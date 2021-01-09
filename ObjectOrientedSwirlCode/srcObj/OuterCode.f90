@@ -13,7 +13,8 @@ INTEGER  :: &
            ifdff,   & ! finite difference flag
            mm,      & ! mode order
            np,      & ! number of points
-           numModes     
+           numModes,&
+           modeNumber 
                               
 REAL(KIND=REAL64) ::  &
                      ed2,   &
@@ -49,8 +50,10 @@ CALL CreateObject(object    = swirlClassObject ,&
 CALL GetModeData(object = swirlClassObject, &
                numModes = numModes)
 
-CALL FindResidualData(object = swirlClassObject,numModes = numModes)
+CALL FindResidualData(object     = swirlClassObject,
+                      modeNumber = numModes)
 
+CALL DestroyObject(object = swirlClassObject)
 
 !WRITE(6,*) swirlClassObject
 

@@ -21,7 +21,7 @@ MODULE swirlClassObj
   IMPLICIT NONE
 
   PRIVATE
-  PUBLIC :: CreateObject, SwirlClassType, GetModeData,FindResidualData
+  PUBLIC :: CreateObject, DestroyObject, SwirlClassType, GetModeData,FindResidualData
 ! Interfaces 
 
   INTERFACE CreateObject
@@ -35,6 +35,10 @@ MODULE swirlClassObj
   INTERFACE GetModeData
     MODULE PROCEDURE GetNumberOfPropagatingModes
   END INTERFACE GetModeData
+
+  INTERFACE DestroyObject
+    MODULE PROCEDURE DestroySwirlClassObject
+  END INTERFACE DestroyObject
 
   INTEGER, PARAMETER :: rDef = REAL64
 ! Type Declaration
@@ -341,8 +345,8 @@ MODULE swirlClassObj
       !               dataset1= object%aa,&
       !               dataset2= object%aa_before,&
       !               numPoints=object%numberOfRadialPoints)
-
- 
+!
+! 
      CALL getSvector( A      = object%aa_before     ,&
                        B      = object%bb_before    ,&
                        x      = object%vr           ,&   
@@ -397,6 +401,35 @@ MODULE swirlClassObj
 ! NEW: deallocate data arrays
 !
 
+!
+!
+  END SUBROUTINE CreateSwirlClassObject
+  SUBROUTINE FindResidualVector(object,modeNumber)
+  
+  TYPE(SwirlClassType), INTENT(INOUT) :: object
+  
+  INTEGER, INTENT(INOUT) :: modeNumber
+  
+       CALL getSvector( A      = object%aa_before     ,&
+                         B      = object%bb_before    ,&
+                         x      = object%vr           ,&   
+                         lambda = object%alpha/object%beta  ,&     
+                         np4    = object%numberOfRadialPoints*4,   &
+                         S_MMS  = object%S_MMS)
+  
+  END SUBROUTINE FindResidualVector
+  SUBROUTINE GetNumberOfPropagatingModes(object,&
+                                         numModes)
+  
+  TYPE(SwirlClassType), INTENT(INOUT) :: object
+  INTEGER, INTENT(IN) :: numModes
+  INTEGER ::j, n
+  
+  END SUBROUTINE GetNumberOfPropagatingModes
+  SUBROUTINE DestroySwirlClassObject(object)
+
+      TYPE(SwirlClassType), INTENT(INOUT) :: object
+      
       DEALLOCATE(object%dl1,   &
                  object%y,     &
                  object%rwork, &
@@ -419,30 +452,6 @@ MODULE swirlClassObj
                  object%S_MMS, &
                  object%vl,    &
                  object%vr)
-
-!
-  END SUBROUTINE CreateSwirlClassObject
-  SUBROUTINE FindResidualVector(object,numModes)
-  
-  TYPE(SwirlClassType), INTENT(INOUT) :: object
-  
-  INTEGER, INTENT(INOUT) :: numModes
-  
-  WRITE(6,*) '1'
-  !     CALL getSvector( A      = object%aa_before     ,&
-  !                       B      = object%bb_before    ,&
-  !                       x      = object%vr           ,&   
-  !                       lambda = object%alpha/object%beta  ,&     
-  !                       np4    = object%numberOfRadialPoints*4,   &
-  !                       S_MMS  = object%S_MMS)
-  !
-  END SUBROUTINE FindResidualVector
-  SUBROUTINE GetNumberOfPropagatingModes(object,&
-                                         numModes)
-  
-  TYPE(SwirlClassType), INTENT(INOUT) :: object
-  INTEGER, INTENT(IN) :: numModes
-  INTEGER ::j, n
-  
-  END SUBROUTINE GetNumberOfPropagatingModes
+     
+  END SUBROUTINE DestroySwirlClassObject  
 END MODULE swirlClassObj

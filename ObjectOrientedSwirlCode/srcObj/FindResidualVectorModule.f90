@@ -61,7 +61,7 @@ DO i = 1, np4
 !    WRITE(6, *) S_MMS(i)
 
 END DO
-
+    WRITE(6,*) SUM(S_MMS)
     END SUBROUTINE getSv 
     
 !
