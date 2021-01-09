@@ -1,0 +1,70 @@
+This is the version of the swirl code that was given to Matt Montgomery
+(727-7631) on September 22, 1995 and to Denny Cicon on October 24,
+1995.
+
+
+Input data:
+  mm    :: Circumferential mode number
+
+  npts  :: Number of radial mesh points
+
+  sig   :: Hub-to-duct radius ratio
+
+  akre  :: Real part of frequency, $k = \omega r_D/A_T$
+  akim  :: Imag part of frequency (zero except for stability calcs)
+
+  ir    :: Axial Mach distribution number (for details see rmach.f)
+           0 = Uniform
+           1 = Linear shear
+           2 = Read from file
+           3 = Uniform + sine wave bndry layers of thickness delta
+           4 = Uniform + linear bndry layers
+           5 = Uniform + 1/7th power law bndry layers
+           6 = Hyperbolic secant profile
+           7 = Laminar mean flow
+           8 = Wavy sinusoid (for stability calcs)
+           9 = Hagen-Poiseuille flow
+           
+  rmax  :: Maximum axial Mach number
+
+  slope :: slope of linear Mach distribution;
+            also used as boundary layer thickness
+
+  is    :: Swirl Mach distribution number (for details see smach.f)
+           0 = No swirl
+           1 = Solid body swirl
+           2 = Free vortex swirl
+           3 = Solid body and free vortex together
+           4 = $V_{\theta} = 1/r^2$ (for stability calcs)
+           5 = Read from file
+           6 = Constant swirl across the duct
+           7 = Trailing line vortex
+
+  angom :: Magnitude of solid body swirl $V_{\theta} = \Omega r$;
+            also used as constant for constant swirl
+
+  gam   :: Magnitude of free vortex swirl $V_{\theta} = \Gamma / r$
+
+  ifd   :: Use finite differences for derivatives
+           1 = Second order
+           2 = Fourth order
+
+  itest :: Perform consistency test on selected modes
+
+  etahr :: Real part of hub liner admittance
+  etahi :: Imag part of hub liner admittance
+  etadr :: Real part of duct liner admittance
+  etadi :: Imag part of duct liner admittance
+
+  ed2   :: Second order smoothing for derivatives
+  ed4   :: Fourth order smoothing for derivatives
+
+Output data:
+  gamma :: Axial wavenumbers
+
+
+Installation test:
+ 1. Copy "input.test" to "input.data"
+ 2. Run swirl
+ 3. Compare output file "gammas.dat" to "gammas.test"
+ 4. Compare output file "gam.nonconv" to "gam.non.test"
