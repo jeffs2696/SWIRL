@@ -22,6 +22,7 @@ REAL(KIND=REAL64) ::  &
 
 COMPLEX(KIND=REAL64) :: ak, etah, etad
 
+CHARACTER(16) :: swrlFileName = 'smach.input'
 !
 mm     = 0
 np     = 16
@@ -45,10 +46,11 @@ CALL CreateObject(object    = swirlClassObject ,&
                    ed2      = ed2,     &
                    ed4      = ed4)     
 
-CALL FindResidualData(object = swirlClassObject,numModes = numModes)
-
 CALL GetModeData(object = swirlClassObject, &
                numModes = numModes)
+
+CALL FindResidualData(object = swirlClassObject,numModes = numModes)
+
 
 !WRITE(6,*) swirlClassObject
 
