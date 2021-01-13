@@ -33,7 +33,7 @@ MODULE swirlClassObj
 
 
   INTERFACE GetModeData
-    MODULE PROCEDURE GetNumberOfPropagatingModes
+    MODULE PROCEDURE GetRadialModeData
   END INTERFACE GetModeData
 
   INTERFACE DestroyObject
@@ -346,13 +346,12 @@ MODULE swirlClassObj
       !               dataset2= object%aa_before,&
       !               numPoints=object%numberOfRadialPoints)
 !
-! 
-     CALL getSvector( A      = object%aa_before     ,&
-                       B      = object%bb_before    ,&
-                       x      = object%vr           ,&   
-                       lambda = object%alpha/object%beta  ,&     
-                       np4    = np4,   &
-                       S_MMS  = object%S_MMS)
+!      CALL getSvector( A      = object%aa_before     ,&
+!                       B      = object%bb_before    ,&
+!                       x      = object%vr           ,&   
+!!                       lambda = object%alpha/object%beta  ,&    
+!                       np4    = np4,   &
+!                       S_MMS  = object%S_MMS)
 !     
 !
      object%isInitialized = .TRUE.
@@ -412,20 +411,29 @@ MODULE swirlClassObj
   
        CALL getSvector( A      = object%aa_before     ,&
                          B      = object%bb_before    ,&
-                         x      = object%vr           ,&   
-                         lambda = object%alpha/object%beta  ,&     
+                         x      = object%vr(:,modeNumber)           ,&   
+                         lambda = object%alpha(modeNumber)/object%beta(modeNumber)  ,&     
                          np4    = object%numberOfRadialPoints*4,   &
                          S_MMS  = object%S_MMS)
   
   END SUBROUTINE FindResidualVector
-  SUBROUTINE GetNumberOfPropagatingModes(object,&
-                                         numModes)
-  
+  SUBROUTINE GetRadialModeData(object,&
+                               modeNumber,&
+                               axialWavenumber,&
+                               radialModeData)
+  ! Defining inputs and outputs
   TYPE(SwirlClassType), INTENT(INOUT) :: object
-  INTEGER, INTENT(IN) :: numModes
-  INTEGER ::j, n
-  
-  END SUBROUTINE GetNumberOfPropagatingModes
+  INTEGER, INTENT(IN) :: modeNumber
+  COMPLEX(KIND=REAL64), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: radialModeData
+  COMPLEX(KIND=REAL64), INTENT(INOUT) :: axialWavenumber
+  CONTINUE
+  IF (object%isInitialized.eqv..TRUE.) THEN
+      axialWavenumber = object%alpha(modeNumber)/object%beta(modeNumber)
+      radialModeData  = object%vr(:,modeNumber)
+  ELSE
+  ENDIF
+
+  END SUBROUTINE GetRadialModeData 
   SUBROUTINE DestroySwirlClassObject(object)
 
       TYPE(SwirlClassType), INTENT(INOUT) :: object

@@ -21,9 +21,18 @@ REAL(KIND=REAL64) ::  &
                      ed4,   &
                      sig   
 
-COMPLEX(KIND=REAL64) :: ak, etah, etad
+COMPLEX(KIND=REAL64) :: ak, etah, etad,&
+                        axialWavenumber
+COMPLEX(KIND=REAL64) , DIMENSION(:), ALLOCATABLE :: radialModeData,&
+                                                    residualVector
 
-CHARACTER(16) :: swrlFileName = 'smach.input'
+
+
+CHARACTER(16) :: swrlFileName 
+CHARACTER(16) :: machFileName
+
+swrlFileName = 'swrl.input'
+machFileName = 'mach.input'
 !
 mm     = 0
 np     = 16
@@ -35,7 +44,8 @@ ifdff  =  1
 ed2    =  0.0_rDef
 ed4    =  0.0_rDef
 numModes = np
-
+modeNumber = 2
+ALLOCATE(radialModeData(np*4),residualVector(np*4))
 CALL CreateObject(object    = swirlClassObject ,&
                    mm       = mm,      &
                    np       = np,      &
@@ -47,10 +57,12 @@ CALL CreateObject(object    = swirlClassObject ,&
                    ed2      = ed2,     &
                    ed4      = ed4)     
 
-CALL GetModeData(object = swirlClassObject, &
-               numModes = numModes)
+CALL GetModeData(object          = swirlClassObject,&
+                 modeNumber      = modeNumber      ,&
+                 axialWavenumber = axialWavenumber,&
+                 radialModeData  = radialModeData )
 
-CALL FindResidualData(object     = swirlClassObject,
+CALL FindResidualData(object     = swirlClassObject,&
                       modeNumber = numModes)
 
 CALL DestroyObject(object = swirlClassObject)

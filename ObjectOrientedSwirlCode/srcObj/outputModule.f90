@@ -256,10 +256,10 @@ CONTAINS
 !
 ! Eigenvector output.
 ! JS: new eigen vector call
-CALL saveEGV(np = np,&
-             vrm = vrm,&
-             rr = rr)
-WRITE(6,*) 'fsbgfs'
+!CALL saveEGV(np = np,&
+!             vrm = vrm,&
+!             rr = rr)
+!WRITE(6,*) 'fsbgfs'
 !!$$$      ncols = np4/15
 !$$$      do n = 1,ncols+1
 !$$$       write(ff,'(i2.2)') n
