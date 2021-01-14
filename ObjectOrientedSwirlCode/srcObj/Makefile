@@ -19,7 +19,8 @@
 #
 #   Ray Hixon update, using LAPACK3.8.0 routines
 #   March 8, 2018
-#
+#   
+##   Jeff Severino
 ###################################################################
 F77      = gfortran
 F90      = gfortran
@@ -42,7 +43,31 @@ EXECUTABLE_LOCATION = ../CodeRunObj
 
 EXE = swirlF2008
 
-BLAS_LOCATION = ../blas3.8.0
+LIB_FILES = ../LibraryFiles
+MOD_FILES = ../ModuleFiles 
+OBJ_FILES = ../ObjectFiles
+EXE_FILES = ../CodeRunObj
+SRC_FILES = ../srcObj
+
+LIB_LOCATION = $(LIB_FILES)
+MOD_LOCATION = $(MOD_FILES)
+OBJ_LOCATION = $(OBJ_FILES)
+
+#Define colored output for ANSI escape sequences     
+
+COM_COLOR   = \033[0;34m
+OBJ_COLOR   = \033[0;36m
+OK_COLOR    = \033[0;32m
+ERROR_COLOR = \033[0;31m
+WARN_COLOR  = \033[0;33m
+NO_COLOR    = \033[m
+
+OK_STRING    = "[OK]"
+ERROR_STRING = "[ERROR]"
+WARN_STRING  = "[WARNING]"
+COM_STRING   = "Compiling"
+
+BLAS_LOCATION = $(LIB_LOCATION)/blas3.8.0
 BLAS_OBJS =      \
          $(BLAS_LOCATION)/daxpy.o  \
          $(BLAS_LOCATION)/dcabs1.o \
@@ -62,7 +87,7 @@ BLAS_OBJS =      \
          $(BLAS_LOCATION)/ztrmm.o  \
          $(BLAS_LOCATION)/ztrmv.o
 
-FITPACK_LOCATION = ../fitpack
+FITPACK_LOCATION = $(LIB_LOCATION)/fitpack
 
 FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/ceez.o   \
@@ -72,7 +97,7 @@ FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/snhcsh.o \
          $(FITPACK_LOCATION)/terms.o
 
-LAPACK_LOCATION = ../lapack3.8.0
+LAPACK_LOCATION = $(LIB_LOCATION)/lapack3.8.0
 
 LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zggev.o        \
@@ -116,12 +141,25 @@ LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zunm2r.o       \
          $(LAPACK_LOCATION)/zunmqr.o
 
+
 all:  $(OBJECTS)
-	$(F90) -o $(EXE) $(BLAS_OBJS) \
-             $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS); \
-        mv $(EXE) $(EXECUTABLE_LOCATION);  \
-		cd $(EXECUTABLE_LOCATION); \
-		./$(EXE)
+	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
+	@$(F90) -o $(EXE) $(BLAS_OBJS) \
+             $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \
+	RESULT=$$?; \
+		if [ $$RESULT -ne 0 ]; then \
+			printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"; \
+		elif [ -s $@.log ]; then \
+			printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"; \
+		else  \
+			printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"; \
+		fi; \
+		cat $@.log; \
+        rm -f $@.log; \
+        exit $$RESULT
+
+	@mv $(EXE) $(EXECUTABLE_LOCATION);
+	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 
 #
 #  clean

@@ -1,4 +1,4 @@
-##################################################################
+#################################################################
 #
 #   Makefile for SWIRL
 #   Version 3.2
@@ -42,7 +42,11 @@ EXECUTABLE_LOCATION = ../CodeRunOrig
 
 EXE = swirlF2008
 
-BLAS_LOCATION = ../blas3.8.0
+LIB_FILES = ../LibraryFiles
+LIB_LOCATION = $(LIB_FILES)
+
+
+BLAS_LOCATION = $(LIB_LOCATION)/blas3.8.0
 BLAS_OBJS =      \
          $(BLAS_LOCATION)/daxpy.o  \
          $(BLAS_LOCATION)/dcabs1.o \
@@ -62,7 +66,7 @@ BLAS_OBJS =      \
          $(BLAS_LOCATION)/ztrmm.o  \
          $(BLAS_LOCATION)/ztrmv.o
 
-FITPACK_LOCATION = ../fitpack
+FITPACK_LOCATION = $(LIB_LOCATION)/fitpack
 
 FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/ceez.o   \
@@ -72,7 +76,7 @@ FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/snhcsh.o \
          $(FITPACK_LOCATION)/terms.o
 
-LAPACK_LOCATION = ../lapack3.8.0
+LAPACK_LOCATION =  $(LIB_LOCATION)/lapack3.8.0
 
 LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zggev.o        \
