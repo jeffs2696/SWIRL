@@ -403,19 +403,26 @@ MODULE swirlClassObj
 !
 !
   END SUBROUTINE CreateSwirlClassObject
-  SUBROUTINE FindResidualVector(object,modeNumber)
+
+  SUBROUTINE FindResidualVector(object    ,& 
+                                modeNumber,&
+                                S            )
   
-  TYPE(SwirlClassType), INTENT(INOUT) :: object
+  TYPE(SwirlClassType)                             ,INTENT(INOUT) :: object
   
-  INTEGER, INTENT(INOUT) :: modeNumber
-  
-       CALL getSvector( A      = object%aa_before     ,&
-                         B      = object%bb_before    ,&
-                         x      = object%vr(:,modeNumber)           ,&   
+  INTEGER                                          ,INTENT(INOUT) :: modeNumber
+
+  COMPLEX(KIND=REAL64),DIMENSION(object%numberOfRadialPoints*4),INTENT(OUT) :: S
+
+       CALL getSvector(  A      = object%aa_before                                  ,&
+                         B      = object%bb_before                                  ,&
+                         x      = object%vr(:,modeNumber)                           ,&   
                          lambda = object%alpha(modeNumber)/object%beta(modeNumber)  ,&     
-                         np4    = object%numberOfRadialPoints*4,   &
+                         np4    = object%numberOfRadialPoints*4                     ,&
                          S_MMS  = object%S_MMS)
-  
+   
+        S =  object%S_MMS
+
   END SUBROUTINE FindResidualVector
   SUBROUTINE GetRadialModeData(object,&
                                modeNumber,&
