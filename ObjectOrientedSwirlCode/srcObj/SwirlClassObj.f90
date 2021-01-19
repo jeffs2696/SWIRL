@@ -21,12 +21,17 @@ MODULE swirlClassObj
   IMPLICIT NONE
 
   PRIVATE
-  PUBLIC :: CreateObject, DestroyObject, SwirlClassType, GetModeData,FindResidualData
+  PUBLIC :: CreateObject   ,&
+            DestroyObject  ,&    
+            SwirlClassType ,&
+            GetModeData    ,&
+            FindResidualData
 ! Interfaces 
 
   INTERFACE CreateObject
     MODULE PROCEDURE CreateSwirlClassObject
   END INTERFACE CreateObject
+  
   INTERFACE FindResidualData
     MODULE PROCEDURE FindResidualVector 
   END INTERFACE FindResidualData

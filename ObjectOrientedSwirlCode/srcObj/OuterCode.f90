@@ -13,28 +13,47 @@ INTEGER  :: &
            ifdff,   & ! finite difference flag
            mm,      & ! mode order
            np,      & ! number of points
+           i,      & ! number of points
            numModes,& ! number of radial modes
            modeNumber 
+
+
+COMPLEX(KIND=REAL64) :: ak             ,&
+                        etah, etad     ,&
+                        axialWavenumber,&
+                        dr             ,&
+                        gam            ,&
+                        gm1            
 
 REAL(KIND=REAL64), DIMENSION(:),ALLOCATABLE :: r, &
                                                 rhoMean       ,&                                 
                                                 rhoVrMean     ,&
                                                 rhoVthetaMean ,&
                                                 rhoVxMean     ,&
-                                                etotalMean    
+                                                etotalMean    ,&
+                                                rmach         ,&
+                                                smach         ,&
+                                                rvel          ,&
+                                                svel          ,&
+                                                snd
+
+
 REAL(KIND=REAL64) ::  &
                      ed2,   & !2nd order smoothing coefficient
                      ed4,   & !4th order smoothing coefficient
                      sig      ! hub-to-tip ratio 
 
-COMPLEX(KIND=REAL64) :: ak, etah, etad,&
-                        axialWavenumber
-
-                    
                     
 COMPLEX(KIND=REAL64) , DIMENSION(:), ALLOCATABLE :: radialModeData,&
                                                     residualVector
 
+
+  INTEGER, PARAMETER :: nPts = 201
+  REAL(KIND=rDef), PARAMETER :: radMin  = 0.2_rDef,  &
+                                radMax  = 1.0_rDef,  &
+                                rVelMax = 0.00_rDef, &
+                                slope   = 0.0_rDef,  &
+                                angom   = 0.00_rDef
 
 !
 mm     = 0
@@ -50,7 +69,51 @@ numModes = np
 modeNumber = 2
 
 ALLOCATE(radialModeData(np*4),&
-         residualVector(np*4))
+         residualVector(np*4),r(np),&
+         snd(np),svel(np),smach(np),rmach(np),rvel(np)
+
+!------------------------------
+     
+
+! generate the grid
+
+  sig = radMin/radMax
+
+  dr = (radMax-radMin)/REAL(nPts-1,rDef)
+
+  DO i=1,np
+   r(i) = (radMin + REAL(i-1,rDef)*dr)/radMax
+  END DO
+
+! solid-body swirl
+
+  gam = 1.4_rDef
+  gm1 = gam - 1.0_rDef
+
+  DO i=1,np
+   snd(i)  =  1.0_rDef -gm1/2.0_rDef*angom*angom*(1.0_rDef -r(i)*r(i))
+   snd(i)  =  sqrt(snd(i))
+
+   svel(i)   =  angom*r(i)
+   smach(i)  =  svel(i)/snd(i)
+
+  END DO
+
+! linear shear in the axial flow
+
+  DO i=1,np
+   if (slope.ge.0.0_rDef) then
+    rvel(i) = slope*(r(i) -1.0_rDef)+rVelMax
+   else
+    rvel(i) = slope*(r(i) -sig)     +rVelMax
+   endif
+  enddo
+
+  do i = 1,np
+   rmach(i) = rvel(i)/snd(i)
+  enddo
+
+
 
 CALL CreateObject(object    = swirlClassObject ,&
                    mm       = mm,      &
