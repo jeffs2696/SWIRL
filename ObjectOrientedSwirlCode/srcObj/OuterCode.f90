@@ -70,7 +70,7 @@ modeNumber = 2
 
 ALLOCATE(radialModeData(np*4),&
          residualVector(np*4),r(np),&
-         snd(np),svel(np),smach(np),rmach(np),rvel(np)
+         snd(np),svel(np),smach(np),rmach(np),rvel(np))
 
 !------------------------------
      
