@@ -64,7 +64,7 @@ CONTAINS
 !
 !  Modified to follow Wai Don and Solomonoff recommendations.
 !
-      WRITE(6,*) 'Entering derivs'
+!      WRITE(6,*) 'Entering derivs'
 
       n     = np -1
       pi    = 4.0_rDef*ATAN(1.0_rDef)
@@ -176,7 +176,7 @@ CONTAINS
        enddo
       enddo
 !
-      WRITE(6,*) 'Leaving derivs'
+!      WRITE(6,*) 'Leaving derivs'
       return
       end
 

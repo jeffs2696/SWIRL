@@ -10,7 +10,7 @@ PROGRAM MAIN
 !  to the Ken Kousen test case (just to check!).
 !
 
-  INTEGER, PARAMETER :: nPts = 201
+  INTEGER, PARAMETER :: nPts = 16
   REAL(KIND=rDef), PARAMETER :: radMin  = 0.2_rDef,  &
                                 radMax  = 1.0_rDef,  &
                                 rVelMax = 0.00_rDef, &

@@ -1,6 +1,6 @@
  &INPUTS 
   MM      =    0, 
-  NPTS    =   16,  
+  NPTS    =   150,  
   SIG     = 0.20, 
   AKRE    =  20., 
   AKIM    =   0.,

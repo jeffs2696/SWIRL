@@ -41,7 +41,7 @@ CONTAINS
 
 !     real*8 x(NMAX),r(NMAX),alpha,zero,sina
 !
-      WRITE(6,*) 'Entering grid'
+!      WRITE(6,*) 'Entering grid'
 
       PI     = 4.0_rDef*ATAN(1.0_rDef)
       n      = np -1
@@ -58,7 +58,7 @@ CONTAINS
        r(j)  =  coeff*(-yj +sigbar)
       END DO
 
-      WRITE(6,*) 'Leaving grid'
+!      WRITE(6,*) 'Leaving grid'
 !
       return
       end SUBROUTINE grid1

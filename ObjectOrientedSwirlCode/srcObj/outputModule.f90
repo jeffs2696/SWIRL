@@ -133,7 +133,7 @@ CONTAINS
       eps = 1.e-4_rDef
 !
 ! Output everything to an unformatted file.
-      WRITE(6,*) 'omega = ',omega
+!      WRITE(6,*) 'omega = ',omega
 
       open(unit=12,             &
            file='output.data',  &
@@ -175,7 +175,7 @@ CONTAINS
        cvcmax = cvcmax -eps
       endif
 
-      WRITE(6,*) 'convection speed: ',cvcmin,cvcmax
+!      WRITE(6,*) 'convection speed: ',cvcmin,cvcmax
 !
 ! Compute number of zero crossings for nonconvected modes.
 

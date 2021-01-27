@@ -132,6 +132,8 @@ MODULE swirlClassObj
                                     mm     ,&
                                     np     ,&
                                     sig    ,&
+                                    AxialMachData,&
+                                    ThetaMachData,&
                                     ak     ,&
                                     etah   ,&
                                     etad   ,&
@@ -148,6 +150,8 @@ MODULE swirlClassObj
     REAL(KIND=REAL64),INTENT(INOUT) :: ed2,   & 
                                        ed4,   &
                                        sig
+
+    REAL(KIND=REAL64),DIMENSION(:), INTENT(INOUT) :: AxialMachData, ThetaMachData
     !
     
     COMPLEX(KIND=REAL64),INTENT(IN) :: etah,etad,ak
@@ -164,6 +168,8 @@ MODULE swirlClassObj
     object%FiniteDifferenceFlag = ifdff
     object%secondOrderSmoother  = ed2
     object%fourthOrderSmoother  = ed4
+    object%rmx                  = AxialMachData
+    object%rmt                  = ThetaMachData
     
     np4 = np*4
     
@@ -173,9 +179,9 @@ MODULE swirlClassObj
                object%y(object%numberOfRadialPoints),        &
                object%rwork(8*np4)                          ,&
                object%r(object%numberOfRadialPoints),        &
-               object%rmx(object%numberOfRadialPoints),      &
+!               object%rmx(object%numberOfRadialPoints),      &
                object%drm(object%numberOfRadialPoints),      &
-               object%rmt(object%numberOfRadialPoints),      &
+!               object%rmt(object%numberOfRadialPoints),      &
                object%drt(object%numberOfRadialPoints),      &
                object%snd(object%numberOfRadialPoints),      &
                object%dsn(object%numberOfRadialPoints),      &
@@ -195,13 +201,13 @@ MODULE swirlClassObj
 
 !
 ! Set up Gauss-Lobatto grid and compute Chebyshev derivative matrix.
-
 !     If the swirl flow is not provided ... 
       if (is .ne. -1) then
 
 
 !       If  
         if (ifdff.eq.0) then
+!          WRITE(6,*) 'Entering gridModule'
           CALL grid(np  = object%numberOfRadialPoints,    &
                     sig = object%hubTipRatio,             &! sig, &
                     x   = object%y,                       &
@@ -213,22 +219,25 @@ MODULE swirlClassObj
                       ed2 = object%secondOrderSmoother,   &
                       ed4 = object%fourthOrderSmoother)
         else
-
+!          WRITE(6,*) 'Entering fdgridModule'
           CALL fdgrid(np  = object%numberOfRadialPoints,  &
                       sig = object%hubTipRatio,           &
                       x   = object%y,                     &
                       r   = object%r)
-
+!          WRITE(6,*) 'Leaving fdgridModule'
+          
+!          WRITE(6,*) 'Entering fdrivsModule'
           CALL fdrivs(np     = object%numberOfRadialPoints,    &
                       sig    = object%hubTipRatio,             &
                       dl1    = object%dl1,                     &
                       iorder = object%FiniteDifferenceFlag,    &!ifdff, &
                       ed2    = object%secondOrderSmoother,     &
                       ed4    = object%fourthOrderSmoother)
+!          WRITE(6,*) 'Leaving fdrivsModule'
 
         endif
 
-
+!        WRITE(6,*) 'Entering smachAndSndspdModule'
         CALL smachAndSndspd(npts  = object%numberOfRadialPoints,    &
                             rr    = object%r,     &
                             rmsw  = object%rmt,   &
@@ -241,7 +250,9 @@ MODULE swirlClassObj
                             gam   = gam,   &
                             sig   = object%hubTipRatio,   &
                             is    = is)
-
+!        WRITE(6,*) 'Leaving smachAndSndspdModule'
+!        WRITE(6,*) 'Entering rmachModule'
+        
         CALL rmach(npts  = object%numberOfRadialPoints,    &
                    rr    = object%r,     &
                    rmch  = object%rmx,   &
@@ -254,7 +265,10 @@ MODULE swirlClassObj
                    rro   = object%hubTipRatio,   &
                    ir    = ir)
 
+!        WRITE(6,*) 'Leaving rmachModule'
+
       else
+!        WRITE(6,*) 'Entering interpModule'
         CALL interp(np    = object%numberOfRadialPoints,    &
                     sig   = object%hubTipRatio,   &
                     rr    = object%r,     &
@@ -268,10 +282,14 @@ MODULE swirlClassObj
                     ifdff = ifdff, &
                     ed2   = object%secondOrderSmoother,   &
                     ed4   = object%fourthOrderSmoother)
+
+!        WRITE(6,*) 'Leaving interpModule'
       endif
 
 ! output the mean flow data.
-
+      
+      
+!      WRITE(6,*) 'Entering machoutModule'
       CALL machout(npts  = object%numberOfRadialPoints,  &
                    rr    = object%r,   &
                    rmch  = object%rmx, &
@@ -281,9 +299,10 @@ MODULE swirlClassObj
                    snd   = object%snd, &
                    dsn   = object%dsn, &
                    rhob  = object%rho)
-!
-! Set up global matrices.
-
+!      WRITE(6,*) 'Leaving machoutModule'
+    ! Set up global matrices.
+    
+!      WRITE(6,*) 'Entering globalModule'
       CALL globalM(np   = object%numberOfRadialPoints,  &
                    np4  = np4, &
                    sig  = object%hubTipRatio, &
@@ -298,7 +317,9 @@ MODULE swirlClassObj
                    dt   = object%drt, &
                    aa   = object%aa,  &
                    bb   = object%bb)
+!      WRITE(6,*) 'Leaving globalModule'
 
+!      WRITE(6,*) 'Entering boundaryModule'
       CALL boundary(np   = object%numberOfRadialPoints,   &
                     sig  = object%hubTipRatio,  &
                     ak   = ak,   &
@@ -309,16 +330,12 @@ MODULE swirlClassObj
                     dd   = object%dl1,  &
                     aa   = object%aa,   &
                     bb   = object%bb)
+!      WRITE(6,*) 'Leaving boundaryModule'
 
       object%aa_before = object%aa
       object%bb_before = object%bb
 
-      !CALL getL2Norm(L2      =object%L2N,&
-      !               dataset1= object%aa,&
-      !               dataset2= object%aa_before,&
-      !               numPoints=object%numberOfRadialPoints)
-
-                
+!      WRITE(6,*) 'Entering analysisModule'          
       CALL analysis(np    = object%numberOfRadialPoints,    &
                     np4   = np4,   &
                     ak    = object%frequency,    &
@@ -344,7 +361,7 @@ MODULE swirlClassObj
                     vphi  = object%vph,   &
                     akap  = object%akap,&
                     S_MMS = object%S_MMS_Array)
-
+!      WRITE(6,*) 'Leaving analysisModule'          
 
       !CALL getL2Norm(L2      =object%L2N,&
       !               dataset1= object%aa,&
@@ -363,11 +380,12 @@ MODULE swirlClassObj
  
   IF (object%isInitialized) THEN
 
-    print *, 'the Object is initialized'
+!    print *, 'the Object is initialized'
   ELSE
     print *, 'The object is not initialized'
     CONTINUE
   ENDIF  
+  
       CALL output(np     = object%numberOfRadialPoints,    &
                   np4    = np4,   &
                   mode   = object%azimuthalMode,    &
@@ -394,16 +412,6 @@ MODULE swirlClassObj
 !
 !      if (irepeat.eq.1) goto 100
 
-
-! passing variables to the swirl object
-
-!object%egvOut = vr
-
-!WRITE(6,*) object%egvOut
-!
-!
-! NEW: deallocate data arrays
-!
 
 !
 !
@@ -470,6 +478,7 @@ MODULE swirlClassObj
                  object%aa,    &
                  object%bb,    &
                  object%S_MMS, &
+                 object%S_MMS_Array, &
                  object%vl,    &
                  object%vr)
      

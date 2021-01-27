@@ -10,6 +10,7 @@ PUBLIC :: getL2Norm
 
 INTERFACE getL2Norm
    MODULE PROCEDURE L2N
+   MODULE PROCEDURE L2N_COMPLEX
    MODULE PROCEDURE L2N_2D
 END INTERFACE
 
@@ -46,6 +47,33 @@ dataSum = dataSum + dataErrorSquared(i)
 ENDDO
 L2 = SQRT(dataSum/numPoints)
 END SUBROUTINE L2N
+SUBROUTINE L2N_COMPLEX(L2,&
+              dataSet1,&
+              dataSet2,&
+              numPoints)
+!lenDataSet = SIZE(dataSet)
+
+
+INTEGER, INTENT(INOUT) :: numPoints
+COMPLEX(KIND=rDef), INTENT(INOUT) :: L2
+COMPLEX(KIND=rDef),DIMENSION(:), INTENT(IN)  :: dataSet1,&
+                                             dataSet2
+
+!Local variables within submodule only
+
+COMPLEX(KIND=rDef) :: dataSum
+COMPLEX(KIND=rDef), DIMENSION(numPoints) :: dataError,&
+                                dataErrorSquared                 
+ 
+
+dataSum = 0.0_rDef
+DO i = 1,numPoints
+dataError(i) = ABS(dataSet1(i) - dataSet2(i)) 
+dataErrorSquared(i) = dataError(i)**2
+dataSum = dataSum + dataErrorSquared(i)
+ENDDO
+L2 = SQRT(dataSum/numPoints)
+END SUBROUTINE L2N_COMPLEX
 SUBROUTINE L2N_2D(L2    ,&
                   dataSet1,&
                   dataSet2,&

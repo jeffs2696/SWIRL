@@ -13,7 +13,18 @@ END INTERFACE smachAndSndspd
 
 CONTAINS
 
-      subroutine smachAndSndspd1(npts,rr,rmsw,rmswp,snd,dsn,dd,rhob,angom,gam,sig,is)
+      subroutine smachAndSndspd1(npts,& 
+                                   rr,&
+                                 rmsw,&
+                                rmswp,&
+                                  snd,&
+                                  dsn,&
+                                   dd,&
+                                 rhob,&
+                                angom,&
+                                  gam,&
+                                  sig,&
+                                   is)
 
       INTEGER, INTENT(IN) :: npts, &
                                is
@@ -172,21 +183,30 @@ CONTAINS
 !
       elseif (is.eq.5) then
 
-       open(unit=24,file='swrl.input',status='unknown')
-       READ(24,*) nptsIn
-       ALLOCATE(rIn(nptsIn), &
-             rmswIn(nPtsIn))
-       DO i=1,nptsIn
-        READ(24,*) rIn(i),rmswIn(i)
-       END DO
-
+!      open(unit=24,file='swrl.input',status='unknown')
+!       READ(24,*) nptsIn
+!       ALLOCATE(rIn(nptsIn), &
+!             rmswIn(nPtsIn))
+!       DO i=1,nptsIn
+!        READ(24,*) rIn(i),rmswIn(i)
+!       END DO
+!
 !      read (24,*) (rmsw(i), i = 1,npts)
 
-       close(24)
-!
+!       close(24)
+
 ! spline data onto grid
 !
 
+       nptsIn = SIZE(rmsw)
+       rIn = rr
+       rmswIn = rmsw
+!       
+!
+!       DO i=1,nptsIn
+!            WRITE(6,*) rmsw(i)
+!       ENDDO
+!
        CALL Akima433Interpolation(inputDataLength  = nptsIn, &
                                   xInputData       = rIn,    &
                                   yInputData       = rmswIn, &
