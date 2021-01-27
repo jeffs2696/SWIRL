@@ -11,7 +11,7 @@ PROGRAM OuterCode
  TYPE(SwirlClassType) :: swirlClassObjectAnalytical
 
 ! original inputs
-  INTEGER  :: &
+ INTEGER  :: &
            ifdff     ,& ! finite difference flag
            mm        ,& ! mode order
            np        ,& ! number of points
@@ -30,7 +30,7 @@ PROGRAM OuterCode
                           dr             ,&
                           gam            ,&
                           gm1            ,&
-                          L2res          ,&
+                 !         L2res          ,&
                           errorSum       ,&
                           alpha
 
@@ -52,6 +52,7 @@ PROGRAM OuterCode
   REAL(KIND=REAL64) ::  &
                        ed2,   & !2nd order smoothing coefficient
                        ed4,   & !4th order smoothing coefficient
+                       L2res ,&
                        sig      ! hub-to-tip ratio 
   
                       
@@ -86,6 +87,7 @@ PROGRAM OuterCode
   Last_gp  = 256 
   Step_gp  = 16
 DO gp = First_gp,Last_gp,Step_gp
+
   nPts   = gp
   np     = nPts
   numModes = np
@@ -121,13 +123,12 @@ DO gp = First_gp,Last_gp,Step_gp
   END DO
 
 ! solid-body swirl
-
   gam = 1.4_rDef
   gm1 = gam - 1.0_rDef
 
   DO i=1,nPts
-   snd(i)  =  1.0_rDef -gm1/2.0_rDef*angom*angom*(1.0_rDef -r(i)*r(i)) ! 
-   snd(i)  =  sqrt(snd(i))
+   snd(i)    =  1.0_rDef - gm1/2.0_rDef*angom*angom*(1.0_rDef - r(i)*r(i)) ! 
+   snd(i)    =  sqrt(snd(i))
    svel(i)   =  angom*r(i)
    smach(i)  =  svel(i)/snd(i)
    smachAnalytical(i)  = SIN(0.1*i) 
@@ -135,7 +136,7 @@ DO gp = First_gp,Last_gp,Step_gp
 
 ! linear shear in the axial flow
   DO i=1,nPts
-   if (slope.ge.0.0_rDef) then
+  IF (slope.ge.0.0_rDef) THEN
     rvel(i) = slope*(r(i) -1.0_rDef)+rVelMax
    else
     rvel(i) = slope*(r(i) -sig)     +rVelMax
@@ -149,15 +150,15 @@ DO gp = First_gp,Last_gp,Step_gp
 
 
 ! Calculated 
-  CALL CreateObject(object    = swirlClassObject ,&
-                     mm       = mm,      &
-                     np       = np,      &
-                     sig      = sig,     &
+  CALL CreateObject(object         = swirlClassObject ,&
+                     mm            = mm,      &
+                     np            = np,      &
+                     sig           = sig,     &
                      AxialMachData = rmach,&
                      ThetaMachData = smach,& 
-                     ak       = ak,      &
-                     etah     = etah,    &
-                     etad     = etad,    &
+                     ak            = ak,      &
+                     etah          = etah,    &
+                     etad           = etad,    &
                      ifdff    = ifdff,   &
                      ed2      = ed2,     &
                      ed4      = ed4)     
@@ -207,22 +208,23 @@ DO gp = First_gp,Last_gp,Step_gp
  ! WRITE(8,*) dr, L2res
  ! WRITE(6,*) dr, L2res
   
-DO i = 1,nPts*4
+  DO i = 1,nPts*4
     errorMMS(i) = REAL(ABS(residualVector(i) - residualVectorAnalytical(i)),rDef)
-    errorSum = errorSum +  errorMMS(i)**2
+    errorSum    = errorSum +  errorMMS(i)**2
 !    WRITE(8,*) i, errorMMS(i)
 !    WRITE(6,*) i, errorMMS(i)
-ENDDO
-L2res = SQRT(REAL(errorSum)/REAL(nPts*4.0_rDef,rDef))
+  ENDDO 
 
-WRITE(8,*)  REAL(dr), REAL(L2res)
-WRITE(6,*)  REAL(dr), REAL(L2res)
+  L2res = SQRT(REAL(errorSum)/REAL(nPts*4.0_rDef,rDef))
 
-IF (REAL(L2res).ne.REAL(L2res)) THEN
-    WRITE(6,*) 'L2res is NaN'
-    STOP
-ELSE
-ENDIF
+  WRITE(8,*)  REAL(dr), REAL(L2res)
+  WRITE(6,*)  REAL(dr), REAL(L2res)
+
+  IF (REAL(L2res).NE.REAL(L2res)) THEN
+      WRITE(6,*) 'L2res is NaN'
+      STOP
+  ELSE
+  ENDIF
 
   DEALLOCATE(radialModeData          ,&
              residualVector          ,&
@@ -236,8 +238,9 @@ ENDIF
              rmach                   ,&
              rmachAnalytical         ,&
              rvel)
-L2res = CMPLX(0.0_rDef,KIND=REAL64)
-errorSum = REAL(0.0_rDef,KIND=REAL64)
+
+  L2res    = REAL(0.0_rDef,KIND=REAL64)
+  errorSum = REAL(0.0_rDef,KIND=REAL64)
 
 ENDDO
 
