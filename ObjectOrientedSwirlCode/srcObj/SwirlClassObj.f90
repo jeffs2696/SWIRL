@@ -207,89 +207,89 @@ MODULE swirlClassObj
 
 !       If  
         if (ifdff.eq.0) then
-!          WRITE(6,*) 'Entering gridModule'
-          CALL grid(np  = object%numberOfRadialPoints,    &
-                    sig = object%hubTipRatio,             &! sig, &
-                    x   = object%y,                       &
-                    r   = object%r)
+          WRITE(6,*) 'Entering gridModule'
+         CALL grid(np  = object%numberOfRadialPoints,    &
+                   sig = object%hubTipRatio,             &! sig, &
+                   x   = object%y,                       &
+                   r   = object%r)
 
-          CALL derivs(np  = object%numberOfRadialPoints,  &
-                      sig = object%hubTipRatio,           &
-                      dl1 = object%dl1,                   &
-                      ed2 = object%secondOrderSmoother,   &
-                      ed4 = object%fourthOrderSmoother)
-        else
-!          WRITE(6,*) 'Entering fdgridModule'
-          CALL fdgrid(np  = object%numberOfRadialPoints,  &
-                      sig = object%hubTipRatio,           &
-                      x   = object%y,                     &
-                      r   = object%r)
-!          WRITE(6,*) 'Leaving fdgridModule'
-          
-!          WRITE(6,*) 'Entering fdrivsModule'
-          CALL fdrivs(np     = object%numberOfRadialPoints,    &
-                      sig    = object%hubTipRatio,             &
-                      dl1    = object%dl1,                     &
-                      iorder = object%FiniteDifferenceFlag,    &!ifdff, &
-                      ed2    = object%secondOrderSmoother,     &
-                      ed4    = object%fourthOrderSmoother)
-!          WRITE(6,*) 'Leaving fdrivsModule'
+         CALL derivs(np  = object%numberOfRadialPoints,  &
+                     sig = object%hubTipRatio,           &
+                     dl1 = object%dl1,                   &
+                     ed2 = object%secondOrderSmoother,   &
+                     ed4 = object%fourthOrderSmoother)
+       else
+          WRITE(6,*) 'Entering fdgridModule'
+         CALL fdgrid(np  = object%numberOfRadialPoints,  &
+                     sig = object%hubTipRatio,           &
+                     x   = object%y,                     &
+                     r   = object%r)
+          WRITE(6,*) 'Leaving fdgridModule'
+         
+          WRITE(6,*) 'Entering fdrivsModule'
+         CALL fdrivs(np     = object%numberOfRadialPoints,    &
+                     sig    = object%hubTipRatio,             &
+                     dl1    = object%dl1,                     &
+                     iorder = object%FiniteDifferenceFlag,    &!ifdff, &
+                     ed2    = object%secondOrderSmoother,     &
+                     ed4    = object%fourthOrderSmoother)
+          WRITE(6,*) 'Leaving fdrivsModule'
 
-        endif
+       endif
 
-!        WRITE(6,*) 'Entering smachAndSndspdModule'
-        CALL smachAndSndspd(npts  = object%numberOfRadialPoints,    &
-                            rr    = object%r,     &
-                            rmsw  = object%rmt,   &
-                            rmswp = object%drt,   &
-                            snd   = object%snd,   &
-                            dsn   = object%dsn,   &
-                            dd    = object%dl1,   &
-                            rhob  = object%rho,   &
-                            angom = angom, &
-                            gam   = gam,   &
-                            sig   = object%hubTipRatio,   &
-                            is    = is)
-!        WRITE(6,*) 'Leaving smachAndSndspdModule'
-!        WRITE(6,*) 'Entering rmachModule'
-        
-        CALL rmach(npts  = object%numberOfRadialPoints,    &
+        WRITE(6,*) 'Entering smachAndSndspdModule'
+       CALL smachAndSndspd(npts  = object%numberOfRadialPoints,    &
+                           rr    = object%r,     &
+                           rmsw  = object%rmt,   &
+                           rmswp = object%drt,   &
+                           snd   = object%snd,   &
+                           dsn   = object%dsn,   &
+                           dd    = object%dl1,   &
+                           rhob  = object%rho,   &
+                           angom = angom, &
+                           gam   = gam,   &
+                           sig   = object%hubTipRatio,   &
+                           is    = is)
+        WRITE(6,*) 'Leaving smachAndSndspdModule'
+        WRITE(6,*) 'Entering rmachModule'
+       
+       CALL rmach(npts  = object%numberOfRadialPoints,    &
+                  rr    = object%r,     &
+                  rmch  = object%rmx,   &
+                  drm   = object%drm,   &
+                  snd   = object%snd,   &
+                  dsn   = object%dsn,   &
+                  dd    = object%dl1,   &
+                  rxmax = rxmax, &
+                  slope = slope, &
+                  rro   = object%hubTipRatio,   &
+                  ir    = ir)
+
+        WRITE(6,*) 'Leaving rmachModule'
+
+     else
+        WRITE(6,*) 'Entering interpModule'
+       CALL interp(np    = object%numberOfRadialPoints,    &
+                   sig   = object%hubTipRatio,   &
                    rr    = object%r,     &
-                   rmch  = object%rmx,   &
+                   rmx   = object%rmx,   &
                    drm   = object%drm,   &
+                   rmt   = object%rmt,   &
+                   drt   = object%drt,   &
                    snd   = object%snd,   &
                    dsn   = object%dsn,   &
                    dd    = object%dl1,   &
-                   rxmax = rxmax, &
-                   slope = slope, &
-                   rro   = object%hubTipRatio,   &
-                   ir    = ir)
+                   ifdff = ifdff, &
+                   ed2   = object%secondOrderSmoother,   &
+                   ed4   = object%fourthOrderSmoother)
 
-!        WRITE(6,*) 'Leaving rmachModule'
-
-      else
-!        WRITE(6,*) 'Entering interpModule'
-        CALL interp(np    = object%numberOfRadialPoints,    &
-                    sig   = object%hubTipRatio,   &
-                    rr    = object%r,     &
-                    rmx   = object%rmx,   &
-                    drm   = object%drm,   &
-                    rmt   = object%rmt,   &
-                    drt   = object%drt,   &
-                    snd   = object%snd,   &
-                    dsn   = object%dsn,   &
-                    dd    = object%dl1,   &
-                    ifdff = ifdff, &
-                    ed2   = object%secondOrderSmoother,   &
-                    ed4   = object%fourthOrderSmoother)
-
-!        WRITE(6,*) 'Leaving interpModule'
+        WRITE(6,*) 'Leaving interpModule'
       endif
 
 ! output the mean flow data.
       
       
-!      WRITE(6,*) 'Entering machoutModule'
+      WRITE(6,*) 'Entering machoutModule'
       CALL machout(npts  = object%numberOfRadialPoints,  &
                    rr    = object%r,   &
                    rmch  = object%rmx, &
@@ -299,10 +299,10 @@ MODULE swirlClassObj
                    snd   = object%snd, &
                    dsn   = object%dsn, &
                    rhob  = object%rho)
-!      WRITE(6,*) 'Leaving machoutModule'
+      WRITE(6,*) 'Leaving machoutModule'
     ! Set up global matrices.
     
-!      WRITE(6,*) 'Entering globalModule'
+      WRITE(6,*) 'Entering globalModule'
       CALL globalM(np   = object%numberOfRadialPoints,  &
                    np4  = np4, &
                    sig  = object%hubTipRatio, &
@@ -317,51 +317,51 @@ MODULE swirlClassObj
                    dt   = object%drt, &
                    aa   = object%aa,  &
                    bb   = object%bb)
-!      WRITE(6,*) 'Leaving globalModule'
+      WRITE(6,*) 'Leaving globalModule'
 
-!      WRITE(6,*) 'Entering boundaryModule'
-      CALL boundary(np   = object%numberOfRadialPoints,   &
-                    sig  = object%hubTipRatio,  &
-                    ak   = ak,   &
-                    etah = etah, &
-                    etad = etad, &
-                    rmx  = object%rmx,  &
-                    rmt  = object%rmt,  &
-                    dd   = object%dl1,  &
-                    aa   = object%aa,   &
-                    bb   = object%bb)
-!      WRITE(6,*) 'Leaving boundaryModule'
+      WRITE(6,*) 'Entering boundaryModule'
+     CALL boundary(np   = object%numberOfRadialPoints,   &
+                   sig  = object%hubTipRatio,  &
+                   ak   = ak,   &
+                   etah = etah, &
+                   etad = etad, &
+                   rmx  = object%rmx,  &
+                   rmt  = object%rmt,  &
+                   dd   = object%dl1,  &
+                   aa   = object%aa,   &
+                   bb   = object%bb)
+      WRITE(6,*) 'Leaving boundaryModule'
 
-      object%aa_before = object%aa
-      object%bb_before = object%bb
+     object%aa_before = object%aa
+     object%bb_before = object%bb
 
-!      WRITE(6,*) 'Entering analysisModule'          
-      CALL analysis(np    = object%numberOfRadialPoints,    &
-                    np4   = np4,   &
-                    ak    = object%frequency,    &
-                    rr    = object%r,     &
-                    snd   = object%snd,   &
-                    rmx   = object%rmx,   &
-                    rmt   = object%rmt,   &
-                    aa    = object%aa,    &
-                    bb    = object%bb,    &
-                    alpha = object%alpha, &
-                    beta  = object%beta,  &
-                    vl    = object%vl,           &
-                    vr    = object%vr,           &
-                    work  = object%work,         &
-                    rwork = object%rwork, &
-                    gam   = object%wvn,   &
-                    jobvl = jobvl, &
-                    jobvr = jobvr, &
-                    mm    = object%azimuthalMode,    &
-                    ir    = ir,    &
-                    is    = is,    &
-                   slp   = slope, &
-                    vphi  = object%vph,   &
-                    akap  = object%akap,&
-                    S_MMS = object%S_MMS_Array)
-!      WRITE(6,*) 'Leaving analysisModule'          
+      WRITE(6,*) 'Entering analysisModule'          
+     CALL analysis(np    = object%numberOfRadialPoints,    &
+                   np4   = np4,   &
+                   ak    = object%frequency,    &
+                   rr    = object%r,     &
+                   snd   = object%snd,   &
+                   rmx   = object%rmx,   &
+                   rmt   = object%rmt,   &
+                   aa    = object%aa,    &
+                   bb    = object%bb,    &
+                   alpha = object%alpha, &
+                   beta  = object%beta,  &
+                   vl    = object%vl,           &
+                   vr    = object%vr,           &
+                   work  = object%work,         &
+                   rwork = object%rwork, &
+                   gam   = object%wvn,   &
+                   jobvl = jobvl, &
+                   jobvr = jobvr, &
+                   mm    = object%azimuthalMode,    &
+                   ir    = ir,    &
+                   is    = is,    &
+                  slp   = slope, &
+                   vphi  = object%vph,   &
+                   akap  = object%akap,&
+                   S_MMS = object%S_MMS_Array)
+      WRITE(6,*) 'Leaving analysisModule'          
 
       !CALL getL2Norm(L2      =object%L2N,&
       !               dataset1= object%aa,&
@@ -380,7 +380,7 @@ MODULE swirlClassObj
  
   IF (object%isInitialized) THEN
 
-!    print *, 'the Object is initialized'
+    print *, 'the Object is initialized'
   ELSE
     print *, 'The object is not initialized'
     CONTINUE

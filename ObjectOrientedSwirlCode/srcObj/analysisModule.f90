@@ -93,7 +93,7 @@ CONTAINS
                          rs
 
       ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
-      eps     = 1.e-8_rDef
+      eps     = 1.e-12_rDef
 !
 ! Compute convected wavenumbers.  Store them in a file.
       do j=1,np
@@ -118,7 +118,7 @@ CONTAINS
  19   format(1x,2e15.5)
       close(22)
 !
-! Check for zero rows and columns in A.
+WRITE(6,*)'Check for zero rows and columns in A.'
       badcol = .false.
       do j=1,np4
        col(j) = .true.
@@ -168,6 +168,7 @@ CONTAINS
 !
       aa_before = aa
       bb_before = bb
+      WRITE(6,*) '  Entering ZGGEV'
       CALL ZGGEV(JOBVL,   & ! JOBVL
                  JOBVR,   & ! JOBVR
                  np4,     & ! N
@@ -186,15 +187,12 @@ CONTAINS
                  RWORK,   & ! RWORK
                  INFO )     ! INFO
 
+      WRITE(6,*) '  Leaving ZGGEV'
        DO i = 1,np4
          
         S_MMS(:,i) =  MATMUL(aa_before,VR(:,i)) - ALPHA(i)/BETA(i)*MATMUL(bb_before,VR(:,i))
        
        END DO
-       h = 3
-       DO i = 1,np4
-!       WRITE(6,*)  S_MMS(i,h)
-       ENDDO
     !  write(6,960) info
  960  format(1x,'info = ',i3)
 !
