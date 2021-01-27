@@ -83,8 +83,8 @@ PROGRAM OuterCode
   ed4    =  0.0_rDef
 
   First_gp = 4
-  Last_gp  = 16
-  Step_gp  = 1
+  Last_gp  = 256 
+  Step_gp  = 16
 DO gp = First_gp,Last_gp,Step_gp
   nPts   = gp
   np     = nPts
@@ -236,6 +236,8 @@ ENDIF
              rmach                   ,&
              rmachAnalytical         ,&
              rvel)
+L2res = CMPLX(0.0_rDef,KIND=REAL64)
+errorSum = REAL(0.0_rDef,KIND=REAL64)
 
 ENDDO
 
