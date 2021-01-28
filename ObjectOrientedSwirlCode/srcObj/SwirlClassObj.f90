@@ -384,8 +384,9 @@ MODULE swirlClassObj
   ELSE
     print *, 'The object is not initialized'
     CONTINUE
-  ENDIF  
-  
+  ENDIF 
+
+      WRITE(6,*) 'Entering outputModule' 
       CALL output(np     = object%numberOfRadialPoints,    &
                   np4    = np4,   &
                   mode   = object%azimuthalMode,    &
@@ -409,6 +410,7 @@ MODULE swirlClassObj
                   vphi   = object%vph,   &
                   is     = is,    &
                   icomp  = icomp)
+      WRITE(6,*) 'Leaving outputModule' 
 !
 !      if (irepeat.eq.1) goto 100
 

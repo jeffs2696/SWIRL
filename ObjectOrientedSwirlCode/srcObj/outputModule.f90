@@ -121,7 +121,7 @@ CONTAINS
 !     character    egv
 !     character*2  ff
 !     character*15 basen,basem
-!
+
 ! Output files: 
 !               output.data: has everything.
 !               gam.nonconv: nonconvecting mode data.
@@ -133,7 +133,7 @@ CONTAINS
       eps = 1.e-4_rDef
 !
 ! Output everything to an unformatted file.
-!      WRITE(6,*) 'omega = ',omega
+      WRITE(6,*) 'omega = ',omega
 
       open(unit=12,             &
            file='output.data',  &
@@ -175,13 +175,13 @@ CONTAINS
        cvcmax = cvcmax -eps
       endif
 
-!      WRITE(6,*) 'convection speed: ',cvcmin,cvcmax
+      WRITE(6,*) 'convection speed: ',cvcmin,cvcmax
 !
 ! Compute number of zero crossings for nonconvected modes.
 
       do i = 1,np4
        gamma1 = wvn(i)
-       akx   = real(gamma1)
+       akx    = real(gamma1)
        if (akx .le. cvcmin .or. akx .ge. cvcmax) then
           izeros(i) = 0
           aim    = aimag(vrm(3*np+1,i))
@@ -207,9 +207,11 @@ CONTAINS
       do i=1,np4
         azeros(i) = REAL(izeros(i),rDef)
       enddo
+      WRITE(6,*) '  Entering indexxModule'
       CALL indexx(n     = np4,    &
                   arrin = azeros, &
                   indx  = indx)
+      WRITE(6,*) '  Leaving indexxModule'
 !
 ! Sort nonconvected modes into upstream and downstream.
       eps  = 1.e-3_rDef
@@ -231,7 +233,7 @@ CONTAINS
          endif
         else
            if (gam1a .eq. 0.0_rDef .or. gam2a .eq. 0.0_rDef) then
-!            print*, 'gam1a = ',gam1a,'  gam2a = ',gam2a
+            print*, 'gam1a = ',gam1a,'  gam2a = ',gam2a
             IF (gam1a == 0.0_rDef) THEN
               alm1 = 0.0_rDef
               alm2 = 2.0_rDef*PI/gam2a
@@ -253,7 +255,7 @@ CONTAINS
        endif
       enddo
  1000 continue
-!
+ WRITE(6,*) 'Continue'
 ! Eigenvector output.
 ! JS: new eigen vector call
 !CALL saveEGV(np = np,&
@@ -314,6 +316,7 @@ CONTAINS
        fac   = (1.0_rDef +rho)/2.0_rDef
        if (izeros(indx(j)).lt.np-4) then
         write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))
+        write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))
         write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))
        endif
       enddo
@@ -325,7 +328,7 @@ CONTAINS
       mumax = int(REAL(np,rDef)/PI)
 
       if (icomp .eq. 1) then
-
+      
        open(unit=15,            &
             file='gam.compare', &
             status='unknown')
@@ -338,13 +341,13 @@ CONTAINS
 !      mumax = int(REAL(np,rDef)/PI)
 
 ! test -- don't we already have the kappas?
-
+       WRITE(6,*) '  Entering kappaModule'
        CALL kappa(mm    = mode,  &
                   mumax = mumax, &
                   sig   = rho,   &
                   mu    = mu,    &
                   akap  = akappa)
-
+       WRITE(6,*) '  Leaving kappaModule'
 !
 ! Compute average axial Mach number.
        tot = 0.0_rDef
@@ -372,19 +375,20 @@ CONTAINS
       endif
 
  25   format(1x,i4,4e20.12,i4)
-
+    WRITE(6,*) '5y'
       do i = 1,2*np
        if (izeros(indx(i)).lt.mumax) then
         jj = (i +1)/2
         kk = i/2
         if (mod(i,2) .eq. 1) then
-         write(15,25) izeros(indx(i)),wvn(indx(i)),gam2(jj)
+    !     write(15,25) izeros(indx(i)),wvn(indx(i)),gam2(jj)
         else
-         write(15,25) izeros(indx(i)),wvn(indx(i)),gam1(kk),mu(kk)
+     !    write(15,25) izeros(indx(i)),wvn(indx(i)),gam1(kk),mu(kk)
         endif
        endif
       enddo
 !
+    WRITE(6,*) '5y'
       return
 !      WRITE(6,*) drm,drt,egv,is,vphi
       end

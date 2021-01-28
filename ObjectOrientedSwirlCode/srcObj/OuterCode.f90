@@ -30,7 +30,7 @@ PROGRAM OuterCode
                           axialWavenumber,&
                           gam            ,&
                           gm1            ,&
-                          alpha
+                          alpha          
 
   REAL(KIND=REAL64), DIMENSION(:),ALLOCATABLE :: r, &
                                                  rhoMean         ,&                                 
@@ -52,6 +52,7 @@ PROGRAM OuterCode
                        ed4,   & !4th order smoothing coefficient
                        L2res ,&
                        errorSum       ,&
+                       errorSquared   ,&
                        dr             ,&
                        sig      ! hub-to-tip ratio 
   
@@ -65,8 +66,8 @@ PROGRAM OuterCode
                                                   
   INTEGER :: nPts = 201 
 
-  REAL(KIND=rDef), PARAMETER :: radMin  = 0.2_rDef,  &
-                                radMax  = 1.0_rDef,  &
+  REAL(KIND=rDef), PARAMETER :: radMin  = 0.20_rDef,  &
+                                radMax  = 1.00_rDef,  &
                                 rVelMax = 0.00_rDef, &
                                 slope   = 0.0_rDef,  &
                                 angom   = 0.00_rDef
@@ -81,7 +82,7 @@ PROGRAM OuterCode
   ed2    =  0.0_rDef
   ed4    =  0.0_rDef
 
-  First_gp = 16
+  First_gp = 7 
   Last_gp  = 64 
   Step_gp  = 1
 
@@ -97,11 +98,11 @@ PROGRAM OuterCode
     modeNumber = 2
 
 !    Conditional statement to only run the first loop    
-   ! IF (gp.GT.First_gp) THEN
-   !     STOP
-   ! ELSE
-   ! ENDIF
-
+!    IF (gp.GT.First_gp) THEN
+!        STOP
+!    ELSE
+!    ENDIF
+!
     ALLOCATE(radialModeData(np*4)  ,&
              residualVector(np*4)  ,&
              residualVectorAnalytical(np*4)  ,&
@@ -119,7 +120,7 @@ PROGRAM OuterCode
      
  
 !  nPts = nPts*2
-  WRITE(6,*)'Number of nodes', nPts 
+!  WRITE(6,*) 'Number of nodes', nPts 
   WRITE(6,*) 'generating the grid'
 
 ! hub - to - tip ratio
@@ -138,7 +139,7 @@ PROGRAM OuterCode
       snd(i)    =  sqrt(snd(i))
       svel(i)   =  angom*r(i)
       smach(i)  =  svel(i)/snd(i)
-      smachAnalytical(i)  = SIN(0.1_rDef*r(i)) 
+      smachAnalytical(i)  = SIN(0.9_rDef*r(i)) 
       IF (smachAnalytical(i).GE.1.0_rDef) THEN
           WRITE(6,*) 'the smachAnalytical is grater than one'
       ELSE
@@ -155,14 +156,14 @@ PROGRAM OuterCode
 
     DO i = 1,nPts
       rmach(i) = rvel(i)/snd(i) 
-      rmachAnalytical(i)  = SIN(0.1_rDef*r(i)) 
+      rmachAnalytical(i)  = SIN(0.9_rDef*r(i)) 
       IF (rmachAnalytical(i).GE.1.0_rDef) THEN
           WRITE(6,*) 'the smachAnalytical is grater than one'
       ELSE
       ENDIF
     ENDDO
 
-! Calculated 
+!   Numerical Object 
     CALL CreateObject(object         = swirlClassObject ,&
                        mm            = mm,      &
                        np            = np,      &
@@ -188,19 +189,19 @@ PROGRAM OuterCode
     CALL DestroyObject(object = swirlClassObject)
     
     
-    ! Calculated 
-    CALL CreateObject(object    = swirlClassObjectAnalytical ,&
-                       mm       = mm,      &
-                       np       = np,      &
-                       sig      = sig,     &
+    ! Analytical Object 
+    CALL CreateObject(object         = swirlClassObjectAnalytical ,&
+                       mm            = mm,      &
+                       np            = np,      &
+                       sig           = sig,     &
                        AxialMachData = rmachAnalytical,&
                        ThetaMachData = smachAnalytical,& 
-                       ak       = ak,      &
-                       etah     = etah,    &
-                       etad     = etad,    &
-                       ifdff    = ifdff,   &
-                       ed2      = ed2,     &
-                       ed4      = ed4)     
+                       ak            = ak,      &
+                       etah          = etah,    &
+                       etad          = etad,    &
+                       ifdff         = ifdff,   &
+                       ed2           = ed2,     &
+                       ed4           = ed4)     
     
     CALL GetModeData(object          = swirlClassObjectAnalytical,&
                      modeNumber      = modeNumber      ,&
@@ -214,12 +215,16 @@ PROGRAM OuterCode
     
     CALL DestroyObject(object = swirlClassObjectAnalytical)
    
+    WRITE(8,*) dr, L2res
+    WRITE(6,*) dr, L2res
+    
     DO i = 1,nPts*4
-      errorMMS(i) = REAL(ABS(residualVector(i) - residualVectorAnalytical(i)),rDef)
-      errorSum    = errorSum +  errorMMS(i)**2
+      errorMMS(i)  = REAL(ABS(residualVector(i) - residualVectorAnalytical(i)),rDef)
+      errorSquared = errorMMS(i)*errorMMS(i)
+      errorSum     = errorSum +  errorSquared
     ENDDO 
-  
-    L2res = SQRT((errorSum)/(nPts*4.0_rDef))
+    
+    L2res = SQRT((errorSum)/REAL(nPts*4.0_rDef,rDef))
   
   !  WRITE(8,*)  REAL(dr), REAL(L2res)
     WRITE(6,*)  (dr), (L2res)
