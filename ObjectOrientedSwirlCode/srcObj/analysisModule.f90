@@ -118,7 +118,6 @@ CONTAINS
  19   format(1x,2e15.5)
       close(22)
 !
-WRITE(6,*)'Check for zero rows and columns in A.'
       badcol = .false.
       do j=1,np4
        col(j) = .true.
@@ -168,7 +167,6 @@ WRITE(6,*)'Check for zero rows and columns in A.'
 !
       aa_before = aa
       bb_before = bb
-      WRITE(6,*) '  Entering ZGGEV'
       CALL ZGGEV(JOBVL,   & ! JOBVL
                  JOBVR,   & ! JOBVR
                  np4,     & ! N
@@ -187,7 +185,6 @@ WRITE(6,*)'Check for zero rows and columns in A.'
                  RWORK,   & ! RWORK
                  INFO )     ! INFO
 
-      WRITE(6,*) '  Leaving ZGGEV'
        DO i = 1,np4
          
         S_MMS(:,i) =  MATMUL(aa_before,VR(:,i)) - ALPHA(i)/BETA(i)*MATMUL(bb_before,VR(:,i))

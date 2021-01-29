@@ -54,7 +54,8 @@ MODULE swirlClassObj
     INTEGER :: azimuthalMode              , &
                numberOfRadialPoints       , &
                numberOfPropagatingModes   , &
-               FiniteDifferenceFlag     
+               FiniteDifferenceFlag       , &
+               PrintToggle
 
     REAL(KIND=REAL64) :: hubTipRatio ,&
                          secondOrderSmoother,&
@@ -93,13 +94,12 @@ MODULE swirlClassObj
                                                          vl, &
                                                          vr
 
-
-
   END TYPE SwirlClassType
 ! Local Variable Declaration
 
+! Needed to decide which eigenvectors to get (See ZGGEV in 
   CHARACTER :: jobvl = 'N' ,&
-             jobvr = 'V'
+               jobvr = 'V'
 
 ! additional variables, implicitly defined in the original code
 
@@ -108,8 +108,9 @@ MODULE swirlClassObj
              irepeat = 0,  &
              is      = 5,  &
              itest   = 0,  &
-             ix      = 0
-!
+             ix      = 0,  &
+             PrintToggle = 100
+         
   REAL(KIND=REAL64) :: angom  = 0.00_rDef, &
                        gam    = 0.00_rDef,   &
                        rxmax  = 0.00_rDef, &
@@ -173,8 +174,10 @@ MODULE swirlClassObj
     
     np4 = np*4
     
+    OPEN(PrintToggle) 
     
-    
+    WRITE(PrintToggle,*) np
+
     ALLOCATE(object%dl1(object%numberOfRadialPoints,object%numberOfRadialPoints),   &
                object%y(object%numberOfRadialPoints),        &
                object%rwork(8*np4)                          ,&
@@ -199,6 +202,7 @@ MODULE swirlClassObj
                object%vl(np4,np4),  &
                object%vr(np4,np4))
 
+
 !
 ! Set up Gauss-Lobatto grid and compute Chebyshev derivative matrix.
 !     If the swirl flow is not provided ... 
@@ -207,7 +211,7 @@ MODULE swirlClassObj
 
 !       If  
         if (ifdff.eq.0) then
-          WRITE(6,*) 'Entering gridModule'
+          WRITE(PrintToggle,*) 'Entering gridModule'
          CALL grid(np  = object%numberOfRadialPoints,    &
                    sig = object%hubTipRatio,             &! sig, &
                    x   = object%y,                       &
@@ -219,25 +223,25 @@ MODULE swirlClassObj
                      ed2 = object%secondOrderSmoother,   &
                      ed4 = object%fourthOrderSmoother)
        else
-          WRITE(6,*) 'Entering fdgridModule'
+          WRITE(PrintToggle,*) 'Entering fdgridModule'
          CALL fdgrid(np  = object%numberOfRadialPoints,  &
                      sig = object%hubTipRatio,           &
                      x   = object%y,                     &
                      r   = object%r)
-          WRITE(6,*) 'Leaving fdgridModule'
+          WRITE(PrintToggle,*) 'Leaving fdgridModule'
          
-          WRITE(6,*) 'Entering fdrivsModule'
+          WRITE(PrintToggle,*) 'Entering fdrivsModule'
          CALL fdrivs(np     = object%numberOfRadialPoints,    &
                      sig    = object%hubTipRatio,             &
                      dl1    = object%dl1,                     &
                      iorder = object%FiniteDifferenceFlag,    &!ifdff, &
                      ed2    = object%secondOrderSmoother,     &
                      ed4    = object%fourthOrderSmoother)
-          WRITE(6,*) 'Leaving fdrivsModule'
+          WRITE(PrintToggle,*) 'Leaving fdrivsModule'
 
        endif
 
-        WRITE(6,*) 'Entering smachAndSndspdModule'
+        WRITE(PrintToggle,*) 'Entering smachAndSndspdModule'
        CALL smachAndSndspd(npts  = object%numberOfRadialPoints,    &
                            rr    = object%r,     &
                            rmsw  = object%rmt,   &
@@ -250,8 +254,8 @@ MODULE swirlClassObj
                            gam   = gam,   &
                            sig   = object%hubTipRatio,   &
                            is    = is)
-        WRITE(6,*) 'Leaving smachAndSndspdModule'
-        WRITE(6,*) 'Entering rmachModule'
+        WRITE(PrintToggle,*) 'Leaving smachAndSndspdModule'
+        WRITE(PrintToggle,*) 'Entering rmachModule'
        
        CALL rmach(npts  = object%numberOfRadialPoints,    &
                   rr    = object%r,     &
@@ -265,10 +269,10 @@ MODULE swirlClassObj
                   rro   = object%hubTipRatio,   &
                   ir    = ir)
 
-        WRITE(6,*) 'Leaving rmachModule'
+        WRITE(PrintToggle,*) 'Leaving rmachModule'
 
      else
-        WRITE(6,*) 'Entering interpModule'
+        WRITE(PrintToggle,*) 'Entering interpModule'
        CALL interp(np    = object%numberOfRadialPoints,    &
                    sig   = object%hubTipRatio,   &
                    rr    = object%r,     &
@@ -283,13 +287,13 @@ MODULE swirlClassObj
                    ed2   = object%secondOrderSmoother,   &
                    ed4   = object%fourthOrderSmoother)
 
-        WRITE(6,*) 'Leaving interpModule'
+        WRITE(PrintToggle,*) 'Leaving interpModule'
       endif
 
 ! output the mean flow data.
       
       
-      WRITE(6,*) 'Entering machoutModule'
+      WRITE(PrintToggle,*) 'Entering machoutModule'
       CALL machout(npts  = object%numberOfRadialPoints,  &
                    rr    = object%r,   &
                    rmch  = object%rmx, &
@@ -299,10 +303,10 @@ MODULE swirlClassObj
                    snd   = object%snd, &
                    dsn   = object%dsn, &
                    rhob  = object%rho)
-      WRITE(6,*) 'Leaving machoutModule'
+      WRITE(PrintToggle,*) 'Leaving machoutModule'
     ! Set up global matrices.
     
-      WRITE(6,*) 'Entering globalModule'
+      WRITE(PrintToggle,*) 'Entering globalModule'
       CALL globalM(np   = object%numberOfRadialPoints,  &
                    np4  = np4, &
                    sig  = object%hubTipRatio, &
@@ -317,9 +321,9 @@ MODULE swirlClassObj
                    dt   = object%drt, &
                    aa   = object%aa,  &
                    bb   = object%bb)
-      WRITE(6,*) 'Leaving globalModule'
+      WRITE(PrintToggle,*) 'Leaving globalModule'
 
-      WRITE(6,*) 'Entering boundaryModule'
+      WRITE(PrintToggle,*) 'Entering boundaryModule'
      CALL boundary(np   = object%numberOfRadialPoints,   &
                    sig  = object%hubTipRatio,  &
                    ak   = ak,   &
@@ -330,12 +334,12 @@ MODULE swirlClassObj
                    dd   = object%dl1,  &
                    aa   = object%aa,   &
                    bb   = object%bb)
-      WRITE(6,*) 'Leaving boundaryModule'
+      WRITE(PrintToggle,*) 'Leaving boundaryModule'
 
      object%aa_before = object%aa
      object%bb_before = object%bb
 
-      WRITE(6,*) 'Entering analysisModule'          
+      WRITE(PrintToggle,*) 'Entering analysisModule'          
      CALL analysis(np    = object%numberOfRadialPoints,    &
                    np4   = np4,   &
                    ak    = object%frequency,    &
@@ -361,7 +365,7 @@ MODULE swirlClassObj
                    vphi  = object%vph,   &
                    akap  = object%akap,&
                    S_MMS = object%S_MMS_Array)
-      WRITE(6,*) 'Leaving analysisModule'          
+      WRITE(PrintToggle,*) 'Leaving analysisModule'          
 
       !CALL getL2Norm(L2      =object%L2N,&
       !               dataset1= object%aa,&
@@ -386,7 +390,7 @@ MODULE swirlClassObj
     CONTINUE
   ENDIF 
 
-      WRITE(6,*) 'Entering outputModule' 
+      WRITE(PrintToggle,*) 'Entering outputModule' 
       CALL output(np     = object%numberOfRadialPoints,    &
                   np4    = np4,   &
                   mode   = object%azimuthalMode,    &
@@ -410,11 +414,11 @@ MODULE swirlClassObj
                   vphi   = object%vph,   &
                   is     = is,    &
                   icomp  = icomp)
-      WRITE(6,*) 'Leaving outputModule' 
+      WRITE(PrintToggle,*) 'Leaving outputModule' 
 !
 !      if (irepeat.eq.1) goto 100
 
-
+      CLOSE(PrintToggle)
 !
 !
   END SUBROUTINE CreateSwirlClassObject

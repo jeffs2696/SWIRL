@@ -207,11 +207,9 @@ CONTAINS
       do i=1,np4
         azeros(i) = REAL(izeros(i),rDef)
       enddo
-      WRITE(6,*) '  Entering indexxModule'
       CALL indexx(n     = np4,    &
                   arrin = azeros, &
                   indx  = indx)
-      WRITE(6,*) '  Leaving indexxModule'
 !
 ! Sort nonconvected modes into upstream and downstream.
       eps  = 1.e-3_rDef
@@ -255,7 +253,6 @@ CONTAINS
        endif
       enddo
  1000 continue
- WRITE(6,*) 'Continue'
 ! Eigenvector output.
 ! JS: new eigen vector call
 !CALL saveEGV(np = np,&
@@ -341,13 +338,11 @@ CONTAINS
 !      mumax = int(REAL(np,rDef)/PI)
 
 ! test -- don't we already have the kappas?
-       WRITE(6,*) '  Entering kappaModule'
        CALL kappa(mm    = mode,  &
                   mumax = mumax, &
                   sig   = rho,   &
                   mu    = mu,    &
                   akap  = akappa)
-       WRITE(6,*) '  Leaving kappaModule'
 !
 ! Compute average axial Mach number.
        tot = 0.0_rDef
@@ -375,7 +370,6 @@ CONTAINS
       endif
 
  25   format(1x,i4,4e20.12,i4)
-    WRITE(6,*) '5y'
       do i = 1,2*np
        if (izeros(indx(i)).lt.mumax) then
         jj = (i +1)/2
@@ -388,7 +382,6 @@ CONTAINS
        endif
       enddo
 !
-    WRITE(6,*) '5y'
       return
 !      WRITE(6,*) drm,drt,egv,is,vphi
       end

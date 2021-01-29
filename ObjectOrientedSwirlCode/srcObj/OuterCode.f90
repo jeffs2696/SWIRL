@@ -28,6 +28,7 @@ PROGRAM OuterCode
   COMPLEX(KIND=REAL64) :: ak             ,&
                           etah, etad     ,&
                           axialWavenumber,&
+                          axialWavenumberAnalytical,&
                           gam            ,&
                           gm1            ,&
                           alpha          
@@ -82,7 +83,7 @@ PROGRAM OuterCode
   ed2    =  0.0_rDef
   ed4    =  0.0_rDef
 
-  First_gp = 7 
+  First_gp = 4 
   Last_gp  = 64 
   Step_gp  = 1
 
@@ -120,20 +121,17 @@ PROGRAM OuterCode
      
  
 !  nPts = nPts*2
-!  WRITE(6,*) 'Number of nodes', nPts 
-  WRITE(6,*) 'generating the grid'
+    WRITE(6,*) 'Number of nodes', nPts 
 
 ! hub - to - tip ratio
     sig = radMin/radMax
     
     dr = (radMax-radMin)/REAL(nPts-1,rDef)
-    WRITE(6,*) 'Setting radial grid'
     DO i=1,nPts
       r(i) = (radMin + REAL(i-1,rDef)*dr)/radMax
     END DO
     
 
-  WRITE(6,*) 'Setting up the flow variables'
     DO i=1,nPts
       snd(i)    =  1.0_rDef - gm1/2.0_rDef*angom*angom*(1.0_rDef - r(i)*r(i)) ! 
       snd(i)    =  sqrt(snd(i))
@@ -205,7 +203,7 @@ PROGRAM OuterCode
     
     CALL GetModeData(object          = swirlClassObjectAnalytical,&
                      modeNumber      = modeNumber      ,&
-                     axialWavenumber = axialWavenumber,&
+                     axialWavenumber = axialWavenumberAnalytical,&
                      radialModeData  = radialModeData )
     
     CALL FindResidualData(object     = swirlClassObjectAnalytical,&
@@ -247,7 +245,7 @@ PROGRAM OuterCode
                rmach                   ,&
                rmachAnalytical         ,&
                rvel)
-  
+ 
     L2res    = REAL(0.0_rDef,KIND=REAL64)
     errorSum = REAL(0.0_rDef,KIND=REAL64)
   
