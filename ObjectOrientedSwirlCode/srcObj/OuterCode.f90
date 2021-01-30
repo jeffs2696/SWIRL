@@ -1,28 +1,28 @@
 PROGRAM OuterCode
- USE, INTRINSIC  :: ISO_FORTRAN_ENV
- USE SwirlClassObj
- USE L2NormModule
- USE IEEE_ARITHMETIC
- IMPLICIT NONE
-
- INTEGER, PARAMETER :: rDef = REAL64
-! defining a new derived data type
-
- TYPE(SwirlClassType) :: swirlClassObject
- TYPE(SwirlClassType) :: swirlClassObjectAnalytical
-
-! original inputs
- INTEGER  :: &
-           ifdff     ,& ! finite difference flag
-           mm        ,& ! mode order
-           np        ,& ! number of points
-           i         ,& ! number of points
-           gp        ,& ! number of points
-           First_gp  ,& ! number of points
-           Last_gp   ,& ! number of points
-           Step_gp   ,& ! number of points
-           numModes  ,& ! number of radial modes
-           modeNumber 
+  USE, INTRINSIC  :: ISO_FORTRAN_ENV
+  USE SwirlClassObj
+  USE L2NormModule
+  USE IEEE_ARITHMETIC
+  IMPLICIT NONE
+ 
+  INTEGER, PARAMETER :: rDef = REAL64
+ ! defining a new derived data type
+ 
+  TYPE(SwirlClassType) :: swirlClassObject
+  TYPE(SwirlClassType) :: swirlClassObjectAnalytical
+ 
+ ! original inputs
+  INTEGER  :: &
+            ifdff     ,& ! finite difference flag
+            mm        ,& ! mode order
+            np        ,& ! number of points
+            i         ,& ! number of points
+            gp        ,& ! number of points
+            First_gp  ,& ! number of points
+            Last_gp   ,& ! number of points
+            Step_gp   ,& ! number of points
+            numModes  ,& ! number of radial modes
+            modeNumber 
 
 
   COMPLEX(KIND=REAL64) :: ak             ,&
