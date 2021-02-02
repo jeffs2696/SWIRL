@@ -15,4 +15,3 @@ all:
 	(cd $(DIR_OBJ);  ./$(EXE); ./$(MOVE_OUTPUT_EXE) )
 	(cd $(DIR_ORIG); ./$(EXE); ./$(MOVE_OUTPUT_EXE) )
 	(cd $(DIR_COMPARE); ./$(COMPARE_EXE))
-	

@@ -9,7 +9,6 @@ PROGRAM OuterCode
  ! defining a new derived data type
  
   TYPE(SwirlClassType) :: swirlClassObject
-  TYPE(SwirlClassType) :: swirlClassObjectAnalytical
  
  ! original inputs
   INTEGER  :: &
@@ -29,16 +28,24 @@ PROGRAM OuterCode
                           etah, etad     ,&
                           axialWavenumber,&
                           axialWavenumberAnalytical,&
+                          ci             ,&
                           gam            ,&
                           gm1            ,&
-                          alpha          
+                          alpha          ,&
+                          k_1            ,&
+                          k_2            ,&
+                          k_3            ,&
+                          k_4            ,&
+                          k_5            ,&
+                          k_6            ,&
+                          k_7            
 
   REAL(KIND=REAL64), DIMENSION(:),ALLOCATABLE :: r, &
-                                                 rhoMean         ,&                                 
-                                                 rhoVrMean       ,&
-                                                 rhoVthetaMean   ,&
-                                                 rhoVxMean       ,&
-                                                 etotalMean      ,&
+!                                                 rhoMean         ,&                                 
+!                                                 rhoVrMean       ,&
+!                                                 rhoVthetaMean   ,&
+!                                                 rhoVxMean       ,&
+!                                                 etotalMean      ,&
                                                  rmach           ,&
                                                  rmachAnalytical ,&
                                                  smach           ,&
@@ -61,11 +68,12 @@ PROGRAM OuterCode
   COMPLEX(KIND=REAL64) , DIMENSION(:), ALLOCATABLE :: radialModeData,&
                                                       residualVector,&
                                                       residualVectorAnalytical,&
-                                                      L2res_array
+                                                      L2res_array  ,&
+                                                      S_1,S_2,S_3,S_4
   
                                                    
                                                   
-  INTEGER :: nPts = 201 
+  INTEGER :: nPts ! = 201 
 
   REAL(KIND=rDef), PARAMETER :: radMin  = 0.20_rDef,  &
                                 radMax  = 1.00_rDef,  &
@@ -83,13 +91,21 @@ PROGRAM OuterCode
   ed2    =  0.0_rDef
   ed4    =  0.0_rDef
 
-  First_gp = 4 
-  Last_gp  = 64 
+  First_gp = 8 
+  Last_gp  = 32
   Step_gp  = 1
 
   gam = 1.4_rDef
   gm1 = gam - 1.0_rDef
 
+  ci  = CMPLX(0.0,1.0)
+  k_1 = CMPLX(0.0,0.0)
+  k_2 = CMPLX(0.0,0.0)
+  k_3 = CMPLX(0.0,0.0)
+  k_4 = CMPLX(0.0,0.0)
+  k_5 = CMPLX(0.0,0.0)
+  k_6 = CMPLX(0.0,0.0)
+  k_7 = CMPLX(0.0,0.0)
 
   ! Starting Grid DO LOOP  
   DO gp =  First_gp,Last_gp,Step_gp
@@ -99,12 +115,14 @@ PROGRAM OuterCode
     modeNumber = 2
 
 !    Conditional statement to only run the first loop    
-!    IF (gp.GT.First_gp) THEN
-!        STOP
-!    ELSE
-!    ENDIF
-!
-    ALLOCATE(radialModeData(np*4)  ,&
+    IF (gp.GT.First_gp) THEN
+        STOP
+    ELSE
+    ENDIF
+!    
+    WRITE(6,*) '# Grid Points: ',  np
+    ALLOCATE(S_1(np),S_2(np),S_3(np),S_4(np),&
+             radialModeData(np*4)  ,&
              residualVector(np*4)  ,&
              residualVectorAnalytical(np*4)  ,&
              errorMMS(np*4)        ,&
@@ -117,13 +135,9 @@ PROGRAM OuterCode
              rmachAnalytical(nPts) ,&
              rvel(nPts))
   
-!------------------------------
-     
- 
-!  nPts = nPts*2
-    WRITE(6,*) 'Number of nodes', nPts 
 
-! hub - to - tip ratio
+! defining flow data and radius     
+!    WRITE(6,*) 'Calculating flow data'
     sig = radMin/radMax
     
     dr = (radMax-radMin)/REAL(nPts-1,rDef)
@@ -137,13 +151,8 @@ PROGRAM OuterCode
       snd(i)    =  sqrt(snd(i))
       svel(i)   =  angom*r(i)
       smach(i)  =  svel(i)/snd(i)
-      smachAnalytical(i)  = SIN(0.9_rDef*r(i)) 
-      IF (smachAnalytical(i).GE.1.0_rDef) THEN
-          WRITE(6,*) 'the smachAnalytical is grater than one'
-      ELSE
-      ENDIF
     END DO
-!   linear shear in the axial flow
+!    WRITE(6,*) ' linear shear in the axial flow'
     DO i=1,nPts
       IF (slope.ge.0.0_rDef) THEN
         rvel(i) = slope*(r(i) -1.0_rDef)+rVelMax
@@ -154,14 +163,9 @@ PROGRAM OuterCode
 
     DO i = 1,nPts
       rmach(i) = rvel(i)/snd(i) 
-      rmachAnalytical(i)  = SIN(0.9_rDef*r(i)) 
-      IF (rmachAnalytical(i).GE.1.0_rDef) THEN
-          WRITE(6,*) 'the smachAnalytical is grater than one'
-      ELSE
-      ENDIF
     ENDDO
 
-!   Numerical Object 
+!    WRITE(6,*) 'Creating Object' 
     CALL CreateObject(object         = swirlClassObject ,&
                        mm            = mm,      &
                        np            = np,      &
@@ -174,7 +178,7 @@ PROGRAM OuterCode
                        ifdff         = ifdff,   &
                        ed2           = ed2,     &
                        ed4           = ed4)     
-    
+!    WRITE(6,*) 'Finished creating object' 
     CALL GetModeData(object          = swirlClassObject,&
                      modeNumber      = modeNumber      ,&
                      axialWavenumber = axialWavenumber,&
@@ -185,55 +189,66 @@ PROGRAM OuterCode
                           S          = residualVector)
     
     CALL DestroyObject(object = swirlClassObject)
+!    WRITE(6,*)  ' Numerical residual vector, S'
+    DO i = 1,np
+    S_1(i) = (EXP(-k_1*r(i))/r(i))*      &
+          (ci*EXP( k_4*r(i))*ak*r(i)-    &
+           ci*EXP(r(i)*(k_1 + k_2 + k_4))*axialWavenumber*r(i)-&
+           ci*EXP(r(i)*(k_1 + k_3 + k_4))*mm-  &
+              EXP(r(i)*(k_1 + 2*k_3+k_7))*gam+  &
+              EXP(r(i)*(k_1 + 2*k_3+k_7))    +  &
+     2.0_rDef*EXP(r(i)*(k_1 +   k_3+k_5))) 
+ 
+    residualVectorAnalytical(i) = S_1(i)
+
+    WRITE(6,*) 'S_1 :', S_1(i)
+
+    S_2(i) = (EXP(-k_1*r(i))/r(i))*      &
+          (ci*EXP( k_5*r(i))*ak*r(i)-    &
+           ci*EXP(r(i)*(k_1 + k_2 + k_5))*axialWavenumber*r(i)-&
+           ci*EXP(r(i)*(k_1 +       k_7))*mm-  &
+           ci*EXP(r(i)*(k_1 +   k_3+k_5))*mm-  &
+             (EXP(r(i)*(k_3))/r(i)    +  &
+          gm1*EXP(3*k_3*r(i))/(2.0_rDef*r(i)))*&
+              EXP(r(i)*(k_1+k_4))*r(i))
     
-    
-    ! Analytical Object 
-    CALL CreateObject(object         = swirlClassObjectAnalytical ,&
-                       mm            = mm,      &
-                       np            = np,      &
-                       sig           = sig,     &
-                       AxialMachData = rmachAnalytical,&
-                       ThetaMachData = smachAnalytical,& 
-                       ak            = ak,      &
-                       etah          = etah,    &
-                       etad          = etad,    &
-                       ifdff         = ifdff,   &
-                       ed2           = ed2,     &
-                       ed4           = ed4)     
-    
-    CALL GetModeData(object          = swirlClassObjectAnalytical,&
-                     modeNumber      = modeNumber      ,&
-                     axialWavenumber = axialWavenumberAnalytical,&
-                     radialModeData  = radialModeData )
-    
-    CALL FindResidualData(object     = swirlClassObjectAnalytical,&
-                          modeNumber = numModes        ,&
-                          S          = residualVectorAnalytical)
-    
-    
-    CALL DestroyObject(object = swirlClassObjectAnalytical)
+    residualVectorAnalytical(i + np) = S_2(i)
+
+    WRITE(6,*) 'S_2 :', S_2(i)
+    S_3(i) = (EXP(-k_1*r(i))/r(i))*      &
+          (ci*EXP(r(i)*(k_1+k_2+k_6))*axialWavenumber*r(i)-&
+           ci*EXP(r(i)*(k_1+k_3+k_6))*mm-  &
+    ci*axialWavenumber*EXP(r(i)*(k_1 +k_7))*r(i)-  &
+          ci*(EXP(r(i)*(k_6))*ak*r(i)    +  &
+          gm1*EXP(k_2 +  2*k_3*r(i) ) /(2.0_rDef*r(i)))*&
+              EXP(r(i)*(k_1+k_4))*r(i))
+
+    residualVectorAnalytical(i + 2*np) = S_3(i)
+
+    WRITE(6,*) 'S_3 :', S_3(i)
+    S_4(i) =-(EXP(-k_1*r(i))/r(i))*      &
+         (-ci*EXP(r(i)*(k_1+k_2+k_7))*axialWavenumber*r(i)+    &
+           ci*EXP(r(i)*(k_1+k_3+k_7))*mm*r(i)-&
+          (gm1*EXP(2*k_3*r(i))/(2.0_rDef*r(i)) + 1/r(i))*&
+              EXP(r(i)*(k_1+k_4))*r(i)) - &
+           ci*EXP(r(i)*(k_1 +       k_5))*mm+  &
+      ci*r(i)*(ak*EXP(k_7*r(i)) - axialWavenumber*EXP(r(i)*(k_1 + k_6)))  
+
+    residualVectorAnalytical(i + 3*np) = S_4(i)
+    WRITE(6,*) 'S_4 :', S_4(i)
+    ENDDO
    
-    WRITE(8,*) dr, L2res
-    WRITE(6,*) dr, L2res
+    DO i=1,np*4
+    errorMMS(i)  =  REAL(ABS(residualVector(i) - residualVectorAnalytical(i)))
+    errorSquared =  errorMMS(i)*errorMMS(i)
+    errorSum     =  errorSum + errorSquared
+    WRITE(6,*) errorMMS(i)
+    END DO
+    L2res = SQRT(errorSum/(np*4))
+    WRITE(6,*)'L2Res: ', L2res
     
-    DO i = 1,nPts*4
-      errorMMS(i)  = REAL(ABS(residualVector(i) - residualVectorAnalytical(i)),rDef)
-      errorSquared = errorMMS(i)*errorMMS(i)
-      errorSum     = errorSum +  errorSquared
-    ENDDO 
-    
-    L2res = SQRT((errorSum)/REAL(nPts*4.0_rDef,rDef))
-  
-  !  WRITE(8,*)  REAL(dr), REAL(L2res)
-    WRITE(6,*)  (dr), (L2res)
-  
-    IF (L2res.NE.L2res) THEN
-        WRITE(6,*) 'L2res is NaN'
-        STOP
-    ELSE
-    ENDIF
-  
-    DEALLOCATE(radialModeData          ,&
+    DEALLOCATE(S_1,S_2,S_3,S_4         ,&
+               radialModeData          ,&
                residualVector          ,&
                residualVectorAnalytical,&
                errorMMS                ,&
@@ -245,9 +260,8 @@ PROGRAM OuterCode
                rmach                   ,&
                rmachAnalytical         ,&
                rvel)
- 
-    L2res    = REAL(0.0_rDef,KIND=REAL64)
-    errorSum = REAL(0.0_rDef,KIND=REAL64)
+!    L2res = 0.0_rDef
+    errorSum = 0.0_rDef
   
 ENDDO
 

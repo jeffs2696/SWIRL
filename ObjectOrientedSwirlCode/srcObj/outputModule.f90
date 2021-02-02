@@ -181,6 +181,7 @@ CONTAINS
 
       do i = 1,np4
        gamma1 = wvn(i)
+!       WRITE(6,*) gamma1
        akx    = real(gamma1)
        if (akx .le. cvcmin .or. akx .ge. cvcmax) then
           izeros(i) = 0
@@ -312,9 +313,9 @@ CONTAINS
        gamma1 = wvn(indx(j))
        fac   = (1.0_rDef +rho)/2.0_rDef
        if (izeros(indx(j)).lt.np-4) then
-        write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))
-        write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))
-        write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))
+!        write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))
+!        write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))
+!        write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))
        endif
       enddo
  10   format(1x,i4,4e13.5,i4)

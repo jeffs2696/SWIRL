@@ -109,7 +109,7 @@ MODULE swirlClassObj
              is      = 5,  &
              itest   = 0,  &
              ix      = 0,  &
-             PrintToggle = 100
+             PrintToggle = 6
          
   REAL(KIND=REAL64) :: angom  = 0.00_rDef, &
                        gam    = 0.00_rDef,   &
@@ -418,7 +418,7 @@ MODULE swirlClassObj
 !
 !      if (irepeat.eq.1) goto 100
 
-      CLOSE(PrintToggle)
+!      CLOSE(PrintToggle)
 !
 !
   END SUBROUTINE CreateSwirlClassObject
@@ -453,6 +453,7 @@ MODULE swirlClassObj
   COMPLEX(KIND=REAL64), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: radialModeData
   COMPLEX(KIND=REAL64), INTENT(INOUT) :: axialWavenumber
   CONTINUE
+  
   IF (object%isInitialized.eqv..TRUE.) THEN
       axialWavenumber = object%alpha(modeNumber)/object%beta(modeNumber)
       radialModeData  = object%vr(:,modeNumber)

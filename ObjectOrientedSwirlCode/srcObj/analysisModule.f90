@@ -93,7 +93,7 @@ CONTAINS
                          rs
 
       ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
-      eps     = 1.e-12_rDef
+      eps     = 1.e-4_rDef
 !
 ! Compute convected wavenumbers.  Store them in a file.
       do j=1,np
@@ -186,11 +186,12 @@ CONTAINS
                  INFO )     ! INFO
 
        DO i = 1,np4
-         
-        S_MMS(:,i) =  MATMUL(aa_before,VR(:,i)) - ALPHA(i)/BETA(i)*MATMUL(bb_before,VR(:,i))
-       
+       IF (REAL(BETA(i)).gt.eps) THEN
+        S_MMS(:,i) =  MATMUL(aa_before,VR(:,i)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(:,i))
+    ELSE 
+       ENDIF
        END DO
-    !  write(6,960) info
+     ! write(6,960) info
  960  format(1x,'info = ',i3)
 !
       c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
@@ -199,7 +200,7 @@ CONTAINS
       if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
        rm = rmx(1)
        gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
-     !  write(6,30) gamco
+      write(6,30) gamco
       endif
  30   format(/,1x,'Cut-off wavenumber: ',e15.5,/)
 !
@@ -219,20 +220,19 @@ CONTAINS
       enddo
 970  format(1x,i4,4e13.4)
 !
-! Print all the gammas to a file.
-      open(unit=15,file='gammas.dat',status='unknown')
-      open(unit=35,file='gam.acc',status='unknown')
-      open(unit=55,file='gammasOnly.dat',status='unknown')
-      rewind 15
-      rewind 35
-      rewind 55
-      write(15,50)
-      write(35,55)
+     ! WRITE(6,*) 'Print all the gammas to a file.'
+!      open(unit=15,file='gammas.dat',status='unknown')
+  !    open(unit=35,file='gam.acc',status='unknown')
+  !    open(unit=55,file='gammasOnly.dat',status='unknown')
+!;      rewind 15
+  !    rewind 35
+ !     rewind 55
+ !     write(15,50)
+!      write(35,55)
  50   format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
          6x,'Im{gam}/k',6x,'kappa')
  55   format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
          10x,'Im{gam/ak}',5x,'nz')
-!
       do i = 1,np4
        if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
         rm   = rmx(1)
@@ -243,22 +243,23 @@ CONTAINS
                   +REAL(ak,rDef)*REAL(ak,rDef)
         if (akap(i).gt.0.0_rDef) then
          akap(i) = SQRT(akap(i))
-         write(15,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
+ !        write(15,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
         else
-         write(15,10) i,gam(i),gam(i)/ak,vphi(i)
+  !       write(15,10) i,gam(i),gam(i)/ak,vphi(i)
         endif
        endif
-       write(35,12) i,gam(i),gam(i)/ak,vphi(i)
-       write(15,10) i,gam(i),gam(i)/ak,vphi(i)
-       write(55,*) REAL(gam(i)),AIMAG(gam(i))
+!       write(35,12) i,gam(i),gam(i)/ak,vphi(i)
+!       write(15,10) i,gam(i),gam(i)/ak,vphi(i)
+!       write(55,*) REAL(gam(i)),AIMAG(gam(i))
       enddo
-      close(15)
-      close(35)
-      close(55)
+ !     close(15)
+  !    close(35)
+  !    close(55)
  10   format(1x,i4,9e15.6)
  12   format(1x,i4,6e20.12)
 !
       return
+      
       end
 
 END MODULE analysisModule

@@ -26,7 +26,7 @@ F77      = gfortran
 F90      = gfortran
 F77FLAGS  = -g -c -Og -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
 F90FLAGS  = -g -c -Og -std=f2008 -fbounds-check -fcheck-array-temporaries \
-			-Wconversion -Wsurprising -Wall -ffpe-trap=denormal,overflow
+			-Wconversion -Wsurprising -Wall -ffpe-trap=zero,invalid
 #-Werror
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map

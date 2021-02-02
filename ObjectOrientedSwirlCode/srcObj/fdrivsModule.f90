@@ -64,7 +64,7 @@ CONTAINS
 
 
 !
-! Compute array for finite differences.
+      WRITE(6,*) ' Compute array for finite differences.'
 !
       do i = 1,np
       ! if the finite difference flag = 2, then it is fourth order, else...
@@ -116,19 +116,20 @@ CONTAINS
         endif
        endif
       enddo
-      open(unit=15,file='deriv.matrix',status='unknown')
-      rewind 15
+!      open(unit=15,file='deriv.matrix',status='unknown')
+!      rewind 15
       do i = 1,np
-       write(15,10) (dl1(i,j), j=1,np)
+!       write(15,10) (dl1(i,j), j=1,np)
       enddo
  10   format(1x,16f7.1)
-      close(15)
+ !     close(15)
 !
       coeff  = 0.50_rDef*(1.0_rDef -sig)
       dx = 2.0_rDef/REAL(np -1,rDef)
       do j = 1,np
        do i = 1,np
         dr       = coeff*dx
+!        WRITE(6,*) dr
         if (iorder.eq.2) then
          dl1(i,j) = dl1(i,j)/(12.0_rDef*dr)
         else
