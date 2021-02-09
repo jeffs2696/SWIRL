@@ -109,7 +109,7 @@ MODULE swirlClassObj
              is      = 5,  &
              itest   = 0,  &
              ix      = 0,  &
-             PrintToggle = 6
+             PrintToggle = 50
          
   REAL(KIND=REAL64) :: angom  = 0.00_rDef, &
                        gam    = 0.00_rDef,   &
@@ -417,7 +417,6 @@ MODULE swirlClassObj
       WRITE(PrintToggle,*) 'Leaving outputModule' 
 !
 !      if (irepeat.eq.1) goto 100
-
 !      CLOSE(PrintToggle)
 !
 !

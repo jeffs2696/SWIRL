@@ -1,3 +1,33 @@
+! This module uses LAPACK's ZGGEV to solve the eigenproblem
+!
+! Input:np,
+!       np4,
+!       ak,
+!       rr,
+!       snd,
+!       rmx,
+!       rmt,
+!       aa,
+!       bb,
+!       alpha,
+!       beta,
+!       vl,
+!       vr,
+!       work,
+!       rwork,
+!       gam,
+!       jobvl,
+!       jobvr,
+!       mm,
+!       ir,
+!       is,
+!       slp,
+!       vphi,
+!       akap,
+!       S_MMS
+!
+! Output:
+!   
 MODULE analysisModule
    USE, INTRINSIC :: ISO_FORTRAN_ENV
    IMPLICIT NONE
@@ -93,7 +123,7 @@ CONTAINS
                          rs
 
       ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
-      eps     = 1.e-4_rDef
+      eps     = 1.e-12_rDef
 !
 ! Compute convected wavenumbers.  Store them in a file.
       do j=1,np
@@ -185,15 +215,17 @@ CONTAINS
                  RWORK,   & ! RWORK
                  INFO )     ! INFO
 
-       DO i = 1,np4
-       IF (REAL(BETA(i)).gt.eps) THEN
-        S_MMS(:,i) =  MATMUL(aa_before,VR(:,i)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(:,i))
-    ELSE 
-       ENDIF
-       END DO
+!!       DO i = 1,np4
+!       IF (REAL(BETA(i)).gt.eps) THEN
+!        S_MMS(:,i) =  MATMUL(aa_before,VR(:,i)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(:,i))
+!        ELSE
+!           WRITE(6,*) i 
+!       ENDIF
+!       END DO
      ! write(6,960) info
  960  format(1x,'info = ',i3)
 !
+      
       c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
 !
 ! Compute cut-off wavenumber for uniform flow.
@@ -219,7 +251,12 @@ CONTAINS
        endif
       enddo
 970  format(1x,i4,4e13.4)
-!
+
+
+
+       DO i = 1,np4
+        S_MMS(:,i) =  MATMUL(aa,VR(:,i)) - gam(i)*MATMUL(bb,VR(:,i))
+       END DO
      ! WRITE(6,*) 'Print all the gammas to a file.'
 !      open(unit=15,file='gammas.dat',status='unknown')
   !    open(unit=35,file='gam.acc',status='unknown')

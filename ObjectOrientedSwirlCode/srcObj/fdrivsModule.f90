@@ -64,7 +64,7 @@ CONTAINS
 
 
 !
-      WRITE(6,*) ' Compute array for finite differences.'
+! Compute array for finite differences.
 !
       do i = 1,np
       ! if the finite difference flag = 2, then it is fourth order, else...
@@ -129,7 +129,6 @@ CONTAINS
       do j = 1,np
        do i = 1,np
         dr       = coeff*dx
-!        WRITE(6,*) dr
         if (iorder.eq.2) then
          dl1(i,j) = dl1(i,j)/(12.0_rDef*dr)
         else

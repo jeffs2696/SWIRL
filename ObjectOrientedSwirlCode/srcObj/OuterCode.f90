@@ -100,9 +100,9 @@ PROGRAM OuterCode
 
   ci  = CMPLX(0.0,1.0)
   k_1 = CMPLX(0.0,0.0)
-  k_2 = CMPLX(0.0,0.0)
-  k_3 = CMPLX(0.0,0.0)
-  k_4 = CMPLX(0.0,0.0)
+  k_2 = CMPLX(0.4,0.0)
+  k_3 = CMPLX(0.8,0.0)
+  k_4 = CMPLX(0.2,0.0)
   k_5 = CMPLX(0.0,0.0)
   k_6 = CMPLX(0.0,0.0)
   k_7 = CMPLX(0.0,0.0)
@@ -115,11 +115,11 @@ PROGRAM OuterCode
     modeNumber = 2
 
 !    Conditional statement to only run the first loop    
-    IF (gp.GT.First_gp) THEN
-        STOP
-    ELSE
-    ENDIF
-!    
+!    IF (gp.GT.First_gp) THEN
+!        STOP
+!    ELSE
+!    ENDIF
+!!    
     WRITE(6,*) '# Grid Points: ',  np
     ALLOCATE(S_1(np),S_2(np),S_3(np),S_4(np),&
              radialModeData(np*4)  ,&
@@ -135,23 +135,21 @@ PROGRAM OuterCode
              rmachAnalytical(nPts) ,&
              rvel(nPts))
   
-
-! defining flow data and radius     
-!    WRITE(6,*) 'Calculating flow data'
     sig = radMin/radMax
-    
+
     dr = (radMax-radMin)/REAL(nPts-1,rDef)
+
     DO i=1,nPts
       r(i) = (radMin + REAL(i-1,rDef)*dr)/radMax
     END DO
     
 
-    DO i=1,nPts
-      snd(i)    =  1.0_rDef - gm1/2.0_rDef*angom*angom*(1.0_rDef - r(i)*r(i)) ! 
-      snd(i)    =  sqrt(snd(i))
-      svel(i)   =  angom*r(i)
-      smach(i)  =  svel(i)/snd(i)
-    END DO
+!    DO i=1,nPts
+!      snd(i)    =  1.0_rDef - gm1/2.0_rDef*angom*angom*(1.0_rDef - r(i)*r(i)) ! 
+!      snd(i)    =  sqrt(snd(i))
+!      svel(i)   =  angom*r(i)
+!      smach(i)  =  svel(i)/snd(i)
+!    END DO
 !    WRITE(6,*) ' linear shear in the axial flow'
     DO i=1,nPts
       IF (slope.ge.0.0_rDef) THEN
@@ -162,7 +160,8 @@ PROGRAM OuterCode
     ENDDO
 
     DO i = 1,nPts
-      rmach(i) = rvel(i)/snd(i) 
+      rmach(i) = 3.0_rDef 
+      smach(i) = exp(-(i))
     ENDDO
 
 !    WRITE(6,*) 'Creating Object' 
@@ -201,7 +200,7 @@ PROGRAM OuterCode
  
     residualVectorAnalytical(i) = S_1(i)
 
-    WRITE(6,*) 'S_1 :', S_1(i)
+!    WRITE(6,*) 'S_1 :', S_1(i)
 
     S_2(i) = (EXP(-k_1*r(i))/r(i))*      &
           (ci*EXP( k_5*r(i))*ak*r(i)-    &
@@ -214,7 +213,7 @@ PROGRAM OuterCode
     
     residualVectorAnalytical(i + np) = S_2(i)
 
-    WRITE(6,*) 'S_2 :', S_2(i)
+!    WRITE(6,*) 'S_2 :', S_2(i)
     S_3(i) = (EXP(-k_1*r(i))/r(i))*      &
           (ci*EXP(r(i)*(k_1+k_2+k_6))*axialWavenumber*r(i)-&
            ci*EXP(r(i)*(k_1+k_3+k_6))*mm-  &
@@ -225,7 +224,7 @@ PROGRAM OuterCode
 
     residualVectorAnalytical(i + 2*np) = S_3(i)
 
-    WRITE(6,*) 'S_3 :', S_3(i)
+!    WRITE(6,*) 'S_3 :', S_3(i)
     S_4(i) =-(EXP(-k_1*r(i))/r(i))*      &
          (-ci*EXP(r(i)*(k_1+k_2+k_7))*axialWavenumber*r(i)+    &
            ci*EXP(r(i)*(k_1+k_3+k_7))*mm*r(i)-&
@@ -235,14 +234,14 @@ PROGRAM OuterCode
       ci*r(i)*(ak*EXP(k_7*r(i)) - axialWavenumber*EXP(r(i)*(k_1 + k_6)))  
 
     residualVectorAnalytical(i + 3*np) = S_4(i)
-    WRITE(6,*) 'S_4 :', S_4(i)
+!    WRITE(6,*) 'S_4 :', S_4(i)
     ENDDO
    
     DO i=1,np*4
     errorMMS(i)  =  REAL(ABS(residualVector(i) - residualVectorAnalytical(i)))
     errorSquared =  errorMMS(i)*errorMMS(i)
     errorSum     =  errorSum + errorSquared
-    WRITE(6,*) errorMMS(i)
+!    WRITE(6,*) errorMMS(i)
     END DO
     L2res = SQRT(errorSum/(np*4))
     WRITE(6,*)'L2Res: ', L2res

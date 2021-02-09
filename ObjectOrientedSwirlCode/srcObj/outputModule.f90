@@ -106,21 +106,6 @@ CONTAINS
       COMPLEX(KIND=rDef), DIMENSION(np) :: gam1, &
                                            gam2
 
-!
-!     implicit real*8 (a-h,o-z)
-!     parameter (NMAX = 128, NMAX4 = NMAX*4)
-!
-!     parameter    (PI = 3.14159265358979324)
-!     dimension    rr(NMAX),izeros(1024),index(1024)
-!     dimension    rmx(NMAX),drm(NMAX),rmt(NMAX),drt(NMAX),snd(NMAX)
-!     dimension    nfile(32),mfile(32),akappa(NMAX)
-!     dimension    mu(NMAX),phi(NMAX)
-!     real*4       azeros(1024)
-!     complex*16   vrm(NMAX4,NMAX4),wvn(NMAX4),gamma,omega,cv,ci
-!     complex*16   vphi(NMAX4),attenh,attend,gam1(NMAX),gam2(NMAX)
-!     character    egv
-!     character*2  ff
-!     character*15 basen,basem
 
 ! Output files: 
 !               output.data: has everything.
@@ -133,7 +118,7 @@ CONTAINS
       eps = 1.e-4_rDef
 !
 ! Output everything to an unformatted file.
-      WRITE(6,*) 'omega = ',omega
+!      WRITE(6,*) 'omega = ',omega
 
       open(unit=12,             &
            file='output.data',  &
@@ -213,7 +198,7 @@ CONTAINS
                   indx  = indx)
 !
 ! Sort nonconvected modes into upstream and downstream.
-      eps  = 1.e-3_rDef
+      eps  = 1.e-12_rDef
 !     do j=1,np4
       do j=1,np4-1
        if (izeros(indx(j)).eq.izeros(indx(j+1))) then
@@ -237,7 +222,7 @@ CONTAINS
               alm1 = 0.0_rDef
               alm2 = 2.0_rDef*PI/gam2a
             END IF
-            IF (gam2a == 0.0_rDef) THEN
+            IF (gam2a.lt.eps) THEN
               alm1 = 2.0_rDef*PI/gam1a
               alm2 = 0.0_rDef
             END IF
