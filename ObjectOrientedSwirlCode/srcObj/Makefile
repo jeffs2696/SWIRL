@@ -35,7 +35,7 @@ FEXT     = f
 F90EXT   = f90
 OEXT     = o
 OBJECTS  =                                                                                   \
-	OuterCode.o	SwirlClassObj.o FindResidualVectorModule.o L2NormModule.o derivsModule.o globalModule.o gridModule.o analysisModule.o                  \
+	OuterCode.o	SourceTermGeneration.o SwirlClassObj.o FindResidualVectorModule.o L2NormModule.o derivsModule.o globalModule.o gridModule.o analysisModule.o                  \
 	boundaryModule.o indexxModule.o egvModule.o outputModule.o rmachModule.o smachAndSndspdModule.o  \
         machoutModule.o fdgridModule.o fdrivsModule.o kapsubModule.o                         \
         interpModule.o inputModule.o Akima1D.f90                                             \
@@ -217,6 +217,7 @@ OuterCode.o: OuterCode.f90        \
 	 smachAndSndspdModule.o \
     FindResidualVectorModule.o \
 	L2NormModule.o \
+	SourceTermGeneration.o \
 	SwirlClassObj.o
 	$(F90) $(F90FLAGS) OuterCode.f90
 
@@ -298,6 +299,9 @@ sndspdModule.o:  sndspdModule.f90
 
 L2NormModule.o: L2NormModule.f90
 	$(F90) $(F90FLAGS) L2NormModule.f90 
+
+SourceTermGeneration.o: SourceTermGeneration.f90
+	$(F90) $(F90FLAGS) SourceTermGeneration.f90 
 
 FindResidualVectorModule.o: FindResidualVectorModule.f90\
 							L2NormModule.o

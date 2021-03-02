@@ -1,12 +1,7 @@
 srcObj notes;
-Questions:
+ TO DO:
+ -Put analytical source terms in a module
+ -redefine the MMS
+ -pass the input flow variables to both the swirlClassObject and the new source term generation modules
+ -set up loop so that the grid points double each time
 
-What should we do about beta(i) being zero?
-
-The code finds these zeros currently but the issue is we need to know the
-corresponding row so that aa and bb are the correct dimensions. 
-In other words, ZGGEV returns the eigenvalues in the form of:
-
-   wvn = alpha(i)/beta(i)
-
-should we put ZGGEV in an interface to catch any other errors?

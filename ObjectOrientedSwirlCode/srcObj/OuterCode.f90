@@ -2,11 +2,11 @@ PROGRAM OuterCode
     USE, INTRINSIC  :: ISO_FORTRAN_ENV
     USE SwirlClassObj
     USE L2NormModule
+    USE sourceTermModule
     USE IEEE_ARITHMETIC
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64
-    ! defining a new derived data type
 
     TYPE(SwirlClassType) :: swirlClassObject
 
@@ -41,17 +41,13 @@ PROGRAM OuterCode
         k_7            
 
     REAL(KIND=REAL64), DIMENSION(:),ALLOCATABLE :: r, &
-        !                                                 rhoMean         ,&                                 
-    !                                                 rhoVrMean       ,&
-    !                                                 rhoVthetaMean   ,&
-    !                                                 rhoVxMean       ,&
-    !                                                 etotalMean      ,&
-    rmach           ,&
+        rmach           ,&
         rmachAnalytical ,&
         smach           ,&
         smachAnalytical ,&
         rvel            ,&
         svel            ,&
+        p, dp_dr        ,&
         snd             ,&
         errorMMS      
 
@@ -70,9 +66,6 @@ PROGRAM OuterCode
         residualVectorAnalytical,&
         L2res_array  ,&
         S_1,S_2,S_3,S_4
-
-
-
     INTEGER :: nPts  = 201 
 
     REAL(KIND=rDef), PARAMETER :: radMin  = 0.20_rDef,  &
@@ -86,7 +79,7 @@ PROGRAM OuterCode
     OPEN(14,FILE="CalcSourceData.dat")
     OPEN(12,FILE="flowData.dat")
 
-    mm     = 0
+    mm     = 2
     sig    = 0.20_rDef   
     ak     = CMPLX(20.0,0,rDef)  
     etah   =  0.40_rDef
@@ -95,14 +88,15 @@ PROGRAM OuterCode
     ed2    =  0.0_rDef
     ed4    =  0.0_rDef
 
-    First_gp = 8 
-    Last_gp  = 32
-    Step_gp  = 1
+    First_gp = 16 
+    Last_gp  = 16
+    Step_gp  = 8
 
     gam = 1.4_rDef
     gm1 = gam - 1.0_rDef
 
     ci  = CMPLX(0.0,1.0)
+    ! constants for MMS modui
     k_1 = CMPLX(0.0,0.0)
     k_2 = CMPLX(0.4,0.0)
     k_3 = CMPLX(0.8,0.0)
@@ -116,15 +110,17 @@ PROGRAM OuterCode
     nPts   = gp
     np     = nPts
     numModes = np
-    modeNumber = 3
+    modeNumber = 2
 
     !    Conditional statement to only run the first loop    
-    IF (gp.GT.First_gp) THEN
-        STOP
-    ELSE
-    ENDIF
+!    IF (gp.GT.First_gp) THEN
+!        STOP
+!    ELSE
+!    ENDIF
     !!    
     WRITE(6,*) '# Grid Points: ',  np
+    !
+
     ALLOCATE(S_1(np),S_2(np),S_3(np),S_4(np),&
         radialModeData(np*4)  ,&
         residualVector(np*4)  ,&
@@ -137,7 +133,9 @@ PROGRAM OuterCode
         smachAnalytical(nPts) ,&
         rmach(nPts)           ,&
         rmachAnalytical(nPts) ,&
-        rvel(nPts))
+        rvel(nPts)            ,&
+        p(nPts)               ,&
+        dp_dr(nPts) )
 
     sig = radMin/radMax
 
@@ -148,28 +146,25 @@ PROGRAM OuterCode
     END DO
 
 
-    !    DO i=1,nPts
-    !      snd(i)    =  1.0_rDef - gm1/2.0_rDef*angom*angom*(1.0_rDef - r(i)*r(i)) ! 
-    !      snd(i)    =  sqrt(snd(i))
-    !      svel(i)   =  angom*r(i)
-    !      smach(i)  =  svel(i)/snd(i)
-    !    END DO
-    !    WRITE(6,*) ' linear shear in the axial flow'
-    DO i=1,nPts
-    IF (slope.ge.0.0_rDef) THEN
-        rvel(i) = slope*(r(i) -1.0_rDef)+rVelMax
-    ELSE
-        rvel(i) = slope*(r(i) -sig)     +rVelMax
-    ENDIF
-    ENDDO
+   ! DO i=1,nPts
+   ! IF (slope.ge.0.0_rDef) THEN
+   !     rvel(i) = slope*(r(i) -1.0_rDef)+rVelMax
+   ! ELSE
+   !     rvel(i) = slope*(r(i) -sig)     +rVelMax
+   ! ENDIF
+   ! ENDDO
 
     DO i = 1,nPts
-    rmach(i) = 0.40_rDef 
-    smach(i) = 0.28*r(i) + 0.1/r(i)
+      rmach(i) = EXP(k_2*r(i)) 
+      smach(i) = EXP(k_3*r(i))
+      rvel(i)  = EXP(k_4*r(i))
+      svel(i)  = EXP(k_5*r(i))
+      
+      p        = EXP(k_7*r(i))
+      dp_dr = k_7*EXP(k_7*r(i))
     WRITE(12,*) r(i),rmach(i), smach(i)
     ENDDO
-
-    !    WRITE(6,*) 'Creating Object' 
+!------------------------------------------------------------------------------
     CALL CreateObject(object         = swirlClassObject ,&
         mm            = mm,      &
         np            = np,      &
@@ -182,18 +177,39 @@ PROGRAM OuterCode
         ifdff         = ifdff,   &
         ed2           = ed2,     &
         ed4           = ed4)     
-    !    WRITE(6,*) 'Finished creating object' 
+    
     CALL GetModeData(object          = swirlClassObject,&
-        modeNumber      = modeNumber      ,&
-        axialWavenumber = axialWavenumber,&
-        radialModeData  = radialModeData )
+                     modeNumber      = modeNumber      ,&
+                     axialWavenumber = axialWavenumber,&
+                     radialModeData  = radialModeData )
 
     CALL FindResidualData(object     = swirlClassObject,&
         modeNumber = numModes        ,&
         S          = residualVector)
 
     CALL DestroyObject(object = swirlClassObject)
+!------------------------------------------------------------------------------
+    ! Call MMS
+    CALL getSourceTerms(np             =np                        ,&
+                        mm             =mm                        ,&
+                        gm1            =gm1                       ,&
+                        ak             =ak                        ,&
+                        ci             =ci                        ,&
+                        axialWavenumber=axialWavenumber           ,&
+                        r              =r                         ,&
+                        rmach          =rmach                     ,&
+                        smach          =smach                     ,& 
+                        snd            =snd                       ,& 
+                        rvel           =rvel                      ,& 
+                        svel           =svel                      ,&
+                        p              =p                         ,&
+                        dp_dr          =dp_dr                     ,&
+                        S_1            =S_1)
+   
 
+    
+    
+    
     !    WRITE(6,*)  ' Numerical residual vector, S'
     DO i = 1,np
     S_1(i) = (EXP(-k_1*r(i))/r(i))*      &
@@ -248,7 +264,7 @@ PROGRAM OuterCode
     errorSquared =  errorMMS(i)*errorMMS(i)
     errorSum     =  errorSum + errorSquared
     !    WRITE(6,*) errorMMS(i)
-        WRITE(6,*) residualVector(i)
+    !    WRITE(6,*) residualVector(i)
     END DO
     DO i=1,np
     WRITE(11,*) r(i),  errorMMS(i)          ,&
@@ -281,7 +297,7 @@ PROGRAM OuterCode
         smachAnalytical         ,&
         rmach                   ,&
         rmachAnalytical         ,&
-        rvel)
+        rvel,p,dp_dr)
     !    L2res = 0.0_rDef
     errorSum = 0.0_rDef
 
