@@ -1,8 +1,8 @@
 MODULE swirlClassObj
 
   USE, INTRINSIC :: ISO_FORTRAN_ENV
-  USE analysisModule
-  USE boundaryModule
+  USE analysisModule          ! Solves the eigenvalue problem
+  USE boundaryModule          ! fills [A] and [B] matricies with appropriate BCs
   USE derivsModule
   USE fdgridModule
   USE fdrivsModule
@@ -28,50 +28,61 @@ MODULE swirlClassObj
             FindResidualData
 ! Interfaces 
 
+  ! Creates a derived data type containing SWIRL's essential modules
   INTERFACE CreateObject
     MODULE PROCEDURE CreateSwirlClassObject
   END INTERFACE CreateObject
-  
+
+  ! Finds S = [A]{x} - i*eigVal*[B]{x}, x \equiv eigen vector
   INTERFACE FindResidualData
     MODULE PROCEDURE FindResidualVector 
   END INTERFACE FindResidualData
 
-
+  ! Extracts the axial wavenumbers (eigenvalues) and 
+  ! perturbation variables (eigenvectors)
   INTERFACE GetModeData
     MODULE PROCEDURE GetRadialModeData
   END INTERFACE GetModeData
 
+  ! Deallocates any arrays
   INTERFACE DestroyObject
     MODULE PROCEDURE DestroySwirlClassObject
   END INTERFACE DestroyObject
 
   INTEGER, PARAMETER :: rDef = REAL64
-! Type Declaration
+
+! Type Declaration and necessary variables
   TYPE SwirlClassType
-    PRIVATE
+    PRIVATE ! prevents user from accessing any of the following variables
 
-    LOGICAL :: isInitialized = .FALSE.
-    INTEGER :: azimuthalMode              , &
-               numberOfRadialPoints       , &
-               numberOfPropagatingModes   , &
-               FiniteDifferenceFlag       , &
-               PrintToggle
+    LOGICAL :: &
+    isInitialized = .FALSE.        ! flag to identify if object exists 
 
-    REAL(KIND=REAL64) :: hubTipRatio ,&
-                         secondOrderSmoother,&
-                         fourthOrderSmoother
+    INTEGER :: &
+    azimuthalMode            ,&    ! m, Circumfirential mode number
+    numberOfRadialPoints     ,&    ! npts, number of radial mesh points
+    numberOfPropagatingModes ,&    ! number of modes that the user wants
+    FiniteDifferenceFlag     ,&    ! Use central FD for derivatives,
+                                   ! 1 = 2nd Order, 2 = 4th Order  
+    PrintToggle                    ! Turns on print to screen
+
+    REAL(KIND=REAL64) :: &
+    hubTipRatio        ,&  
+    secondOrderSmoother,&!derivative "smoothers"
+    fourthOrderSmoother  !"          "
   
-    REAL(KIND=REAL64), DIMENSION(:), ALLOCATABLE :: y,     &
-                                                    rwork, &
-                                                    r,     &
-                                                    rmx,   &
-                                                    drm,   &
-                                                    rmt,   &
-                                                    drt,   &
-                                                    snd,   &
-                                                    dsn,   &
-                                                    rho,   &
-                                                    akap     
+    REAL(KIND=REAL64), DIMENSION(:), ALLOCATABLE :: &
+    y,     &! used to map grid on a -1 to 1 scale
+    rwork, &! needed for ZGGEV
+    r,     &! radial locations
+    rmx,   &! axial mach number
+    drm,   &! derivative of the axial mach number
+    rmt,   &! theta mach number
+    drt,   &! derivative of the theta mach number
+    snd,   &! speed of sound
+    dsn,   &! derivative of the speed of sound, back calculated from mach data
+    rho,   &! flow densityas a function of snd
+    akap     
   
     REAL(KIND=REAL64), DIMENSION(:,:), ALLOCATABLE :: dl1
   
@@ -130,11 +141,12 @@ MODULE swirlClassObj
   CONTAINS
 
   SUBROUTINE CreateSwirlClassObject(object ,& 
-                                    mm     ,&
+                                    azimuthalMode     ,&
                                     np     ,&
                                     sig    ,&
                                     AxialMachData,&
                                     ThetaMachData,&
+                                    SoundSpeed   ,&
                                     ak     ,&
                                     etah   ,&
                                     etad   ,&
@@ -142,17 +154,24 @@ MODULE swirlClassObj
                                     ed2    ,&
                                     ed4)
 
-    TYPE(SwirlClassType), INTENT(INOUT) :: object
+    TYPE(SwirlClassType), INTENT(INOUT) :: &
+    object
     
-    INTEGER, INTENT(INOUT) :: ifdff,   &
-                              mm,&
-                              np!,      &
+    INTEGER, INTENT(INOUT) :: &
+    ifdff,   &
+    azimuthalMode,&
+    np
                     
-    REAL(KIND=REAL64),INTENT(INOUT) :: ed2,   & 
-                                       ed4,   &
-                                       sig
+    REAL(KIND=REAL64),INTENT(INOUT) :: &
+    ed2,   & 
+    ed4,   &
+    sig
 
-    REAL(KIND=REAL64),DIMENSION(:), INTENT(INOUT) :: AxialMachData, ThetaMachData
+    REAL(KIND=REAL64),DIMENSION(:), INTENT(INOUT) :: &
+    AxialMachData,&
+    ThetaMachData,&
+    SoundSpeed
+
     !
     
     COMPLEX(KIND=REAL64),INTENT(IN) :: etah,etad,ak
@@ -160,7 +179,7 @@ MODULE swirlClassObj
     INTEGER ::                np4                              
     
     ! Set user input to the object 'properties';
-    object%azimuthalMode        = mm
+    object%azimuthalMode        = azimuthalMode
     object%numberOfRadialPoints = np
     object%hubTipRatio          = sig
     object%frequency            = ak
@@ -214,7 +233,7 @@ MODULE swirlClassObj
           WRITE(PrintToggle,*) 'Entering gridModule'
          CALL grid(np  = object%numberOfRadialPoints,    &
                    sig = object%hubTipRatio,             &! sig, &
-                   x   = object%y,                       &
+                   x   = object%y,                       &!
                    r   = object%r)
 
          CALL derivs(np  = object%numberOfRadialPoints,  &
@@ -254,6 +273,7 @@ MODULE swirlClassObj
                            gam   = gam,   &
                            sig   = object%hubTipRatio,   &
                            is    = is)
+        SoundSpeed = object%snd
         WRITE(PrintToggle,*) 'Leaving smachAndSndspdModule'
         WRITE(PrintToggle,*) 'Entering rmachModule'
        
@@ -416,36 +436,61 @@ MODULE swirlClassObj
                   icomp  = icomp)
       WRITE(PrintToggle,*) 'Leaving outputModule' 
 !
-!      if (irepeat.eq.1) goto 100
-!      CLOSE(PrintToggle)
-!
-!
   END SUBROUTINE CreateSwirlClassObject
 
   SUBROUTINE FindResidualVector(object    ,& 
-                                modeNumber,&
+                                axialWavenumber ,& 
+                                vRPertubationData,&
+                                vThPertubationData,&
+                                vXPertubationData,&
+                                pPertubationData,&
+                                vRResidual,&
+                                vThResidual,&
+                                vXResidual,&
+                                pResidual       ,&
                                 S            )
   
   TYPE(SwirlClassType)                             ,INTENT(INOUT) :: object
   
-  INTEGER                                          ,INTENT(INOUT) :: modeNumber
+!  INTEGER                                          ,INTENT(INOUT) :: modeNumber
 
+  REAL(KIND=REAL64),DIMENSION(object%numberOfRadialPoints)  :: vRPertubationData,&
+                                                               vThPertubationData,&
+                                                               vXPertubationData ,&
+                                                               pPertubationData 
+
+  REAL(KIND=REAL64),DIMENSION(object%numberOfRadialPoints)  :: vRResidual,&
+                                                                  vThResidual,&
+                                                                  vXResidual ,&
+                                                                  pResidual 
+  COMPLEX(KIND=REAL64),DIMENSION(object%numberOfRadialPoints*4)  :: Xmatrix
+  COMPLEX(KIND=REAL64) , INTENT(IN) :: axialWavenumber
   COMPLEX(KIND=REAL64),DIMENSION(object%numberOfRadialPoints*4),INTENT(OUT) :: S
 
-       CALL getSvector(  A      = object%aa_before                                  ,&
-                         B      = object%bb_before                                  ,&
-                         x      = object%vr(:,modeNumber)                           ,&   
-                         lambda = object%alpha(modeNumber)/object%beta(modeNumber)  ,&     
-                         np4    = object%numberOfRadialPoints*4                     ,&
-                         S_MMS  = object%S_MMS)
-   
-        S =  object%S_MMS
+  INTEGER :: i                                                                            
+
+    DO i =1,object%numberOfRadialPoints
+    Xmatrix(i) = vRPertubationData(i)
+    Xmatrix(object%numberOfRadialPoints+i) = vThPertubationData(i)
+    Xmatrix(2*object%numberOfRadialPoints+i) = vXPertubationData(i)
+    Xmatrix(3*object%numberOfRadialPoints+i) = pPertubationData(i)
+    ENDDO
+
+    S = MATMUL(object%aa_before,Xmatrix) + CMPLX(0.0_rDef,1.0_rDef)*axialWavenumber*MATMUL(object%bb_before,Xmatrix)
+
+    DO i =1,object%numberOfRadialPoints
+    vXResidual(i) = S(i)
+    vThResidual(i) = S(i+ object%numberOfRadialPoints)
+    vXResidual(i) = S(i+ 2*object%numberOfRadialPoints)
+    pResidual(i) = S(i+ 3*object%numberOfRadialPoints)
+    ENDDO
 
   END SUBROUTINE FindResidualVector
-  SUBROUTINE GetRadialModeData(object,&
-                               modeNumber,&
+  SUBROUTINE GetRadialModeData(object         ,&
+                               modeNumber     ,&
                                axialWavenumber,&
                                radialModeData)
+                               
   ! Defining inputs and outputs
   TYPE(SwirlClassType), INTENT(INOUT) :: object
   INTEGER, INTENT(IN) :: modeNumber
@@ -456,7 +501,9 @@ MODULE swirlClassObj
   IF (object%isInitialized.eqv..TRUE.) THEN
       axialWavenumber = object%alpha(modeNumber)/object%beta(modeNumber)
       radialModeData  = object%vr(:,modeNumber)
+      
   ELSE
+    WRITE(6,*) 'Cannot provide radial mode data, no object is provided'
   ENDIF
 
   END SUBROUTINE GetRadialModeData 

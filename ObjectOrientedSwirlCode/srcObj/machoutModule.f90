@@ -1,3 +1,6 @@
+! MACHOUTMODULE.f90 - Gathers the fluid properties used and exports to file
+!
+! 
 MODULE machoutModule
       USE, INTRINSIC :: ISO_FORTRAN_ENV
       IMPLICIT NONE

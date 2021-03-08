@@ -1,33 +1,10 @@
-! This module uses LAPACK's ZGGEV to solve the eigenproblem
+! ANALYSISMODULE.f90 - Utilizes ZGGEV to calculate the eigenvalues and vectors
+! of Equation 2.51 in the SwirlCodePaper. The eigenvalues are then sorted but
+! the current equation used to solve for them is unclear.
 !
-! Input:np,
-!       np4,
-!       ak,
-!       rr,
-!       snd,
-!       rmx,
-!       rmt,
-!       aa,
-!       bb,
-!       alpha,
-!       beta,
-!       vl,
-!       vr,
-!       work,
-!       rwork,
-!       gam,
-!       jobvl,
-!       jobvr,
-!       mm,
-!       ir,
-!       is,
-!       slp,
-!       vphi,
-!       akap,
-!       S_MMS
-!
-! Output:
-!   
+! ZGGEV provides the eigenvalues in the form of lambda = alpha/beta where 
+! sometimes beta is zero. This module returns "gam", which is = alpha/beta for 
+! a user defined zero. It is currently set to double precision.
 MODULE analysisModule
    USE, INTRINSIC :: ISO_FORTRAN_ENV
    IMPLICIT NONE
@@ -132,6 +109,17 @@ CONTAINS
        as = snd(j)
        r  = rr(j)
 !       print*,'ak = ',ak,' as = ',as,' rm = ',rm
+!      JS: could this be from the following train of thought?
+!
+!      Looking along the diagonal:
+!      [A] {x} = \lambda [B} {x} 
+!      [A]     = \lambda [B}  
+!      where \lambda = -i gam
+!      
+!      taking a diagonal term, (any one)
+!      -1i ( k/A - m/r M_th) = -1i gam_cvct M_x
+!      gam_cvct = 1/M_x ( -1i ( k/A - m/r M_th) )
+
        if ( (rm.ne.0.0_rDef) .and. (r.ne.0.0_rDef) ) then
         cvct(j) = (ak/as -REAL(mm,rDef)*rs/r)/rm
        endif
@@ -228,18 +216,24 @@ CONTAINS
       
       c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
 !
-! Compute cut-off wavenumber for uniform flow.
-      if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
-       rm = rmx(1)
-       gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
-      write(6,30) gamco
-      endif
- 30   format(/,1x,'Cut-off wavenumber: ',e15.5,/)
+! Compute cut-off wavenumber for uniform flow. Eqn(4.3)
+!      if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
+!       rm = rmx(1)
+!       gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
+!      write(6,30) gamco
+!      endif
+! 30   format(/,1x,'Cut-off wavenumber: ',e15.5,/)
 !
 ! Print the gammas to the display.
 !      write(6,500)
  500  format(1x)
 !      write(6,50)
+
+
+! 
+! Calculate the eigenvalues/axial wavenumbers, "gam", while sorting out the
+! trivial results based on an error tolerance, "eps". For the gammas that
+! remain, caluclate the  axial group velocity, (from Equation 4.4)
       do j=1,np4
        if (beta(j).ne.c0) then
         gam(j) = ci*alpha(j)/beta(j)
@@ -254,9 +248,6 @@ CONTAINS
 
 
 
-       DO i = 1,np4
-        S_MMS(:,i) =  MATMUL(aa,VR(:,i)) - gam(i)*MATMUL(bb,VR(:,i))
-       END DO
      ! WRITE(6,*) 'Print all the gammas to a file.'
 !      open(unit=15,file='gammas.dat',status='unknown')
   !    open(unit=35,file='gam.acc',status='unknown')
@@ -266,29 +257,36 @@ CONTAINS
  !     rewind 55
  !     write(15,50)
 !      write(35,55)
- 50   format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
-         6x,'Im{gam}/k',6x,'kappa')
- 55   format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
-         10x,'Im{gam/ak}',5x,'nz')
-      do i = 1,np4
-       if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
-        rm   = rmx(1)
-!       akap(i) = (rm*rm -1.)*gam(i)*gam(i) &
-!          -2.*real(ak)*rm*gam(i) +real(ak)*real(ak)
-        akap(i) = (rm*rm -1.0_rDef)*REAL(gam(i)*gam(i),rDef) &
-           -2.0_rDef*REAL(ak,rDef)*rm*REAL(gam(i),rDef)      &
-                  +REAL(ak,rDef)*REAL(ak,rDef)
-        if (akap(i).gt.0.0_rDef) then
-         akap(i) = SQRT(akap(i))
+! 50   format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
+!         6x,'Im{gam}/k',6x,'kappa')
+! 55   format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
+!         10x,'Im{gam/ak}',5x,'nz')
+
+
+
+
+! In the case of linear shear with no sloppe and no swirl, the following is 
+! done instead
+
+!      do i = 1,np4
+!       if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
+!        rm   = rmx(1)
+!!       akap(i) = (rm*rm -1.)*gam(i)*gam(i) &
+!!          -2.*real(ak)*rm*gam(i) +real(ak)*real(ak)
+!        akap(i) = (rm*rm -1.0_rDef)*REAL(gam(i)*gam(i),rDef) &
+!           -2.0_rDef*REAL(ak,rDef)*rm*REAL(gam(i),rDef)      &
+!                  +REAL(ak,rDef)*REAL(ak,rDef)
+!        if (akap(i).gt.0.0_rDef) then
+!         akap(i) = SQRT(akap(i))
  !        write(15,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
-        else
+!        else
   !       write(15,10) i,gam(i),gam(i)/ak,vphi(i)
-        endif
-       endif
+!        endif
+!       endif
 !       write(35,12) i,gam(i),gam(i)/ak,vphi(i)
 !       write(15,10) i,gam(i),gam(i)/ak,vphi(i)
 !       write(55,*) REAL(gam(i)),AIMAG(gam(i))
-      enddo
+!      enddo
  !     close(15)
   !    close(35)
   !    close(55)
