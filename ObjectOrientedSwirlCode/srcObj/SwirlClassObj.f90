@@ -25,6 +25,7 @@ MODULE swirlClassObj
             DestroyObject  ,&    
             SwirlClassType ,&
             GetModeData    ,&
+            GetMeanFlowData,&
             FindResidualData
 ! Interfaces 
 
@@ -43,6 +44,10 @@ MODULE swirlClassObj
   INTERFACE GetModeData
     MODULE PROCEDURE GetRadialModeData
   END INTERFACE GetModeData
+
+  INTERFACE GetMeanFlowData
+    MODULE PROCEDURE GetMeanData
+  END INTERFACE GetMeanFlowData
 
   ! Deallocates any arrays
   INTERFACE DestroyObject
@@ -82,7 +87,7 @@ MODULE swirlClassObj
     snd,   &! speed of sound
     dsn,   &! derivative of the speed of sound, back calculated from mach data
     rho,   &! flow densityas a function of snd
-    akap     
+    akap    
   
     REAL(KIND=REAL64), DIMENSION(:,:), ALLOCATABLE :: dl1
   
@@ -146,7 +151,7 @@ MODULE swirlClassObj
                                     sig    ,&
                                     AxialMachData,&
                                     ThetaMachData,&
-                                    SoundSpeed   ,&
+!                                    SoundSpeed   ,&
                                     ak     ,&
                                     etah   ,&
                                     etad   ,&
@@ -169,8 +174,8 @@ MODULE swirlClassObj
 
     REAL(KIND=REAL64),DIMENSION(:), INTENT(INOUT) :: &
     AxialMachData,&
-    ThetaMachData,&
-    SoundSpeed
+    ThetaMachData!,&
+!    SoundSpeed
 
     !
     
@@ -273,7 +278,7 @@ MODULE swirlClassObj
                            gam   = gam,   &
                            sig   = object%hubTipRatio,   &
                            is    = is)
-        SoundSpeed = object%snd
+!        SoundSpeed = object%snd
         WRITE(PrintToggle,*) 'Leaving smachAndSndspdModule'
         WRITE(PrintToggle,*) 'Entering rmachModule'
        
@@ -507,6 +512,18 @@ MODULE swirlClassObj
   ENDIF
 
   END SUBROUTINE GetRadialModeData 
+  SUBROUTINE GetMeanData(object   ,&
+                         axialMach,&
+                         thetaMach)
+  
+  TYPE(SwirlClassType), INTENT(INOUT) :: object
+  REAL(KIND=rDef),DIMENSION(object%numberOfRadialPoints), INTENT(OUT) :: &
+  axialMach,&
+  thetaMach
+  
+  axialMach = object%rmx 
+  thetaMach = object%rmt
+  END SUBROUTINE
   SUBROUTINE DestroySwirlClassObject(object)
 
       TYPE(SwirlClassType), INTENT(INOUT) :: object

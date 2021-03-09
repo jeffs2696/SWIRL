@@ -107,26 +107,27 @@ PROGRAM OuterCode
     hubAdmittance       =  0.40_rDef
     ductAdmittance      =  0.70_rDef
     finiteDiffFlag      =  1
-    secondOrderSmoother    =  0.0_rDef
-    fourthOrderSmoother    =  0.0_rDef
+    secondOrderSmoother =  0.0_rDef
+    fourthOrderSmoother =  0.0_rDef
 
     ! constants needed for calculations
     gam = 1.4_rDef       ! ratio of specific heats
     gm1 = gam - 1.0_rDef 
 
-    ci  = CMPLX(0.0,1.0) ! imaginary number
+    ci  = CMPLX(0.0,1.0,rDef) ! imaginary number
     ! constants for MMS module
-    k_1 = CMPLX(0.0,0.0)
-    k_2 = CMPLX(0.4,0.0)
-    k_3 = CMPLX(0.8,0.0)
-    k_4 = CMPLX(0.2,0.0)
-    k_5 = CMPLX(0.0,0.0)
-    k_6 = CMPLX(0.0,0.0)
-    k_7 = CMPLX(0.0,0.0)
-
+    k_1 = CMPLX(0.2,0.0,rDef)
+    k_2 = CMPLX(0.4,0.0,rDef)
+    k_3 = CMPLX(0.8,0.0,rDef)
+    k_4 = CMPLX(0.2,0.0,rDef)
+    k_5 = CMPLX(0.0,0.0,rDef)
+    k_6 = CMPLX(0.0,0.0,rDef)
+    k_7 = CMPLX(0.0,0.0,rDef)
+    axialWavenumberAnalytical = 0.50_rDef
     ! Starting Grid DO LOOP  
     DO fac = 3,3
     nPts   = 1+(2**fac)
+
     numberOfGridPoints     = nPts
 
     numModes = numberOfGridPoints
@@ -174,6 +175,7 @@ PROGRAM OuterCode
     END DO
 
     DO i = 1,nPts
+      SoundSpeed(i)     = EXP(k_1*r(i))
       axialMachData(i)  = EXP(k_2*r(i)) 
       thetaMachData(i)  = EXP(k_3*r(i))
       vRPertubation(i)  = EXP(k_4*r(i))
@@ -194,7 +196,6 @@ PROGRAM OuterCode
         sig           = hubToTipRatio,     &
         AxialMachData = axialMachData,&
         ThetaMachData = thetaMachData,& 
-        SoundSpeed    = SoundSpeed          ,&
         ak            = frequency,      &
         etah          = hubAdmittance,    &
         etad          = ductAdmittance,    &
@@ -204,7 +205,7 @@ PROGRAM OuterCode
     
     CALL FindResidualData(&
         object              = swirlClassObject,&
-        axialWavenumber     = axialWavenumber,&
+        axialWavenumber     = axialWavenumberAnalytical,&
         vRPertubationData   = vRPertubation,&
         vThPertubationData  = vThPertubation,&
         vXPertubationData   = vXPertubation,&
@@ -214,6 +215,7 @@ PROGRAM OuterCode
         vXResidual          = vXResidual,&
         pResidual           = pResidual,&
         S                   = residualVector)
+
     CALL GetModeData(&
         object          = swirlClassObject,&
         modeNumber      = modeNumber      ,&
@@ -230,12 +232,13 @@ PROGRAM OuterCode
     CALL DestroyObject(object = swirlClassObject)
 !------------------------------------------------------------------------------
     ! Call MMS
+!    WRITE(6,*) axialWavenumber
+
     CALL getSourceTerms(np             =numberOfGridPoints        ,&
                         mm             =azimuthalModeNumber       ,&
                         gm1            =gm1                       ,&
-                        ak             =frequency                 ,&
-                        ci             =ci                        ,&
-                        axialWavenumber=axialWavenumber           ,&
+                        ak             =frequency*0.5_rDef        ,&
+                        axialWavenumber=axialWavenumberAnalytical,&
                         r              =r                         ,&
                         rmach          =axialMachData             ,&
                         smach          =thetaMachData             ,& 
@@ -264,10 +267,7 @@ PROGRAM OuterCode
 !        EXP(r(i)*(k_1 + 2*k_3+k_7))*gam+  &
 !        EXP(r(i)*(k_1 + 2*k_3+k_7))    +  &
 !        2.0_rDef*EXP(r(i)*(k_1 +   k_3+k_5))) 
-!
-    residualVectorAnalytical(i) = S_1(i)
 
-    !    WRITE(6,*) 'S_1 :', S_1(i)
 
 !    S_2(i) = (EXP(-k_1*r(i))/r(i))*      &
 !        (ci*EXP( k_5*r(i))*frequency*r(i)-    &
@@ -277,10 +277,7 @@ PROGRAM OuterCode
 !        (EXP(r(i)*(k_3))/r(i)    +  &
 !        gm1*EXP(3*k_3*r(i))/(2.0_rDef*r(i)))*&
 !        EXP(r(i)*(k_1+k_4))*r(i))
-!
-    residualVectorAnalytical(i + numberOfGridPoints) = S_2(i)
 
-    !    WRITE(6,*) 'S_2 :', S_2(i)
 !    S_3(i) = (EXP(-k_1*r(i))/r(i))*      &
 !        (ci*EXP(r(i)*(k_1+k_2+k_6))*axialWavenumber*r(i)-&
 !        ci*EXP(r(i)*(k_1+k_3+k_6))*azimuthalModeNumber-  &
@@ -288,10 +285,9 @@ PROGRAM OuterCode
 !        ci*(EXP(r(i)*(k_6))*frequency*r(i)    +  &
 !        gm1*EXP(k_2 +  2*k_3*r(i) ) /(2.0_rDef*r(i)))*&
 !        EXP(r(i)*(k_1+k_4))*r(i))
-!
-    residualVectorAnalytical(i + 2*numberOfGridPoints) = S_3(i)
 
-    !    WRITE(6,*) 'S_3 :', S_3(i)
+
+        
 !    S_4(i) =-(EXP(-k_1*r(i))/r(i))*      &
 !        (-ci*EXP(r(i)*(k_1+k_2+k_7))*axialWavenumber*r(i)+    &
 !        ci*EXP(r(i)*(k_1+k_3+k_7))*azimuthalModeNumber*r(i)-&
@@ -299,9 +295,17 @@ PROGRAM OuterCode
 !        EXP(r(i)*(k_1+k_4))*r(i)) - &
 !        ci*EXP(r(i)*(k_1 +       k_5))*azimuthalModeNumber+  &
 !        ci*r(i)*(frequency*EXP(k_7*r(i)) - axialWavenumber*EXP(r(i)*(k_1 + k_6)))  
-!
+
+
+    residualVectorAnalytical(i) = S_1(i)
+    residualVectorAnalytical(i + numberOfGridPoints) = S_2(i)
+    residualVectorAnalytical(i + 2*numberOfGridPoints) = S_3(i)
     residualVectorAnalytical(i + 3*numberOfGridPoints) = S_4(i)
+    !    WRITE(6,*) 'S_1 :', S_1(i)
+    !    WRITE(6,*) 'S_2 :', S_2(i)
+    !    WRITE(6,*) 'S_3 :', S_3(i)
     !    WRITE(6,*) 'S_4 :', S_4(i)
+
     ENDDO
 
     DO i=1,numberOfGridPoints*4

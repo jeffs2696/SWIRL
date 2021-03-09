@@ -21,21 +21,7 @@ CONTAINS
 
       subroutine analysis1(np,np4,ak,rr,snd,rmx,rmt,aa,bb,alpha,beta, &
          vl,vr,work,rwork,gam,jobvl,jobvr,mm,ir,is,slp,vphi,akap,S_MMS)
-!
-!     implicit real*8 (a-h,o-z)
-!     parameter (NMAX = 128, NMAX4 = NMAX*4)
-!
-!     dimension rwork(8*np4)
-!     character jobvl,jobvr
-!     logical   col(500),row(500),badrow,badcol
-!
-!     complex*16 alpha(NMAX4),beta(NMAX4),work(2*NMAX4),cvct(NMAX4)
-!     complex*16 ci,c0,ak
-!     complex*16 aa(NMAX4,NMAX4),bb(NMAX4,NMAX4),vphi(NMAX4)
-!     complex*16 vl(NMAX4,NMAX4),vr(NMAX4,NMAX4),gam(NMAX4)
-!     dimension  rmx(NMAX),rmt(NMAX),rr(NMAX),snd(NMAX)
-!     dimension  akap(NMAX)
-!
+
 
       INTEGER, INTENT(IN) :: np, &
                             np4, &

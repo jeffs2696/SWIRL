@@ -37,10 +37,6 @@ CONTAINS
                       rtot, &
                       pbar
 !
-!     implicit real*8 (a-h,o-z)
-!     parameter (NMAX = 128, NMAX4 = NMAX*4)
-!     dimension rr(NMAX),rmch(NMAX),rmchp(NMAX),rmsw(NMAX),rmswp(NMAX)
-!     dimension snd(NMAX),dsn(NMAX),rhob(NMAX)
 !
 !  Output Mach number, shear, and swirl distributions.
       open(unit=21,         &

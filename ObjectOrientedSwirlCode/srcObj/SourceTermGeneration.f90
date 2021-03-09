@@ -19,7 +19,6 @@ MODULE sourceTermModule
                              mm             ,&
                              gm1            ,&
                              ak             ,&
-                             ci             ,&
                              axialWavenumber,&
                              r              ,&
                              rmach          ,&
@@ -41,7 +40,6 @@ MODULE sourceTermModule
     INTEGER, INTENT(IN) :: np,mm
     COMPLEX(KIND=rDef) ,INTENT(IN) :: ak, & 
                                       gm1,&
-                                      ci, & 
                                       axialWavenumber
                                   
     COMPLEX(KIND=rDef), DIMENSION(:) ,INTENT(INOUT) :: S_1  ,&
@@ -64,7 +62,7 @@ MODULE sourceTermModule
                                                 drvel_dr
     ! redefining the flow varibles as complex data types to clean up the 
     ! source terms
-    COMPLEX(KIND=rDef) :: mmC
+    COMPLEX(KIND=rDef) :: ci,mmC
     COMPLEX(KIND=rDef), DIMENSION(np)  ::rC,&
                                         rmachC,&
                                         smachC,& 
@@ -77,12 +75,14 @@ MODULE sourceTermModule
                                         dsmach_drC,&
                                         drmach_drC,&
                                         drvel_drC
+                                    ci = CMPLX(0.0_rDef,1.0_rDef,rDef)
     mmC    =CMPLX( mm   ,rDef)
     rC     =CMPLX( r    ,rDef) 
     rmachC =CMPLX( rmach,rDef)
     smachC =CMPLX( smach,rDef)
     dsmach_drC =CMPLX( dsmach_dr,rDef)
-    drmach_drC =CMPLX( drmach_dr,rDef)
+    drmach_drc =cmplx( drmach_dr,rdef)
+    drvel_drC =cmplx( drvel_dr,rdef)
     sndC   =CMPLX( snd  ,rDef) 
     rvelC  =CMPLX( rvel ,rDef)
     svelC  =CMPLX( svel ,rDef)
@@ -95,8 +95,8 @@ MODULE sourceTermModule
                (2.0_rDef/rC)*smachC*svelC - dp_drC -&
                (gm1/rC)*smachC**(2.0_rDef)*pC   
                                    
-    S_2 = -ci*( ak/sndC - (mmC/rC)*smachC -axialWavenumber*rmachC)*svelC +&
-              (smachC/rC + dsmach_drC + (gm1/(2*rC))*smachC**(3.0_rDef))*rvelC  +& 
+    S_2 = -ci*( ak/sndC - (mmC/rC)*smachC - axialWavenumber*rmachC)*svelC +&
+              (smachC/rC + dsmach_drC + (gm1/(2.0_rDef*rC))*smachC**(3.0_rDef))*rvelC  +& 
               (ci*mmC/rC)*pC 
 
     S_3 = -ci*( ak/sndC - (mmC/rC)*smachC -axialWavenumber*rmachC)*xvelC +&
@@ -105,7 +105,7 @@ MODULE sourceTermModule
 
     S_4 = -ci*( ak/sndC - (mmC/rC)*smachC -axialWavenumber*rmachC)*pC +&
               drvel_drC + ((gm1/(2*rC))*smachC**(2.0_rDef) + 1.0_rDef/rC)*rvelC  +& 
-              (ci*mmC/rC)*svelC+ci*axialWavenumber*rvelC
+              (ci*mmC/rC)*svelC+ci*axialWavenumber*xvelC
 !   DO i = 1,4
 !     DO j = 1,np
 !
