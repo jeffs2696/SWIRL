@@ -22,7 +22,6 @@ PROGRAM OuterCode
         Step_gp             ,& ! number of points
         numModes            ,& ! number of radial modes
         modeNumber 
-
     COMPLEX(KIND=REAL64) :: & 
         frequency                ,&
         hubAdmittance            ,& 
@@ -33,7 +32,6 @@ PROGRAM OuterCode
         gam                      ,&
         gm1                      ,&
         alpha                    ,&
-        boundingConstant         ,&
         k_1                      ,&
         k_2                      ,&
         k_3                      ,&
@@ -76,6 +74,7 @@ PROGRAM OuterCode
         sndL2res           ,&
         errorSum        ,&
         errorSquared    ,&
+        boundingConstant         ,&
         dr              ,&
         hubToTipRatio      ! hub-to-tip ratio 
 
@@ -132,7 +131,7 @@ PROGRAM OuterCode
     k_7 = CMPLX(0.0,0.0,rDef)
     axialWavenumberAnalytical = 0.50_rDef
     ! Starting Grid DO LOOP  
-    DO fac = 1,5
+    DO fac = 3,7
     nPts   = 1+(2**fac)
 
     numberOfGridPoints     = nPts
@@ -144,46 +143,45 @@ PROGRAM OuterCode
     file_name = 'SoundSpeedMMS' // trim(adjustl(file_id)) // '.dat'
 
     OPEN(145,FILE=TRIM(file_name))
-
     numModes = numberOfGridPoints 
     modeNumber = azimuthalModeNumber
 
     WRITE(6,*) '# Grid Points: ',  numberOfGridPoints
 
-    ALLOCATE(S_1(numberOfGridPoints)                ,&
-        S_2(numberOfGridPoints)                ,&
-        S_3(numberOfGridPoints)                ,&
-        S_4(numberOfGridPoints)                ,&
-        radialModeData(numberOfGridPoints*4)  ,&
-        residualVector(numberOfGridPoints*4)  ,&
+    ALLOCATE(&
+        S_1(numberOfGridPoints)                         ,&
+        S_2(numberOfGridPoints)                         ,&
+        S_3(numberOfGridPoints)                         ,&
+        S_4(numberOfGridPoints)                         ,&
+        radialModeData(numberOfGridPoints*4)            ,&
+        residualVector(numberOfGridPoints*4)            ,&
         residualVectorAnalytical(numberOfGridPoints*4)  ,&
-        errorMMS(numberOfGridPoints*4)        ,&
-        sndError(numberOfGridPoints)        ,&
-        r(nPts)                               ,&
-        snd(nPts)                             ,&
-        thetaMachData(nPts)                   ,&
-        smachAnalytical(nPts)                 ,&
-        axialMachData(nPts)                   ,&
-        totalMachData(nPts)                   ,&
-        SoundSpeed(nPts)                      ,&
-        SoundSpeedOut(nPts)                      ,&
-        vRPertubation(nPts)                   ,&
-        vThPertubation(nPts)                  ,&
-        vXPertubation(nPts)                   ,&
-        pPertubation(nPts)                    ,&
-        vRResidual(nPts)                      ,&
-        vThResidual(nPts)                     ,&
-        vXResidual(nPts)                      ,&
-        pResidual(nPts)                       ,&
-        vRSource(nPts)                        ,&
-        vThSource(nPts)                       ,&
-        vXSource(nPts)                        ,&
-        pSource(nPts)                         ,&
-        dp_dr(nPts)                           ,&
+        errorMMS(numberOfGridPoints*4)                  ,&
+        sndError(numberOfGridPoints)                    ,&
+        r(nPts)                                         ,&
+        snd(nPts)                                       ,&
+        thetaMachData(nPts)                             ,&
+        smachAnalytical(nPts)                           ,&
+        axialMachData(nPts)                             ,&
+        totalMachData(nPts)                             ,&
+        SoundSpeed(nPts)                                ,&
+        SoundSpeedOut(nPts)                             ,&
+        vRPertubation(nPts)                             ,&
+        vThPertubation(nPts)                            ,&
+        vXPertubation(nPts)                             ,&
+        pPertubation(nPts)                              ,&
+        vRResidual(nPts)                                ,&
+        vThResidual(nPts)                               ,&
+        vXResidual(nPts)                                ,&
+        pResidual(nPts)                                 ,&
+        vRSource(nPts)                                  ,&
+        vThSource(nPts)                                 ,&
+        vXSource(nPts)                                  ,&
+        pSource(nPts)                                   ,&
+        dp_dr(nPts)                                     ,&
         dsmach_dr(nPts)                       ,&
         drmach_dr(nPts)                       ,&
         drvel_dr(nPts) )
-
 
     dr = (radMax-radMin)/REAL(nPts-1,rDef)
 
@@ -192,19 +190,14 @@ PROGRAM OuterCode
     END DO
 
     DO i = 1,nPts
-    axialMachData(i)  =  boundingConstant*&
-        EXP(k_2*(r(i)-1.0_rDef))
-    thetaMachData(i)  = SQRT((r(i)*k_3*2.0_rDef)/gm1)!EXP(k_2*r(i))
-    SoundSpeed(i)     = EXP(k_3*(r(i)-r(nPts))) 
-    vRPertubation(i)  = EXP(k_4*r(i))
-    vThPertubation(i) = EXP(k_5*r(i))
-    vXPertubation(i)  = EXP(k_6*r(i))
-    pPertubation      = EXP(k_7*r(i))
-    dp_dr             = k_7*EXP(k_7*r(i))
-    dsmach_dr(i)      = k_3*EXP(k_3*r(i))
-    drmach_dr(i)      = k_2*EXP(k_2*r(i))
-    drvel_dr (i)      = k_4*EXP(k_4*r(i))
-    totalMachData(i)  = ((axialMachData(i)**2.0_rDef+&
+    axialMachData(i)  =&
+        (boundingConstant)*&
+        EXP(REAL(k_2,rDef)*(r(i)-1.0_rDef))
+    thetaMachData(i)  = SQRT((r(i)*REAL(k_3,rDef)*2.0_rDef)/REAL(gm1,rDef))!EXP(k_2*r(i)) 
+    SoundSpeed(i)     = EXP(REAL(k_3,rDef)*(r(i)-r(nPts))) 
+
+    totalMachData(i)  =&
+        ((axialMachData(i)**2.0_rDef+&
         thetaMachData(i)**2.0_rDef)**0.5_rDef)
 
     IF(totalMachData(i) > 1.0_rDef) THEN
@@ -215,40 +208,49 @@ PROGRAM OuterCode
         WRITE(12,*) r(i),axialMachData(i), thetaMachData(i), SoundSpeed(i)
 
     ENDIF
+    vRPertubation(i)  = EXP(REAL(k_4,rDef)*r(i))
+    vThPertubation(i) = EXP(REAL(k_5,rDef)*r(i))
+    vXPertubation(i)  = EXP(REAL(k_6,rDef)*r(i))
+    pPertubation      = EXP(REAL(k_7,rDef)*r(i))
+    dp_dr             = REAL(k_7,rDef)*EXP(REAL(k_7)*r(i))
+    dsmach_dr(i)      = REAL(k_3,rDef)*EXP(REAL(k_3)*r(i))
+    drmach_dr(i)      = REAL(k_2,rDef)*EXP(REAL(k_2)*r(i))
+    drvel_dr (i)      = REAL(k_4,rDef)*EXP(REAL(k_4)*r(i))
 
-    ENDDO !------------------------------------------------------------------------------
+    ENDDO 
+    !------------------------------------------------------------------------------
     CALL CreateObject(&
-        object        = swirlClassObject ,&
-        azimuthalMode = azimuthalModeNumber,      &
-        np            = numberOfGridPoints,      &
-        sig           = hubToTipRatio,     &
-        AxialMachData = axialMachData,&
-        ThetaMachData = thetaMachData,& 
-        SoundSpeed    = SoundSpeedOut  ,&
-        ak            = frequency,      &
-        etah          = hubAdmittance,    &
-        etad          = ductAdmittance,    &
-        ifdff         = finiteDiffFlag,   &
-        ed2           = secondOrderSmoother,     &
+        object        = swirlClassObject     ,&
+        azimuthalMode = azimuthalModeNumber  ,&
+        np            = numberOfGridPoints   ,&
+        sig           = hubToTipRatio        ,&
+        AxialMachData = axialMachData        ,&
+        ThetaMachData = thetaMachData        ,& 
+        SoundSpeed    = SoundSpeedOut        ,&
+        ak            = frequency            ,&
+        etah          = hubAdmittance        ,&
+        etad          = ductAdmittance       ,&
+        ifdff         = finiteDiffFlag       ,&
+        ed2           = secondOrderSmoother  ,&
         ed4           = fourthOrderSmoother)     
 
     CALL FindResidualData(&
-        object              = swirlClassObject,&
+        object              = swirlClassObject         ,&
         axialWavenumber     = axialWavenumberAnalytical,&
-        vRPertubationData   = vRPertubation,&
-        vThPertubationData  = vThPertubation,&
-        vXPertubationData   = vXPertubation,&
-        pPertubationData    = pPertubation,&
-        vRResidual          = vRResidual,&
-        vThResidual         = vThResidual,&
-        vXResidual          = vXResidual,&
-        pResidual           = pResidual,&
+        vRPertubationData   = vRPertubation            ,&
+        vThPertubationData  = vThPertubation           ,&
+        vXPertubationData   = vXPertubation            ,&
+        pPertubationData    = pPertubation             ,&
+        vRResidual          = vRResidual               ,&
+        vThResidual         = vThResidual              ,&
+        vXResidual          = vXResidual               ,&
+        pResidual           = pResidual                ,&
         S                   = residualVector)
 
     CALL GetModeData(&
         object          = swirlClassObject,&
         modeNumber      = modeNumber      ,&
-        axialWavenumber = axialWavenumber,&
+        axialWavenumber = axialWavenumber ,&
         radialModeData  = radialModeData )
 
     !               DO i = 1,numberOfGridPoints
@@ -281,111 +283,122 @@ PROGRAM OuterCode
     ! Call MMS
     !    WRITE(6,*) axialWavenumber
 
-    CALL getSourceTerms(np             =numberOfGridPoints        ,&
-        mm             =azimuthalModeNumber       ,&
-        gm1            =gm1                       ,&
-        ak             =frequency*0.5_rDef        ,&
-        axialWavenumber=axialWavenumberAnalytical,&
-        r              =r                         ,&
-        rmach          =axialMachData             ,&
-        smach          =thetaMachData             ,& 
-        snd            =SoundSpeed                ,& 
-        rvel           =vRPertubation             ,& 
-        svel           =vThPertubation            ,&
-        xvel           =vXPertubation             ,&
-        p              =pPertubation              ,&
-        dp_dr          =dp_dr                     ,&
-        dsmach_dr      =dsmach_dr                 ,&
-        drmach_dr      =drmach_dr                 ,&
-        drvel_dr       =drvel_dr                  ,&
-        S_1            =S_1                       ,&
-        S_2            =S_2                       ,&
-        S_3            =S_3                       ,&
-        S_4            =S_4                       )
-
-
-
-    !    WRITE(6,*)  ' Numerical residual vector, S'
-    DO i = 1,numberOfGridPoints
-
-
-    residualVectorAnalytical(i) = S_1(i)
-    residualVectorAnalytical(i + numberOfGridPoints) = S_2(i)
-    residualVectorAnalytical(i + 2*numberOfGridPoints) = S_3(i)
-    residualVectorAnalytical(i + 3*numberOfGridPoints) = S_4(i)
-    !    WRITE(6,*) 'S_1 :', S_1(i)
-    !    WRITE(6,*) 'S_2 :', S_2(i)
-    !    WRITE(6,*) 'S_3 :', S_3(i)
-    !    WRITE(6,*) 'S_4 :', S_4(i)
-
-    ENDDO
-
-    DO i=1,numberOfGridPoints*4
-    errorMMS(i)  =  REAL(ABS(residualVector(i) - residualVectorAnalytical(i)))
-    errorSquared =  errorMMS(i)*errorMMS(i)
-    errorSum     =  errorSum + errorSquared
-    !    WRITE(6,*) errorMMS(i)
-    !    WRITE(6,*) residualVector(i)
-    END DO
-    DO i=1,numberOfGridPoints
-    WRITE(11,*) r(i),  errorMMS(i)          ,&
-        errorMMS(numberOfGridPoints + i)     ,&
-        errorMMS(2*numberOfGridPoints + i)   ,&
-        errorMMS(3*numberOfGridPoints + i)
-
-    WRITE(144,*) r(i),  REAL(residualVector(i))          ,&
-        REAL(residualVector(numberOfGridPoints + i))     ,&
-        REAL(residualVector(2*numberOfGridPoints + i))   ,&
-        REAL(residualVector(3*numberOfGridPoints + i))
-    !    WRITE(6,*) r(i),  REAL(residualVector(i))          ,&
-    !                       REAL(residualVector(numberOfGridPoints + i))     ,&
-    !                       REAL(residualVector(2*numberOfGridPoints + i))   ,&
-    !                       REAL(residualVector(3*numberOfGridPoints + i))
-    !
-    WRITE(13,*) r(i),  REAL(residualVectorAnalytical(i))          ,&
-        REAL(residualVectorAnalytical(numberOfGridPoints + i))     ,&
-        REAL(residualVectorAnalytical(2*numberOfGridPoints + i))   ,&
-        REAL(residualVectorAnalytical(3*numberOfGridPoints + i))
-    END DO
-    L2res = SQRT(errorSum/(numberOfGridPoints*4))
+!    CALL getSourceTerms(&
+!        np             =numberOfGridPoints        ,&
+!        mm             =azimuthalModeNumber       ,&
+!        gm1            =gm1                       ,&
+!        ak             =frequency*0.5_rDef        ,&
+!        axialWavenumber=axialWavenumberAnalytical ,&
+!        r              =r                         ,&
+!        rmach          =axialMachData             ,&
+!        smach          =thetaMachData             ,& 
+!        snd            =SoundSpeed                ,& 
+!        rvel           =vRPertubation             ,& 
+!        svel           =vThPertubation            ,&
+!        xvel           =vXPertubation             ,&
+!        p              =pPertubation              ,&
+!        dp_dr          =dp_dr                     ,&
+!        dsmach_dr      =dsmach_dr                 ,&
+!        drmach_dr      =drmach_dr                 ,&
+!        drvel_dr       =drvel_dr                  ,&
+!        S_1            =S_1                       ,&
+!        S_2            =S_2                       ,&
+!        S_3            =S_3                       ,&
+!        S_4            =S_4                       )
+!
+!    !    WRITE(6,*)  ' Numerical residual vector, S'
+!    DO i = 1,numberOfGridPoints
+!
+!
+!    residualVectorAnalytical(i) = S_1(i)
+!    residualVectorAnalytical(i + numberOfGridPoints) = S_2(i)
+!    residualVectorAnalytical(i + 2*numberOfGridPoints) = S_3(i)
+!    residualVectorAnalytical(i + 3*numberOfGridPoints) = S_4(i)
+!    !    WRITE(6,*) 'S_1 :', S_1(i)
+!    !    WRITE(6,*) 'S_2 :', S_2(i)
+!    !    WRITE(6,*) 'S_3 :', S_3(i)
+!    !    WRITE(6,*) 'S_4 :', S_4(i)
+!
+!    ENDDO
+!
+!    DO i=1,numberOfGridPoints*4
+!    errorMMS(i)  =  REAL(ABS(residualVector(i) - residualVectorAnalytical(i)))
+!    errorSquared =  errorMMS(i)*errorMMS(i)
+!    errorSum     =  errorSum + errorSquared
+!    !    WRITE(6,*) errorMMS(i)
+!    !    WRITE(6,*) residualVector(i)
+!    END DO
+!    DO i=1,numberOfGridPoints
+!    WRITE(11,*) &
+!        r(i)                                 ,&
+!        errorMMS(i)                          ,&
+!        errorMMS(numberOfGridPoints + i)     ,&
+!        errorMMS(2*numberOfGridPoints + i)   ,&
+!        errorMMS(3*numberOfGridPoints + i)
+!
+!    WRITE(144,*) &
+!        r(i)                                             ,&
+!        REAL(residualVector(i))                          ,&
+!        REAL(residualVector(numberOfGridPoints + i))     ,&
+!        REAL(residualVector(2*numberOfGridPoints + i))   ,&
+!        REAL(residualVector(3*numberOfGridPoints + i))
+!
+!    !    WRITE(6,*) r(i),  REAL(residualVector(i))          ,&
+!    !                       REAL(residualVector(numberOfGridPoints + i))     ,&
+!    !                       REAL(residualVector(2*numberOfGridPoints + i))   ,&
+!    !                       REAL(residualVector(3*numberOfGridPoints + i))
+!    !
+!    WRITE(13,*) &
+!        r(i)                                                        ,&
+!        REAL(residualVectorAnalytical(i))                           ,&
+!        REAL(residualVectorAnalytical(numberOfGridPoints + i))      ,&
+!        REAL(residualVectorAnalytical(2*numberOfGridPoints + i))    ,&
+!        REAL(residualVectorAnalytical(3*numberOfGridPoints + i))
+!
+!    END DO
+!    L2res = SQRT(errorSum/(numberOfGridPoints*4))
     !    WRITE(6,*)'L2Res: ', L2res
 
-    DEALLOCATE(S_1,S_2,S_3,S_4         ,&
-        radialModeData          ,&
-        residualVector          ,&
-        residualVectorAnalytical,&
-        errorMMS                ,&
-        sndError                ,&
-        r                       ,&
-        snd                     ,&
-        vRPertubation           ,&
-        vThPertubation          ,&
-        vXPertubation           ,&
-        pPertubation            ,&
-        vRSource                ,&
-        vThSource               ,&
-        vXSource                ,&
-        pSource                 ,&
+    DEALLOCATE(&
+        S_1                       ,&
+        S_2                       ,&
+        S_3                       ,&
+        S_4                       ,&
+        radialModeData            ,&
+        residualVector            ,&
+        residualVectorAnalytical  ,&
+        errorMMS                  ,&
+        sndError                  ,&
+        r                         ,&
+        snd                       ,&
+        vRPertubation             ,&
+        vThPertubation            ,&
+        vXPertubation             ,&
+        pPertubation              ,&
+        vRSource                  ,&
+        vThSource                 ,&
+        vXSource                  ,&
+        pSource                   ,&
         vRResidual                ,&
         vThResidual               ,&
         vXResidual                ,&
         pResidual                 ,&
-        thetaMachData           ,&
-        smachAnalytical         ,&
-        axialMachData           ,&
-        totalMachData           ,&
-        SoundSpeed              ,&
-        SoundSpeedOut           ,&
-        dp_dr                   ,&
-        drmach_dr               ,&
-        dsmach_dr               ,&
+        thetaMachData             ,&
+        smachAnalytical           ,&
+        axialMachData             ,&
+        totalMachData             ,&
+        SoundSpeed                ,&
+        SoundSpeedOut             ,&
+        dp_dr                     ,&
+        drmach_dr                 ,&
+        dsmach_dr                 ,&
         drvel_dr)
+
     !    L2res = 0.0_rDef
     errorSum = 0.0_rDef
 
     CLOSE(145)
-    ENDDO
-
+    ENDDO 
     CLOSE(144)
     CLOSE(8)
     CLOSE(11)

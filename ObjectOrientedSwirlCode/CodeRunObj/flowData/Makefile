@@ -1,4 +1,4 @@
-F90 = gfortran
+F89 = gfortran
 EXE = getFlowData
 
 OBJ_EXT = .o

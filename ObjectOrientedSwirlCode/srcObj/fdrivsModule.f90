@@ -147,23 +147,23 @@ CONTAINS
         dl2(k,j) = tot
        enddo
       enddo
-      do k=1,np
-       do j=1,np
-        tot = 0.0_rDef
-        do i = 1,np
-         tot = tot +dl2(k,i)*dl2(i,j)
-        enddo
-        dl4(k,j) = tot
-       enddo
-      enddo
+!      do k=1,np
+!       do j=1,np
+!        tot = 0.0_rDef
+!        do i = 1,np
+!         tot = tot +dl2(k,i)*dl2(i,j)
+!        enddo
+!        dl4(k,j) = tot
+!       enddo
+!      enddo
 !
 ! Correct 1st derivative matrix using 2nd and 4th order smoothing.
       do k=1,np
        do j=1,np
-        dl1(k,j) = dl1(k,j) +ed2*dl2(k,j) +ed4*dl4(k,j)
+        dl1(k,j) = dl1(k,j) !+ed2*dl2(k,j) +ed4*dl4(k,j)
        enddo
       enddo
 !
-      return
+!      return
       end
 END MODULE fdrivsModule

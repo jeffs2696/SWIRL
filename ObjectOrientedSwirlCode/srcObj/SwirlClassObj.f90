@@ -4,7 +4,7 @@ MODULE swirlClassObj
   USE analysisModule          ! Solves the eigenvalue problem
   USE boundaryModule          ! fills [A] and [B] matricies with appropriate BCs
   USE derivsModule 
-USE fdgridModule
+  USE fdgridModule
   USE fdrivsModule
   USE globalModule
   USE gridModule
@@ -502,8 +502,9 @@ REAL(KIND=REAL64),DIMENSION(object%numberOfRadialPoints)  :: vRPertubationData,&
   CONTINUE
   
   IF (object%isInitialized.eqv..TRUE.) THEN
-      axialWavenumber = object%alpha(modeNumber)/object%beta(modeNumber)
-      radialModeData  = object%vr(:,modeNumber)
+
+!      axialWavenumber = object%alpha(modeNumber)/object%beta(modeNumber)
+!      radialModeData  = object%vr(:,modeNumber)
       
   ELSE
     WRITE(6,*) 'Cannot provide radial mode data, no object is provided'
@@ -544,7 +545,9 @@ REAL(KIND=REAL64),DIMENSION(object%numberOfRadialPoints)  :: vRPertubationData,&
                  object%vph,   &
                  object%wvn,   &
                  object%aa,    &
+                 object%aa_before,    &
                  object%bb,    &
+                 object%bb_before,    &
                  object%S_MMS, &
                  object%S_MMS_Array, &
                  object%vl,    &
