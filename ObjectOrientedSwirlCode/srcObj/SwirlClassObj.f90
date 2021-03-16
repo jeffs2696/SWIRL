@@ -3,8 +3,8 @@ MODULE swirlClassObj
   USE, INTRINSIC :: ISO_FORTRAN_ENV
   USE analysisModule          ! Solves the eigenvalue problem
   USE boundaryModule          ! fills [A] and [B] matricies with appropriate BCs
-  USE derivsModule
-  USE fdgridModule
+  USE derivsModule 
+USE fdgridModule
   USE fdrivsModule
   USE globalModule
   USE gridModule
@@ -106,9 +106,10 @@ MODULE swirlClassObj
                                                        S_MMS,&
                                                        wvn
   
-    COMPLEX(KIND=REAL64), DIMENSION(:,:), ALLOCATABLE :: S_MMS_Array,&
-                                                         vl, &
-                                                         vr
+    COMPLEX(KIND=REAL64), DIMENSION(:,:), ALLOCATABLE :: &
+    S_MMS_Array,&
+    vl,&
+    vr
 
   END TYPE SwirlClassType
 ! Local Variable Declaration
@@ -151,7 +152,7 @@ MODULE swirlClassObj
                                     sig    ,&
                                     AxialMachData,&
                                     ThetaMachData,&
-!                                    SoundSpeed   ,&
+                                    SoundSpeed   ,&
                                     ak     ,&
                                     etah   ,&
                                     etad   ,&
@@ -174,8 +175,8 @@ MODULE swirlClassObj
 
     REAL(KIND=REAL64),DIMENSION(:), INTENT(INOUT) :: &
     AxialMachData,&
-    ThetaMachData!,&
-!    SoundSpeed
+    ThetaMachData,&
+    SoundSpeed
 
     !
     
@@ -206,9 +207,7 @@ MODULE swirlClassObj
                object%y(object%numberOfRadialPoints),        &
                object%rwork(8*np4)                          ,&
                object%r(object%numberOfRadialPoints),        &
-!               object%rmx(object%numberOfRadialPoints),      &
                object%drm(object%numberOfRadialPoints),      &
-!               object%rmt(object%numberOfRadialPoints),      &
                object%drt(object%numberOfRadialPoints),      &
                object%snd(object%numberOfRadialPoints),      &
                object%dsn(object%numberOfRadialPoints),      &
@@ -221,11 +220,10 @@ MODULE swirlClassObj
                object%S_MMS_Array(np4,np4),   &
                object%vph(np4),     &
                object%wvn(np4),     &
-              object%aa(np4,np4),  &
-              object%bb(np4,np4),  &
+               object%aa(np4,np4),  &
+               object%bb(np4,np4),  &
                object%vl(np4,np4),  &
                object%vr(np4,np4))
-
 
 !
 ! Set up Gauss-Lobatto grid and compute Chebyshev derivative matrix.
@@ -278,7 +276,7 @@ MODULE swirlClassObj
                            gam   = gam,   &
                            sig   = object%hubTipRatio,   &
                            is    = is)
-!        SoundSpeed = object%snd
+        SoundSpeed = object%snd
         WRITE(PrintToggle,*) 'Leaving smachAndSndspdModule'
         WRITE(PrintToggle,*) 'Entering rmachModule'
        
@@ -458,8 +456,7 @@ MODULE swirlClassObj
   TYPE(SwirlClassType)                             ,INTENT(INOUT) :: object
   
 !  INTEGER                                          ,INTENT(INOUT) :: modeNumber
-
-  REAL(KIND=REAL64),DIMENSION(object%numberOfRadialPoints)  :: vRPertubationData,&
+REAL(KIND=REAL64),DIMENSION(object%numberOfRadialPoints)  :: vRPertubationData,&
                                                                vThPertubationData,&
                                                                vXPertubationData ,&
                                                                pPertubationData 
@@ -468,7 +465,7 @@ MODULE swirlClassObj
                                                                   vThResidual,&
                                                                   vXResidual ,&
                                                                   pResidual 
-  COMPLEX(KIND=REAL64),DIMENSION(object%numberOfRadialPoints*4)  :: Xmatrix
+  COMPLEX(KIND=REAL64),DIMENSION(object%numberOfRadialPoints*4)  :: Xmatrix 
   COMPLEX(KIND=REAL64) , INTENT(IN) :: axialWavenumber
   COMPLEX(KIND=REAL64),DIMENSION(object%numberOfRadialPoints*4),INTENT(OUT) :: S
 
@@ -482,6 +479,7 @@ MODULE swirlClassObj
     ENDDO
 
     S = MATMUL(object%aa_before,Xmatrix) + CMPLX(0.0_rDef,1.0_rDef)*axialWavenumber*MATMUL(object%bb_before,Xmatrix)
+
 
     DO i =1,object%numberOfRadialPoints
     vXResidual(i) = S(i)

@@ -2,6 +2,6 @@ srcObj notes;
  TO DO:
 V-Put analytical source terms in a module
  -redefine the MMS to account for liner boundary condition
- -pass the input flow variables to both the swirlClassObject and the new source term generation modules
+ -pass the input flow variables to both the swirlClassObject and the new source term generation moduls
 V-set up loop so that the grid points double each time
 

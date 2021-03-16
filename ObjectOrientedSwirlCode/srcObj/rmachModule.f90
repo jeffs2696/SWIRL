@@ -11,8 +11,7 @@ END INTERFACE
 
       INTEGER, PARAMETER :: rDef = REAL64
 
-CONTAINS
-
+CONTAINS 
       subroutine rmach1(npts,rr,rmch,drm,snd,dsn,dd,rxmax,slope,rro,ir)
 
       INTEGER, INTENT(IN) :: npts
@@ -28,7 +27,7 @@ CONTAINS
       REAL(KIND=rDef), INTENT(OUT) :: slope
 
       REAL(KIND=rDef), INTENT(IN) :: rxmax, &
-                                       rro
+                                     rro
 
       INTEGER, INTENT(INOUT) :: ir
 !
@@ -126,20 +125,23 @@ CONTAINS
 !
 ! drh mod:  read in data and use akima spline
 !
-       open(unit=22,file='mach.input',status='unknown')
-       READ(22,*) nptsIn
-
-       ALLOCATE(rIn(nptsIn), &
-             rmchIn(nptsIn))
-
-       DO i=1,nptsIn
-        READ(22,*) rIn(i),rmchIn(i)
-       END DO
-
-       CLOSE(22)
+!       open(unit=22,file='mach.input',status='unknown')
+!       READ(22,*) nptsIn
+!
+!       ALLOCATE(rIn(nptsIn), &
+!             rmchIn(nptsIn))
+!
+!       DO i=1,nptsIn
+!        READ(22,*) rIn(i),rmchIn(i)
+!       END DO
+!
+!       CLOSE(22)
 !
 ! spline data onto grid
 !
+       nptsIn = SIZE(rmch)
+       rIn = rr
+       rmchIn = rmch
 
        CALL Akima433Interpolation(inputDataLength  = nptsIn, &
                                   xInputData       = rIn,    &

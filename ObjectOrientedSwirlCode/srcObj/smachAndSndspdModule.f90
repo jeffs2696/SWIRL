@@ -3,8 +3,7 @@ MODULE smachAndSndspdModule
       USE Akima1D
       IMPLICIT NONE
       PRIVATE
-      PUBLIC :: smachAndSndspd
-
+      PUBLIC :: smachAndSndspd 
 INTERFACE smachAndSndspd
       MODULE PROCEDURE smachAndSndspd1
 END INTERFACE smachAndSndspd
@@ -55,7 +54,7 @@ CONTAINS
                        gm1, &
                        agm, &
                        alg, &
-                       ang, &
+                       ang, & 
                       rsw1, &
                       rswi, &
                         x1, &
@@ -65,7 +64,7 @@ CONTAINS
                                          vswp
 
       INTEGER :: nptsIn
-      REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: rIn, &
+      REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE ::   rIn, &
                                                  rmswIn
 !
 !     implicit real*8 (a-h,o-z)
@@ -173,7 +172,7 @@ CONTAINS
         dsn(i)   =  gm1*gam*gam/(2.0_rDef*r**5*snd(i))
 
         vsw(i)   =  gam/(r*r)
-        rmsw(i)  =  vsw(i)/snd(i)
+        rmsw(i)  =  vsw(i)/snd(i) 
         vswp(i)  = -2.0_rDef*gam/(r*r*r)
         rmswp(i) = -gam/(r**3*snd(i)**2)*(2.0_rDef*snd(i) +r*dsn(i))
 
@@ -182,7 +181,6 @@ CONTAINS
 !  is = 5: read in swirl from file.
 !
       elseif (is.eq.5) then
-
 !      open(unit=24,file='swrl.input',status='unknown')
 !       READ(24,*) nptsIn
 !       ALLOCATE(rIn(nptsIn), &
@@ -238,7 +236,6 @@ CONTAINS
           rsw1    = rmsw(i+1)*rmsw(i+1)/rr(i+1)
           xi      = rr(i)
           x1      = rr(i+1)
-!         snd(i) = snd(i+1) +0.5_rDef*(rswi +rsw1)*(xi -x1)
           snd(i) = snd(i+1) +0.5_rDef*(rswi +rsw1)*(x1 -xi)
          else
           snd(i) = 2.0_rDef*rmsw(i)*(rmsw(i+1) -rmsw(i))/rr(i+1)
