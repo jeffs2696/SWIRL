@@ -1,4 +1,6 @@
 F90 = gfortran
+F90FLAGS  = -g -c -Og -std=f2008 -fbounds-check -fcheck-array-temporaries \
+			-Wconversion -Wsurprising -Wall -ffpe-trap=invalid
 EXE = getFlowData
 
 OBJ_EXT = .o
@@ -21,5 +23,5 @@ clean:
 	rm -f $(OBJ_LOCATION)/*.o *.input 
 	    
 SoundSpeedMMS.o: $(SRC_LOCATION)/SoundSpeedMMS.f90
-	$(F90) -c -O $(SRC_LOCATION)/SoundSpeedMMS.f90
+	$(F90) $(F90FLAGS) $(SRC_LOCATION)/SoundSpeedMMS.f90
 

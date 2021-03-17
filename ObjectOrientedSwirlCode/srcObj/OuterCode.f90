@@ -17,9 +17,8 @@ PROGRAM OuterCode
         i                   ,& ! number of points
         gp                  ,& ! number of points
         fac                 ,&
-        First_gp            ,& ! number of points
-        Last_gp             ,& ! number of points
-        Step_gp             ,& ! number of points
+        First_fac            ,& ! number of points
+        Last_fac             ,& ! number of points
         numModes            ,& ! number of radial modes
         modeNumber 
     COMPLEX(KIND=REAL64) :: & 
@@ -97,12 +96,12 @@ PROGRAM OuterCode
         slope   = 0.0_rDef,  &
         angom   = 0.00_rDef
 
-    CHARACTER(50) :: file_name 
+    CHARACTER(50) :: file_name1,file_name2 
     CHARACTER(10) :: file_id 
 
-    OPEN(11,FILE="errorData.dat")
-    OPEN(13,FILE="SourceData.dat")
-    OPEN(144,FILE="CalcSourceData.dat")
+    !OPEN(11,FILE="errorData.dat")
+    !OPEN(13,FILE="SourceData.dat")
+    !OPEN(144,FILE="CalcSourceData.dat")
     OPEN(12,FILE="flowData.dat")
 
     ! inputs needed for SwirlClassType
@@ -131,18 +130,26 @@ PROGRAM OuterCode
     k_7 = CMPLX(0.0,0.0,rDef)
     axialWavenumberAnalytical = 0.50_rDef
     ! Starting Grid DO LOOP  
-    DO fac = 3,7
+
+    file_name2 = 'SoundSpeedL2MMS' // trim(adjustl(file_id)) // '.dat'
+    First_fac  = 3
+    Last_fac   = 7
+    OPEN(345,FILE=TRIM(file_name2))
+
+    WRITE(345,*) Last_fac-First_fac
+    
+    WRITE(6,*) Last_fac-First_fac
+    DO fac = First_fac,Last_fac
     nPts   = 1+(2**fac)
 
     numberOfGridPoints     = nPts
 
-    ! write integer into a string
-    WRITE(file_id, '(i0)') numberOfGridPoints
+    ! write integer into a string WRITE(file_id, '(i0)') numberOfGridPoints
 
     ! Construct the filename:
-    file_name = 'SoundSpeedMMS' // trim(adjustl(file_id)) // '.dat'
+    file_name1 = 'SoundSpeedMMS' // trim(adjustl(file_id)) // '.dat'
 
-    OPEN(145,FILE=TRIM(file_name))
+!    OPEN(145,FILE=TRIM(file_name1))
     numModes = numberOfGridPoints 
     modeNumber = azimuthalModeNumber
 
@@ -199,6 +206,7 @@ PROGRAM OuterCode
     totalMachData(i)  =&
         ((axialMachData(i)**2.0_rDef+&
         thetaMachData(i)**2.0_rDef)**0.5_rDef)
+    !WRITE(6,*) totalMachData(i)
 
     IF(totalMachData(i) > 1.0_rDef) THEN
         WRITE(6,*) i,'ERROR: Total mach is greater than one'
@@ -263,21 +271,13 @@ PROGRAM OuterCode
     CALL DestroyObject(object = swirlClassObject)
 
     !------------------------------------------------------------------------------ 
-    sndL2res = 0.0_rDef
-    WRITE(145,*) numberOfGridPoints
-    DO  i=1,numberOfGridPoints
-    sndError(i) = ABS(SoundSpeedOut(i) - SoundSpeed(i))
-    
-    WRITE(145,*) sndError(i)
+    CALL getL2Norm(L2 = sndL2res,&
+       dataSet1 = SoundSpeed,&
+        dataSet2 = SoundSpeedOut,&
+        numPoints= numberOfGridPoints)
+    WRITE(6,*) dr, sndL2res
 
-    ENDDO
-    DO i = 1,numberOfGridPoints
-    sndL2res = sndError(i)*sndError(i) + sndL2res
-    ENDDO
-
-    sndL2res = SQRT(sndL2res/numberOfGridPoints)
-    WRITE(6,*) sndL2res
-
+    WRITE(345,*) dr , sndL2res
 
     !------------------------------------------------------------------------------
     ! Call MMS
@@ -397,11 +397,11 @@ PROGRAM OuterCode
     !    L2res = 0.0_rDef
     errorSum = 0.0_rDef
 
-    CLOSE(145)
+!    CLOSE(145)
     ENDDO 
-    CLOSE(144)
-    CLOSE(8)
-    CLOSE(11)
+    CLOSE(345)
+!    CLOSE(144)
+!    CLOSE(11)
     CLOSE(12)
-    CLOSE(13)
+!    CLOSE(13)
 END PROGRAM 

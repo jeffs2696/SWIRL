@@ -162,6 +162,8 @@ all:  $(OBJECTS)
 
 	@mv $(EXE) $(EXECUTABLE_LOCATION);
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
+	@(cd $(EXECUTABLE_LOCATION)/meanFlowMMS; ./getFlowData);
+	@(cd $(EXECUTABLE_LOCATION); ./plotFlowData.sh);
 #
 #
 #all: $(OBJECTS)

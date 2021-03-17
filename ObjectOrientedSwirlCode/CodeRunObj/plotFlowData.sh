@@ -1,6 +1,6 @@
 #! /bin/bash 
 
 gnuplot -persist <<-blah
-	load "plotFlowData.plt"
+	load "plottingScripts/plotFlowData.plt"
 blah
 

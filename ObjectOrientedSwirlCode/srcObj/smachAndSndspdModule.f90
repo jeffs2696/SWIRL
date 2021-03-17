@@ -14,58 +14,58 @@ CONTAINS
 
       subroutine smachAndSndspd1(npts,& 
                                    rr,&
-                                 rmsw,&
-                                rmswp,&
-                                  snd,&
-                                  dsn,&
+                                   rmsw,&
+                                   rmswp,&
+                                   snd,&
+                                   dsn,&
                                    dd,&
-                                 rhob,&
-                                angom,&
-                                  gam,&
-                                  sig,&
+                                   rhob,&
+                                   angom,&
+                                   gam,&
+                                   sig,&
                                    is)
 
-      INTEGER, INTENT(IN) :: npts, &
-                               is
+                               INTEGER, INTENT(IN) :: npts, &
+                                   is
 
-      REAL(KIND=rDef), INTENT(IN) :: angom, &
-                                     gam,   &
-                                     sig
+                               REAL(KIND=rDef), INTENT(IN) :: angom, &
+                                   gam,   &
+                                   sig
 
-      REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: rr, &
-                                                 rhob
+                               REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: rr, &
+                                   rhob
 
-      REAL(KIND=rDef), DIMENSION(:,:), INTENT(IN) :: dd
+                               REAL(KIND=rDef), DIMENSION(:,:), INTENT(IN) :: dd
 
-      REAL(KIND=rDef), DIMENSION(:), INTENT(OUT) :: rmsw,  &
-                                                    rmswp, &
-                                                      snd, &
-                                                      dsn
-!
-! local variables
-!
-      INTEGER :: i, &
-                 j, &
-                 k
+                               REAL(KIND=rDef), DIMENSION(:), INTENT(OUT) :: rmsw,  &
+                                   rmswp, &
+                                   snd, &
+                                   dsn
+                               !
+                               ! local variables
+                               !
+                               INTEGER :: i, &
+                                   j, &
+                                   k
 
-      REAL(KIND=rDef) :: r, &
-                       tot, &
-                        gm, &
-                       gm1, &
-                       agm, &
-                       alg, &
-                       ang, & 
-                      rsw1, &
-                      rswi, &
-                        x1, &
-                        xi
+                               REAL(KIND=rDef) :: r, &
+                                   tot, &
+                                   gm, &
+                                   gm1, &
+                                   agm, &
+                                   alg, &
+                                   ang, & 
+                                   rsw1, &
+                                   rswi, &
+                                   x1, &
+                                   xi
 
-      REAL(KIND=rDef), DIMENSION(npts) :: vsw, &
-                                         vswp
+                               REAL(KIND=rDef), DIMENSION(npts) :: vsw, &
+                                   vswp
 
-      INTEGER :: nptsIn
-      REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE ::   rIn, &
-                                                 rmswIn
+                               INTEGER :: nptsIn
+                               REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE ::   rIn, &
+                                   rmswIn
 !
 !     implicit real*8 (a-h,o-z)
 !     parameter (NMAX = 128)

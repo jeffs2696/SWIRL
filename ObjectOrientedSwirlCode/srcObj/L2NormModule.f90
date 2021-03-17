@@ -28,7 +28,7 @@ SUBROUTINE L2N(L2,&
 
 
 INTEGER, INTENT(INOUT) :: numPoints
-COMPLEX(KIND=rDef), INTENT(INOUT) :: L2
+REAL(KIND=rDef), INTENT(INOUT) :: L2
 REAL(KIND=rDef),DIMENSION(:), INTENT(IN)  :: dataSet1,&
                                              dataSet2
 
@@ -46,6 +46,7 @@ dataErrorSquared(i) = dataError(i)**2
 dataSum = dataSum + dataErrorSquared(i)
 ENDDO
 L2 = SQRT(dataSum/numPoints)
+WRITE(6,*) L2
 END SUBROUTINE L2N
 SUBROUTINE L2N_COMPLEX(L2,&
               dataSet1,&
