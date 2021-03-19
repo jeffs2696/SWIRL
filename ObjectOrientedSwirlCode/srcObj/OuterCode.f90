@@ -212,8 +212,12 @@ PROGRAM OuterCode
             axialMachData(i)  =&
                 (boundingConstant)*&
                 EXP(REAL(k_2, rDef)*(r(i)-1.0_rDef))
-            thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i)) 
-            SoundSpeed(i)     = EXP(REAL(k_3, rDef)*(r(i)-r(nPts))) 
+
+            thetaMachData(i) = SQRT((REAL(k_3,rDef)**2.0_rDef*&
+                SIN(REAL(k_3,rDef)*(r(i)-1.0_rDef))**2.0_rDef*1.0_rDef/&
+                COS(REAL(k_3,rDef)*(r(i)-1.0_rDef))**2.0_rDef)/gm1)
+            ! thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i)) 
+            SoundSpeed(i)     =COS(k_3*(r(i)-1.0_rDef))! EXP(REAL(k_3, rDef)*(r(i)-r(nPts))) 
 
             totalMachData(i)  =&
                 ((axialMachData(i)**2.0_rDef+&
