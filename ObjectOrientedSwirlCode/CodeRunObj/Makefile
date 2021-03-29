@@ -36,10 +36,9 @@ F90EXT   = f90
 OEXT     = o
 
 MMS_LOCATION = meanFlowMMS/
-OUTPUT_DATA  = gammas.dat gammasOnly.dat CalcSourceData.dat SourceData.dat \
-			   output.data mach.dat gam.acc gam.non.acc gam.nonconv machOut.dat \
-			   flowData.dat cv.waves.dat errorData.dat errorData2.dat \
-			   SoundSpeedL2MMS SoundSpeedL2MMS.post
+OUTPUT_DATA  =  \
+			   output.data mach.dat  gam.non.acc gam.nonconv machOut.dat \
+			   flowData.dat cv.waves.dat  
 
 			  
 

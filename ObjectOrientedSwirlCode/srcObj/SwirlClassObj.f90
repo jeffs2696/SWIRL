@@ -413,9 +413,8 @@ CONTAINS
 
         IF (object%isInitialized) THEN
 
-            print *, 'the Object is initialized'
         ELSE
-            print *, 'The object is not initialized'
+            WRITE(6,*) 'ERROR: The object is not initialized'
             CONTINUE
         ENDIF
 
@@ -557,6 +556,7 @@ CONTAINS
         thetaMach_dr = object%drt
         SoundSpeed   = object%snd
         SoundSpeed_dr = object%dsn
+        radialData   = object%r
 
         ! the other mean flow data from SWIRL
 

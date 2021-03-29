@@ -46,7 +46,7 @@ dataErrorSquared(i) = dataError(i)**2
 dataSum = dataSum + dataErrorSquared(i)
 ENDDO
 L2 = SQRT(dataSum/numPoints)
-WRITE(6,*) L2
+!WRITE(6,*) L2
 END SUBROUTINE L2N
 SUBROUTINE L2N_COMPLEX(L2,&
               dataSet1,&
