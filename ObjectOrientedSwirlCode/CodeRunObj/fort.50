@@ -1,95 +1,84 @@
+           3
+ Entering fdgridModule
+ Leaving fdgridModule
+ Entering smachAndSndspdModule
+ Leaving smachAndSndspdModule
+ Entering rmachModule
+ Leaving rmachModule
+ Entering machoutModule
+ Leaving machoutModule
+ Entering analysisModule
+ Leaving analysisModule
+ Entering outputModule
+           5
+ Entering fdgridModule
+ Leaving fdgridModule
+ Entering smachAndSndspdModule
+ Leaving smachAndSndspdModule
+ Entering rmachModule
+ Leaving rmachModule
+ Entering machoutModule
+ Leaving machoutModule
+ Entering analysisModule
+ Leaving analysisModule
+ Entering outputModule
            9
  Entering fdgridModule
  Leaving fdgridModule
- Entering fdrivsModule
- Leaving fdrivsModule
  Entering smachAndSndspdModule
  Leaving smachAndSndspdModule
  Entering rmachModule
  Leaving rmachModule
  Entering machoutModule
  Leaving machoutModule
- Entering globalModule
- Leaving globalModule
- Entering boundaryModule
- Leaving boundaryModule
  Entering analysisModule
  Leaving analysisModule
  Entering outputModule
- Leaving outputModule
           17
  Entering fdgridModule
  Leaving fdgridModule
- Entering fdrivsModule
- Leaving fdrivsModule
  Entering smachAndSndspdModule
  Leaving smachAndSndspdModule
  Entering rmachModule
  Leaving rmachModule
  Entering machoutModule
  Leaving machoutModule
- Entering globalModule
- Leaving globalModule
- Entering boundaryModule
- Leaving boundaryModule
  Entering analysisModule
  Leaving analysisModule
  Entering outputModule
- Leaving outputModule
           33
  Entering fdgridModule
  Leaving fdgridModule
- Entering fdrivsModule
- Leaving fdrivsModule
  Entering smachAndSndspdModule
  Leaving smachAndSndspdModule
  Entering rmachModule
  Leaving rmachModule
  Entering machoutModule
  Leaving machoutModule
- Entering globalModule
- Leaving globalModule
- Entering boundaryModule
- Leaving boundaryModule
  Entering analysisModule
  Leaving analysisModule
  Entering outputModule
- Leaving outputModule
           65
  Entering fdgridModule
  Leaving fdgridModule
- Entering fdrivsModule
- Leaving fdrivsModule
  Entering smachAndSndspdModule
  Leaving smachAndSndspdModule
  Entering rmachModule
  Leaving rmachModule
  Entering machoutModule
  Leaving machoutModule
- Entering globalModule
- Leaving globalModule
- Entering boundaryModule
- Leaving boundaryModule
  Entering analysisModule
  Leaving analysisModule
  Entering outputModule
- Leaving outputModule
          129
  Entering fdgridModule
  Leaving fdgridModule
- Entering fdrivsModule
- Leaving fdrivsModule
  Entering smachAndSndspdModule
  Leaving smachAndSndspdModule
  Entering rmachModule
  Leaving rmachModule
  Entering machoutModule
  Leaving machoutModule
- Entering globalModule
- Leaving globalModule
- Entering boundaryModule
- Leaving boundaryModule
  Entering analysisModule
  Leaving analysisModule
  Entering outputModule
- Leaving outputModule

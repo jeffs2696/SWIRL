@@ -216,13 +216,12 @@ CONTAINS
             !
             ! Spectral computation of M_theta'.
 
-            do k = 1, npts
-                tot = 0.0_rDef
-                do j = 1, npts
-                    tot = tot+dd(k, j)*rmsw(j)
-                enddo
-                rmswp(k) = tot
-            enddo
+            !JS: dM_th/dr ::
+            !     do j = 1, npts
+            !         tot = tot+dd(k, j)*rmsw(j)
+            !     enddo
+            !     rmswp(k) = tot
+            ! enddo
 
             ! calculate the speed of sound by integration (Eq. (2.6) in paper)
 
@@ -247,13 +246,13 @@ CONTAINS
             !
             ! get the radial derivative of the speed of sound
             !
-            do k = 1, npts
-                tot = 0.0_rDef
-                do j = 1, npts
-                    tot = tot+dd(k, j)*snd(j)
-                enddo
-                dsn(k) = tot
-            enddo
+            ! do k = 1, npts
+            !     tot = 0.0_rDef
+            !     do j = 1, npts
+            !         tot = tot+dd(k, j)*snd(j)
+            !     enddo
+            !     dsn(k) = tot
+            ! enddo
             !
             !  is = 6: constant swirl across the duct; Vt = const.
             !

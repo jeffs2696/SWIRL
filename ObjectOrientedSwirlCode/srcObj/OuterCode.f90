@@ -105,7 +105,12 @@ PROGRAM OuterCode
         slope   = 0.0_rDef   ,&
         angom   = 0.00_rDef
 
-    CHARACTER(50):: file_name1, file_name2
+    CHARACTER(50):: &
+        file_name1 , &
+        file_name2 , &
+        file_name3 , &
+        file_name4 , &
+        file_name5
     CHARACTER(30):: FORMAT
     CHARACTER(10):: file_id
 
@@ -114,11 +119,11 @@ PROGRAM OuterCode
     !OPEN(144, FILE="CalcSourceData.dat")
 
     ! Files for output
-    OPEN(12, FILE="FlowDataInput.dat")
+    ! OPEN(12, FILE="FlowDataInput.dat")
 
-    WRITE(12,"(A10,A10,A10,A10)") 'radius', 'M_x' , 'M_theta', 'A'
-    WRITE(122,"(A10,A10,A10,A10)") 'radius', 'M_x' , 'M_theta', 'A'
-    WRITE(6,"(A10,A10,A10,A10)") 'radius', 'M_x' , 'M_theta', 'A'
+    ! WRITE(12,"(A10,A10,A10,A10)") 'radius', 'M_x' , 'M_theta', 'A'
+    ! WRITE(122,"(A10,A10,A10,A10)") 'radius', 'M_x' , 'M_theta', 'A'
+    ! WRITE(6,"(A10,A10,A10,A10)") 'radius', 'M_x' , 'M_theta', 'A'
     ! 5    format('#',5x, 'r',8x, 'M_x',5x, 'dM_x/dr',5x, 'M_th',3x, 'dM_th/dr', &
     !      4x, 'M_tot',7x, 'A',8x, 'dA/dr',5x, 'rhob',6x, 'pbar')
 
@@ -129,7 +134,7 @@ PROGRAM OuterCode
     frequency           = CMPLX(20.0, 0, rDef)
     hubAdmittance       =  0.40_rDef
     ductAdmittance      =  0.70_rDef
-    finiteDiffFlag      =  1
+    finiteDiffFlag      =  1 
     secondOrderSmoother =  0.0_rDef
     fourthOrderSmoother =  0.0_rDef
 
@@ -142,7 +147,7 @@ PROGRAM OuterCode
     boundingConstant = 0.5_rDef
     k_1 = CMPLX(0.2, 0.0, rDef)
     k_2 = CMPLX(0.001, 0.0, rDef)
-    k_3 = CMPLX(0.1, 0.0, rDef)
+    k_3 = CMPLX(0.7, 0.0, rDef)
     k_4 = CMPLX(0.2, 0.0, rDef)
     k_5 = CMPLX(0.0, 0.0, rDef)
     k_6 = CMPLX(0.0, 0.0, rDef)
@@ -151,12 +156,13 @@ PROGRAM OuterCode
     axialWavenumberAnalytical = 0.50_rDef
     ! Starting Grid DO LOOP
 
-    ! file_name2 = 'SoundSpeedL2MMS' // trim(adjustl(file_id)) // '.dat'
-    file_name2 = 'SndSpeedRateOfConvergence.dat'
-    First_fac  = 3
+    First_fac  = 1
     Last_fac   = 7
 
+    file_name2 = 'L2vsDeltar.dat'
+    file_name3 = 'SndSpeedRateOfConvergence.dat'
     OPEN(345, FILE = TRIM(file_name2))
+    OPEN(344, FILE = TRIM(file_name3))
 
     !WRITE(345, *) Last_fac-First_fac
 
@@ -171,14 +177,17 @@ PROGRAM OuterCode
 
     DO fac = First_fac, Last_fac
         facCount = facCount + 1
-        nPts   = 1+(2**fac)
+        numberOfGridPoints   = 1+(2**fac)
 
-        numberOfGridPoints     = nPts
 
-        ! write integer into a string WRITE(file_id, '(i0)') numberOfGridPoints
+        ! write integer into a string 
+        WRITE(file_id, '(i0)') numberOfGridPoints
 
         ! Construct the filename:
+
         file_name1 = 'SoundSpeedMMS' // trim(adjustl(file_id)) // '.dat'
+    file_name4 = 'FlowDataInput' // trim(adjustl(file_id)) // '.dat'
+    file_name5 = 'FlowDataOutput' // trim(adjustl(file_id)) // '.dat'
 
         !    OPEN(145, FILE = TRIM(file_name1))
 
@@ -194,44 +203,44 @@ PROGRAM OuterCode
             residualVectorAnalytical(numberOfGridPoints*4)  ,&
             errorMMS(numberOfGridPoints*4)                  ,&
             sndError(numberOfGridPoints)                    ,&
-            r(nPts)                                         ,&
-            rOut(nPts)                                         ,&
-            snd(nPts)                                       ,&
-            thetaMachData(nPts)                             ,&
-            thetaMachDataOut(nPts)                             ,&
-            thetaMachData_dr_Out(nPts)                             ,&
-            smachAnalytical(nPts)                           ,&
-            axialMachData(nPts)                             ,&
-            axialMachDataOut(nPts)                             ,&
-            axialMachData_dr_Out(nPts)                             ,&
-            totalMachData(nPts)                             ,&
-            SoundSpeedExpected(nPts)                                ,&
-            SoundSpeedOut(nPts)                             ,&
-            SoundSpeed_dr_Out(nPts)                             ,&
-            vRPertubation(nPts)                             ,&
-            vThPertubation(nPts)                            ,&
-            vXPertubation(nPts)                             ,&
-            pPertubation(nPts)                              ,&
-            vRResidual(nPts)                                ,&
-            vThResidual(nPts)                               ,&
-            vXResidual(nPts)                                ,&
-            pResidual(nPts)                                 ,&
-            vRSource(nPts)                                  ,&
-            vThSource(nPts)                                 ,&
-            vXSource(nPts)                                  ,&
-            pSource(nPts)                                   ,&
-            dp_dr(nPts)                                     ,&
-            dsmach_dr(nPts)                       ,&
-            drmach_dr(nPts)                       ,&
-            drvel_dr(nPts) )
+            r(numberOfGridPoints)                                         ,&
+            rOut(numberOfGridPoints)                                         ,&
+            snd(numberOfGridPoints)                                       ,&
+            thetaMachData(numberOfGridPoints)                             ,&
+            thetaMachDataOut(numberOfGridPoints)                             ,&
+            thetaMachData_dr_Out(numberOfGridPoints)                             ,&
+            smachAnalytical(numberOfGridPoints)                           ,&
+            axialMachData(numberOfGridPoints)                             ,&
+            axialMachDataOut(numberOfGridPoints)                             ,&
+            axialMachData_dr_Out(numberOfGridPoints)                             ,&
+            totalMachData(numberOfGridPoints)                             ,&
+            SoundSpeedExpected(numberOfGridPoints)                                ,&
+            SoundSpeedOut(numberOfGridPoints)                             ,&
+            SoundSpeed_dr_Out(numberOfGridPoints)                             ,&
+            vRPertubation(numberOfGridPoints)                             ,&
+            vThPertubation(numberOfGridPoints)                            ,&
+            vXPertubation(numberOfGridPoints)                             ,&
+            pPertubation(numberOfGridPoints)                              ,&
+            vRResidual(numberOfGridPoints)                                ,&
+            vThResidual(numberOfGridPoints)                               ,&
+            vXResidual(numberOfGridPoints)                                ,&
+            pResidual(numberOfGridPoints)                                 ,&
+            vRSource(numberOfGridPoints)                                  ,&
+            vThSource(numberOfGridPoints)                                 ,&
+            vXSource(numberOfGridPoints)                                  ,&
+            pSource(numberOfGridPoints)                                   ,&
+            dp_dr(numberOfGridPoints)                                     ,&
+            dsmach_dr(numberOfGridPoints)                       ,&
+            drmach_dr(numberOfGridPoints)                       ,&
+            drvel_dr(numberOfGridPoints) )
 
-        dr = (radMax-radMin)/REAL(nPts-1, rDef)
+        dr = (radMax-radMin)/REAL(numberOfGridPoints-1, rDef)
 
-        DO i = 1, nPts
+        DO i = 1, numberOfGridPoints
             r(i) = (radMin+REAL(i-1, rDef)*dr)/radMax
         END DO
 
-        DO i = 1, nPts
+        DO i = 1, numberOfGridPoints
             axialMachData(i)  =&
                 (boundingConstant)*&
                 EXP(REAL(k_2, rDef)*(r(i)-1.0_rDef))
@@ -239,10 +248,10 @@ PROGRAM OuterCode
             thetaMachData(i) = SQRT(2.0_rDef)*&
                 SQRT(-(REAL(k_3,rDef)*r(i)*&
                 SIN(REAL(k_3,rDef)*(r(i)-1.0_rDef)))/&
-                (gm1*COS(REAL(k_3,rDef)*(r(i)-1.0_rDef))))
+                (REAL(gm1,rDef)*COS(REAL(k_3,rDef)*(r(i)-1.0_rDef))))
             ! thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i))
             ! the sound speed we expect given the M_theta (for MMS)
-            SoundSpeedExpected(i)     =COS(REAL(k_3,rDef)*(r(i)-1.0_rDef))! EXP(REAL(k_3, rDef)*(r(i)-r(nPts)))
+            SoundSpeedExpected(i)     =COS(REAL(k_3,rDef)*(r(i)-1.0_rDef))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
 
             totalMachData(i)  =&
                 ((axialMachData(i)**2.0_rDef+&
@@ -254,7 +263,7 @@ PROGRAM OuterCode
                 STOP
             ELSE
 
-                WRITE(12, FORMAT) r(i), axialMachData(i), thetaMachData(i)!, SoundSpeedExpected(i)
+                ! 5RITE(12, FORMAT) r(i), axialMachData(i), thetaMachData(i)!, SoundSpeedExpected(i)
                 WRITE(6, FORMAT) r(i), axialMachData(i), thetaMachData(i)!, SoundSpeedExpected(i)
 
             ENDIF
@@ -268,6 +277,13 @@ PROGRAM OuterCode
             drvel_dr (i)      = REAL(k_4, rDef)*EXP(REAL(k_4)*r(i))
 
         ENDDO
+
+        OPEN(12, FILE=file_name4)
+        DO i = 1,numberOfGridPoints
+            WRITE(12,*) r(i) , axialMachData(i) , thetaMachData(i), SoundSpeedExpected(i)
+        ENDDO
+        CLOSE(12)
+
         !------------------------------------------------------------------------------
         CALL CreateObject(&
             object        = swirlClassObject     ,&
@@ -294,31 +310,33 @@ PROGRAM OuterCode
             radialData        = rOut)
 
 
-        OPEN(122, FILE="FlowDataOutput.dat")
+        
+        OPEN(122, FILE=TRIM(file_name5) )
         DO i = 1,numberOfGridPoints
-            WRITE(122,*) rOut(i) , axialMachDataOut(i) , thetaMachDataOut(i)
+            WRITE(122,*) rOut(i) , axialMachDataOut(i) , thetaMachDataOut(i),&
+                SoundSpeedOut(i)
         ENDDO
         CLOSE(122)
 
 
-        CALL FindResidualData(&
-            object              = swirlClassObject         ,&
-            axialWavenumber     = axialWavenumberAnalytical,&
-            vRPertubationData   = vRPertubation            ,&
-            vThPertubationData  = vThPertubation           ,&
-            vXPertubationData   = vXPertubation            ,&
-            pPertubationData    = pPertubation             ,&
-            vRResidual          = vRResidual               ,&
-            vThResidual         = vThResidual              ,&
-            vXResidual          = vXResidual               ,&
-            pResidual           = pResidual                ,&
-            S                   = residualVector)
+!         CALL FindResidualData(&
+!             object              = swirlClassObject         ,&
+!             axialWavenumber     = axialWavenumberAnalytical,&
+!             vRPertubationData   = vRPertubation            ,&
+!             vThPertubationData  = vThPertubation           ,&
+!             vXPertubationData   = vXPertubation            ,&
+!             pPertubationData    = pPertubation             ,&
+!             vRResidual          = vRResidual               ,&
+!             vThResidual         = vThResidual              ,&
+!             vXResidual          = vXResidual               ,&
+!             pResidual           = pResidual                ,&
+!             S                   = residualVector)
 
-        CALL GetModeData(&
-            object          = swirlClassObject   ,&
-            modeNumber      = azimuthalModeNumber,&
-            axialWavenumber = axialWavenumber    ,&
-            radialModeData  = radialModeData )
+!         CALL GetModeData(&
+!             object          = swirlClassObject   ,&
+!             modeNumber      = azimuthalModeNumber,&
+!             axialWavenumber = axialWavenumber    ,&
+!             radialModeData  = radialModeData )
 
         !               DO i = 1, numberOfGridPoints
         !               vRPertubation(i)  =  radialModeData(i)
@@ -477,16 +495,20 @@ PROGRAM OuterCode
         alphaArray(i) = (LOG(sndL2Array(i+1)) -&
             LOG(sndL2Array(i)))/LOG(0.5_rDef)
         WRITE(6,'(F10.5,F10.5)') drArray(i), REAL(alphaArray(i),rDef)
+        WRITE(344,'(F10.5,F10.5)') drArray(i), REAL(alphaArray(i),rDef)
+
+         ! WRITE(6,*) sndL2Array(i)/sndL2Array(i+1)
 
     ENDDO
     DEALLOCATE(&
         sndL2Array,&
         drArray   ,&
         alphaArray)
+    CLOSE(344)
     CLOSE(345)
     !    CLOSE(144)
     !    CLOSE(11)
-    CLOSE(12)
+     ! CLOSE(12)
     !    CLOSE(13)
     ! CLOSE(122)
 END PROGRAM

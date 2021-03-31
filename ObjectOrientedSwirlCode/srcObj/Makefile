@@ -25,8 +25,8 @@
 F77      = gfortran
 F90      = gfortran
 F77FLAGS  = -g -c -Og -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
-F90FLAGS  = -g -c -Og -std=f2008 -fbounds-check -fcheck-array-temporaries \
-			-Wconversion -Wsurprising -Wall -ffpe-trap=invalid
+F90FLAGS  = -g -c -Og -std=f2008 -fall-intrinsics -fbounds-check -fcheck-array-temporaries \
+			-Wconversion -Wsurprising -Wall -ffpe-trap=invalid,overflow,underflow
 #,overflow,underflow
 #-Werror
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
@@ -162,7 +162,6 @@ all:  $(OBJECTS)
 
 	@mv $(EXE) $(EXECUTABLE_LOCATION);
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
-	@(cd $(EXECUTABLE_LOCATION); ./plotFlowData.sh);
 #
 #
 #all: $(OBJECTS)

@@ -256,16 +256,16 @@ CONTAINS
                     x   = object%y,                     &
                     r   = object%r)
                 WRITE(PrintToggle, *) 'Leaving fdgridModule'
-
-                WRITE(PrintToggle, *) 'Entering fdrivsModule'
-                CALL fdrivs(np     = object%numberOfRadialPoints,    &
-                    sig    = object%hubTipRatio,             &
-                    dl1    = object%dl1,                     &
-                    iorder = object%FiniteDifferenceFlag,    &!ifdff, &
-                    ed2    = object%secondOrderSmoother,     &
-                    ed4    = object%fourthOrderSmoother)
-                WRITE(PrintToggle, *) 'Leaving fdrivsModule'
-
+!
+!                WRITE(PrintToggle, *) 'Entering fdrivsModule'
+!                CALL fdrivs(np     = object%numberOfRadialPoints,    &
+!                    sig    = object%hubTipRatio,             &
+!                    dl1    = object%dl1,                     &
+!                    iorder = object%FiniteDifferenceFlag,    &!ifdff, &
+!                    ed2    = object%secondOrderSmoother,     &
+!                    ed4    = object%fourthOrderSmoother)
+!                WRITE(PrintToggle, *) 'Leaving fdrivsModule'
+!
             endif
 
             WRITE(PrintToggle, *) 'Entering smachAndSndspdModule'
@@ -332,68 +332,68 @@ CONTAINS
             dsn   = object%dsn, &
             rhob  = object%rho)
         WRITE(PrintToggle, *) 'Leaving machoutModule'
-! Set up global matrices.
-
-        WRITE(PrintToggle, *) 'Entering globalModule'
-        CALL globalM(np   = object%numberOfRadialPoints,  &
-            np4  = np4, &
-            sig  = object%hubTipRatio, &
-            mode = object%azimuthalMode,  &
-            om   = object%frequency,  &
-            snd  = object%snd, &
-            dd   = object%dl1, &
-            rr   = object%r,   &
-            rx   = object%rmx, &
-            dr   = object%drm, &
-            rt   = object%rmt, &
-            dt   = object%drt, &
-            aa   = object%aa,  &
-            bb   = object%bb)
-        WRITE(PrintToggle, *) 'Leaving globalModule'
-
-        WRITE(PrintToggle, *) 'Entering boundaryModule'
-        CALL boundary(np   = object%numberOfRadialPoints,   &
-            sig  = object%hubTipRatio,  &
-            ak   = ak,   &
-            etah = etah, &
-            etad = etad, &
-            rmx  = object%rmx,  &
-            rmt  = object%rmt,  &
-            dd   = object%dl1,  &
-            aa   = object%aa,   &
-            bb   = object%bb)
-        WRITE(PrintToggle, *) 'Leaving boundaryModule'
-
+!! Set up global matrices.
+!
+!        WRITE(PrintToggle, *) 'Entering globalModule'
+!        CALL globalM(np   = object%numberOfRadialPoints,  &
+!            np4  = np4, &
+!            sig  = object%hubTipRatio, &
+!            mode = object%azimuthalMode,  &
+!            om   = object%frequency,  &
+!            snd  = object%snd, &
+!            dd   = object%dl1, &
+!            rr   = object%r,   &
+!            rx   = object%rmx, &
+!            dr   = object%drm, &
+!            rt   = object%rmt, &
+!            dt   = object%drt, &
+!            aa   = object%aa,  &
+!            bb   = object%bb)
+!        WRITE(PrintToggle, *) 'Leaving globalModule'
+!
+!        WRITE(PrintToggle, *) 'Entering boundaryModule'
+!        CALL boundary(np   = object%numberOfRadialPoints,   &
+!            sig  = object%hubTipRatio,  &
+!            ak   = ak,   &
+!            etah = etah, &
+!            etad = etad, &
+!            rmx  = object%rmx,  &
+!            rmt  = object%rmt,  &
+!            dd   = object%dl1,  &
+!            aa   = object%aa,   &
+!            bb   = object%bb)
+!        WRITE(PrintToggle, *) 'Leaving boundaryModule'
+!
         object%aa_before = object%aa
         object%bb_before = object%bb
 
         WRITE(PrintToggle, *) 'Entering analysisModule'
-        CALL analysis(np    = object%numberOfRadialPoints,    &
-            np4   = np4,   &
-            ak    = object%frequency,    &
-            rr    = object%r,     &
-            snd   = object%snd,   &
-            rmx   = object%rmx,   &
-            rmt   = object%rmt,   &
-            aa    = object%aa,    &
-            bb    = object%bb,    &
-            alpha = object%alpha, &
-            beta  = object%beta,  &
-            vl    = object%vl,           &
-            vr    = object%vr,           &
-            work  = object%work,         &
-            rwork = object%rwork, &
-            gam   = object%wvn,   &
-            jobvl = jobvl, &
-            jobvr = jobvr, &
-            mm    = object%azimuthalMode,    &
-            ir    = ir,    &
-            is    = is,    &
-            slp   = slope, &
-            vphi  = object%vph,   &
-            akap  = object%akap, &
-            S_MMS = object%S_MMS_Array)
-
+!        CALL analysis(np    = object%numberOfRadialPoints,    &
+!            np4   = np4,   &
+!            ak    = object%frequency,    &
+!            rr    = object%r,     &
+!            snd   = object%snd,   &
+!            rmx   = object%rmx,   &
+!            rmt   = object%rmt,   &
+!            aa    = object%aa,    &
+!            bb    = object%bb,    &
+!            alpha = object%alpha, &
+!            beta  = object%beta,  &
+!            vl    = object%vl,           &
+!            vr    = object%vr,           &
+!            work  = object%work,         &
+!            rwork = object%rwork, &
+!            gam   = object%wvn,   &
+!            jobvl = jobvl, &
+!            jobvr = jobvr, &
+!            mm    = object%azimuthalMode,    &
+!            ir    = ir,    &
+!            is    = is,    &
+!            slp   = slope, &
+!            vphi  = object%vph,   &
+!            akap  = object%akap, &
+!            S_MMS = object%S_MMS_Array)
+!
         WRITE(PrintToggle, *) 'Leaving analysisModule'
 
 !CALL getL2Norm(L2      =object%L2N, &
@@ -419,31 +419,31 @@ CONTAINS
         ENDIF
 
         WRITE(PrintToggle, *) 'Entering outputModule'
-        CALL output(np     = object%numberOfRadialPoints,    &
-            np4    = np4,   &
-            mode   = object%azimuthalMode,    &
-            rho    = object%hubTipRatio,   &
-            omega  = ak,    &
-            rmax   = rxmax, &
-            slp    = slope, &
-            ang    = angom, &
-            gam    = gam,   &
-            egv    = jobvr, &
-            attenh = object%hubLinerAdmittance,  &
-            attend = object%ductLinerAdmittance,  &
-            rmx    = object%rmx,   &
-            drm    = object%drm,   &
-            rmt    = object%rmt,   &
-            drt    = object%drt,   &
-            snd    = object%snd,   &
-            rr     = object%r,     &
-            wvn    = object%wvn,   &
-            vrm    = object%vr,    &
-            vphi   = object%vph,   &
-            is     = is,    &
-            icomp  = icomp)
-        WRITE(PrintToggle, *) 'Leaving outputModule'
-!
+!        CALL output(np     = object%numberOfRadialPoints,    &
+!            np4    = np4,   &
+!            mode   = object%azimuthalMode,    &
+!            rho    = object%hubTipRatio,   &
+!            omega  = ak,    &
+!            rmax   = rxmax, &
+!            slp    = slope, &
+!            ang    = angom, &
+!            gam    = gam,   &
+!            egv    = jobvr, &
+!            attenh = object%hubLinerAdmittance,  &
+!            attend = object%ductLinerAdmittance,  &
+!            rmx    = object%rmx,   &
+!            drm    = object%drm,   &
+!            rmt    = object%rmt,   &
+!            drt    = object%drt,   &
+!            snd    = object%snd,   &
+!            rr     = object%r,     &
+!            wvn    = object%wvn,   &
+!            vrm    = object%vr,    &
+!            vphi   = object%vph,   &
+!            is     = is,    &
+!            icomp  = icomp)
+!        WRITE(PrintToggle, *) 'Leaving outputModule'
+!!
     END SUBROUTINE CreateSwirlClassObject
 
     SUBROUTINE FindResidualVector(&

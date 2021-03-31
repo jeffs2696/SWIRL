@@ -156,13 +156,13 @@ CONTAINS
 !      close(22)
 !
 ! Spectral computation of M'.
-       do k=1,npts
-        tot = 0.0_rDef
-        do j=1,npts
-         tot = tot +dd(k,j)*rmch(j)
-        enddo
-        drm(k) = tot
-       enddo
+       ! do k=1,npts
+       !  tot = 0.0_rDef
+       !  do j=1,npts
+       !   tot = tot +dd(k,j)*rmch(j)
+       !  enddo
+       !  drm(k) = tot
+       ! enddo
 
       endif
 !

@@ -116,7 +116,7 @@ CONTAINS
         endif
        endif
       enddo
-!      open(unit=15,file='deriv.matrix',status='unknown')
+     ! open(unit=15,file='deriv.matrix',status='unknown')
 !      rewind 15
       do i = 1,np
 !       write(15,10) (dl1(i,j), j=1,np)
