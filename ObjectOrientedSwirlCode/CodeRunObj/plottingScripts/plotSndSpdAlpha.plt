@@ -2,6 +2,8 @@
 set termopt enhanced    # turn on enhanced text mode
 set xlabel "{/Symbol D}r" 
 set ylabel ""
+set logscale x 10
+set logscale x 10
 #set xrange [-10:35]
 #set yrange [-50:50]
 set grid

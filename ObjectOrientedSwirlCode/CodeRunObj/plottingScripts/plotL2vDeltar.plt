@@ -4,6 +4,8 @@ set xlabel "{/Symbol D}r"
 set ylabel ""
 #set xrange [-10:35]
 #set yrange [-50:50]
+set logscale x 10
+set logscale y 10 
 set grid
 plot "L2vsDeltar.dat" using 1:2 with linespoints linecolor rgb "#008080" title  "L_2"
 

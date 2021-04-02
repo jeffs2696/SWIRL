@@ -144,10 +144,10 @@ PROGRAM OuterCode
 
     ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
     ! constants for MMS module
-    boundingConstant = 0.5_rDef
+    boundingConstant = 0.0_rDef
     k_1 = CMPLX(0.2, 0.0, rDef)
     k_2 = CMPLX(0.001, 0.0, rDef)
-    k_3 = CMPLX(0.7, 0.0, rDef)
+    k_3 = CMPLX(0.400, 0.0, rDef)
     k_4 = CMPLX(0.2, 0.0, rDef)
     k_5 = CMPLX(0.0, 0.0, rDef)
     k_6 = CMPLX(0.0, 0.0, rDef)
@@ -157,7 +157,7 @@ PROGRAM OuterCode
     ! Starting Grid DO LOOP
 
     First_fac  = 1
-    Last_fac   = 7
+    Last_fac   = 10
 
     file_name2 = 'L2vsDeltar.dat'
     file_name3 = 'SndSpeedRateOfConvergence.dat'
