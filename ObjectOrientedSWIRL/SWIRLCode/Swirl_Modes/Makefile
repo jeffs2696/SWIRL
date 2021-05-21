@@ -16,7 +16,11 @@
 #   U. Toledo
 #   October 19, 2016
 #
+# modified to account for changing folders into neater directories
 #
+#   Jeff Severino
+#   U. Toledo
+#   May, 21, 2021
 ###################################################################
 #
 EXE77     = swirl
@@ -36,40 +40,44 @@ F90FLAGS  = -c -O -std=f2008 -fbounds-check -fcheck-array-temporaries -Wconversi
 #FFLAGS  = -c -g
 FEXT    = f
 OEXT    = o
-OBJSRC90=                                                                          \
-	srcF2008/swirl.o srcF2008/derivsModule.o srcF2008/globalModule.o           \
-        srcF2008/gridModule.o srcF2008/inputModule.o srcF2008/analysisModule.o     \
-        srcF2008/boundaryModule.o srcF2008/outputModule.o srcF2008/rmachModule.o   \
-        srcF2008/smachAndSndspdModule.o srcF2008/machoutModule.o                   \
-        srcF2008/fdgridModule.o srcF2008/fdrivsModule.o srcF2008/kapsubModule.o    \
-        srcF2008/interpModule.o srcF2008/indexxModule.o srcF2008/Akima1D.o         \
-        srcF2008/akima433.o
+
+OBJSRC90 = \
+		   srcF2008/swirl.o \
+		   srcF2008/derivsModule.o \
+		   srcF2008/globalModule.o \
+		   srcF2008/gridModule.o \
+srcF2008/inputModule.o srcF2008/analysisModule.o     \
+		   srcF2008/boundaryModule.o srcF2008/outputModule.o srcF2008/rmachModule.o   \
+		   srcF2008/smachAndSndspdModule.o srcF2008/machoutModule.o                   \
+		   srcF2008/fdgridModule.o srcF2008/fdrivsModule.o srcF2008/kapsubModule.o    \
+		   srcF2008/interpModule.o srcF2008/indexxModule.o srcF2008/Akima1D.o         \
+		   srcF2008/akima433.o
 OBJSRC  =     \
-	src/swirl.o src/derivs.o src/global.o src/grid.o src/input.o       \
-	src/analysis.o src/boundary.o src/output.o src/rmach.o src/smach.o \
-	src/machout.o src/sndspd.o src/fdgrid.o src/fdrivs.o src/kapsub.o  \
-	src/interp.o src/indexx.o
+			  src/swirl.o src/derivs.o src/global.o src/grid.o src/input.o       \
+			  src/analysis.o src/boundary.o src/output.o src/rmach.o src/smach.o \
+			  src/machout.o src/sndspd.o src/fdgrid.o src/fdrivs.o src/kapsub.o  \
+			  src/interp.o src/indexx.o
 OBJBLAS =     \
-	blas/zblas1.o    blas/zblas2.o    blas/zblas3.o    blas/dgemv.o    \
-	blas/ddot.o      blas/daxpy.o     blas/dscal.o
+			  blas/zblas1.o    blas/zblas2.o    blas/zblas3.o    blas/dgemv.o    \
+			  blas/ddot.o      blas/daxpy.o     blas/dscal.o
 OBJLPCK =     \
-	lapack/dlamc2.o  lapack/dlamch.o  lapack/xerbla.o  lapack/zggbak.o \
-	lapack/zlacgv.o  lapack/zlanhs.o  lapack/zlarft.o  lapack/zlassq.o \
-	lapack/zungqr.o  lapack/dlabad.o  lapack/dlamc3.o  lapack/dlapy3.o \
-	lapack/zgegv.o   lapack/zggbal.o  lapack/zlacpy.o  lapack/zlarf.o  \
-	lapack/zlartg.o  lapack/zrot.o    lapack/zunm2r.o  lapack/dladiv.o \
-	lapack/dlamc4.o  lapack/ilaenv.o  lapack/zgeqr2.o  lapack/zgghrd.o \
-	lapack/zladiv.o  lapack/zlarfb.o  lapack/zlascl.o  lapack/ztgevc.o \
-	lapack/zunmqr.o  lapack/dlamc1.o  lapack/dlamc5.o  lapack/lsame.o  \
-	lapack/zgeqrf.o  lapack/zhgeqz.o  lapack/zlange.o  lapack/zlarfg.o \
-	lapack/zlaset.o  lapack/zung2r.o  
+			  lapack/dlamc2.o  lapack/dlamch.o  lapack/xerbla.o  lapack/zggbak.o \
+			  lapack/zlacgv.o  lapack/zlanhs.o  lapack/zlarft.o  lapack/zlassq.o \
+			  lapack/zungqr.o  lapack/dlabad.o  lapack/dlamc3.o  lapack/dlapy3.o \
+			  lapack/zgegv.o   lapack/zggbal.o  lapack/zlacpy.o  lapack/zlarf.o  \
+			  lapack/zlartg.o  lapack/zrot.o    lapack/zunm2r.o  lapack/dladiv.o \
+			  lapack/dlamc4.o  lapack/ilaenv.o  lapack/zgeqr2.o  lapack/zgghrd.o \
+			  lapack/zladiv.o  lapack/zlarfb.o  lapack/zlascl.o  lapack/ztgevc.o \
+			  lapack/zunmqr.o  lapack/dlamc1.o  lapack/dlamc5.o  lapack/lsame.o  \
+			  lapack/zgeqrf.o  lapack/zhgeqz.o  lapack/zlange.o  lapack/zlarfg.o \
+			  lapack/zlaset.o  lapack/zung2r.o  
 OBJFTPK =     \
-	fitpack/ceez.o   fitpack/curv1.o  fitpack/curv2.o  fitpack/intrvl.o \
-	fitpack/snhcsh.o fitpack/terms.o
+			  fitpack/ceez.o   fitpack/curv1.o  fitpack/curv2.o  fitpack/intrvl.o \
+			  fitpack/snhcsh.o fitpack/terms.o
 OBJECTS =     \
-	$(OBJSRC) $(OBJBLAS) $(OBJLPCK) $(OBJFTPK)
+			  $(OBJSRC) $(OBJBLAS) $(OBJLPCK) $(OBJFTPK)
 OBJECTS90 =     \
-	$(OBJSRC90) $(OBJBLAS) $(OBJLPCK) $(OBJFTPK)
+				$(OBJSRC90) $(OBJBLAS) $(OBJLPCK) $(OBJFTPK)
 
 
 $(EXE90): 
@@ -103,40 +111,40 @@ clean:
 	rm -f blas/*.o
 	rm -f lapack/*.o
 	rm -f fitpack/*.o
-#
-#   Define dependency information for object files
-#                                                               
-src/swirl.o: src/swirl.f \
-  src/pmnmax
+	#
+	#   Define dependency information for object files
+	#                                                               
+	src/swirl.o: src/swirl.f \
+		src/pmnmax
 src/analysis.o: src/analysis.f \
-  src/pmnmax
+	src/pmnmax
 src/boundary.o: src/boundary.f \
-  src/pmnmax
+	src/pmnmax
 src/derivs.o: src/derivs.f \
-  src/pmnmax
+	src/pmnmax
 src/global.o: src/global.f \
-  src/pmnmax
+	src/pmnmax
 src/grid.o:  src/grid.f \
-  src/pmnmax
+	src/pmnmax
 src/input.o: src/input.f
 src/fdgrid.o: src/fdgrid.f \
-  src/pmnmax
+	src/pmnmax
 src/fdrivs.o: src/fdrivs.f \
-  src/pmnmax
+	src/pmnmax
 src/indexx.o: src/indexx.f
 src/interp.o: src/interp.f \
-  src/pmnmax
+	src/pmnmax
 src/kapsub.o: src/kapsub.f
 src/machout.o: src/machout.f \
-  src/pmnmax
+	src/pmnmax
 src/output.o: src/output.f \
-  src/pmnmax
+	src/pmnmax
 src/rmach.o: src/rmach.f \
-  src/pmnmax
+	src/pmnmax
 src/smach.o: src/smach.f \
-  src/pmnmax
+	src/pmnmax
 src/sndspd.o: src/sndspd.f \
-  src/pmnmax
+	src/pmnmax
 srcF2008/swirl.o: srcF2008/swirl.f90
 srcF2008/akima433.o: srcF2008/akima433.f
 srcF2008/Akima1D.o: srcF2008/Akima1D.f90
