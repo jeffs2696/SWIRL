@@ -1,0 +1,45 @@
+#
+#  Makefile for LAPACK
+#
+LIB  = liblapack.a
+#
+#  Fortran to C
+FC   = f2c
+FOPT = -c -C
+FFLAGS = -A -Nn802 $(FOPT)
+FEXT = f
+#
+#  C compiler
+CC   = gcc
+COPT = -O
+CFLAGS = -c $(COPT) 
+CEXT = c
+#
+#  OBJECTS
+OEXT = o
+OBJS =    dlamc2.o  dlamch.o  xerbla.o  zggbak.o  zlacgv.o  zlanhs.o \
+zlarft.o  zlassq.o  zungqr.o  dlabad.o  dlamc3.o  dlapy3.o  zgegv.o  \
+zggbal.o  zlacpy.o  zlarf.o   zlartg.o  zrot.o    zunm2r.o  dladiv.o \
+dlamc4.o  ilaenv.o  zgeqr2.o  zgghrd.o  zladiv.o  zlarfb.o  zlascl.o \
+ztgevc.o  zunmqr.o  dlamc1.o  dlamc5.o  lsame.o   zgeqrf.o  zhgeqz.o \
+zlange.o  zlarfg.o  zlaset.o  zung2r.o  
+#
+#  Define suffixes used in transformation rules.
+.SUFFIXES:
+.SUFFIXES: .$(OEXT) .$(FEXT)
+#
+#  Define transformation rule for fortran to object files.
+.$(FEXT).$(OEXT):
+	$(FC) $(FFLAGS) $*.f
+	$(CC) $(CFLAGS) $*.c
+########################################################################
+#
+#   Define dependency and load command for library
+#
+$(LIB): $(OBJS)
+	rm -f  $(LIB)
+	ar qv  $(LIB) $(OBJS)
+	ar s   $(LIB)
+
+clean: 
+	rm -f *.o *.a core

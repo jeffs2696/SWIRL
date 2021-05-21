@@ -1,0 +1,396 @@
+\section{SWIRL Verification cases}
+
+In the Kousen report, there are a number of verification
+cases presented.  In this section, the inputs for running
+those cases are determined.
+
+\subsection{Cylinder, Uniform Flow with Liner (Table 4.3)}
+
+In Table 4.3, a comparison is shown for the case of a 
+cylinder (no centerbody) with uniform flow.  For this
+test case, 
+
+\begin{eqnarray}
+m &=& 2
+\nonumber
+\\
+k &=& \frac{\omega r_T}{A_T} = -1
+\nonumber
+\\
+M_x &=& 0.5
+\nonumber
+\\
+\eta_T &=& 0.72 + 0.42 i
+\nonumber
+\end{eqnarray}
+
+Recall that in the SWIRL code, $A_T$ is the speed of
+sound at the outer radius, $r_T$.  Also, $\eta_T$ is the 
+admittance of the liner on the outer wall.  The azimuthal
+mode number is $m$.
+
+The input deck for this test case is:
+
+\begin{tiny}
+\VerbatimInput{input.data.Table4.3}
+\end{tiny}%
+
+The resulting $\gamma$ values are given in 'gam.acc'.  The
+data from left to right are:
+
+\begin{enumerate}
+\item{Eigenvalue ID number, j.}
+\item{Real part of the nondimensional axial wavenumber $\overline{\gamma}_j$}
+\item{Imaginary part of the nondimensional axial wavenumber $\overline{\gamma}_j$}
+\item{Real part of $\frac{k}{\overline{\gamma}_j}$}
+\item{Imaginary part of $\frac{k}{\overline{\gamma}_j}$}
+\item{Real part of $\frac{\overline{\gamma}_j}{k}$}
+\item{Imaginary part of $\frac{\overline{\gamma}_j}{k}$}
+\end{enumerate}
+
+(I have no idea why the last two columns are needed.)
+
+The output in 'gam.acc' for this test case is:
+
+\begin{tiny}
+\VerbatimInput{gam.acc.Table4.3}
+\end{tiny}%
+
+Comparing to the data in Table 4.3 of the paper, the first eigenvalues are
+well predicted.  However, there are a number of eigenvalues that lie
+between the tabulated results for 
+$\gamma_8^{+}$ and
+$\gamma_9^{+}$, and between $\gamma_8^{-}$ and
+$\gamma_9^{-}$.
+
+\begin{table}
+ \centering
+ \begin{tabular}{c | r | r | r | r}
+ \hline
+ $\gamma^{\pm}_n$ & Kousen Ref. [15] & Kousen report & current & index  \\
+ \hline
+ $\gamma_0^{+}$ & $ 0.620 - 5.014  i $ & $ 0.6195 - 5.0139 i$ & $ 0.61954  - 5.01386 i$ & 60  \\
+ $\gamma_1^{+}$ & $-5.820 - 3.897  i $ & $-5.8195 - 3.8968 i$ & $-5.81953  - 3.89677 i$ & 58  \\
+ $\gamma_2^{+}$ & $ 0.445 - 9.187  i $ & $ 0.4453 - 9.1868 i$ & $ 0.44533  - 9.18684 i$ & 59  \\
+ $\gamma_3^{+}$ & $ 0.453 - 13.062 i $ & $ 0.4539 - 13.062 i$ & $ 0.45389  - 13.0615 i$ & 57  \\
+ $\gamma_4^{+}$ & $ 0.480 - 16.822 i $ & $ 0.4795 - 16.822 i$ & $ 0.47952  - 16.8216 i$ & 55  \\
+ $\gamma_5^{+}$ & $ 0.503 - 20.531 i $ & $ 0.5029 - 20.531 i$ & $ 0.50287  - 20.5307 i$ & 51  \\
+ $\gamma_6^{+}$ & $ 0.522 - 24.213 i $ & $ 0.5220 - 24.213 i$ & $ 0.52202  - 24.2129 i$ & 50  \\
+ $\gamma_7^{+}$ & $ 0.538 - 27.880 i $ & $ 0.5376 - 27.880 i$ & $ 0.53754  - 27.8800 i$ & 48  \\
+ $\gamma_8^{+}$ & $ 0.550 - 31.537 i $ & $ 0.5502 - 31.537 i$ & $ 0.55024  - 31.5368 i$ & 47  \\
+ $\gamma_9^{+}$ & $ 0.589 - 49.75  i $ & $ 0.5891 - 49.754 i$ & $ 0.58745  - 49.7669 i$ & 33  \\ \hline
+ $\gamma_0^{-}$ & $ 0.410 + 1.290  i $ & $ 0.4101 + 1.2904 i$ & $ 0.41009  + 1.29037 i$ & 64  \\
+ $\gamma_1^{-}$ & $ 1.259 + 6.085  i $ & $ 1.2595 + 6.0852 i$ & $ 1.25949  + 6.08517 i$ & 63  \\
+ $\gamma_2^{-}$ & $ 1.146 + 9.668  i $ & $ 1.1457 + 9.6679 i$ & $ 1.14567  + 9.66787 i$ & 62  \\
+ $\gamma_3^{-}$ & $ 1.022 + 13.315 i $ & $ 1.0218 + 13.315 i$ & $ 1.02183  + 13.3150 i$ & 61  \\
+ $\gamma_4^{-}$ & $ 0.943 + 16.977 i $ & $ 0.9425 + 16.977 i$ & $ 0.94250  + 16.9767 i$ & 56  \\
+ $\gamma_5^{-}$ & $ 0.891 + 20.635 i $ & $ 0.8908 + 20.635 i$ & $ 0.89075  + 20.6353 i$ & 54  \\
+ $\gamma_6^{-}$ & $ 0.855 + 24.288 i $ & $ 0.8549 + 24.288 i$ & $ 0.85490  + 24.2883 i$ & 53  \\
+ $\gamma_7^{-}$ & $ 0.829 + 27.937 i $ & $ 0.8288 + 27.937 i$ & $ 0.82877  + 27.9369 i$ & 52  \\
+ $\gamma_8^{-}$ & $ 0.809 + 31.581 i $ & $ 0.8089 + 31.581 i$ & $ 0.80891  + 31.5812 i$ & 49  \\
+ $\gamma_9^{-}$ & $ 0.755 + 49.77  i $ & $ 0.7547 + 49.772 i$ & $ 0.75658  + 49.7851 i$ & 39  \\ \hline
+ \end{tabular}
+ \caption{Table 4.3 data}
+ \label{Table43}
+\end{table}
+
+\subsection{Cylinder, Shear Flow (Table 4.4)}
+
+This test case is given in Ref. 10 by Shankar.  The data corresponds to the results
+given in Table 1 of Ref. 10.  This is a hard-wall duct ($\eta = 0$), with an axial
+Mach number profile given by:
+
+\begin{eqnarray}
+b &=& r_T - r_H
+\nonumber
+\\
+\widetilde{r} &=& \frac{r}{b}
+\nonumber
+\\
+M \left(\widetilde{r} \right)
+&=&
+M_0 \left(1 - \widetilde{r} \right)^{\frac{1}{7}}
+\nonumber
+\\
+M_0 &=& 0.3
+\nonumber
+\\
+m &=& 0
+\nonumber
+\\
+kb &=& 20
+\nonumber
+\end{eqnarray}
+
+Next, we translate Shankar's notation into the SWIRL notation.  Comparing
+Shankar and SWIRL,
+
+\begin{eqnarray}
+p_n \left(r, x, t \right)
+&=&
+a_n \phi_n \left( r \right)
+e^{i k \left(\beta_n x - c t \right)}
+\nonumber
+\\
+\widetilde{p}_n \left(r, x, \theta, t \right)
+&=&
+p_n \left(r \right) e^{i \left(k_x x + m \theta - \omega t \right)}
+\nonumber
+\end{eqnarray}
+
+Translating this into SWIRL inputs:
+
+\begin{eqnarray}
+\left(kb \right)_{Shankar} &=& \frac{\omega}{A_T} r_T
+\nonumber
+\\
+&=& k_{SWIRL}
+\nonumber
+\end{eqnarray}
+
+The input deck for this test case is:
+
+\begin{tiny}
+\VerbatimInput{input.data.Table4.4}
+\end{tiny}%
+
+For the cylinder case of Shankar, the results in Table 4.4 are for
+$\frac{\overline{\gamma}_n}{k}$ in order to compare with the $\beta_n$
+results:
+
+\begin{table}
+ \centering
+ \begin{tabular}{ |l | c | c | c | c | c |}
+ \hline
+ $\gamma^{\pm}_n$ & Shankar $\beta_n$  & $\frac{\overline{\gamma}_n}{k}$ (16 points) & index & $\frac{\overline{\gamma}_n}{k}$ (32 points) & index  \\
+ \hline
+ $\gamma_0^{-}$    & $  0.81500 $            & $  0.816009 $             & 45 & $ 0.815493             $ & 69 \\
+ $\gamma_1^{-}$    & $  0.76944 $            & $  0.769595 $             & 47 & $ 0.769520             $ & 71 \\
+ $\gamma_2^{-}$    & $  0.72751 $            & $  0.727753 $             & 46 & $ 0.727642             $ & 70 \\
+ $\gamma_3^{-}$    & $  0.65329 $            & $  0.653542 $             & 44 & $ 0.653472             $ & 68 \\
+ $\gamma_4^{-}$    & $  0.54028 $            & $  0.540499 $             & 43 & $ 0.540524             $ & 67 \\
+ $\gamma_5^{-}$    & $  0.36933 $            & $  0.369465 $             & 42 & $ 0.369746             $ & 66 \\
+ $\gamma_6^{-}$    & $  0.06361 $            & $  0.064613 $             & 41 & $ 0.064754             $ & 65 \\
+ $\gamma_7^{-}$    & $ -0.28313 + 0.48807 i$ & $ -0.278964 + 0.487173 i$ & 39 & $-0.282743 + 0.486526 i$ & 63 \\
+ $\gamma_8^{-}$    & $ -0.28357 + 0.80635 i$ & $ -0.289882 + 0.854887 i$ & 29 & $-0.283251 + 0.804397 i$ & 62 \\
+ $\gamma_9^{-}$    & $ -0.28410 + 1.05658 i$ & $ -0.263260 + 1.090093 i$ & 27 & $-0.283670 + 1.053847 i$ & 57 \\ 
+ $\gamma_{10}^{-}$ & $ -0.28410 + 1.27947 i$ & $ -0.315161 + 1.655351 i$ & 25 & $-0.284027 + 1.275635 i$ & 50 \\ \hline
+ \end{tabular}
+ \caption{Table 4.4 data}
+ \label{Table44}
+\end{table}
+
+The output in 'gam.acc' for this test case (using 16 points) is:
+
+\begin{tiny}
+\VerbatimInput{gam.acc.Table4.4.16pt}
+\end{tiny}%
+
+The output in 'gam.acc' for this test case (using 32 points) is:
+
+\begin{tiny}
+\VerbatimInput{gam.acc.Table4.4.32pt}
+\end{tiny}%
+
+\subsection{Annulus, Shear Flow (Table 4.5)}
+
+This test case is given in Ref. 10 by Shankar.   In order to
+get the correct input data,
+
+\begin{eqnarray}
+\widetilde{r}_i  
+&=& 6.0
+\nonumber
+\\
+\frac{r_i}{b}
+&=& 6.0
+\nonumber
+\\
+\frac{r_i}{r_o - r_i}
+&=& 6.0
+\nonumber
+\\
+r_i
+&=& 6 r_o - 6 r_i
+\nonumber
+\\
+7 r_i
+&=& 6 r_o 
+\nonumber
+\\
+\frac{r_i}{r_o}
+&=& \frac{6}{7} 
+\nonumber
+\\
+\sigma &=& \frac{6}{7}
+\nonumber
+\\
+b &=& \frac{1}{7}
+\nonumber
+\\
+k b &=& 10
+\nonumber
+\\
+k &=& 70
+\nonumber
+\end{eqnarray}
+
+The axial Mach number profile is given by:
+
+\begin{eqnarray}
+M \left(\frac{r}{b} \right)
+&=&
+M_0 \left(1 - 2 \left| \frac{r_i - r}{b} + 0.5 \right| \right)^{\frac{1}{7}}
+\nonumber
+\\
+M_0 &=& 0.3
+\nonumber
+\end{eqnarray}
+
+The input data for SWIRL is then:
+
+\begin{tiny}
+\VerbatimInput{input.data.Table4.5}
+\end{tiny}%
+
+The output in 'gam.acc' for this test case is:
+
+\begin{tiny}
+\VerbatimInput{gam.acc.Table4.5}
+\end{tiny}%
+
+The comparison with the original data is given in the table.  Note that, in order to
+make sure of a valid comparison, 64 radial grid points were run.
+
+\begin{table}
+ \centering
+ \begin{tabular}{ |l | c | c | c | c |}
+ \hline
+ $\gamma^{\pm}_n$ & Shankar $\beta_n$  & Kousen report & $\frac{\overline{\gamma}_n}{k}$ (current) & index  \\
+ \hline
+ $\gamma_0^{-}$    & $  0.79293 $            & $  0.79353 $            & $ 0.793478             $ & 134 \\
+ $\gamma_1^{-}$    & $  0.75075 $            & $  0.75292 $            & $ 0.752847             $ & 132 \\
+ $\gamma_2^{-}$    & $  0.57143 $            & $  0.57320 $            & $ 0.573124             $ & 131 \\
+ $\gamma_3^{-}$    & $ -0.00969 $            & $  0.16437 $            & $ 0.164294             $ & 130 \\
+ $\gamma_4^{-}$    & $ -0.28733 + 0.73219 i$ & $ -0.28357 + 0.73425 i$ & $-0.283637 + 0.734325 i$ & 127 \\
+ $\gamma_5^{-}$    & $ -0.29118 + 1.21721 i$ & $ -0.28622 + 1.2198  i$ & $-0.286225 + 1.219841 i$ & 125 \\
+ $\gamma_6^{-}$    & $ -0.29248 + 1.62569 i$ & $ -0.28766 + 1.6281  i$ & $-0.287553 + 1.628282 i$ & 122 \\
+ $\gamma_7^{-}$    & $ -0.29519 + 2.00221 i$ & $ -0.28947 + 2.0055  i$ & $-0.289320 + 2.005620 i$ & 120 \\
+ $\gamma_8^{-}$    & $ -0.29567 + 2.36511 i$ & $ -0.29035 + 2.3683  i$ & $-0.289988 + 2.368514 i$ & 114 \\
+ $\gamma_9^{-}$    & $ -0.29768 + 2.71665 i$ & $ -0.29167 + 2.7209  i$ & $-0.291333 + 2.720846 i$ & 112 \\ 
+ $\gamma_{10}^{-}$ & $ -0.29776 + 3.06414 i$ & $ -0.29243 + 3.0679  i$ & $-0.291720 + 3.068215 i$ & 110 \\ \hline
+ \end{tabular}
+ \caption{Table 4.5 data}
+ \label{Table45}
+\end{table}
+
+In the data, note the propagating mode at index 133.  This needs to be investigated further.
+
+\subsection{Lined Annulus, Shear Flow (Table 4.6)}
+
+This test case is given in Ref. 10 by Shankar.   In order to
+get the correct input data,
+
+\begin{eqnarray}
+\widetilde{r}_i  
+&=& 2.0
+\nonumber
+\\
+\frac{r_i}{b}
+&=& 2.0
+\nonumber
+\\
+\frac{r_i}{r_o - r_i}
+&=& 2.0
+\nonumber
+\\
+r_i
+&=& 2 r_o - 2 r_i
+\nonumber
+\\
+3 r_i
+&=& 2 r_o 
+\nonumber
+\\
+\frac{r_i}{r_o}
+&=& \frac{2}{3} 
+\nonumber
+\\
+\sigma &=& \frac{2}{3}
+\nonumber
+\\
+b &=& \frac{1}{3}
+\nonumber
+\\
+k b &=& 10
+\nonumber
+\\
+k &=& 30
+\nonumber
+\end{eqnarray}
+
+The axial Mach number profile is again given by:
+
+\begin{eqnarray}
+M \left(\frac{r}{b} \right)
+&=&
+M_0 \left(1 - 2 \left| \frac{r_i - r}{b} + 0.5 \right| \right)^{\frac{1}{7}}
+\nonumber
+\\
+M_0 &=& 0.3
+\nonumber
+\end{eqnarray}
+
+The admittance is given as:
+
+\begin{eqnarray}
+\eta &=& 0.3 + 0.1 i
+\nonumber
+\end{eqnarray}
+
+
+It is not clear from Shankar whether both walls are lined or only one.
+Running the code for each case, it appears that the outer wall is lined
+and the inner wall is hard.
+
+The input data for SWIRL is then:
+
+\begin{tiny}
+\VerbatimInput{input.data.Table4.6}
+\end{tiny}%
+
+The output in 'gam.acc' for this test case is:
+
+\begin{tiny}
+\VerbatimInput{gam.acc.Table4.6}
+\end{tiny}%
+
+The comparison with the original data is given in the table.  Note that, in order to
+make sure of a valid comparison, 64 radial grid points were run (though the 32 point
+dataset looked good too).
+
+\begin{table}
+ \centering
+ \begin{tabular}{ |l | c | c | c | c |}
+ \hline
+ $\gamma^{\pm}_n$ & Shankar $\beta_n$  & Kousen report & $\frac{\overline{\gamma}_n}{k}$ (current) & index  \\
+ \hline
+ $\gamma_0^{-}$    & $  0.78698 + 0.00400 i$ & $  0.78093 + 0.00913 i$ & $ 0.787228 + 0.003757 i$ & 136 \\
+ $\gamma_1^{-}$    & $  0.73438 + 0.02541 i$ & $  0.75079 + 0.03387 i$ & $ 0.735936 + 0.026332 i$ & 135 \\
+ $\gamma_2^{-}$    & $  0.55840 + 0.03148 i$ & $  0.57267 + 0.03246 i$ & $ 0.560121 + 0.031371 i$ & 134 \\
+ $\gamma_3^{-}$    & $  0.14308 + 0.07638 i$ & $  0.16875 + 0.06982 i$ & $ 0.143097 + 0.072855 i$ & 131 \\
+ $\gamma_4^{-}$    & $ -0.23900 + 0.74173 i$ & $ -0.23734 + 0.72727 i$ & $-0.235625 + 0.743714 i$ & 130 \\
+ $\gamma_5^{-}$    & $ -0.26149 + 1.21973 i$ & $ -0.25993 + 1.2120  i$ & $-0.257309 + 1.221354 i$ & 129 \\
+ $\gamma_6^{-}$    & $ -0.26996 + 1.62627 i$ & $ -0.26860 + 1.6207  i$ & $-0.265988 + 1.627490 i$ & 124 \\
+ $\gamma_7^{-}$    & $ -0.27669 + 2.00192 i$ & $ -0.27468 + 1.9983  i$ & $-0.272158 + 2.003568 i$ & 118 \\
+ $\gamma_8^{-}$    & $ -0.27974 + 2.36439 i$ & $ -0.27813 + 2.3612  i$ & $-0.275516 + 2.365756 i$ & 116 \\
+ $\gamma_9^{-}$    & $ -0.28359 + 2.71568 i$ & $ -0.28147 + 2.7139  i$ & $-0.278985 + 2.717521 i$ & 114 \\ 
+ $\gamma_{10}^{-}$ & $ -0.28502 + 3.06304 i$ & $ -0.28361 + 3.0610  i$ & $-0.280811 + 3.064511 i$ & 112 \\ \hline
+ \end{tabular}
+ \caption{Table 4.6 data}
+ \label{Table46}
+\end{table}
+
+In the data, note the (very nearly) propagating mode at index 137.  This needs to be investigated further -- are
+these modes real?
+
