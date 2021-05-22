@@ -24,7 +24,8 @@
 F77      = gfortran
 F90      = gfortran
 F77FLAGS  = -c -O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
-F90FLAGS  = -c -O -std=f2008 -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall -Werror
+F90FLAGS  = -c -O -std=f2008 -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall 
+#-Werror
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
 FEXT     = f
@@ -37,11 +38,11 @@ OBJECTS  =                                                                      
         interpModule.o inputModule.o Akima1D.f90                                             \
 	akima433.o
 
-EXECUTABLE_LOCATION = ../CodeRun
+EXECUTABLE_LOCATION = ../../CodeRun
 
 EXE = swirlF2008
 
-BLAS_LOCATION = ../blas3.8.0
+BLAS_LOCATION = ../../LibraryFiles/blas3.8.0
 BLAS_OBJS =      \
          $(BLAS_LOCATION)/daxpy.o  \
          $(BLAS_LOCATION)/dcabs1.o \
@@ -61,7 +62,7 @@ BLAS_OBJS =      \
          $(BLAS_LOCATION)/ztrmm.o  \
          $(BLAS_LOCATION)/ztrmv.o
 
-FITPACK_LOCATION = ../fitpack
+FITPACK_LOCATION = ../../LibraryFiles/fitpack
 
 FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/ceez.o   \
@@ -71,7 +72,7 @@ FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/snhcsh.o \
          $(FITPACK_LOCATION)/terms.o
 
-LAPACK_LOCATION = ../lapack3.8.0
+LAPACK_LOCATION = ../../LibraryFiles/lapack3.8.0
 
 LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zggev.o        \
