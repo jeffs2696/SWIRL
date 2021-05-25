@@ -21,10 +21,27 @@
 #   March 8, 2018
 #
 ###################################################################
+
+# Defining colored output for ANSI escape sequences 
+#
+
+COM_COLOR   = \033[0;34m
+OBJ_COLOR   = \033[0;36m
+OK_COLOR    = \033[0;32m
+ERROR_COLOR = \033[0;31m
+WARN_COLOR  = \033[0;33m
+NO_COLOR    = \033[m
+
+OK_STRING = "[OK]"
+ERROR_STRING = "[ERROR]"
+WARN_STRING = "[WARNING]"
+COM_STRING = "Compiling..."
+
 F77      = gfortran
 F90      = gfortran
 F77FLAGS  = -c -O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
-F90FLAGS  = -c -O -std=f2008 -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall -Werror
+F90FLAGS  = -c -O -std=f2008 -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall 
+# -Werror
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
 FEXT     = f
@@ -41,7 +58,13 @@ EXECUTABLE_LOCATION = ../CodeRun
 
 EXE = swirlF2008
 
-BLAS_LOCATION = ../blas3.8.0
+LIB_FILES = ../../LibraryFiles
+MOD_FILES = ../ModuleFiles
+OBJ_FILES = ../ObjectFiles
+EXE_FILES = $(EXECUTABLE_LOCATION)
+SRC_FILES = ../srcF2020
+
+BLAS_LOCATION = $(LIB_FILES)/blas3.8.0
 BLAS_OBJS =      \
          $(BLAS_LOCATION)/daxpy.o  \
          $(BLAS_LOCATION)/dcabs1.o \
@@ -61,7 +84,7 @@ BLAS_OBJS =      \
          $(BLAS_LOCATION)/ztrmm.o  \
          $(BLAS_LOCATION)/ztrmv.o
 
-FITPACK_LOCATION = ../fitpack
+FITPACK_LOCATION = $(LIB_FILES)/fitpack
 
 FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/ceez.o   \
@@ -71,7 +94,7 @@ FITPACK_OBJS =                        \
          $(FITPACK_LOCATION)/snhcsh.o \
          $(FITPACK_LOCATION)/terms.o
 
-LAPACK_LOCATION = ../lapack3.8.0
+LAPACK_LOCATION = $(LIB_FILES)/lapack3.8.0
 
 LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zggev.o        \
@@ -116,8 +139,9 @@ LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zunmqr.o
 
 all:  $(OBJECTS)
-	$(F90) -o $(EXE) $(BLAS_OBJS) \
-             $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS); \
+	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
+	@$(F90) -o $(EXE) $(BLAS_OBJS) \
+             $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \
         mv $(EXE) $(EXECUTABLE_LOCATION)
 #
 #  clean
