@@ -19,7 +19,18 @@
 #
 #   Ray Hixon update, using LAPACK3.8.0 routines
 #   March 8, 2018
+#   
+#   Jeff Severino
 #
+#   -Added colored output and log message for errors 
+#     see the all target
+#   - add gdb flags
+#   - added a line to the all: rule to run the executable in the CodeRun
+#   folder 
+#
+#   TO DO:
+#
+#   		
 ###################################################################
 
 # Defining colored output for ANSI escape sequences 
@@ -40,8 +51,7 @@ COM_STRING = "Compiling..."
 F77      = gfortran
 F90      = gfortran
 F77FLAGS  = -c -O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
-F90FLAGS  = -c -O -std=f2008 -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall 
-# -Werror
+F90FLAGS  = -c -O -std=f2008 -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall -Werror
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
 FEXT     = f
@@ -142,7 +152,20 @@ all:  $(OBJECTS)
 	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
 	@$(F90) -o $(EXE) $(BLAS_OBJS) \
              $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \
-        mv $(EXE) $(EXECUTABLE_LOCATION)
+	RESULT=$$?; \
+		if [ $$RESULT -ne 0 ]; then \
+			printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"; \
+		elif [ -s $@.log ]; then \
+			printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"; \
+			else  \
+			printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"; \
+			fi; \
+			cat $@.log; \
+			rm -f $@.log; \
+			exit $$RESULT
+
+	@mv $(EXE) $(EXECUTABLE_LOCATION)
+	(cd ../$(EXECUTABLE_LOCATION); ./$(EXE))
 #
 #  clean
 clean:

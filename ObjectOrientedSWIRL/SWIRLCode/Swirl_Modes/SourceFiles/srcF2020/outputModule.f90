@@ -243,6 +243,7 @@ CONTAINS
               alm1 = 2.0_rDef*PI/gam1a
               alm2 = 2.0_rDef*PI/gam2a
            endif
+           WRITE(6,*) alm1, alm2
          if (abs(alm1).lt.abs(alm2)) then
           jtmp       = indx(j)
           indx(j)   = indx(j+1)
