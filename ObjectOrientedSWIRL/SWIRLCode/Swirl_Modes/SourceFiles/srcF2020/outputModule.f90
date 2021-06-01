@@ -130,6 +130,8 @@ CONTAINS
       pi  = 4.0_rDef*ATAN(1.0_rDef)
       ci  = CMPLX(0.0_rDef,1.0_rDef,rDef)
       eps = 1.e-4_rDef
+      alm1 = -10000
+      alm2 = -10000
 !
 ! Output everything to an unformatted file.
       WRITE(6,*) 'omega = ',omega
@@ -243,7 +245,7 @@ CONTAINS
               alm1 = 2.0_rDef*PI/gam1a
               alm2 = 2.0_rDef*PI/gam2a
            endif
-           WRITE(6,*) alm1, alm2
+           ! WRITE(6,*) 'alm1\2 :' ,alm1, alm2
          if (abs(alm1).lt.abs(alm2)) then
           jtmp       = indx(j)
           indx(j)   = indx(j+1)
