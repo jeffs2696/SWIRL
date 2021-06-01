@@ -79,13 +79,13 @@ OBJECTS  =                  \
         interpModule.o inputModule.o Akima1D.f90                                             \
 	akima433.o
 
-EXECUTABLE_LOCATION = ../CodeRun
+EXECUTABLE_LOCATION = ../../CodeRun
 
 EXE = swirlF2008
 
 LIB_FILES = ../../LibraryFiles
-MOD_FILES = ../ModuleFiles
-OBJ_FILES = ../ObjectFiles
+MOD_FILES = ../../ModuleFiles
+OBJ_FILES = ../../ObjectFiles
 EXE_FILES = $(EXECUTABLE_LOCATION)
 SRC_FILES = ../srcF2020
 
@@ -180,7 +180,7 @@ all:  $(OBJECTS)
 			exit $$RESULT
 
 	@mv $(EXE) $(EXECUTABLE_LOCATION)
-	@(cd ../$(EXECUTABLE_LOCATION); ./$(EXE))
+	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 #
 #  clean
 clean:
