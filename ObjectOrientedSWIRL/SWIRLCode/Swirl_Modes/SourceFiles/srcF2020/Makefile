@@ -81,7 +81,7 @@ OBJECTS  =                  \
 
 EXECUTABLE_LOCATION = ../../CodeRun
 
-EXE = swirlF2008
+EXE = swirlF2020
 
 LIB_FILES = ../../LibraryFiles
 MOD_FILES = ../../ModuleFiles
