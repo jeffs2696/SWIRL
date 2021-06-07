@@ -171,8 +171,7 @@ CONTAINS
         ed2             , &
         ed4)
 
-        TYPE(SwirlClassType), INTENT(INOUT) :: &
-            object
+        TYPE(SwirlClassType), INTENT(INOUT) :: & object
 
         INTEGER, INTENT(INOUT) :: &
             ifdff,   &

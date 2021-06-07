@@ -171,22 +171,25 @@ CONTAINS
 !  is = 5: read in swirl from file.
 !
       elseif (is.eq.5) then
-
-       open(unit=24,file='swrl.input',status='unknown')
-       READ(24,*) nptsIn
-       ALLOCATE(rIn(nptsIn), &
-             rmswIn(nPtsIn))
-       DO i=1,nptsIn
-        READ(24,*) rIn(i),rmswIn(i)
-       END DO
+! JS: removed read from file functionality
+       ! open(unit=24,file='swrl.input',status='unknown')
+       ! READ(24,*) nptsIn
+       ! ALLOCATE(rIn(nptsIn), &
+             ! rmswIn(nPtsIn))
+       ! DO i=1,nptsIn
+        ! READ(24,*) rIn(i),rmswIn(i)
+       ! END DO
 
 !      read (24,*) (rmsw(i), i = 1,npts)
 
-       close(24)
+       ! close(24)
 !
 ! spline data onto grid
 !
 
+            nptsIn = SIZE(rmsw)
+            rIn = rr
+            rmswIn = rmsw
        CALL Akima433Interpolation(inputDataLength  = nptsIn, &
                                   xInputData       = rIn,    &
                                   yInputData       = rmswIn, &

@@ -126,20 +126,24 @@ CONTAINS
 !
 ! drh mod:  read in data and use akima spline
 !
-       open(unit=22,file='mach.input',status='unknown')
-       READ(22,*) nptsIn
+       ! open(unit=22,file='mach.input',status='unknown')
+       ! READ(22,*) nptsIn
 
-       ALLOCATE(rIn(nptsIn), &
-             rmchIn(nptsIn))
+       ! ALLOCATE(rIn(nptsIn), &
+       !       rmchIn(nptsIn))
 
-       DO i=1,nptsIn
-        READ(22,*) rIn(i),rmchIn(i)
-       END DO
+       ! DO i=1,nptsIn
+       !  READ(22,*) rIn(i),rmchIn(i)
+       ! END DO
 
-       CLOSE(22)
+       ! CLOSE(22)
 !
 ! spline data onto grid
 !
+! JS: removed read from file capability, now it is input from main
+       nptsIn = SIZE(rmch)
+       rIn = rr
+       rmchIn = rmch
 
        CALL Akima433Interpolation(inputDataLength  = nptsIn, &
                                   xInputData       = rIn,    &
@@ -148,7 +152,7 @@ CONTAINS
                                   xOutputData      = rr,     &
                                   yOutputData      = rmch)
 
-       DEALLOCATE(rIn, rmchIn)
+       ! DEALLOCATE(rIn, rmchIn)
 
 !      read (22,*) (rmch(i), i = 1,npts)
 !      close(22)

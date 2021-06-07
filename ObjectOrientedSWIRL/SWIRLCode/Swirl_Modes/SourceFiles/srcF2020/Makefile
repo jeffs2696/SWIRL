@@ -64,7 +64,8 @@ FEXT     = f
 F90EXT   = f90
 OEXT     = o
 OBJECTS  =                  \
-	swirl.o 				\
+    main.o					\
+	swirlClassObject.o 				\
 	derivsModule.o 			\
 	globalModule.o 			\
 	gridModule.o   			\
@@ -213,7 +214,7 @@ cleanAll:
 #
 #   Define dependency information for object files
 #                                                               
-swirl.o: swirl.f90        \
+main.o: main.f90        \
          analysisModule.o \
          boundaryModule.o \
          derivsModule.o   \
@@ -226,8 +227,9 @@ swirl.o: swirl.f90        \
 	 machoutModule.o  \
          outputModule.o   \
 	 rmachModule.o    \
-	 smachAndSndspdModule.o 
-	$(F90) $(F90FLAGS) swirl.f90
+	 smachAndSndspdModule.o \
+	 swirlClassObject.o 
+	$(F90) $(F90FLAGS) main.f90
 
 akima433.o: akima433.f
 	$(F77) $(F77FLAGS) akima433.f
@@ -301,6 +303,8 @@ smachAndSndspdModule.o:  smachAndSndspdModule.f90 \
 sndspdModule.o:  sndspdModule.f90
 	$(F90) $(F90FLAGS) sndspdModule.f90
 
+swirlClassObject.o: swirlClassObject.f90
+	@$(F90) $(F90FLAGS) swirlClassObject.f90
 #----------------------------------BLAS------------------------------------------
 
 $(BLAS_LOCATION)/dgemv.o: \
