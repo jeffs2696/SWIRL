@@ -185,7 +185,7 @@ PROGRAM MAIN
     ! Starting Grid DO LOOP
 
     First_fac  = 1
-    Last_fac   = 1
+    Last_fac   = 2
 
     facCount = 0 ! initializer for fac count
     ! file_name2 = 'L2vsDeltar.dat'

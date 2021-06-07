@@ -236,22 +236,22 @@ CONTAINS
                     +REAL(ak,rDef)*REAL(ak,rDef)
                 if (akap(i).gt.0.0_rDef) then
                     akap(i) = SQRT(akap(i))
-                    write(15,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
+                    ! write(15,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
                 else
-                    write(15,10) i,gam(i),gam(i)/ak,vphi(i)
+                    ! write(15,10) i,gam(i),gam(i)/ak,vphi(i)
                 endif
 ! JS: if there is not linear shear and there is no swirl flag then proceed
             endif
-
-            write(35,12) i,gam(i),gam(i)/ak,vphi(i)
-            write(15,10) i,gam(i),gam(i)/ak,vphi(i)
-            write(55,*) REAL(gam(i)),AIMAG(gam(i))
+! because gam has blank entries (gives 1e-310 because previous loop omitted some entries)
+            ! write(35,12) i,gam(i),gam(i)/ak,vphi(i)
+            ! write(15,10) i,gam(i),gam(i)/ak,vphi(i)
+            ! write(55,*) REAL(gam(i)),AIMAG(gam(i))
         enddo
         close(15)
         close(35)
         close(55)
-10      format(1x,i4,9e15.6)
-12      format(1x,i4,6e20.12)
+ 10      format(1x,i4,9e15.6)
+! 12      format(1x,i4,6e20.12)
 !
         return
     end
