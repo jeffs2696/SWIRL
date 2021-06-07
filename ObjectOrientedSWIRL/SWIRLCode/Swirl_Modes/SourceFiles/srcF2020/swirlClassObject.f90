@@ -177,8 +177,6 @@
 
               INTEGER ::&
                   np4
-              WRITE(6,*) 'IN SUBROUTINE: CreateSwirlClassObject '
-              WRITE(6,*) 'FROM MODULE  : SwirlClassObj.f90'
 
 ! Set user input to the object 'properties';
               object%azimuthalMode        = azimuthalMode

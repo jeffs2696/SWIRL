@@ -122,12 +122,14 @@ PROGRAM MAIN
 
     FORMAT = "(F12.5,F12.5,F12.5,F12.5)" ! General format for numerical
 
-    WRITE(6,*) 'SWIRL STARTS HERE - OuterCode.f90'
+    WRITE(6,*) 'SWIRL STARTS HERE - main.f90'
 
-
+    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
     WRITE(6,*) '    Defining inputs needed for SwirlClassType class definition'
     WRITE(6,*) '    ALL INPUTS ARE NON DIMENSIONAL                            '
     WRITE(6,*) '    BE WEARY OF CONTRADICTIONS IN MAGNITUDE                   '
+    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
+    WRITE(6,*) ' '
 
     ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
 
@@ -157,26 +159,29 @@ PROGRAM MAIN
     k_6 = CMPLX(0.0, 0.0, rDef)
     k_7 = CMPLX(0.0, 0.0, rDef)
 
-
-    WRITE(6,*) '    Azimuthal Mode Number' , azimuthalModeNumber
-    WRITE(6,*) '    Hub to Tip Ratio     ' , hubToTipRatio
-    WRITE(6,*) '    Frequency            ' , frequency
-    WRITE(6,*) '    Hub Liner Admittance ' , hubAdmittance
-    WRITE(6,*) '    Duct Liner Admittance' , ductAdmittance
-    WRITE(6,*) '    Second Order Smoother' , secondOrderSmoother
-    WRITE(6,*) '    Fourth Order Smoother' , fourthOrderSmoother
-
-    IF (FiniteDiffFlag.eq.0) THEN
-        WRITE(6,*) '    Finite Difference Flag' , FiniteDiffFlag
-        WRITE(6,*) '    --> Spectral Differencing is used for the radial derivatives'
-    ELSEIF (FiniteDiffFlag.eq.1) THEN
-        WRITE(6,*) '    Finite Difference Flag' , FiniteDiffFlag
-        WRITE(6,*) '    --> Second Order Differencing is used for the radial derivatives'
-    ELSEIF (FiniteDiffFlag.eq.2) THEN
-        WRITE(6,*) '    Finite Difference Flag' , FiniteDiffFlag
-        WRITE(6,*) '    --> Fourth Order Differencing is used for the radial derivatives'
+    WRITE(6,*) ' '
+    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
+    WRITE(6,*) '    INPUT DECK: '
+    WRITE(6,*) '        Azimuthal Mode Number' , azimuthalModeNumber
+    WRITE(6,*) '        Hub to Tip Ratio     ' , hubToTipRatio
+    WRITE(6,*) '        Frequency            ' , frequency
+    WRITE(6,*) '        Hub Liner Admittance ' , hubAdmittance
+    WRITE(6,*) '        Duct Liner Admittance' , ductAdmittance
+    WRITE(6,*) '        Second Order Smoother' , secondOrderSmoother
+    WRITE(6,*) '        Fourth Order Smoother' , fourthOrderSmoother
+    IF (finiteDiffFlag.eq.0) THEN
+        WRITE(6,*) '        Finite Difference Flag' , finiteDiffFlag
+        WRITE(6,*) '        --> Spectral Differencing is used for the radial derivatives'
+    ELSEIF (finiteDiffFlag.eq.1) THEN
+        WRITE(6,*) '        Finite Difference Flag' , finiteDiffFlag
+        WRITE(6,*) '        --> Second Order Differencing is used for the radial derivatives'
+    ELSEIF (finiteDiffFlag.eq.2) THEN
+        WRITE(6,*) '        Finite Difference Flag' , finiteDiffFlag
+        WRITE(6,*) '       --> Fourth Order Differencing is used for the radial derivatives'
     ENDIF
 
+    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
+    WRITE(6,*) ' '
     ! Starting Grid DO LOOP
 
     First_fac  = 1
@@ -210,7 +215,7 @@ PROGRAM MAIN
 
         WRITE(6, *) '       # Grid Points:                   ',  numberOfGridPoints
 
-        WRITE(6, *) '       ALLOCATING SwirlClassObj Arrays ...'
+        ! WRITE(6, *) '       ALLOCATING SwirlClassObj Arrays ...'
         ALLOCATE(&
              S_1(numberOfGridPoints)                         ,&
             S_2(numberOfGridPoints)                         ,&
@@ -253,7 +258,7 @@ PROGRAM MAIN
             drvel_dr(numberOfGridPoints) )
 
 
-        WRITE(6, *) '       DONE ALLOCATING SwirlClassObj Arrays ...'
+        ! WRITE(6, *) '       DONE ALLOCATING SwirlClassObj Arrays ...'
 
         WRITE(6,*) '        Defining Radial Domain ...'
 
