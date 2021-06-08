@@ -131,9 +131,10 @@
           ! INTEGER :: i , j
           REAL(KIND = REAL64) ::&
               angom  = 0.00_rDef, &
-              gam    = 0.00_rDef,   &
+              gam    = 1.400_rDef,   & !not used in smachModule
               rxmax  = 0.00_rDef, &
               slope  = 0.00_rDef
+
 ! 100       continue
       CONTAINS
 

@@ -22,8 +22,6 @@ PROGRAM MAIN
         hubAdmittance            ,& !Liner Admittance At the Hub
         ductAdmittance           ,&
         ci                       ,&
-        gam                      ,&
-        gm1                      ,&
         k_1                      ,&
         k_2                      ,&
         k_3                      ,&
@@ -41,6 +39,8 @@ PROGRAM MAIN
         SoundSpeedExpected         
 
     REAL(KIND = REAL64) ::  &
+        gam                      ,&
+        gm1                      ,&
         secondOrderSmoother ,& !2nd order smoothing coefficient
         fourthOrderSmoother ,& !4th order smoothing coefficient
         boundingConstant    ,&
