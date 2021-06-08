@@ -48,6 +48,7 @@ CONTAINS
                 dl1(i,j) = 0.0_rDef
             enddo
         enddo
+
         do i = 1,np
             if (iorder.eq.2) then
                 if (i.eq.1) then
@@ -97,13 +98,14 @@ CONTAINS
                 endif
             endif
         enddo
-        open(unit=15,file='deriv.matrix',status='unknown')
-        rewind 15
-        do i = 1,np
-            write(15,10) (dl1(i,j), j=1,np)
-        enddo
-10      format(1x,16f7.1)
-        close(15)
+
+        ! open(unit=15,file='deriv.matrix',status='unknown')
+        ! rewind 15
+        ! do i = 1,np
+        !     write(15,10) (dl1(i,j), j=1,np)
+        ! enddo
+! 10      format(1x,16f7.1)
+        ! close(15)
 !
         coeff  = 0.50_rDef*(1.0_rDef -sig)
         dx = 2.0_rDef/REAL(np -1,rDef)
