@@ -144,13 +144,10 @@
               sig             , &
               AxialMachData   , &
               ThetaMachData   , &
-          ! SoundSpeed      , &
               ak              , &
               etah            , &
               etad            , &
-              ifdff           , &
-              ed2             , &
-              ed4)
+              ifdff           )
 
               TYPE(SwirlClassType), INTENT(INOUT) ::&
                   object
@@ -161,8 +158,6 @@
                   np
 
               REAL(KIND = REAL64), INTENT(INOUT) :: &
-                  ed2,   &
-                  ed4,   &
                   sig
 
               REAL(KIND = REAL64), DIMENSION(:), INTENT(INOUT) :: &
@@ -172,13 +167,20 @@
 
 !
 
-              COMPLEX(KIND = REAL64), INTENT(IN) ::&
-                  etah, etad, ak
-
               INTEGER ::&
                   np4
 
+              REAL(KIND = REAL64) :: &
+                  ed2 ,   &
+                  ed4 
+
+              COMPLEX(KIND = REAL64), INTENT(IN) ::&
+                  etah, etad, ak
+
+
 ! Set user input to the object 'properties';
+              ed2 = 0.0_rDef
+              ed4 = 0.0_rDef
               object%azimuthalMode        = azimuthalMode
               object%numberOfRadialPoints = np
               object%hubTipRatio          = sig

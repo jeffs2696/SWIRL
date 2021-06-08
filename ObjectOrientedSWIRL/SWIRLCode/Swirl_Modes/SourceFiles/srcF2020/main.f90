@@ -189,9 +189,7 @@ PROGRAM MAIN
             ak            = frequency            ,&
             etah          = hubAdmittance        ,&
             etad          = ductAdmittance       ,&
-            ifdff         = finiteDiffFlag       ,&
-            ed2           = secondOrderSmoother  ,&
-            ed4           = fourthOrderSmoother)
+            ifdff         = finiteDiffFlag       )
 
 
         CALL DestroyObject(object = swirlClassObj)
