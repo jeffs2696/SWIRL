@@ -5,7 +5,7 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64
-    TYPE(SwirlClassType) :: swirlClassObj
+    TYPE(SwirlClassType) , DIMENSION(5) :: swirlClassObj
 
     INTEGER  :: &
         finiteDiffFlag      ,& ! finite difference flag
@@ -64,21 +64,19 @@ PROGRAM MAIN
 !
 ! Code Starts Here!
 
-!
     CONTINUE
-!
 
     FORMAT = "(F12.5,F12.5,F12.5,F12.5)" ! General format for numerical
 
-    WRITE(6,*) 'SWIRL STARTS HERE - main.f90'
-
-    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
-    WRITE(6,*) '    Defining inputs needed for SwirlClassType class definition'
-    WRITE(6,*) '    ALL INPUTS ARE NON DIMENSIONAL                            '
-    WRITE(6,*) '    BE WEARY OF CONTRADICTIONS IN MAGNITUDE                   '
-    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
-    WRITE(6,*) ' '
-
+!    WRITE(6,*) 'SWIRL STARTS HERE - main.f90'
+!
+!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
+!    WRITE(6,*) '    Defining inputs needed for SwirlClassType class definition'
+!    WRITE(6,*) '    ALL INPUTS ARE NON DIMENSIONAL                            '
+!    WRITE(6,*) '    BE WEARY OF CONTRADICTIONS IN MAGNITUDE                   '
+!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
+!    WRITE(6,*) ' '
+!
     ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
 
     ! inputs needed for SwirlClassType
@@ -109,7 +107,7 @@ PROGRAM MAIN
     ! Starting Grid DO LOOP
 
     First_fac  = 1
-    Last_fac   = 1
+    Last_fac   = 5
 
     facCount = 0 ! initializer for fac count
 
@@ -138,7 +136,6 @@ PROGRAM MAIN
         DO i = 1, numberOfGridPoints
             r(i) = (radMin+REAL(i-1, rDef)*dr)/radMax
         END DO
-
 
         WRITE(6,*) ' '
         WRITE(6,'(a)') 'Table 1: Input Flow Data'
@@ -176,11 +173,10 @@ PROGRAM MAIN
                 WRITE(6, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
 
             ENDIF
-
         ENDDO
 
         CALL CreateObject(&
-            object        = swirlClassObj  ,&
+            object        = swirlClassObj(fac)  ,&
             azimuthalMode = azimuthalModeNumber  ,&
             np            = numberOfGridPoints   ,&
             sig           = hubToTipRatio        ,&
@@ -192,7 +188,7 @@ PROGRAM MAIN
             ifdff         = finiteDiffFlag       )
 
 
-        CALL DestroyObject(object = swirlClassObj)
+        CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
             r                         ,&
@@ -203,5 +199,7 @@ PROGRAM MAIN
             SoundSpeedExpected                ,&
             )
 
+
     END DO
+     
 END PROGRAM MAIN
