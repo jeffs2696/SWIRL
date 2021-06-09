@@ -44,7 +44,9 @@ PROGRAM MAIN
         axialMachData_dr_Out    ,&
         thetaMachData_dr_Out    ,&
         SoundSpeed_dr_Out   ,&
-        SoundSpeedError
+        SoundSpeedError     ,&
+        SoundSpeedL2Array   ,&
+        RateOfConvergence
 
 
 
@@ -127,6 +129,11 @@ PROGRAM MAIN
     facCount = 0 ! initializer for fac count
 
     WRITE(6, *) '       Number of Grid Study Iterations: ' , Last_fac-First_fac + 1
+
+    ALLOCATE(&
+        SoundSpeedL2Array(Last_fac-First_fac + 1) ,&
+        RateOfConvergence(Last_fac-First_fac) )
+
 
     DO fac = First_fac, Last_fac
 
@@ -226,7 +233,9 @@ PROGRAM MAIN
             dataSet1  = SoundSpeedExpected ,&
             dataSet2  = SoundSpeedOut      ,&
             numPoints = numberOfGridPoints )
-         
+
+        SoundSpeedL2Array(fac) = SoundSpeedErrorL2
+
         CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
@@ -242,10 +251,28 @@ PROGRAM MAIN
             SoundSpeedOut         ,&
             SoundSpeed_dr_Out     ,&
             SoundSpeedExpected    ,&
-            SoundSpeedError       ,&
-            )
+            SoundSpeedError                   )
+
 
     END DO
+
+    DO i = 1,5
+        WRITE(6,*) 1+2**i , SoundSpeedL2Array(i)
+    END DO
+
+    DO i = 1,4
+        RateOfConvergence(i) = &
+            (&
+            LOG(SoundSpeedL2Array(i+1)) -&
+            LOG(SoundSpeedL2Array(i  ))&
+            )&
+            /&
+            LOG(0.5_rDef)
+        WRITE(6,*) RateOfConvergence(i)
+    ENDDO
+    DEALLOCATE( &
+        SoundSpeedL2Array ,&
+        RateOfConvergence)
 
 
 END PROGRAM MAIN

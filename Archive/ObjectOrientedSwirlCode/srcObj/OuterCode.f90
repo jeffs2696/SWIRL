@@ -311,7 +311,7 @@ WRITE(6,*) '    BE WEARY OF CONTRADICTIONS IN MAGNITUDE                   '
                 thetaMachData(i)**2.0_rDef)**0.5_rDef)
 
 
-            IF(totalMachData(i) > 1.0_rDef) 
+            IF(totalMachData(i) > 1.0_rDef) THEN
                 WRITE(6, *) i, 'ERROR: Total mach is greater than one'
                 STOP
             ELSE
