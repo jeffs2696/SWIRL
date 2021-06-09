@@ -21,8 +21,8 @@
           PUBLIC ::&
               CreateObject   ,&
               DestroyObject  ,&
-              SwirlClassType ,& 
-              GetMeanFlowData!, & FindResidualData!, & GetModeData    
+              SwirlClassType ,&
+              GetMeanFlowData!, & FindResidualData!, & GetModeData
 
 ! Interfaces
 
@@ -175,7 +175,7 @@
 
               REAL(KIND = REAL64) :: &
                   ed2 ,   &
-                  ed4 
+                  ed4
 
               COMPLEX(KIND = REAL64), INTENT(IN) ::&
                   etah, etad, ak
@@ -464,42 +464,45 @@
 !
 ! NEW: deallocate data arrays
 !
-    SUBROUTINE GetMeanData(&
-        object   ,&
-        axialMach, &
-        thetaMach, &
-        axialMach_dr, &
-        thetaMach_dr, &
-        SoundSpeed  , &
-        SoundSpeed_dr, &
-        radialData)
+          SUBROUTINE GetMeanData(&
+              object   ,&
+              axialMach, &
+              thetaMach, &
+              axialMach_dr, &
+              thetaMach_dr, &
+              SoundSpeed  , &
+              SoundSpeed_dr, &
+              radialData)
+
+! The goal of this subroutine is to extract the mean flow data that we input plus the rest of the mean flow parameters
+! that SWIRL generated
+! 
+!
+
+              TYPE(SwirlClassType), INTENT(INOUT) ::&
+                  object
+              REAL(KIND = rDef), DIMENSION(object%numberOfRadialPoints), INTENT(OUT) :: &
+                  axialMach, &
+                  thetaMach, &
+                  axialMach_dr, &
+                  thetaMach_dr, &
+                  SoundSpeed  , &
+                  SoundSpeed_dr, &
+                  radialData
+
+              ! the data we originally sent in
+              axialMach     = object%rmx
+              axialMach_dr  = object%drm
+              thetaMach     = object%rmt
+              thetaMach_dr  = object%drt
+              SoundSpeed    = object%snd
+              SoundSpeed_dr = object%dsn
+              radialData    = object%r
+
+              ! the other mean flow data from SWIRL
 
 
-
-        TYPE(SwirlClassType), INTENT(INOUT) ::&
-            object
-        REAL(KIND = rDef), DIMENSION(object%numberOfRadialPoints), INTENT(OUT) :: &
-            axialMach, &
-            thetaMach, &
-            axialMach_dr, &
-            thetaMach_dr, &
-            SoundSpeed  , &
-            SoundSpeed_dr, &
-            radialData
-
-        ! the data we originally sent in
-        axialMach = object%rmx
-        axialMach_dr = object%drm
-        thetaMach = object%rmt
-        thetaMach_dr = object%drt
-        SoundSpeed   = object%snd
-        SoundSpeed_dr = object%dsn
-        radialData   = object%r
-
-        ! the other mean flow data from SWIRL
-
-
-    END SUBROUTINE GetMeanData
+          END SUBROUTINE GetMeanData
           SUBROUTINE DestroySwirlClassObject(&
               object)
 
@@ -525,11 +528,11 @@
                   object%vph,   &
                   object%wvn,   &
                   object%aa,    &
-                  ! object%aa_before,    &
+              ! object%aa_before,    &
                   object%bb,    &
-                  ! object%bb_before,    &
-                  ! object%S_MMS, &
-                  ! object%S_MMS_Array, &
+              ! object%bb_before,    &
+              ! object%S_MMS, &
+              ! object%S_MMS_Array, &
                   object%vl,    &
                   object%vr)
           END SUBROUTINE DestroySwirlClassObject

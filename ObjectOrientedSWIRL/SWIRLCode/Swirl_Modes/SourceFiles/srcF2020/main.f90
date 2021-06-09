@@ -34,9 +34,22 @@ PROGRAM MAIN
         r                   ,&
         axialMachData       ,&
         thetaMachData       ,&
-        thetaMachDataOut    ,&
         totalMachData       ,&
-        SoundSpeedExpected         
+        ! SoundSpeed          ,&
+        SoundSpeedExpected  ,&
+        rOut                ,&
+        axialMachDataOut    ,&
+        thetaMachDataOut    ,&
+        SoundSpeedOut       ,&
+        axialMachData_dr_Out    ,&
+        thetaMachData_dr_Out    ,&
+        SoundSpeed_dr_Out
+
+
+
+
+
+
 
     REAL(KIND = REAL64) ::  &
         gam                      ,&
@@ -124,10 +137,16 @@ PROGRAM MAIN
 
         ALLOCATE(&
             r(numberOfGridPoints)                                         ,&
+            rOut(numberOfGridPoints)                                         ,&
             thetaMachData(numberOfGridPoints)                             ,&
             thetaMachDataOut(numberOfGridPoints)                             ,&
+            thetaMachData_dr_Out(numberOfGridPoints)                             ,&
             axialMachData(numberOfGridPoints)                             ,&
+            axialMachDataOut(numberOfGridPoints)                             ,&
+            axialMachData_dr_Out(numberOfGridPoints)                             ,&
             totalMachData(numberOfGridPoints)                             ,&
+            SoundSpeedOut(numberOfGridPoints)           ,&
+            SoundSpeed_dr_Out(numberOfGridPoints)       ,&
             SoundSpeedExpected(numberOfGridPoints)                                ,&
             )
 
@@ -187,19 +206,44 @@ PROGRAM MAIN
             etad          = ductAdmittance       ,&
             ifdff         = finiteDiffFlag       )
 
+! get Mean Flow Data to Calculate MMS
+    CALL GetMeanFlowData(&
+        object          = swirlClassObj(fac), &
+        axialMach       = axialMachDataOut, &
+        thetaMach       = thetaMachDataOut, &
+        axialMach_dr    = axialMachData_dr_Out, &
+        thetaMach_dr    = thetaMachData_dr_Out, &
+        SoundSpeed      = SoundSpeedOut, &
+        SoundSpeed_dr   = SoundSpeed_dr_Out, &
+        radialData      = rOut)
 
         CALL DestroyObject(object = swirlClassObj(fac))
 
+        ! DEALLOCATE(&
+        !     r                         ,&
+        !     thetaMachData             ,&
+        !     thetaMachDataOut             ,&
+        !     axialMachData             ,&
+        !     totalMachData             ,&
+        !     SoundSpeedExpected                ,&
+        !     )
+
         DEALLOCATE(&
-            r                         ,&
-            thetaMachData             ,&
-            thetaMachDataOut             ,&
-            axialMachData             ,&
-            totalMachData             ,&
-            SoundSpeedExpected                ,&
+            r                                                                   ,&
+            rOut                                                                ,&
+            thetaMachData                                           ,&
+            thetaMachDataOut                                        ,&
+            thetaMachData_dr_Out                                    ,&
+            axialMachData                                           ,&
+            axialMachDataOut                                        ,&
+            axialMachData_dr_Out                                    ,&
+            totalMachData                                           ,&
+            SoundSpeedOut                         ,&
+            SoundSpeed_dr_Out                 ,&
+            SoundSpeedExpected                                         ,&
             )
 
-
     END DO
-     
+
+
 END PROGRAM MAIN
