@@ -16,11 +16,9 @@ PROGRAM MAIN
         numberOfGridPoints  ,& ! number of points
         i                   ,& ! indexer for do loops
         fac                 ,& ! variable used for doubling grid points
-        facCount            ,& ! counts the outermost do loop
-        First_fac           ,& ! starting fac integer
-        Last_fac               ! ending fac integer
+        facCount               ! counts the outermost do loop
 
-    COMPLEX(KIND = REAL64) :: &
+    COMPLEX(KIND = rDef) :: &
         frequency                ,& !non-dimensional frequency
         hubAdmittance            ,& !Liner Admittance At the Hub
         ductAdmittance           ,&
@@ -125,19 +123,16 @@ PROGRAM MAIN
 
     ! Starting Grid DO LOOP
 
-    First_fac  = 1
-    Last_fac   = numberOfIterations
-
-    facCount = 0 ! initializer for fac count
 
     WRITE(6, *) '       Number of Grid Study Iterations: ' , numberOfIterations 
 
     ALLOCATE(&
-        SoundSpeedL2Array(Last_fac-First_fac + 1) ,&
-        RateOfConvergence(Last_fac-First_fac) )
+        SoundSpeedL2Array(numberOfIterations)       ,&
+        RateOfConvergence(numberOfIterations - 1) )
 
+    facCount = 0 ! initializer for fac count
 
-    DO fac = First_fac, Last_fac
+    DO fac = 1, numberOfIterations
 
         facCount = facCount + 1
         numberOfGridPoints   = 1+(2**fac)
