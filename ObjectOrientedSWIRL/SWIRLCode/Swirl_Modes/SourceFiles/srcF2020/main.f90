@@ -1,6 +1,7 @@
 PROGRAM MAIN
     USE, INTRINSIC  :: ISO_FORTRAN_ENV
     USE swirlClassObject
+    USE L2NormModule
 
     IMPLICIT NONE
 
@@ -35,7 +36,6 @@ PROGRAM MAIN
         axialMachData       ,&
         thetaMachData       ,&
         totalMachData       ,&
-        ! SoundSpeed          ,&
         SoundSpeedExpected  ,&
         rOut                ,&
         axialMachDataOut    ,&
@@ -43,7 +43,8 @@ PROGRAM MAIN
         SoundSpeedOut       ,&
         axialMachData_dr_Out    ,&
         thetaMachData_dr_Out    ,&
-        SoundSpeed_dr_Out
+        SoundSpeed_dr_Out   ,&
+        SoundSpeedError
 
 
 
@@ -58,7 +59,8 @@ PROGRAM MAIN
         fourthOrderSmoother ,& !4th order smoothing coefficient
         boundingConstant    ,&
         dr                  ,&
-        hubToTipRatio      ! hub-to-tip ratio
+        hubToTipRatio       ,&
+        SoundSpeedErrorL2
 
 
     ! INTEGER:: nPts  = 201  ! indended for flow data only and not the grid
@@ -148,6 +150,7 @@ PROGRAM MAIN
             SoundSpeedOut(numberOfGridPoints)           ,&
             SoundSpeed_dr_Out(numberOfGridPoints)       ,&
             SoundSpeedExpected(numberOfGridPoints)                                ,&
+            SoundSpeedError(numberOfGridPoints) ,&
             )
 
         dr = (radMax-radMin)/REAL(numberOfGridPoints-1, rDef)
@@ -207,40 +210,39 @@ PROGRAM MAIN
             ifdff         = finiteDiffFlag       )
 
 ! get Mean Flow Data to Calculate MMS
-    CALL GetMeanFlowData(&
-        object          = swirlClassObj(fac), &
-        axialMach       = axialMachDataOut, &
-        thetaMach       = thetaMachDataOut, &
-        axialMach_dr    = axialMachData_dr_Out, &
-        thetaMach_dr    = thetaMachData_dr_Out, &
-        SoundSpeed      = SoundSpeedOut, &
-        SoundSpeed_dr   = SoundSpeed_dr_Out, &
-        radialData      = rOut)
+        CALL GetMeanFlowData(&
+            object          = swirlClassObj(fac), &
+            axialMach       = axialMachDataOut, &
+            thetaMach       = thetaMachDataOut, &
+            axialMach_dr    = axialMachData_dr_Out, &
+            thetaMach_dr    = thetaMachData_dr_Out, &
+            SoundSpeed      = SoundSpeedOut, &
+            SoundSpeed_dr   = SoundSpeed_dr_Out, &
+            radialData      = rOut)
 
+        ! SoundSpeedError = ABS(SoundSpeedExpected - SoundSpeedOut)
+
+        CALL getL2Norm(L2 = SoundSpeedErrorL2 ,&
+            dataSet1  = SoundSpeedExpected ,&
+            dataSet2  = SoundSpeedOut      ,&
+            numPoints = numberOfGridPoints )
+         
         CALL DestroyObject(object = swirlClassObj(fac))
 
-        ! DEALLOCATE(&
-        !     r                         ,&
-        !     thetaMachData             ,&
-        !     thetaMachDataOut             ,&
-        !     axialMachData             ,&
-        !     totalMachData             ,&
-        !     SoundSpeedExpected                ,&
-        !     )
-
         DEALLOCATE(&
-            r                                                                   ,&
-            rOut                                                                ,&
-            thetaMachData                                           ,&
-            thetaMachDataOut                                        ,&
-            thetaMachData_dr_Out                                    ,&
-            axialMachData                                           ,&
-            axialMachDataOut                                        ,&
-            axialMachData_dr_Out                                    ,&
-            totalMachData                                           ,&
-            SoundSpeedOut                         ,&
-            SoundSpeed_dr_Out                 ,&
-            SoundSpeedExpected                                         ,&
+            r                     ,&
+            rOut                  ,&
+            thetaMachData         ,&
+            thetaMachDataOut      ,&
+            thetaMachData_dr_Out  ,&
+            axialMachData         ,&
+            axialMachDataOut      ,&
+            axialMachData_dr_Out  ,&
+            totalMachData         ,&
+            SoundSpeedOut         ,&
+            SoundSpeed_dr_Out     ,&
+            SoundSpeedExpected    ,&
+            SoundSpeedError       ,&
             )
 
     END DO

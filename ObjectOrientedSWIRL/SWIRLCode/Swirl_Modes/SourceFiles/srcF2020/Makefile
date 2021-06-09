@@ -66,6 +66,7 @@ OEXT     = o
 OBJECTS  =                  \
     main.o					\
 	swirlClassObject.o 				\
+	L2NormModule.o			\
 	derivsModule.o 			\
 	globalModule.o 			\
 	gridModule.o   			\
@@ -228,6 +229,7 @@ main.o: main.f90        \
          outputModule.o   \
 	 rmachModule.o    \
 	 smachAndSndspdModule.o \
+	 L2NormModule.o         \
 	 swirlClassObject.o 
 	$(F90) $(F90FLAGS) main.f90
 
@@ -302,6 +304,9 @@ smachAndSndspdModule.o:  smachAndSndspdModule.f90 \
 
 sndspdModule.o:  sndspdModule.f90
 	$(F90) $(F90FLAGS) sndspdModule.f90
+
+L2NormModule.o: L2NormModule.f90
+	$(F90) $(F90FLAGS) L2NormModule.f90 
 
 swirlClassObject.o: swirlClassObject.f90
 	@$(F90) $(F90FLAGS) swirlClassObject.f90
