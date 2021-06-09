@@ -5,8 +5,10 @@ PROGRAM MAIN
 
     IMPLICIT NONE
 
-    INTEGER, PARAMETER :: rDef = REAL64
-    TYPE(SwirlClassType) , DIMENSION(5) :: swirlClassObj
+    INTEGER, PARAMETER :: rDef = REAL64, &
+                          numberOfIterations = 5
+
+    TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
     INTEGER  :: &
         finiteDiffFlag      ,& ! finite difference flag
@@ -124,11 +126,11 @@ PROGRAM MAIN
     ! Starting Grid DO LOOP
 
     First_fac  = 1
-    Last_fac   = 5
+    Last_fac   = numberOfIterations
 
     facCount = 0 ! initializer for fac count
 
-    WRITE(6, *) '       Number of Grid Study Iterations: ' , Last_fac-First_fac + 1
+    WRITE(6, *) '       Number of Grid Study Iterations: ' , numberOfIterations 
 
     ALLOCATE(&
         SoundSpeedL2Array(Last_fac-First_fac + 1) ,&
@@ -256,11 +258,11 @@ PROGRAM MAIN
 
     END DO
 
-    DO i = 1,5
+    DO i = 1,numberOfIterations
         WRITE(6,*) 1+2**i , SoundSpeedL2Array(i)
     END DO
 
-    DO i = 1,4
+    DO i = 1,numberOfIterations - 1 
         RateOfConvergence(i) = &
             (&
             LOG(SoundSpeedL2Array(i+1)) -&
