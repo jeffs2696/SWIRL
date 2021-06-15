@@ -6,7 +6,7 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-                          numberOfIterations = 5
+        numberOfIterations = 9
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
@@ -31,7 +31,7 @@ PROGRAM MAIN
         k_6                      ,&
         k_7
 
-    REAL(KIND = REAL64), DIMENSION(:), ALLOCATABLE :: &
+    REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         r                   ,&
         axialMachData       ,&
         thetaMachData       ,&
@@ -48,12 +48,6 @@ PROGRAM MAIN
         SoundSpeedL2Array   ,&
         RateOfConvergence
 
-
-
-
-
-
-
     REAL(KIND = REAL64) ::  &
         gam                      ,&
         gm1                      ,&
@@ -63,9 +57,6 @@ PROGRAM MAIN
         dr                  ,&
         hubToTipRatio       ,&
         SoundSpeedErrorL2
-
-
-    ! INTEGER:: nPts  = 201  ! indended for flow data only and not the grid
 
     REAL(KIND = rDef), PARAMETER ::&
         radMin  = 0.20_rDef  ,&
@@ -78,22 +69,12 @@ PROGRAM MAIN
 
     CHARACTER(10):: file_id
 
-!
 ! Code Starts Here!
 
     CONTINUE
 
     FORMAT = "(F12.5,F12.5,F12.5,F12.5)" ! General format for numerical
 
-!    WRITE(6,*) 'SWIRL STARTS HERE - main.f90'
-!
-!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
-!    WRITE(6,*) '    Defining inputs needed for SwirlClassType class definition'
-!    WRITE(6,*) '    ALL INPUTS ARE NON DIMENSIONAL                            '
-!    WRITE(6,*) '    BE WEARY OF CONTRADICTIONS IN MAGNITUDE                   '
-!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
-!    WRITE(6,*) ' '
-!
     ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
 
     ! inputs needed for SwirlClassType
@@ -106,9 +87,6 @@ PROGRAM MAIN
     secondOrderSmoother       =  0.0_rDef
     fourthOrderSmoother       =  0.0_rDef
 
-    ! constants needed for calculations
-    gam = 1.4_rDef       ! ratio of specific heats
-    gm1 = gam-1.0_rDef
 
 
     ! constants for MMS module
