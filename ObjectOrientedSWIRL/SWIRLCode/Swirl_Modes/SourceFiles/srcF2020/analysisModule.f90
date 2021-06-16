@@ -163,6 +163,7 @@ CONTAINS
 !
 ! updated call
 !
+! call f90_zggev ( all of the same inputs )
         CALL ZGGEV(JOBVL,   & ! JOBVL
             JOBVR,   & ! JOBVR
             np4,     & ! N

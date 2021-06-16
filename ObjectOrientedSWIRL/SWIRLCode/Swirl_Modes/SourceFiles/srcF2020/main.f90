@@ -6,7 +6,7 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-        numberOfIterations = 9
+        numberOfIterations = 7
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
@@ -69,12 +69,22 @@ PROGRAM MAIN
 
     CHARACTER(10):: file_id
 
+!
 ! Code Starts Here!
 
     CONTINUE
 
     FORMAT = "(F12.5,F12.5,F12.5,F12.5)" ! General format for numerical
 
+!    WRITE(6,*) 'SWIRL STARTS HERE - main.f90'
+!
+!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
+!    WRITE(6,*) '    Defining inputs needed for SwirlClassType class definition'
+!    WRITE(6,*) '    ALL INPUTS ARE NON DIMENSIONAL                            '
+!    WRITE(6,*) '    BE WEARY OF CONTRADICTIONS IN MAGNITUDE                   '
+!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
+!    WRITE(6,*) ' '
+!
     ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
 
     ! inputs needed for SwirlClassType
@@ -87,6 +97,9 @@ PROGRAM MAIN
     secondOrderSmoother       =  0.0_rDef
     fourthOrderSmoother       =  0.0_rDef
 
+    ! constants needed for calculations
+    gam = 1.4_rDef       ! ratio of specific heats
+    gm1 = gam-1.0_rDef
 
 
     ! constants for MMS module
@@ -151,16 +164,16 @@ PROGRAM MAIN
             ! us to know what the speed of sound is expected to be
             axialMachData(i)  =&
                 (boundingConstant)*&
-                EXP(REAL(k_2, rDef)*(r(i)-1.0_rDef))
+                EXP(REAL(k_2, rDef)*(r(i)-radMax))
 
             thetaMachData(i) = &
                 SQRT(2.0_rDef)*&
                 SQRT(-(REAL(k_3,rDef)*r(i)*&
-                SIN(REAL(k_3,rDef)*(r(i)-1.0_rDef)))/&
-                (REAL(gm1,rDef)*COS(REAL(k_3,rDef)*(r(i)-1.0_rDef))))
+                SIN(REAL(k_3,rDef)*(r(i)-radMax)))/&
+                (REAL(gm1,rDef)*COS(REAL(k_3,rDef)*(r(i)-radMax))))
 
             SoundSpeedExpected(i) = &
-                COS(REAL(k_3,rDef)*(r(i)-1.0_rDef))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
+                COS(REAL(k_3,rDef)*(r(i)-radMax))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
             ! thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i))
             ! thetaMachData(i)  = 0.0_rDef!EXP(k_2*r(i))
             ! the sound speed we expect given the M_theta (for MMS)
@@ -231,6 +244,7 @@ PROGRAM MAIN
 
     END DO
 
+    WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
     DO i = 1,numberOfIterations
         WRITE(6,*) 1+2**i , SoundSpeedL2Array(i)
     END DO
