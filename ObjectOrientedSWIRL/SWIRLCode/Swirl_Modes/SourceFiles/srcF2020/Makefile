@@ -324,6 +324,10 @@ $(LAPACK_LOCATION)/zggev.o: \
 	 (cd $(LAPACK_LOCATION); \
          make zggev.o "F77=$(F77)" "LINK=$(LINK)" "FFLAGS=$(F77FLAGS)" )
 
+$(LAPACK_LOCATION)/f90_zggev.o: \
+   $(LAPACK_LOCATION)/f90_zggev.f
+	 (cd $(LAPACK_LOCATION); \
+         make f90_zggev.o "F77=$(F77)" "LINK=$(LINK)" "FFLAGS=$(F77FLAGS)" )
 #-----------------------------------FITPACK----------------------------------------
 
 $(FITPACK_LOCATION)/curv1.o: \

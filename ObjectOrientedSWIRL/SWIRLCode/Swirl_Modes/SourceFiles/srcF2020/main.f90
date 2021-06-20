@@ -115,7 +115,7 @@ PROGRAM MAIN
     ! Starting Grid DO LOOP
 
 
-    WRITE(6, *) '       Number of Grid Study Iterations: ' , numberOfIterations 
+    WRITE(6, *) '       Number of Grid Study Iterations: ' , numberOfIterations
 
     ALLOCATE(&
         SoundSpeedL2Array(numberOfIterations)       ,&
@@ -204,7 +204,7 @@ PROGRAM MAIN
             etad          = ductAdmittance       ,&
             ifdff         = finiteDiffFlag       )
 
-! get Mean Flow Data to Calculate MMS
+        ! get Mean Flow Data to Calculate MMS
         CALL GetMeanFlowData(&
             object          = swirlClassObj(fac), &
             axialMach       = axialMachDataOut, &
@@ -223,6 +223,7 @@ PROGRAM MAIN
             numPoints = numberOfGridPoints )
 
         SoundSpeedL2Array(fac) = SoundSpeedErrorL2
+
 
         CALL DestroyObject(object = swirlClassObj(fac))
 
@@ -249,7 +250,7 @@ PROGRAM MAIN
         WRITE(6,*) 1+2**i , SoundSpeedL2Array(i)
     END DO
 
-    DO i = 1,numberOfIterations - 1 
+    DO i = 1,numberOfIterations - 1
         RateOfConvergence(i) = &
             (&
             LOG(SoundSpeedL2Array(i+1)) -&
