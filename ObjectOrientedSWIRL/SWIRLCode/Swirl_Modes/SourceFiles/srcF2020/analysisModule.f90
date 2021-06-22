@@ -1,5 +1,6 @@
 MODULE analysisModule
     USE, INTRINSIC :: ISO_FORTRAN_ENV
+    USE F90_ZGGEV 
     IMPLICIT NONE
     PRIVATE
     PUBLIC :: analysis
@@ -164,6 +165,8 @@ CONTAINS
 ! updated call
 !
 ! call f90_zggev ( all of the same inputs )
+        CALL USE_ZGGEV()
+
         CALL ZGGEV(JOBVL,   & ! JOBVL
             JOBVR,   & ! JOBVR
             np4,     & ! N

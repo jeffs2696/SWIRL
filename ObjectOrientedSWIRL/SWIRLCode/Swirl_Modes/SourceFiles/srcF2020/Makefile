@@ -125,6 +125,7 @@ LAPACK_LOCATION = $(LIB_FILES)/lapack3.8.0
 
 LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zggev.o        \
+         $(LAPACK_LOCATION)/f90_zggev.o        \
          $(LAPACK_LOCATION)/disnan.o       \
          $(LAPACK_LOCATION)/dlabad.o       \
          $(LAPACK_LOCATION)/dladiv.o       \
@@ -241,7 +242,8 @@ Akima1D.o:  Akima1D.f90 \
 	$(F90) $(F90FLAGS) Akima1D.f90
 
 analysisModule.o:  analysisModule.f90 \
-                  $(LAPACK_LOCATION)/zggev.o
+                  $(LAPACK_LOCATION)/zggev.o\
+				  $(LAPACK_LOCATION)/f90_zggev.o 
 	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) analysisModule.f90
 
 boundaryModule.o:  boundaryModule.f90
@@ -325,7 +327,7 @@ $(LAPACK_LOCATION)/zggev.o: \
          make zggev.o "F77=$(F77)" "LINK=$(LINK)" "FFLAGS=$(F77FLAGS)" )
 
 $(LAPACK_LOCATION)/f90_zggev.o: \
-   $(LAPACK_LOCATION)/f90_zggev.f
+   $(LAPACK_LOCATION)/f90_zggev.f90
 	 (cd $(LAPACK_LOCATION); \
          make f90_zggev.o "F77=$(F77)" "LINK=$(LINK)" "FFLAGS=$(F77FLAGS)" )
 #-----------------------------------FITPACK----------------------------------------

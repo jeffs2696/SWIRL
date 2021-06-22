@@ -6,6 +6,7 @@ FFLAGS = -c -O
 FEXT   = f
 OEXT   = o
 OBJS   =                \
+		 f90_zggev.o \
          zggev.o        \
          disnan.o       \
          dlabad.o       \
@@ -231,6 +232,10 @@ zggbal.o:                   \
   $(BLAS_LOCATION)/zdscal.o \
   $(BLAS_LOCATION)/zswap.o 
 	$(F77) $(FFLAGS) -I$(BLAS_LOCATION) zggbal.f
+
+f90_zggev.o:                    \
+	f90_zggev.f90           
+	$(F77) $(FFLAGS) f90_zggev.f90
 
 zggev.o:                    \
   zggev.f                   \
