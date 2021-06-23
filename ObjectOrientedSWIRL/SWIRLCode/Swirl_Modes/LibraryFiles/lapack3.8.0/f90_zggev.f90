@@ -3,9 +3,9 @@ MODULE F90_ZGGEV
 USE, INTRINSIC :: ISO_FORTRAN_ENV
 IMPLICIT NONE
 PRIVATE
-PUBLIC :: USE_ZGGEV 
+PUBLIC :: USE_EIGENSOLVER 
 
-INTERFACE USE_ZGGEV 
+INTERFACE USE_EIGENSOLVER 
     MODULE PROCEDURE F77_ZGGEV
 END INTERFACE
 
@@ -36,14 +36,16 @@ INTEGER, INTENT(IN) :: &
 REAL(KIND=rDef), DIMENSION(:) , INTENT(IN) :: &
     RWORK
 
+COMPLEX(KIND=rDef) , DIMENSION(:) , INTENT(IN) :: &
+    ALPHA , &
+    BETA  , &
+    WORK
+
 COMPLEX(KIND=rDef) , DIMENSION(:,:) , INTENT(IN) :: & 
     A , &
-    ALPHA , &
     B     , &
-    BETA  , &
     VL    , &
-    VR    , &
-    WORK  
+    VR    
 
 
 
@@ -52,23 +54,24 @@ COMPLEX(KIND=rDef) , DIMENSION(:,:) , INTENT(IN) :: &
 !    WORK( N )
 
 
-!        CALL ZGGEV(&
-!            JOBVL,   & ! JOBVL
-!            JOBVR,   & ! JOBVR
-!            N,     & ! N
-!            A,      & ! A
-!            LDA,   & ! LDA
-!            B,      & ! B
-!            LDB,   & ! LDB
-!            ALPHA,   & ! ALPHA
-!            BETA,    & ! BETA
-!            VL,      & ! VL
-!            LDVL,   & ! LDVL
-!            VR,      & ! VR
-!            LDVR,   & ! LDVR
-!            WORK,    & ! WORK
-!            LWORK, & ! LWORK
-!            RWORK,   & ! RWORK
-!            INFO )     ! INFO
+        CALL ZGGEV(&
+            JOBVL,   & ! JOBVL
+            JOBVR,   & ! JOBVR
+            N,     & ! N
+            A,      & ! A
+            LDA,   & ! LDA
+            B,      & ! B
+            LDB,   & ! LDB
+            ALPHA,   & ! ALPHA
+            BETA,    & ! BETA
+            VL,      & ! VL
+            LDVL,   & ! LDVL
+            VR,      & ! VR
+            LDVR,   & ! LDVR
+            WORK,    & ! WORK
+            LWORK, & ! LWORK
+            RWORK,   & ! RWORK
+            INFO )     ! INFO
+WRITE(6,*) INFO
 END SUBROUTINE F77_ZGGEV
 END MODULE F90_ZGGEV

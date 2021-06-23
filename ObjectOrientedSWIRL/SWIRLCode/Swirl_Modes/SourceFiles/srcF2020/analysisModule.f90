@@ -95,29 +95,43 @@ CONTAINS
 !
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
+
             rm = rmx(j)
             rs = rmt(j)
             as = snd(j)
             r  = rr(j)
+
 !       print*,'ak = ',ak,' as = ',as,' rm = ',rm
+
             if ( (rm.ne.0.0_rDef) .and. (r.ne.0.0_rDef) ) then
+
                 cvct(j) = (ak/as -REAL(mm,rDef)*rs/r)/rm
+
             endif
+
         enddo
+
         open(unit=22,               &
             file='cv.waves.dat',   &
             status='unknown')
         rewind 22
+
         do j=1,np
             write(22,19) cvct(j)
         enddo
+
         write(6,17) (cvct(j), j=1,np)
 17      format(1x,'Convected wavenumbers: ',/,8(f10.5))
+
 19      format(1x,2e15.5)
+
         close(22)
+
 !
 ! Check for zero rows and columns in A.
+
         badcol = .false.
+
         do j=1,np4
             col(j) = .true.
             do k=1,np4
@@ -126,13 +140,16 @@ CONTAINS
                 endif
             enddo
         enddo
+
         do j=1,np4
             if (col(j)) then
                 write(6,20) j
                 badcol = .true.
             endif
         enddo
+
         badrow = .false.
+
         do k=1,np4
             row(k) = .true.
             do j=1,np4
@@ -141,11 +158,14 @@ CONTAINS
                 endif
             enddo
         enddo
+
         do k=1,np4
+
             if (row(k)) then
                 write(6,25) k
                 badrow = .true.
             endif
+
         enddo
 !
         if (badrow.or.badcol) return
@@ -161,48 +181,46 @@ CONTAINS
 
 !     CALL ZGEGV(JOBVL,JOBVR,np4,aa,NMAX4,bb,NMAX4,ALPHA,BETA, &
 !                VL,NMAX4,VR,NMAX4,WORK,2*NMAX4,RWORK,INFO )
-!
+
 ! updated call
-!
-!( JOBVL, JOBVR, N, A, LDA, B, LDB, ALPHA, BETA,  call f90_zggev ( all of the same inputs )
-!   VL, LDVL, VR, LDVR, WORK, LWORK, RWORK, INFO )i
-!            CALL USE_ZGGEV(&
-!            JOBVL = JOBVL  ,   & ! JOBVL
-!            JOBVR = JOBVR  ,   & ! JOBVR
-!            N     = np4      ,     & ! N
-!            A     = aa,      & ! A
-!            LDA   = NMAX4,   & ! LDA
-!            B     = bb,      & ! B
-!            LDB   = NMAX4,   & ! LDB
-!            ALPHA = ALPHA,   & ! ALPHA
-!            BETA  = BETA,    & ! BETA
-!            VL    = VL,      & ! VL
-!            LDVL  = NMAX4,   & ! LDVL
-!            VR    = VR,      & ! VR
-!            LDVR  = NMAX4,   & ! LDVR
-!            WORK  = WORK,    & ! WORK
-!            LWORK = 2*NMAX4, & ! LWORK
-!            RWORK = RWORK,   & ! RWORK
-!            INFO  = INFO )     ! INFO
-!
-        CALL ZGGEV(&
-            JOBVL,   & ! JOBVL
-            JOBVR,   & ! JOBVR
-            np4,     & ! N
-            aa,      & ! A
-            NMAX4,   & ! LDA
-            bb,      & ! B
-            NMAX4,   & ! LDB
-            ALPHA,   & ! ALPHA
-            BETA,    & ! BETA
-            VL,      & ! VL
-            NMAX4,   & ! LDVL
-            VR,      & ! VR
-            NMAX4,   & ! LDVR
-            WORK,    & ! WORK
-            2*NMAX4, & ! LWORK
-            RWORK,   & ! RWORK
-            INFO )     ! INFO
+
+            CALL USE_EIGENSOLVER(&
+            JOBVL = JOBVL  ,   & ! JOBVL
+            JOBVR = JOBVR  ,   & ! JOBVR
+            N     = np4      ,     & ! N
+            A     = aa,      & ! A
+            LDA   = NMAX4,   & ! LDA
+            B     = bb,      & ! B
+            LDB   = NMAX4,   & ! LDB
+            ALPHA = ALPHA,   & ! ALPHA
+            BETA  = BETA,    & ! BETA
+            VL    = VL,      & ! VL
+            LDVL  = NMAX4,   & ! LDVL
+            VR    = VR,      & ! VR
+            LDVR  = NMAX4,   & ! LDVR
+            WORK  = WORK,    & ! WORK
+            LWORK = 2*NMAX4, & ! LWORK
+            RWORK = RWORK,   & ! RWORK
+            INFO  = INFO )     ! INFO
+
+!        CALL ZGGEV(&
+!            JOBVL,   & ! JOBVL
+!            JOBVR,   & ! JOBVR
+!            np4,     & ! N
+!            aa,      & ! A
+!            NMAX4,   & ! LDA
+!            bb,      & ! B
+!            NMAX4,   & ! LDB
+!            ALPHA,   & ! ALPHA
+!            BETA,    & ! BETA
+!            VL,      & ! VL
+!            NMAX4,   & ! LDVL
+!            VR,      & ! VR
+!            NMAX4,   & ! LDVR
+!            WORK,    & ! WORK
+!            2*NMAX4, & ! LWORK
+!            RWORK,   & ! RWORK
+!            INFO )     ! INFO
 !
         write(6,960) info
 960     format(1x,'info = ',i3)

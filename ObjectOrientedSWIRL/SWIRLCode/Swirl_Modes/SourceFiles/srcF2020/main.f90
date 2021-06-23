@@ -6,7 +6,7 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-        numberOfIterations = 7
+        numberOfIterations = 2
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
@@ -215,6 +215,10 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
+        DO i = 1,numberOfGridPoints
+            WRITE(6,FORMAT) axialMachDataOut(i)
+        ENDDO
+            
         ! SoundSpeedError = ABS(SoundSpeedExpected - SoundSpeedOut)
 
         CALL getL2Norm(L2 = SoundSpeedErrorL2 ,&
