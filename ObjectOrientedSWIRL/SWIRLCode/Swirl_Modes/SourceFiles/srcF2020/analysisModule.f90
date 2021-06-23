@@ -164,10 +164,29 @@ CONTAINS
 !
 ! updated call
 !
-! call f90_zggev ( all of the same inputs )
-        CALL USE_ZGGEV()
-
-        CALL ZGGEV(JOBVL,   & ! JOBVL
+!( JOBVL, JOBVR, N, A, LDA, B, LDB, ALPHA, BETA,  call f90_zggev ( all of the same inputs )
+!   VL, LDVL, VR, LDVR, WORK, LWORK, RWORK, INFO )i
+!            CALL USE_ZGGEV(&
+!            JOBVL = JOBVL  ,   & ! JOBVL
+!            JOBVR = JOBVR  ,   & ! JOBVR
+!            N     = np4      ,     & ! N
+!            A     = aa,      & ! A
+!            LDA   = NMAX4,   & ! LDA
+!            B     = bb,      & ! B
+!            LDB   = NMAX4,   & ! LDB
+!            ALPHA = ALPHA,   & ! ALPHA
+!            BETA  = BETA,    & ! BETA
+!            VL    = VL,      & ! VL
+!            LDVL  = NMAX4,   & ! LDVL
+!            VR    = VR,      & ! VR
+!            LDVR  = NMAX4,   & ! LDVR
+!            WORK  = WORK,    & ! WORK
+!            LWORK = 2*NMAX4, & ! LWORK
+!            RWORK = RWORK,   & ! RWORK
+!            INFO  = INFO )     ! INFO
+!
+        CALL ZGGEV(&
+            JOBVL,   & ! JOBVL
             JOBVR,   & ! JOBVR
             np4,     & ! N
             aa,      & ! A
