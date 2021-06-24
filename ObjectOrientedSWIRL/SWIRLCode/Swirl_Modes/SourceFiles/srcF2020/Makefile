@@ -36,6 +36,7 @@
 # Defining colored output for ANSI escape sequences 
 #
 
+
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
 OK_COLOR    = \033[0;32m
@@ -50,13 +51,24 @@ COM_STRING = "Compiling..."
 
 F77      = gfortran
 F90      = gfortran
-F77FLAGS  = -g -c -O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
-F90FLAGS  = -g -c \
-			-O \
+F77FLAGS  = -g -c \
+			-O0 \
 			-std=f2008 \
-			-fbounds-check -fcheck-array-temporaries \
+			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
 			-Wconversion -Wsurprising -Wall -Werror \
-			-ffpe-trap=zero,overflow,underflow
+			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
+			-fdump-fortran-global
+
+
+
+#-O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
+F90FLAGS  = -g -c \
+			-O0 \
+			-std=f2008 \
+			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
+			-Wconversion -Wsurprising -Wall -Werror \
+			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
+			-fdump-fortran-global
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
 #

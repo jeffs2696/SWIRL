@@ -35,17 +35,24 @@ REAL(KIND=rDef),DIMENSION(:), INTENT(IN)  :: dataSet1,&
 !Local variables within submodule only
 
 REAL(KIND=rDef) :: dataSum
-REAL(KIND=rDef), DIMENSION(numPoints) :: dataError,&
+REAL(KIND=rDef), DIMENSION(:),ALLOCATABLE :: dataError,&
                                 dataErrorSquared                 
- 
+                            
+ALLOCATE(dataError(numPoints), &
+         dataErrorSquared(numPoints))
 
 dataSum = 0.0_rDef
+
 DO i = 1,numPoints
 dataError(i) = ABS(dataSet1(i) - dataSet2(i)) 
 dataErrorSquared(i) = dataError(i)**2
 dataSum = dataSum + dataErrorSquared(i)
 ENDDO
+
 L2 = SQRT(dataSum/numPoints)
+
+DEALLOCATE(dataError,dataErrorSquared)
+
 !WRITE(6,*) L2
 END SUBROUTINE L2N
 SUBROUTINE L2N_COMPLEX(L2,&

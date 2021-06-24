@@ -174,8 +174,12 @@ CONTAINS
 ! JS: removed read from file functionality
        ! open(unit=24,file='swrl.input',status='unknown')
        ! READ(24,*) nptsIn
-       ! ALLOCATE(rIn(nptsIn), &
-             ! rmswIn(nPtsIn))
+
+            nptsIn = SIZE(rmsw)
+            
+       ALLOCATE(rIn(nptsIn), &
+             rmswIn(nPtsIn))
+
        ! DO i=1,nptsIn
         ! READ(24,*) rIn(i),rmswIn(i)
        ! END DO
@@ -187,16 +191,15 @@ CONTAINS
 ! spline data onto grid
 !
 
-            nptsIn = SIZE(rmsw)
             rIn = rr
             rmswIn = rmsw
-       CALL Akima433Interpolation(inputDataLength  = nptsIn, &
-                                  xInputData       = rIn,    &
-                                  yInputData       = rmswIn, &
-                                  outputDataLength = npts,   &
-                                  xOutputData      = rr,     &
-                                  yOutputData      = rmsw)
-
+!       CALL Akima433Interpolation(inputDataLength  = nptsIn, &
+!                                  xInputData       = rIn,    &
+!                                  yInputData       = rmswIn, &
+!                                  outputDataLength = npts,   &
+!                                  xOutputData      = rr,     &
+!                                  yOutputData      = rmsw)
+!
        DEALLOCATE(rIn, rmswIn)
 !
 ! Spectral computation of M_theta'.

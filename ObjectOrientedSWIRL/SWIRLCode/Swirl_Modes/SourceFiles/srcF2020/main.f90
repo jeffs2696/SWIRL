@@ -6,12 +6,12 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-        numberOfIterations = 2
+        numberOfIterations = 5
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
     INTEGER  :: &
-        unit                ,& ! for NEWUNIT
+        ! myunit               ,& ! for NEWUNIT
         finiteDiffFlag      ,& ! finite difference flag
         azimuthalModeNumber ,& ! mode order
         numberOfGridPoints  ,& ! number of points
@@ -135,9 +135,7 @@ PROGRAM MAIN
         ! write integer into a string 
         WRITE(file_id, '(i0)') numberOfGridPoints
         ! Construct the file name 
-        file_name = 'InputFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
-
-        OPEN(NEWUNIT = unit, FILE = TRIM(file_name))
+        file_name = 'MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
 
         WRITE(6, *) '       # Grid Points:                   ',  numberOfGridPoints
 
@@ -199,6 +197,7 @@ PROGRAM MAIN
             ELSE
 
                 WRITE(6, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
+                ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
 
             ENDIF
         ENDDO
@@ -226,18 +225,37 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
+        ! OPEN(NEWUNIT = myunit, FILE = TRIM(file_name))
+
         DO i = 1,numberOfGridPoints
 
-            WRITE(unit,FORMAT) &
+!            WRITE(myunit,*) &
+!                rOut(i)                 , &
+!                axialMachDataOut(i)     , &
+!                thetaMachDataOut(i)     , &
+!                SoundSpeedExpected(i)   , &
+!                SoundSpeedOut(i)        
+
+            WRITE(6,*) &
                 rOut(i)                 , &
                 axialMachDataOut(i)     , &
                 thetaMachDataOut(i)     , &
-                axialMachData_dr_Out(i) , &
-                thetaMachData_dr_Out(i) , &
-                SoundSpeedOut(i)        , &
-                SoundSpeed_dr_Out        
+                SoundSpeedExpected(i)   , &
+                SoundSpeedOut(i)        
+
+            ! WRITE(6,FORMAT) &
+            !     r(i)                 , &
+            !     axialMachData(i)     , &
+            !     thetaMachData(i)     , &
+            !     ! axialMachData_dr_Out(i) , &
+            !     ! thetaMachData_dr_Out(i) , &
+            !     SoundSpeedExpected(i)   , &
+            !     SoundSpeedOut(i)        
+                ! SoundSpeed_dr_Out        
 
         ENDDO
+
+        ! CLOSE(myunit)
             
         ! SoundSpeedError = ABS(SoundSpeedExpected - SoundSpeedOut)
 
@@ -247,6 +265,7 @@ PROGRAM MAIN
             numPoints = numberOfGridPoints )
 
         SoundSpeedL2Array(fac) = SoundSpeedErrorL2
+        WRITE(6,*) 'SoundSpeedErrorL2' , SoundSpeedErrorL2
 
 
         CALL DestroyObject(object = swirlClassObj(fac))
@@ -267,7 +286,6 @@ PROGRAM MAIN
             SoundSpeedError                   )
 
 
-    CLOSE(unit)
 
     END DO
 
@@ -277,6 +295,7 @@ PROGRAM MAIN
     END DO
 
     DO i = 1,numberOfIterations - 1
+
         RateOfConvergence(i) = &
             (&
             LOG(SoundSpeedL2Array(i+1)) -&
@@ -284,6 +303,7 @@ PROGRAM MAIN
             )&
             /&
             LOG(0.5_rDef)
+
         WRITE(6,*) RateOfConvergence(i)
 
 
