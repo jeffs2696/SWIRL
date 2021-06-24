@@ -11,6 +11,7 @@ PROGRAM MAIN
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
     INTEGER  :: &
+        unit                ,& ! for NEWUNIT
         finiteDiffFlag      ,& ! finite difference flag
         azimuthalModeNumber ,& ! mode order
         numberOfGridPoints  ,& ! number of points
@@ -64,6 +65,9 @@ PROGRAM MAIN
         rVelMax = 0.00_rDef  ,&
         slope   = 0.0_rDef   ,&
         angom   = 0.00_rDef
+
+    CHARACTER(50) :: &
+        file_name
 
     CHARACTER(30):: FORMAT
 
@@ -128,7 +132,12 @@ PROGRAM MAIN
         facCount = facCount + 1
         numberOfGridPoints   = 1+(2**fac)
 
+        ! write integer into a string 
         WRITE(file_id, '(i0)') numberOfGridPoints
+        ! Construct the file name 
+        file_name = 'InputFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
+
+        OPEN(NEWUNIT = unit, FILE = TRIM(file_name))
 
         WRITE(6, *) '       # Grid Points:                   ',  numberOfGridPoints
 
@@ -151,7 +160,9 @@ PROGRAM MAIN
         dr = (radMax-radMin)/REAL(numberOfGridPoints-1, rDef)
 
         DO i = 1, numberOfGridPoints
+
             r(i) = (radMin+REAL(i-1, rDef)*dr)/radMax
+
         END DO
 
         WRITE(6,*) ' '
@@ -216,7 +227,16 @@ PROGRAM MAIN
             radialData      = rOut)
 
         DO i = 1,numberOfGridPoints
-            WRITE(6,FORMAT) axialMachDataOut(i)
+
+            WRITE(unit,FORMAT) &
+                rOut(i)                 , &
+                axialMachDataOut(i)     , &
+                thetaMachDataOut(i)     , &
+                axialMachData_dr_Out(i) , &
+                thetaMachData_dr_Out(i) , &
+                SoundSpeedOut(i)        , &
+                SoundSpeed_dr_Out        
+
         ENDDO
             
         ! SoundSpeedError = ABS(SoundSpeedExpected - SoundSpeedOut)
@@ -247,6 +267,8 @@ PROGRAM MAIN
             SoundSpeedError                   )
 
 
+    CLOSE(unit)
+
     END DO
 
     WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
@@ -263,7 +285,12 @@ PROGRAM MAIN
             /&
             LOG(0.5_rDef)
         WRITE(6,*) RateOfConvergence(i)
+
+
+        ! CLOSE(unit)
+
     ENDDO
+
     DEALLOCATE( &
         SoundSpeedL2Array ,&
         RateOfConvergence)
