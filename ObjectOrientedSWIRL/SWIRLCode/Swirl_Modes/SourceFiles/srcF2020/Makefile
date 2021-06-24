@@ -179,8 +179,8 @@ LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zunmqr.o
 
 all:  $(OBJECTS)
-	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
-	@$(F90) -o $(EXE) $(BLAS_OBJS) \
+	printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
+	$(F90) -o $(EXE) $(BLAS_OBJS) \
              $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \
 	RESULT=$$?; \
 		if [ $$RESULT -ne 0 ]; then \
@@ -194,8 +194,8 @@ all:  $(OBJECTS)
 			rm -f $@.log; \
 			exit $$RESULT
 
-	@mv $(EXE) $(EXECUTABLE_LOCATION)
-	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
+	mv $(EXE) $(EXECUTABLE_LOCATION)
+	(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 #
 #  clean
 clean:

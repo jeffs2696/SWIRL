@@ -88,23 +88,21 @@ MODULE swirlClassObject
           COMPLEX(KIND = REAL64) ::&
               frequency        , &
               hubLinerAdmittance, &
-              ductLinerAdmittance!, & L2N
+              ductLinerAdmittance 
 
           COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
               aa, bb
-          COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
-              aa_before, bb_before
+          ! COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
+              ! aa_before, bb_before
 
           COMPLEX(KIND = REAL64), DIMENSION(:), ALLOCATABLE ::&
               alpha, &
               beta,  &
               work,  &
               vph,   &
-              S_MMS, &
               wvn
 
           COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE :: &
-              S_MMS_Array, &
               vl, &
               vr
 
@@ -427,7 +425,7 @@ MODULE swirlClassObject
 ! 
 !
 
-          TYPE(SwirlClassType), INTENT(INOUT) ::&
+          TYPE(SwirlClassType), INTENT(IN) ::&
               object
           REAL(KIND = rDef), DIMENSION(object%numberOfRadialPoints), INTENT(OUT) :: &
               axialMach, &

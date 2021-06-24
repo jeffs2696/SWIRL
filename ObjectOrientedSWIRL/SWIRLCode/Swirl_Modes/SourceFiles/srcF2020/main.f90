@@ -80,15 +80,6 @@ PROGRAM MAIN
 
     FORMAT = "(F12.5,F12.5,F12.5,F12.5)" ! General format for numerical
 
-!    WRITE(6,*) 'SWIRL STARTS HERE - main.f90'
-!
-!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
-!    WRITE(6,*) '    Defining inputs needed for SwirlClassType class definition'
-!    WRITE(6,*) '    ALL INPUTS ARE NON DIMENSIONAL                            '
-!    WRITE(6,*) '    BE WEARY OF CONTRADICTIONS IN MAGNITUDE                   '
-!    WRITE(6,*) '-------------------------------------------------------------------------------------------------'
-!    WRITE(6,*) ' '
-!
     ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
 
     ! inputs needed for SwirlClassType
@@ -119,7 +110,7 @@ PROGRAM MAIN
     ! Starting Grid DO LOOP
 
 
-    WRITE(6, *) '       Number of Grid Study Iterations: ' , numberOfIterations
+    WRITE(6, *) 'Number of Grid Study Iterations: ' , numberOfIterations
 
     ALLOCATE(&
         SoundSpeedL2Array(numberOfIterations)       ,&
@@ -136,6 +127,8 @@ PROGRAM MAIN
         WRITE(file_id, '(i0)') numberOfGridPoints
         ! Construct the file name 
         file_name = 'MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
+
+        ! OPEN(NEWUNIT = myunit, FILE = TRIM(file_name) )
 
         WRITE(6, *) '       # Grid Points:                   ',  numberOfGridPoints
 
@@ -225,16 +218,16 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
-        ! OPEN(NEWUNIT = myunit, FILE = TRIM(file_name))
+         ! OPEN(505 , FILE = TRIM(file_name) )
 
         DO i = 1,numberOfGridPoints
 
-!            WRITE(myunit,*) &
-!                rOut(i)                 , &
-!                axialMachDataOut(i)     , &
-!                thetaMachDataOut(i)     , &
-!                SoundSpeedExpected(i)   , &
-!                SoundSpeedOut(i)        
+           ! WRITE(myunit,*) &
+           !     rOut(i)                 , &
+           !     axialMachDataOut(i)     , &
+           !     thetaMachDataOut(i)     , &
+           !     SoundSpeedExpected(i)   , &
+           !     SoundSpeedOut(i)        
 
             WRITE(6,*) &
                 rOut(i)                 , &
@@ -255,8 +248,8 @@ PROGRAM MAIN
 
         ENDDO
 
-        ! CLOSE(myunit)
             
+        ! CLOSE(myunit)
         ! SoundSpeedError = ABS(SoundSpeedExpected - SoundSpeedOut)
 
         CALL getL2Norm(L2 = SoundSpeedErrorL2 ,&
@@ -305,9 +298,6 @@ PROGRAM MAIN
             LOG(0.5_rDef)
 
         WRITE(6,*) RateOfConvergence(i)
-
-
-        ! CLOSE(unit)
 
     ENDDO
 
