@@ -8,7 +8,7 @@ MODULE swirlClassObject
       USE fdrivsModule
       USE globalModule
       USE gridModule
-      USE inputModule
+      ! USE inputModule
       USE interpModule
       USE machoutModule
       USE outputModule
