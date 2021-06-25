@@ -50,7 +50,7 @@ dataErrorSquared(i) = dataError(i)**2
 dataSum = dataSum + dataErrorSquared(i)
 ENDDO
 
-L2 = SQRT(dataSum/numPoints)
+L2 = SQRT(dataSum/REAL(numPoints,rDef))
 
 DEALLOCATE(dataError,dataErrorSquared)
 
@@ -58,30 +58,32 @@ DEALLOCATE(dataError,dataErrorSquared)
 END SUBROUTINE L2N
 SUBROUTINE L2N_COMPLEX(L2,&
               dataSet1,&
-              dataSet2,&
-              numPoints)
-!lenDataSet = SIZE(dataSet)
+              dataSet2)!,& numPoints)
 
 
-INTEGER, INTENT(INOUT) :: numPoints
 COMPLEX(KIND=rDef), INTENT(INOUT) :: L2
 COMPLEX(KIND=rDef),DIMENSION(:), INTENT(IN)  :: dataSet1,&
                                              dataSet2
-
 !Local variables within submodule only
 
+INTEGER  :: numPoints
 COMPLEX(KIND=rDef) :: dataSum
-COMPLEX(KIND=rDef), DIMENSION(numPoints) :: dataError,&
+COMPLEX(KIND=rDef), DIMENSION(:), ALLOCATABLE :: dataError,&
                                 dataErrorSquared                 
+numPoints = SIZE(dataSet1)
+ALLOCATE(&
+    dataError(numPoints) , &
+    dataErrorSquared(numPoints))
  
-
-dataSum = 0.0_rDef
+dataSum = CMPLX(0.0,0.0,rDef)
 DO i = 1,numPoints
 dataError(i) = ABS(dataSet1(i) - dataSet2(i)) 
 dataErrorSquared(i) = dataError(i)**2
 dataSum = dataSum + dataErrorSquared(i)
 ENDDO
-L2 = SQRT(dataSum/numPoints)
+L2 = SQRT(dataSum/CMPLX(numPoints,KIND=rDef))
+
+DEALLOCATE(dataError,dataErrorSquared)
 END SUBROUTINE L2N_COMPLEX
 SUBROUTINE L2N_2D(L2    ,&
                   dataSet1,&
@@ -111,7 +113,8 @@ dataErrorSquared(i,j) = dataError(i,j)**2
 dataSum = dataSum + dataErrorSquared(i,j)
 ENDDO
 ENDDO
-L2 = SQRT(dataSum/numPoints)
+L2 = SQRT(CMPLX(dataSum,KIND=rDef) &
+    /CMPLX(numPoints,KIND=rDef))
 WRITE(6,*) L2
 END SUBROUTINE L2N_2D
 END MODULE L2NormModule

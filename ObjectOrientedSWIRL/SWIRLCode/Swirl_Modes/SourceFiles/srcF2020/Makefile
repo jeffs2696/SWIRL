@@ -3,8 +3,7 @@
 #   Makefile for SWIRL
 #   Version 3.2
 #
-#   Kenneth A. Kousen
-#   United Technologies Research Center
+#   Kenneth A. Kousen #   United Technologies Research Center
 #   411 Silver Lane, MS 129-20
 #   East Hartford, CT  06118
 #   (860) 727-7743
@@ -67,8 +66,9 @@ F90FLAGS  = -g -c \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
+			-Wno-error=compare-reals \
 			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
-			-fdump-fortran-global -frealloc-lhs \
+			-fdump-fortran-global \
 			-fimplicit-none
 
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \

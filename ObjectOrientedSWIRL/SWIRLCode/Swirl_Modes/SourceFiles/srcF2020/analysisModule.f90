@@ -73,7 +73,8 @@ CONTAINS
             row
 
         COMPLEX(KIND=rDef) :: c0, &
-            ci
+            ci, &
+            beta_non_zero
 
         COMPLEX(KIND=rDef), DIMENSION(np4) :: cvct
 
@@ -243,7 +244,9 @@ CONTAINS
 500     format(1x)
         write(6,50)
         do j=1,np4
-            if (beta(j).ne.c0) then
+
+        beta_non_zero = beta(j)
+            if (beta_non_zero.ne.c0) then
                 gam(j) = ci*alpha(j)/beta(j)
                 if (abs(AIMAG(gam(j))).lt.eps) then
                     gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
