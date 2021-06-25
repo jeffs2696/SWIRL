@@ -22,22 +22,23 @@ CONTAINS
 
 SUBROUTINE L2N(L2,&
               dataSet1,&
-              dataSet2,&
-              numPoints)
+              dataSet2)
 !lenDataSet = SIZE(dataSet)
 
 
-INTEGER, INTENT(INOUT) :: numPoints
+! INTEGER, INTENT(INOUT) :: numPoints
 REAL(KIND=rDef), INTENT(INOUT) :: L2
 REAL(KIND=rDef),DIMENSION(:), INTENT(IN)  :: dataSet1,&
                                              dataSet2
 
 !Local variables within submodule only
-
+INTEGER :: numPoints
 REAL(KIND=rDef) :: dataSum
 REAL(KIND=rDef), DIMENSION(:),ALLOCATABLE :: dataError,&
                                 dataErrorSquared                 
                             
+                           
+numPoints = SIZE(dataSet1)
 ALLOCATE(dataError(numPoints), &
          dataErrorSquared(numPoints))
 

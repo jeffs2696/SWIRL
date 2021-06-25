@@ -1,4 +1,4 @@
-##################################################################
+##################################################################}}}}}}}
 #
 #   Makefile for SWIRL
 #   Version 3.2
@@ -55,20 +55,22 @@ F77FLAGS  = -g -c \
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-Wconversion -Wsurprising -Wall -Werror \
+			-Wall -Wline-truncation -Wuninitialized -Wconversion -Wsurprising \
+		   	-Warray-temporaries -Wconversion-extra -Wextra -Werror \
 			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
-			-fdump-fortran-global
-
-
+			-fdump-fortran-global 
 
 #-O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
 F90FLAGS  = -g -c \
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-Wconversion -Wsurprising -Wall -Werror \
+			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
+			-Wconversion -Wsurprising -Warray-temporaries \
 			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
-			-fdump-fortran-global
+			-fdump-fortran-global -frealloc-lhs \
+			-fimplicit-none
+
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
 #
@@ -179,8 +181,8 @@ LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zunmqr.o
 
 all:  $(OBJECTS)
-	printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
-	$(F90) -o $(EXE) $(BLAS_OBJS) \
+	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
+	@$(F90) -o $(EXE) $(BLAS_OBJS) \
              $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \
 	RESULT=$$?; \
 		if [ $$RESULT -ne 0 ]; then \
@@ -194,8 +196,8 @@ all:  $(OBJECTS)
 			rm -f $@.log; \
 			exit $$RESULT
 
-	mv $(EXE) $(EXECUTABLE_LOCATION)
-	(cd $(EXECUTABLE_LOCATION); ./$(EXE))
+	@mv $(EXE) $(EXECUTABLE_LOCATION)
+	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 #
 #  clean
 clean:

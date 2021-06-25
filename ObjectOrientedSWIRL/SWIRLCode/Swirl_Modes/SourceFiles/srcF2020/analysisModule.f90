@@ -85,7 +85,7 @@ CONTAINS
 
         REAL(KIND=rDef) :: as, &
             eps, &
-            gamco, &
+            ! gamco, &
             r, &
             rm, &
             rs
@@ -103,11 +103,12 @@ CONTAINS
 
 !       print*,'ak = ',ak,' as = ',as,' rm = ',rm
 
-            if ( (rm.ne.0.0_rDef) .and. (r.ne.0.0_rDef) ) then
+            ! if ( (rm.ne.0.0_rDef) .and. (r.ne.0.0_rDef) ) then
 
-                cvct(j) = (ak/as -REAL(mm,rDef)*rs/r)/rm
+                cvct(j) = (ak/CMPLX(as,KIND=rDef) -CMPLX(mm,KIND=rDef)*CMPLX(rs,KIND=rDef)/CMPLX(r,KIND=rDef))/CMPLX(rm,KIND=rDef)
 
-            endif
+
+            ! endif
 
         enddo
 
@@ -228,12 +229,14 @@ CONTAINS
         c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
 !
 ! Compute cut-off wavenumber for uniform flow.
-        if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
-            rm = rmx(1)
-            gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
-            write(6,30) gamco
-        endif
-30      format(/,1x,'Cut-off wavenumber: ',e15.5,/)
+! getting -Werror=compare-reals error with the if statements
+
+      !  if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
+      !      rm = rmx(1)
+      !      gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
+      !      write(6,30) gamco
+      !  endif
+! 30      format(/,1x,'Cut-off wavenumber: ',e15.5,/)
 !
 ! Print the gammas to the display.
         write(6,500)

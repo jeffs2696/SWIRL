@@ -11,7 +11,7 @@ PROGRAM MAIN
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
     INTEGER  :: &
-        ! myunit               ,& ! for NEWUNIT
+        ! UNIT               ,& ! for NEWUNIT
         finiteDiffFlag      ,& ! finite difference flag
         azimuthalModeNumber ,& ! mode order
         numberOfGridPoints  ,& ! number of points
@@ -61,10 +61,7 @@ PROGRAM MAIN
 
     REAL(KIND = rDef), PARAMETER ::&
         radMin  = 0.20_rDef  ,&
-        radMax  = 1.00_rDef  ,&
-        rVelMax = 0.00_rDef  ,&
-        slope   = 0.0_rDef   ,&
-        angom   = 0.00_rDef
+        radMax  = 1.00_rDef  
 
     CHARACTER(50) :: &
         file_name
@@ -86,8 +83,8 @@ PROGRAM MAIN
     azimuthalModeNumber       = 2
     hubToTipRatio             = radMin/radMax
     frequency                 =  CMPLX(20.0, 0, rDef)
-    hubAdmittance             =  0.40_rDef
-    ductAdmittance            =  0.70_rDef
+    hubAdmittance             =  CMPLX(0.40, 0 ,rDef)
+    ductAdmittance            =  CMPLX(0.70,0,rDef)
     finiteDiffFlag            =  1
     secondOrderSmoother       =  0.0_rDef
     fourthOrderSmoother       =  0.0_rDef
@@ -128,9 +125,10 @@ PROGRAM MAIN
         ! Construct the file name 
         file_name = 'MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
 
-        ! OPEN(NEWUNIT = myunit, FILE = TRIM(file_name) )
+        ! OPEN(NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
-        WRITE(6, *) '       # Grid Points:                   ',  numberOfGridPoints
+        
+        WRITE(6, *) '# Grid Points ',  numberOfGridPoints
 
         ALLOCATE(&
             r(numberOfGridPoints)                                         ,&
@@ -249,13 +247,13 @@ PROGRAM MAIN
         ENDDO
 
             
-        ! CLOSE(myunit)
+        ! CLOSE(UNIT)
         ! SoundSpeedError = ABS(SoundSpeedExpected - SoundSpeedOut)
 
         CALL getL2Norm(L2 = SoundSpeedErrorL2 ,&
             dataSet1  = SoundSpeedExpected ,&
-            dataSet2  = SoundSpeedOut      ,&
-            numPoints = numberOfGridPoints )
+            dataSet2  = SoundSpeedOut      )!,&
+           ! numPoints = numberOfGridPoints )
 
         SoundSpeedL2Array(fac) = SoundSpeedErrorL2
         WRITE(6,*) 'SoundSpeedErrorL2' , SoundSpeedErrorL2
