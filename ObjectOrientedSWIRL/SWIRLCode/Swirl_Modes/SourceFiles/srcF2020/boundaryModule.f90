@@ -61,23 +61,23 @@ CONTAINS
        rmh    = sqrt(rmx(1)*rmx(1)   +rmt(1)*rmt(1))
        rmd    = sqrt(rmx(np)*rmx(np) +rmt(np)*rmt(np))
        aa(np,np)   = ci*ak
-       aa(np,2*np) = 0.0_rDef
+       aa(np,2*np) = CMPLX(0.0_rDef,KIND=rDef)
        do j=1,np
-        aa(np,3*np+j) = 0.0_rDef
+        aa(np,3*np+j) = CMPLX(0.0_rDef,KIND=rDef)
        enddo
        aa(np,4*np) = -ci*ak*etad
-       bb(np,np)   = 0.0_rDef
-       bb(np,4*np) = etad*rmd
+       bb(np,np)   = CMPLX(0.0_rDef,KIND=rDef)
+       bb(np,4*np) = etad*CMPLX(rmd,KIND=rDef)
 
        if (sig.ne.0.0_rDef) then
         aa(1,1)    = -ci*ak
-        aa(1,np+1) = 0.0_rDef
+        aa(1,np+1) = CMPLX(0.0_rDef,KIND=rDef)
         do j=1,np
-         aa(1,3*np+j) = 0.0_rDef
+         aa(1,3*np+j) = CMPLX(0.0_rDef,KIND=rDef)
         enddo
         aa(1,3*np+1) = -ci*ak*etah
-        bb(1,1)      = 0.0_rDef
-        bb(1,3*np+1) = etah*rmh
+        bb(1,1)      = CMPLX(0.0_rDef,KIND=rDef)
+        bb(1,3*np+1) = etah*CMPLX(rmh,KIND=rDef)
        endif
 
       else
@@ -86,16 +86,16 @@ CONTAINS
 
        if (sig.ne.0.0_rDef) then ! there is an inner wall : BC: v_r = 0
         do j = 1,np
-         aa(1,  np+j) = 0.0_rDef ! v_r eqn at inner wall, v_th entries
-         aa(1,3*np+j) = 0.0_rDef ! v_r eqn at inner wall, p entries
-         bb(1,     j) = 0.0_rDef ! v_r eqn at inner wall, v_r entries
+         aa(1,  np+j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at inner wall, v_th entries
+         aa(1,3*np+j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at inner wall, p entries
+         bb(1,     j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at inner wall, v_r entries
         enddo
        endif
 
        do j = 1,np               ! outer wall : BC: v_r = 0
-        aa(np,  np+j) = 0.0_rDef ! v_r eqn at outer wall, v_th entries
-        aa(np,3*np+j) = 0.0_rDef ! v_r eqn at outer wall, p entries
-        bb(np,     j) = 0.0_rDef ! v_r eqn at outer wall, v_r entries
+        aa(np,  np+j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at outer wall, v_th entries
+        aa(np,3*np+j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at outer wall, p entries
+        bb(np,     j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at outer wall, v_r entries
        enddo
       endif
 !
