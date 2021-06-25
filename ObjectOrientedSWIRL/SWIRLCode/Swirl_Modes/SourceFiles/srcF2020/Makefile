@@ -66,7 +66,7 @@ F90FLAGS  = -g -c \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
-			-Wconversion -Wsurprising -Warray-temporaries \
+			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
 			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-fdump-fortran-global -frealloc-lhs \
 			-fimplicit-none
