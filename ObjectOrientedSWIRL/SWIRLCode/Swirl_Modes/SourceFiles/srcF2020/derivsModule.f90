@@ -104,7 +104,7 @@ CONTAINS
        if (k.eq.1 .or. k.eq.np) cbk = 2.0_rDef
 
        do j=1,np
-        xj  = COS(REAL(j-1)*pinr)
+        xj  = COS(REAL(j-1,rDef)*pinr)
         cbj = 1.0_rDef
         if (j.eq.1 .or. j.eq.np) cbj = 2.0_rDef
 
