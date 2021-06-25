@@ -91,8 +91,11 @@ OBJECTS  =                  \
 	rmachModule.o 			\
 	smachAndSndspdModule.o  \
     machoutModule.o 		\
-	fdgridModule.o fdrivsModule.o kapsubModule.o                         \
-        interpModule.o inputModule.o Akima1D.f90                                             \
+	fdgridModule.o 			\
+   	fdrivsModule.o 			\
+	kapsubModule.o          \
+    interpModule.o 			\
+	Akima1D.f90             \
 	akima433.o
 
 EXECUTABLE_LOCATION = ../../CodeRun
@@ -238,7 +241,6 @@ main.o: main.f90        \
          fdrivsModule.o   \
          globalModule.o   \
          gridModule.o     \
-         inputModule.o    \
          interpModule.o   \
 	 machoutModule.o  \
          outputModule.o   \
@@ -271,9 +273,6 @@ globalModule.o:  globalModule.f90
 
 gridModule.o:  gridModule.f90
 	$(F90) $(F90FLAGS) gridModule.f90
-
-inputModule.o:  inputModule.f90
-	$(F90) $(F90FLAGS) inputModule.f90
 
 fdgridModule.o:  fdgridModule.f90
 	$(F90) $(F90FLAGS) fdgridModule.f90
