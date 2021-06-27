@@ -49,7 +49,7 @@ CONTAINS
             enddo
         enddo
 
-        do i = 1,np
+        do i = 2,np+1
             if (iorder.eq.2) then
                 ! if (i.eq.1) then
                 !     dl1(i,1) = -25.0_rDef
@@ -83,14 +83,14 @@ CONTAINS
                 !     dl1(i,i+2) = -1.0_rDef
                 ! endif
             else
-                if (i.eq.1) then
-                    dl1(i,1) =  -3.0_rDef
-                    dl1(i,2) =   4.0_rDef
-                    dl1(i,3) =  -1.0_rDef
-                elseif (i.eq.np) then
-                    dl1(i,np-2) =  1.0_rDef
-                    dl1(i,np-1) = -4.0_rDef
-                    dl1(i,np)   =  3.0_rDef
+                if (i.eq.2) then
+                    dl1(i-1,1) =  -3.0_rDef
+                    dl1(i-1,2) =   4.0_rDef
+                    dl1(i-1,3) =  -1.0_rDef
+                elseif (i.eq.(np+1)) then
+                    dl1(i,np-1) =  1.0_rDef
+                    dl1(i,np) = -4.0_rDef
+                    dl1(i,np+1)   =  3.0_rDef
                 else
                     dl1(i,i-1) = -1.0_rDef
                     dl1(i,i)   =  0.0_rDef
@@ -107,6 +107,11 @@ CONTAINS
 ! 10      format(1x,16f7.1)
         ! close(15)
 !
+
+        do i = 1,np
+            write(6,10) (dl1(i,j), j=1,np)
+        enddo
+10      format(1x,16f7.1)
 
         coeff  = 0.50_rDef*(1.0_rDef -sig)
         dx = 2.0_rDef/REAL(np -1,rDef)

@@ -54,9 +54,9 @@ F77FLAGS  = -g -c \
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
+			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-Wall -Wline-truncation -Wuninitialized -Wconversion -Wsurprising \
 		   	-Warray-temporaries -Wconversion-extra -Wextra -Werror \
-			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-fdump-fortran-global 
 
 #-O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
@@ -64,13 +64,14 @@ F90FLAGS  = -g -c \
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
-			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
-			-Wno-error=compare-reals -Wno-error=do-subscript -Wno-error=array-temporaries \
-			-Wno-error=conversion-extra \
 			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-fdump-fortran-global \
-			-fimplicit-none
+			-fimplicit-none \
+			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
+			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
+			-Wno-error=compare-reals \
+			
+#-Wno-error=do-subscript \ -Wno-error=array-temporaries \ -Wno-error=conversion-extra 
 # -Wno-error=do-subscript
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
