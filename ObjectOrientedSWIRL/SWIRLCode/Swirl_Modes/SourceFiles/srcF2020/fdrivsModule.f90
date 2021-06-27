@@ -51,37 +51,37 @@ CONTAINS
 
         do i = 1,np
             if (iorder.eq.2) then
-                if (i.eq.1) then
-                    dl1(i,1) = -25.0_rDef
-                    dl1(i,2) =  48.0_rDef
-                    dl1(i,3) = -36.0_rDef
-                    dl1(i,4) =  16.0_rDef
-                    dl1(i,5) =  -3.0_rDef
-                elseif (i.eq.2) then
-                    dl1(i,1) =  -3.0_rDef
-                    dl1(i,2) = -10.0_rDef
-                    dl1(i,3) =  18.0_rDef
-                    dl1(i,4) =  -6.0_rDef
-                    dl1(i,5) =   1.0_rDef
-                elseif (i.eq.np-1) then
-                    dl1(i,np-4) =  -1.0_rDef
-                    dl1(i,np-3) =   6.0_rDef
-                    dl1(i,np-2) = -18.0_rDef
-                    dl1(i,np-1) =  10.0_rDef
-                    dl1(i,np)   =   3.0_rDef
-                elseif (i.eq.np) then
-                    dl1(i,np-4) =   3.0_rDef
-                    dl1(i,np-3) = -16.0_rDef
-                    dl1(i,np-2) =  36.0_rDef
-                    dl1(i,np-1) = -48.0_rDef
-                    dl1(i,np)   =  25.0_rDef
-                else
-                    dl1(i,i-2) =  1.0_rDef
-                    dl1(i,i-1) = -8.0_rDef
-                    dl1(i,i)   =  0.0_rDef
-                    dl1(i,i+1) =  8.0_rDef
-                    dl1(i,i+2) = -1.0_rDef
-                endif
+                ! if (i.eq.1) then
+                !     dl1(i,1) = -25.0_rDef
+                !     dl1(i,2) =  48.0_rDef
+                !     dl1(i,3) = -36.0_rDef
+                !     dl1(i,4) =  16.0_rDef
+                !     dl1(i,5) =  -3.0_rDef
+                ! elseif (i.eq.2) then
+                !     dl1(i,1) =  -3.0_rDef
+                !     dl1(i,2) = -10.0_rDef
+                !     dl1(i,3) =  18.0_rDef
+                !     dl1(i,4) =  -6.0_rDef
+                !     dl1(i,5) =   1.0_rDef
+                ! elseif (i.eq.np-1) then
+                !     dl1(i,np-4) =  -1.0_rDef
+                !     dl1(i,np-3) =   6.0_rDef
+                !     dl1(i,np-2) = -18.0_rDef
+                !     dl1(i,np-1) =  10.0_rDef
+                !     dl1(i,np)   =   3.0_rDef
+                ! elseif (i.eq.np) then
+                !     dl1(i,np-4) =   3.0_rDef
+                !     dl1(i,np-3) = -16.0_rDef
+                !     dl1(i,np-2) =  36.0_rDef
+                !     dl1(i,np-1) = -48.0_rDef
+                !     dl1(i,np)   =  25.0_rDef
+                ! else
+                !     dl1(i,i-2) =  1.0_rDef
+                !     dl1(i,i-1) = -8.0_rDef
+                !     dl1(i,i)   =  0.0_rDef
+                !     dl1(i,i+1) =  8.0_rDef
+                !     dl1(i,i+2) = -1.0_rDef
+                ! endif
             else
                 if (i.eq.1) then
                     dl1(i,1) =  -3.0_rDef
@@ -107,6 +107,7 @@ CONTAINS
 ! 10      format(1x,16f7.1)
         ! close(15)
 !
+
         coeff  = 0.50_rDef*(1.0_rDef -sig)
         dx = 2.0_rDef/REAL(np -1,rDef)
         do j = 1,np

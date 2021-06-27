@@ -27,7 +27,7 @@
 #   - added a line to the all: rule to run the executable in the CodeRun
 #   folder 
 #   - added floating point exception flags
-#
+#   - added -Wextra which caught some more bugs
 #   TO DO:
 #   		
 ###################################################################
@@ -66,11 +66,12 @@ F90FLAGS  = -g -c \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
-			-Wno-error=compare-reals -Wno-error=do-subscript \
+			-Wno-error=compare-reals -Wno-error=do-subscript -Wno-error=array-temporaries \
+			-Wno-error=conversion-extra \
 			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-fdump-fortran-global \
 			-fimplicit-none
-
+# -Wno-error=do-subscript
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
 #

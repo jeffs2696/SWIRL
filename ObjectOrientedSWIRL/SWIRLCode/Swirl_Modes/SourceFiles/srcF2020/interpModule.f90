@@ -80,8 +80,7 @@ CONTAINS
       REAL(KIND=rSP), DIMENSION(:), ALLOCATABLE :: xx, &
                                                   ymx, &
                                                   ymt, &
-                                                  yab
-      
+                                                  yab 
 !
 ! Use fitpack to interpolate the given Mach distributions onto an
 !  appropriate cosine mesh.
@@ -101,8 +100,8 @@ CONTAINS
 !
       WRITE(6,*) 'Entering interp'
       trans = 'N'
-      alpha = 1.
-      beta  = 0.
+      alpha = 1.0_rDef
+      beta  = 0.0_rDef
       incx  = 1
       incy  = 1
 !
@@ -136,7 +135,7 @@ CONTAINS
       END DO
 
       close(10)
-      sig    =  xx(1)/xx(nvals)
+      sig    =  REAL(xx(1),rDef)/REAL(xx(nvals),rDef)
       if (ifdff .eq. 0) then
 
          call grid(np  = np,  &
@@ -182,7 +181,18 @@ CONTAINS
 
       nmax = np
 
-      call dgemv(trans,np,np,alpha,dd,NMAX,rmx,incx,beta,drm,incy)
+      call dgemv(&
+          trans,& !Specifies the type of operation
+          np   ,& 
+          np   ,&
+          alpha,&
+          dd   ,&
+          np   ,&
+          rmx  ,&
+          incx ,&
+          beta ,&
+          drm  ,&
+          incy)
 !
 ! Mt distribution.
 
@@ -194,7 +204,7 @@ CONTAINS
        rmt(i) = REAL(curv2(r,nvals,xx,ymt,yp,sigma),rDef)
       enddo
 
-      call dgemv(trans,np,np,alpha,dd,NMAX,rmt,incx,beta,drt,incy)
+      call dgemv(trans,np,np,alpha,dd,np,rmt,incx,beta,drt,incy)
 !
 ! Abar distribution.
       call curv1(nvals,xx,yab,slp1,slp2,islpsw,yp,temp,sigma,ierr)
@@ -203,7 +213,20 @@ CONTAINS
        r      = REAL(rr(i),rSP)
        snd(i) = REAL(curv2(r,nvals,xx,yab,yp,sigma),rDef)
       enddo
-      call dgemv(trans,np,np,alpha,dd,NMAX,snd,incx,beta,dsn,incy)
+
+      call dgemv(&
+          trans,&
+          np   ,&
+          np   ,&
+          alpha,&
+          dd   ,&
+          np   ,&
+          snd  ,&
+          incx ,&
+          beta ,&
+          dsn  ,&
+          incy)
+       
 !
 ! Calculate isentropic Abar distribution based on input Mt distribution.
 !$$$      gm    = 1.4
