@@ -50,7 +50,8 @@ COM_STRING = "Compiling..."
 
 F90      = gfortran
 #-O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
-F90FLAGS  = -g -c \
+F90FLAGS  =	\
+			-g -c \
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
@@ -64,15 +65,19 @@ F90FLAGS  = -g -c \
 			-Wno-error=do-subscript
 			
 F77      = gfortran
-F77FLAGS  = $(F90FLAGS)
- # -g -c \
-			# -O0 \
-			# -std=f2008 \
-			# -fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			# -ffpe-trap=denormal,invalid,zero,overflow,underflow \
-			# -Wall -Wline-truncation -Wuninitialized -Wconversion -Wsurprising \
-		   	# -Warray-temporaries -Wconversion-extra -Wextra -Werror \
-			# -fdump-fortran-global 
+F77FLAGS  = \
+			-g -c \
+			-O0 \
+			-std=legacy \
+			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
+			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
+			-fdump-fortran-global \
+			-fimplicit-none \
+			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
+			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
+			-Wno-error=compare-reals \
+			-Wno-error=array-temporaries \
+			-Wno-error=do-subscript
 
 
 
@@ -102,7 +107,6 @@ OBJECTS  =                  \
    	fdrivsModule.o 			\
 	kapsubModule.o          \
     interpModule.o 			\
-	Akima1D.f90             \
 	akima433.o
 
 EXECUTABLE_LOCATION = ../../CodeRun
@@ -256,12 +260,12 @@ main.o: main.f90        \
 	 swirlClassObject.o 
 	$(F90) $(F90FLAGS) main.f90
 
-akima433.o: akima433.f
-	$(F77) $(F77FLAGS) akima433.f
+# akima433.o: akima433.f
+# 	$(F77) $(F77FLAGS) akima433.f
 
-Akima1D.o:  Akima1D.f90 \
-	    akima433.o
-	$(F90) $(F90FLAGS) Akima1D.f90
+# Akima1D.o:  Akima1D.f90 \
+# 	    akima433.o
+# 	$(F90) $(F90FLAGS) Akima1D.f90
 
 analysisModule.o:  analysisModule.f90 \
                   $(LAPACK_LOCATION)/zggev.o\
@@ -306,16 +310,13 @@ kapsubModule.o:  kapsubModule.f90 \
 machoutModule.o:  machoutModule.f90
 	$(F90) $(F90FLAGS) machoutModule.f90
 
-rmachModule.o:  rmachModule.f90 \
-	        Akima1D.o
+rmachModule.o:  rmachModule.f90 
 	$(F90) $(F90FLAGS) rmachModule.f90
 
 smachModule.o:  smachModule.f90 \
-	        Akima1D.o
 	$(F90) $(F90FLAGS) smachModule.f90
 
-smachAndSndspdModule.o:  smachAndSndspdModule.f90 \
-	        Akima1D.o
+smachAndSndspdModule.o:  smachAndSndspdModule.f90 
 	$(F90) $(F90FLAGS) smachAndSndspdModule.f90
 
 sndspdModule.o:  sndspdModule.f90

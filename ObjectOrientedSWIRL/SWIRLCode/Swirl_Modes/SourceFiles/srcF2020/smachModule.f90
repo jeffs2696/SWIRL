@@ -1,6 +1,6 @@
 MODULE smachModule
       USE, INTRINSIC :: ISO_FORTRAN_ENV
-      USE Akima1D
+      ! USE Akima1D
       IMPLICIT NONE
       PRIVATE
       PUBLIC :: smach
@@ -131,12 +131,12 @@ CONTAINS
 ! spline data onto grid
 !
 
-       CALL Akima433Interpolation(inputDataLength  = nptsIn, &
-                                  xInputData       = rIn,    &
-                                  yInputData       = rmswIn, &
-                                  outputDataLength = npts,   &
-                                  xOutputData      = rr,     &
-                                  yOutputData      = rmsw)
+       ! CALL Akima433Interpolation(inputDataLength  = nptsIn, &
+       !                            xInputData       = rIn,    &
+       !                            yInputData       = rmswIn, &
+       !                            outputDataLength = npts,   &
+       !                            xOutputData      = rr,     &
+       !                            yOutputData      = rmsw)
 
        DEALLOCATE(rIn, rmswIn)
 !

@@ -1,6 +1,6 @@
 MODULE smachAndSndspdModule
       USE, INTRINSIC :: ISO_FORTRAN_ENV
-      USE Akima1D
+      ! USE Akima1D
       IMPLICIT NONE
       PRIVATE
       PUBLIC :: smachAndSndspd
@@ -291,7 +291,7 @@ CONTAINS
 !$$$       enddo
 !$$$      endif
 !
-      return
+      ! return
       WRITE(6,*) rhob,rmsw,sig
       end
 END MODULE smachAndSndspdModule

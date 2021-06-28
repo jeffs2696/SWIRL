@@ -1,6 +1,6 @@
 MODULE rmachModule
       USE, INTRINSIC :: ISO_FORTRAN_ENV
-      USE Akima1D
+      ! USE Akima1D
       IMPLICIT NONE
       PRIVATE
       PUBLIC :: rmach
@@ -35,10 +35,10 @@ CONTAINS
 ! local variables
 !
 
-      INTEGER :: nptsIn, &
-                      i, &
-                      j, &
-                      k
+      INTEGER :: &
+          i, &
+          j, &
+          k
 
       REAL(KIND=rDef) :: pi, &
                           r, &
@@ -71,8 +71,8 @@ CONTAINS
       REAL(KIND=rDef), DIMENSION(npts) :: vrm, &
                                          vrmp
 
-      REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: rIn, &
-                                                 rmchIn
+      ! REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: rIn, &
+      !                                            rmchIn
 
 !
 !     implicit real*8 (a-h,o-z)
@@ -141,16 +141,13 @@ CONTAINS
 ! spline data onto grid
 !
 ! JS: removed read from file capability, now it is input from main
-       nptsIn = SIZE(rmch)
-       rIn = rr
-       rmchIn = rmch
 
-       CALL Akima433Interpolation(inputDataLength  = nptsIn, &
-                                  xInputData       = rIn,    &
-                                  yInputData       = rmchIn, &
-                                  outputDataLength = npts,   &
-                                  xOutputData      = rr,     &
-                                  yOutputData      = rmch)
+       ! CALL Akima433Interpolation(inputDataLength  = nptsIn, &
+       !                            xInputData       = rIn,    &
+       !                            yInputData       = rmchIn, &
+       !                            outputDataLength = npts,   &
+       !                            xOutputData      = rr,     &
+       !                            yOutputData      = rmch)
 
        ! DEALLOCATE(rIn, rmchIn)
 
