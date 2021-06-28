@@ -70,6 +70,8 @@ F90FLAGS  = -g -c \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
 			-Wno-error=compare-reals \
+			-Wno-error=array-temporaries \
+			-Wno-error=do-subscript
 			
 #-Wno-error=do-subscript \ -Wno-error=array-temporaries \ -Wno-error=conversion-extra 
 # -Wno-error=do-subscript

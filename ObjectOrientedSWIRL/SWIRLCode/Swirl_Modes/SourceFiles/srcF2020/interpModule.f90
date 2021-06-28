@@ -119,7 +119,7 @@ CONTAINS
 !     do i = 1,NMAX
        read(10,*,end=100) rDum,rDum,rDum,rDum
        nvals = nvals +1
-       GO TO 5
+      GO TO 5
 !     enddo
  100  continue
 
@@ -193,10 +193,20 @@ CONTAINS
           beta ,&
           drm  ,&
           incy)
-!
-! Mt distribution.
 
-      call curv1(nvals,xx,ymt,slp1,slp2,islpsw,yp,temp,sigma,ierr)
+! Mt distribution.
+      call curv1(&
+          nvals ,&
+          xx    ,&
+          ymt   ,&
+          slp1  ,&
+          slp2  ,&
+          islpsw,&
+          yp    ,&
+          temp  ,&
+          sigma ,&
+          ierr)
+
       if (ierr.ne.0) write(6,*) ierr
 
       do i = 1,np
@@ -204,10 +214,22 @@ CONTAINS
        rmt(i) = REAL(curv2(r,nvals,xx,ymt,yp,sigma),rDef)
       enddo
 
-      call dgemv(trans,np,np,alpha,dd,np,rmt,incx,beta,drt,incy)
-!
+      call dgemv(&
+          trans,&
+          np   ,&
+          np   ,&
+          alpha,&
+          dd   ,&
+          np   ,&
+          rmt  ,&
+          incx ,&
+          beta ,&
+          drt  ,&
+          incy)
+
 ! Abar distribution.
       call curv1(nvals,xx,yab,slp1,slp2,islpsw,yp,temp,sigma,ierr)
+
       if (ierr.ne.0) write(6,*) ierr
       do i = 1,np
        r      = REAL(rr(i),rSP)

@@ -374,8 +374,10 @@ CONTAINS
                          rmh, &
                          rmd
 
-      COMPLEX(KIND=rDef) :: ci
-   
+      COMPLEX(KIND=rDef) ::&
+          ci,&
+          c0
+  
 !
 !     implicit real*8 (a-h,o-z)
 !     parameter (NMAX = 128, NMAX4 = NMAX*4)
@@ -387,40 +389,43 @@ CONTAINS
       ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
       eps     = 1.e-4_rDef
 !
+      c0      = CMPLX(0.0_rDef,0.0_rDef,rDef)
+
+
       etamag = abs(etah) +abs(etad)
       if (etamag.gt.eps) then
        rmh    = rmx(1)
        rmd    = rmx(np)
        aa(np,np)   = ci*ak
-       aa(np,2*np) = 0.0_rDef
+       aa(np,2*np) = c0 
        do j=1,np
-        aa(np,3*np+j) = 0.0_rDef
+        aa(np,3*np+j) = c0
        enddo
        aa(np,4*np) = -ci*ak*etad
-       bb(np,np)   = 0.0_rDef
-       bb(np,4*np) = etad*rmd
+       bb(np,np)   = c0
+       bb(np,4*np) = etad*CMPLX(rmd,KIND=rDef)
        if (sig.ne.0.0_rDef) then
         aa(1,1)    = -ci*ak
-        aa(1,np+1) = 0.0_rDef
+        aa(1,np+1) = c0
         do j=1,np
-         aa(1,3*np+j) = 0.0_rDef
+         aa(1,3*np+j) = c0 
         enddo
         aa(1,3*np+1) = -ci*ak*etah
-        bb(1,1)      = 0.0_rDef
-        bb(1,3*np+1) = etah*rmh
+        bb(1,1)      = c0
+        bb(1,3*np+1) = etah*CMPLX(rmh,KIND=rDef)
        endif
       else
        if (sig.ne.0.0_rDef) then
         do j = 1,np
-         aa(1,  np+j) = 0.0_rDef
-         aa(1,3*np+j) = 0.0_rDef
-         bb(1,     j) = 0.0_rDef
+         aa(1,  np+j) = c0
+         aa(1,3*np+j) = c0
+         bb(1,     j) = c0
         enddo
        endif
        do j = 1,np
-        aa(np,  np+j) = 0.0_rDef
-        aa(np,3*np+j) = 0.0_rDef
-        bb(np,     j) = 0.0_rDef
+        aa(np,  np+j) = c0
+        aa(np,3*np+j) = c0
+        bb(np,     j) = c0
        enddo
       endif
 !
@@ -554,8 +559,8 @@ CONTAINS
       do k=1,np
        r   = rr(k)
        do j=1,np
-        aa(     k,3*np+j) = dd(k,j)
-        aa(3*np+k,     j) = dd(k,j)
+        aa(     k,3*np+j) = CMPLX(dd(k,j),KIND=rDef)
+        aa(3*np+k,     j) = CMPLX(dd(k,j),KIND=rDef)
         if (k.eq.j) then
          aa(     k,     j) = -ci*om
          aa(  np+k,  np+j) = -ci*om
@@ -563,18 +568,18 @@ CONTAINS
          aa(3*np+k,3*np+j) = -ci*om
          aa(  np+k,     j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
          aa(2*np+k,     j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
-         if (r.ne.0.) then
-          aa(  np+k,3*np+j) = ci*REAL(mode,rDef)/r
-          aa(3*np+k,  np+j) = ci*REAL(mode,rDef)/r
-          aa(3*np+k,     j) = aa(3*np+k,j) +1.0_rDef/r
+         if (r.ne.0.0_rDef) then
+          aa(  np+k,3*np+j) = ci*CMPLX(mode,KIND=rDef)/CMPLX(r,KIND=rDef)
+          aa(3*np+k,  np+j) = ci*CMPLX(mode,KIND=rDef)/CMPLX(r,KIND=rDef)
+          aa(3*np+k,     j) = aa(3*np+k,j) +CMPLX(1.0_rDef,KIND=rDef)/CMPLX(r,KIND=rDef)
          else
           aa(  np+k,3*np+j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
           aa(3*np+k,  np+j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
          endif
-         bb(     k,     j) = rx(j)
-         bb(  np+k,  np+j) = rx(j)
-         bb(2*np+k,2*np+j) = rx(j)
-         bb(3*np+k,3*np+j) = rx(j)
+         bb(     k,     j) = CMPLX(rx(j),KIND=rDef)
+         bb(  np+k,  np+j) = CMPLX(rx(j),KIND=rDef)
+         bb(2*np+k,2*np+j) = CMPLX(rx(j),KIND=rDef)
+         bb(3*np+k,3*np+j) = CMPLX(rx(j),KIND=rDef)
          bb(2*np+k,3*np+j) = CMPLX(1.0_rDef,0.0_rDef,rDef)
          bb(3*np+k,2*np+j) = CMPLX(1.0_rDef,0.0_rDef,rDef)
         endif
@@ -819,8 +824,8 @@ CONTAINS
           indx(j+1) = jtmp
          endif
         else
-         alm1 = 2.*PI/gam1
-         alm2 = 2.*PI/gam2
+         alm1 = 2.0_rDef*PI/gam1
+         alm2 = 2.0_rDef*PI/gam2
          if (abs(alm1).lt.abs(alm2)) then
           jtmp       = indx(j)
           indx(j)   = indx(j+1)
