@@ -11,7 +11,6 @@ MODULE swirlClassObject
       ! USE inputModule
       USE interpModule
       USE machoutModule
-      USE outputModule
       USE rmachModule
       USE smachAndSndspdModule
 

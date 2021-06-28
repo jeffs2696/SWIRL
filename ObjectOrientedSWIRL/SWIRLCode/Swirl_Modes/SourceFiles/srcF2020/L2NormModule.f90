@@ -77,7 +77,7 @@ ALLOCATE(&
  
 dataSum = CMPLX(0.0,0.0,rDef)
 DO i = 1,numPoints
-dataError(i) = ABS(dataSet1(i) - dataSet2(i)) 
+dataError(i) = CMPLX(ABS(dataSet1(i) - dataSet2(i)),KIND=rDef)
 dataErrorSquared(i) = dataError(i)**2
 dataSum = dataSum + dataErrorSquared(i)
 ENDDO

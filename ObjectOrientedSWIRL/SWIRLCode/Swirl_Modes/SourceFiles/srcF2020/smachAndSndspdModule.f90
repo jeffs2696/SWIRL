@@ -219,7 +219,7 @@ CONTAINS
        DO k=1,npts
         snd(k) = 0.0_rDef
         do i = npts-1,k,-1
-         if (rr(i).ne.0.) then
+         if (rr(i).ne.0.0_rDef) then
           rswi    = rmsw(i)*rmsw(i)/rr(i)
           rsw1    = rmsw(i+1)*rmsw(i+1)/rr(i+1)
           xi      = rr(i)

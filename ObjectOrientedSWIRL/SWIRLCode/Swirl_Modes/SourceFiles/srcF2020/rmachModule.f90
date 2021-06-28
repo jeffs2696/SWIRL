@@ -235,11 +235,11 @@ CONTAINS
          endif
          vrmp(i) = -2.0_rDef*rxmax/(7.0_rDef*pwl**(6.0_rDef/7.0_rDef))*sgn
         else ! cylinder
-         vrm(i)  =  rxmax*(1. -rsh)**(1.0_rDef/7.0_rDef)
-         vrmp(i) = -rxmax/7.*(1. -rsh)**(-6.0_rDef/7.0_rDef)
+         vrm(i)  =  rxmax*(1.0_rDef -rsh)**(1.0_rDef/7.0_rDef)
+         vrmp(i) = -rxmax/7.0_rDef*(1.0_rDef -rsh)**(-6.0_rDef/7.0_rDef)
         endif
        enddo
-       if (rro.ne.0.) then ! need to go through the Shankar paper for this
+       if (rro.ne.0.0_rDef) then ! need to go through the Shankar paper for this
         vrm(1)  = 0.0_rDef
         vrmp(1) = 1.10_rDef*vrmp(2)
        ELSE ! DRH addition; set value at centerline of cylinder (r=0)
