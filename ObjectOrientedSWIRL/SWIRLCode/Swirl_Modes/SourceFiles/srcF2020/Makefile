@@ -48,17 +48,7 @@ ERROR_STRING = "[ERROR]"
 WARN_STRING = "[WARNING]"
 COM_STRING = "Compiling..."
 
-F77      = gfortran
 F90      = gfortran
-F77FLAGS  = -g -c \
-			-O0 \
-			-std=f2008 \
-			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
-			-Wall -Wline-truncation -Wuninitialized -Wconversion -Wsurprising \
-		   	-Warray-temporaries -Wconversion-extra -Wextra -Werror \
-			-fdump-fortran-global 
-
 #-O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
 F90FLAGS  = -g -c \
 			-O0 \
@@ -73,6 +63,20 @@ F90FLAGS  = -g -c \
 			-Wno-error=array-temporaries \
 			-Wno-error=do-subscript
 			
+F77      = gfortran
+F77FLAGS  = $(F90FLAGS)
+ # -g -c \
+			# -O0 \
+			# -std=f2008 \
+			# -fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
+			# -ffpe-trap=denormal,invalid,zero,overflow,underflow \
+			# -Wall -Wline-truncation -Wuninitialized -Wconversion -Wsurprising \
+		   	# -Warray-temporaries -Wconversion-extra -Wextra -Werror \
+			# -fdump-fortran-global 
+
+
+
+
 #-Wno-error=do-subscript \ -Wno-error=array-temporaries \ -Wno-error=conversion-extra 
 # -Wno-error=do-subscript
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \

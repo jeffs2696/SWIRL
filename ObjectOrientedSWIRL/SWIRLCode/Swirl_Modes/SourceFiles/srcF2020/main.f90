@@ -11,7 +11,7 @@ PROGRAM MAIN
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
     INTEGER  :: &
-        ! UNIT               ,& ! for NEWUNIT
+        UNIT               ,& ! for NEWUNIT
         finiteDiffFlag      ,& ! finite difference flag
         azimuthalModeNumber ,& ! mode order
         numberOfGridPoints  ,& ! number of points
@@ -125,8 +125,9 @@ PROGRAM MAIN
         ! Construct the file name 
         file_name = 'MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
 
-        ! OPEN(NEWUNIT = UNIT, FILE = TRIM(file_name) )
+        OPEN(NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
+        WRITE(6, *) 'UNIT = ', UNIT
         
         WRITE(6, *) '# Grid Points ',  numberOfGridPoints
 
@@ -216,7 +217,9 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
-
+        WRITE(6,*) 'Input-Output Comparsion'
+        
+        WRITE(6,*) 'radius,M_x,M_theta,A_expected,A_actual'
         DO i = 1,numberOfGridPoints
 
            ! WRITE(UNIT,*) &
@@ -245,7 +248,6 @@ PROGRAM MAIN
 
         ENDDO
 
-        ! CLOSE(UNIT)
 
         CALL getL2Norm(&
             L2        = SoundSpeedErrorL2  ,&
@@ -257,6 +259,7 @@ PROGRAM MAIN
         WRITE(6,*) 'SoundSpeedErrorL2' , SoundSpeedErrorL2
 
 
+        CLOSE(UNIT)
         CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
