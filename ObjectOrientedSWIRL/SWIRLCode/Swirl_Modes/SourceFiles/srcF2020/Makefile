@@ -91,7 +91,6 @@ OBJECTS  =                  \
 	analysisModule.o        \
 	boundaryModule.o 		\
 	indexxModule.o 			\
-	outputModule.o 			\
 	rmachModule.o 			\
 	smachAndSndspdModule.o  \
     machoutModule.o 		\
@@ -247,7 +246,6 @@ main.o: main.f90        \
          gridModule.o     \
          interpModule.o   \
 	 machoutModule.o  \
-         outputModule.o   \
 	 rmachModule.o    \
 	 smachAndSndspdModule.o \
 	 L2NormModule.o         \
@@ -303,11 +301,6 @@ kapsubModule.o:  kapsubModule.f90 \
 
 machoutModule.o:  machoutModule.f90
 	$(F90) $(F90FLAGS) machoutModule.f90
-
-outputModule.o:  outputModule.f90 \
-                 indexxModule.o   \
-                 kapsubModule.o
-	$(F90) $(F90FLAGS) outputModule.f90
 
 rmachModule.o:  rmachModule.f90 \
 	        Akima1D.o
