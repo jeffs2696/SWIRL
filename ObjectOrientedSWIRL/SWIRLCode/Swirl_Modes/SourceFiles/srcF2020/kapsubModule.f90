@@ -553,7 +553,9 @@ CONTAINS
        enddo
       enddo
 !
+
       ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
+      
 !
 ! Global matrices.
       do k=1,np

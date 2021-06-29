@@ -127,7 +127,6 @@ PROGRAM MAIN
 
         OPEN(NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
-        WRITE(6, *) 'UNIT = ', UNIT
         
         WRITE(6, *) '# Grid Points ',  numberOfGridPoints
 
@@ -259,7 +258,6 @@ PROGRAM MAIN
         WRITE(6,*) 'SoundSpeedErrorL2' , SoundSpeedErrorL2
 
 
-        CLOSE(UNIT)
         CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
@@ -277,6 +275,7 @@ PROGRAM MAIN
             SoundSpeedExpected    ,&
             SoundSpeedError                   )
 
+        CLOSE(UNIT)
 
 
     END DO

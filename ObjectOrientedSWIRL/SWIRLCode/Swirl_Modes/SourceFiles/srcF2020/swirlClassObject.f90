@@ -9,7 +9,7 @@ MODULE swirlClassObject
       USE globalModule
       USE gridModule
       ! USE inputModule
-      USE interpModule
+      ! USE interpModule
       USE machoutModule
       USE rmachModule
       USE smachAndSndspdModule
@@ -120,17 +120,17 @@ MODULE swirlClassObject
           ! icomp   = 0,  &
       ir      = 2,  &
           ! irepeat = 0,  &
-      is      = 5!,  &
+      is      = 5,  &
       ! itest   = 0,  &
       ! ix      = 0,  &
-      ! PrintToggle = 6 ! set this variable to 6 to see progress in terminal
+      PrintToggle = 6 ! set this variable to 6 to see progress in terminal
 
 ! JS: added i and j to zero out matricies
 
       ! INTEGER :: i , j
       REAL(KIND = REAL64) ::&
-          angom  = 0.00_rDef, &
-          gam    = 1.400_rDef,   & !not used in smachModule
+          ! angom  = 0.00_rDef, &
+          ! gam    = 1.400_rDef,   & !not used in smachModule
           rxmax  = 0.00_rDef, &
           slope  = 0.00_rDef
 
@@ -241,12 +241,15 @@ MODULE swirlClassObject
                       ed4 = object%fourthOrderSmoother)
               else
 
+                  WRITE(PrintToggle,*) 'Entering fdgrid CALL'
                   CALL fdgrid(&
                       np  = object%numberOfRadialPoints,  &
                       sig = object%hubTipRatio, &
                       x   = object%y,   &
                       r   = object%r)
+                  WRITE(PrintToggle,*) 'Leaving fdgrid CALL'
 
+                  WRITE(PrintToggle,*) 'Entering fdrivs CALL'
                   CALL fdrivs(&
                       np     = object%numberOfRadialPoints,    &
                       sig    = object%hubTipRatio,   &
@@ -254,9 +257,11 @@ MODULE swirlClassObject
                       iorder = object%FiniteDifferenceFlag, &
                       ed2    = object%secondOrderSmoother,   &
                       ed4    = object%fourthOrderSmoother)
+                  WRITE(PrintToggle,*) 'Leaving fdrivs CALL'
 
               endif
 
+              WRITE(PrintToggle,*) 'Entering smachAndSndspd CALL'
               CALL smachAndSndspd(&
                   npts  = object%numberOfRadialPoints,    &
                   rr    = object%r,     &
@@ -264,13 +269,10 @@ MODULE swirlClassObject
                   rmswp = object%drt,   &
                   snd   = object%snd,   &
                   dsn   = object%dsn,   &
-                  dd    = object%dl1,   &
-                  rhob  = object%rho,   &
-                  angom = angom, &
-                  gam   = gam,   &
-                  sig   = object%hubTipRatio,   &
-                  is    = is)
+                  dd    = object%dl1   )
+              WRITE(PrintToggle,*) 'Leaving smachAndSndspd CALL'
 
+              WRITE(PrintToggle,*) 'Entering rmach CALL'
               CALL rmach(&
                   npts  = object%numberOfRadialPoints,    &
                   rr    = object%r,     &
@@ -283,22 +285,23 @@ MODULE swirlClassObject
                   slope = slope, &
                   rro   = object%hubTipRatio,   &
                   ir    = ir)
+              WRITE(PrintToggle,*) 'Leaving rmach CALL'
 
           else
-              CALL interp(&
-                  np    = object%numberOfRadialPoints,    &
-                  sig   = object%hubTipRatio,   &
-                  rr    = object%r,     &
-                  rmx   = object%rmx,   &
-                  drm   = object%drm,   &
-                  rmt   = object%rmt,   &
-                  drt   = object%drt,   &
-                  snd   = object%snd,   &
-                  dsn   = object%dsn,   &
-                  dd    = object%dl1,   &
-                  ifdff = object%FiniteDifferenceFlag, &
-                  ed2   = object%secondOrderSmoother,   &
-                  ed4   = object%fourthOrderSmoother)
+              ! CALL interp(&
+              !     np    = object%numberOfRadialPoints,    &
+              !     sig   = object%hubTipRatio,   &
+              !     rr    = object%r,     &
+              !     rmx   = object%rmx,   &
+              !     drm   = object%drm,   &
+              !     rmt   = object%rmt,   &
+              !     drt   = object%drt,   &
+              !     snd   = object%snd,   &
+              !     dsn   = object%dsn,   &
+              !     dd    = object%dl1,   &
+              !     ifdff = object%FiniteDifferenceFlag, &
+              !     ed2   = object%secondOrderSmoother,   &
+              !     ed4   = object%fourthOrderSmoother)
           endif
 
 ! output the mean flow data.

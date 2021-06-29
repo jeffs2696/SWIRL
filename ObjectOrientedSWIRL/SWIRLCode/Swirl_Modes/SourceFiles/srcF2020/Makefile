@@ -61,7 +61,6 @@ F90FLAGS  =	\
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
 			-Wno-error=compare-reals \
-			-Wno-error=array-temporaries \
 			-Wno-error=do-subscript
 			
 F77      = gfortran
@@ -104,10 +103,11 @@ OBJECTS  =                  \
 	smachAndSndspdModule.o  \
     machoutModule.o 		\
 	fdgridModule.o 			\
-   	fdrivsModule.o 			\
-	kapsubModule.o          \
-    interpModule.o 			\
-	akima433.o
+   	fdrivsModule.o 			         
+
+# \
+# 	Akima1D.f90             \
+# 	akima433.o
 
 EXECUTABLE_LOCATION = ../../CodeRun
 
@@ -252,7 +252,6 @@ main.o: main.f90        \
          fdrivsModule.o   \
          globalModule.o   \
          gridModule.o     \
-         interpModule.o   \
 	 machoutModule.o  \
 	 rmachModule.o    \
 	 smachAndSndspdModule.o \
@@ -293,19 +292,19 @@ fdrivsModule.o:  fdrivsModule.f90
 indexxModule.o:  indexxModule.f90
 	$(F90) $(F90FLAGS) indexxModule.f90
 
-interpModule.o:  interpModule.f90 \
-         derivsModule.o   \
-         fdgridModule.o   \
-         fdrivsModule.o   \
-         gridModule.o     \
-         $(BLAS_LOCATION)/dgemv.o \
-         $(FITPACK_LOCATION)/curv1.o \
-         $(FITPACK_LOCATION)/curv2.o
-	$(F90) $(F90FLAGS) interpModule.f90
+# interpModule.o:  interpModule.f90 \
+#          derivsModule.o   \
+#          fdgridModule.o   \
+#          fdrivsModule.o   \
+#          gridModule.o     \
+#          $(BLAS_LOCATION)/dgemv.o \
+#          $(FITPACK_LOCATION)/curv1.o \
+#          $(FITPACK_LOCATION)/curv2.o
+# 	$(F90) $(F90FLAGS) interpModule.f90
 
-kapsubModule.o:  kapsubModule.f90 \
-                  $(LAPACK_LOCATION)/zggev.o
-	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) kapsubModule.f90
+# kapsubModule.o:  kapsubModule.f90 \
+#                   $(LAPACK_LOCATION)/zggev.o
+# 	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) kapsubModule.f90
 
 machoutModule.o:  machoutModule.f90
 	$(F90) $(F90FLAGS) machoutModule.f90
@@ -313,7 +312,7 @@ machoutModule.o:  machoutModule.f90
 rmachModule.o:  rmachModule.f90 
 	$(F90) $(F90FLAGS) rmachModule.f90
 
-smachModule.o:  smachModule.f90 \
+smachModule.o:  smachModule.f90 
 	$(F90) $(F90FLAGS) smachModule.f90
 
 smachAndSndspdModule.o:  smachAndSndspdModule.f90 
