@@ -122,8 +122,8 @@ CONTAINS
             write(22,19) cvct(j)
         enddo
 
-        write(6,17) (cvct(j), j=1,np)
-17      format(1x,'Convected wavenumbers: ',/,8(f10.5))
+        ! write(6,17) (cvct(j), j=1,np)
+! 17      format(1x,'Convected wavenumbers: ',/,8(f10.5))
 
 19      format(1x,2e15.5)
 
@@ -145,7 +145,7 @@ CONTAINS
 
         do j=1,np4
             if (col(j)) then
-                write(6,20) j
+                ! write(6,20) j
                 badcol = .true.
             endif
         enddo
@@ -164,15 +164,15 @@ CONTAINS
         do k=1,np4
 
             if (row(k)) then
-                write(6,25) k
+                ! write(6,25) k
                 badrow = .true.
             endif
 
         enddo
 !
         if (badrow.or.badcol) return
-20      format(1x,'Column ',i4,' contains all zeros.')
-25      format(1x,'Row    ',i4,' contains all zeros.')
+! 20      format(1x,'Column ',i4,' contains all zeros.')
+! 25      format(1x,'Row    ',i4,' contains all zeros.')
 !
         print *, jobvl, jobvr
 !
@@ -224,8 +224,8 @@ CONTAINS
 !            RWORK,   & ! RWORK
 !            INFO )     ! INFO
 !
-        write(6,960) info
-960     format(1x,'info = ',i3)
+        ! write(6,960) info
+! 960     format(1x,'info = ',i3)
 !
         c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
 !
@@ -240,9 +240,9 @@ CONTAINS
 ! 30      format(/,1x,'Cut-off wavenumber: ',e15.5,/)
 !
 ! Print the gammas to the display.
-        write(6,500)
-500     format(1x)
-        write(6,50)
+        ! write(6,500)
+! 500     format(1x)
+        ! write(6,50)
         do j=1,np4
 
         beta_non_zero = beta(j)
@@ -252,7 +252,7 @@ CONTAINS
                     gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
                 endif
                 vphi(j)  = ak/gam(j)
-                write(6,10) j,gam(j),gam(j)/ak,vphi(j)
+                ! write(6,10) j,gam(j),gam(j)/ak,vphi(j)
             endif
         enddo
 !970  format(1x,i4,4e13.4)

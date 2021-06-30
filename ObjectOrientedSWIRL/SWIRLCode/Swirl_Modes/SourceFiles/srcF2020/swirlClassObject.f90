@@ -10,7 +10,7 @@ MODULE swirlClassObject
       USE gridModule
       ! USE inputModule
       ! USE interpModule
-      USE machoutModule
+      ! USE machoutModule
       USE rmachModule
       USE smachAndSndspdModule
 
@@ -131,7 +131,6 @@ MODULE swirlClassObject
       REAL(KIND = REAL64) ::&
           ! angom  = 0.00_rDef, &
           ! gam    = 1.400_rDef,   & !not used in smachModule
-          rxmax  = 0.00_rDef, &
           slope  = 0.00_rDef
 
 ! 100       continue
@@ -275,16 +274,10 @@ MODULE swirlClassObject
               WRITE(PrintToggle,*) 'Entering rmach CALL'
               CALL rmach(&
                   npts  = object%numberOfRadialPoints,    &
-                  rr    = object%r,     &
                   rmch  = object%rmx,   &
                   drm   = object%drm,   &
-                  snd   = object%snd,   &
-                  dsn   = object%dsn,   &
-                  dd    = object%dl1,   &
-                  rxmax = rxmax, &
-                  slope = slope, &
-                  rro   = object%hubTipRatio,   &
-                  ir    = ir)
+                  dd    = object%dl1    &
+                  )
               WRITE(PrintToggle,*) 'Leaving rmach CALL'
 
           else
@@ -304,18 +297,6 @@ MODULE swirlClassObject
               !     ed4   = object%fourthOrderSmoother)
           endif
 
-! output the mean flow data.
-
-          CALL machout(&
-              npts  = object%numberOfRadialPoints,  &
-              rr    = object%r,   &
-              rmch  = object%rmx, &
-              rmchp = object%drm, &
-              rmsw  = object%rmt, &
-              rmswp = object%drt, &
-              snd   = object%snd, &
-              dsn   = object%dsn, &
-              rhob  = object%rho)
 !
 ! Set up global matrices.
 
@@ -388,7 +369,6 @@ MODULE swirlClassObject
       !     mode   = object%mm,    &
       !     rho    = object%hubTipRatio,   &
       !     omega  = object%ak,    &
-      !     rmax   = object%rxmax, &
       !     slp    = object%slope, &
       !     ang    = object%angom, &
       !     gam    = object%gam,   &

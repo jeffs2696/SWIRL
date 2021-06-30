@@ -4,4 +4,3 @@ set xlabel "Radius"
 set ylabel ""
 set key outside
 set grid
-plot "InputFlowData3.dat"

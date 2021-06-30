@@ -154,9 +154,9 @@ PROGRAM MAIN
 
         END DO
 
-        WRITE(6,*) ' '
-        WRITE(6,'(a)') 'Table 1: Input Flow Data'
-        WRITE(6,'(12a12,12a5,12a12,12a12)') 'Radius', 'Mx' , 'M_theta', 'A_expected'
+        ! WRITE(6,*) ' '
+        ! WRITE(6,'(a)') 'Table 1: Input Flow Data'
+        ! WRITE(6,'(12a12,12a5,12a12,12a12)') 'Radius', 'Mx' , 'M_theta', 'A_expected'
 
         DO i = 1, numberOfGridPoints
 
@@ -187,7 +187,7 @@ PROGRAM MAIN
                 STOP
             ELSE
 
-                WRITE(6, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
+                ! WRITE(6, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
                 ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
 
             ENDIF
@@ -216,24 +216,24 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
-        WRITE(6,*) 'Input-Output Comparsion'
+        ! WRITE(6,*) 'Input-Output Comparsion'
         
-        WRITE(6,*) 'radius,M_x,M_theta,A_expected,A_actual'
+        ! WRITE(6,*) 'radius,M_x,M_theta,A_expected,A_actual'
         DO i = 1,numberOfGridPoints
 
-           ! WRITE(UNIT,*) &
-           !     rOut(i)                 , &
-           !     axialMachDataOut(i)     , &
-           !     thetaMachDataOut(i)     , &
-           !     SoundSpeedExpected(i)   , &
-           !     SoundSpeedOut(i)        
-
-            WRITE(6,*) &
+            WRITE(UNIT,*) &
                 rOut(i)                 , &
                 axialMachDataOut(i)     , &
                 thetaMachDataOut(i)     , &
                 SoundSpeedExpected(i)   , &
                 SoundSpeedOut(i)        
+
+            ! WRITE(6,*) &
+            !     rOut(i)                 , &
+            !     axialMachDataOut(i)     , &
+            !     thetaMachDataOut(i)     , &
+            !     SoundSpeedExpected(i)   , &
+            !     SoundSpeedOut(i)        
 
             ! WRITE(6,FORMAT) &
             !     r(i)                 , &
@@ -280,11 +280,15 @@ PROGRAM MAIN
 
     END DO
 
-    WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
+    ! WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
+    OPEN(NEWUNIT=UNIT,FILE='RateOfConvergenceForIntegration')
+    WRITE(UNIT,*) 'Grid Points' , 'L2 of Speed of Sound'
+
     DO i = 1,numberOfIterations
-        WRITE(6,*) 1+2**i , SoundSpeedL2Array(i)
+        WRITE(UNIT,*) 1+2**i , SoundSpeedL2Array(i)
     END DO
 
+    WRITE(UNIT,*) 'Rate Of Convergence'
     DO i = 1,numberOfIterations - 1
 
         RateOfConvergence(i) = &
@@ -295,10 +299,11 @@ PROGRAM MAIN
             /&
             LOG(0.5_rDef)
 
-        WRITE(6,*) RateOfConvergence(i)
+        WRITE(UNIT,*) RateOfConvergence(i)
 
     ENDDO
 
+    CLOSE(UNIT)
     DEALLOCATE( &
         SoundSpeedL2Array ,&
         RateOfConvergence)

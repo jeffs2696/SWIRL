@@ -13,15 +13,10 @@ END INTERFACE smachAndSndspd
 
 CONTAINS
 
-      subroutine smachAndSndspd1(npts,rr,rmsw,rmswp,snd,dsn,dd)
+      SUBROUTINE smachAndSndspd1(npts,rr,rmsw,rmswp,snd,dsn,dd)
 
       INTEGER, INTENT(IN) :: &
           npts
-
-      ! REAL(KIND=rDef), INTENT(IN) :: &
-                                     ! angom, &
-                                     ! gam,   &
-                                     ! sig
 
       REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
           rr
@@ -33,59 +28,48 @@ CONTAINS
           rmsw,  &
           rmswp, &
           dsn
+
       REAL(KIND=rDef), DIMENSION(:), INTENT(INOUT) ::&
           snd
-!
+
 ! local variables
-!
+
       INTEGER :: i, &
                  j, &
                  k
 
       REAL(KIND=rDef) :: &
-          ! r, &
-                       tot, &
-                        gm, &
-                       gm1, &
-                       ! agm, &
-                       ! alg, &
-                       ! ang, &
-                      rsw1, &
-                      rswi, &
-                        x1, &
-                        xi
-
-
-      INTEGER :: nptsIn
+          tot, &
+          gm, &
+          gm1, &
+          rsw1, &
+          rswi, &
+          x1, &
+          xi
+      
       gm  = 1.4_rDef
       gm1 = gm -1.0_rDef
-
-!
-       
-
-      nptsIn = SIZE(rmsw)
             
 ! Spectral computation of M_theta'.
 
-       do k=1,npts
+       DO k=1,npts
         tot = 0.0_rDef
-        do j=1,npts
+        DO j=1,npts
          tot = tot +dd(k,j)*rmsw(j)
-        enddo
+        ENDDO
         rmswp(k) = tot
-       enddo
+       ENDDO
 
        DO k = 1, npts
-       snd(k) = 0.0_rDef
+          snd(k) = 0.0_rDef
        ENDDO
+      
 ! calculate the speed of sound by integration (Eq. (2.6) in paper)
 
 ! put in some fixes -- need to check this.
        DO k=1,npts
-       
-        ! snd(k) = 0.0_rDef
 
-        do i = npts-1,k,-1
+        DO i = npts-1,k,-1
 
          IF (rr(i).ne.0.0_rDef) then
              
@@ -93,26 +77,22 @@ CONTAINS
           rsw1    = rmsw(i+1)*rmsw(i+1)/rr(i+1)
           xi      = rr(i)
           x1      = rr(i+1)
-!         snd(i) = snd(i+1) +0.5_rDef*(rswi +rsw1)*(xi -x1)
-
           snd(i) = snd(i+1) +0.5_rDef*(rswi +rsw1)*(x1 -xi)
           
          ELSE
           snd(i) = 2.0_rDef*rmsw(i)*(rmsw(i+1) -rmsw(i))/rr(i+1)
-       WRITE(6,*) 'test'
           
-        ! WRITE(6,*) i,k,snd
          ENDIF
+
         ENDDO
-!       snd(k) = exp(-gm1*snd(k))
+
         snd(k) = exp(-0.5_rDef*gm1*snd(k))
 
-        WRITE(6,*) k,snd
 
        END DO
 
 ! get the radial derivative of the speed of sound
-!
+
        do k = 1,npts
          tot = 0.0_rDef
          do j = 1,npts
@@ -120,16 +100,6 @@ CONTAINS
          enddo
          dsn(k) = tot
        enddo
-!
 
-!
-! Divide swirl velocity by speed of sound to get swirl Mach number.
-!$$$      if (is.ne.5) then
-!$$$       do i = 1,npts
-!$$$        rmsw(i)  = vsw(i)/snd(i)
-!$$$        rmswp(i) = vswp(i)/snd(i) -vsw(i)*dsn(i)/(snd(i)*snd(i))
-!$$$       enddo
-!$$$      endif
-!
       END SUBROUTINE smachAndSndspd1
 END MODULE smachAndSndspdModule
