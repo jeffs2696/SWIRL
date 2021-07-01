@@ -224,6 +224,7 @@ CONTAINS
 !            RWORK,   & ! RWORK
 !            INFO )     ! INFO
 !
+
         ! write(6,960) info
 ! 960     format(1x,'info = ',i3)
 !
