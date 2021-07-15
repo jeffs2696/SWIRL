@@ -6,7 +6,7 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-        numberOfIterations = 5
+        numberOfIterations = 9
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
