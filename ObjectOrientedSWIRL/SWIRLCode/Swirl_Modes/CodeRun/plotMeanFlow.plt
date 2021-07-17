@@ -7,4 +7,4 @@ set key outside
 #set xrange [-10:35]
 #set yrange [-50:50]
 set grid
-plot "FlowDataInput3.dat" using 1:2 with linespoints
+plot "MeanFlowData3.dat" using 1:2 with linespoints

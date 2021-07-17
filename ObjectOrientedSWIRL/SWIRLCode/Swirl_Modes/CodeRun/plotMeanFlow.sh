@@ -1,5 +1,5 @@
 #! /bin/bash
 
 gnuplot -persist <<- blah
-    load "SWIRLInputOutputComparison.plt"
+    load "plotMeanFlow.plt"
 blah

@@ -2,5 +2,4 @@
 
 gnuplot -persist <<-blah
 	load "plottingScripts/plotFlowData.plt"
-blah
-
+blah 

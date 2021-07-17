@@ -8,8 +8,8 @@ set key outside
 #set yrange [-50:50]
 set grid
 plot for [i=1:5] \
-    "FlowDataInput".(1+2**i).".dat" using 1:4 with linespoints linecolor rgb "#008080" title  "A_{in}" ,\
-    'FlowDataOutput'.(1+2**i).'.dat' using 1:4 with linespoints linecolor rgb "#008080" title  "A_{in}" 
+    "MeanFlowData".(1+2**i).".dat" using 1:4 with linespoints linecolor rgb "#008080" title  "A"
+    # 'MeanFlowData'.(1+2**i).'.dat' using 1:4 with linespoints linecolor rgb "#008080" title  "A_{in}" 
 # plot \
 #     "FlowDataInput.dat" using 1:3 with linespoints linecolor rgb "#006580" title  "M_{{/Symbol q},in}" ,\
 #      "FlowDataOutput.dat" using 1:3 with linespoints linecolor rgb "#002080" title  "M_{{/Symbol q},out}" 

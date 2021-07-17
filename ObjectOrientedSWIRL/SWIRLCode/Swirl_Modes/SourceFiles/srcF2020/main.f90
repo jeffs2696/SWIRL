@@ -98,7 +98,7 @@ PROGRAM MAIN
     boundingConstant = 0.1000_rDef
     k_1 = CMPLX(0.2, 0.0, rDef)
     k_2 = CMPLX(1.0, 0.0, rDef)
-    k_3 = CMPLX(0.4, 0.0, rDef)
+    k_3 = CMPLX(100, 0.0, rDef)
     k_4 = CMPLX(0.2, 0.0, rDef)
     k_5 = CMPLX(0.0, 0.0, rDef)
     k_6 = CMPLX(0.0, 0.0, rDef)
@@ -280,15 +280,25 @@ PROGRAM MAIN
 
     END DO
 
+    file_name ='L2OfSoundSpeed.dat'
+
     ! WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
-    OPEN(NEWUNIT=UNIT,FILE='RateOfConvergenceForIntegration')
+    OPEN(NEWUNIT=UNIT,FILE=file_name)
+
     WRITE(UNIT,*) 'Grid Points' , 'L2 of Speed of Sound'
 
     DO i = 1,numberOfIterations
         WRITE(UNIT,*) 1+2**i , SoundSpeedL2Array(i)
     END DO
 
+    CLOSE(UNIT);
+
+    file_name = 'RateOfConvergenceForIntegration.dat'
+
+    OPEN(NEWUNIT=UNIT,FILE=file_name)
+
     WRITE(UNIT,*) 'Rate Of Convergence'
+
     DO i = 1,numberOfIterations - 1
 
         RateOfConvergence(i) = &
@@ -297,13 +307,13 @@ PROGRAM MAIN
             LOG(SoundSpeedL2Array(i  ))&
             )&
             /&
-            LOG(0.5_rDef)
-
+            LOG(0.5_rDef) 
         WRITE(UNIT,*) RateOfConvergence(i)
 
     ENDDO
 
     CLOSE(UNIT)
+
     DEALLOCATE( &
         SoundSpeedL2Array ,&
         RateOfConvergence)
