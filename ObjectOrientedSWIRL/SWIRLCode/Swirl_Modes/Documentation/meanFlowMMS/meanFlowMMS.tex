@@ -210,6 +210,7 @@ produced from the speed of sound and comparing that to the tangential mach numbe
 that has been analytically defined (See Equation \ref{eq:Mthetabackcalculated}).
 \subsection{Procedure}
 
+
 To test the integration code,  $M_{\theta}$ is defined as a result 
 of differentiating the speed of sound. This is done opposed to integrating
 $M_{\theta}$ as a preference, but a function can be defined for $M_{\theta}$, and 
@@ -309,8 +310,6 @@ Subtracting $A_{Analytic}$ from both sides gives
     \epsilon_A(r_j)(\Delta r) &= \beta(r_j) (\Delta r)^{\alpha}
 \end{align*}
 
-
-
 To estimate the order of accuracy of the accuracy, we define the global errors 
 by calculating the L2 Norm of the error which is denoted as $\hat{\epsilon}_A$ 
 
@@ -361,16 +360,7 @@ Defining  for a doubling of grid points ,
     \right)}{\ln \left( \frac{1}{2} \right)}
 \end{align*}
 
-
-
 \section{Results}
-
-To confirm that the mean flow was consistent throughout SWIRL's computation,
-the input mean flow data was compared to the output mean flow data to ensure 
-that the mean flow variables remain unchanged.
-Then, by setting $k$ equal to $0.1$ and starting with 9 grid points and ending
-at 33, we can compute the global errors along with the asymptotic rate of 
-convergence.  
 
 % % \begin{figure}[h!]
 %     \includegraphics[width=\textwidth]{Figures/l2vDr}

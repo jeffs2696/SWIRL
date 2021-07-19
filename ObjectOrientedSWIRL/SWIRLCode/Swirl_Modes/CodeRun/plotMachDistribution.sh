@@ -1,5 +1,5 @@
 #! /bin/bash
 
 gnuplot -persist <<- blah
-    load "plotMeanFlow.plt"
+    load "plottingScripts/plotFlowData.plt"
 blah

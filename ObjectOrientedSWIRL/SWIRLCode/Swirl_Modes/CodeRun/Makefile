@@ -5,3 +5,7 @@ run:
 	./$(EXE)
 clean:
 	rm $(OUTPUT_FILES)
+plot:
+	(./plotMachDistribution.sh ./plotROC.sh ./plotL2OfSoundSpeed.sh);
+	pdflatex test.tex;
+	xdg-open test.pdf

@@ -2,13 +2,12 @@
 set termopt enhanced    # turn on enhanced text mode
 # set multiplot layout 2, 1 
 set xlabel "Radius" 
-set ylabel ""
+set ylabel "Speed Of Sound"
 set key outside
-#set xrange [-10:35]
-#set yrange [-50:50]
+# set yrange [-5.0e-11:5.0e-11]
 set grid
-plot for [i=1:5] \
-    "MeanFlowData".(1+2**i).".dat" using 1:4 with linespoints linecolor rgb "#008080" title  "A"
+plot for [i=9:9] \
+    "MeanFlowData".(1+2**i).".dat" using 1:5 with linespoints linecolor rgb "#008080" title  "A"
     # 'MeanFlowData'.(1+2**i).'.dat' using 1:4 with linespoints linecolor rgb "#008080" title  "A_{in}" 
 # plot \
 #     "FlowDataInput.dat" using 1:3 with linespoints linecolor rgb "#006580" title  "M_{{/Symbol q},in}" ,\

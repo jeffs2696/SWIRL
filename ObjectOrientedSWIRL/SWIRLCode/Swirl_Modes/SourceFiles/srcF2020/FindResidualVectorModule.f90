@@ -1,7 +1,7 @@
 MODULE FindResidualVectorModule
 
    USE, INTRINSIC:: ISO_FORTRAN_ENV
-   USE L2NormModule
+   ! USE L2NormModule
    IMPLICIT NONE PRIVATE
    PUBLIC:: getSvector
 

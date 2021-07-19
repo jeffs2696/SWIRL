@@ -14,7 +14,7 @@ MODULE analysisModule
 CONTAINS
 
     subroutine analysis1(np,np4,ak,rr,snd,rmx,rmt,aa,bb,alpha,beta, &
-        vl,vr,work,rwork,gam,jobvl,jobvr,mm,ir,is,slp,vphi,akap)
+        vl,vr,work,rwork,gam,jobvl,jobvr,mm,ir,is,slp,vphi,akap,S_MMS)
 !
 !     implicit real*8 (a-h,o-z)
 !     parameter (NMAX = 128, NMAX4 = NMAX*4)
@@ -64,19 +64,25 @@ CONTAINS
         CHARACTER, INTENT(IN) :: jobvl, &
             jobvr
 
+        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(INOUT) :: S_MMS
+
 ! define local variables
 
         LOGICAL :: badcol, &
             badrow
 
         LOGICAL, DIMENSION(np4) :: col, &
-            row
+            row 
 
         COMPLEX(KIND=rDef) :: c0, &
             ci, &
-            beta_non_zero
+            beta_non_zero !,& lambda 
 
         COMPLEX(KIND=rDef), DIMENSION(np4) :: cvct
+            ! xx, &
+            ! SS
+
+        COMPLEX(KIND=rDef), DIMENSION(np4,np4) :: aa_before, bb_before 
 
         INTEGER :: i, &
             j, &
@@ -185,6 +191,16 @@ CONTAINS
 !                VL,NMAX4,VR,NMAX4,WORK,2*NMAX4,RWORK,INFO )
 
 ! updated call
+        DO i = 1,np4
+            DO j = 1,np4
+                aa_before(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
+                bb_before(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
+                S_MMS(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
+
+            ENDDO
+        ENDDO
+        aa_before = aa
+        bb_before = bb
 
             CALL USE_EIGENSOLVER(&
             JOBVL = JOBVL  ,   & ! JOBVL
@@ -204,6 +220,11 @@ CONTAINS
             LWORK = 2*NMAX4, & ! LWORK
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
+            WRITE(6,*) VR
+
+            DO i = 1,np4
+                S_MMS(:,i) = MATMUL(aa_before,VR(:,i)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(:,i))
+            ENDDO
 
 !        CALL ZGGEV(&
 !            JOBVL,   & ! JOBVL
@@ -301,6 +322,8 @@ CONTAINS
 10      format(1x,i4,9e15.6)
 ! 12      format(1x,i4,6e20.12)
 !
+
+        ! SS = MATMUL(aa_before,VR(:,1)) - gam(1)*MATMUL(bb_before,VR(:,1))
         return
     end
 

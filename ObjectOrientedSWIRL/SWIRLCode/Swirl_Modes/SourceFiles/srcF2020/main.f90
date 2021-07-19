@@ -66,7 +66,11 @@ PROGRAM MAIN
     CHARACTER(50) :: &
         file_name
 
-    CHARACTER(30):: FORMAT
+    CHARACTER(50):: &
+        FORMAT_MEAN_FLOW , &
+        FORMAT_MEAN_FLOW_HEADERS , &
+        FORMAT_L2        , &
+        FORMAT_ROC       
 
     CHARACTER(10):: file_id
 
@@ -75,7 +79,10 @@ PROGRAM MAIN
 
     CONTINUE
 
-    FORMAT = "(F12.5,F12.5,F12.5,F12.5)" ! General format for numerical
+    FORMAT_MEAN_FLOW = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
+    FORMAT_MEAN_FLOW_HEADERS = "(A12,A12,A12,A12,A12)" 
+    FORMAT_L2 = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
+    FORMAT_ROC = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
 
     ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
 
@@ -98,7 +105,7 @@ PROGRAM MAIN
     boundingConstant = 0.1000_rDef
     k_1 = CMPLX(0.2, 0.0, rDef)
     k_2 = CMPLX(1.0, 0.0, rDef)
-    k_3 = CMPLX(100, 0.0, rDef)
+    k_3 = CMPLX(0.4, 0.0, rDef)
     k_4 = CMPLX(0.2, 0.0, rDef)
     k_5 = CMPLX(0.0, 0.0, rDef)
     k_6 = CMPLX(0.0, 0.0, rDef)
@@ -218,10 +225,10 @@ PROGRAM MAIN
 
         ! WRITE(6,*) 'Input-Output Comparsion'
         
-        ! WRITE(6,*) 'radius,M_x,M_theta,A_expected,A_actual'
+        WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
         DO i = 1,numberOfGridPoints
 
-            WRITE(UNIT,*) &
+            WRITE(UNIT,FORMAT_MEAN_FLOW) &
                 rOut(i)                 , &
                 axialMachDataOut(i)     , &
                 thetaMachDataOut(i)     , &
@@ -308,7 +315,7 @@ PROGRAM MAIN
             )&
             /&
             LOG(0.5_rDef) 
-        WRITE(UNIT,*) RateOfConvergence(i)
+        WRITE(UNIT,*) 1+2**i, RateOfConvergence(i)
 
     ENDDO
 

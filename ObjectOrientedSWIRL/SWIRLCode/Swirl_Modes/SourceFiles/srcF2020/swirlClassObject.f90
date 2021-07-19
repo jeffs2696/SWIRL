@@ -102,6 +102,7 @@ MODULE swirlClassObject
               wvn
 
           COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE :: &
+              S_MMS , &
               vl, &
               vr
 
@@ -214,6 +215,7 @@ MODULE swirlClassObject
               object%alpha(np4),   &
               object%beta(np4),    &
               object%work(2*np4),  &
+              object%S_MMS(np4,np4)        ,&
               object%vph(np4),     &
               object%wvn(np4),     &
               object%aa(np4,np4),  &
@@ -352,7 +354,8 @@ MODULE swirlClassObject
               is    = is,    &
               slp   = slope, &
               vphi  = object%vph,   &
-              akap  = object%akap)
+              akap  = object%akap,  &
+              S_MMS = object%S_MMS)
 
           object%isInitialized = .TRUE.
 
@@ -460,7 +463,8 @@ MODULE swirlClassObject
               object%aa,    &
               object%bb,    &
               object%vl,    &
-              object%vr)
+              object%vr,    &
+              object%S_MMS)
       END SUBROUTINE DestroySwirlClassObject
 !
   END MODULE swirlClassObject
