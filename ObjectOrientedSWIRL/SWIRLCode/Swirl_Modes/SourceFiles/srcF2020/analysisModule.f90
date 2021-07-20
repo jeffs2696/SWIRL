@@ -58,8 +58,8 @@ CONTAINS
 
         COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(IN) :: aa, &
             bb, &
-            vl, &
-            vr
+            VL, &
+            VR
 
         CHARACTER, INTENT(IN) :: jobvl, &
             jobvr
@@ -220,10 +220,11 @@ CONTAINS
             LWORK = 2*NMAX4, & ! LWORK
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
+
             WRITE(6,*) VR
 
             DO i = 1,np4
-                S_MMS(:,i) = MATMUL(aa_before,VR(:,i)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(:,i))
+                 ! S_MMS(i,:) = MATMUL(aa_before,VR(i,:)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(i,:))
             ENDDO
 
 !        CALL ZGGEV(&

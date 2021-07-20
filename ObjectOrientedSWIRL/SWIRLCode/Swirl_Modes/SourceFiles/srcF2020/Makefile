@@ -89,20 +89,21 @@ F77FLAGS  = \
 FEXT     = f
 F90EXT   = f90
 OEXT     = o
-OBJECTS  =                  \
-    main.o					\
-	swirlClassObject.o 				\
-	L2NormModule.o			\
-	derivsModule.o 			\
-	globalModule.o 			\
-	gridModule.o   			\
-	analysisModule.o        \
-	boundaryModule.o 		\
-	indexxModule.o 			\
-	rmachModule.o 			\
-	smachAndSndspdModule.o  \
-    machoutModule.o 		\
-	fdgridModule.o 			\
+OBJECTS  =                     \
+    main.o					   \
+	swirlClassObject.o 		   \
+    FindResidualVectorModule.o \
+	L2NormModule.o			   \
+	derivsModule.o 			   \
+	globalModule.o 			   \
+	gridModule.o   			   \
+	analysisModule.o           \
+	boundaryModule.o 		   \
+	indexxModule.o 			   \
+	rmachModule.o 			   \
+	smachAndSndspdModule.o     \
+    machoutModule.o 		   \
+	fdgridModule.o 			   \
    	fdrivsModule.o 			         
 
 # \
@@ -252,11 +253,12 @@ main.o: main.f90        \
          fdrivsModule.o   \
          globalModule.o   \
          gridModule.o     \
-	 machoutModule.o  \
-	 rmachModule.o    \
-	 smachAndSndspdModule.o \
-	 L2NormModule.o         \
-	 swirlClassObject.o 
+	     machoutModule.o  \
+	     rmachModule.o    \
+	     smachAndSndspdModule.o \
+         FindResidualVectorModule.o \
+	     L2NormModule.o         \
+	     swirlClassObject.o 
 	$(F90) $(F90FLAGS) main.f90
 
 # akima433.o: akima433.f
@@ -323,6 +325,10 @@ sndspdModule.o:  sndspdModule.f90
 
 L2NormModule.o: L2NormModule.f90
 	$(F90) $(F90FLAGS) L2NormModule.f90 
+
+FindResidualVectorModule.o: FindResidualVectorModule.f90\
+							L2NormModule.o
+	$(F90) $(F90FLAGS) FindResidualVectorModule.f90
 
 swirlClassObject.o: swirlClassObject.f90
 	@$(F90) $(F90FLAGS) swirlClassObject.f90

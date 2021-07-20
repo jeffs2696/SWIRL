@@ -13,6 +13,8 @@ MODULE swirlClassObject
       ! USE machoutModule
       USE rmachModule
       USE smachAndSndspdModule
+      USE FindResidualVectorModule
+      USE L2NormModule
 
       IMPLICIT NONE
 
@@ -91,8 +93,8 @@ MODULE swirlClassObject
 
           COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
               aa, bb
-          ! COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
-              ! aa_before, bb_before
+          COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
+              aa_before, bb_before
 
           COMPLEX(KIND = REAL64), DIMENSION(:), ALLOCATABLE ::&
               alpha, &
@@ -219,7 +221,9 @@ MODULE swirlClassObject
               object%vph(np4),     &
               object%wvn(np4),     &
               object%aa(np4,np4),  &
+              object%aa_before(np4,np4),  &
               object%bb(np4,np4),  &
+              object%bb_before(np4,np4),  &
               object%vl(np4,np4),  &
               object%vr(np4,np4))
 
@@ -330,6 +334,9 @@ MODULE swirlClassObject
               aa   = object%aa,   &
               bb   = object%bb)
 
+          object%aa_before = object%aa
+          object%bb_before = object%bb
+
           CALL analysis(&
               np    = object%numberOfRadialPoints,    &
               np4   = np4,   &
@@ -356,6 +363,14 @@ MODULE swirlClassObject
               vphi  = object%vph,   &
               akap  = object%akap,  &
               S_MMS = object%S_MMS)
+
+          CALL getSvector( &
+              A      = object%aa_before ,   &
+              B      = object%bb_before ,   &
+              x      = object%vr        ,   &
+              lambda = object%wvn       ,   &
+              np4    = np4              ,   &
+              S_MMS  = object%S_MMS)
 
           object%isInitialized = .TRUE.
 

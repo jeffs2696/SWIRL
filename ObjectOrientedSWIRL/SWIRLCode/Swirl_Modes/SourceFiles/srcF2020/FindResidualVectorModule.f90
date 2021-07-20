@@ -2,7 +2,8 @@ MODULE FindResidualVectorModule
 
    USE, INTRINSIC:: ISO_FORTRAN_ENV
    ! USE L2NormModule
-   IMPLICIT NONE PRIVATE
+   IMPLICIT NONE
+   PRIVATE
    PUBLIC:: getSvector
 
 INTERFACE getSvector 
@@ -22,8 +23,10 @@ CONTAINS
                       S_MMS )
 
    INTEGER, INTENT(IN):: np4
+
    COMPLEX(KIND = REAL64), DIMENSION(np4, np4), INTENT(IN):: A, &
-                                                              B
+       B
+
    COMPLEX(KIND = REAL64), DIMENSION(np4), INTENT(IN):: x 
                                                             
    COMPLEX(KIND = REAL64), INTENT(IN) :: lambda
@@ -35,11 +38,11 @@ CONTAINS
 
     S_MMS = MATMUL(A, x) - lambda*(MATMUL(B, x))
 
-!    DO i = 1, np4
+   DO i = 1, np4
 
-!    WRITE(6, *) S_MMS(i)
+   WRITE(6, *) S_MMS(i)
 
- !   END DO
+   END DO
     
 !    WRITE(6,*) SUM(S_MMS)
     

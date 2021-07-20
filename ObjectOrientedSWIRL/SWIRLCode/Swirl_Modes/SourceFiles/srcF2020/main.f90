@@ -130,7 +130,7 @@ PROGRAM MAIN
         ! write integer into a string 
         WRITE(file_id, '(i0)') numberOfGridPoints
         ! Construct the file name 
-        file_name = 'MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
+        file_name = 'MeanFlowData/MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
 
         OPEN(NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
@@ -287,7 +287,7 @@ PROGRAM MAIN
 
     END DO
 
-    file_name ='L2OfSoundSpeed.dat'
+    file_name ='MethodOfManfSoln/L2OfSoundSpeed.dat'
 
     ! WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
     OPEN(NEWUNIT=UNIT,FILE=file_name)
@@ -300,7 +300,7 @@ PROGRAM MAIN
 
     CLOSE(UNIT);
 
-    file_name = 'RateOfConvergenceForIntegration.dat'
+    file_name = 'MethodOfManfSoln/RateOfConvergenceForIntegration.dat'
 
     OPEN(NEWUNIT=UNIT,FILE=file_name)
 
@@ -315,7 +315,8 @@ PROGRAM MAIN
             )&
             /&
             LOG(0.5_rDef) 
-        WRITE(UNIT,*) 1+2**i, RateOfConvergence(i)
+
+        WRITE(UNIT,*) (radMax - radMin)/REAL(1+2**i,KIND=rDef), RateOfConvergence(i)
 
     ENDDO
 
