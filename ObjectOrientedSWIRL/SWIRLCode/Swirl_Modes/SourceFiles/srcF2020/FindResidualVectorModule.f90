@@ -15,8 +15,9 @@ END INTERFACE getSvector
      
 CONTAINS
 
-    SUBROUTINE getSv(A, &
-                      B, &
+    SUBROUTINE getSv(&
+        A, &
+        B, &
         x, & 
         lambda, &
         np4,&

@@ -24,7 +24,8 @@ MODULE swirlClassObject
           DestroyObject  ,&
           SwirlClassType ,&
           GetMeanFlowData, & 
-          FindResidualData!, & GetModeData
+          FindResidualData, & 
+          GetModeData
 
 ! Interfaces
 
@@ -37,11 +38,11 @@ MODULE swirlClassObject
          INTERFACE FindResidualData
              MODULE PROCEDURE GetResidualVector
          END INTERFACE FindResidualData
-!
-!          INTERFACE GetModeData
-!              MODULE PROCEDURE GetRadialModeData
-!          END INTERFACE GetModeData
-!
+
+          INTERFACE GetModeData
+              MODULE PROCEDURE GetRadialModeData
+          END INTERFACE GetModeData
+
       INTERFACE GetMeanFlowData
           MODULE PROCEDURE GetMeanData
       END INTERFACE GetMeanFlowData
@@ -443,19 +444,56 @@ MODULE swirlClassObject
 
       END SUBROUTINE GetMeanData
 
+      SUBROUTINE GetRadialModeData(&
+          object        , &
+          eigenValue    , &
+          eigenVector   , &
+          eigenIndex)
 
-      SUBROUTINE GetResidualVector(object,S)
           TYPE(SwirlClassType), INTENT(IN) ::&
               object
+
+          INTEGER, INTENT(IN) :: &
+              eigenIndex 
+
+          COMPLEX(KIND = rDef), INTENT(INOUT) :: &
+              eigenValue
+
+          COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
+              eigenVector
+
+          eigenValue = object%wvn(eigenIndex)
+          eigenVector= object%vr(:,eigenIndex)
+
+          WRITE(6,*) (eigenValue), SIZE(eigenVector), (eigenIndex)
+
+
+      END SUBROUTINE GetRadialModeData 
+
+      SUBROUTINE GetResidualVector(&
+          object                  ,&
+          ! eigenValue              ,&
+          ! eigenVector             ,&
+          S)
+
+          TYPE(SwirlClassType), INTENT(IN) ::&
+              object
+
+          ! COMPLEX(KIND = rDef), INTENT(INOUT) :: &
+          !     eigenValue
+
+          ! COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
+          !     eigenVector
+
           COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
           S
 
           INTEGER :: SZ
 
           IF (object%isInitialized.eqv..TRUE.) then
+
               SZ = SIZE(S)
-              WRITE(6,*) SZ
-          endif
+
           CALL getSvector( &
               A      = object%aa_before ,   &
               B      = object%bb_before ,   &
@@ -464,6 +502,7 @@ MODULE swirlClassObject
               np4    = SZ              ,   &
               S_MMS  = S ) 
 
+          ENDIF
       S = object%S_MMS
       ! write(6,*) 
 

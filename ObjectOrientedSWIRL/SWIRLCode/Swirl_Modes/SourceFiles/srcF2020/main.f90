@@ -17,10 +17,13 @@ PROGRAM MAIN
         numberOfGridPoints  ,& ! number of points
         i                   ,& ! indexer for do loops
         fac                 ,& ! variable used for doubling grid points
+        eigenIndex          ,&
         facCount               ! counts the outermost do loop
 
     COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
-        S_MMS
+        S_MMS                                        , &
+        eigenVector
+
     COMPLEX(KIND = rDef) :: &
         frequency                ,& !non-dimensional frequency
         hubAdmittance            ,& !Liner Admittance At the Hub
@@ -32,7 +35,8 @@ PROGRAM MAIN
         k_4                      ,&
         k_5                      ,&
         k_6                      ,&
-        k_7
+        k_7                      ,&
+        eigenValue
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         r                   ,&
@@ -113,6 +117,7 @@ PROGRAM MAIN
     k_6 = CMPLX(0.0, 0.0, rDef)
     k_7 = CMPLX(0.0, 0.0, rDef)
 
+    eigenIndex = 2
     ! Starting Grid DO LOOP
 
 
@@ -153,7 +158,8 @@ PROGRAM MAIN
             SoundSpeed_dr_Out(numberOfGridPoints)       ,&
             SoundSpeedExpected(numberOfGridPoints)                                ,&
             SoundSpeedError(numberOfGridPoints) ,&
-            S_MMS(numberOfGridPoints*4) )
+            S_MMS(numberOfGridPoints*4)             , &
+            eigenVector(numberOfGridPoints*4) )
 
         dr = (radMax-radMin)/REAL(numberOfGridPoints-1, rDef)
 
@@ -267,10 +273,18 @@ PROGRAM MAIN
         WRITE(6,*) 'SoundSpeedErrorL2' , SoundSpeedErrorL2
 
 
-        CALL FindResidualData(object = swirlClassObj(fac),&
-            S =S_MMS )
+        CALL GetModeData(&
+            object = swirlClassObj(fac) , &
+            eigenValue = eigenValue     , &
+            eigenVector= eigenVector    , &
+            eigenIndex = eigenIndex) 
 
-        WRITE(6,*) S_MMS
+        CALL FindResidualData(&
+            object = swirlClassObj(fac),&
+            S      = S_MMS )
+
+
+        ! WRITE(6,*) S_MMS
         CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
@@ -287,7 +301,8 @@ PROGRAM MAIN
             SoundSpeed_dr_Out     ,&
             SoundSpeedExpected    ,&
             SoundSpeedError       ,&
-            S_MMS)
+            S_MMS                 ,&
+            eigenVector)
 
         CLOSE(UNIT)
 
