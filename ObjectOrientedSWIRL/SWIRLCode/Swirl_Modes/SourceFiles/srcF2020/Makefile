@@ -61,6 +61,7 @@ F90FLAGS  =	\
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
 			-Wno-error=compare-reals \
+			-Wno-error=character-truncation \
 			-Wno-error=do-subscript
 			
 F77      = gfortran

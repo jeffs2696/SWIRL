@@ -1,0 +1,629 @@
+\documentclass[12pt]{uthesis-v12}  %---> DO NOT ALTER THIS COMMAND
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\begin{document} %---> %---> %---> %---> DO NOT ALTER THIS COMMAND
+
+%--------+----------------------------------------------------------+
+%        |  \title{}                                    (REQUIRED)  |
+%        |  \author{}                                   (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.1 of "Read_Me_First_(v12).pdf"            |
+%        |                                                          |
+%        |  Also see section 2.2 of above "Read Me" file for the    |
+%        |  proper use of the invisible tilde ("~") character when  |
+%        |  entering a middle initial in the \author command.       |
+%        +----------------------------------------------------------+
+
+\title{ Something About Swirling Modes
+       \protect\\ with Asymmetric Price Information and No Goods}
+
+\author{Elmer J.~Fudd}
+
+%--------+----------------------------------------------------------+
+%        |  \copyrightpage{}                            (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.2 of "Read_Me_First_(v12).pdf"            |
+%        |                                                          |
+%        |  1) You must enter either "yes" or "no" in this          |
+%        |      command.  Inputting "yes" produces a copyright      |
+%        |      notification page as the second page and inputting  |
+%        |      "no" produces a blank second page.                  |
+%        |  2) Input to this command is case sensitive.             |
+%        |  3) Default: the "yes" option.                           |
+%        +----------------------------------------------------------+
+
+\copyrightpage{yes}
+
+%--------+----------------------------------------------------------+
+%        |  \mydocument{}                               (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.3 of "Read_Me_First_(v12).pdf"            |
+%        |                                                          |
+%        |  1) Input to this command is limited to the following    |
+%        |     three options: a) Dissertation                       |
+%        |                    b) Thesis                             |
+%        |                    c) Project                            |
+%        |  2) Input to this command is case-sensitive.             |
+%        +----------------------------------------------------------+
+
+\mydocument{Dissertation}
+
+%--------+----------------------------------------------------------+
+%        |  \degree{}{}                                 (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.4 of "Read_Me_First_(v12).pdf"            |
+%        |                                                          |
+%        |  You need to provide two distinct inputs into this       |
+%        |  command:                                                |
+%        |     1) In the first set of braces you need to specify    |
+%        |        the *exact* degree you will receive. Some         |
+%        |        examples are: -) Masters of Arts                  |
+%        |                      -) Masters of Science               |
+%        |                      -) Doctor of Philosophy             |
+%        |     2) In the second set of braces you need to state the |
+%        |        *specific* discipline or area for that degree     |
+%        |        (e.g., Economics, Education, Engineering, etc.).  |
+%        |  Students should consult their advisor if they have any  |
+%        |  questions about this information.                       |
+%        +----------------------------------------------------------+
+
+\degree{Masters of Science}{Mechanical Engineering}
+
+%--------+----------------------------------------------------------+
+%        |  \conferraldate{}{}                          (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.5 of "Read_Me_First_(v12).pdf"            |
+%        |                                                          |
+%        |  In the two set of braces enter the month and then the   |
+%        |  year your degree will be *conferred* by the university. |
+%        +----------------------------------------------------------+
+
+\conferraldate{December}{2021}
+
+%--------+----------------------------------------------------------+
+%        |  \advisor{}                                  (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.6.2 of "Read_Me_First_(v12).pdf"          |
+%        |                                                          |
+%        |  1) Also see section 2.2 of "Read_Me_First_(v12).pdf"    |
+%        |     for the proper use of the invisible tilde ("~")      |
+%        |     character when entering a middle initial or the      |
+%        |     abbreviation of an academic title (e.g., Dr.) in     |
+%        |     the \advisor{} command.                              |
+%        |  2) Also see section 3.6.1. for consistent presentation  |
+%        |     of title page signature lines.                       |
+%        +----------------------------------------------------------+
+
+\advisor{Dr.~Ray Hixon}
+
+%--------+----------------------------------------------------------+
+%        |  Committee Member Signature Commands         (OPTIONAL)  |
+%        |                                                          |
+%        |  See section 3.6.3 of "Read_Me_First_(v12).pdf"          |
+%        |                                                          |
+%        |  1) Use the commands below to provide signature lines    |
+%        |     for your "other" committee members;                  |
+%        |        --> you must list your other committee members    |
+%        |            in alphabetic order by last name              |
+%        |        --> to do this, use the commands below in the     |
+%        |            order presented below.                        |
+%        |  2) You can choose to include none, some, or all of the  |
+%        |     "XXXmember" commands below --- based on the number   |
+%        |     committee members you have; simply delete (or        |
+%        |     comment-out) any of the commands below that are not  |
+%        |     needed.                                              |
+%        |  3) Do not include the name of your committee chair or   |
+%        |     the Graduate Dean in the commands listed below.      |
+%        |     Their signature lines are generated by the           |
+%        |     \advisor{} and \graduatedean{}{} commands.           |
+%        |  4) You cannot use any of the commands below more than   |
+%        |     once. (For details on this issue, see section 3.6.3  |
+%        |     of "Read_Me_First_(v12).pdf".)                       |
+%        |  5) Also see section 2.2 of "Read_Me_First_(v12).pdf"    |
+%        |     for the proper use of the invisible tilde ("~")      |
+%        |     character when entering a middle initial or the      |
+%        |     abbreviation of an academic title (e.g., Dr.) in     |
+%        |     the commands below.                                  |
+%        |  6) See section 3.6.1. for consistent presentation of    |
+%        |     title page signature lines.                          |
+%        |                                                          |
+%        |  I know I shouldn't have to say this, but enough         |
+%        |  students over the years have made the same mistake      |
+%        |  that I'm forced to state:                               |
+%        |                                                          |
+%        |      THE NAMES USED IN THE FOLLOWING COMMANDS ARE        |
+%        |      SILLY NAMES I'VE USED AS EXAMPLES ONLY.  THEY       |
+%        |      ARE NOT THE ACTUAL NAMES OF YOUR COMMITTEE          |
+%        |      MEMBERS.  REPLACE THE SILLY NAMES BELOW WITH        |
+%        |      THE NAMES OF YOUR ACTUAL COMMITTEE MEMBERS.         |
+%        |                                                          |
+%        +----------------------------------------------------------+
+
+  \secondmember{Dr.~Anita Bath}
+   \thirdmember{Dr.~Chris P.~Bacon}
+  \fourthmember{Dr.~Adam Baum}
+   \fifthmember{Dr.~Corey O.~Graff}
+   \sixthmember{Dr.~Hugh Jass}
+ \seventhmember{Dr.~Noah Lott}
+  \eighthmember{Dr.~Jean Poole}
+
+%--------+----------------------------------------------------------+
+%        |  \graduatedean{}{}                           (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.6.4 of "Read_Me_First_(v12).pdf"          |
+%        |                                                          |
+%        |  1) THE NAME AND TITLE PROVIDED BELOW ARE THOSE OF THE   |
+%        |     ACTUAL GRADUATE DEAN AT THE TIME THIS DOCUMENT WAS   |
+%        |     CONSTRUCTED (January 2012). Contact the Graduate     |
+%        |     College to determine whether this information is     |
+%        |     correct at the time you submit your document.        |
+%        |  2) Section 2.2 of "Read_Me_First_(v12).pdf" describes   |
+%        |     the proper use of the invisible tilde ("~")          |
+%        |     character when entering a middle initial or the      |
+%        |     abbreviation of an academic title (e.g., Dr.) in     |
+%        |     the \graduatedean{} command.                         |
+%        |  3) See section 3.6.1. for consistent presentation of    |
+%        |     title page signature lines.                          |
+%        +----------------------------------------------------------+
+
+\graduatedean{Dr.~Patricia R.~Komuniecki}{Dean}
+
+%--------+----------------------------------------------------------+
+%        |  \maketitle                                  (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.7 of "Read_Me_First_(v12).pdf"            |
+%        |                                                          |
+%        |  This is a required LaTeX command; to be brief, bad      |
+%        |  things will happen if this command is not included      |
+%        |  in your document at this particular location.           |
+%        +----------------------------------------------------------+
+
+\maketitle  %---->  ----->  ---->  ---->   DO NOT ALTER THIS COMMAND
+
+%--------+----------------------------------------------------------+
+%        |  Abstract Page Environment                   (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.8 of "Read_Me_First_(v12).pdf"            |
+%        +----------------------------------------------------------+
+
+\begin{abstractpage}
+[Insert the abstract to your work here]
+\end{abstractpage}
+
+%--------+----------------------------------------------------------+
+%        |  Dedication Page Environment                 (OPTIONAL)  |
+%        |                                                          |
+%        |  See section 3.9 of "Read_Me_First_(v12).pdf"            |
+%        |                                                          |
+%        |  If both a dedication page and an acknowledgements page  |
+%        |  are included in the document, the dedication page must  |
+%        |  proceed the acknowledgements page.                      |
+%        +----------------------------------------------------------+
+
+\begin{dedication}
+\noindent [Insert your dedication here]
+\end{dedication}
+
+%--------+----------------------------------------------------------+
+%        |  Acknowledgments Page Environment            (OPTIONAL)  |
+%        |                                                          |
+%        |  See section 3.10 of "Read_Me_First_(v12).pdf"           |
+%        |                                                          |
+%        |  If both a dedication page and an acknowledgements page  |
+%        |  are included in the document, the dedication page must  |
+%        |  proceed the acknowledgements page.                      |
+%        +----------------------------------------------------------+
+
+\begin{acknowledgments}
+\noindent [Insert your acknowledgements here]
+\end{acknowledgments}
+
+%--------+----------------------------------------------------------+
+%        |  \tableofcontents                            (REQUIRED)  |
+%        |  \listoftables                            (CONDITIONAL)  |
+%        |  \listoffigures                           (CONDITIONAL)  |
+%        |                                                          |
+%        |  See sections 3.11 & 3.12 of "Read_Me_First_(v12).pdf"   |
+%        |                                                          |
+%        |  1) You must include the \tableofcontents command in     |
+%        |     your document: the UT Manual requires every          |
+%        |     dissertation/thesis to have a detailed table of      |
+%        |     contents.                                            |
+%        |  2) Including the \listoftables and \listoffigures       |
+%        |     commands is "conditional."  See sections 3.12 of     |
+%        |     "Read_Me_First_(v12).pdf" for additional details.    |
+%        +----------------------------------------------------------+
+
+\tableofcontents  %----->  ----->  ---->  DO NOT ALTER THIS COMMAND
+\listoftables \listoffigures
+
+%--------+----------------------------------------------------------+
+%        |  \captionformat{}                            (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.12.2 of "Read_Me_First_(v12).pdf"         |
+%        |                                                          |
+%        |  1) You are required to choose between the "hang" or     |
+%        |     "align" option for this command.                     |
+%        |  2) Input to this command is case sensitive.             |
+%        |  3) Default: ``hang'' option.                            |
+%        +----------------------------------------------------------+
+
+\captionformat{hang}
+
+%--------+----------------------------------------------------------+
+%        |  List of Abbreviations Environment           (OPTIONAL)  |
+%        |                                                          |
+%        |  See section 3.13 of "Read_Me_First_(v12).pdf"           |
+%        |                                                          |
+%        |  1) This is an optional section; consult your advisor    |
+%        |     to determine whether you need/want to include this   |
+%        |     section in your document.                            |
+%        |  2) If you do not want a List of Abbreviations simply    |
+%        |     delete the material below (and these instructions).  |
+%        |  3) If you do want a List of Abbreviations simply        |
+%        |     replace the silly material below with the            |
+%        |     information relevant to your document.               |
+%        |     a. Within the "listofabbreviations" environment      |
+%        |        below you must use a separate \abbreviation{}{}   |
+%        |        command for each entry in your List of            |
+%        |        Abbreviations.                                    |
+%        |     b. As the examples below demonstrate, the            |
+%        |        information within the first set of braces is     |
+%        |        the abbreviation and the information in the       |
+%        |        second set of braces is the definition of that    |
+%        |        abbreviation.                                     |
+%        +----------------------------------------------------------+
+
+\begin{listofabbreviations}
+
+ \abbreviation{ABBREV}{This is where you provide a brief
+                       definition of the abbreviation ``ABBREV''}
+     \abbreviation{BB}{B.B.~King}
+    \abbreviation{BSE}{Bovine Spongiform Encephalopathy (Mad Cow
+                       Disease)}
+     \abbreviation{CB}{L.D. Caskey and J.D. Beazley, \emph{Attic
+                       Vase Paintings in the Museum of Fine
+                       Arts}, Boston (Oxford 1931--1963)}
+    \abbreviation{GLE}{Gauss' law for electricity: $\nabla\cdot E
+                       = \displaystyle\frac{\rho}{\varepsilon_0}
+                       = 4\pi k \rho$}
+    \abbreviation{HHS}{Department of Health and Human Services}
+    \abbreviation{IaR}{I am root}
+
+\end{listofabbreviations}
+
+%--------+----------------------------------------------------------+
+%        |  List of Symbols Environment                 (OPTIONAL)  |
+%        |                                                          |
+%        |  See section 3.14 of "Read_Me_First_(v12).pdf"           |
+%        |                                                          |
+%        |  1) This is an optional section; consult your advisor    |
+%        |     to determine whether you need/want to include this   |
+%        |     section in your document.                            |
+%        |  2) If you do not want a List of Symbols simply delete   |
+%        |     the material below (and these instructions).         |
+%        |  3) If you do want a List of Symbols simply replace the  |
+%        |     silly material below with the information relevant   |
+%        |     to your document.                                    |
+%        |       a. Within the "listofsymbols" environment below    |
+%        |          you must use a separate \emblem{}{} command     |
+%        |          for each entry in your List of Symbols.         |
+%        |       b. As the examples below show, insert your symbol  |
+%        |          within the first set of braces in the           |
+%        |          \emblem{}{} command, and its definition within  |
+%        |          the second set of braces.                       |
+%        |       c. Use the \emblemskip command to insert a blank   |
+%        |          line between different categories of symbols:   |
+%        |          -) such additional spacing is required between  |
+%        |             different categories of symbols;             |
+%        |          -) see "Read_Me_First_(v12).pdf" for details.   |
+%        +----------------------------------------------------------+
+
+\begin{listofsymbols}
+
+ \emblem{$\ddagger$}{the degree to which the flayrod has gone out of
+                    skew on tredel}
+\emblem{$\triangle$}{the ratio of the M2 monetary aggregate to the
+                    Monetary Base}
+
+       \emblemskip
+
+  \emblem{$\alpha$}{angle of rotation around internal rotation axis}
+   \emblem{$\beta$}{the number of people named ``Bob''}
+
+       \emblemskip
+
+         \emblem{Q}{Tobin's q; the ratio of the market value of
+                    installed capital to the replacement cost of
+                    capital}
+         \emblem{Y}{Gross Domestic Product (adjusted for inflation)}
+
+\end{listofsymbols}
+
+%--------+----------------------------------------------------------+
+%        |  Preface Environment                         (OPTIONAL)  |
+%        |                                                          |
+%        |  See section 3.15 of "Read_Me_First_(v12).pdf"           |
+%        +----------------------------------------------------------+
+
+\begin{preface}
+[Insert your preface here]
+\end{preface}
+
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+%--------+----------------------------------------------------------+
+%        |  \makebody                                   (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.16 of "Read_Me_First_(v12).pdf"           |
+%        |                                                          |
+%        |  This is a *required* UThesis command; again, bad        |
+%        |  things will happen if this command is not included in   |
+%        |  your document at this particular location --- see the   |
+%        |  file "Read_Me_First_(v12).pdf" for details.             |
+%        +----------------------------------------------------------+
+
+\makebody   %------->  ------->  ------->  DO NOT ALTER THIS COMMAND
+
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+%--------+----------------------------------------------------------+
+%        |  \chapter{}                                  (REQUIRED)  |
+%        |                                                          |
+%        |  See section 3.17 of "Read_Me_First_(v12).pdf"           |
+%        |                                                          |
+%        |  For guidance on using the commands \chapter{},          |
+%        |  \section{}, \subsection{}, \subsubsection{}, etc., see  |
+%        |  Leslie Lamport's "LaTeX: A Document Preparation         |
+%        |  System." Addison Wesley: Reading Massachusetts, 1985.   |
+%        +----------------------------------------------------------+
+
+\chapter{Insert the Heading to Chapter 1}
+\input{Chapter1/meanFlowMMS/meanFlowMMSBody.tex}
+[ Insert your text to chapter 1 here.  A pretend example of a silly
+table is provided below (i.e., Table~\ref{SILLY}).~]
+
+%        +----------------------------------------------------------+
+%        |                                                          |
+%        |  IMPORTANT:                                              |
+%        |                                                          |
+%        |  Delete the following material.  I included this         |
+%        |  material here as silly table to provide an example in   |
+%        |  the List of Tables page for this template file.         |
+%        |                                                          |
+%        +----------------------------------------------------------+
+
+     \vfill
+     \begin{table}[ht]
+     \caption{A silly glossary for research reports.\label{SILLY}}
+     \begin{center}
+     \begin{tabular}{p{2.75in}|p{2.5in}}
+      \rule[-0.5em]{0pt}{1.75em} \bf When Professors write \ldots
+      & \bf they REALLY mean \ldots \\ \hline\hline
+      %--------+------------------------------------
+      \rule[-0.5em]{0pt}{1.75em} Typical results are shown \ldots
+      & The best results are shown \ldots \\ \hline
+      %--------+------------------------------------
+      \rule[-0.5em]{0pt}{1.75em} It is generally believed that
+      \ldots & A couple of other guys think so too  \\ \hline
+      %--------+------------------------------------
+      \rule[-0.5em]{0pt}{1.75em}Thanks to Al K.~Seltzer for
+      assistance and to I.P. Daly for valuable discussions &
+      Seltzer did the work and Daly explained
+      what it meant \\
+     \end{tabular}
+     \end{center}
+     \end{table}
+     \vfill
+
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+\chapter{Insert the Heading to Chapter 2}
+
+[~Insert your text to chapter 2 here. A pretend example of a silly
+figure is provided below (i.e., Figure~\ref{DOWD}).~]
+
+%        +----------------------------------------------------------+
+%        |                                                          |
+%        |  IMPORTANT:                                              |
+%        |                                                          |
+%        |  Delete the following material.  I included this         |
+%        |  material here as a silly figure to provide an example   |
+%        |  in the List of Figures page for this template file.     |
+%        |                                                          |
+%        +----------------------------------------------------------+
+
+      \vfill
+      \begin{figure}[ht]
+      \begin{center}
+      \begin{tabular}{|cp{5.5in}c|} \hline
+      & Let's pretend that instead of this text I provided a figure
+      of myself smoking a most excellent cigar.  As long as we're
+      pretending, let's assume that figure shows that I have a really
+      big smile on my face. & \\
+      & & \\[-0.75em]
+      & OK, the truth is that I wanted to provide an example of a
+      figure to contrast the text in the figure's caption to the text
+      entered as a entry in the \emph{List of Figures}. This
+      difference is controlled through the
+      $\backslash$\texttt{caption[\,]\{\}} command. Appendix~B of
+      ``Read Me First (v12).pdf'' provides a primer for this issue. &
+      \\ \hline
+      \end{tabular}
+      \caption[Dr.~Dowd enjoying a wonderful cigar.] {Dr.~Dowd
+              enjoying a wonderful cigar. From the smile on his face
+              we are left to wonder if the cigar is an H.~Upmann
+              \emph{Corona Imperial} or a Punch \emph{Rothchild}
+              (with a double maduro wrapper, of course). \label{DOWD}
+              }
+      \end{center}
+      \end{figure}
+      \vfill
+
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+%--------+----------------------------------------------------------+
+%        |  \myreferences{}                          (CONDITIONAL)  |
+%        |                                                          |
+%        |  See section 3.18 of "Read_Me_First_(v12).pdf"           |
+%        |                                                          |
+%        |  That section of the READ ME file describes two options  |
+%        |  for listing the works cited in your document: first,    |
+%        |  manually entering your list of references and, second,  |
+%        |  using BibTeX to generate that list.                     |
+%        |                                                          |
+%        |  1) If you manually enter your reference list, first     |
+%        |     include the \myreferences command, as illustrated    |
+%        |     below.  Second, use the "referencelist" environment  |
+%        |     described below.  For this, note that the UT Manual  |
+%        |     requires double-spacing *between* references in      |
+%        |     that list. However, it also states that *within*     |
+%        |     individual references the spacing may be single- or  |
+%        |     double-spaced.  Because of this, UThesis provides    |
+%        |     two options for the "referencelist" environment:     |
+%        |                                                          |
+%        |            \begin{referencelist}{ENTER OPTION HERE}      |
+%        |            \item ...                                     |
+%        |            \end{referencelist}                           |
+%        |                                                          |
+%        |     a. Replacing "ENTER OPTION HERE" above with the      |
+%        |        text "single" will generate a reference list      |
+%        |        with single-spaced entries in that list but       |
+%        |        double-spacing between those entries. An example  |
+%        |        of this is provided below.                        |
+%        |     b. Alternatively, using the "double" option will     |
+%        |        generate a list with double-spaced entries and    |
+%        |        double-spacing between entries. An example of     |
+%        |        this is also provided below.                      |
+%        |                                                          |
+%        |     Note that input to these options is case sensitive   |
+%        |     and the default setting is the "double" option.      |
+%        |                                                          |
+%        |  2) If you instead choose to use BibTeX to generate the  |
+%        |     reference list, then you *cannot* include either     |
+%        |     the "\myreferences" command or the "referencelist"   |
+%        |     environment in your document. In this case you must  |
+%        |                                                          |
+%        |     a. delete the \myreferences command and the two      |
+%        |        examples of the "referencelist"  environment      |
+%        |        below;                                            |
+%        |     b. then you must add and locate appropriately all    |
+%        |        necessary BibTeX commands within your document    |
+%        |        (e.g., \bibliographystyle{}, \citationstyle{},    |
+%        |        \bibliography{}, etc.).                           |
+%        +----------------------------------------------------------+
+
+\myreferences
+
+                                          %%%%%%%%%%%%%%%%%%%%%%
+                                          %% DELETE THIS WHEN
+ \hfill \fbox{First example: references   %% CONSTRUCTING YOUR
+ generated by the ``single'' option}      %% OWN REFERENCE LIST
+                                          %%%%%%%%%%%%%%%%%%%%%%
+
+\begin{referencelist}{single}
+\item \textbf{Friedman, Milton}, ``The Role of Monetary Policy,''
+      \emph{American Economic Review}, March 1968, 58(1), 1--17.
+
+\item \textbf{Keynes, John Maynard}, \emph{The General Theory of
+      Employment, Interest, and Money}, New York: Harcourt Brace
+      Jovanovic, 1936.
+
+\item \textbf{Smith, Adam}, \emph{An Inquiry into the Nature and
+      Causes of the Wealth of Nations}, Edwin Cannan, ed.,
+      London: Methuen \& Co., Ltd. 1904.
+
+\item \textbf{Tobin, James}, ``A Dynamic Aggregative Model,''
+      \emph{Journal of Political Economy,} April 1955, 63(2),
+      103--115.
+\end{referencelist}
+
+                                          %%%%%%%%%%%%%%%%%%%%%%
+                                          %% DELETE THIS WHEN
+ \hfill \fbox{Second example: references  %% CONSTRUCTING YOUR
+ generated by the ``double'' option}      %% OWN REFERENCE LIST
+                                          %%%%%%%%%%%%%%%%%%%%%%
+
+\begin{referencelist}{double}
+\item \textbf{Friedman, Milton}, ``The Role of Monetary Policy,''
+      \emph{American Economic Review}, March 1968, 58(1), 1--17.
+
+\item \textbf{Keynes, John Maynard}, \emph{The General Theory of
+      Employment, Interest, and Money}, New York: Harcourt Brace
+      Jovanovic, 1936.
+
+\item \textbf{Smith, Adam}, \emph{An Inquiry into the Nature and
+      Causes of the Wealth of Nations}, Edwin Cannan, ed.,
+      London: Methuen \& Co., Ltd. 1904.
+
+\item \textbf{Tobin, James}, ``A Dynamic Aggregative Model,''
+      \emph{Journal of Political Economy,} April 1955, 63(2),
+      103--115.
+\end{referencelist}
+
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+%--------+----------------------------------------------------------+
+%        |  \appendix                                  (IF NEEDED)  |
+%        |                                                          |
+%        |  See section 3.19 of "Read_Me_First_(v12).pdf"           |
+%        |                                                          |
+%        |  1) When you include the \appendix command a subsequent  |
+%        |     \chapter{} command will not generate a chapter but   |
+%        |     an appendix section.                                 |
+%        |                                                          |
+%        |  2) As is illustrated below, to generate a second or     |
+%        |     third appendix you simply have to include            |
+%        |     additional \chapter{} commands (i.e., you DO NOT     |
+%        |     have to repeat the use of the \appendix command).    |
+%        +----------------------------------------------------------+
+
+\appendix
+
+\chapter{Insert the Heading to Appendix A}
+
+[Insert text to Appendix A (if appendix is needed)]
+
+%====================================================================
+
+\chapter{Insert the Heading to Appendix B}
+
+[Insert text to Appendix B (if appendix is needed)]
+
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+%--------+----------------------------------------------------------+
+%        |  \end{document}                              (REQUIRED)  |
+%        |                                                          |
+%        |  Details (if you can call them "details") are provided   |
+%        |  in section 3.20 of "Read_Me_First_(v12).pdf"            |
+%        +----------------------------------------------------------+
+
+\end{document} %---> ---> ---> --->   DO NOT ALTER THIS COMMAND
+
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

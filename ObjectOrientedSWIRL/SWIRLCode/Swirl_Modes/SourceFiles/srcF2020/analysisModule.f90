@@ -14,7 +14,7 @@ MODULE analysisModule
 CONTAINS
 
     subroutine analysis1(np,np4,ak,rr,snd,rmx,rmt,aa,bb,alpha,beta, &
-        vl,vr,work,rwork,gam,jobvl,jobvr,mm,ir,is,slp,vphi,akap,S_MMS)
+        vl,vr,work,rwork,gam,jobvl,jobvr,mm,ir,is,slp,vphi,akap)
 !
 !     implicit real*8 (a-h,o-z)
 !     parameter (NMAX = 128, NMAX4 = NMAX*4)
@@ -64,7 +64,7 @@ CONTAINS
         CHARACTER, INTENT(IN) :: jobvl, &
             jobvr
 
-        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(INOUT) :: S_MMS
+        ! COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(INOUT) :: S_MMS
 
 ! define local variables
 
@@ -195,7 +195,7 @@ CONTAINS
             DO j = 1,np4
                 aa_before(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
                 bb_before(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
-                S_MMS(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
+                ! S_MMS(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
 
             ENDDO
         ENDDO
@@ -221,7 +221,6 @@ CONTAINS
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
 
-            WRITE(6,*) VR
 
             DO i = 1,np4
                  ! S_MMS(i,:) = MATMUL(aa_before,VR(i,:)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(i,:))
@@ -325,7 +324,8 @@ CONTAINS
 !
 
         ! SS = MATMUL(aa_before,VR(:,1)) - gam(1)*MATMUL(bb_before,VR(:,1))
-        return
+        ! return
+
     end
 
 END MODULE analysisModule

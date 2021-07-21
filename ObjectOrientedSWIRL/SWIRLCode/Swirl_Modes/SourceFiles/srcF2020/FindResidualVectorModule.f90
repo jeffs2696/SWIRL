@@ -17,32 +17,37 @@ CONTAINS
 
     SUBROUTINE getSv(A, &
                       B, &
-                      x, &
-                      lambda, &
-                      np4, &
-                      S_MMS )
+        x, & 
+        lambda, &
+        np4,&
+        S_MMS )
 
    INTEGER, INTENT(IN):: np4
 
    COMPLEX(KIND = REAL64), DIMENSION(np4, np4), INTENT(IN):: A, &
-       B
+       B,x
 
-   COMPLEX(KIND = REAL64), DIMENSION(np4), INTENT(IN):: x 
+   COMPLEX(KIND = REAL64), DIMENSION(np4), INTENT(IN):: lambda
                                                             
-   COMPLEX(KIND = REAL64), INTENT(IN) :: lambda
-   
-   COMPLEX(KIND = REAL64), INTENT(OUT), DIMENSION(np4):: S_MMS
+   COMPLEX(KIND = REAL64), INTENT(INOUT), DIMENSION(np4):: S_MMS
 
    ! Local variables
-   INTEGER:: i, j, h, Q, jj
+   ! INTEGER:: i 
+   !, j, h, Q, jj
+   COMPLEX(KIND = REAL64),  DIMENSION(np4):: S_MMS_A, S_MMS_B
 
-    S_MMS = MATMUL(A, x) - lambda*(MATMUL(B, x))
+   ! WRITE(6,*) A,B,x,SIZE(S_MMS)
+   S_MMS_A =MATMUL(A, x(:,2))
+   S_MMS_B = MATMUL(B, x(:,2))
 
-   DO i = 1, np4
+   S_MMS = S_MMS_A   - lambda(2)*S_MMS_B
 
-   WRITE(6, *) S_MMS(i)
+   WRITE(6,*) S_MMS
+   ! DO i = 1, np4
 
-   END DO
+   ! WRITE(6, *) S_MMS(i)
+
+   ! END DO
     
 !    WRITE(6,*) SUM(S_MMS)
     

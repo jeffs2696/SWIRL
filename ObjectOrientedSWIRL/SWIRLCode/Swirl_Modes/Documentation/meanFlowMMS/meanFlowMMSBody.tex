@@ -1,30 +1,4 @@
-\documentclass[12pt]{article} 
-\usepackage{setspace}
-\usepackage{amsmath}
-\usepackage{cancel}
-\usepackage{algorithm}
-\usepackage{graphicx}
-\usepackage[noend]{algpseudocode}
-\usepackage{gnuplot-lua-tikz}
-\doublespacing
-\begin{document}
 
-% \begin{titlepage}
-
-%     \title{
-%         Method of Manufactured Solution Applied to SWIRL's Speed of Sound Integration
-%     Technique}
-
-
-%     \author{ Jeffrey Severino \\
-%         University of Toledo \\
-%         Toledo, OH  43606 \\
-%     email: jseveri@rockets.utoledo.edu}
-
-
-%     \maketitle
-
-% \end{titlepage}
 
 \section{Introduction}
 The Method of Manufactured Solutions (MMS) is a process for generating an 
@@ -52,46 +26,31 @@ accuracy.
 
 \subsection{Theory}
 
-To relate the speed of sound to a given flow, the radial momentum equation
-is used.  If the flow contains a swirling component,then the primitive variables 
-are nonuniform through the flow, and mean flow assumptions are not valid. 
-% \begin{align*}
-%     \frac{\partial v_r}{\partial t} +
-%     v_r \frac{\partial v_r}{\partial r} + 
-%     \frac{v_{\theta}}{r} 
-%     \frac{\partial v_{\theta}}{\partial \theta} -
-%     \frac{v_{\theta}^2}{r} _ 
-%     v_x \frac{\partial v_r}{\partial x} =
-%     \frac{1}{\rho}\frac{\partial P}{\partial r}
-% \end{align*}
+If the flow contains a swirling component,
+then the primitive variables are nonuniform through the flow, and mean flow assumptions are not valid. To account to this,
+we integrate the momentum equation in the radial direction with
+respect to the radius. 
 
- To account to for this, the radial momentum is simplified by assuming the 
- flow is steady, the flow has no radial component. In addition, the viscous
- and body forces are neglected.
- 
- The the radial pressure derivative term is set equal to the dynamic pressure term
- and seperation of variables is applied.  
+Integrating the radial momentum equation yields,
+%Equation (2.5) in Kousen's work is,
 
- \begin{align*}
-     \frac{v_{\theta}^2}{r} = \frac{1}{\rho}\frac{\partial P}{\partial r} \\
- P = \int_{r}^{r_{max}} \frac{\rho V_{\theta}^2}{ \partial r}
- \end{align*}
- 
-% \[\] 
+\[P = \int_{\tilde{r}}^{1} \frac{\bar{\rho} V_{\theta}^2}{\tilde{r}} d\tilde{r}\] 
 
-% where $\tilde{r}$ is the radius dimensional radius normalized 
-% by the tip diameter $r_t = r_{max}$
+where $\tilde{r}$ is the radius dimensional radius normalized 
+by the tip diameter $r_t = r_{max}$
 
-% To show the work, we will start with the dimensional form of the equation and
-% differentiate both sides,
-% \[
-% \]
-% Applying separation of variables,
-% \[
-%     \int_{r}^{r_{max}}
-%     \frac{\bar{\rho} v_{\theta}^2}{r} \partial r 
-%     =-\int_{P(r)}^{P(r_{max})}\partial p
-% \]
+To show the work, we will start with the dimensional form of the equation and
+differentiate both sides,
+\[
+    \frac{\bar{\rho} v_{\theta}^2}{r} 
+    =\frac{\partial P}{\partial r}.
+\]
+Applying separation of variables,
+\[
+    \int_{r}^{r_{max}}
+    \frac{\bar{\rho} v_{\theta}^2}{r} \partial r 
+    =-\int_{P(r)}^{P(r_{max})}\partial p
+\]
 
 Since $\tilde{r} = r/r_{max}$,
 \[r = \tilde{r}r_{max}.\]
@@ -121,19 +80,13 @@ Using the quotient rule, we can extract the definition of the speed of sound.
 \frac{\partial \bar{\rho}}{\partial r}\\
 &=  \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} -
 \left( \frac{A^2}{\bar{\rho}} \right) 
-\frac{\partial \bar{\rho} }{\partial r}
-\end{align*}
-
-Using isentropic condition $ \partial P/A^2 = \partial \rho$, 
-
-\begin{align*}
+\frac{\partial \bar{\rho} }{\partial r}\\
+\text{Using isentropic condition } \partial P/A^2 =
+\partial \rho \rightarrow 
 &= \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} -
 \left( \frac{1}{\bar{\rho}} \right) \frac{\partial  P }{\partial r}\\
 \frac{\partial A^2}{\partial r} 
-&= \frac{\partial P}{\partial r} \frac{\gamma - 1}{\bar{\rho}}  
-\end{align*}
-
-\begin{align*}
+&= \frac{\partial P}{\partial r} \frac{\gamma - 1}{\bar{\rho}}  \\ \text{or..}
     \frac{\bar{\rho}}{\gamma -1}\frac{\partial A^2}{\partial r} &= \frac{\partial P}{\partial r} 
 \end{align*}
 
@@ -383,14 +336,13 @@ Defining  for a doubling of grid points ,
     \right)}{\ln \left( \frac{1}{2} \right)}
 \end{align*}
 
-\section{Results And Discussion}
-% \input{plotReport/plotReportBody.tex}
+\section{Results}
+
 \begin{figure}
     \begin{center}
        \input{plotReport/MachDistribution.tex}
     \end{center}
 \end{figure}
-
 
 \begin{figure}
     \begin{center}
@@ -409,16 +361,7 @@ Defining  for a doubling of grid points ,
         \input{plotReport/L2OfSoundSpeed.tex}
     \end{center}
 \end{figure}
-The data in Figure 1 indicates the two flow components of the velocity vector 
-used for the MMS. This test was intended to have a large swirling component to
-put emphasis on the integration technique used to determine the speed of sound.
-Figure 2 shows the resulting speed of sound which was calculated
-with the composite trapezoidal rule as the numerical integration scheme. The 
-results, as seen in Figure 2, show the improvement in calculation as the number 
-of grid points are increased. Note that not all grid points are shown in Figure 2. 
-Figure 3 shows the L2 Error for the calculated speed of sound as it compared to the 
-expected speed of sound. The L2 norm suggest that the  Figure 4 shows the asymptotic rate of convergence for
-the composite trapezoidal rule.
+
 
 % % \begin{figure}[h!]
 %     \includegraphics[width=\textwidth]{Figures/l2vDr}
@@ -925,4 +868,3 @@ the rest of the terms gives,
 
 
 
-\end{document}

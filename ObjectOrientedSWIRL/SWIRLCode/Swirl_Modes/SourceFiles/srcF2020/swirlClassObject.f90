@@ -23,7 +23,8 @@ MODULE swirlClassObject
           CreateObject   ,&
           DestroyObject  ,&
           SwirlClassType ,&
-          GetMeanFlowData!, & FindResidualData!, & GetModeData
+          GetMeanFlowData, & 
+          FindResidualData!, & GetModeData
 
 ! Interfaces
 
@@ -33,9 +34,9 @@ MODULE swirlClassObject
       END INTERFACE CreateObject
 
 ! Finds S = [A]{x} - i*eigVal*[B]{x}, x \equiv eigen vector
-!          INTERFACE FindResidualData
-!              MODULE PROCEDURE FindResidualVector
-!          END INTERFACE FindResidualData
+         INTERFACE FindResidualData
+             MODULE PROCEDURE GetResidualVector
+         END INTERFACE FindResidualData
 !
 !          INTERFACE GetModeData
 !              MODULE PROCEDURE GetRadialModeData
@@ -101,10 +102,11 @@ MODULE swirlClassObject
               beta,  &
               work,  &
               vph,   &
+              S_MMS ,&
               wvn
 
           COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE :: &
-              S_MMS , &
+              ! S_MMS , &
               vl, &
               vr
 
@@ -217,7 +219,7 @@ MODULE swirlClassObject
               object%alpha(np4),   &
               object%beta(np4),    &
               object%work(2*np4),  &
-              object%S_MMS(np4,np4)        ,&
+              object%S_MMS(np4)        ,&
               object%vph(np4),     &
               object%wvn(np4),     &
               object%aa(np4,np4),  &
@@ -361,16 +363,7 @@ MODULE swirlClassObject
               is    = is,    &
               slp   = slope, &
               vphi  = object%vph,   &
-              akap  = object%akap,  &
-              S_MMS = object%S_MMS)
-
-          CALL getSvector( &
-              A      = object%aa_before ,   &
-              B      = object%bb_before ,   &
-              x      = object%vr        ,   &
-              lambda = object%wvn       ,   &
-              np4    = np4              ,   &
-              S_MMS  = object%S_MMS)
+              akap  = object%akap)
 
           object%isInitialized = .TRUE.
 
@@ -449,6 +442,32 @@ MODULE swirlClassObject
 
 
       END SUBROUTINE GetMeanData
+
+
+      SUBROUTINE GetResidualVector(object,S)
+          TYPE(SwirlClassType), INTENT(IN) ::&
+              object
+          COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
+          S
+
+          INTEGER :: SZ
+
+          IF (object%isInitialized.eqv..TRUE.) then
+              SZ = SIZE(S)
+              WRITE(6,*) SZ
+          endif
+          CALL getSvector( &
+              A      = object%aa_before ,   &
+              B      = object%bb_before ,   &
+              x      = object%vr        ,   &
+              lambda = object%wvn       ,   &
+              np4    = SZ              ,   &
+              S_MMS  = S ) 
+
+      S = object%S_MMS
+      ! write(6,*) 
+
+      END SUBROUTINE GetResidualVector
       SUBROUTINE DestroySwirlClassObject(&
               object)
 
@@ -476,7 +495,9 @@ MODULE swirlClassObject
               object%vph,   &
               object%wvn,   &
               object%aa,    &
+              object%aa_before,    &
               object%bb,    &
+              object%bb_before,    &
               object%vl,    &
               object%vr,    &
               object%S_MMS)

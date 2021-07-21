@@ -6,7 +6,7 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-        numberOfIterations = 9
+        numberOfIterations = 2
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
@@ -19,6 +19,8 @@ PROGRAM MAIN
         fac                 ,& ! variable used for doubling grid points
         facCount               ! counts the outermost do loop
 
+    COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
+        S_MMS
     COMPLEX(KIND = rDef) :: &
         frequency                ,& !non-dimensional frequency
         hubAdmittance            ,& !Liner Admittance At the Hub
@@ -151,7 +153,7 @@ PROGRAM MAIN
             SoundSpeed_dr_Out(numberOfGridPoints)       ,&
             SoundSpeedExpected(numberOfGridPoints)                                ,&
             SoundSpeedError(numberOfGridPoints) ,&
-            )
+            S_MMS(numberOfGridPoints*4) )
 
         dr = (radMax-radMin)/REAL(numberOfGridPoints-1, rDef)
 
@@ -265,6 +267,10 @@ PROGRAM MAIN
         WRITE(6,*) 'SoundSpeedErrorL2' , SoundSpeedErrorL2
 
 
+        CALL FindResidualData(object = swirlClassObj(fac),&
+            S =S_MMS )
+
+        WRITE(6,*) S_MMS
         CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
@@ -280,14 +286,16 @@ PROGRAM MAIN
             SoundSpeedOut         ,&
             SoundSpeed_dr_Out     ,&
             SoundSpeedExpected    ,&
-            SoundSpeedError                   )
+            SoundSpeedError       ,&
+            S_MMS)
 
         CLOSE(UNIT)
 
 
+
     END DO
 
-    file_name ='MethodOfManfSoln/L2OfSoundSpeed.dat'
+    file_name ='L2OfSoundSpeed.dat'
 
     ! WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
     OPEN(NEWUNIT=UNIT,FILE=file_name)
@@ -300,7 +308,7 @@ PROGRAM MAIN
 
     CLOSE(UNIT);
 
-    file_name = 'MethodOfManfSoln/RateOfConvergenceForIntegration.dat'
+      file_name = 'RateOfConvergenceForIntegration.dat'
 
     OPEN(NEWUNIT=UNIT,FILE=file_name)
 
