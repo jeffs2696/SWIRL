@@ -472,18 +472,18 @@ MODULE swirlClassObject
 
       SUBROUTINE GetResidualVector(&
           object                  ,&
-          ! eigenValue              ,&
-          ! eigenVector             ,&
+          eigenValue              ,&
+          eigenVector             ,&
           S)
 
           TYPE(SwirlClassType), INTENT(IN) ::&
               object
 
-          ! COMPLEX(KIND = rDef), INTENT(INOUT) :: &
-          !     eigenValue
+          COMPLEX(KIND = rDef), INTENT(INOUT) :: &
+              eigenValue
 
-          ! COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
-          !     eigenVector
+          COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
+              eigenVector
 
           COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
           S
@@ -493,14 +493,14 @@ MODULE swirlClassObject
           IF (object%isInitialized.eqv..TRUE.) then
 
               SZ = SIZE(S)
-
-          CALL getSvector( &
-              A      = object%aa_before ,   &
-              B      = object%bb_before ,   &
-              x      = object%vr        ,   &
-              lambda = object%wvn       ,   &
-              np4    = SZ              ,   &
-              S_MMS  = S ) 
+              WRITE(6,*) eigenValue,eigenVector
+              CALL getSvector( &
+                  A      = object%aa_before ,   &
+                  B      = object%bb_before ,   &
+                  x      = eigenVector        ,   &
+                  lambda = eigenValue       ,   &
+                  np4    = SZ              ,   &
+                  S_MMS  = S ) 
 
           ENDIF
       S = object%S_MMS

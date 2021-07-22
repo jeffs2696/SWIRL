@@ -281,6 +281,8 @@ PROGRAM MAIN
 
         CALL FindResidualData(&
             object = swirlClassObj(fac),&
+            eigenValue = eigenValue     , &
+            eigenVector= eigenVector    , &
             S      = S_MMS )
 
 
