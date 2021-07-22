@@ -21,8 +21,10 @@ PROGRAM MAIN
         facCount               ! counts the outermost do loop
 
     COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
+        S_eig                                        , &
         S_MMS                                        , &
-        eigenVector
+        eigenVector                                  ,&
+        eigenVectorMMS
 
     COMPLEX(KIND = rDef) :: &
         frequency                ,& !non-dimensional frequency
@@ -36,7 +38,9 @@ PROGRAM MAIN
         k_5                      ,&
         k_6                      ,&
         k_7                      ,&
-        eigenValue
+        eigL2               ,& 
+        eigenValue               ,&
+        eigenValueMMS           
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         r                   ,&
@@ -117,7 +121,9 @@ PROGRAM MAIN
     k_6 = CMPLX(0.0, 0.0, rDef)
     k_7 = CMPLX(0.0, 0.0, rDef)
 
+
     eigenIndex = 2
+    eigenValueMMS = CMPLX( 0.40_rDef,0.0_rDef,KIND=rDef)
     ! Starting Grid DO LOOP
 
 
@@ -145,21 +151,23 @@ PROGRAM MAIN
         WRITE(6, *) '# Grid Points ',  numberOfGridPoints
 
         ALLOCATE(&
-            r(numberOfGridPoints)                                         ,&
-            rOut(numberOfGridPoints)                                         ,&
-            thetaMachData(numberOfGridPoints)                             ,&
-            thetaMachDataOut(numberOfGridPoints)                             ,&
-            thetaMachData_dr_Out(numberOfGridPoints)                             ,&
-            axialMachData(numberOfGridPoints)                             ,&
-            axialMachDataOut(numberOfGridPoints)                             ,&
-            axialMachData_dr_Out(numberOfGridPoints)                             ,&
-            totalMachData(numberOfGridPoints)                             ,&
-            SoundSpeedOut(numberOfGridPoints)           ,&
-            SoundSpeed_dr_Out(numberOfGridPoints)       ,&
-            SoundSpeedExpected(numberOfGridPoints)                                ,&
-            SoundSpeedError(numberOfGridPoints) ,&
-            S_MMS(numberOfGridPoints*4)             , &
-            eigenVector(numberOfGridPoints*4) )
+            r(numberOfGridPoints)                    , &
+            rOut(numberOfGridPoints)                 , &
+            thetaMachData(numberOfGridPoints)        , &
+            thetaMachDataOut(numberOfGridPoints)     , &
+            thetaMachData_dr_Out(numberOfGridPoints) , &
+            axialMachData(numberOfGridPoints)        , &
+            axialMachDataOut(numberOfGridPoints)     , &
+            axialMachData_dr_Out(numberOfGridPoints) , &
+            totalMachData(numberOfGridPoints)        , &
+            SoundSpeedOut(numberOfGridPoints)        , &
+            SoundSpeed_dr_Out(numberOfGridPoints)    , & 
+            SoundSpeedExpected(numberOfGridPoints)   , &
+            SoundSpeedError(numberOfGridPoints)      , &
+            S_MMS(numberOfGridPoints*4)              , &
+            S_eig(numberOfGridPoints*4)              , &
+            eigenVector(numberOfGridPoints*4)        , &
+            eigenVectorMMS(numberOfGridPoints*4))
 
         dr = (radMax-radMin)/REAL(numberOfGridPoints-1, rDef)
 
@@ -206,6 +214,11 @@ PROGRAM MAIN
                 ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
 
             ENDIF
+        ENDDO
+
+        DO i = 1,numberOfGridPoints*4
+
+            eigenVectorMMS(i) = CMPLX(1.0_rDef,0.0_rDef,KIND=rDef) !CMPLX(SIN(REAL(k_3,rDef)*REAL(i,rDef)/REAL(numberOfGridPoints*4,rDef)),KIND=rDef)
         ENDDO
 
         CALL CreateObject(&
@@ -275,15 +288,36 @@ PROGRAM MAIN
 
         CALL GetModeData(&
             object = swirlClassObj(fac) , &
-            eigenValue = eigenValue     , &
+            eigenValue = eigenValue, &
             eigenVector= eigenVector    , &
             eigenIndex = eigenIndex) 
 
         CALL FindResidualData(&
             object = swirlClassObj(fac),&
-            eigenValue = eigenValue     , &
-            eigenVector= eigenVector    , &
+            eigenValue = eigenValueMMS     , &
+            eigenVector= eigenVectorMMS    , &
             S      = S_MMS )
+
+
+        CALL FindResidualData(&
+            object = swirlClassObj(fac),&
+            eigenValue = eigenValue, &
+            eigenVector= eigenVector, &
+            S      = S_eig )
+
+        
+          do i = 1,numberOfGridPoints*4
+              if (REAL(S_MMS(i),rDef) < 1e-12_rDef) then
+                 S_MMS(i) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
+                 else
+             endif
+         enddo
+        CALL getL2Norm(&
+            L2        = eigL2,&
+            dataSet  = S_MMS)
+
+
+
 
 
         ! WRITE(6,*) S_MMS
@@ -304,7 +338,9 @@ PROGRAM MAIN
             SoundSpeedExpected    ,&
             SoundSpeedError       ,&
             S_MMS                 ,&
-            eigenVector)
+            S_eig                 ,&
+            eigenVector           ,&
+            eigenVectorMMS)
 
         CLOSE(UNIT)
 

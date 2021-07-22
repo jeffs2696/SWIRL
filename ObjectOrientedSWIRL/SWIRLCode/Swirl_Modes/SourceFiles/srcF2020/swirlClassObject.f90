@@ -465,7 +465,7 @@ MODULE swirlClassObject
           eigenValue = object%wvn(eigenIndex)
           eigenVector= object%vr(:,eigenIndex)
 
-          WRITE(6,*) (eigenValue), SIZE(eigenVector), (eigenIndex)
+          ! WRITE(6,*) (eigenValue), SIZE(eigenVector), (eigenIndex)
 
 
       END SUBROUTINE GetRadialModeData 
@@ -493,7 +493,7 @@ MODULE swirlClassObject
           IF (object%isInitialized.eqv..TRUE.) then
 
               SZ = SIZE(S)
-              WRITE(6,*) eigenValue,eigenVector
+              ! WRITE(6,*) eigenValue,eigenVector
               CALL getSvector( &
                   A      = object%aa_before ,   &
                   B      = object%bb_before ,   &
@@ -503,7 +503,7 @@ MODULE swirlClassObject
                   S_MMS  = S ) 
 
           ENDIF
-      S = object%S_MMS
+      ! S = object%S_MMS
       ! write(6,*) 
 
       END SUBROUTINE GetResidualVector

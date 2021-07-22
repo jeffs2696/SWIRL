@@ -44,7 +44,7 @@ CONTAINS
 
         S_MMS = S_MMS_A   - lambda*S_MMS_B
 
-        WRITE(6,*) S_MMS
+        ! WRITE(6,*) S_MMS
 
     END SUBROUTINE getSv1Dinput
 
@@ -76,7 +76,7 @@ CONTAINS
 
         S_MMS = S_MMS_A   - lambda(2)*S_MMS_B
 
-        WRITE(6,*) S_MMS
+        ! WRITE(6,*) S_MMS
 
     END SUBROUTINE getSv2Dinput
 
