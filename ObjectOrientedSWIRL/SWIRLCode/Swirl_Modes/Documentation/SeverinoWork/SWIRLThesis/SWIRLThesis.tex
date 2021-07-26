@@ -1,6 +1,10 @@
 \documentclass[12pt]{uthesis-v12}  %---> DO NOT ALTER THIS COMMAND
 \usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
 \usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 \usepackage{algorithm}
 \usepackage{graphicx}
 \usepackage[noend]{algpseudocode}
@@ -389,7 +393,8 @@
 %        +----------------------------------------------------------+
 
 \chapter{Insert the Heading to Chapter 1}
-\input{Chapter1/meanFlowMMS/meanFlowMMSBody.tex}
+\input{Methods/Methods.tex}
+% \input{Chapter1/meanFlowMMS/meanFlowMMSBody.tex}
 [ Insert your text to chapter 1 here.  A pretend example of a silly
 table is provided below (i.e., Table~\ref{SILLY}).~]
 
@@ -404,26 +409,26 @@ table is provided below (i.e., Table~\ref{SILLY}).~]
 %        +----------------------------------------------------------+
 
      \vfill
-     \begin{table}[ht]
-     \caption{A silly glossary for research reports.\label{SILLY}}
-     \begin{center}
-     \begin{tabular}{p{2.75in}|p{2.5in}}
-      \rule[-0.5em]{0pt}{1.75em} \bf When Professors write \ldots
-      & \bf they REALLY mean \ldots \\ \hline\hline
-      %--------+------------------------------------
-      \rule[-0.5em]{0pt}{1.75em} Typical results are shown \ldots
-      & The best results are shown \ldots \\ \hline
-      %--------+------------------------------------
-      \rule[-0.5em]{0pt}{1.75em} It is generally believed that
-      \ldots & A couple of other guys think so too  \\ \hline
-      %--------+------------------------------------
-      \rule[-0.5em]{0pt}{1.75em}Thanks to Al K.~Seltzer for
-      assistance and to I.P. Daly for valuable discussions &
-      Seltzer did the work and Daly explained
-      what it meant \\
-     \end{tabular}
-     \end{center}
-     \end{table}
+     %\begin{table}[ht]
+     %\caption{A silly glossary for research reports.\label{SILLY}}
+     %\begin{center}
+     %\begin{tabular}{p{2.75in}|p{2.5in}}
+     % \rule[-0.5em]{0pt}{1.75em} \bf When Professors write \ldots
+     % & \bf they REALLY mean \ldots \\ \hline\hline
+     % %--------+------------------------------------
+     % \rule[-0.5em]{0pt}{1.75em} Typical results are shown \ldots
+     % & The best results are shown \ldots \\ \hline
+     % %--------+------------------------------------
+     % \rule[-0.5em]{0pt}{1.75em} It is generally believed that
+     % \ldots & A couple of other guys think so too  \\ \hline
+     % %--------+------------------------------------
+     % \rule[-0.5em]{0pt}{1.75em}Thanks to Al K.~Seltzer for
+     % assistance and to I.P. Daly for valuable discussions &
+     % Seltzer did the work and Daly explained
+     % what it meant \\
+     %\end{tabular}
+     %\end{center}
+     %\end{table}
      \vfill
 
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -447,30 +452,30 @@ figure is provided below (i.e., Figure~\ref{DOWD}).~]
 %        +----------------------------------------------------------+
 
       \vfill
-      \begin{figure}[ht]
-      \begin{center}
-      \begin{tabular}{|cp{5.5in}c|} \hline
-      & Let's pretend that instead of this text I provided a figure
-      of myself smoking a most excellent cigar.  As long as we're
-      pretending, let's assume that figure shows that I have a really
-      big smile on my face. & \\
-      & & \\[-0.75em]
-      & OK, the truth is that I wanted to provide an example of a
-      figure to contrast the text in the figure's caption to the text
-      entered as a entry in the \emph{List of Figures}. This
-      difference is controlled through the
-      $\backslash$\texttt{caption[\,]\{\}} command. Appendix~B of
-      ``Read Me First (v12).pdf'' provides a primer for this issue. &
-      \\ \hline
-      \end{tabular}
-      \caption[Dr.~Dowd enjoying a wonderful cigar.] {Dr.~Dowd
-              enjoying a wonderful cigar. From the smile on his face
-              we are left to wonder if the cigar is an H.~Upmann
-              \emph{Corona Imperial} or a Punch \emph{Rothchild}
-              (with a double maduro wrapper, of course). \label{DOWD}
-              }
-      \end{center}
-      \end{figure}
+      % \begin{figure}[ht]
+      % \begin{center}
+      % \begin{tabular}{|cp{5.5in}c|} \hline
+      % & Let's pretend that instead of this text I provided a figure
+      % of myself smoking a most excellent cigar.  As long as we're
+      % pretending, let's assume that figure shows that I have a really
+      % big smile on my face. & \\
+      % & & \\[-0.75em]
+      % & OK, the truth is that I wanted to provide an example of a
+      % figure to contrast the text in the figure's caption to the text
+      % entered as a entry in the \emph{List of Figures}. This
+      % difference is controlled through the
+      % $\backslash$\texttt{caption[\,]\{\}} command. Appendix~B of
+      % ``Read Me First (v12).pdf'' provides a primer for this issue. &
+      % \\ \hline
+      % \end{tabular}
+      % \caption[Dr.~Dowd enjoying a wonderful cigar.] {Dr.~Dowd
+      %         enjoying a wonderful cigar. From the smile on his face
+      %         we are left to wonder if the cigar is an H.~Upmann
+      %         \emph{Corona Imperial} or a Punch \emph{Rothchild}
+      %         (with a double maduro wrapper, of course). \label{DOWD}
+      %         }
+      % \end{center}
+      % \end{figure}
       \vfill
 
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

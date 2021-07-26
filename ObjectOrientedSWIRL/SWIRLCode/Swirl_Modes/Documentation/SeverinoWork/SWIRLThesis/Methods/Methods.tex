@@ -1,42 +1,12 @@
-\documentclass[12pt]{article}
-\usepackage{amsmath}
-\usepackage{mathtools}
-\usepackage{epigraph}
-\usepackage{cancel}
-\usepackage{xcolor}
-\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
-\addtolength{\oddsidemargin}{-1.25in}
-\addtolength{\evensidemargin}{+1.25in}
-\addtolength{\textwidth}{1.75in}
-
-\addtolength{\topmargin}{-.875in}
-\addtolength{\textheight}{1.75in}
-
-\begin{document}
-
-\begin{titlepage}
-\title{
-SWIRL Documentation}
 
 
-\author{ Jeffrey Severino
- \\
-University of Toledo \\
-Toledo, OH  43606 \\
-email: jseveri@rockets.utoledo.edu  }
-
-\maketitle
-
-\end{titlepage}
-\tableofcontents
-\newpage
 \section{Divergence operations in new coordinate systems}
 
-%\epigraph{The introduction of numbers as \textit{coordinates} is an act of violence."} {\textit{Hermann Weyl}}
+\epigraph{The introduction of numbers as \textit{coordinates} is an act of violence."} {\textit{Hermann Weyl}}
 
-%Hermann Weyl was a renown mathematician and physicist who has made revolutionary contributions to the field of differential geometry and topology. In his work on manifolds, he proposed the idea of working without coordinates and showed the application of multi-variable without the need to define a coordinate system , using coordinates when only absolutely necessary. This perspective emphasizes the distinction between quantities and the various coordinates systems that can be used to describe their change and behavior.
+Hermann Weyl was a renown mathematician and physicist who has made revolutionary contributions to the field of differential geometry and topology. In his work on manifolds, he proposed the idea of working without coordinates and showed the application of multi-variable without the need to define a coordinate system , using coordinates when only absolutely necessary. This perspective emphasizes the distinction between quantities and the various coordinates systems that can be used to describe their change and behavior.
 The divergence, ($\nabla$), represents the operation of taking derivatives of a vector field. However, understanding the mathematical and physical representation of the divergence operator into new coordinate systems serves as a good prerequisite for the application of the Navier Stokes equations for the evaluation of aerodynamic models in unusual flow domains. Although there are many resources that will provide equations in varying coordinate systems, the derivation offers insight into the advantages and drawbacks of using a new reference frame for a flow domain. The divergence operator in Cartesian coordinates is,
-%This is also important because eigenmode analysis tells us the domain of a pulse traveling through the domain at a frequency that is intrinsic to the flow itself
+This is also important because eigenmode analysis tells us the domain of a pulse traveling through the domain at a frequency that is intrinsic to the flow itself
 
 
 
@@ -1391,13 +1361,13 @@ M_{\theta}\frac{\tilde{P}}{\tilde{r}}\]
 
 
 Sound wave is a pressure disturbance that moves with at a speed $a$
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.3\linewidth]{screenshot001}
-	\caption{}
-	\label{fig:screenshot001}
-\end{figure}
+(insErt sound wave figure here)
+% \begin{figure}[h!]
+% 	\centering
+% 	\includegraphics[width=0.3\linewidth]{screenshot001}
+% 	\caption{}
+% 	\label{fig:screenshot001}
+% \end{figure}
 
 By applying a rectangular control volume around this pressure wave, we can apply our conservation equations. We are assuming that these properities are increasing by a small increment. This is why each variable is added by a infinitesimally small term.
 
@@ -1568,4 +1538,3 @@ Using log rules
 
 \bibliography{References}
 \bibliographystyle{unsrt}
-\end{document}
