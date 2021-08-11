@@ -62,6 +62,7 @@ F90FLAGS  =	\
 			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
 			-Wno-error=compare-reals \
 			-Wno-error=character-truncation \
+			-Wno-error=conversion-extra \
 			-Wno-error=do-subscript
 			
 F77      = gfortran
@@ -94,6 +95,7 @@ OBJECTS  =                     \
     main.o					   \
 	swirlClassObject.o 		   \
     FindResidualVectorModule.o \
+	SourceTermModule.o         \
 	L2NormModule.o			   \
 	derivsModule.o 			   \
 	globalModule.o 			   \
@@ -258,6 +260,7 @@ main.o: main.f90        \
 	     rmachModule.o    \
 	     smachAndSndspdModule.o \
          FindResidualVectorModule.o \
+		 SourceTermModule.o  \
 	     L2NormModule.o         \
 	     swirlClassObject.o 
 	$(F90) $(F90FLAGS) main.f90
@@ -323,6 +326,9 @@ smachAndSndspdModule.o:  smachAndSndspdModule.f90
 
 sndspdModule.o:  sndspdModule.f90
 	$(F90) $(F90FLAGS) sndspdModule.f90
+
+SourceTermModule.o:  SourceTermModule.f90
+	$(F90) $(F90FLAGS) SourceTermModule.f90
 
 L2NormModule.o: L2NormModule.f90
 	$(F90) $(F90FLAGS) L2NormModule.f90 

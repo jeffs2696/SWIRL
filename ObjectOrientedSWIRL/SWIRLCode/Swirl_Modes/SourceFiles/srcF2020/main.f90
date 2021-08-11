@@ -2,6 +2,7 @@ PROGRAM MAIN
     USE, INTRINSIC  :: ISO_FORTRAN_ENV
     USE swirlClassObject
     USE L2NormModule
+    USE SourceTermModule
 
     IMPLICIT NONE
 
@@ -21,6 +22,7 @@ PROGRAM MAIN
         facCount               ! counts the outermost do loop
 
     COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
+        k , &
         S_eig                                        , &
         S_MMS                                        , &
         eigenVector                                  ,&
@@ -40,6 +42,10 @@ PROGRAM MAIN
         k_7                      ,&
         eigL2               ,& 
         eigenValue               ,&
+        S_1                      ,&
+        S_2                      ,&
+        S_3                      ,&
+        S_4                      ,&
         eigenValueMMS           
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
@@ -70,8 +76,8 @@ PROGRAM MAIN
         SoundSpeedErrorL2
 
     REAL(KIND = rDef), PARAMETER ::&
-        radMin  = 0.20_rDef  ,&
-        radMax  = 1.00_rDef  
+        r_min  = 0.20_rDef  ,&
+        r_max  = 1.00_rDef  
 
     CHARACTER(50) :: &
         file_name
@@ -98,7 +104,7 @@ PROGRAM MAIN
 
     ! inputs needed for SwirlClassType
     azimuthalModeNumber       = 2
-    hubToTipRatio             = radMin/radMax
+    hubToTipRatio             = r_min/r_max
     frequency                 =  CMPLX(20.0, 0, rDef)
     hubAdmittance             =  CMPLX(0.40, 0 ,rDef)
     ductAdmittance            =  CMPLX(0.70,0,rDef)
@@ -130,8 +136,19 @@ PROGRAM MAIN
     WRITE(6, *) 'Number of Grid Study Iterations: ' , numberOfIterations
 
     ALLOCATE(&
+        k(7) , &
         SoundSpeedL2Array(numberOfIterations)       ,&
         RateOfConvergence(numberOfIterations - 1) )
+
+    k(1) = CMPLX(0.2, 0.0, rDef)
+    k(2) = CMPLX(1.0, 0.0, rDef)
+    k(3) = CMPLX(0.4, 0.0, rDef)
+    k(4) = CMPLX(0.2, 0.0, rDef)
+    k(5) = CMPLX(0.0, 0.0, rDef)
+    k(6) = CMPLX(0.0, 0.0, rDef)
+    k(7) = CMPLX(0.0, 0.0, rDef)
+
+
 
     facCount = 0 ! initializer for fac count
 
@@ -169,11 +186,11 @@ PROGRAM MAIN
             eigenVector(numberOfGridPoints*4)        , &
             eigenVectorMMS(numberOfGridPoints*4))
 
-        dr = (radMax-radMin)/REAL(numberOfGridPoints-1, rDef)
+        dr = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
         DO i = 1, numberOfGridPoints
 
-            r(i) = (radMin+REAL(i-1, rDef)*dr)/radMax
+            r(i) = (r_min+REAL(i-1, rDef)*dr)/r_max
 
         END DO
 
@@ -187,16 +204,16 @@ PROGRAM MAIN
             ! us to know what the speed of sound is expected to be
             axialMachData(i)  =&
                 (boundingConstant)*&
-                EXP(REAL(k_2, rDef)*(r(i)-radMax))
+                EXP(REAL(k(2), rDef)*(r(i)-r_max))
 
             thetaMachData(i) = &
                 SQRT(2.0_rDef)*&
-                SQRT(-(REAL(k_3,rDef)*r(i)*&
-                SIN(REAL(k_3,rDef)*(r(i)-radMax)))/&
-                (REAL(gm1,rDef)*COS(REAL(k_3,rDef)*(r(i)-radMax))))
+                SQRT(-(REAL(k(3),rDef)*r(i)*&
+                SIN(REAL(k(3),rDef)*(r(i)-r_max)))/&
+                (REAL(gm1,rDef)*COS(REAL(k(3),rDef)*(r(i)-r_max))))
 
             SoundSpeedExpected(i) = &
-                COS(REAL(k_3,rDef)*(r(i)-radMax))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
+                COS(REAL(k(3),rDef)*(r(i)-r_max))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
             ! thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i))
             ! thetaMachData(i)  = 0.0_rDef!EXP(k_2*r(i))
             ! the sound speed we expect given the M_theta (for MMS)
@@ -312,11 +329,26 @@ PROGRAM MAIN
                  else
              endif
          enddo
+
         CALL getL2Norm(&
             L2        = eigL2,&
             dataSet  = S_MMS)
 
 
+
+        CALL getMMSSourceTerms(&
+            gam = frequency,& !WE NEED TO extract modal data to get the axial wavenumber here
+            i   = ci       ,&
+            ak  = frequency,&
+            k   = k        ,&
+            kappa = gam    ,&
+            m   = azimuthalModeNumber     ,&
+            r   = r(1)     ,&
+            r_max = r_max  ,&
+            S_1 = S_1      ,&
+            S_2 = S_2      ,&
+            S_3 = S_3      ,&
+            S_4 = S_4     ) 
 
 
 
@@ -343,7 +375,6 @@ PROGRAM MAIN
             eigenVectorMMS)
 
         CLOSE(UNIT)
-
 
 
     END DO
@@ -375,9 +406,9 @@ PROGRAM MAIN
             LOG(SoundSpeedL2Array(i  ))&
             )&
             /&
-            LOG(0.5_rDef) 
+            LOG(0.5_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
-        WRITE(UNIT,*) (radMax - radMin)/REAL(1+2**i,KIND=rDef), RateOfConvergence(i)
+        WRITE(UNIT,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence(i)
 
     ENDDO
 
