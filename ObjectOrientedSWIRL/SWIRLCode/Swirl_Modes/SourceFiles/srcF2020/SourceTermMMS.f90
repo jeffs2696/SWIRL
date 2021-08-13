@@ -1,5 +1,6 @@
  
 ! gam - axial wavenumber 
+! ak  - reduced frequency
 ! kappa - ratio of specific heats
 ! i - imaginary number
 
@@ -17,7 +18,7 @@
     S_3  , &
     S_4)
     
-    INTEGER :: m
+    INTEGER, INTENT(IN) :: m
     REAL(KIND=rDef)   , INTENT(IN) :: kappa,r,r_max 
     COMPLEX(KIND=rDef), INTENT(IN) :: i, gam, ak           
     COMPLEX(KIND=rDef), INTENT(OUT) :: S_1, S_2, S_3, S_4

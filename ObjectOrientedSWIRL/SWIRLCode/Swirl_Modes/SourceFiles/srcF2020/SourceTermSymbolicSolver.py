@@ -1,20 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
-from sympy.interactive import printing
-printing.init_printing(use_latex = True) 
-from sympy.utilities.codegen import codegen
-from sympy.utilities.autowrap import autowrap
-import sympy as sp
-from sympy import *
-import numpy as np
-import math
-import re
-
-
 # The goal of this python script is to generate source terms for the simplified linearized Euler equations. This script was writted in jupyter notebook.
 # 
 # The linearized Euler equations after substitUting the exponential form for the pertubation quantities $\bar{v}_r \bar{v}_{\theta} \bar{v}_x \bar{p}$
@@ -59,7 +45,7 @@ import re
 # \frac{1-\kappa}{2}\int_{\bar{r}}^{\bar{r}_{max}}\frac{M_\theta^2}{\bar{r}} dr 
 # \right]$$ 
 # 
-# Defining an analytical expression for $M_{\theta}$ from this yields,
+# Defining an analytical expression for $M_{\theta}$ from this equation yields,
 # 
 # $$ M_{\theta} = \sqrt{  
 # \frac{\bar{r}}{(\kappa - 1) \bar{A}} 
@@ -79,49 +65,57 @@ import re
 # $$ \frac{\partial \bar{A}_{analytic}}{\partial \bar{r} } = 
 # -k \sin \left( k ( \bar{r} - \bar{r}_{max}) \right)
 # $$
+# 
+# Plugging this into the expression for $M_{\theta}$
+# \begin{align*}                                                                                                                                                                                                                                    M_{\theta} = \sqrt{2}\,\sqrt{-\frac{k\,r\,\sin\left(k\,\left(r-r_{\mathrm{max}}\right)\right)}{(\gamma - 1)\,\cos\left(k\,\left(r-r_{\mathrm{max}}\right)\right)}}                                                                        \end{align*}           
+# 
+# However, this gives a negative number in the square root which adds complexity to the fortran output, particularly at the boundaries, instead we will use the sin function,
+# 
+# $$ \bar{A}_{analytic} = \sin \left( k \frac{\bar{r}}{\bar{r}_{max}} )\right) $$
+# And the derivative with respect to non dimensional radius is,
+# 
+# $$ \frac{\partial \bar{A}_{analytic}}{\partial \bar{r} } = 
+# \frac{\partial}{\partial \bar {r}} \left( 
+# \sin \left( k (\bar{r} - \bar{r}_{max} )\right) 
+# \right)$$
+# 
+# $$ \frac{\partial \bar{A}_{analytic}}{\partial \bar{r} } = 
+# k \sin \left( k ( \bar{r} - \bar{r}_{max}) \right)
+# $$
+# 
 
-# In[2]:
+# In[1]:
 
 
+# Importing libraries
+
+import sympy as sp
+import numpy as np
+import math
+import re
+from sympy import *
+from sympy.utilities.codegen import codegen
+from sympy.interactive import printing
+printing.init_printing(use_latex = True) 
+
+
+# In[18]:
+
+
+# Defining symbolic variables needed for this code.
+
+# all units are dimensionless! 
+
+# radius, maximum radius, and ratio of specific heats
 r, r_max, kappa = symbols('r r_max kappa')
 
+# arbitrary constants
 k = symbols('k', cls=IndexedBase)
+C = symbols('C')
+# reduced frequency
+ak = symbols('ak')
 
-ak,   k_1, k_2, k_3, k_4, k_5, k_6, k_7 , = symbols('ak k_1 k_2 k_3 k_4 k_5 k_6 k_7')
-
-
-# In[3]:
-
-
-# Defining an arbitrary analytical function for the speed of sound
-# as well as taking its derivative and the derivative of the square
-# of the speed of sound 
-
-A_analytic = sp.cos(k[1]*(r-r_max))
-dA_analytic_dr = diff(A_analytic,r)
-
-print('A = '    ,A_analytic)
-print('dA/dr =', dA_analytic_dr)
-
-
-# In[4]:
-
-
-dA_analytic_sq_dr = diff(A_analytic**2,r)
-
-# Using the expression for the tangential Mach number, M_t above ...
-
-M_t_analytic = sp.sqrt(r/((kappa-1)*A_analytic**2) * (dA_analytic_sq_dr))
-
-print('M_theta =', M_t_analytic)
-
-
-# In[5]:
-
-
-# Now we define the symbolic variables required for the eigenproblem
-# note that we still need functions for the perturbation variables
-
+# imaginary #, Speed of sound, azimuthal mode number, axial wavenumber 
 i, A, m, gamma   = symbols('i A m gamma')
 
 v_r, v_t, v_x, p = symbols('v_r v_t v_x p ')
@@ -131,6 +125,41 @@ M_t, M_x         = symbols('M_t M_x')
 dp_dr, dv_r_dr   = symbols('dp_dr dv_r_dr')
 
 dM_x_dr, dM_t_dr = symbols('dM_x_dr dM_t_dr')
+
+
+# Defining an arbitrary analytical function for the speed of sound
+# as well as taking its derivative and the derivative of the square
+# of the speed of sound ...
+
+# In[32]:
+
+
+A_analytic = sp.sin(k[1]*(r/r_max))
+dA_analytic_dr = diff(A_analytic,r)
+
+pprint(('A =    ',A_analytic),use_unicode=False)
+pprint(('\n'))
+pprint(('dA/dr =', dA_analytic_dr),use_unicode=False)
+
+
+# In[35]:
+
+
+dA_analytic_sq_dr = diff(A_analytic**2,r)
+
+# Using the expression for the tangential Mach number, M_t above ...
+
+M_t_analytic = sp.sqrt(r/((kappa-1)*A_analytic**2) * (dA_analytic_sq_dr))
+pprint(M_t_analytic.subs(r,1))
+pprint(('M_theta =', M_t_analytic))
+
+
+# In[5]:
+
+
+# Now we define the symbolic variables required for the eigenproblem
+# note that we still need functions for the perturbation variables
+
 
 
 # In[6]:
@@ -145,10 +174,11 @@ S_3 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_x + (dM_x_dr - ((kappa - 1)/2*r)*M_t**
 S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - 1)/2*r)*M_t**2 + 1/r)*v_r + i*m*v_t/r + i*gamma*v_x
 
 # Lets look at the source terms
-print('S_1',S_1)
-print('S_2',S_2)
-print('S_3',S_3)
-print('S_4',S_4)
+pprint('The linearized (unsteady) Euler Equations used in SWIRL:')
+pprint(('S_1=',S_1),use_unicode=False)
+pprint(('S_2=',S_2),use_unicode=False)
+pprint(('S_3=',S_3),use_unicode=False)
+pprint(('S_4=',S_4),use_unicode=False)
 
 
 # Now Lets make the mean flow substitutions from the Speed of Sound.
@@ -174,6 +204,7 @@ v_x_analytical = sp.cos(k[5]*(r - r_max))
 p_analytical   = sp.cos(k[6]*(r - r_max))
 
 
+
 S_1 = (S_1.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
 
 S_2 = (S_2.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
@@ -181,11 +212,11 @@ S_2 = (S_2.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,       
 S_3 = (S_3.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
 
 S_4 = (S_4.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
-
-print('S_1' ,S_1)
-print('S_2' ,S_2)
-print('S_3' ,S_3)
-print('S_4' ,S_4)
+print('Substituting analytical functions')
+pprint(('S_1' ,S_1),use_unicode=False)
+pprint(('S_2' ,S_2),use_unicode=False)
+pprint(('S_3' ,S_3),use_unicode=False)
+pprint(('S_4' ,S_4),use_unicode=False)
 
 
 # Note that there is still derivative terms in each of the source terms, let's evaluate those derivatives
@@ -210,14 +241,37 @@ S_2 = (S_2.subs({                  dp_dr:dp_dr_analytical,                  dv_r
 S_3 = (S_3.subs({                  dp_dr:dp_dr_analytical,                  dv_r_dr:dv_r_dr_analytical,                  dM_x_dr:dM_x_dr_analytical,                  dM_t_dr:dM_t_dr_analytical,                 }))
 
 S_4 = (S_4.subs({                  dp_dr:dp_dr_analytical,                  dv_r_dr:dv_r_dr_analytical,                  dM_x_dr:dM_x_dr_analytical,                  dM_t_dr:dM_t_dr_analytical,                 }))
+pprint('Substituting derivatives')
 
-print('S_1' ,S_1)
-print('S_2' ,S_2)
-print('S_3' ,S_3)
-print('S_4' ,S_4)
+pprint(('S_1' ,S_1))
+pprint(('S_2' ,S_2))
+pprint(('S_3' ,S_3))
+pprint(('S_4' ,S_4))
 
+
+# Let's see what happens if r = r_max...
 
 # In[10]:
+
+
+S_1 = (S_1.subs({                  r:r_max                 }))
+
+S_2 = (S_1.subs({                  r:r_max                 }))
+
+S_3 = (S_1.subs({                  r:r_max                 }))
+
+S_4 = (S_1.subs({                  r:r_max                 }))
+
+pprint(('S_1 =' ,S_1))
+pprint(('S_2 =' ,S_2))
+pprint(('S_3 =' ,S_3))
+pprint(('S_4 =' ,S_4))
+
+
+# Now that the symbolic expressions are solved for, we can write a FORTRAN Code!
+# Note that there are many ways to do this, see: https://docs.sympy.org/latest/modules/codegen.html
+
+# In[11]:
 
 
 
@@ -240,6 +294,7 @@ S_list = ''.join(S_list)
 
 f_code_header = ''' 
 ! gam - axial wavenumber 
+! ak  - reduced frequency
 ! kappa - ratio of specific heats
 ! i - imaginary number
 
@@ -257,7 +312,7 @@ f_code_header = '''
     S_3  , &
     S_4)
     
-    INTEGER :: m
+    INTEGER, INTENT(IN) :: m
     REAL(KIND=rDef)   , INTENT(IN) :: kappa,r,r_max 
     COMPLEX(KIND=rDef), INTENT(IN) :: i, gam, ak           
     COMPLEX(KIND=rDef), INTENT(OUT) :: S_1, S_2, S_3, S_4
@@ -270,14 +325,14 @@ f_code_footer = '''
 '''
 
 
-# In[11]:
+# In[ ]:
 
 
 with open('S_1.tex','w') as f:
     f.write(latex(S_1))
 
 
-# In[12]:
+# In[ ]:
 
 
 with open('SourceTermMMS.f90','w') as f:

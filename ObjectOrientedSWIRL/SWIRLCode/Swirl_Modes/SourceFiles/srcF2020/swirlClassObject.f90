@@ -469,6 +469,7 @@ MODULE swirlClassObject
 
 
       END SUBROUTINE GetRadialModeData 
+     
 
       SUBROUTINE GetResidualVector(&
           object                  ,&

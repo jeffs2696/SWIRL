@@ -167,30 +167,30 @@ Dividing by $A$,
 &= \frac{\partial A^2}{\partial r} \frac{1}{A^2}
 \end{align*}
 
-%At this point we can either find the derivative of  $\bar{A}$ or the integral of
-%$M_{\theta}$ with respect to r
-%\begin{enumerate}
-%    \item
-%\begin{align*}
-%\text{Integrating both sides } \int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=\int_{A^2(r)}^{A^2(r_{max})}\frac{1}{A^2}  {\partial A^2}\\
-%\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln(A^2(r_{max})) - ln(A^2(r)) \\
-%\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{A^2(r_{max})}{A^2(r)}\right) 
-%\end{align*}
-%
-%Defining non dimensional speed of sound $\tilde{A} = \frac{A(r)}{A(r_{max})}$
-%\begin{align*}
-%\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{1}{\tilde{A}^2}\right) \\
-%&= -2ln(\tilde{A})\\
-%\tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
-%\tilde{A}(\tilde{r}) &= exp\left[\left(\frac{1 - \gamma}{2}\right)\int_{\tilde{r}}^{1}\frac{M_{\theta}}{\tilde{r}}{\partial \tilde{r}}\right]	
-%\end{align*}
-%\item Or we can differentiate
-%\end{enumerate}
-%Solving for $M_{\theta}$ ,
-%\begin{align*}
-%M_{\theta}^2 
-%&= \frac{\partial A^2}{\partial r} \frac{r}{A^2 \left(\gamma - 1\right)}
-%\end{align*}
+At this point we can either find the derivative of  $\bar{A}$ or the integral of
+$M_{\theta}$ with respect to r
+\begin{enumerate}
+    \item
+\begin{align*}
+\text{Integrating both sides } \int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=\int_{A^2(r)}^{A^2(r_{max})}\frac{1}{A^2}  {\partial A^2}\\
+\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln(A^2(r_{max})) - ln(A^2(r)) \\
+\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{A^2(r_{max})}{A^2(r)}\right) 
+\end{align*}
+
+Defining non dimensional speed of sound $\tilde{A} = \frac{A(r)}{A(r_{max})}$
+\begin{align*}
+\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{1}{\tilde{A}^2}\right) \\
+&= -2ln(\tilde{A})\\
+\tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
+\tilde{A}(\tilde{r}) &= exp\left[\left(\frac{1 - \gamma}{2}\right)\int_{\tilde{r}}^{1}\frac{M_{\theta}}{\tilde{r}}{\partial \tilde{r}}\right]	
+\end{align*}
+\item Or we can differentiate
+\end{enumerate}
+Solving for $M_{\theta}$ ,
+\begin{align*}
+M_{\theta}^2 
+&= \frac{\partial A^2}{\partial r} \frac{r}{A^2 \left(\gamma - 1\right)}
+\end{align*}
 Nondimensionalizing:
 
 Plugging in,

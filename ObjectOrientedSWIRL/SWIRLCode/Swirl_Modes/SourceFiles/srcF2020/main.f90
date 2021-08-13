@@ -33,13 +33,6 @@ PROGRAM MAIN
         hubAdmittance            ,& !Liner Admittance At the Hub
         ductAdmittance           ,&
         ci                       ,&
-        k_1                      ,&
-        k_2                      ,&
-        k_3                      ,&
-        k_4                      ,&
-        k_5                      ,&
-        k_6                      ,&
-        k_7                      ,&
         eigL2               ,& 
         eigenValue               ,&
         S_1                      ,&
@@ -119,14 +112,6 @@ PROGRAM MAIN
 
     ! constants for MMS module
     boundingConstant = 0.1000_rDef
-    k_1 = CMPLX(0.2, 0.0, rDef)
-    k_2 = CMPLX(1.0, 0.0, rDef)
-    k_3 = CMPLX(0.4, 0.0, rDef)
-    k_4 = CMPLX(0.2, 0.0, rDef)
-    k_5 = CMPLX(0.0, 0.0, rDef)
-    k_6 = CMPLX(0.0, 0.0, rDef)
-    k_7 = CMPLX(0.0, 0.0, rDef)
-
 
     eigenIndex = 2
     eigenValueMMS = CMPLX( 0.40_rDef,0.0_rDef,KIND=rDef)
@@ -142,11 +127,11 @@ PROGRAM MAIN
 
     k(1) = CMPLX(0.2, 0.0, rDef)
     k(2) = CMPLX(1.0, 0.0, rDef)
-    k(3) = CMPLX(0.4, 0.0, rDef)
+    k(3) = CMPLX(0.91, 0.0, rDef)
     k(4) = CMPLX(0.2, 0.0, rDef)
-    k(5) = CMPLX(0.0, 0.0, rDef)
-    k(6) = CMPLX(0.0, 0.0, rDef)
-    k(7) = CMPLX(0.0, 0.0, rDef)
+    k(5) = CMPLX(0.1, 0.0, rDef)
+    k(6) = CMPLX(0.1, 0.0, rDef)
+    k(7) = CMPLX(0.1, 0.0, rDef)
 
 
 
@@ -200,24 +185,48 @@ PROGRAM MAIN
 
         DO i = 1, numberOfGridPoints
 
-            ! this segment of the code is defining a flow that will allow
-            ! us to know what the speed of sound is expected to be
-            axialMachData(i)  =&
-                (boundingConstant)*&
-                EXP(REAL(k(2), rDef)*(r(i)-r_max))
+!            axialMachData(i)  =&
+!                (boundingConstant)*&
+!                EXP(REAL(k(2), rDef)*(r(i)-r_max))
+!
+!
+!            thetaMachdata(i) = &
+!                (2.0_rdef)*&
+!                sqrt(&
+!                (real(k(1),rdef)*(r(i)**2.0_rDef)*&
+!                cos(real(k(1),rdef)*((r(i))**2.0_rDef/r_max)))/&
+!                (r_max*real(gm1,rdef)*(SIN(real(k(1),rdef)*((r(i))**2.0_rDef/r_max)))) &
+!                )
+!
+!            SoundSpeedExpected(i) = &
+!                SIN(REAL(k(1),rDef)*(r(i)-r_max)) ! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
+!
 
-            thetaMachData(i) = &
-                SQRT(2.0_rDef)*&
-                SQRT(-(REAL(k(3),rDef)*r(i)*&
-                SIN(REAL(k(3),rDef)*(r(i)-r_max)))/&
-                (REAL(gm1,rDef)*COS(REAL(k(3),rDef)*(r(i)-r_max))))
+! This segment of code was used to define a mean flow parameters that tested the rate of convergence for 
+! the integration method used to determine the speed
+! of sound 
+
+! vvvvvvvvvvvvvvvvvvvv
+!            ! this segment of the code is defining a flow that will allow
+!            ! us to know what the speed of sound is expected to be
+           axialMachData(i)  =&
+               (boundingConstant)*&
+               EXP(REAL(k(2), rDef)*(r(i)-r_max))
+
+            thetamachdata(i) = &
+                sqrt(2.0_rdef)*&
+                sqrt(-(real(k(1),rdef)*r(i)*&
+                sin(real(k(1),rdef)*(r(i)-r_max)))/&
+                (real(gm1,rdef)*cos(real(k(1),rdef)*(r(i)-r_max))))
 
             SoundSpeedExpected(i) = &
-                COS(REAL(k(3),rDef)*(r(i)-r_max))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
+                COS(REAL(k(1),rDef)*(r(i)-r_max))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
             ! thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i))
             ! thetaMachData(i)  = 0.0_rDef!EXP(k_2*r(i))
             ! the sound speed we expect given the M_theta (for MMS)
-
+!
+            WRITE(6,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
+            WRITE(6, FORMAT_MEAN_FLOW) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
             totalMachData(i)  =&
                 ((axialMachData(i)**2.0_rDef+&
                 thetaMachData(i)**2.0_rDef)**0.5_rDef)
@@ -227,8 +236,7 @@ PROGRAM MAIN
                 STOP
             ELSE
 
-                ! WRITE(6, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
-                ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
+                 ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
 
             ENDIF
         ENDDO
@@ -330,25 +338,35 @@ PROGRAM MAIN
              endif
          enddo
 
+         DO i = 1,numberOfGridPoints
+
+             CALL getMMSSourceTerms(&
+                 gam = eigenValue,& !WE NEED TO extract modal data to get the axial wavenumber here
+                 i   = ci       ,&
+                 ak  = frequency,&
+                 k   = k        ,&
+                 kappa = gam    ,&
+                 m   = azimuthalModeNumber     ,&
+                 r   = r(i)     ,&
+                 r_max = r_max  ,&
+                 S_1 = S_1      ,&
+                 S_2 = S_2      ,&
+                 S_3 = S_3      ,&
+                 S_4 = S_4     ) 
+
+             WRITE(6,*) S_1, S_2, S_3, S_4
+
+         ENDDO
+
+
+
         CALL getL2Norm(&
             L2        = eigL2,&
             dataSet  = S_MMS)
 
+         
 
 
-        CALL getMMSSourceTerms(&
-            gam = frequency,& !WE NEED TO extract modal data to get the axial wavenumber here
-            i   = ci       ,&
-            ak  = frequency,&
-            k   = k        ,&
-            kappa = gam    ,&
-            m   = azimuthalModeNumber     ,&
-            r   = r(1)     ,&
-            r_max = r_max  ,&
-            S_1 = S_1      ,&
-            S_2 = S_2      ,&
-            S_3 = S_3      ,&
-            S_4 = S_4     ) 
 
 
 
