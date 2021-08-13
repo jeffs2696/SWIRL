@@ -125,8 +125,8 @@ PROGRAM MAIN
         SoundSpeedL2Array(numberOfIterations)       ,&
         RateOfConvergence(numberOfIterations - 1) )
 
-    k(1) = CMPLX(0.2, 0.0, rDef)
-    k(2) = CMPLX(1.0, 0.0, rDef)
+    k(1) = CMPLX(0.15, 0.0, rDef)
+    k(2) = CMPLX(0.4, 0.0, rDef)
     k(3) = CMPLX(0.91, 0.0, rDef)
     k(4) = CMPLX(0.2, 0.0, rDef)
     k(5) = CMPLX(0.1, 0.0, rDef)
@@ -185,22 +185,22 @@ PROGRAM MAIN
 
         DO i = 1, numberOfGridPoints
 
-!            axialMachData(i)  =&
-!                (boundingConstant)*&
-!                EXP(REAL(k(2), rDef)*(r(i)-r_max))
-!
-!
-!            thetaMachdata(i) = &
-!                (2.0_rdef)*&
-!                sqrt(&
-!                (real(k(1),rdef)*(r(i)**2.0_rDef)*&
-!                cos(real(k(1),rdef)*((r(i))**2.0_rDef/r_max)))/&
-!                (r_max*real(gm1,rdef)*(SIN(real(k(1),rdef)*((r(i))**2.0_rDef/r_max)))) &
-!                )
-!
-!            SoundSpeedExpected(i) = &
-!                SIN(REAL(k(1),rDef)*(r(i)-r_max)) ! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
-!
+            axialMachData(i)  =&
+                (boundingConstant)*&
+                EXP(REAL(k(2), rDef)*(r(i)-r_max))
+
+
+            thetaMachdata(i) = &
+                SQRT(2.0_rdef)*&
+                sqrt(&
+                ((real(k(1),rdef))*r(i))&
+                /&
+                (real(gm1,rdef)) )
+
+
+            SoundSpeedExpected(i) = &
+                EXP(REAL(k(1),rDef)*(r(i)-r_max)) 
+
 
 ! This segment of code was used to define a mean flow parameters that tested the rate of convergence for 
 ! the integration method used to determine the speed
@@ -209,18 +209,18 @@ PROGRAM MAIN
 ! vvvvvvvvvvvvvvvvvvvv
 !            ! this segment of the code is defining a flow that will allow
 !            ! us to know what the speed of sound is expected to be
-           axialMachData(i)  =&
-               (boundingConstant)*&
-               EXP(REAL(k(2), rDef)*(r(i)-r_max))
-
-            thetamachdata(i) = &
-                sqrt(2.0_rdef)*&
-                sqrt(-(real(k(1),rdef)*r(i)*&
-                sin(real(k(1),rdef)*(r(i)-r_max)))/&
-                (real(gm1,rdef)*cos(real(k(1),rdef)*(r(i)-r_max))))
-
-            SoundSpeedExpected(i) = &
-                COS(REAL(k(1),rDef)*(r(i)-r_max))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
+!            axialMachData(i)  =&
+!                (boundingConstant)*&
+!                EXP(REAL(k(2), rDef)*(r(i)-r_max))
+!
+!            thetamachdata(i) = &
+!                sqrt(2.0_rdef)*&
+!                sqrt(-(real(k(1),rdef)*r(i)*&
+!                sin(real(k(1),rdef)*(r(i)-r_max)))/&
+!                (real(gm1,rdef)*cos(real(k(1),rdef)*(r(i)-r_max))))
+!
+!            SoundSpeedExpected(i) = &
+!                COS(REAL(k(1),rDef)*(r(i)-r_max))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
             ! thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i))
             ! thetaMachData(i)  = 0.0_rDef!EXP(k_2*r(i))
             ! the sound speed we expect given the M_theta (for MMS)
@@ -231,6 +231,7 @@ PROGRAM MAIN
                 ((axialMachData(i)**2.0_rDef+&
                 thetaMachData(i)**2.0_rDef)**0.5_rDef)
 
+            WRITE(6,*) totalMachData(i)
             IF(totalMachData(i) > 1.0_rDef) THEN
                 WRITE(6, *) i, 'ERROR: Total mach is greater than one'
                 STOP
@@ -418,17 +419,21 @@ PROGRAM MAIN
 
     DO i = 1,numberOfIterations - 1
 
-        RateOfConvergence(i) = &
-            (&
-            LOG(SoundSpeedL2Array(i+1)) -&
-            LOG(SoundSpeedL2Array(i  ))&
-            )&
-            /&
-            LOG(0.5_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+        if (SoundSpeedL2Array(i) <= 0.0_rDef) then
+            WRITE(6,*) 'SoundSpeed is converged!'
+        else
+            RateOfConvergence(i) = &
+                (&
+                LOG(SoundSpeedL2Array(i+1)) -&
+                LOG(SoundSpeedL2Array(i  ))&
+                )&
+                /&
+                LOG(0.5_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
-        WRITE(UNIT,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence(i)
+            WRITE(UNIT,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence(i)
+        endif
 
-    ENDDO
+        ENDDO
 
     CLOSE(UNIT)
 

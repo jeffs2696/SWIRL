@@ -108,7 +108,7 @@ OBJECTS  =                     \
     machoutModule.o 		   \
 	fdgridModule.o 			   \
    	fdrivsModule.o 			         
-
+MODULES = $(OBJECTS:$(OEXT)=mod)
 # \
 # 	Akima1D.f90             \
 # 	akima433.o
@@ -214,7 +214,7 @@ all:  $(OBJECTS)
 			rm -f $@.log; \
 			exit $$RESULT
 
-	@mv $(EXE) $(EXECUTABLE_LOCATION)
+	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 #
 #  clean

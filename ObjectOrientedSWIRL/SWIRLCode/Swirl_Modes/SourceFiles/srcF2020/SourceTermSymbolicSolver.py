@@ -88,18 +88,18 @@
 
 
 # Importing libraries
-
+from sympy import *
+from sympy.utilities.codegen import codegen
+from sympy.utilities.autowrap import autowrap
+from sympy.interactive import printing
+printing.init_printing(use_latex = True) 
 import sympy as sp
 import numpy as np
 import math
 import re
-from sympy import *
-from sympy.utilities.codegen import codegen
-from sympy.interactive import printing
-printing.init_printing(use_latex = True) 
 
 
-# In[18]:
+# In[2]:
 
 
 # Defining symbolic variables needed for this code.
@@ -111,7 +111,9 @@ r, r_max, kappa = symbols('r r_max kappa')
 
 # arbitrary constants
 k = symbols('k', cls=IndexedBase)
+
 C = symbols('C')
+
 # reduced frequency
 ak = symbols('ak')
 
@@ -131,18 +133,26 @@ dM_x_dr, dM_t_dr = symbols('dM_x_dr dM_t_dr')
 # as well as taking its derivative and the derivative of the square
 # of the speed of sound ...
 
-# In[32]:
+# In[3]:
 
 
-A_analytic = sp.sin(k[1]*(r/r_max))
-dA_analytic_dr = diff(A_analytic,r)
+A_analytic        = sp.cos(k[1]*(r-r_max))
 
-pprint(('A =    ',A_analytic),use_unicode=False)
+dA_analytic_dr    = diff(A_analytic,r)
+dA_analytic_sq_dr = diff(A_analytic**2,r)
+
+pprint(('A =    ',A_analytic))
 pprint(('\n'))
-pprint(('dA/dr =', dA_analytic_dr),use_unicode=False)
+pprint(('dA/dr =', dA_analytic_dr))
 
 
-# In[35]:
+# In[ ]:
+
+
+
+
+
+# In[4]:
 
 
 dA_analytic_sq_dr = diff(A_analytic**2,r)
@@ -150,19 +160,13 @@ dA_analytic_sq_dr = diff(A_analytic**2,r)
 # Using the expression for the tangential Mach number, M_t above ...
 
 M_t_analytic = sp.sqrt(r/((kappa-1)*A_analytic**2) * (dA_analytic_sq_dr))
-pprint(M_t_analytic.subs(r,1))
+pprint(('\n'))
 pprint(('M_theta =', M_t_analytic))
+
+# This can be written to a fortran code, see end of file
 
 
 # In[5]:
-
-
-# Now we define the symbolic variables required for the eigenproblem
-# note that we still need functions for the perturbation variables
-
-
-
-# In[6]:
 
 
 S_1 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_r + (2.0/r)*M_t*v_t - dp_dr - ((kappa - 1)/(2*r))*M_t**2*p
@@ -175,17 +179,17 @@ S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - 1)/2*r)*M_t**
 
 # Lets look at the source terms
 pprint('The linearized (unsteady) Euler Equations used in SWIRL:')
-pprint(('S_1=',S_1),use_unicode=False)
-pprint(('S_2=',S_2),use_unicode=False)
-pprint(('S_3=',S_3),use_unicode=False)
-pprint(('S_4=',S_4),use_unicode=False)
+pprint(('S_1=',S_1))
+pprint(('S_2=',S_2))
+pprint(('S_3=',S_3))
+pprint(('S_4=',S_4))
 
 
 # Now Lets make the mean flow substitutions from the Speed of Sound.
 # We still need to define an analytical axial Mach number as well as 
 # functions for the perturbation variables
 
-# In[7]:
+# In[6]:
 
 
 S_1 = (S_1.subs({A:A_analytic, M_t:M_t_analytic}))
@@ -194,7 +198,7 @@ S_3 = (S_3.subs({A:A_analytic, M_t:M_t_analytic}))
 S_4 = (S_4.subs({A:A_analytic, M_t:M_t_analytic}))
 
 
-# In[8]:
+# In[7]:
 
 
 M_x_analytical = sp.cos(k[2]*(r - r_max))
@@ -213,16 +217,16 @@ S_3 = (S_3.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,       
 
 S_4 = (S_4.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
 print('Substituting analytical functions')
-pprint(('S_1' ,S_1),use_unicode=False)
-pprint(('S_2' ,S_2),use_unicode=False)
-pprint(('S_3' ,S_3),use_unicode=False)
-pprint(('S_4' ,S_4),use_unicode=False)
+pprint(('S_1 =' ,S_1))
+pprint(('S_2 =' ,S_2))
+pprint(('S_3 =' ,S_3))
+pprint(('S_4 =' ,S_4))
 
 
 # Note that there is still derivative terms in each of the source terms, let's evaluate those derivatives
 # and substitute those in
 
-# In[9]:
+# In[8]:
 
 
 dp_dr_analytical   = p_analytical.diff(r)
@@ -249,27 +253,48 @@ pprint(('S_3' ,S_3))
 pprint(('S_4' ,S_4))
 
 
+# In[9]:
+
+
 # Let's see what happens if r = r_max...
 
-# In[10]:
 
+#(S_1.subs({ \
+#                 r:r_max \
+#                }))
 
-S_1 = (S_1.subs({                  r:r_max                 }))
+#S_2 = (S_1.subs({ \
+#                 r:r_max \
+#                }))
 
-S_2 = (S_1.subs({                  r:r_max                 }))
+#S_3 = (S_1.subs({ \
+#                 r:r_max \
+#                }))
 
-S_3 = (S_1.subs({                  r:r_max                 }))
+#S_4 = (S_1.subs({ \
+#                 r:r_max \
+#                }))
 
-S_4 = (S_1.subs({                  r:r_max                 }))
-
-pprint(('S_1 =' ,S_1))
-pprint(('S_2 =' ,S_2))
-pprint(('S_3 =' ,S_3))
-pprint(('S_4 =' ,S_4))
+#pprint(('S_1 =' ,S_1))
+#pprint(('S_2 =' ,S_2))
+#pprint(('S_3 =' ,S_3))
+#pprint(('S_4 =' ,S_4))
 
 
 # Now that the symbolic expressions are solved for, we can write a FORTRAN Code!
 # Note that there are many ways to do this, see: https://docs.sympy.org/latest/modules/codegen.html
+
+# In[10]:
+
+
+thetaMachNumber = M_t_analytic
+pprint(thetaMachNumber)
+SoundSpeedExpected = A_analytic
+pprint(A_analytic)
+
+fcode(M_t_analytic,source_format='free',standard=95)
+fcode(A_analytic,source_format='free',standard=95)
+
 
 # In[11]:
 
@@ -292,7 +317,7 @@ S_list.append(fS_3)
 S_list.append(fS_4)
 S_list = ''.join(S_list)
 
-f_code_header = ''' 
+f_code_header2 = ''' 
 ! gam - axial wavenumber 
 ! ak  - reduced frequency
 ! kappa - ratio of specific heats
@@ -320,16 +345,26 @@ f_code_header = '''
     
 '''
 
-f_code_footer = '''
+f_code_footer2 = '''
     END SUBROUTINE SourceCalc
 '''
 
 
-# In[ ]:
+# In[12]:
 
 
 with open('S_1.tex','w') as f:
     f.write(latex(S_1))
+
+
+# In[13]:
+
+
+with open('SoundSpeedMMS.f90','w') as f:
+    #Fortran wrapper goes here 
+    f.write(f_code_header)
+    f.write(S_list)
+    f.write(f_code_footer)
 
 
 # In[ ]:

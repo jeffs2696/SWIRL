@@ -28,7 +28,7 @@
 !     dimension rmx(NMAX),drm(NMAX),rmt(NMAX),drt(NMAX)
 !     dimension snd(NMAX),dsn(NMAX),rho(NMAX)
 !     dimension akap(NMAX)
-
+! TYPE Name of type that i want 
       REAL(KIND=REAL64), DIMENSION(:,:), ALLOCATABLE :: dl1
       REAL(KIND=REAL64), DIMENSION(:), ALLOCATABLE :: y,     &
                                                       rwork, &
@@ -86,7 +86,8 @@
                            rxmax, &
                            sig,   &
                            slope
-
+      !END TYPE
+! 
 ! "sig" is the hub/duct ratio.
 ! "ak"  is the reduced frequency omega r_d/c.
 ! "mm"  is the circumferential mode number.
