@@ -84,7 +84,7 @@
 # $$
 # 
 
-# In[1]:
+# In[34]:
 
 
 # Importing libraries
@@ -99,7 +99,7 @@ import math
 import re
 
 
-# In[2]:
+# In[35]:
 
 
 # Defining symbolic variables needed for this code.
@@ -133,49 +133,43 @@ dM_x_dr, dM_t_dr = symbols('dM_x_dr dM_t_dr')
 # as well as taking its derivative and the derivative of the square
 # of the speed of sound ...
 
-# In[3]:
+# In[48]:
 
 
-A_analytic        = sp.cos(k[1]*(r-r_max))
+A_analytic        = sp.exp(k[1]*(r-r_max)) 
 
 dA_analytic_dr    = diff(A_analytic,r)
-dA_analytic_sq_dr = diff(A_analytic**2,r)
+dA_analytic_sq_dr = diff(A_analytic**2.0,r)
 
 pprint(('A =    ',A_analytic))
 pprint(('\n'))
 pprint(('dA/dr =', dA_analytic_dr))
 
 
-# In[ ]:
+# In[37]:
 
 
-
-
-
-# In[4]:
-
-
-dA_analytic_sq_dr = diff(A_analytic**2,r)
+dA_analytic_sq_dr = diff(A_analytic**2.0,r)
 
 # Using the expression for the tangential Mach number, M_t above ...
 
-M_t_analytic = sp.sqrt(r/((kappa-1)*A_analytic**2) * (dA_analytic_sq_dr))
+M_t_analytic = sp.sqrt(                        r/((kappa-1.0)*A_analytic**2.0) *                        (dA_analytic_sq_dr))
 pprint(('\n'))
 pprint(('M_theta =', M_t_analytic))
 
 # This can be written to a fortran code, see end of file
 
 
-# In[5]:
+# In[38]:
 
 
-S_1 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_r + (2.0/r)*M_t*v_t - dp_dr - ((kappa - 1)/(2*r))*M_t**2*p
+S_1 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_r + (2.0/r)*M_t*v_t - dp_dr - ((kappa - 1.0)/(2.0*r))*M_t**2.0*p
 
-S_2 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_t + (M_t/r - dM_t_dr - ((kappa - 1)/2*r)*M_t**3)*v_r + i*m*p/r
+S_2 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_t + (M_t/r - dM_t_dr - ((kappa - 1.0)/2.0*r)*M_t**3.0)*v_r + i*m*p/r
 
-S_3 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_x + (dM_x_dr - ((kappa - 1)/2*r)*M_t**3)*v_r + i*gamma*p
+S_3 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_x + (dM_x_dr - ((kappa - 1.0)/(2.0*r))*M_x*M_t**2.0)*v_r + i*gamma*p
 
-S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - 1)/2*r)*M_t**2 + 1/r)*v_r + i*m*v_t/r + i*gamma*v_x
+S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - 1.0)/(2.0*r))*M_t**2.0 + 1.0/r)*v_r + i*m*v_t/r + i*gamma*v_x
 
 # Lets look at the source terms
 pprint('The linearized (unsteady) Euler Equations used in SWIRL:')
@@ -189,7 +183,7 @@ pprint(('S_4=',S_4))
 # We still need to define an analytical axial Mach number as well as 
 # functions for the perturbation variables
 
-# In[6]:
+# In[39]:
 
 
 S_1 = (S_1.subs({A:A_analytic, M_t:M_t_analytic}))
@@ -198,7 +192,7 @@ S_3 = (S_3.subs({A:A_analytic, M_t:M_t_analytic}))
 S_4 = (S_4.subs({A:A_analytic, M_t:M_t_analytic}))
 
 
-# In[7]:
+# In[40]:
 
 
 M_x_analytical = sp.cos(k[2]*(r - r_max))
@@ -226,7 +220,7 @@ pprint(('S_4 =' ,S_4))
 # Note that there is still derivative terms in each of the source terms, let's evaluate those derivatives
 # and substitute those in
 
-# In[8]:
+# In[41]:
 
 
 dp_dr_analytical   = p_analytical.diff(r)
@@ -253,7 +247,7 @@ pprint(('S_3' ,S_3))
 pprint(('S_4' ,S_4))
 
 
-# In[9]:
+# In[42]:
 
 
 # Let's see what happens if r = r_max...
@@ -284,7 +278,7 @@ pprint(('S_4' ,S_4))
 # Now that the symbolic expressions are solved for, we can write a FORTRAN Code!
 # Note that there are many ways to do this, see: https://docs.sympy.org/latest/modules/codegen.html
 
-# In[10]:
+# In[43]:
 
 
 thetaMachNumber = M_t_analytic
@@ -296,7 +290,7 @@ fcode(M_t_analytic,source_format='free',standard=95)
 fcode(A_analytic,source_format='free',standard=95)
 
 
-# In[11]:
+# In[44]:
 
 
 
@@ -348,33 +342,37 @@ f_code_header2 = '''
 f_code_footer2 = '''
     END SUBROUTINE SourceCalc
 '''
+print(S_1)
+print(S_2)
+print(S_3)
+print(S_4)
 
 
-# In[12]:
+# In[45]:
 
 
-with open('S_1.tex','w') as f:
-    f.write(latex(S_1))
+#with open('S_1.tex','w') as f:
+#    f.write(latex(S_1))
 
 
-# In[13]:
+# In[46]:
 
 
-with open('SoundSpeedMMS.f90','w') as f:
+#with open('SoundSpeedMMS.f90','w') as f:
     #Fortran wrapper goes here 
-    f.write(f_code_header)
-    f.write(S_list)
-    f.write(f_code_footer)
+#    f.write(f_code_header)
+#    f.write(S_list)
+#    f.write(f_code_footer)
 
 
-# In[ ]:
+# In[47]:
 
 
 with open('SourceTermMMS.f90','w') as f:
     #Fortran wrapper goes here 
-    f.write(f_code_header)
+    f.write(f_code_header2)
     f.write(S_list)
-    f.write(f_code_footer)
+    f.write(f_code_footer2)
 
 
 # 

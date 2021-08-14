@@ -25,6 +25,10 @@ PROGRAM MAIN
         k , &
         S_eig                                        , &
         S_MMS                                        , &
+        S_1                      ,&
+        S_2                      ,&
+        S_3                      ,&
+        S_4                      ,&
         eigenVector                                  ,&
         eigenVectorMMS
 
@@ -35,10 +39,6 @@ PROGRAM MAIN
         ci                       ,&
         eigL2               ,& 
         eigenValue               ,&
-        S_1                      ,&
-        S_2                      ,&
-        S_3                      ,&
-        S_4                      ,&
         eigenValueMMS           
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
@@ -149,7 +149,7 @@ PROGRAM MAIN
 
         OPEN(NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
-        
+
         WRITE(6, *) '# Grid Points ',  numberOfGridPoints
 
         ALLOCATE(&
@@ -167,6 +167,10 @@ PROGRAM MAIN
             SoundSpeedExpected(numberOfGridPoints)   , &
             SoundSpeedError(numberOfGridPoints)      , &
             S_MMS(numberOfGridPoints*4)              , &
+            S_1(numberOfGridPoints)                      ,&
+            S_2(numberOfGridPoints)                      ,&
+            S_3(numberOfGridPoints)                      ,&
+            S_4(numberOfGridPoints)                      ,&
             S_eig(numberOfGridPoints*4)              , &
             eigenVector(numberOfGridPoints*4)        , &
             eigenVectorMMS(numberOfGridPoints*4))
@@ -189,7 +193,6 @@ PROGRAM MAIN
                 (boundingConstant)*&
                 EXP(REAL(k(2), rDef)*(r(i)-r_max))
 
-
             thetaMachdata(i) = &
                 SQRT(2.0_rdef)*&
                 sqrt(&
@@ -197,10 +200,8 @@ PROGRAM MAIN
                 /&
                 (real(gm1,rdef)) )
 
-
             SoundSpeedExpected(i) = &
                 EXP(REAL(k(1),rDef)*(r(i)-r_max)) 
-
 
 ! This segment of code was used to define a mean flow parameters that tested the rate of convergence for 
 ! the integration method used to determine the speed
@@ -237,7 +238,7 @@ PROGRAM MAIN
                 STOP
             ELSE
 
-                 ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
+                ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
 
             ENDIF
         ENDDO
@@ -319,56 +320,48 @@ PROGRAM MAIN
             eigenIndex = eigenIndex) 
 
         CALL FindResidualData(&
-            object = swirlClassObj(fac),&
-            eigenValue = eigenValueMMS     , &
-            eigenVector= eigenVectorMMS    , &
-            S      = S_MMS )
-
+            object      = swirlClassObj(fac),&
+            eigenValue  = eigenValueMMS     , &
+            eigenVector = eigenVectorMMS    , &
+            S           = S_MMS )
 
         CALL FindResidualData(&
-            object = swirlClassObj(fac),&
-            eigenValue = eigenValue, &
-            eigenVector= eigenVector, &
-            S      = S_eig )
-
-        
-          do i = 1,numberOfGridPoints*4
-              if (REAL(S_MMS(i),rDef) < 1e-12_rDef) then
-                 S_MMS(i) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
-                 else
-             endif
-         enddo
-
-         DO i = 1,numberOfGridPoints
-
-             CALL getMMSSourceTerms(&
-                 gam = eigenValue,& !WE NEED TO extract modal data to get the axial wavenumber here
-                 i   = ci       ,&
-                 ak  = frequency,&
-                 k   = k        ,&
-                 kappa = gam    ,&
-                 m   = azimuthalModeNumber     ,&
-                 r   = r(i)     ,&
-                 r_max = r_max  ,&
-                 S_1 = S_1      ,&
-                 S_2 = S_2      ,&
-                 S_3 = S_3      ,&
-                 S_4 = S_4     ) 
-
-             WRITE(6,*) S_1, S_2, S_3, S_4
-
-         ENDDO
+            object      = swirlClassObj(fac),&
+            eigenValue  = eigenValue, &
+            eigenVector = eigenVector, &
+            S           = S_eig )
 
 
+        do i = 1,numberOfGridPoints*4
+            if (REAL(S_MMS(i),rDef) < 1e-12_rDef) then
+                S_MMS(i) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
+            else
+            endif
+        enddo
+
+        DO i = 1,numberOfGridPoints
+
+            CALL getMMSSourceTerms(&
+                gam = eigenValue,& !WE NEED TO extract modal data to get the axial wavenumber here
+                i   = ci       ,&
+                ak  = frequency,&
+                k   = k        ,&
+                kappa = gam    ,&
+                m   = azimuthalModeNumber     ,&
+                r   = r(i)     ,&
+                r_max = r_max  ,&
+                S_1 = S_1(i)      ,&
+                S_2 = S_2(i)      ,&
+                S_3 = S_3(i)      ,&
+                S_4 = S_4(i)     ) 
+
+            WRITE(6,*) S_1(i), S_2(i), S_3(i), S_4(i)
+
+        ENDDO
 
         CALL getL2Norm(&
             L2        = eigL2,&
             dataSet  = S_MMS)
-
-         
-
-
-
 
 
         ! WRITE(6,*) S_MMS
@@ -390,6 +383,10 @@ PROGRAM MAIN
             SoundSpeedError       ,&
             S_MMS                 ,&
             S_eig                 ,&
+            S_1                      ,&
+            S_2                      ,&
+            S_3                      ,&
+            S_4                      ,&
             eigenVector           ,&
             eigenVectorMMS)
 
@@ -411,7 +408,7 @@ PROGRAM MAIN
 
     CLOSE(UNIT);
 
-      file_name = 'RateOfConvergenceForIntegration.dat'
+    file_name = 'RateOfConvergenceForIntegration.dat'
 
     OPEN(NEWUNIT=UNIT,FILE=file_name)
 
@@ -433,7 +430,7 @@ PROGRAM MAIN
             WRITE(UNIT,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence(i)
         endif
 
-        ENDDO
+    ENDDO
 
     CLOSE(UNIT)
 
