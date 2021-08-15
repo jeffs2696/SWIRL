@@ -7,7 +7,7 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-        numberOfIterations = 2
+        numberOfIterations = 7
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
 
@@ -25,20 +25,23 @@ PROGRAM MAIN
         k , &
         S_eig                                        , &
         S_MMS                                        , &
-        S_1                      ,&
-        S_2                      ,&
-        S_3                      ,&
-        S_4                      ,&
-        eigenVector                                  ,&
+        S_1                                          , &
+        S_2                                          , &
+        S_3                                          , &
+        S_4                                          , &
+        S_array                                      , &
+        S_L2Array                                   , &
+        eigenVector                                  , &
         eigenVectorMMS
 
     COMPLEX(KIND = rDef) :: &
-        frequency                ,& !non-dimensional frequency
-        hubAdmittance            ,& !Liner Admittance At the Hub
-        ductAdmittance           ,&
-        ci                       ,&
-        eigL2               ,& 
-        eigenValue               ,&
+        frequency          ,& !non-dimensional frequency
+        hubAdmittance      ,& !Liner Admittance At the Hub
+        ductAdmittance     ,&
+        ci                 ,&
+        eigL2              ,& 
+        S_L2              ,& 
+        eigenValue         ,&
         eigenValueMMS           
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
@@ -56,7 +59,8 @@ PROGRAM MAIN
         SoundSpeed_dr_Out   ,&
         SoundSpeedError     ,&
         SoundSpeedL2Array   ,&
-        RateOfConvergence
+        RateOfConvergence1  ,&
+        RateOfConvergence2 
 
     REAL(KIND = REAL64) ::  &
         gam                      ,&
@@ -122,8 +126,10 @@ PROGRAM MAIN
 
     ALLOCATE(&
         k(7) , &
+        S_L2Array(numberOfIterations)              , &
         SoundSpeedL2Array(numberOfIterations)       ,&
-        RateOfConvergence(numberOfIterations - 1) )
+        RateOfConvergence1(numberOfIterations - 1) , &
+        RateOfConvergence2(numberOfIterations - 1) )
 
     k(1) = CMPLX(0.15, 0.0, rDef)
     k(2) = CMPLX(0.4, 0.0, rDef)
@@ -167,6 +173,7 @@ PROGRAM MAIN
             SoundSpeedExpected(numberOfGridPoints)   , &
             SoundSpeedError(numberOfGridPoints)      , &
             S_MMS(numberOfGridPoints*4)              , &
+            S_array(numberOfGridPoints*4)              , &
             S_1(numberOfGridPoints)                      ,&
             S_2(numberOfGridPoints)                      ,&
             S_3(numberOfGridPoints)                      ,&
@@ -226,13 +233,12 @@ PROGRAM MAIN
             ! thetaMachData(i)  = 0.0_rDef!EXP(k_2*r(i))
             ! the sound speed we expect given the M_theta (for MMS)
 !
-            WRITE(6,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
-            WRITE(6, FORMAT_MEAN_FLOW) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
+            ! WRITE(6,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
+            ! WRITE(6, FORMAT_MEAN_FLOW) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
             totalMachData(i)  =&
                 ((axialMachData(i)**2.0_rDef+&
                 thetaMachData(i)**2.0_rDef)**0.5_rDef)
 
-            WRITE(6,*) totalMachData(i)
             IF(totalMachData(i) > 1.0_rDef) THEN
                 WRITE(6, *) i, 'ERROR: Total mach is greater than one'
                 STOP
@@ -273,7 +279,7 @@ PROGRAM MAIN
 
         ! WRITE(6,*) 'Input-Output Comparsion'
         
-        WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
+        ! WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
         DO i = 1,numberOfGridPoints
 
             WRITE(UNIT,FORMAT_MEAN_FLOW) &
@@ -321,8 +327,8 @@ PROGRAM MAIN
 
         CALL FindResidualData(&
             object      = swirlClassObj(fac),&
-            eigenValue  = eigenValueMMS     , &
-            eigenVector = eigenVectorMMS    , &
+            eigenValue  = eigenValue     , &
+            eigenVector = eigenVector    , &
             S           = S_MMS )
 
         CALL FindResidualData(&
@@ -334,9 +340,12 @@ PROGRAM MAIN
 
         do i = 1,numberOfGridPoints*4
             if (REAL(S_MMS(i),rDef) < 1e-12_rDef) then
+
                 S_MMS(i) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
             else
             endif
+            ! WRITE(6,*) S_MMS(i)
+
         enddo
 
         DO i = 1,numberOfGridPoints
@@ -355,16 +364,29 @@ PROGRAM MAIN
                 S_3 = S_3(i)      ,&
                 S_4 = S_4(i)     ) 
 
-            WRITE(6,*) S_1(i), S_2(i), S_3(i), S_4(i)
+            ! WRITE(6,*) S_1(i), S_2(i), S_3(i), S_4(i)
 
+            S_array(i)                    = S_1(i)
+            S_array(i+numberOfGridPoints) = S_2(i)
+            S_array(i+2*numberOfGridPoints) = S_3(i)
+            S_array(i+3*numberOfGridPoints) = S_4(i)
         ENDDO
 
+
+        DO i = 1,numberOfGridPoints
+
+        ENDDO
         CALL getL2Norm(&
             L2        = eigL2,&
             dataSet  = S_MMS)
+        CALL getL2Norm(&
+            L2        = S_L2 ,&
+            dataSet1  = S_MMS,&
+            dataSet2  = S_array)
 
 
-        ! WRITE(6,*) S_MMS
+        S_L2Array(fac) = S_L2   
+        WRITE(6,*) S_L2
         CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
@@ -382,6 +404,7 @@ PROGRAM MAIN
             SoundSpeedExpected    ,&
             SoundSpeedError       ,&
             S_MMS                 ,&
+            S_array                 ,&
             S_eig                 ,&
             S_1                      ,&
             S_2                      ,&
@@ -419,7 +442,7 @@ PROGRAM MAIN
         if (SoundSpeedL2Array(i) <= 0.0_rDef) then
             WRITE(6,*) 'SoundSpeed is converged!'
         else
-            RateOfConvergence(i) = &
+            RateOfConvergence1(i) = &
                 (&
                 LOG(SoundSpeedL2Array(i+1)) -&
                 LOG(SoundSpeedL2Array(i  ))&
@@ -427,16 +450,37 @@ PROGRAM MAIN
                 /&
                 LOG(0.5_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
-            WRITE(UNIT,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence(i)
+            WRITE(UNIT,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence1(i)
         endif
 
     ENDDO
+
+    DO i = 1,numberOfIterations - 1
+
+        ! if (S_L2Array(i) <= 0.0_rDef) then
+            ! WRITE(6,*) 'Eigenproblem is converged!'
+            ! else
+                RateOfConvergence2(i) = &
+                    (&
+                    LOG(REAL(S_L2Array(i+1),KIND=rDef)) -&
+                    LOG(REAL(S_L2Array(i  ),KIND=rDef))&
+                    )&
+                    /&
+                    LOG(0.5_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+
+                WRITE(6,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence2(i)
+            ! endif
+
+    ENDDO
+
 
     CLOSE(UNIT)
 
     DEALLOCATE( &
         SoundSpeedL2Array ,&
-        RateOfConvergence)
+        S_L2Array ,&
+        RateOfConvergence1 ,&
+        RateOfConvergence2)
 
 
 END PROGRAM MAIN

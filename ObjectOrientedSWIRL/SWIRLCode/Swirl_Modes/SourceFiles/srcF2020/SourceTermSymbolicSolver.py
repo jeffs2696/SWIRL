@@ -84,7 +84,7 @@
 # $$
 # 
 
-# In[34]:
+# In[1]:
 
 
 # Importing libraries
@@ -99,7 +99,7 @@ import math
 import re
 
 
-# In[35]:
+# In[2]:
 
 
 # Defining symbolic variables needed for this code.
@@ -133,7 +133,7 @@ dM_x_dr, dM_t_dr = symbols('dM_x_dr dM_t_dr')
 # as well as taking its derivative and the derivative of the square
 # of the speed of sound ...
 
-# In[48]:
+# In[3]:
 
 
 A_analytic        = sp.exp(k[1]*(r-r_max)) 
@@ -146,7 +146,7 @@ pprint(('\n'))
 pprint(('dA/dr =', dA_analytic_dr))
 
 
-# In[37]:
+# In[4]:
 
 
 dA_analytic_sq_dr = diff(A_analytic**2.0,r)
@@ -160,7 +160,7 @@ pprint(('M_theta =', M_t_analytic))
 # This can be written to a fortran code, see end of file
 
 
-# In[38]:
+# In[5]:
 
 
 S_1 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_r + (2.0/r)*M_t*v_t - dp_dr - ((kappa - 1.0)/(2.0*r))*M_t**2.0*p
@@ -183,7 +183,7 @@ pprint(('S_4=',S_4))
 # We still need to define an analytical axial Mach number as well as 
 # functions for the perturbation variables
 
-# In[39]:
+# In[6]:
 
 
 S_1 = (S_1.subs({A:A_analytic, M_t:M_t_analytic}))
@@ -192,7 +192,7 @@ S_3 = (S_3.subs({A:A_analytic, M_t:M_t_analytic}))
 S_4 = (S_4.subs({A:A_analytic, M_t:M_t_analytic}))
 
 
-# In[40]:
+# In[7]:
 
 
 M_x_analytical = sp.cos(k[2]*(r - r_max))
@@ -220,7 +220,7 @@ pprint(('S_4 =' ,S_4))
 # Note that there is still derivative terms in each of the source terms, let's evaluate those derivatives
 # and substitute those in
 
-# In[41]:
+# In[8]:
 
 
 dp_dr_analytical   = p_analytical.diff(r)
@@ -247,7 +247,7 @@ pprint(('S_3' ,S_3))
 pprint(('S_4' ,S_4))
 
 
-# In[42]:
+# In[9]:
 
 
 # Let's see what happens if r = r_max...
@@ -278,7 +278,7 @@ pprint(('S_4' ,S_4))
 # Now that the symbolic expressions are solved for, we can write a FORTRAN Code!
 # Note that there are many ways to do this, see: https://docs.sympy.org/latest/modules/codegen.html
 
-# In[43]:
+# In[10]:
 
 
 thetaMachNumber = M_t_analytic
@@ -290,7 +290,7 @@ fcode(M_t_analytic,source_format='free',standard=95)
 fcode(A_analytic,source_format='free',standard=95)
 
 
-# In[44]:
+# In[11]:
 
 
 
@@ -337,6 +337,7 @@ f_code_header2 = '''
     COMPLEX(KIND=rDef), INTENT(OUT) :: S_1, S_2, S_3, S_4
     COMPLEX(KIND=rDef), DIMENSION(:), INTENT(OUT) :: k
     
+    m = REAL(m,KIND=rDef)
 '''
 
 f_code_footer2 = '''
@@ -348,14 +349,14 @@ print(S_3)
 print(S_4)
 
 
-# In[45]:
+# In[12]:
 
 
 #with open('S_1.tex','w') as f:
 #    f.write(latex(S_1))
 
 
-# In[46]:
+# In[13]:
 
 
 #with open('SoundSpeedMMS.f90','w') as f:
@@ -365,7 +366,7 @@ print(S_4)
 #    f.write(f_code_footer)
 
 
-# In[47]:
+# In[14]:
 
 
 with open('SourceTermMMS.f90','w') as f:
