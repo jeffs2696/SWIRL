@@ -466,7 +466,7 @@ PROGRAM MAIN
                     LOG(REAL(S_L2Array(i  ),KIND=rDef))&
                     )&
                     /&
-                    LOG(0.5_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+                    LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
                 WRITE(6,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence2(i)
             ! endif
