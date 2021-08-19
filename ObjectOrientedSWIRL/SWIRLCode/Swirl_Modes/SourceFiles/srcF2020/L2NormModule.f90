@@ -16,11 +16,16 @@ MODULE L2NormModule
         MODULE PROCEDURE L2N_2D
     END INTERFACE
 
+    INTERFACE getLMax
+        MODULE PROCEDURE LMax
+    END INTERFACE getLMax
+
     INTEGER,PARAMETER :: rDef = REAL64
     INTEGER :: i
 !,numPoints
 
 CONTAINS
+
 
     SUBROUTINE L2N(L2,&
         dataSet1,&
@@ -209,6 +214,16 @@ CONTAINS
         ENDDO
         L2 = SQRT(CMPLX(dataSum,KIND=rDef) &
             /CMPLX(numPoints,KIND=rDef))
-        WRITE(6,*) L2
+        ! WRITE(6,*) L2
     END SUBROUTINE L2N_2D
+    SUBROUTINE LMax( &
+        LM , &
+        dataSet)
+
+        REAL(KIND=rDef), INTENT(INOUT) :: LM
+        REAL(KIND=rDef),DIMENSION(:), INTENT(IN)  :: dataSet
+
+        LM = MAXVAL(dataSet)
+
+    END SUBROUTINE LMax
 END MODULE L2NormModule

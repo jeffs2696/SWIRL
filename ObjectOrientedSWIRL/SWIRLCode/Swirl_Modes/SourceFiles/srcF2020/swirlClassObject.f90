@@ -67,6 +67,7 @@ MODULE swirlClassObject
               FiniteDifferenceFlag     ,&    ! Use central FD for derivatives, ! 1 = 2nd Order, 2 = 4th Order
               PrintToggle                    ! Turns on print to screen
 
+
           REAL(KIND = REAL64) :: &
               hubTipRatio        ,&
               secondOrderSmoother, &!derivative "smoothers"
@@ -116,6 +117,7 @@ MODULE swirlClassObject
 
 ! Local Variable Declaration
 
+      LOGICAL :: debug = .FALSE.
       CHARACTER :: &
           jobvl = 'N' ,&
           jobvr = 'V'
@@ -129,7 +131,7 @@ MODULE swirlClassObject
       is      = 5,  &
       ! itest   = 0,  &
       ! ix      = 0,  &
-      PrintToggle = 6 ! set this variable to 6 to see progress in terminal
+          PrintToggle = 0 ! set this variable to 6 to see progress in terminal
 
 ! JS: added i and j to zero out matricies
 
@@ -249,15 +251,28 @@ MODULE swirlClassObject
                       ed4 = object%fourthOrderSmoother)
               else
 
-                  WRITE(PrintToggle,*) 'Entering fdgrid CALL'
+                  IF (debug) THEN
+                      WRITE(PrintToggle,*) 'Entering fdgrid CALL'
+                  ELSE
+                  ENDIF
+
+                  
                   CALL fdgrid(&
                       np  = object%numberOfRadialPoints,  &
                       sig = object%hubTipRatio, &
                       x   = object%y,   &
                       r   = object%r)
-                  WRITE(PrintToggle,*) 'Leaving fdgrid CALL'
 
-                  WRITE(PrintToggle,*) 'Entering fdrivs CALL'
+                  IF (debug) THEN
+                      WRITE(PrintToggle,*) 'Leaving fdgrid CALL'
+                  ELSE
+                  ENDIF
+
+                  IF (debug) THEN
+                      WRITE(PrintToggle,*) 'Entering fdrivs CALL'
+                  ELSE
+                  ENDIF
+
                   CALL fdrivs(&
                       np     = object%numberOfRadialPoints,    &
                       sig    = object%hubTipRatio,   &
@@ -265,11 +280,19 @@ MODULE swirlClassObject
                       iorder = object%FiniteDifferenceFlag, &
                       ed2    = object%secondOrderSmoother,   &
                       ed4    = object%fourthOrderSmoother)
-                  WRITE(PrintToggle,*) 'Leaving fdrivs CALL'
+                  IF (debug) THEN
+                      WRITE(PrintToggle,*) 'Leaving fdrivs CALL'
+                  ELSE
+                  ENDIF
+
 
               endif
 
-              WRITE(PrintToggle,*) 'Entering smachAndSndspd CALL'
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Entering smachAndSndspd CALL'
+              ELSE
+              ENDIF
+
               CALL smachAndSndspd(&
                   npts  = object%numberOfRadialPoints,    &
                   rr    = object%r,     &
@@ -278,16 +301,28 @@ MODULE swirlClassObject
                   snd   = object%snd,   &
                   dsn   = object%dsn,   &
                   dd    = object%dl1   )
-              WRITE(PrintToggle,*) 'Leaving smachAndSndspd CALL'
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Leaving smachAndSndspd CALL'
+              ELSE
+              ENDIF
 
-              WRITE(PrintToggle,*) 'Entering rmach CALL'
+
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Entering rmach CALL'
+              ELSE
+              ENDIF
+
               CALL rmach(&
                   npts  = object%numberOfRadialPoints,    &
                   rmch  = object%rmx,   &
                   drm   = object%drm,   &
                   dd    = object%dl1    &
                   )
-              WRITE(PrintToggle,*) 'Leaving rmach CALL'
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Leaving rmach CALL'
+              ELSE
+              ENDIF
+
 
           else
               ! CALL interp(&
@@ -308,6 +343,10 @@ MODULE swirlClassObject
 
 !
 ! Set up global matrices.
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Entering globalM CALL'
+              ELSE
+              ENDIF
 
           CALL globalM(&
               np   = object%numberOfRadialPoints,  &
@@ -325,6 +364,16 @@ MODULE swirlClassObject
               aa   = object%aa,  &
               bb   = object%bb)
 
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Leaving globalM CALL'
+              ELSE
+              ENDIF
+
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Entering boundary CALL'
+              ELSE
+              ENDIF
+
           CALL boundary(&
               np   = object%numberOfRadialPoints,   &
               sig  = object%hubTipRatio,  &
@@ -337,9 +386,19 @@ MODULE swirlClassObject
               aa   = object%aa,   &
               bb   = object%bb)
 
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Leaving boundary CALL'
+              ELSE
+              ENDIF
           object%aa_before = object%aa
           object%bb_before = object%bb
 
+
+
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Entering analysis CALL'
+              ELSE
+              ENDIF
           CALL analysis(&
               np    = object%numberOfRadialPoints,    &
               np4   = np4,   &
@@ -365,6 +424,11 @@ MODULE swirlClassObject
               slp   = slope, &
               vphi  = object%vph,   &
               akap  = object%akap)
+
+              IF (debug) THEN
+                  WRITE(PrintToggle,*) 'Leaving analysis CALL'
+              ELSE
+              ENDIF
 
           object%isInitialized = .TRUE.
 

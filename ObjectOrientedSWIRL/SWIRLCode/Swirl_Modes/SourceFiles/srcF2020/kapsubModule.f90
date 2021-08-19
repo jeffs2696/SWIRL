@@ -284,7 +284,7 @@ CONTAINS
       enddo
       do j=1,np4
        if (col(j)) then
-        write(6,20) j
+        ! write(6,20) j
         badcol = .true.
        endif
       enddo
@@ -299,7 +299,7 @@ CONTAINS
       enddo
       do k=1,np4
        if (row(k)) then
-        write(6,25) k
+        ! write(6,25) k
         badrow = .true.
        endif
       enddo

@@ -72,6 +72,5 @@ COMPLEX(KIND=rDef) , DIMENSION(:,:) , INTENT(IN) :: &
             LWORK, & ! LWORK
             RWORK,   & ! RWORK
             INFO )     ! INFO
-WRITE(6,*) INFO
 END SUBROUTINE F77_ZGGEV
 END MODULE F90_ZGGEV

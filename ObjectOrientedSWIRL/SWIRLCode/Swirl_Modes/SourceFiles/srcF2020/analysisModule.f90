@@ -180,7 +180,6 @@ CONTAINS
 ! 20      format(1x,'Column ',i4,' contains all zeros.')
 ! 25      format(1x,'Row    ',i4,' contains all zeros.')
 !
-        print *, jobvl, jobvr
 !
 !     CALL ZGEGV(JOBVL,JOBVR,np4,aa,NMAX4,bb,NMAX4,ALPHA,BETA, &
 !                VL,NMAX4,VR,NMAX4,WORK,2*NMAX4,RWORK,INFO )
