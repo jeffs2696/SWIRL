@@ -11,7 +11,7 @@ PROGRAM MAIN
         numberOfIterations = 7
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
-    TYPE(mmsClassType)  :: mmsClassObj, SourceTermMMSObject
+    TYPE(mmsClassType)  :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
 
     INTEGER  :: &
         UNIT               ,& ! for NEWUNIT
@@ -34,8 +34,7 @@ PROGRAM MAIN
         S_4                                          , &
         S_array                                      , &
         S_L2Array                                   , &
-        eigenVector                                  , &
-        eigenVectorMMS
+        eigenVector                                  
 
     COMPLEX(KIND = rDef) :: &
         frequency          ,& !non-dimensional frequency
@@ -44,8 +43,7 @@ PROGRAM MAIN
         ci                 ,&
         eigL2              ,& 
         S_L2              ,& 
-        eigenValue         ,&
-        eigenValueMMS           
+        eigenValue        
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         r                   ,&
@@ -90,17 +88,22 @@ PROGRAM MAIN
 
     CHARACTER(10):: file_id
 
-!
 ! Code Starts Here!
 
     CONTINUE
+
+    IF (debug) THEN
+
+        WRITE(0, *) 'Number of Grid Study Iterations: ' , numberOfIterations
+
+    ELSE
+    ENDIF
 
     FORMAT_MEAN_FLOW = "(F15.12,F15.12,F15.12,F15.12,F15.12)" 
     FORMAT_MEAN_FLOW_HEADERS = "(A15,A15,A15,A15,A15)" 
     FORMAT_L2 = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
     FORMAT_ROC = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
 
-    ci  = CMPLX(0.0, 1.0, rDef)  ! imaginary number
 
     ! inputs needed for SwirlClassType
     azimuthalModeNumber       = 2
@@ -113,21 +116,13 @@ PROGRAM MAIN
     fourthOrderSmoother       =  0.0_rDef
 
     ! constants needed for calculations
-    gam = 1.4_rDef       ! ratio of specific heats
+    gam = 1.4_rDef               ! ratio of specific heats
     gm1 = gam-1.0_rDef
-
+    ci  = CMPLX(0.0, 1.0, rDef)  !imaginary number
 
     ! constants for MMS module
     boundingConstant = 0.1000_rDef
-
-    eigenIndex = 2
-    eigenValueMMS = CMPLX( 0.40_rDef,0.0_rDef,KIND=rDef)
-    ! Starting Grid DO LOOP
-
-    IF (debug) THEN
-        WRITE(6, *) 'Number of Grid Study Iterations: ' , numberOfIterations
-    ELSE
-    ENDIF
+    eigenIndex = 3
 
     ALLOCATE(&
         k(7) , &
@@ -144,29 +139,27 @@ PROGRAM MAIN
     k(6) = CMPLX(0.1, 0.0, rDef)
     k(7) = CMPLX(0.1, 0.0, rDef)
 
-
-
     facCount = 0 ! initializer for fac count
 
     DO fac = 1, numberOfIterations
 
-        facCount = facCount + 1
+        facCount             = facCount + 1
         numberOfGridPoints   = 1+(2**fac)
-
-        ! write integer into a string 
-        WRITE(file_id, '(i0)') numberOfGridPoints
-        ! Construct the file name 
-        file_name = 'MeanFlowData/MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
-
-        OPEN(NEWUNIT = UNIT, FILE = TRIM(file_name) )
-
+        dr                   = &
+            (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
         IF (debug) THEN
 
-            WRITE(6, *) '# Grid Points ',  numberOfGridPoints
+            WRITE(0, *) '# Grid Points ',  numberOfGridPoints
 
         ELSE
         ENDIF
+
+        WRITE(file_id, '(i0)') numberOfGridPoints 
+
+        file_name = 'MeanFlowData/MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
+
+        OPEN( NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
         ALLOCATE(&
             r(numberOfGridPoints)                    , &
@@ -183,16 +176,14 @@ PROGRAM MAIN
             SoundSpeedExpected(numberOfGridPoints)   , &
             SoundSpeedError(numberOfGridPoints)      , &
             S_MMS(numberOfGridPoints*4)              , &
-            S_array(numberOfGridPoints*4)              , &
-            S_1(numberOfGridPoints)                      ,&
-            S_2(numberOfGridPoints)                      ,&
-            S_3(numberOfGridPoints)                      ,&
-            S_4(numberOfGridPoints)                      ,&
+            S_array(numberOfGridPoints*4)            , &
+            S_1(numberOfGridPoints)                  , &
+            S_2(numberOfGridPoints)                  , &
+            S_3(numberOfGridPoints)                  , &
+            S_4(numberOfGridPoints)                  , &
             S_eig(numberOfGridPoints*4)              , &
-            eigenVector(numberOfGridPoints*4)        , &
-            eigenVectorMMS(numberOfGridPoints*4))
+            eigenVector(numberOfGridPoints*4)          ) 
 
-        dr = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
         DO i = 1, numberOfGridPoints
 
@@ -200,77 +191,34 @@ PROGRAM MAIN
 
         END DO
 
-        ! WRITE(6,*) ' '
-
-        IF (debug) THEN
-            ! WRITE(6,'(a)') 'Table 1: Input Flow Data'
-
-            ! WRITE(6,FORMAT_MEAN_FLOW_HEADERS ) 'Radius', 'Mx' , 'M_theta', 'A_expected'
-
-        ELSE
-        ENDIF
-
         DO i = 1, numberOfGridPoints
 
             axialMachData(i)  =&
                 (boundingConstant)*&
                 EXP(REAL(k(2), rDef)*(r(i)-r_max))
 
+        ENDDO
 
-            CALL getSoundSpeed(&
-                r = r,&
-                r_max = r_max , &
-                k = k , &
-                kappa = gam , &
-                SoundSpeedExpected = SoundSpeedExpected , &
-                thetaMachData = thetaMachData)
+        CALL getSoundSpeed(&
+            r                  = r                  , &
+            r_max              = r_max              , &
+            k                  = k                  , &
+            kappa              = gam                , &
+            SoundSpeedExpected = SoundSpeedExpected , &
+            thetaMachData      = thetaMachData)
 
-
-! This segment of code was used to define a mean flow parameters that tested the rate of convergence for 
-! the integration method used to determine the speed
-! of sound 
-
-! vvvvvvvvvvvvvvvvvvvv
-!            ! this segment of the code is defining a flow that will allow
-!            ! us to know what the speed of sound is expected to be
-!            axialMachData(i)  =&
-!                (boundingConstant)*&
-!                EXP(REAL(k(2), rDef)*(r(i)-r_max))
-!
-!            thetamachdata(i) = &
-!                sqrt(2.0_rdef)*&
-!                sqrt(-(real(k(1),rdef)*r(i)*&
-!                sin(real(k(1),rdef)*(r(i)-r_max)))/&
-!                (real(gm1,rdef)*cos(real(k(1),rdef)*(r(i)-r_max))))
-!
-!            SoundSpeedExpected(i) = &
-!                COS(REAL(k(1),rDef)*(r(i)-r_max))! EXP(REAL(k_3, rDef)*(r(i)-r(numberOfGridPoints)))
-            ! thetaMachData(i)  = SQRT((r(i)*REAL(k_3, rDef)*2.0_rDef)/REAL(gm1, rDef))  ! EXP(k_2*r(i))
-            ! thetaMachData(i)  = 0.0_rDef!EXP(k_2*r(i))
-            ! the sound speed we expect given the M_theta (for MMS)
-!
-            ! WRITE(6,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
-            IF (debug) THEN
-                WRITE(6, FORMAT_MEAN_FLOW) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
-            ELSE
-            ENDIF
+        DO i = 1, numberOfGridPoints
             totalMachData(i)  =&
                 ((axialMachData(i)**2.0_rDef+&
                 thetaMachData(i)**2.0_rDef)**0.5_rDef)
 
             IF(totalMachData(i) > 1.0_rDef) THEN
-                WRITE(6, *) i, 'ERROR: Total mach is greater than one'
+                WRITE(0, *) i, 'ERROR: Total mach is greater than one'
                 STOP
             ELSE
 
-                ! WRITE(myunit, FORMAT) r(i), axialMachData(i), thetaMachData(i), SoundSpeedExpected(i)
-
             ENDIF
-        ENDDO
 
-        DO i = 1,numberOfGridPoints*4
-
-            eigenVectorMMS(i) = CMPLX(1.0_rDef,0.0_rDef,KIND=rDef) !CMPLX(SIN(REAL(k_3,rDef)*REAL(i,rDef)/REAL(numberOfGridPoints*4,rDef)),KIND=rDef)
         ENDDO
 
         CALL CreateObject(&
@@ -296,8 +244,13 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
-        ! WRITE(6,*) 'Input-Output Comparsion'
+        CALL GetModeData(&
+            object     = swirlClassObj(fac) , &
+            eigenValue = eigenValue         , &
+            eigenVector= eigenVector        , &
+            eigenIndex = eigenIndex) 
 
+        ! Write the resulting mean flow
         WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
         DO i = 1,numberOfGridPoints
 
@@ -308,48 +261,25 @@ PROGRAM MAIN
                 SoundSpeedExpected(i)   , &
                 SoundSpeedOut(i)        
 
-            ! WRITE(6,*) &
-            !     rOut(i)                 , &
-            !     axialMachDataOut(i)     , &
-            !     thetaMachDataOut(i)     , &
-            !     SoundSpeedExpected(i)   , &
-            !     SoundSpeedOut(i)        
-
-            ! WRITE(6,FORMAT) &
-            !     r(i)                 , &
-            !     axialMachData(i)     , &
-            !     thetaMachData(i)     , &
-            !     ! axialMachData_dr_Out(i) , &
-            !     ! thetaMachData_dr_Out(i) , &
-            !     SoundSpeedExpected(i)   , &
-            !     SoundSpeedOut(i)        
-            ! SoundSpeed_dr_Out        
-
         ENDDO
 
-
         CALL getL2Norm(&
-            object    = mmsClassObj   ,& 
-            L2        = SoundSpeedErrorL2  ,&
-            dataSet1  = SoundSpeedExpected ,&
-            dataSet2  = SoundSpeedOut      )
-
-        CALL getL2Norm(&
-            L2        = SoundSpeedErrorL2  ,&
-            dataSet1  = SoundSpeedExpected ,&
-            dataSet2  = SoundSpeedOut      )
+            object    = SoundSpeedMMS_ClassObj ,& 
+            L2        = SoundSpeedErrorL2      ,&
+            dataSet1  = SoundSpeedExpected     ,&
+            dataSet2  = SoundSpeedOut           )
 
         SoundSpeedL2Array(fac) = SoundSpeedErrorL2
+
         IF (debug) THEN
+
             WRITE(6,*) 'SoundSpeedErrorL2' , SoundSpeedErrorL2
+
         ELSE
         ENDIF
 
-        CALL GetModeData(&
-            object = swirlClassObj(fac) , &
-            eigenValue = eigenValue, &
-            eigenVector= eigenVector    , &
-            eigenIndex = eigenIndex) 
+        ! Sanity Check to make sure that the proper residual was calculated
+        ! if S_MMS < Double Precision then the CALL was a success
 
         CALL FindResidualData(&
             object      = swirlClassObj(fac),&
@@ -363,60 +293,68 @@ PROGRAM MAIN
             eigenVector = eigenVector, &
             S           = S_eig )
 
-
         do i = 1,numberOfGridPoints*4
-            if (REAL(S_MMS(i),rDef) < 1e-12_rDef) then
+
+            ! if the real component is less than machine precision . . .
+            IF (REAL(S_MMS(i),rDef) < 1e-12_rDef) then
 
                 S_MMS(i) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
-            else
-            endif
-            ! WRITE(6,*) S_MMS(i)
+
+            ELSE
+            ENDIF
+            WRITE(6,*) S_MMS(i),S_eig(i)
 
         enddo
 
         DO i = 1,numberOfGridPoints
 
-            CALL getMMSSourceTerms(&
-                gam   = eigenValue,& !WE NEED TO extract modal data to get the axial wavenumber here
-                i     = ci       ,&
-                ak    = frequency,&
-                k     = k        ,&
-                kappa = gam    ,&
+            CALL getMMSSourceTerms( &
+                gam   = eigenValue              ,& !WE NEED TO extract modal data to get the axial wavenumber here
+                i     = ci                      ,&
+                ak    = frequency               ,&
+                k     = k                       ,&
+                kappa = gam                     ,&
                 m     = azimuthalModeNumber     ,&
-                r     = r(i)     ,&
-                r_max = r_max  ,&
-                S_1   = S_1(i)      ,&
-                S_2   = S_2(i)      ,&
-                S_3   = S_3(i)      ,&
-                S_4   = S_4(i)     ) 
+                r     = r(i)                    ,&
+                r_max = r_max                   ,&
+                S_1   = S_1(i)                  ,&
+                S_2   = S_2(i)                  ,&
+                S_3   = S_3(i)                  ,&
+                S_4   = S_4(i)     )             
 
-            ! WRITE(6,*) S_1(i), S_2(i), S_3(i), S_4(i)
-
-            S_array(i)                    = S_1(i)
-            S_array(i+numberOfGridPoints) = S_2(i)
+            S_array(i)                      = S_1(i)
+            S_array(i+numberOfGridPoints)   = S_2(i)
             S_array(i+2*numberOfGridPoints) = S_3(i)
             S_array(i+3*numberOfGridPoints) = S_4(i)
+
         ENDDO
 
 
         DO i = 1,numberOfGridPoints
 
+            WRITE(6,*) (S_array(i)-S_MMS(i))
+
         ENDDO
+
         CALL getL2Norm(&
             L2        = eigL2,&
             dataSet  = S_MMS)
+
         CALL getL2Norm(&
-            object    = SourceTermMMSObject,&
+            object    = SourceTermMMS_ClassObj,&
             L2        = S_L2 ,&
-            dataSet1  = S_MMS,&
+            dataSet1  = S_eig,&
             dataSet2  = S_array)
 
-
         S_L2Array(fac) = S_L2   
+
         IF (debug) THEN
+
             WRITE(6,*) S_L2
+
         ELSE
         ENDIF
+
         CALL DestroyObject(object = swirlClassObj(fac))
 
         DEALLOCATE(&
@@ -440,17 +378,16 @@ PROGRAM MAIN
             S_2                      ,&
             S_3                      ,&
             S_4                      ,&
-            eigenVector           ,&
-            eigenVectorMMS)
+            eigenVector           )
 
         CLOSE(UNIT)
 
 
     END DO
 
+    ! Should I put the data writing in another script? : JS
     file_name ='L2OfSoundSpeed.dat'
 
-    ! WRITE(6,*) 'Grid Points' , 'L2 of Speed of Sound'
     OPEN(NEWUNIT=UNIT,FILE=file_name)
 
     WRITE(UNIT,*) 'Grid Points' , 'L2 of Speed of Sound'
@@ -467,29 +404,20 @@ PROGRAM MAIN
 
     WRITE(UNIT,*) 'Rate Of Convergence'
 
+    CALL getRateOfConvergence(&
+        object            = SoundSpeedMMS_ClassObj , &
+        RateOfConvergence = RateOfConvergence1 , &
+        L2Array           = SoundSpeedL2Array)
+
     DO i = 1,numberOfIterations - 1
 
-        if (SoundSpeedL2Array(i) <= 0.0_rDef) then
-            WRITE(6,*) 'SoundSpeed is converged!'
-        else
-            RateOfConvergence1(i) = &
-                (&
-                LOG(SoundSpeedL2Array(i+1)) -&
-                LOG(SoundSpeedL2Array(i  ))&
-                )&
-                /&
-                LOG(0.5_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
-
             WRITE(UNIT,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence1(i)
-        endif
+            WRITE(6,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence1(i)
 
     ENDDO
 
     DO i = 1,numberOfIterations - 1
 
-        ! if (S_L2Array(i) <= 0.0_rDef) then
-        ! WRITE(6,*) 'Eigenproblem is converged!'
-        ! else
         RateOfConvergence2(i) = &
             (&
             LOG(REAL(S_L2Array(i+1),KIND=rDef)) -&
@@ -497,14 +425,15 @@ PROGRAM MAIN
             )&
             /&
             LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+
         IF (debug) THEN 
+
             WRITE(6,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence2(i)
+
         ELSE
         ENDIF
-        ! endif
 
     ENDDO
-
 
     CLOSE(UNIT)
 
@@ -513,6 +442,5 @@ PROGRAM MAIN
         S_L2Array ,&
         RateOfConvergence1 ,&
         RateOfConvergence2)
-
 
 END PROGRAM MAIN

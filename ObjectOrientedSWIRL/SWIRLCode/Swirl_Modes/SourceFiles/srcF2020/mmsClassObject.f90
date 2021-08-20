@@ -3,7 +3,7 @@ MODULE mmsClassObject
     USE, INTRINSIC :: ISO_FORTRAN_ENV
     IMPLICIT NONE
     PRIVATE
-    PUBLIC :: getL2Norm, mmsClassType
+    PUBLIC :: getRateOfConvergence, getL2Norm, mmsClassType
 
 
     INTERFACE getL2Norm
@@ -18,6 +18,9 @@ MODULE mmsClassObject
         MODULE PROCEDURE LMax
     END INTERFACE getLMax
 
+    INTERFACE getRateOfConvergence
+        MODULE PROCEDURE getROC
+    END INTERFACE getRateOfConvergence
 !    INTERFACE getLMax
 !        MODULE PROCEDURE LMax
 !    END INTERFACE getLMax
@@ -37,7 +40,8 @@ MODULE mmsClassObject
         REAL(KIND=rDef),DIMENSION(:) , ALLOCATABLE :: &
             dataSet , &
             dataSet1,&
-            dataSet2
+            dataSet2,&
+            RateOfConvergence, L2Array
 
         REAL(KIND=rDef),DIMENSION(:,:) , ALLOCATABLE :: &
             TwoDdataSet1 , &
@@ -52,7 +56,6 @@ CONTAINS
         L2        ,&
         dataSet1  ,&
         dataSet2)
-!lenDataSet = SIZE(dataSet)
 
         TYPE(mmsClassType) , INTENT(INOUT) :: &
             object
@@ -309,5 +312,42 @@ CONTAINS
 
 
     END SUBROUTINE LMax
+    SUBROUTINE getROC(&
+        object           ,&
+        RateOfConvergence,&
+        L2Array          )
+
+        TYPE(mmsClassType) , INTENT(INOUT) :: &
+            object
+
+        REAL(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
+            RateOfConvergence
+
+        REAL(KIND = rDef), DIMENSION(:), INTENT(IN) :: &
+            L2Array
+
+        INTEGER ::  numberOfIterations, i
+
+        numberOfIterations = SIZE(RateOfConvergence)
+
+        WRITE(6,*)  SIZE(RateOfConvergence)
+
+        object%L2Array = L2Array
+        object%RateOfConvergence = RateOfConvergence
+
+        DO i = 1,numberOfIterations 
+            ! WRITE(6,*) L2Array(i)
+             object%RateOfConvergence(i) = &
+                (&
+                LOG((object%L2Array(i+1))) -&
+                LOG((object%L2Array(i  )))&
+                )&
+                /&
+                LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+
+        ENDDO
+        RateOfConvergence = object%RateOfConvergence 
+
+END SUBROUTINE getROC 
 
 END MODULE mmsClassObject
