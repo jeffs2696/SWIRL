@@ -20,6 +20,7 @@ MODULE mmsClassObject
 
     INTERFACE getRateOfConvergence
         MODULE PROCEDURE getROC
+        MODULE PROCEDURE getROC_Complex
     END INTERFACE getRateOfConvergence
 !    INTERFACE getLMax
 !        MODULE PROCEDURE LMax
@@ -349,5 +350,43 @@ CONTAINS
         RateOfConvergence = object%RateOfConvergence 
 
 END SUBROUTINE getROC 
+
+SUBROUTINE getROC_Complex(&
+    object           ,&
+    RateOfConvergence,&
+    L2Array          )
+
+    TYPE(mmsClassType) , INTENT(INOUT) :: &
+        object
+
+    REAL(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
+        RateOfConvergence
+
+    COMPLEX(KIND = rDef), DIMENSION(:), INTENT(IN) :: &
+        L2Array
+
+        INTEGER ::  numberOfIterations, i
+
+        numberOfIterations = SIZE(RateOfConvergence)
+
+        WRITE(6,*)  SIZE(RateOfConvergence)
+
+        object%L2Array = L2Array
+        object%RateOfConvergence = RateOfConvergence
+
+        DO i = 1,numberOfIterations 
+            ! WRITE(6,*) L2Array(i)
+             object%RateOfConvergence(i) = &
+                (&
+                 LOG(REAL(object%L2Array(i+1),KIND=rDef)) -&
+                 LOG(REAL(object%L2Array(i  ),KIND=rDef))&
+                )&
+                /&
+                LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+
+        ENDDO
+        RateOfConvergence = object%RateOfConvergence 
+
+    END SUBROUTINE getROC_Complex
 
 END MODULE mmsClassObject

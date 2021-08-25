@@ -38,6 +38,14 @@ is found to be the composite trapezoidal rule through asymptotic error analysis.
 
 
 \section{Methods}
+
+SWIRL is a linearized Euler equations of motion code that formulates an
+eigenvalue problem calculates the 
+axial wavenumber and radial mode shapes from small unsteady disturbances in a mean flow. 
+The mean flow varies along the axial and tangetial directons as a function of 
+radius. The flow domain can either be a circular or annular duct, with or without
+acoustic liner. TSWIRL was originally written by Kousen [insert ref].
+
 The SWIRL code requires two mean flow parameters as a function of radius, $M_x$
 , and $M_{\theta}$. The speed of sound, $\widetilde{A}$ is calculated by 
 integrating $M_{\theta}$ with respect to r. To verify that SWIRL is handling 
@@ -233,11 +241,31 @@ produced from the speed of sound and comparing that to the tangential mach numbe
 that has been analytically defined (See Equation \ref{eq:Mthetabackcalculated}).
 \subsection{Procedure}
 
+There are a few constraints and conditions that must be followed in order for the analytical 
+function to have physical significance.
+\begin{itemize}
+    \item The mean flow and speed of sound must be real and positive. This will 
+        occur is a speed of sound is chosen such that the tangential mach number
+        is imaginary
+    \item The derivative of the speed of sound must be positive
+    \item Any bounding constants used with the mean flow should not allow the 
+        total Mach number to exceed one.
+    \item the speed of sound should be one at the outer radius of the cylinder
+\end{itemize}
 
-To test the integration code,  $M_{\theta}$ is defined as a result 
-of differentiating the speed of sound. This is done opposed to integrating
-$M_{\theta}$ as a preference, but a function can be defined for $M_{\theta}$, and 
-then integrate to find what $\widetilde{A}$ should be. 
+Given these constraints, $tanh(r)$ is chosen as a function since it can be
+modified to meet the conditions above.
+
+The benefit of tanh(r) is that it is bounded between one and negative one. 
+\begin{itemize}
+    \item As r $\rightarrow$ $\infty$ tanh(r) $\rightarrow$ 1
+    \item As -r $\rightarrow$ $-\infty$ tanh(r) $\rightarrow$ -1
+\end{itemize}
+
+To test the numerical integration method,  $M_{\theta}$ is defined as a result 
+of differentiating the speed of sound, $A$. This is done opposed to integrating
+$M_{\theta}$. However, a function can be defined for $M_{\theta}$, which can 
+then be integrated to find what $\widetilde{A}$ should be. 
 Instead, the procedure of choice is to back calculate what the appropriate 
 $M_{\theta}$ is for a given expression for $\widetilde{A}$.
 
@@ -248,31 +276,42 @@ Equation \ref{eq:Mthetabackcalculated} ,
     M_{\theta} = \sqrt{ \frac{\widetilde{r}}{(\gamma -1) \widetilde{A}^2} 
     \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}}}
 \end{align*}
-This time we define the speed of sound with the subscript $Analytic$ to indicate 
+
+This time we define the speed of sound with the subscript $analytic$ to indicate 
 that this is the analytical function of choice and has no physical relevance 
-to the actual problem
+to the actual problem.
+
 \begin{align*}
-    \widetilde{A}_{Analytic} = \cos \left( k \left( \widetilde{r} - \widetilde{r_{max}} \right) \right)
+\widetilde{A}_{analytic} = \Lambda + k_1 \tanh \left( k_2 \left( \widetilde{r} - \widetilde{r}_{max} \right) \right),
 \end{align*}
 
+where, 
+
+\begin{align*}
+    \Lambda = 1 - k_1 \tanh(k_2 (1 - \widetilde{r}_{max})),
+\end{align*}
+
+When, $\widetilde{r}=\widetilde{r}_{max}$ , $\widetilde{A}_{analytic} = 1$.  
 Taking the derivative with respect to $\widetilde{r}$,
 
 \begin{align*}
-    \frac{\partial \widetilde{A}_{Analytic} }{\partial \widetilde{r}} &= 
-    \frac{\partial }{\partial \widetilde{r}}\left( 
-        \cos \left( k \left( \widetilde{r} - \widetilde{r_{max}} \right) \right)
-    \right)\\
-    \frac{\partial \widetilde{A}_{Analytic}}{\partial \widetilde{r}} &= 
-    -k\,\sin\left(k\,\left(r-r_{\mathrm{max}}\right)\right)
+    \frac{\partial \widetilde{A}_{analytic} }{\partial \widetilde{r}} &=
+    \left(1 - \tanh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}\right) {k}_{1} {k}_{2}, \\ 
+    &= \frac{ k_{1} k_{2}}{\cosh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}}.
 \end{align*}
-Now we substitute this into the expression for $M_{\theta}$ in Equation 
+
+Now / substitute this into the expression for $M_{\theta}$ in Equation 
 \ref{eq:Mthetabackcalculated},
 
 \begin{align*}
-    M_{\theta} = \sqrt{2}\,\sqrt{-\frac{k\,r\,\sin\left(k\,\left(r-r_{\mathrm{max}}\right)\right)}{(\gamma - 1)\,\cos\left(k\,\left(r-r_{\mathrm{max}}\right)\right)}}
+    M_{\theta} = \sqrt{2}
+    \sqrt{\frac{r {k}_{1} {k}_{2}}{\left(\kappa - 1\right) \left(\tanh{\left(\left(r - r_{max}\right) {k}_{2} \right)} {k}_{1} + \tanh{\left(\left(r_{max} - 1\right) {k}_{2} \right)} {k}_{1} + 1\right) \cosh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}}}
 \end{align*} 
 
+Now that the mean flow is defined, the integration method used to obtain the 
+speed of sound
 
+What happens when $r = r_{max}$?
 
 \subsection{Calculation of Observed Order-of-Accuracy}
 The numerical scheme used to perform the integration of the tangential velocity
@@ -283,8 +322,8 @@ the discretization error must first be defined. The error, $\epsilon$, is a func
 The discretization error in the solution should be proportional to 
 $\left( \Delta r \right)^{\alpha}$ where $\alpha > 0$ is the theoretical order
 for the computational method.  The error for each grid is expressed as 
-\[ \epsilon_{M_{\theta}}(\Delta r) = |M_{\theta,Analytic}-M_{\theta,calc}|\]
-where $M_{\theta,Analytic}$ is the tangential mach number that is defined from the
+\[ \epsilon_{M_{\theta}}(\Delta r) = |M_{\theta,analytic}-M_{\theta,calc}|\]
+where $M_{\theta,analytic}$ is the tangential mach number that is defined from the
 speed of sound we also defined and the $M_{\theta,calc}$ is the result from 
 SWIRL. The $\Delta r$ is to indicate that this is a discretization error for a
 specific grid spacing. Applying the same concept to to the speed of sound,
@@ -302,7 +341,7 @@ expression for the tangential mach number, we know what the theoretical result
 would be from the numerical integration technique as shown above. 
 Similarly we define the discretization error for the speed of sound.
 
-\[ \epsilon_{A}(\Delta r) = |A_{Analytic}-A_{calc}|\]
+\[ \epsilon_{A}(\Delta r) = |A_{analytic}-A_{calc}|\]
 
 For a perfect answer, we expect $\epsilon$ to be zero. Since a Taylor series can 
 be used to derive the numerical schemes, we know that the truncation of higher
@@ -312,8 +351,8 @@ is constructed with such truncated Taylor series.
 %\text{H.O.T}
 We expect the error at each grid point $j$ to satisfy the following,
 \begin{align*}
-    0 &= |A_{Analytic}(r_j) - A_{calc}(r_j)| \\
-    \widetilde{A}_{Analytic}(r_j) &= \widetilde{A}_{calc}(r_j) +
+    0 &= |A_{analytic}(r_j) - A_{calc}(r_j)| \\
+    \widetilde{A}_{analytic}(r_j) &= \widetilde{A}_{calc}(r_j) +
     (\Delta r)^{\alpha} \beta(r_j)  + H.O.T
 \end{align*}
 
@@ -325,10 +364,10 @@ spacing approached zero.
 It is important to note that $\beta$ represents the first derivative of the 
 Taylor Series
 
-Subtracting $A_{Analytic}$ from both sides gives
+Subtracting $A_{analytic}$ from both sides gives
 
 \begin{align*}
-    A_{calc}(r_j) - A_{Analytic}(r_j) &= A_{Analytic}(r_j) - A_{Analytic}(r_j)
+    A_{calc}(r_j) - A_{analytic}(r_j) &= A_{analytic}(r_j) - A_{analytic}(r_j)
     + \beta(r_j) (\Delta r)^{\alpha} \\
     \epsilon_A(r_j)(\Delta r) &= \beta(r_j) (\Delta r)^{\alpha}
 \end{align*}
@@ -337,8 +376,8 @@ To estimate the order of accuracy of the accuracy, we define the global errors
 by calculating the L2 Norm of the error which is denoted as $\hat{\epsilon}_A$ 
 
 % \begin{align*}
-%     0 &=|A_{Analytic}(r_j)-A_{calc}(r_j)| \\
-%     A_{calc}(r_j) &= A_{Analytic}(r_j) + \beta(r_j) (\Delta r)^{\alpha} + 
+%     0 &=|A_{analytic}(r_j)-A_{calc}(r_j)| \\
+%     A_{calc}(r_j) &= A_{analytic}(r_j) + \beta(r_j) (\Delta r)^{\alpha} + 
 % \end{align*}
 
 \begin{align*}

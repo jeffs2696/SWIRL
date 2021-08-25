@@ -31,154 +31,211 @@ CONTAINS
 !     dimension  akap(NMAX)
 !
 
-        INTEGER, INTENT(IN) :: np, &
+        INTEGER, INTENT(IN) :: &
+            np, &
             np4, &
             mm, &
             ir, &
             is
 
-        REAL(KIND=rDef), INTENT(IN) :: slp
+        REAL(KIND=rDef), INTENT(IN) :: &
+            slp
 
-        REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: rr, &
+        REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
+            rr, &
             snd, &
             rmx, &
             rmt, &
             rwork
 
-        REAL(KIND=rDef), DIMENSION(:), INTENT(OUT) :: akap
+        REAL(KIND=rDef), DIMENSION(:), INTENT(OUT) :: &
+            akap
 
-        COMPLEX(KIND=rDef), INTENT(IN) :: ak
+        COMPLEX(KIND=rDef), INTENT(IN) :: &
+            ak ! axial wavenumber      
 
-        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: alpha, &
+        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
+            alpha, &
             beta, &
             work
 
-        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(OUT) :: gam, &
+        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(OUT) :: &
+            gam, &
             vphi
 
-        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(IN) :: aa, &
+        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(IN) :: &
+            aa, &
             bb, &
             VL, &
             VR
 
-        CHARACTER, INTENT(IN) :: jobvl, &
+        CHARACTER, INTENT(IN) :: &
+            jobvl, &
             jobvr
 
         ! COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(INOUT) :: S_MMS
 
 ! define local variables
 
-        LOGICAL :: badcol, &
+        LOGICAL :: &
+            badcol, &
             badrow
 
-        LOGICAL, DIMENSION(np4) :: col, &
+        LOGICAL, DIMENSION(np4) :: &
+            col, &
             row 
 
-        COMPLEX(KIND=rDef) :: c0, &
+        COMPLEX(KIND=rDef) :: &
+            c0, &
             ci, &
             beta_non_zero !,& lambda 
 
-        COMPLEX(KIND=rDef), DIMENSION(np4) :: cvct
-            ! xx, &
-            ! SS
+        COMPLEX(KIND=rDef), DIMENSION(np4) :: &
+            cvct
+        ! xx, &
+        ! SS
 
         COMPLEX(KIND=rDef), DIMENSION(np4,np4) :: aa_before, bb_before 
 
-        INTEGER :: i, &
+        INTEGER :: &
+            i, &
             j, &
             k, &
             info, &
             nmax4
 
-        REAL(KIND=rDef) :: as, &
+        REAL(KIND=rDef) :: &
+            as, &
             eps, &
-            ! gamco, &
+        ! gamco, &
             r, &
             rm, &
             rs
+        LOGICAL :: debug = .FALSE. 
+
+        INTEGER  :: &
+            UNIT 
+
+        CHARACTER :: &
+            file_name
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
-        eps     = 1.e-8_rDef
+
+        eps     = 1.e-8_rDef !JS: is this sufficient
 !
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
 
-            rm = rmx(j)
-            rs = rmt(j)
-            as = snd(j)
-            r  = rr(j)
+            ! get mean flow, i.e. . .
+            rm = rmx(j) !axial ,. . . 
+            rs = rmt(j) !and tangential mach numbers +  ...
+            as = snd(j) ! the speed of sound.
+            r  = rr(j)  ! Don't forget, we need this data at each radial point! 
 
-!       print*,'ak = ',ak,' as = ',as,' rm = ',rm
+            IF (debug) THEN 
+                WRITE(6,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
+            ELSE
+            ENDIF
 
-            ! if ( (rm.ne.0.0_rDef) .and. (r.ne.0.0_rDef) ) then
+            IF ( (rm.ne.0.0_rDef) .and. (r.ne.0.0_rDef) ) THEN
 
-                cvct(j) = (ak/CMPLX(as,KIND=rDef) -CMPLX(mm,KIND=rDef)*CMPLX(rs,KIND=rDef)/CMPLX(r,KIND=rDef))/CMPLX(rm,KIND=rDef)
+                cvct(j) = (ak/CMPLX(as,KIND=rDef) - CMPLX(mm,KIND=rDef)*CMPLX(rs,KIND=rDef)/CMPLX(r,KIND=rDef))/CMPLX(rm,KIND=rDef)
 
+            ENDIF
 
-            ! endif
+        ENDDO
 
-        enddo
+        file_name = 'cv.waves.dat'
 
-        open(unit=22,               &
-            file='cv.waves.dat',   &
-            status='unknown')
-        rewind 22
+        OPEN(NEWUNIT=UNIT,FILE=file_name)
+        DO j=1,np
+            WRITE(UNIT,19) cvct(j)
+            IF (debug) THEN
+                WRITE(0,19) cvct(j)
+            ELSE
+            ENDIF
+        ENDDO
 
-        do j=1,np
-            write(22,19) cvct(j)
-        enddo
+        IF (debug) THEN
+            WRITE(0,17) (cvct(j), j=1,np)
 
-        ! write(6,17) (cvct(j), j=1,np)
-! 17      format(1x,'Convected wavenumbers: ',/,8(f10.5))
+        ELSE
+        ENDIF
+17      FORMAT(1x,'Convected wavenumbers: ',/,8(f10.5))
+19      FORMAT(1x,2e15.5)
 
-19      format(1x,2e15.5)
+        CLOSE(UNIT)
 
-        close(22)
-
-!
 ! Check for zero rows and columns in A.
 
-        badcol = .false.
+        badcol = .FALSE.
 
-        do j=1,np4
-            col(j) = .true.
-            do k=1,np4
-                if (abs(aa(k,j)).gt.eps) then
+        DO j=1,np4
+
+            col(j) = .TRUE.
+
+            DO k=1,np4
+
+                IF (abs(aa(k,j)).gt.eps) THEN
+
                     col(j) = .false.
-                endif
-            enddo
-        enddo
 
-        do j=1,np4
-            if (col(j)) then
-                ! write(6,20) j
+                ENDIF
+
+            ENDDO
+
+        ENDDO
+
+        DO j=1,np4
+
+            IF (col(j)) THEN
+
+
+                IF (debug) THEN
+                    WRITE(6,20) j
+
+                ELSE
+                ENDIF
                 badcol = .true.
-            endif
-        enddo
+
+            ENDIF
+
+        ENDDO
 
         badrow = .false.
 
-        do k=1,np4
+        DO k=1,np4
+
             row(k) = .true.
-            do j=1,np4
-                if (abs(aa(k,j)).gt.eps) then
+
+            DO j=1,np4
+
+                IF (abs(aa(k,j)).gt.eps) then
+
                     row(j) = .false.
-                endif
-            enddo
-        enddo
+
+                ENDIF
+
+            ENDDO
+
+        ENDDO
 
         do k=1,np4
 
             if (row(k)) then
-                ! write(6,25) k
-                badrow = .true.
+
+                IF (debug) THEN
+                    write(6,25) k
+                    badrow = .true.
+                ELSE
+                ENDIF
             endif
 
         enddo
 !
         if (badrow.or.badcol) return
-! 20      format(1x,'Column ',i4,' contains all zeros.')
-! 25      format(1x,'Row    ',i4,' contains all zeros.')
+ 20      format(1x,'Column ',i4,' contains all zeros.')
+ 25      format(1x,'Row    ',i4,' contains all zeros.')
 !
 !
 !     CALL ZGEGV(JOBVL,JOBVR,np4,aa,NMAX4,bb,NMAX4,ALPHA,BETA, &
@@ -201,7 +258,7 @@ CONTAINS
         aa_before = aa
         bb_before = bb
 
-            CALL USE_EIGENSOLVER(&
+        CALL USE_EIGENSOLVER(&
             JOBVL = JOBVL  ,   & ! JOBVL
             JOBVR = JOBVR  ,   & ! JOBVR
             N     = np4      ,     & ! N
@@ -220,10 +277,11 @@ CONTAINS
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
 
+           
 
-            DO i = 1,np4
-                 ! S_MMS(i,:) = MATMUL(aa_before,VR(i,:)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(i,:))
-            ENDDO
+        DO i = 1,np4
+            ! S_MMS(i,:) = MATMUL(aa_before,VR(i,:)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(i,:))
+        ENDDO
 
 !        CALL ZGGEV(&
 !            JOBVL,   & ! JOBVL
@@ -253,27 +311,35 @@ CONTAINS
 ! Compute cut-off wavenumber for uniform flow.
 ! getting -Werror=compare-reals error with the if statements
 
-      !  if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
-      !      rm = rmx(1)
-      !      gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
-      !      write(6,30) gamco
-      !  endif
+        !  if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
+        !      rm = rmx(1)
+        !      gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
+        !      write(6,30) gamco
+        !  endif
 ! 30      format(/,1x,'Cut-off wavenumber: ',e15.5,/)
 !
 ! Print the gammas to the display.
         ! write(6,500)
 ! 500     format(1x)
         ! write(6,50)
+
         do j=1,np4
 
-        beta_non_zero = beta(j)
-            if (beta_non_zero.ne.c0) then
+            beta_non_zero = beta(j)
+            ! if (beta_non_zero.ne.c0) then
+            if (beta(j).ne.c0) then
+
                 gam(j) = ci*alpha(j)/beta(j)
                 if (abs(AIMAG(gam(j))).lt.eps) then
                     gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
                 endif
                 vphi(j)  = ak/gam(j)
-                ! write(6,10) j,gam(j),gam(j)/ak,vphi(j)
+
+                IF (debug) THEN 
+                    write(6,10) j,gam(j),gam(j)/ak,vphi(j)
+                ELSE
+                ENDIF
+
             endif
         enddo
 !970  format(1x,i4,4e13.4)
@@ -291,7 +357,7 @@ CONTAINS
             6x,'Im{gam}/k',6x,'kappa')
 55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
             10x,'Im{gam/ak}',5x,'nz')
-!
+
         do i = 1,np4
 ! JS: if there is (linear shear) and (no slope) and (no swirl then) ...
 ! Note: this will never happen because we removed the swrl.input functionality 

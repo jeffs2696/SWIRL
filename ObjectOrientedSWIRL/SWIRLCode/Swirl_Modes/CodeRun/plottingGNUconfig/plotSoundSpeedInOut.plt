@@ -5,7 +5,7 @@ set termopt enhanced    # turn on enhanced text mode
 # set multiplot layout 2, 1 
 set xlabel "Radius" 
 set ylabel "Speed Of Sound"
-set key outside
+set key left
 set samples 100
 # set yrange [-5.0e-11:5.0e-11]
 set grid

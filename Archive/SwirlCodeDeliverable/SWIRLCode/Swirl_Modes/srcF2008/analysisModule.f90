@@ -185,7 +185,7 @@ CONTAINS
  960  format(1x,'info = ',i3)
 !
       c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
-!
+
 ! Compute cut-off wavenumber for uniform flow.
       if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
        rm = rmx(1)
@@ -193,7 +193,7 @@ CONTAINS
        write(6,30) gamco
       endif
  30   format(/,1x,'Cut-off wavenumber: ',e15.5,/)
-!
+
 ! Print the gammas to the display.
       write(6,500)
  500  format(1x)
@@ -209,7 +209,7 @@ CONTAINS
        endif
       enddo
 !970  format(1x,i4,4e13.4)
-!
+
 ! Print all the gammas to a file.
       open(unit=15,file='gammas.dat',status='unknown')
       open(unit=35,file='gam.acc',status='unknown')

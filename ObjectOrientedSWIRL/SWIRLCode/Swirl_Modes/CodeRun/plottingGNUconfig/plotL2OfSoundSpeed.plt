@@ -3,8 +3,8 @@ set term tikz
 set output 'L2OfSoundSpeed.tex'
 set termopt enhanced    # turn on enhanced text mode
 set xlabel "Number of Grid Points" 
-set ylabel "L2 Error" font ",12"
-set format y "$%.2t*10^%+03T$"
+set ylabel "L2 Error Exponent for a Base 10" font ",12"
+set format y "{%L}"
 set logscale x 10
 set logscale y 10 
 set grid

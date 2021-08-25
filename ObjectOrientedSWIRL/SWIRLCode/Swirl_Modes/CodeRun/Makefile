@@ -7,7 +7,8 @@ PLOT_REPORT_DIR = plotReport
 PLOT_NAMES = plotMachDistribution 	\
 			 plotL2OfSoundSpeed 	\
 			 plotROC 				\
-			 plotSoundSpeed
+			 plotSoundSpeed         \
+			 plotSoundSpeedError
 
 
 PLOT_EXE = $(PLOT_NAMES:=.$(SHELL_EXT))
@@ -27,6 +28,6 @@ plot: all
 	cd plottingScripts; mv *.tex ../plotReport/ ;
 	cd plotReport; \
 	pdflatex plotReport.tex; \
-	xdg-open plotReport.pdf
+	xdg-open plotReport.pdf; 
 
 .PHONY: all

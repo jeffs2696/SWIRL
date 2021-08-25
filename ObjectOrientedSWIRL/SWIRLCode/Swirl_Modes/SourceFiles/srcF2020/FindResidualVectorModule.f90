@@ -8,7 +8,7 @@ MODULE FindResidualVectorModule
 
     INTERFACE getSvector
         MODULE PROCEDURE getSv1Dinput
-        MODULE PROCEDURE getSv2Dinput
+        ! MODULE PROCEDURE getSv2Dinput
     END INTERFACE getSvector
 
 
@@ -36,48 +36,44 @@ CONTAINS
         ! Local variables
         ! INTEGER:: i
         !, j, h, Q, jj
-        COMPLEX(KIND = REAL64),  DIMENSION(np4):: S_MMS_A, S_MMS_B
 
-        ! WRITE(6,*) A,B,x,SIZE(S_MMS)
-        S_MMS_A =MATMUL(A, x)
-        S_MMS_B = MATMUL(B, x)
+        WRITE(6,*) A,B,x,SIZE(S_MMS),lambda
 
-        S_MMS = S_MMS_A   - lambda*S_MMS_B
 
-        ! WRITE(6,*) S_MMS
 
-    END SUBROUTINE getSv1Dinput
+     END SUBROUTINE getSv1Dinput
 
-    SUBROUTINE getSv2Dinput(&
-        A, &
-        B, &
-        x, &
-        lambda, &
-        np4,&
-        S_MMS )
+    !SUBROUTINE getSv2Dinput(&
+    !    A, &
+    !    B, &
+    !    x, &
+    !    lambda, &
+    !    np4,&
+    !    eigenIndex , &
+    !    S_MMS )
 
-        INTEGER, INTENT(IN):: np4
+    !    INTEGER, INTENT(IN):: np4,eigenIndex
 
-        COMPLEX(KIND = REAL64), DIMENSION(np4, np4), INTENT(IN):: A, &
-            B,x
+    !    COMPLEX(KIND = REAL64), DIMENSION(np4, np4), INTENT(IN):: A, &
+    !        B,x
 
-        COMPLEX(KIND = REAL64), DIMENSION(np4), INTENT(IN):: lambda
+    !    COMPLEX(KIND = REAL64), DIMENSION(np4), INTENT(IN):: lambda
 
-        COMPLEX(KIND = REAL64), INTENT(INOUT), DIMENSION(np4):: S_MMS
+    !    COMPLEX(KIND = REAL64), INTENT(INOUT), DIMENSION(np4):: S_MMS
 
-        ! Local variables
-        ! INTEGER:: i
-        !, j, h, Q, jj
-        COMPLEX(KIND = REAL64),  DIMENSION(np4):: S_MMS_A, S_MMS_B
+    !    ! Local variables
+    !    ! INTEGER:: i
+    !    !, j, h, Q, jj
+    !    COMPLEX(KIND = REAL64),  DIMENSION(np4):: S_MMS_A, S_MMS_B
 
-        ! WRITE(6,*) A,B,x,SIZE(S_MMS)
-        S_MMS_A =MATMUL(A, x(:,2))
-        S_MMS_B = MATMUL(B, x(:,2))
+    !    ! WRITE(6,*) A,B,x,SIZE(S_MMS)
+    !    S_MMS_A =MATMUL(A, x(:,eigenIndex))
+    !    S_MMS_B = MATMUL(B, x(:,eigenIndex))
 
-        S_MMS = S_MMS_A   - lambda(2)*S_MMS_B
+    !    S_MMS = S_MMS_A   - lambda(eigenIndex)*S_MMS_B
 
-        ! WRITE(6,*) S_MMS
+    !    ! WRITE(6,*) S_MMS
 
-    END SUBROUTINE getSv2Dinput
+    !END SUBROUTINE getSv2Dinput
 
 END MODULE FindResidualVectorModule
