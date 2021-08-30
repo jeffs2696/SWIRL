@@ -8,10 +8,10 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     INTEGER, PARAMETER :: rDef = REAL64, &
-        numberOfIterations = 7
+        numberOfIterations = 5
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: swirlClassObj
-    TYPE(mmsClassType)  :: SoundSpeedMMS_ClassObj! , SourceTermMMS_ClassObj
+    TYPE(mmsClassType)  :: SoundSpeedMMS_ClassObj , SourceTermMMS_ClassObj
 
     INTEGER  :: &
         UNIT               ,& ! for NEWUNIT
@@ -35,7 +35,9 @@ PROGRAM MAIN
         S_array                                      , &
         S_error                                      , &
         S_L2Array                                   , &
-        eigenVector                                  
+        eigenVector                                  , &
+        eigenVectorMMS
+
 
     COMPLEX(KIND = rDef) :: &
         frequency          ,& !non-dimensional frequency
@@ -43,7 +45,7 @@ PROGRAM MAIN
         ductAdmittance     ,&
         ci                 ,&
 !        eigL2              ,& 
-!        S_L2              ,& 
+       S_L2              ,& 
         eigenValue        
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
@@ -61,6 +63,10 @@ PROGRAM MAIN
         SoundSpeed_dr_Out   ,&
         SoundSpeedError     ,&
         SoundSpeedL2Array   ,&
+        vR                  ,&
+        vT                  ,&
+        vX                  ,&
+        Pr                  ,&
         RateOfConvergence1  ,&
         RateOfConvergence2 
 
@@ -106,7 +112,6 @@ PROGRAM MAIN
     FORMAT_L2 = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
     FORMAT_ROC = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
 
-
     ! inputs needed for SwirlClassType
     azimuthalModeNumber       = 2
     hubToTipRatio             = r_min/r_max
@@ -124,7 +129,7 @@ PROGRAM MAIN
 
     ! constants for MMS module
     boundingConstant = 0.1000_rDef
-    eigenIndex = 3
+    eigenIndex = 4
 
     ALLOCATE(&
         k(7) , &
@@ -185,7 +190,12 @@ PROGRAM MAIN
             S_4(numberOfGridPoints)                  , &
             S_eig(numberOfGridPoints*4)              , &
             S_error(numberOfGridPoints*4)              , &
-            eigenVector(numberOfGridPoints*4)          ) 
+            vR(numberOfGridPoints)                  ,&
+            vT(numberOfGridPoints)                  ,&
+            vX(numberOfGridPoints)                  ,&
+            Pr(numberOfGridPoints)                  ,&
+            eigenVector(numberOfGridPoints*4)        , &
+            eigenVectorMMS(numberOfGridPoints*4)          ) 
 
 
         DO i = 1, numberOfGridPoints
@@ -222,6 +232,10 @@ PROGRAM MAIN
             ELSE
 
             ENDIF
+            vR = cos(k(4)*(r(i)-r_max))
+            vT = cos(k(5)*(r(i)-r_max))
+            vX = cos(k(6)*(r(i)-r_max))
+            Pr = cos(k(7)*(r(i)-r_max))
 
         ENDDO
 
@@ -253,18 +267,7 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
-        ! Get Mode Data passes back the eigen values and modes for a given
-        ! index. This is because the eigenValue in the swirlClassObj is 1xnp4 and 
-        ! the eigenVector is np4xnp4 long. Each column of the eigenVector 
-        ! corresponds to a single eigenVector. The user supplies the index 
-        ! that corresponds to n 
-        CALL GetModeData(&
-            object     = swirlClassObj(fac) , &
-            eigenValue = eigenValue         , &
-            eigenVector= eigenVector        , &
-            eigenIndex = eigenIndex) 
-        ! WRITE(6,*) MATMUL(eigenVector)
-        
+
         ! Write the resulting mean flow
         WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) 'radius','M_x','M_theta','A_expected','A_actual'
         DO i = 1,numberOfGridPoints
@@ -278,6 +281,25 @@ PROGRAM MAIN
                 SoundSpeedOut(i)               
 
         ENDDO
+
+        CLOSE(UNIT)
+
+        ! Get Mode Data passes back the eigen values and modes for a given
+        ! index. This is because the eigenValue in the swirlClassObj is 1xnp4 and 
+        ! the eigenVector is np4xnp4 long. Each column of the eigenVector 
+        ! corresponds to a single eigenVector. The user supplies the index 
+        ! that corresponds to n 
+        CALL GetModeData(&
+            object     = swirlClassObj(fac) , &
+            eigenValue = eigenValue         , &
+            eigenVector= eigenVector        , &
+            eigenIndex = eigenIndex) 
+
+        OPEN( NEWUNIT = UNIT, FILE = 'RadialModes.dat' )
+        DO i = 1,numberOfGridPoints
+            WRITE(UNIT,*) r(i), REAL(eigenVector(i),KIND=rDef)
+        ENDDO
+        CLOSE(UNIT)
 
         CALL getL2Norm(&
             object    = SoundSpeedMMS_ClassObj ,& 
@@ -294,22 +316,40 @@ PROGRAM MAIN
         ELSE
         ENDIF
 
+        DO i = 1,numberOfGridPoints
+            eigenVectorMMS(i) = vR(i)
+            eigenVectorMMS(i +   numberOfGridPoints) = vT(i)
+            eigenVectorMMS(i + 2*numberOfGridPoints) = vX(i)
+            eigenVectorMMS(i + 3*numberOfGridPoints) = vX(i)
+        ENDDO
         ! Sanity Check to make sure that the proper residual was calculated
         ! if S_MMS < Double Precision then the CALL was a success
+!
+       CALL FindResidualData(&
+           object      = swirlClassObj(fac),&
+           eigenVector = eigenVector       ,&
+           eigenValue  = eigenValue        ,&
+           S           = S_eig )
 
-         CALL FindResidualData(&
-             object      = swirlClassObj(fac),&
-             S           = S_MMS )
 
-        do i = 1,numberOfGridPoints
+       CALL FindResidualData(&
+           object      = swirlClassObj(fac),&
+           eigenVector = eigenVectorMMS       ,&
+           eigenValue  = eigenValue        ,&
+           S           = S_MMS )
+
+       WRITE(6,*) 'Eigenvector and Value check'
+        do i = 1,numberOfGridPoints*4
 
             ! if the real component is less than machine precision . . .
-            ! IF (REAL(S_MMS(i),rDef) < 1e-12_rDef) then
-
-            !     S_MMS(i) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
-
-            ! ELSE
-            ! ENDIF
+            IF (REAL(S_eig(i),rDef) < 10e-12_rDef) then
+                S_eig(i) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
+            ELSE
+            ENDIF
+            IF (debug) THEN
+                WRITE(6,*) S_eig(i)
+            ELSE
+            ENDIF
 
         enddo
 
@@ -333,28 +373,22 @@ PROGRAM MAIN
             S_array(i+numberOfGridPoints)   = S_2(i)
             S_array(i+2*numberOfGridPoints) = S_3(i)
             S_array(i+3*numberOfGridPoints) = S_4(i)
-
         ENDDO
 
+        S_error = ABS(S_array - S_MMS)
 
-
-        DO i = 1,numberOfGridPoints
-
-            ! WRITE(6,*) (S_array(i)-S_MMS(i))
-
-        ENDDO
 
 !        CALL getL2Norm(&
 !            L2        = eigL2,&
 !            dataSet  = S_MMS)
 !
-!        CALL getL2Norm(&
-!            object    = SourceTermMMS_ClassObj,&
-!            L2        = S_L2 ,&
-!            dataSet1  = S_eig,&
-!            dataSet2  = S_array)
-!
-!        S_L2Array(fac) = S_L2   
+        CALL getL2Norm(&
+            object    = SourceTermMMS_ClassObj,&
+            L2        = S_L2 ,&
+            dataSet1  = S_MMS,&
+            dataSet2  = S_array)
+
+        S_L2Array(fac) = S_L2   
 !
 !        IF (debug) THEN
 !
@@ -365,7 +399,6 @@ PROGRAM MAIN
 !
         CALL DestroyObject(object = swirlClassObj(fac))
 
-        CLOSE(UNIT)
 
         file_name = 'SoundSpeedError.dat'
 
@@ -379,6 +412,17 @@ PROGRAM MAIN
 
         CLOSE(UNIT);
 
+        file_name = 'SourceTermError.dat'
+
+        OPEN(NEWUNIT=UNIT,FILE=file_name)
+
+        WRITE(UNIT,*) 'Grid Points' , 'Source Term Error'
+
+        DO i = 1,numberOfGridPoints
+            WRITE(UNIT,*) r(i) , REAL(S_error(i),KIND=rDef)
+        END DO
+
+        CLOSE(UNIT);
         DEALLOCATE(&
             r                     ,&
             rOut                  ,&
@@ -401,7 +445,12 @@ PROGRAM MAIN
             S_2                      ,&
             S_3                      ,&
             S_4                      ,&
-            eigenVector           )
+            vR                    ,&
+            vT                    ,&
+            vX                    ,&
+            Pr                    ,&
+            eigenVector           ,&
+            eigenVectorMMS)
 
 
 
@@ -456,38 +505,47 @@ PROGRAM MAIN
     OPEN(NEWUNIT=UNIT,FILE=file_name)
 
     WRITE(UNIT,*) 'Rate Of Convergence'
+    DO i = 1,numberOfIterations
 
-    ! CALL getRateOfConvergence(&
-    !     object            = SourceTermMMS_ClassObj, &
-    !     RateOfConvergence = RateOfConvergence2 , &
-    !     L2Array           = S_L2Array)
+        IF (S_L2Array(i) .eq. 0.0_rDef) THEN
 
-    ! DO i = 1,numberOfIterations - 1
 
-    !     WRITE(UNIT,*)  REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), ABS(REAL(RateOfConvergence2(i),KIND=rDef))
-    !     WRITE(6,*)     REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), REAL(RateOfConvergence2(i),KIND=rDef)
+            WRITE(6,*) 'Error: S_L2Array has a zero element at index',i
+            STOP
+            ELSE
+        ENDIF
+    ENDDO
+    CALL getRateOfConvergence(&
+        object            = SourceTermMMS_ClassObj, &
+        RateOfConvergence = RateOfConvergence2 , &
+        L2Array           = S_L2Array)
 
-    ! ENDDO
+    DO i = 1,numberOfIterations - 1
+
+        WRITE(UNIT,*)  REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), ABS(REAL(RateOfConvergence2(i),KIND=rDef))
+
+    ENDDO
 
     CLOSE(UNIT)
-    ! DO i = 1,numberOfIterations - 1
+    DO i = 1,numberOfIterations - 1
 
-    !     RateOfConvergence2(i) = &
-    !         (&
-    !         LOG(REAL(S_L2Array(i+1),KIND=rDef)) -&
-    !         LOG(REAL(S_L2Array(i  ),KIND=rDef))&
-    !         )&
-    !         /&
-    !         LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+        !     RateOfConvergence2(i) = &
+        !         (&
+        !         LOG(REAL(S_L2Array(i+1),KIND=rDef)) -&
+        !         LOG(REAL(S_L2Array(i  ),KIND=rDef))&
+        !         )&
+        !         /&
+        !         LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
-    ! IF (debug) THEN 
+        IF (debug) THEN 
 
-    !     WRITE(6,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence2(i)
+            WRITE(6,*)     REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), REAL(RateOfConvergence2(i),KIND=rDef)
+            !     WRITE(6,*) (r_max - r_min)/REAL(1+2**i,KIND=rDef), RateOfConvergence2(i)
 
-    ! ELSE
-    ! ENDIF
+        ELSE
+        ENDIF
 
-! ENDDO
+    ENDDO
 
 
     DEALLOCATE( &

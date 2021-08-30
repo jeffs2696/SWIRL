@@ -44,6 +44,10 @@ MODULE swirlClassObject
         MODULE PROCEDURE GetMeanData
     END INTERFACE GetMeanFlowData
 
+    INTERFACE GetSortedModeData
+        MODULE PROCEDURE SortModeData
+    END INTERFACE GetSortedModeData
+
 ! Deallocates any arrays
     INTERFACE DestroyObject
         MODULE PROCEDURE DestroySwirlClassObject
@@ -215,9 +219,9 @@ CONTAINS
                 object%vph(np4),     &
                 object%wvn(np4),     &
                 object%aa(np4,np4),  &
-                object%aa_before(np,np),  &
+                object%aa_before(np4,np4),  &
                 object%bb(np4,np4),  &
-                object%bb_before(np,np),  &
+                object%bb_before(np4,np4),  &
                 object%vl(np4,np4),  &
                 object%vr(np4,np4))
 
@@ -423,14 +427,6 @@ CONTAINS
             ELSE
             ENDIF
 
-
-        ELSE
-            WRITE(6,*) 'ERROR: The object is not initialized'
-            CONTINUE
-        ENDIF
-
-    END SUBROUTINE CreateSwirlClassObject
-
 ! CALL output(&
     !     np     = object%numberOfRadialPoints,    &
     !     np4    = object%np4,   &
@@ -454,6 +450,13 @@ CONTAINS
     !     vphi   = object%vph,   &
     !     is     = object%is,    &
     !     icomp  = object%icomp)
+
+        ELSE
+            WRITE(6,*) 'ERROR: The object is not initialized'
+            CONTINUE
+        ENDIF
+
+    END SUBROUTINE CreateSwirlClassObject
 !
     ! if (irepeat.eq.1) goto 100
 !
@@ -520,47 +523,60 @@ CONTAINS
         eigenValue = object%wvn(eigenIndex)
         eigenVector= object%vr(:,eigenIndex)
 
+
     END SUBROUTINE GetRadialModeData 
 
     SUBROUTINE GetResidualVector(&
         object                  ,&
-            S)
+        eigenVector             ,&
+        eigenValue              ,&
+        S)
 
         TYPE(SwirlClassType), INTENT(IN) ::&
             object
 
-        ! COMPLEX(KIND = rDef), INTENT(IN) :: lambda
+        COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(IN) :: &
+            eigenVector
+
+        COMPLEX(KIND = rDef), INTENT(IN) :: &
+            eigenValue 
+
         COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
             S
-        ! COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4) ,INTENT(IN) :: x
 
         ! Local variables 
-        INTEGER :: np , i, j
+        INTEGER :: np , i
+
+        COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4) :: &
+            S_A, &
+            S_B
 
         COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4,object%numberOfRadialPoints*4) :: &
-            S_A,S_B,S_S
+            LS_B 
 
+        COMPLEX(KIND = rDef), DIMENSION(1,object%numberOfRadialPoints*4) :: &
+            eigenVectorT
 
-        WRITE(6,*) 'Shape',SIZE(S)
         np = object%numberOfRadialPoints
 
-        ! WRITE(6,*) SHAPE(object%vr,KIND=rDef)
-        S_A = MATMUL(object%aa,object%vr)
-        S_B = MATMUL(object%bb,object%vr) 
-
-        WRITE(6,*) SIZE(S_A,1) , SIZE(S_A,2)
+        LS_B = eigenValue*object%bb
         DO i = 1,np*4
-            DO j = 1,np*4
-                S_S(i,j)   = S_A(i,j) - object%wvn(j)*S_B(i,j)  
-                WRITE(6,*) S_S(i,j)
-            ENDDO
+            eigenVectorT(1,i) = eigenVector(i)
         ENDDO
 
 
-        ! S = S_A - S_B
+        S_A =  MATMUL(object%aa_before,eigenVector)
+        S_B =  MATMUL(object%bb_before,eigenVector)
+        ! S_A =  MATMUL(eigenVector,object%aa_before)
+        ! S_B =  MATMUL(eigenVector,object%bb_before)
+
+            S = S_A - eigenValue*S_B
 
 
     END SUBROUTINE GetResidualVector
+    SUBROUTINE SortModeData()
+
+    END SUBROUTINE SortModeData
     SUBROUTINE DestroySwirlClassObject(&
         object)
 

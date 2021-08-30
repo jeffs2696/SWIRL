@@ -375,7 +375,7 @@ SUBROUTINE getROC_Complex(&
         object%RateOfConvergence = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            ! WRITE(6,*) L2Array(i)
+            WRITE(6,*) L2Array(i)
              object%RateOfConvergence(i) = &
                 (&
                  LOG(REAL(object%L2Array(i+1),KIND=rDef)) -&

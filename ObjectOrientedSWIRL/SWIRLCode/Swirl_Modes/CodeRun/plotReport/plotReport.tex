@@ -4,51 +4,68 @@
 %
 \documentclass[a4paper]{article}
 \usepackage{gnuplot-lua-tikz}
+\usepackage{graphicx}
 
 \begin{document}
 
+
 \begin{figure}
     \begin{center}
-       \input{MachDistribution.tex}
+        \scalebox{0.75}{\input{MachDistribution.tex}}
     \end{center}
+    \caption{Mach Number vs Radius}
 \end{figure}
 
 \begin{figure}
     \begin{center}
-        \input{SoundSpeedFromIntegration.tex}
+        \scalebox{0.75}{\input{SoundSpeedFromIntegration.tex}}
     \end{center}
+    \caption{Speed of Sound from Integrating the Tangential Mach Number}
 \end{figure}
 
 \begin{figure}
     \begin{center}
-        \input{ROC.tex}
+        \scalebox{0.75}{\input{SoundSpeedError.tex}}
     \end{center}
+    \caption{Speed of Sound Expected vs Actual}
 \end{figure}
 
 \begin{figure}
     \begin{center}
-        \input{SoundSpeedError.tex}
+        \scalebox{0.75}{\input{L2OfSoundSpeed.tex}}
     \end{center}
+    \caption{L2 of speed of sound error}
+\end{figure}
+
+
+\begin{figure}
+    \begin{center}
+        \scalebox{0.75}{\input{ROC.tex}}
+    \end{center}
+    \caption{Rate of Convergence for the Speed of Sound Integration}
 \end{figure}
 
 \begin{figure}
     \begin{center}
-        \input{L2OfSoundSpeed.tex}
+        \scalebox{0.75}{\input{SourceTermError.tex}}
     \end{center}
+    \caption{Source Term Error}
 \end{figure}
 
+\begin{figure}
+    \begin{center}
+        \scalebox{0.75}{\input{L2OfSourceTerm.tex}}
+    \end{center}
+    \caption{L2 of SourceTerm error}
+\end{figure}
 
 \begin{figure}
    \begin{center}
-        \input{ROC_Source.tex}
+       \scalebox{0.75}{\input{ROC_Source.tex}}
     \end{center}
+    \caption{Rate of Convergence for the Source Term}
 \end{figure}
 
-\begin{figure}
-    \begin{center}
-        \input{L2OfSourceTerm.tex}
-    \end{center}
-\end{figure}
 \end{document}
 
 

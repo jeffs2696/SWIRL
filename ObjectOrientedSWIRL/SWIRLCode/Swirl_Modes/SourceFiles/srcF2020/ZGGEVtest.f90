@@ -1,0 +1,3 @@
+PROGRAM zggevtest
+
+END PROGRAM

@@ -13,23 +13,31 @@ MODULE analysisModule
 
 CONTAINS
 
-    subroutine analysis1(np,np4,ak,rr,snd,rmx,rmt,aa,bb,alpha,beta, &
-        vl,vr,work,rwork,gam,jobvl,jobvr,mm,ir,is,slp,vphi,akap)
-!
-!     implicit real*8 (a-h,o-z)
-!     parameter (NMAX = 128, NMAX4 = NMAX*4)
-!
-!     dimension rwork(8*np4)
-!     character jobvl,jobvr
-!     logical   col(500),row(500),badrow,badcol
-!
-!     complex*16 alpha(NMAX4),beta(NMAX4),work(2*NMAX4),cvct(NMAX4)
-!     complex*16 ci,c0,ak
-!     complex*16 aa(NMAX4,NMAX4),bb(NMAX4,NMAX4),vphi(NMAX4)
-!     complex*16 vl(NMAX4,NMAX4),vr(NMAX4,NMAX4),gam(NMAX4)
-!     dimension  rmx(NMAX),rmt(NMAX),rr(NMAX),snd(NMAX)
-!     dimension  akap(NMAX)
-!
+    subroutine analysis1(&
+        np,&
+        np4, &
+        ak, &
+        rr, &
+        snd, &
+        rmx, &
+        rmt, &
+        aa, &
+        bb, &
+        alpha, &
+        beta, &
+        vl, &
+        vr, &
+        work, &
+        rwork, &
+        gam, &
+        jobvl, &
+        jobvr, &
+        mm, &
+        ir, &
+        is, &
+        slp, &
+        vphi, &
+        akap)
 
         INTEGER, INTENT(IN) :: &
             np, &
@@ -73,8 +81,6 @@ CONTAINS
             jobvl, &
             jobvr
 
-        ! COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(INOUT) :: S_MMS
-
 ! define local variables
 
         LOGICAL :: &
@@ -88,12 +94,10 @@ CONTAINS
         COMPLEX(KIND=rDef) :: &
             c0, &
             ci, &
-            beta_non_zero !,& lambda 
+            SMALL
 
         COMPLEX(KIND=rDef), DIMENSION(np4) :: &
             cvct
-        ! xx, &
-        ! SS
 
         COMPLEX(KIND=rDef), DIMENSION(np4,np4) :: aa_before, bb_before 
 
@@ -111,7 +115,7 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .FALSE. 
+        LOGICAL :: debug = .TRUE. 
 
         INTEGER  :: &
             UNIT 
@@ -121,8 +125,8 @@ CONTAINS
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 1.e-8_rDef !JS: is this sufficient
-!
+        eps     = 1.e-12_rDef !JS: is this sufficient
+
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
 
@@ -133,7 +137,7 @@ CONTAINS
             r  = rr(j)  ! Don't forget, we need this data at each radial point! 
 
             IF (debug) THEN 
-                WRITE(6,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
+                ! WRITE(6,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
             ELSE
             ENDIF
 
@@ -151,7 +155,7 @@ CONTAINS
         DO j=1,np
             WRITE(UNIT,19) cvct(j)
             IF (debug) THEN
-                WRITE(0,19) cvct(j)
+                ! WRITE(0,19) cvct(j)
             ELSE
             ENDIF
         ENDDO
@@ -191,11 +195,8 @@ CONTAINS
             IF (col(j)) THEN
 
 
-                IF (debug) THEN
                     WRITE(6,20) j
 
-                ELSE
-                ENDIF
                 badcol = .true.
 
             ENDIF
@@ -224,11 +225,8 @@ CONTAINS
 
             if (row(k)) then
 
-                IF (debug) THEN
                     write(6,25) k
                     badrow = .true.
-                ELSE
-                ENDIF
             endif
 
         enddo
@@ -236,25 +234,9 @@ CONTAINS
         if (badrow.or.badcol) return
  20      format(1x,'Column ',i4,' contains all zeros.')
  25      format(1x,'Row    ',i4,' contains all zeros.')
-!
-!
-!     CALL ZGEGV(JOBVL,JOBVR,np4,aa,NMAX4,bb,NMAX4,ALPHA,BETA, &
-!                VL,NMAX4,VR,NMAX4,WORK,2*NMAX4,RWORK,INFO )
 
         nmax4 = np4
 
-!     CALL ZGEGV(JOBVL,JOBVR,np4,aa,NMAX4,bb,NMAX4,ALPHA,BETA, &
-!                VL,NMAX4,VR,NMAX4,WORK,2*NMAX4,RWORK,INFO )
-
-! updated call
-        DO i = 1,np4
-            DO j = 1,np4
-                aa_before(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
-                bb_before(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
-                ! S_MMS(i,j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
-
-            ENDDO
-        ENDDO
         aa_before = aa
         bb_before = bb
 
@@ -277,35 +259,21 @@ CONTAINS
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
 
-           
+        WRITE(6,*) 'INFO = ' ,INFO
+        IF (INFO .EQ. 0) THEN
+            WRITE(0,*) 'EIGENSOLVER PASSED'
+        ELSEIF (INFO .EQ. 1 .or. INFO .LT. np4) THEN
+            WRITE(0,*) 'EIGENSOLVER FAILED'
+            WRITE(0,*) 'The QZ iteration. No eigenvectors are calculated'
+            WRITE(0,*) 'But ALPHA(j) and BETA(j) should be correct for  '
+            WRITE(0,*) 'j = INFO + 1,...,N'
+        ELSEIF (INFO .LT. 0) THEN 
+            WRITE(0,*) 'EIGENSOLVER FAILED'
+            WRITE(6,*) 'if INFO = -i, the i-th argument had an illegal value.'
+        ENDIF
 
-        DO i = 1,np4
-            ! S_MMS(i,:) = MATMUL(aa_before,VR(i,:)) - (ALPHA(i)/BETA(i))*MATMUL(bb_before,VR(i,:))
-        ENDDO
 
-!        CALL ZGGEV(&
-!            JOBVL,   & ! JOBVL
-!            JOBVR,   & ! JOBVR
-!            np4,     & ! N
-!            aa,      & ! A
-!            NMAX4,   & ! LDA
-!            bb,      & ! B
-!            NMAX4,   & ! LDB
-!            ALPHA,   & ! ALPHA
-!            BETA,    & ! BETA
-!            VL,      & ! VL
-!            NMAX4,   & ! LDVL
-!            VR,      & ! VR
-!            NMAX4,   & ! LDVR
-!            WORK,    & ! WORK
-!            2*NMAX4, & ! LWORK
-!            RWORK,   & ! RWORK
-!            INFO )     ! INFO
-!
 
-        ! write(6,960) info
-! 960     format(1x,'info = ',i3)
-!
         c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
 !
 ! Compute cut-off wavenumber for uniform flow.
@@ -317,30 +285,52 @@ CONTAINS
         !      write(6,30) gamco
         !  endif
 ! 30      format(/,1x,'Cut-off wavenumber: ',e15.5,/)
+
 !
 ! Print the gammas to the display.
         ! write(6,500)
 ! 500     format(1x)
         ! write(6,50)
 
+        SMALL = CMPLX(eps,eps,KIND=rDef)
+
         do j=1,np4
 
-            beta_non_zero = beta(j)
-            ! if (beta_non_zero.ne.c0) then
-            if (beta(j).ne.c0) then
 
-                gam(j) = ci*alpha(j)/beta(j)
-                if (abs(AIMAG(gam(j))).lt.eps) then
-                    gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
-                endif
-                vphi(j)  = ak/gam(j)
+            IF ( (ABS(REAL(alpha(j))).LT.ABS(eps)) .or. &
+                (ABS(AIMAG(alpha(j))).LT.ABS(eps)) ) THEN
+                WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+                WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
+                WRITE(6,*) 'BETA (',j,') = ', beta(j)
+            ELSE
 
-                IF (debug) THEN 
-                    write(6,10) j,gam(j),gam(j)/ak,vphi(j)
+                if (beta(j).ne.c0) then
+
+                    gam(j) = ci*alpha(j)/beta(j)
+
+                    WRITE(6,*) 'alpha',j ,alpha(j)
+                    WRITE(6,*) 'beta ', j ,beta(j)
+
+                    if (abs(AIMAG(gam(j))).lt.eps) then
+
+                        gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
+
+                    else
+                        ! WRITE(6,*) 'Bad Eigenvalue at' , j
+
+                    endif
+                    vphi(j)  = ak/gam(j)
+
+                    IF (debug) THEN 
+                        ! write(6,10) j,gam(j),gam(j)/ak,vphi(j)
+                    ELSE
+                    ENDIF
                 ELSE
-                ENDIF
 
-            endif
+                    WRITE(6,*) 'Bad Eigenvalue at' , j
+                endif
+            ENDIF
+
         enddo
 !970  format(1x,i4,4e13.4)
 !

@@ -6,8 +6,11 @@ PLOT_SHELL_SCRIPT_DIR = plottingScripts
 PLOT_REPORT_DIR = plotReport
 PLOT_NAMES = plotMachDistribution 	\
 			 plotL2OfSoundSpeed 	\
+			 plotL2OfSourceTerm 	\
 			 plotROC 				\
+			 plotROC_Source 		\
 			 plotSoundSpeed         \
+			 plotSourceTermError    \
 			 plotSoundSpeedError
 
 

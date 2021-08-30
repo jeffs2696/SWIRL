@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  24 AUG 2021 13:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  29 AUG 2021 23:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -387,20 +387,20 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 (./plotReport.aux)
 \openout1 = `plotReport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
  ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -429,52 +429,30 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 16.
-)
-Overfull \hbox (10.65929pt too wide) in paragraph at lines 287--13
- [] 
- []
-
-(./SoundSpeedFromIntegration.tex)
-Overfull \hbox (10.65929pt too wide) in paragraph at lines 296--19
- [] 
- []
-
-(./ROC.tex)
-Overfull \hbox (10.65929pt too wide) in paragraph at lines 198--25
- [] 
- []
-
-(./SoundSpeedError.tex)
-Overfull \hbox (10.65929pt too wide) in paragraph at lines 250--31
- [] 
- []
-
-(./L2OfSoundSpeed.tex)
-Overfull \hbox (11.8644pt too wide) in paragraph at lines 233--37
- [] 
- []
-
-(./ROC_Source.tex) (./L2OfSourceTerm.tex) [1{/var/lib/texmf/fonts/map/pdftex/up
-dmap/pdftex.map}] [2] [3] (./plotReport.aux) ) 
+) (./SoundSpeedFromIntegration.tex)
+(./SoundSpeedError.tex) (./L2OfSoundSpeed.tex) (./ROC.tex)
+(./SourceTermError.tex) (./L2OfSourceTerm.tex) (./ROC_Source.tex) [1{/var/lib/t
+exmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] (./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
- 12508 strings out of 481239
- 266294 string characters out of 5920378
- 565417 words of memory out of 5000000
- 27553 multiletter control sequences out of 15000+600000
+ 12512 strings out of 481239
+ 266368 string characters out of 5920378
+ 593968 words of memory out of 5000000
+ 27554 multiletter control sequences out of 15000+600000
  532636 words of font info for 25 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,8n,65p,392b,903s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on plotReport.pdf (3 pages, 81722 bytes).
+ 68i,10n,65p,413b,918s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmsy7.pfb>
+Output written on plotReport.pdf (4 pages, 87459 bytes).
 PDF statistics:
- 45 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
