@@ -103,7 +103,6 @@ OBJECTS  =                     \
 	derivsModule.o 			   \
 	globalModule.o 			   \
 	gridModule.o   			   \
-	analysisModule.o           \
 	boundaryModule.o 		   \
 	indexxModule.o 			   \
 	rmachModule.o 			   \
@@ -111,6 +110,10 @@ OBJECTS  =                     \
     machoutModule.o 		   \
 	fdgridModule.o 			   \
    	fdrivsModule.o 			         
+
+ 
+	# analysisModule.o           \
+		
 MODULES = $(OBJECTS:$(OEXT)=mod)
 # \
 # 	Akima1D.f90             \
@@ -218,6 +221,8 @@ all:  $(OBJECTS)
 			exit $$RESULT
 
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
+	@(./SourceTermSymbolicSolver.py);
+	@(sed -i -f script.sed SourceTermMMS.f90);
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
 #
@@ -253,7 +258,6 @@ cleanAll:
 #   Define dependency information for object files
 #                                                               
 main.o: main.f90        \
-         analysisModule.o \
          boundaryModule.o \
          derivsModule.o   \
          fdgridModule.o   \
@@ -270,6 +274,7 @@ main.o: main.f90        \
 	     swirlClassObject.o 
 	$(F90) $(F90FLAGS) main.f90
 
+         # analysisModule.o \
 # akima433.o: akima433.f
 # 	$(F77) $(F77FLAGS) akima433.f
 
@@ -277,10 +282,10 @@ main.o: main.f90        \
 # 	    akima433.o
 # 	$(F90) $(F90FLAGS) Akima1D.f90
 
-analysisModule.o:  analysisModule.f90 \
-                  $(LAPACK_LOCATION)/zggev.o\
-				  $(LAPACK_LOCATION)/f90_zggev.o 
-	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) analysisModule.f90
+# analysisModule.o:  analysisModule.f90 \
+#                   $(LAPACK_LOCATION)/zggev.o\
+# 				  $(LAPACK_LOCATION)/f90_zggev.o 
+# 	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) analysisModule.f90
 
 boundaryModule.o:  boundaryModule.f90
 	$(F90) $(F90FLAGS) boundaryModule.f90

@@ -2,7 +2,7 @@
 set term tikz
 set output 'SourceTermError.tex'
 set termopt enhanced    # turn on enhanced text mode
-set xlabel "Radius [-]"
+set xlabel "Radius*4 [-]"
 set ylabel "Source Term Error"
 set samples 100
 set grid

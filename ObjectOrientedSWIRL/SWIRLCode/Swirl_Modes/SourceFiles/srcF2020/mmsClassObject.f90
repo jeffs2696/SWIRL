@@ -378,8 +378,8 @@ SUBROUTINE getROC_Complex(&
             WRITE(6,*) L2Array(i)
              object%RateOfConvergence(i) = &
                 (&
-                 LOG(REAL(object%L2Array(i+1),KIND=rDef)) -&
-                 LOG(REAL(object%L2Array(i  ),KIND=rDef))&
+                 LOG((object%L2Array(i+1))) -&
+                 LOG((object%L2Array(i  )))&
                 )&
                 /&
                 LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS

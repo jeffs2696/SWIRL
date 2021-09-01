@@ -9,23 +9,6 @@
 \doublespacing
 \begin{document}
 
-% \begin{titlepage}
-
-%     \title{
-%         Method of Manufactured Solution Applied to SWIRL's Speed of Sound Integration
-%     Technique}
-
-
-%     \author{ Jeffrey Severino \\
-%         University of Toledo \\
-%         Toledo, OH  43606 \\
-%     email: jseveri@rockets.utoledo.edu}
-
-
-%     \maketitle
-
-% \end{titlepage}
-
 \section{Introduction}
 The Method of Manufactured Solutions (MMS) is a process for generating an 
 analytical solution for a code that provides the numerical solution for a 
@@ -39,15 +22,14 @@ is found to be the composite trapezoidal rule through asymptotic error analysis.
 
 \section{Methods}
 
-SWIRL is a linearized Euler equations of motion code that formulates an
-eigenvalue problem calculates the 
+SWIRL is a linearized Euler equations of motion code that calculates the 
 axial wavenumber and radial mode shapes from small unsteady disturbances in a mean flow. 
 The mean flow varies along the axial and tangetial directons as a function of 
 radius. The flow domain can either be a circular or annular duct, with or without
-acoustic liner. TSWIRL was originally written by Kousen [insert ref].
+acoustic liner. SWIRL was originally written by Kousen [insert ref].
 
 The SWIRL code requires two mean flow parameters as a function of radius, $M_x$
-, and $M_{\theta}$. The speed of sound, $\widetilde{A}$ is calculated by 
+, and $M_{\theta}$. Afterwards, the speed of sound, $\widetilde{A}$ is calculated by 
 integrating $M_{\theta}$ with respect to r. To verify that SWIRL is handling 
 and returning the accompanying mean flow parameters, the error between the 
 mean flow input and output variables are computed. Since the trapezoidal rule
@@ -63,55 +45,45 @@ accuracy.
 To relate the speed of sound to a given flow, the radial momentum equation
 is used.  If the flow contains a swirling component,then the primitive variables 
 are nonuniform through the flow, and mean flow assumptions are not valid. 
-% \begin{align*}
-%     \frac{\partial v_r}{\partial t} +
-%     v_r \frac{\partial v_r}{\partial r} + 
-%     \frac{v_{\theta}}{r} 
-%     \frac{\partial v_{\theta}}{\partial \theta} -
-%     \frac{v_{\theta}^2}{r} _ 
-%     v_x \frac{\partial v_r}{\partial x} =
-%     \frac{1}{\rho}\frac{\partial P}{\partial r}
-% \end{align*}
+\begin{align*}
+    \frac{\partial v_r}{\partial t} +
+    v_r \frac{\partial v_r}{\partial r} + 
+    \frac{v_{\theta}}{r} 
+    \frac{\partial v_{\theta}}{\partial \theta} -
+    \frac{v_{\theta}^2}{r} 
+    v_x \frac{\partial v_r}{\partial x} =
+    \frac{1}{\rho}\frac{\partial P}{\partial r}
+\end{align*}
 
  To account to for this, the radial momentum is simplified by assuming the 
  flow is steady, the flow has no radial component. In addition, the viscous
- and body forces are neglected.
- 
- The the radial pressure derivative term is set equal to the dynamic pressure term
- and seperation of variables is applied.  
+ and body forces are neglected.  Then the radial pressure derivative term is
+ set equal to the dynamic pressure term. Seperation of variables is applied.  
 
  \begin{align*}
      \frac{v_{\theta}^2}{r} = \frac{1}{\rho}\frac{\partial P}{\partial r} \\
- P = \int_{r}^{r_{max}} \frac{\rho V_{\theta}^2}{ \partial r}
+ P = \int_{r}^{r_{max}} \frac{\rho V_{\theta}^2}{  r}
  \end{align*}
- 
-% \[\] 
 
-% where $\tilde{r}$ is the radius dimensional radius normalized 
-% by the tip diameter $r_t = r_{max}$
-
-% To show the work, we will start with the dimensional form of the equation and
-% differentiate both sides,
-% \[
-% \]
-% Applying separation of variables,
-% \[
-%     \int_{r}^{r_{max}}
-%     \frac{\bar{\rho} v_{\theta}^2}{r} \partial r 
-%     =-\int_{P(r)}^{P(r_{max})}\partial p
-% \]
+To show the work, we will start with the dimensional form of the equation and
+differentiate both sides.  Applying separation of variables,
+ \[
+     \int_{r}^{r_{max}}
+     \frac{\bar{\rho} v_{\theta}^2}{r} \partial r 
+     =-\int_{P(r)}^{P(r_{max})}\partial p.
+ \]
 
 Since $\tilde{r} = r/r_{max}$,
 \[r = \tilde{r}r_{max}.\]
 Taking total derivatives (i.e. applying chain rule),
-\[dr = d(\tilde{r}r_{max}) = d(\tilde{r})r_{max}\]
+\[dr = d(\tilde{r}r_{max}) = d(\tilde{r})r_{max}, \]
 Substituting these back in and evaluating the right hand side,
 \[
     \int_{\tilde{r}}^{1} \frac{\bar{\rho} v_{\theta}^2}{\tilde{r}}\partial \tilde{r} 
     =P(1)-P(\tilde{r})
 \]
 
-For reference the minimum value of $\tilde{r}$ is
+For reference the minimum value of $\tilde{r}$ is,
 
 \[\sigma = \frac{r_{max}}{r_{min}}\]
 
@@ -119,7 +91,7 @@ For the radial derivative, the definition of the speed of sound is utilized,
 \[\frac{\partial A^2}{\partial r } =
 \frac{\partial}{\partial r} \left( \frac{\gamma P}{\rho} \right).\]
 
-Using the quotient rule, we can extract the definition of the speed of sound.
+Using the quotient rule, the definition of the speed of sound is extracted,
 
 \begin{align*}
 &= \frac{\partial P}{\partial r} \frac{\gamma \bar{\rho}}{\bar{\rho}^2} -
@@ -146,18 +118,9 @@ Using isentropic condition $ \partial P/A^2 = \partial \rho$,
 \end{align*}
 
 
-Going back to the radial momentum equation, and rearranging the 
-
-\begin{align*}
-    \frac{\bar{\rho} v_{\theta}^2}{r} 
-&=\frac{\partial P}{\partial r}\\
-\frac{\cancel{
-        \bar{\rho}
-} v_{\theta}^2}{r} 
-&=\frac{\cancel{\bar{\rho}}}{\gamma -1}\frac{\partial A^2}{\partial r}\\
-    \frac{v_{\theta}^2}{r}\left(\gamma -1\right) &= \frac{\partial A^2}{\partial r}
-\end{align*}
-To start the nondimensionalization, we define,
+Going back to the radial momentum equation, and rearranging the terms will simplify 
+the expression. The following terms are defined to start the
+nondimensionalization.  
 
 \begin{align*}
     M_{\theta} &= \frac{V_{\theta}}{A} \\ 
@@ -172,11 +135,11 @@ To start the nondimensionalization, we define,
 Dividing by $A$,
 \begin{align*}
     \frac{M_{\theta}^2}{r}\left(\gamma - 1\right) 
-&= \frac{\partial A^2}{\partial r} \frac{1}{A^2}
+ &= \frac{\partial A^2}{\partial r} \frac{1}{A^2}
 \end{align*}
 
-At this point we can either find the derivative of  $\bar{A}$ or the integral of
-$M_{\theta}$ with respect to r
+Now there is two options, either find the derivative of  $\bar{A}$ or the integral of
+$M_{\theta}$ with respect to r.
 \begin{enumerate}
     \item
 \begin{align*}
@@ -199,9 +162,7 @@ Solving for $M_{\theta}$ ,
 M_{\theta}^2 
 &= \frac{\partial A^2}{\partial r} \frac{r}{A^2 \left(\gamma - 1\right)}
 \end{align*}
-Nondimensionalizing:
-
-Plugging in,
+Nondimensionalizing and substituting, 
 
 \begin{align} 
     M_{\theta}^2
@@ -216,29 +177,30 @@ Plugging in,
     } \label{eq:Mthetabackcalculated}
 \end{align}
 
-3.1 Guidelines for Creating Manufactured Solutions states:
-\begin{enumerate}
-    \item  The manufactured solutions should be composed of smooth analytic 
-        functions 
-    \item The manufactured solutions should exercize every term in the governing
-        equation that is being tested,
-    \item The solution should have non trivial derivatives.  
-    \item The solution derivatives should be bounded by a small constant. In this case
-        this constant should prevent the function from becoming greater than 
-        one.
-    \item The solution should not prevent the code from running 
-    \item The solution should be defined on a connected subset of two- or three-
-        dimensional space to allow flexibility in chosing the domain of the PDE.
-        Section 3.3.1 provides more information about this.
-    \item The solution should coincide with the differential operators of the PDE.
-        For example, the flux term in Fourier's law of conduction requires T to 
-        be differentiable.
-\end{enumerate}
-With these guidelines, a function is specified for the speed of sound to conduct
-a method of manufactured solutions on SWIRL's speed of sound numerical 
-integration. This is checked by observing the tangential mach number 
-produced from the speed of sound and comparing that to the tangential mach number
-that has been analytically defined (See Equation \ref{eq:Mthetabackcalculated}).
+% 3.1 Guidelines for Creating Manufactured Solutions states:
+% \begin{enumerate}
+%     \item  The manufactured solutions should be composed of smooth analytic 
+%         functions 
+%     \item The manufactured solutions should exercize every term in the governing
+%         equation that is being tested,
+%     \item The solution should have non trivial derivatives.  
+%     \item The solution derivatives should be bounded by a small constant. In this case
+%         this constant should prevent the function from becoming greater than 
+%         one.
+%     \item The solution should not prevent the code from running 
+%     \item The solution should be defined on a connected subset of two- or three-
+%         dimensional space to allow flexibility in chosing the domain of the PDE.
+%         Section 3.3.1 provides more information about this.
+%     \item The solution should coincide with the differential operators of the PDE.
+%         For example, the flux term in Fourier's law of conduction requires T to 
+%         be differentiable.
+% \end{enumerate}
+% With these guidelines, a function is specified for the speed of sound to conduct
+% a method of manufactured solutions on SWIRL's speed of sound numerical 
+% integration. This is checked by observing the tangential mach number 
+% produced from the speed of sound and comparing that to the tangential mach number
+% that has been analytically defined (See Equation \ref{eq:Mthetabackcalculated}).
+
 \subsection{Procedure}
 
 There are a few constraints and conditions that must be followed in order for the analytical 
@@ -256,7 +218,8 @@ function to have physical significance.
 Given these constraints, $tanh(r)$ is chosen as a function since it can be
 modified to meet the conditions above.
 
-The benefit of tanh(r) is that it is bounded between one and negative one. 
+The benefit of tanh(r) is that it is bounded between one and negative one, i.e.
+
 \begin{itemize}
     \item As r $\rightarrow$ $\infty$ tanh(r) $\rightarrow$ 1
     \item As -r $\rightarrow$ $-\infty$ tanh(r) $\rightarrow$ -1
@@ -277,7 +240,7 @@ Equation \ref{eq:Mthetabackcalculated} ,
     \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}}}
 \end{align*}
 
-This time we define the speed of sound with the subscript $analytic$ to indicate 
+The speed of sound is defined with the subscript $analytic$ to indicate 
 that this is the analytical function of choice and has no physical relevance 
 to the actual problem.
 
@@ -300,7 +263,7 @@ Taking the derivative with respect to $\widetilde{r}$,
     &= \frac{ k_{1} k_{2}}{\cosh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}}.
 \end{align*}
 
-Now / substitute this into the expression for $M_{\theta}$ in Equation 
+Substitute this into the expression for $M_{\theta}$ in Equation 
 \ref{eq:Mthetabackcalculated},
 
 \begin{align*}
@@ -311,14 +274,16 @@ Now / substitute this into the expression for $M_{\theta}$ in Equation
 Now that the mean flow is defined, the integration method used to obtain the 
 speed of sound
 
-What happens when $r = r_{max}$?
+% What happens when $r = r_{max}$?
 
 \subsection{Calculation of Observed Order-of-Accuracy}
 The numerical scheme used to perform the integration of the tangential velocity
-will have a theoretical order-of-accuracy. To find the theoretical order-of-accuracy,
-the discretization error must first be defined. The error, $\epsilon$, is a function of id spacing, $\Delta r$
+will have a theoretical order-of-accuracy. To find the theoretical 
+order-of-accuracy, the discretization error must first be defined. The error, 
+$\epsilon$, is a function of id spacing, $\Delta r$
 
 \[ \epsilon = \epsilon(\Delta r) \]
+
 The discretization error in the solution should be proportional to 
 $\left( \Delta r \right)^{\alpha}$ where $\alpha > 0$ is the theoretical order
 for the computational method.  The error for each grid is expressed as 
@@ -334,6 +299,7 @@ the theoretical order of accuracy. For instance, if the numerical soution
 is second-order accurate and the error is converging to a value, the L2 norm of
 the error will decrease by a factor of 4 for every halving of the grid cell 
 size. 
+
 Since the input variables should remain unchanged (except from minor changes 
 from the Akima interpolation), the error for the axial and tangential mach 
 number should be zero. As for the speed of sound, since we are using an analytic
@@ -348,8 +314,8 @@ be used to derive the numerical schemes, we know that the truncation of higher
 order terms is what indicates the error we expect from using a scheme that 
 is constructed with such truncated Taylor series.
 
-%\text{H.O.T}
-We expect the error at each grid point $j$ to satisfy the following,
+The error at each grid point $j$ is expected to satisfy the following,
+
 \begin{align*}
     0 &= |A_{analytic}(r_j) - A_{calc}(r_j)| \\
     \widetilde{A}_{analytic}(r_j) &= \widetilde{A}_{calc}(r_j) +
@@ -359,12 +325,9 @@ We expect the error at each grid point $j$ to satisfy the following,
 where the value of $\beta(r_j)$ does not change with grid spacing, and 
 $\alpha$ is the asymptotic order of accuracy of the method. It is important to
 note that the numerical method recovers the original equations as the grid 
-spacing approached zero. 
-
-It is important to note that $\beta$ represents the first derivative of the 
-Taylor Series
-
-Subtracting $A_{analytic}$ from both sides gives
+spacing approached zero.  It is important to note that $\beta$ represents the
+first derivative of the Taylor Series.  Subtracting $A_{analytic}$ from both
+sides gives,
 
 \begin{align*}
     A_{calc}(r_j) - A_{analytic}(r_j) &= A_{analytic}(r_j) - A_{analytic}(r_j)
@@ -375,11 +338,6 @@ Subtracting $A_{analytic}$ from both sides gives
 To estimate the order of accuracy of the accuracy, we define the global errors 
 by calculating the L2 Norm of the error which is denoted as $\hat{\epsilon}_A$ 
 
-% \begin{align*}
-%     0 &=|A_{analytic}(r_j)-A_{calc}(r_j)| \\
-%     A_{calc}(r_j) &= A_{analytic}(r_j) + \beta(r_j) (\Delta r)^{\alpha} + 
-% \end{align*}
-
 \begin{align*}
     \hat{\epsilon}_A = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \epsilon(r_j)^2  }
 \end{align*}
@@ -387,6 +345,7 @@ by calculating the L2 Norm of the error which is denoted as $\hat{\epsilon}_A$
 \begin{align*}
     \hat{\beta}_A(r_j) = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \beta(r_j)^2  }
 \end{align*}
+
 As the grid density increases, $\hat{\beta}$ should asymptote to a constant 
 value. Given two grid densities, $\Delta r$ and $\sigma\Delta r$, and assuming
 that the leading error term is much larger than any other error term,
@@ -422,32 +381,67 @@ Defining  for a doubling of grid points ,
     \right)}{\ln \left( \frac{1}{2} \right)}
 \end{align*}
 
+Similarly for the eigenvalue problem, 
+
+\[ [A]x = \lambda [B]x \]
+
+\section{Code Documentation}
+
+placeholder
 \section{Results And Discussion}
+
 % \input{plotReport/plotReportBody.tex}
+
 \begin{figure}
     \begin{center}
-       \input{plotReport/MachDistribution.tex}
+        \scalebox{0.75}{\input{plotReport/MachDistribution.tex}}
     \end{center}
 \end{figure}
 
 
 \begin{figure}
     \begin{center}
-        \input{plotReport/SoundSpeedFromIntegration.tex}
+        \scalebox{0.75}{\input{plotReport/SoundSpeedFromIntegration.tex}}
     \end{center}
 \end{figure}
 
 \begin{figure}
     \begin{center}
-        \input{plotReport/ROC.tex}
+        \scalebox{0.75}{\input{plotReport/SoundSpeedError.tex}}
     \end{center}
 \end{figure}
 
 \begin{figure}
     \begin{center}
-        \input{plotReport/L2OfSoundSpeed.tex}
+        \scalebox{0.75}{\input{plotReport/L2OfSoundSpeed.tex}}
     \end{center}
 \end{figure}
+
+\begin{figure}
+    \begin{center}
+        \scalebox{0.75}{\input{plotReport/ROC.tex}}
+    \end{center}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+        \scalebox{0.75}{\input{plotReport/SourceTermError.tex}}
+    \end{center}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+        \scalebox{0.75}{\input{plotReport/L2OfSourceTerm.tex}}
+    \end{center}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+        \scalebox{0.75}{\input{plotReport/ROC_Source.tex}}
+    \end{center}
+\end{figure}
+
+
 The data in Figure 1 indicates the two flow components of the velocity vector 
 used for the MMS. This test was intended to have a large swirling component to
 put emphasis on the integration technique used to determine the speed of sound.
@@ -459,36 +453,26 @@ Figure 3 shows the L2 Error for the calculated speed of sound as it compared to 
 expected speed of sound. The L2 norm suggest that the  Figure 4 shows the asymptotic rate of convergence for
 the composite trapezoidal rule.
 
-% % \begin{figure}[h!]
-%     \includegraphics[width=\textwidth]{Figures/l2vDr}
-% \end{figure}
-
-
-% \begin{figure}[h]
-%     \includegraphics[width=\textwidth]{Figures/alphaVdr}
-% \end{figure}
-
-
 \section{Conclusion}
+
 \section{Appendix}
 
 \subsection{Error Analysis}
-
 
 Reference: A. Ralston, A first course in numerical analysis 2nd edition
 
 \subsubsection{Exact Polynomial Approximation}
 
-
-Say we have some discrete data,
+Let there be discrete data,
 
 \begin{equation*}
     \left( x_{i},y_2 \right),\left( x_2, y_2 \right), \dots , \left( x_n,y_n \right)
 \end{equation*}
-We want to find a polynomial of the LEAST degree that gits these points exactly. 
-Such a polynomial is called a Lagrange Polynomial. If in addition you supply a
-function, or derivative value, you can use Hermitie intepolation to help the 
-desired fitted polynomial handle sudden changes (?)
+
+The goal is to find a polynomial of the LEAST degree that fits these points
+exactly.  Such a polynomial is called a Lagrange Polynomial. If in addition ,a
+function, or derivative value, is supplied, Hermitie intepolation can help the 
+desired fitted polynomial handle sudden changes [insert ref]
 
 For Lagrange Polynomials, the general form is,
 
@@ -497,6 +481,7 @@ For Lagrange Polynomials, the general form is,
     \sum_{j=1}^{n} l_j(x_i) f(x_j) + \underbrace{\frac{f^{(n)}\left( c \right)}
     {n!}p_n(x_i)}_{\text{Error at } x_i},
 \end{equation*}
+
 where,
 
 \begin{equation*}
@@ -511,7 +496,7 @@ where,
     ( x_i - x_n)
 \end{equation*}
 
-So if we have two data points $x_i$ and $x_{i+1}$, the function of least degree
+For two data points, $x_i$ and $x_{i+1}$, the function of least degree
 that fits the data \textit{exactly} for a Langrange interpolation is,
 
 \begin{equation*}
@@ -520,9 +505,8 @@ that fits the data \textit{exactly} for a Langrange interpolation is,
     \right]
 \end{equation*}
 
-Note that I said \textit{exactly}! So I will drop the error term\dots
-
-Then we \textit{claim} that
+Note the polynomial fits  \textit{exactly}! So the error term is dropped.
+The next \textit{claim} is,
 
 \begin{align*}
     p(x_i) =  
@@ -530,20 +514,20 @@ Then we \textit{claim} that
     l_{i+1}\left( x_{i+1}\right)f_{i+1}\left( x_{i+1}\right) 
 \end{align*}
 
-which means that we also claim that
+which means that,
 \begin{align*}
     l_i(x) = \frac{x - x_{i+1}}{x_{i} - x_{i+1}} \\
-    l_{i+1}(x) = \frac{x - x_{i}}{x_{i+1} - x_{i}}
+    l_{i+1}(x) = \frac{x - x_{i}}{x_{i+1} - x_{i}},
 \end{align*}
 
 if $x = x_i$,
 \[ l_i(x_i) = \frac{x_i - x_{i+1}}{x_i - x_{i+1} }= 1\], 
-\[l_{i + 1}(x_i) = \frac{x_i-x_i}{x_{i+1} - x_{i}} = 0\]
+\[l_{i + 1}(x_i) = \frac{x_i-x_i}{x_{i+1} - x_{i}} = 0.\]
 and 
 if $x = x_{i+1}$,
 
 \[ l_i(x_{i+1}) = \frac{x_{i+1} - x_{i+1}}{x_i - x_{i+1} }= 0\], 
-\[l_{i + 1}(x_{i+1}) = \frac{x_{i+1}-x_i}{x_{i+1} - x_{i}} = 1\]
+\[l_{i + 1}(x_{i+1}) = \frac{x_{i+1}-x_i}{x_{i+1} - x_{i}} = 1.\]
 
 let's see if $p\left( x \right)$ passes through these points exactly,
 
@@ -647,7 +631,7 @@ The Lagrange polynomial is
 Recall that 
 
 \[ \hat{x} = x - x_i\]
-Now we prepare to integrate,
+Preparing to integrate,
 
 \begin{align*}
     \int_{x_1}^{x_2} \widetilde{f} dx &=
@@ -658,8 +642,8 @@ Now we prepare to integrate,
 
 In the interior of the domain $i = 1, iMax - 1$, the function is integrated 
 from $\hat{x} = 0$ to $\hat{x} = \Delta x^+$. In other words ,the integration 
-covers the complete range of the polynomial. Note that we are only integrating
-over a single interval.
+covers the complete range of the polynomial. Note that the integration is over 
+a single interval.
 
 \begin{align*}
     \int_0^{\Delta x^+} \widetilde{f} d\hat{x}&=
@@ -703,9 +687,9 @@ f_{i}
            \left[ f_{i+1} +f_i\right] 
 \end{align*}
 Which is the trapezoidal rule!
-\subsection{Taylor Series Error Analysis}
 
-Here we try to determine the order of accuracy of the trapezoidal rule. 
+\subsection{Taylor Series Error Analysis}
+The goal is to determine the order of accuracy of the trapezoidal rule. 
 The Taylor series for the integral $F$ and for the function $f$ are:
 
 \begin{align*}
@@ -715,13 +699,15 @@ The Taylor series for the integral $F$ and for the function $f$ are:
     \mathcal{O}\left( \Delta x^3 \right) \\
     f_i &= f_i
 \end{align*}
+
 Summing the two gives,
 
 \begin{align*}
 f_i + f_{i+1} = 2 f_i  + \Delta x \frac{\partial f}{\partial x } +
 \mathcal{O}\left( \Delta x^2 \right) 
 \end{align*}
-Multiplying by $\Delta x /2  $
+
+Multiplying by $\Delta x /2  $,
 
 \begin{align*}
     \frac{\Delta x}{2 }(f_i + f_{i+1} )= 
@@ -730,7 +716,7 @@ Multiplying by $\Delta x /2  $
 \end{align*}
 
 
-\subsection{Composie Trapezoidal Rule}
+\subsection{Composite Trapezoidal Rule}
 To account for the entire domain, we express our trapezoidal rule as the sum 
 of sub intervals for a uniform grid, to do so we redefine the grid spacing,
 
@@ -779,11 +765,10 @@ and $n$ is the total number of grid points.
     f_i
 \end{align*}
 
-Noe we can use A taylor series expansion on the composite trapezoidal rule to
-get an order of accuracy
+A taylor series expansion on the composite trapezoidal rule gives an order of
+accuracy.  The summation will be expanded around $ i \Delta x$ in order to
+interpret the sum as a Riemann sum.
 
-the summation will be expanded Around $ i \Delta x$ in order to interpret the sum 
-as a Riemann sum
 \begin{align*}
     f_1  &= f_1\\
     i\Delta x \frac{\partial f }{\partial x } +
@@ -791,7 +776,8 @@ as a Riemann sum
     \frac{(i\Delta x)^3}{3!} \frac{\partial^3 f }{\partial x^3 } + \dots
 \end{align*}
 
-Let's further simplify the Taylor series at the last grid point,
+Further simplifing the Taylor series at the last grid point,
+
 \begin{align*} 
     f_n &= f_1 + 
     \Delta \widetilde{x}^+\frac{\partial f }{\partial x  } +
@@ -807,9 +793,9 @@ Let's further simplify the Taylor series at the last grid point,
         \frac{\partial^3 f}{\partial x^3}
 \end{align*}
 
-Okay this is a bit tricky, lets distribute the summation on the Taylor series 
-expanded around each grid point. Since this Taylor Series expanison involves 
-the 1st grid point we re-adjust our summation to show this.
+Distribute the summation of the Taylor series expanded around each grid point.
+Since this Taylor Series expanison involves the 1st grid point the summation 
+is re-adjusted to show the following, 
 
 \begin{align*}
     \sum_{i = 2}^{n - 1} f_i  &= 
@@ -839,19 +825,21 @@ the 1st grid point we re-adjust our summation to show this.
     \frac{(\Delta x)^3}{3!} \frac{\partial^3 f }{\partial x^3 } 
     \sum_{i = 1}^{n - 2} \left( i^3 \right)
 \end{align*} 
-Now we can  substitute this into the composite trapezoial rule and gather the coefficients 
-
+Now substitute this into the composite trapezoial rule and gather the coefficients, 
 
 \begin{align*}
     \frac{\Delta x^+ }{2}\left[ f_1 + f_n \right] + \Delta x^+ \sum_{i=1}^{n-2} f_i 
 \end{align*}
-Let's look at one common term at a time, starting with $f_1$, note the two halfs
-summing to one,
+
+Looking at one common term at a time, starting with $f_1$. (Note the two halfs
+summing to one),
+
 \begin{align*} \frac{\Delta x^+}{2}\left[ f_1 + f_1 + \sum_{i=1}^{n-2} f_1 \right] \\
     \Delta x^+ f_1\left[ 1 + \sum_{i=1}^{n-2}1 \right]
 \end{align*}
 
-Now for the rest of the terms, we factor out $\Delta x^+$
+Now for the rest of the terms, factor out $\Delta x^+$,
+
 \begin{align*}
     (\Delta x^+)^2 \frac{\partial f}{\partial x } \left(
         \sum_{i = 1}^{n - 2} \left( i\right) + \frac{n-1}{2} \right) + \\
@@ -861,8 +849,7 @@ Now for the rest of the terms, we factor out $\Delta x^+$
     \sum_{i = 1}^{n - 2} \left( i\right)^3 + \frac{(n-1)^3}{2} \right) \dots
 \end{align*}
 
-Using the following summation rules we can further simplify the problem
-
+Using the following summation rules the problem can further simplified,
 
 \begin{align*}
     \sum_{i = 1}^{n}c= cn  \\
@@ -870,7 +857,8 @@ Using the following summation rules we can further simplify the problem
     \sum_{i = 1}^{n}i^2  = \frac{n^3}{3} + \frac{n^2}{2} + \frac{n}{6}   \\
     \sum_{i = 1}^{n}i^3  = \frac{n^4}{4} + \frac{n^3}{2} + \frac{n^2}{4}  
 \end{align*}
-Let's put the terms back together, and then simplify with the closed form 
+
+Putting the terms back together, and then simplifing with the closed form 
 expressions for the summations,
 \begin{align*}
     \Delta x^+ f_1\left[ 1 + \sum_{i=1}^{n-2}1 \right] + \\
@@ -933,12 +921,12 @@ Using this for the coefficient of the second term,
         \frac{(n-2)^3}{3} + \frac{(n-2)^2}{2} + \frac{(n-2)}{6} + \frac{(n-1)^2}{2} \right)  +
 \end{align*}
 
-Since we expect the third term to have a $\left( n-1 \right)^3$ if this pattern
+The third term is expected to have a $\left( n-1 \right)^3$. If this pattern
 of the Taylor series being expanded around L, the coefficient of the third term
-is going to be set equal to $\left( n-1 \right)^3$ and simplified,
+is going to be set equal to $\left( n-1 \right)^3$ and simplified. In addition,
+the leading coefficient is expected to have 1/6 as well. Multiplying by 3
+and setting the result equal $(n-1)j^3$ gives,
 
-We also expect the leading coeffient to have 1/6 as well. Multiplying by 3
-and setting the result equal $(n-1)^3$ gives,
 \begin{align*}
     \left(
     (n-2)^3 + \frac{3(n-2)^2}{2} + \frac{(n-2)}{3} + (n-1)^2 
@@ -947,9 +935,9 @@ and setting the result equal $(n-1)^3$ gives,
     (n-1)^3 \\
     \frac{n-1}{2}
 \end{align*}
+
 Plugging this back in, along with the definition of $\Delta \widetilde{x}^+$ for
 the rest of the terms gives,
-
 
 \begin{align*}
      f_1\left[ \Delta \widetilde{x}^+  \right] + \\
@@ -958,10 +946,5 @@ the rest of the terms gives,
  \frac{ \Delta \widetilde{x}^+
  }{2\Delta x}
  \end{align*}
-
-
-
-
-
 
 \end{document}

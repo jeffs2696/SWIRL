@@ -1,8 +1,10 @@
  
     SUBROUTINE CalcSoundSpeed(& 
-    r  , &
-    r_max , &
-    k, kappa, SoundSpeedExpected,thetaMachData       &
+    r                 , &
+    r_max             , &
+    k, kappa          , &
+    SoundSpeedExpected, &
+    thetaMachData       &
     )
     
     REAL(KIND=rDef)   , INTENT(IN) :: &
@@ -17,17 +19,28 @@
     COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
     k
      
+    ! Local variables 
     INTEGER :: &
     numberOfGridPoints, i
+    
+    REAL(KIND = rDef) :: one,two,three
+    
+    REAL(KIND=rDef), DIMENSION(SIZE(k)) :: kR
+    
+    kR = REAL(k,KIND = rDef)
+        
+    one   = (1.0_rDef)    
+    two   = (2.0_rDef)    
+    three = (3.0_rDef)
+
     
     numberOfGridPoints = SIZE(SoundSpeedExpected)
 
         DO i = 1,numberOfGridPoints
 
-        SoundSpeedExpected(i) = -tanh((1.0d0 - r_max)*k(2))*k(1) + tanh((r(i)- r_max)*k(2))*k(1) + 1.0d0
-        thetaMachData(i)      = 1.4142135623731d0*sqrt(r(i)*(1 - tanh((r(i)- r_max)*k(2))**2)*1d0/(-tanh(( &
-      1.0d0 - r_max)*k(2))*k(1) + tanh((r(i)- r_max)*k(2))*k(1) + 1.0d0)* &
-      k(1)*k(2)/(kappa - 1.0d0))
+        SoundSpeedExpected(i) = one - tanh((one - r_max)*kR(2))*kR(1) + tanh((r(i)- r_max)*kR(2))*kR(1)
+        thetaMachData(i)      = sqrt(r(i)*two*kR(1)*kR(2)/((kappa - one)*(one - tanh((one - r_max)*kR(2))*kR(1 &
+      ) + tanh((r(i)- r_max)*kR(2))*kR(1))*cosh((r(i)- r_max)*kR(2))**2.0_rDef))
 
 
         END DO

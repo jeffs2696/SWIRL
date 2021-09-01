@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[12]:
+# In[253]:
 
 
 # Importing libraries
@@ -19,10 +19,6 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-# In[13]:
-
-
 # Defining symbolic variables needed for this code.
 # all units are dimensionless! 
 
@@ -31,6 +27,7 @@ r, r_max, kappa = symbols('r r_max kappa')
 
 # arbitrary constants
 k = symbols('k', cls=IndexedBase)
+one, two, three = symbols('one two three')
 C = symbols('C')
 x = symbols('x')
 
@@ -45,48 +42,71 @@ dp_dr, dv_r_dr   = symbols('dp_dr dv_r_dr')
 dM_x_dr, dM_t_dr = symbols('dM_x_dr dM_t_dr')
 
 
-# In[14]:
+# In[254]:
 
 
-lamm = 1.0 - k[1]*sp.tanh(k[2]*(1.0-r_max))
+lamm = one - k[1]*sp.tanh(k[2]*(one-r_max))
 
 A_analytic        = lamm + k[1]*sp.tanh(k[2]*(r-r_max))
 
 dA_analytic_dr    = diff(A_analytic,r)
-dA_analytic_sq_dr = diff(A_analytic**2.0,r)
-pprint(simplify(dA_analytic_dr))
+dA_analytic_sq_dr = diff(A_analytic**two,r)
+#pprint(simplify(dA_analytic_dr))
 
-M_t_analytic = sp.sqrt(                        r/((kappa-1.0)*A_analytic**2.0) *                        (dA_analytic_sq_dr))
+M_t_analytic = simplify(sp.sqrt(                        r/((kappa-one)*A_analytic**two) *                        (dA_analytic_sq_dr)))
 
 #print(latex(simplify(M_t_analytic)))
 
 
-# In[15]:
+# In[255]:
 
 
 # Using the expression for the tangential Mach number, M_t above ...
 f_A   = fcode(A_analytic  ,source_format='free',standard=95)
 f_M_t = fcode(M_t_analytic,source_format='free',standard=95)
+#print(f_A)
+#print(f_M_t)
+f_M_t = re.sub(r"\*\*2","**2.0_rDef",f_M_t)
+
+#print(f_A)
+#print(f_M_t)
+
+
+# In[256]:
+
 
 f_A   = "        SoundSpeedExpected(i) = " + f_A +"\n"
 f_M_t = "        thetaMachData(i)      = " + f_M_t + "\n"
 
 f_A = re.sub(r"r ","r(i)",f_A)
 f_A = re.sub(r"r\*","r(i)*",f_A)
+f_A = re.sub(r"k\(","kR(",f_A)
+f_A = re.sub(r"k\(1\)","kR(1)",f_A)
+f_A = re.sub(r"k\(2\)","kR(2)",f_A)
 
 f_M_t = re.sub(r"r ","r(i)",f_M_t)
 f_M_t = re.sub(r"r\*","r(i)*",f_M_t)
+f_M_t = re.sub(r"k\(1\)","kR(1)",f_M_t)
+f_M_t = re.sub(r"k\(2\)","kR(2)",f_M_t)
+f_M_t = re.sub(r"k\(","kR(",f_M_t)
 
 S_list = []
 S_list.append(f_A)
 S_list.append(f_M_t)
 S_list = ''.join(S_list)
 
+
+# In[257]:
+
+
+
 f_code_header1 = ''' 
     SUBROUTINE CalcSoundSpeed(& 
-    r  , &
-    r_max , &
-    k, kappa, SoundSpeedExpected,thetaMachData       &
+    r                 , &
+    r_max             , &
+    k, kappa          , &
+    SoundSpeedExpected, &
+    thetaMachData       &
     )
     
     REAL(KIND=rDef)   , INTENT(IN) :: &
@@ -101,8 +121,20 @@ f_code_header1 = '''
     COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
     k
      
+    ! Local variables 
     INTEGER :: &
     numberOfGridPoints, i
+    
+    REAL(KIND = rDef) :: one,two,three
+    
+    REAL(KIND=rDef), DIMENSION(SIZE(k)) :: kR
+    
+    kR = REAL(k,KIND = rDef)
+        
+    one   = (1.0_rDef)    
+    two   = (2.0_rDef)    
+    three = (3.0_rDef)
+
     
     numberOfGridPoints = SIZE(SoundSpeedExpected)
 
@@ -123,21 +155,21 @@ with open('SoundSpeedMMS.f90','w') as f:
     f.write(f_code_footer1)
 
     
-with open('SoundSpeedMMS.f90','r') as f:
-    for line in f:
-        print(line)
+#with open('SoundSpeedMMS.f90','r') as f:
+#    for line in f:
+#        print(line)
 
 
-# In[16]:
+# In[258]:
 
 
-S_1 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_r + (2.0/r)*M_t*v_t - dp_dr - ((kappa - 1.0)/(2.0*r))*M_t**2.0*p
+S_1 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_r + (two/r)*M_t*v_t - dp_dr - ((kappa - one)/(two*r))*M_t**two*p
 
-S_2 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_t + (M_t/r - dM_t_dr - ((kappa - 1.0)/2.0*r)*M_t**3.0)*v_r + i*m*p/r
+S_2 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_t + (M_t/r - dM_t_dr - ((kappa - one)/(two*r))*M_t**three)*v_r + i*m*p/r
 
-S_3 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_x + (dM_x_dr - ((kappa - 1.0)/(2.0*r))*M_x*M_t**2.0)*v_r + i*gamma*p
+S_3 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_x + (dM_x_dr - ((kappa - one)/(two*r))*M_x*M_t**two)*v_r + i*gamma*p
 
-S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - 1.0)/(2.0*r))*M_t**2.0 + 1.0/r)*v_r + i*m*v_t/r + i*gamma*v_x
+S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - one)/(two*r))*M_t**two + one/r)*v_r + i*m*v_t/r + i*gamma*v_x
 
 # Lets look at the source terms
 #pprint('The linearized (unsteady) Euler Equations used in SWIRL:')
@@ -147,7 +179,7 @@ S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - 1.0)/(2.0*r))
 #pprint(('S_4=',S_4))
 
 
-# In[17]:
+# In[259]:
 
 
 S_1 = (S_1.subs({A:A_analytic, M_t:M_t_analytic}))
@@ -156,7 +188,7 @@ S_3 = (S_3.subs({A:A_analytic, M_t:M_t_analytic}))
 S_4 = (S_4.subs({A:A_analytic, M_t:M_t_analytic}))
 
 
-# In[18]:
+# In[260]:
 
 
 M_x_analytical = sp.cos(k[2]*(r - r_max))
@@ -174,7 +206,7 @@ S_3 = (S_3.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,       
 S_4 = (S_4.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
 
 
-# In[19]:
+# In[261]:
 
 
 dp_dr_analytical   = p_analytical.diff(r)
@@ -192,7 +224,7 @@ S_3 = (S_3.subs({                 dp_dr:dp_dr_analytical,                 dv_r_d
 S_4 = (S_4.subs({                 dp_dr:dp_dr_analytical,                 dv_r_dr:dv_r_dr_analytical,                 dM_x_dr:dM_x_dr_analytical,                 dM_t_dr:dM_t_dr_analytical,                }))
 
 
-# In[20]:
+# In[262]:
 
 
 fS_1 = fcode(S_1,source_format='free',standard=95)
@@ -221,7 +253,7 @@ fS_3 = re.sub(r"r_max","r_maxC ",fS_3)
 fS_4 = re.sub(r"r_max","r_maxC ",fS_4)
 
 
-# In[22]:
+# In[263]:
 
 
 S_list = []
@@ -261,6 +293,12 @@ f_code_header2 = '''
     ! Local variables
     COMPLEX(KIND=rDef) :: mC, kappaC, rC, r_maxC
     
+    COMPLEX(KIND=rDef) :: one,two,three
+    
+    one = CMPLX(1.0,KIND=rDef)    
+    two = CMPLX(2.0,KIND=rDef)    
+    three = CMPLX(3.0,KIND=rDef)
+    
     mC = CMPLX(m,KIND=rDef)
     kappaC = CMPLX(kappa,KIND=rDef)
     rC = CMPLX(r,KIND=rDef)
@@ -270,15 +308,15 @@ f_code_header2 = '''
 f_code_footer2 = '''
     END SUBROUTINE SourceCalc
 '''
-print(fS_1)
-print(fS_2)
-print(fS_3)
-print(fS_4)
+#print(fS_1)
+#print(fS_2)
+#print(fS_3)
+#print(fS_4)
 
-print(S_1)
-print(S_2)
-print(S_3)
-print(S_4)
+#print(S_1)
+#print(S_2)
+#print(S_3)
+#print(S_4)
 
 
 with open('SourceTermMMS.f90','w') as f:

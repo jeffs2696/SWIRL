@@ -120,6 +120,8 @@ CONTAINS
         INTEGER  :: &
             UNIT 
 
+        CHARACTER(10) :: &
+            file_id
         CHARACTER :: &
             file_name
 
@@ -294,22 +296,28 @@ CONTAINS
 
         SMALL = CMPLX(eps,eps,KIND=rDef)
 
-        do j=1,np4
+        WRITE(file_id, '(i0)') np 
+        OPEN(NEWUNIT=UNIT,FILE='alpha_beta'//TRIM(ADJUSTL(file_id)) // '.dat')
 
+        DO j=1,np4
 
             IF ( (ABS(REAL(alpha(j))).LT.ABS(eps)) .or. &
                 (ABS(AIMAG(alpha(j))).LT.ABS(eps)) ) THEN
                 WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
                 WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
                 WRITE(6,*) 'BETA (',j,') = ', beta(j)
-            ELSE
 
+                ELSE IF ( (ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
+                (ABS(AIMAG(beta(j))).LT.ABS(eps)) ) THEN
+                WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+                WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
+                WRITE(6,*) 'BETA (',j,') = ', beta(j)
+            ELSE 
+                WRITE(UNIT,*) j,alpha(j),beta(j)
                 if (beta(j).ne.c0) then
 
                     gam(j) = ci*alpha(j)/beta(j)
 
-                    WRITE(6,*) 'alpha',j ,alpha(j)
-                    WRITE(6,*) 'beta ', j ,beta(j)
 
                     if (abs(AIMAG(gam(j))).lt.eps) then
 
@@ -332,6 +340,7 @@ CONTAINS
             ENDIF
 
         enddo
+        CLOSE(UNIT)
 !970  format(1x,i4,4e13.4)
 !
 ! Print all the gammas to a file.
