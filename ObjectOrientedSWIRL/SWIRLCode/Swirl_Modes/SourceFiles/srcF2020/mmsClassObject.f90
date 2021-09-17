@@ -295,7 +295,7 @@ CONTAINS
             /CMPLX(numPoints,KIND=rDef))
         object%L2 = L2
 
-        WRITE(6,*) L2
+        ! WRITE(6,*) L2
     END SUBROUTINE L2N_2D
     SUBROUTINE LMax( &
         object , &
@@ -375,7 +375,7 @@ SUBROUTINE getROC_Complex(&
         object%RateOfConvergence = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            WRITE(6,*) L2Array(i)
+            ! WRITE(6,*) L2Array(i)
              object%RateOfConvergence(i) = &
                 (&
                  LOG((object%L2Array(i+1))) -&

@@ -49,55 +49,100 @@ CONTAINS
             enddo
         enddo
 
-        do i = 1,np
-            if (iorder.eq.2) then
-                if (i.eq.1) then
-                    dl1(i,1) = -25.0_rDef
-                    dl1(i,2) =  48.0_rDef
-                    dl1(i,3) = -36.0_rDef
-                    dl1(i,4) =  16.0_rDef
-                    dl1(i,5) =  -3.0_rDef
-                elseif (i.eq.2) then
-                    dl1(i,1) =  -3.0_rDef
-                    dl1(i,2) = -10.0_rDef
-                    dl1(i,3) =  18.0_rDef
-                    dl1(i,4) =  -6.0_rDef
-                    dl1(i,5) =   1.0_rDef
-                elseif (i.eq.np-1) then
-                    dl1(i,np-4) =  -1.0_rDef
-                    dl1(i,np-3) =   6.0_rDef
-                    dl1(i,np-2) = -18.0_rDef
-                    dl1(i,np-1) =  10.0_rDef
-                    dl1(i,np)   =   3.0_rDef
-                elseif (i.eq.np) then
-                    dl1(i,np-4) =   3.0_rDef
-                    dl1(i,np-3) = -16.0_rDef
-                    dl1(i,np-2) =  36.0_rDef
-                    dl1(i,np-1) = -48.0_rDef
-                    dl1(i,np)   =  25.0_rDef
-                else
-                    dl1(i,i-2) =  1.0_rDef
-                    dl1(i,i-1) = -8.0_rDef
-                    dl1(i,i)   =  0.0_rDef
-                    dl1(i,i+1) =  8.0_rDef
-                    dl1(i,i+2) = -1.0_rDef
-                endif
-            else
-                if (i.eq.1) then
-                    dl1(i,1) =  -3.0_rDef
-                    dl1(i,2) =   4.0_rDef
-                    dl1(i,3) =  -1.0_rDef
-                elseif (i.eq.np) then
-                    dl1(i,np-2) =  1.0_rDef
-                    dl1(i,np-1) = -4.0_rDef
-                    dl1(i,np)   =  3.0_rDef
-                else
-                    dl1(i,i-1) = -1.0_rDef
-                    dl1(i,i)   =  0.0_rDef
-                    dl1(i,i+1) =  1.0_rDef
-                endif
-            endif
-        enddo
+        if (iorder.eq.2) then
+            dl1(1,1) = -25.0_rDef
+            dl1(1,2) =  48.0_rDef
+            dl1(1,3) = -36.0_rDef
+            dl1(1,4) =  16.0_rDef
+            dl1(1,5) =  -3.0_rDef
+
+            dl1(2,1) =  -3.0_rDef
+            dl1(2,2) = -10.0_rDef
+            dl1(2,3) =  18.0_rDef
+            dl1(2,4) =  -6.0_rDef
+            dl1(2,5) =   1.0_rDef
+            do i = 3,np-2
+                dl1(i,i-2) =  1.0_rDef
+                dl1(i,i-1) = -8.0_rDef
+                dl1(i,i)   =  0.0_rDef
+                dl1(i,i+1) =  8.0_rDef
+                dl1(i,i+2) = -1.0_rDef
+            enddo
+            dl1(np-1,np-4) =  -1.0_rDef
+            dl1(np-1,np-3) =   6.0_rDef
+            dl1(np-1,np-2) = -18.0_rDef
+            dl1(np-1,np-1) =  10.0_rDef
+            dl1(np-1,np)   =   3.0_rDef
+            dl1(np,np-4) =   3.0_rDef
+            dl1(np,np-3) = -16.0_rDef
+            dl1(np,np-2) =  36.0_rDef
+            dl1(np,np-1) = -48.0_rDef
+            dl1(np,np)   =  25.0_rDef
+        else
+            dl1(1,1) =  -3.0_rDef
+            dl1(1,2) =   4.0_rDef
+            dl1(1,3) =  -1.0_rDef
+            dl1(np,np-2) =  1.0_rDef
+            dl1(np,np-1) = -4.0_rDef
+            dl1(np,np)   =  3.0_rDef
+            do i= 2,np-1
+                dl1(i,i-1) = -1.0_rDef
+                dl1(i,i)   =  0.0_rDef
+                dl1(i,i+1) =  1.0_rDef
+            ENDDO
+        endif
+        ! endif
+        !     dl1(i,i-2) =  1.0_rDef
+        !     dl1(i,i-1) = -8.0_rDef
+        !     dl1(i,i)   =  0.0_rDef
+        !     dl1(i,i+1) =  8.0_rDef
+        !     dl1(i,i+2) = -1.0_rDef
+        ! if (i.eq.1) then
+        !     dl1(i,1) = -25.0_rDef
+        !     dl1(i,2) =  48.0_rDef
+        !     dl1(i,3) = -36.0_rDef
+        !     dl1(i,4) =  16.0_rDef
+        !     dl1(i,5) =  -3.0_rDef
+        ! elseif (i.eq.2) then
+        !     dl1(i,1) =  -3.0_rDef
+        !     dl1(i,2) = -10.0_rDef
+        !     dl1(i,3) =  18.0_rDef
+        !     dl1(i,4) =  -6.0_rDef
+        !     dl1(i,5) =   1.0_rDef
+        ! elseif (i.eq.np-1) then
+        !     dl1(i,np-4) =  -1.0_rDef
+        !     dl1(i,np-3) =   6.0_rDef
+        !     dl1(i,np-2) = -18.0_rDef
+        !     dl1(i,np-1) =  10.0_rDef
+        !     dl1(i,np)   =   3.0_rDef
+        ! elseif (i.eq.np) then
+        !     dl1(i,np-4) =   3.0_rDef
+        !     dl1(i,np-3) = -16.0_rDef
+        !     dl1(i,np-2) =  36.0_rDef
+        !     dl1(i,np-1) = -48.0_rDef
+        !     dl1(i,np)   =  25.0_rDef
+        ! else
+        !     dl1(i,i-2) =  1.0_rDef
+        !     dl1(i,i-1) = -8.0_rDef
+        !     dl1(i,i)   =  0.0_rDef
+        !     dl1(i,i+1) =  8.0_rDef
+        !     dl1(i,i+2) = -1.0_rDef
+        ! endif
+        ! else
+        ! if (i.eq.1) then
+        !     dl1(i,1) =  -3.0_rDef
+        !     dl1(i,2) =   4.0_rDef
+        !     dl1(i,3) =  -1.0_rDef
+        ! elseif (i.eq.np) then
+        !     dl1(i,np-2) =  1.0_rDef
+        !     dl1(i,np-1) = -4.0_rDef
+        !     dl1(i,np)   =  3.0_rDef
+        ! else
+        !     dl1(i,i-1) = -1.0_rDef
+        !     dl1(i,i)   =  0.0_rDef
+        !     dl1(i,i+1) =  1.0_rDef
+        ! endif
+        ! endif
 
         ! open(unit=15,file='deriv.matrix',status='unknown')
         ! rewind 15

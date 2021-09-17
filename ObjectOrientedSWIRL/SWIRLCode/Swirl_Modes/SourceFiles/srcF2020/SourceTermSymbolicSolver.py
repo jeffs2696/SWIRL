@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[253]:
+# In[1]:
 
 
 # Importing libraries
@@ -41,24 +41,56 @@ M_t, M_x         = symbols('M_t M_x')
 dp_dr, dv_r_dr   = symbols('dp_dr dv_r_dr')
 dM_x_dr, dM_t_dr = symbols('dM_x_dr dM_t_dr')
 
+#locations of inflection Points for tanh?
+#r_loc    = symbols('r_loc', cls=IndexedBase)
 
-# In[254]:
+r2 , r3  = symbols('r2 r3')
+j = symbols('j')
 
 
-lamm = one - k[1]*sp.tanh(k[2]*(one-r_max))
+# In[2]:
 
-A_analytic        = lamm + k[1]*sp.tanh(k[2]*(r-r_max))
+
+RightKink = k[1]*sp.tanh(k[2]*(r - r_max)) + k[1]*sp.tanh(k[2]*(r - r2)) + k[1]*sp.tanh(k[2]*(r - r3))
+
+LeftKink = k[1]*sp.tanh(k[2]*(r_max - r_max)) + k[1]*sp.tanh(k[2]*(r2    - r_max)) + k[1]*sp.tanh(k[2]*(r3    - r_max))
+
+#RightKink = Sum(sp.tanh(r - Indexed('r_loc',j)),(j,0,2))
+#LeftKink = Sum(sp.tanh(Indexed('r_loc',j) - r_max),(j,0,2))
+
+A_analytic =  one +LeftKink + RightKink 
+#lamm = one + \
+#k[1]*sp.tanh(k[2]*(r_max - one)) + \
+#k[1]*sp.tanh(k[2]*(r2 - one)) + \
+#k[1]*sp.tanh(k[2]*(r3 - one))
+
+#A_analytic        = lamm + \
+#k[1]*sp.tanh(k[2]*(r-r_max)) + \
+#k[1]*sp.tanh(k[2]*(r-r2)) +  \
+#k[1]*sp.tanh(k[2]*(r-r3))
 
 dA_analytic_dr    = diff(A_analytic,r)
 dA_analytic_sq_dr = diff(A_analytic**two,r)
 #pprint(simplify(dA_analytic_dr))
 
-M_t_analytic = simplify(sp.sqrt(                        r/((kappa-one)*A_analytic**two) *                        (dA_analytic_sq_dr)))
+M_t_analytic = (sp.sqrt(                        r/((kappa-one)*A_analytic**two) *                        (dA_analytic_sq_dr)))
 
 #print(latex(simplify(M_t_analytic)))
 
 
-# In[255]:
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[3]:
 
 
 # Using the expression for the tangential Mach number, M_t above ...
@@ -72,7 +104,7 @@ f_M_t = re.sub(r"\*\*2","**2.0_rDef",f_M_t)
 #print(f_M_t)
 
 
-# In[256]:
+# In[4]:
 
 
 f_A   = "        SoundSpeedExpected(i) = " + f_A +"\n"
@@ -96,13 +128,14 @@ S_list.append(f_M_t)
 S_list = ''.join(S_list)
 
 
-# In[257]:
-
+# In[5]:
 
 
 f_code_header1 = ''' 
     SUBROUTINE CalcSoundSpeed(& 
     r                 , &
+    r2                , &
+    r3                , &
     r_max             , &
     k, kappa          , &
     SoundSpeedExpected, &
@@ -110,20 +143,23 @@ f_code_header1 = '''
     )
     
     REAL(KIND=rDef)   , INTENT(IN) :: &
-    r_max,kappa
+    r2   , &
+    r3   , &
+    r_max, &
+    kappa
     
     REAL(KIND=rDef)   , DIMENSION(:), INTENT(INOUT) :: &
     SoundSpeedExpected, thetaMachData
     
     REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: &
-    r
+    r!, r_loc
     
     COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
     k
      
     ! Local variables 
     INTEGER :: &
-    numberOfGridPoints, i
+    numberOfGridPoints, i!, j
     
     REAL(KIND = rDef) :: one,two,three
     
@@ -160,26 +196,26 @@ with open('SoundSpeedMMS.f90','w') as f:
 #        print(line)
 
 
-# In[258]:
+# In[6]:
 
 
-S_1 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_r + (two/r)*M_t*v_t - dp_dr - ((kappa - one)/(two*r))*M_t**two*p
+S_1 = -i*(ak/A - (m/r)*M_t - gamma*M_x)*v_r  -(two/r)*M_t*v_t - dp_dr - ((kappa - one)/r)*(M_t**two)*p
 
-S_2 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_t + (M_t/r - dM_t_dr - ((kappa - one)/(two*r))*M_t**three)*v_r + i*m*p/r
+S_2 = -i*(ak/A - (m/r)*M_t - gamma*M_x)*v_t + (M_t/r + dM_t_dr + ((kappa - one)/(two*r))*M_t**three)*v_r + i*m*p/r
 
-S_3 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*v_x + (dM_x_dr - ((kappa - one)/(two*r))*M_x*M_t**two)*v_r + i*gamma*p
+S_3 = -i*(ak/A - (m/r)*M_t - gamma*M_x)*v_x + (dM_x_dr + ((kappa - one)/(two*r))*M_x*M_t**two)*v_r + i*gamma*p
 
-S_4 = i*(-ak/A + (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa - one)/(two*r))*M_t**two + one/r)*v_r + i*m*v_t/r + i*gamma*v_x
+S_4 = -i*(ak/A - (m/r)*M_t - gamma*M_x)*p   + dv_r_dr + (((kappa + one)/(two*r))*M_t**two + one/r)*v_r + i*m*v_t/r + i*gamma*v_x
 
 # Lets look at the source terms
 #pprint('The linearized (unsteady) Euler Equations used in SWIRL:')
 #pprint(('S_1=',S_1))
 #pprint(('S_2=',S_2))
 #pprint(('S_3=',S_3))
-#pprint(('S_4=',S_4))
+#pprint(('S_4=',S_4))+
 
 
-# In[259]:
+# In[7]:
 
 
 S_1 = (S_1.subs({A:A_analytic, M_t:M_t_analytic}))
@@ -188,14 +224,14 @@ S_3 = (S_3.subs({A:A_analytic, M_t:M_t_analytic}))
 S_4 = (S_4.subs({A:A_analytic, M_t:M_t_analytic}))
 
 
-# In[260]:
+# In[8]:
 
 
-M_x_analytical = sp.cos(k[2]*(r - r_max))
-v_r_analytical = sp.cos(k[3]*(r - r_max))
-v_t_analytical = sp.cos(k[4]*(r - r_max))
-v_x_analytical = sp.cos(k[5]*(r - r_max))
-p_analytical   = sp.cos(k[6]*(r - r_max))
+M_x_analytical = k[3]*sp.cos(k[3]*(r - r_max))
+v_r_analytical = sp.cos(k[4]*(r - r_max))
+v_t_analytical = sp.cos(k[5]*(r - r_max))
+v_x_analytical = sp.cos(k[6]*(r - r_max))
+p_analytical   = sp.cos(k[7]*(r - r_max))
 
 S_1 = (S_1.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
 
@@ -206,7 +242,7 @@ S_3 = (S_3.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,       
 S_4 = (S_4.subs({M_x:M_x_analytical,                  v_r:v_r_analytical,                  v_t:v_t_analytical,                  v_x:v_x_analytical,                  p:p_analytical,                 }))
 
 
-# In[261]:
+# In[9]:
 
 
 dp_dr_analytical   = p_analytical.diff(r)
@@ -215,16 +251,16 @@ dM_x_dr_analytical = M_x_analytical.diff(r)
 dM_t_dr_analytical = M_t_analytic.diff(r)
 
 
-S_1 = (S_1.subs({                 dp_dr:dp_dr_analytical,                 dv_r_dr:dv_r_dr_analytical,                 dM_x_dr:dM_x_dr_analytical,                 dM_t_dr:dM_t_dr_analytical,                }))
+S_1 = (S_1.subs({                  dp_dr:dp_dr_analytical,                  dv_r_dr:dv_r_dr_analytical,                  dM_x_dr:dM_x_dr_analytical,                  dM_t_dr:dM_t_dr_analytical,                 }))
 
-S_2 = (S_2.subs({                 dp_dr:dp_dr_analytical,                 dv_r_dr:dv_r_dr_analytical,                 dM_x_dr:dM_x_dr_analytical,                 dM_t_dr:dM_t_dr_analytical,                })) 
+S_2 = (S_2.subs({                  dp_dr:dp_dr_analytical,                  dv_r_dr:dv_r_dr_analytical,                  dM_x_dr:dM_x_dr_analytical,                  dM_t_dr:dM_t_dr_analytical,                 })) 
 
-S_3 = (S_3.subs({                 dp_dr:dp_dr_analytical,                 dv_r_dr:dv_r_dr_analytical,                 dM_x_dr:dM_x_dr_analytical,                 dM_t_dr:dM_t_dr_analytical,                }))
+S_3 = (S_3.subs({                  dp_dr:dp_dr_analytical,                  dv_r_dr:dv_r_dr_analytical,                  dM_x_dr:dM_x_dr_analytical,                  dM_t_dr:dM_t_dr_analytical,                 }))
 
-S_4 = (S_4.subs({                 dp_dr:dp_dr_analytical,                 dv_r_dr:dv_r_dr_analytical,                 dM_x_dr:dM_x_dr_analytical,                 dM_t_dr:dM_t_dr_analytical,                }))
+S_4 = (S_4.subs({                  dp_dr:dp_dr_analytical,                  dv_r_dr:dv_r_dr_analytical,                  dM_x_dr:dM_x_dr_analytical,                  dM_t_dr:dM_t_dr_analytical,                 }))
 
 
-# In[262]:
+# In[10]:
 
 
 fS_1 = fcode(S_1,source_format='free',standard=95)
@@ -253,7 +289,7 @@ fS_3 = re.sub(r"r_max","r_maxC ",fS_3)
 fS_4 = re.sub(r"r_max","r_maxC ",fS_4)
 
 
-# In[263]:
+# In[11]:
 
 
 S_list = []
@@ -269,7 +305,7 @@ f_code_header2 = '''
 ! ak  - reduced frequency
 ! kappa - ratio of specific heats
 ! i - imaginary number
-
+ 
     SUBROUTINE SourceCalc(& 
     gam  , &
     i    , &
@@ -278,6 +314,8 @@ f_code_header2 = '''
     kappa, &
     m    , & 
     r    , &
+    r2   , &
+    r3   , &
     r_max, &
     S_1  , &
     S_2  , &
@@ -285,23 +323,26 @@ f_code_header2 = '''
     S_4)
     
     INTEGER, INTENT(IN) :: m
-    REAL(KIND=rDef)   , INTENT(IN) :: kappa,r,r_max 
+    REAL(KIND=rDef)   , INTENT(IN) :: kappa,r,r2,r3,r_max
+    !REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: r_loc
     COMPLEX(KIND=rDef), INTENT(IN) :: i, gam, ak           
     COMPLEX(KIND=rDef), INTENT(INOUT) :: S_1, S_2, S_3, S_4
     COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: k
     
     ! Local variables
-    COMPLEX(KIND=rDef) :: mC, kappaC, rC, r_maxC
+    COMPLEX(KIND=rDef) :: mC, kappaC, rC, r_maxC, r2C, r3C
     
     COMPLEX(KIND=rDef) :: one,two,three
-    
+
     one = CMPLX(1.0,KIND=rDef)    
     two = CMPLX(2.0,KIND=rDef)    
     three = CMPLX(3.0,KIND=rDef)
-    
+
     mC = CMPLX(m,KIND=rDef)
     kappaC = CMPLX(kappa,KIND=rDef)
     rC = CMPLX(r,KIND=rDef)
+    r2C = CMPLX(r2,KIND=rDef)
+    r3C = CMPLX(r3,KIND=rDef)
     r_maxC = CMPLX(r_max,KIND=rDef)
 '''
 
@@ -323,4 +364,10 @@ with open('SourceTermMMS.f90','w') as f:
     f.write(f_code_header2)
     f.write(S_list)
     f.write(f_code_footer2)
+
+
+# In[ ]:
+
+
+
 

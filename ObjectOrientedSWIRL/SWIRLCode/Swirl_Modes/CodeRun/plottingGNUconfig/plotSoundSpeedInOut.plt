@@ -9,10 +9,11 @@ set key left
 set samples 100
 # set yrange [-5.0e-11:5.0e-11]
 set grid
-plot for [i=7:7] \
+plot for [i=4:7] \
     "../MeanFlowData/MeanFlowData".(1+2**i).".dat" using 1:5 with linespoints pointinterval 10 linecolor rgb "#2A84A5" title  "".(1+2**i)." Grid Points" , \
-    "../MeanFlowData/MeanFlowData".(1+2**5).".dat" using 1:5 with linespoints pointinterval 10 linecolor rgb "#D8B655" title  "".(1+2**5)." Grid Points" , \
-    "../MeanFlowData/MeanFlowData".(1+2**1).".dat" using 1:5 with linespoints pointtype 7 linecolor rgb "#CA472F" title  "".(1+2**1)." Grid Points" 
+    "../MeanFlowData/MeanFlowData".(1+2**7).".dat" using 1:4 with linespoints pointtype 7 pointinterval 5 linecolor rgb "#DA474F" title  "Expected" 
+    # "../MeanFlowData/MeanFlowData".(1+2**5).".dat" using 1:5 with linespoints pointinterval 10 linecolor rgb "#D8B655" title  "".(1+2**5)." Grid Points" , \
+    # "../MeanFlowData/MeanFlowData".(1+2**1).".dat" using 1:5 with linespoints pointtype 7 linecolor rgb "#CA472F" title  "".(1+2**1)." Grid Points" , \
     # 'MeanFlowData'.(1+2**i).'.dat' using 1:4 with linespoints linecolor rgb "#008080" title  "A_{in}" 
 # plot \
 #     "FlowDataInput.dat" using 1:3 with linespoints linecolor rgb "#006580" title  "M_{{/Symbol q},in}" ,\

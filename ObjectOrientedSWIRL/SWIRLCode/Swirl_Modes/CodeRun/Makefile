@@ -1,4 +1,4 @@
-OUTPUT_FILES = *.dat gam.acc
+OUTPUT_FILES = *.dat MeanFlowData/*.dat
 EXE = swirlF2020
 SHELL_EXT = sh
 PLOT_GNUPLOT_DIR = plottingGNUconfig
@@ -10,7 +10,7 @@ PLOT_NAMES = plotMachDistribution 	\
 			 plotROC 				\
 			 plotROC_Source 		\
 			 plotSoundSpeed         \
-			 plotSourceTermError    \
+			 plotSourceTermData     \
 			 plotSoundSpeedError
 
 
@@ -24,7 +24,7 @@ NUMBERS =
 run SWIRL:
 	./$(EXE)
 clean:
-	rm $(OUTPUT_FILES)
+	(rm $(OUTPUT_FILES); rm *.log);
 plot: all
 	@cd $(PLOT_SHELL_SCRIPT_DIR); \
 	$(foreach var,$(PLOT_EXE),./$(var);)
