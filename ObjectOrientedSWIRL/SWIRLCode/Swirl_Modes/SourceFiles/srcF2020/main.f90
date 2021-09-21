@@ -118,7 +118,7 @@ PROGRAM MAIN
     ! inputs needed for SwirlClassType
     azimuthalModeNumber       = 1
     hubToTipRatio             = r_min/r_max
-    frequency                 =  CMPLX(20.0, 0, rDef)
+    frequency                 =  CMPLX(10.0, 0, rDef)
     hubAdmittance             =  CMPLX(0,0,rDef)!CMPLX(0.40, 0 ,rDef)
     ductAdmittance            =  CMPLX(0,0,rDef)!CMPLX(0.70,0,rDef)
     finiteDiffFlag            =  1
