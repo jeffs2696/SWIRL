@@ -8,3 +8,6 @@ make
 
 The executable, 'swirlF2008', is put in the CodeRun subdirectory,
 and reads from the file 'input.data'
+
+JS:
+Corresponding pdfs are in the Documentation folder

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  17 SEP 2021 13:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  21 SEP 2021 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -436,11 +436,11 @@ xmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] (./plotReport.aux) )
 Here is how much of TeX's memory you used:
  12525 strings out of 481239
  266611 string characters out of 5920378
- 1178527 words of memory out of 5000000
+ 1185013 words of memory out of 5000000
  27567 multiletter control sequences out of 15000+600000
  532636 words of font info for 25 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,10n,65p,413b,1166s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,10n,65p,413b,1160s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive
@@ -449,7 +449,7 @@ dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy7.pfb>
-Output written on plotReport.pdf (4 pages, 190691 bytes).
+Output written on plotReport.pdf (4 pages, 173958 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  34 compressed objects within 1 object stream

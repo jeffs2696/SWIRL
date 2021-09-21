@@ -272,7 +272,7 @@ main.o: main.f90        \
 	     L2NormModule.o         \
 		 mmsClassObject.o \
 	     swirlClassObject.o 
-	$(F90) $(F90FLAGS) main.f90
+	@$(F90) $(F90FLAGS) main.f90
 
          # analysisModule.o \
 # akima433.o: akima433.f
@@ -288,25 +288,25 @@ main.o: main.f90        \
 # 	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) analysisModule.f90
 
 boundaryModule.o:  boundaryModule.f90
-	$(F90) $(F90FLAGS) boundaryModule.f90
+	@$(F90) $(F90FLAGS) boundaryModule.f90
 
 derivsModule.o:  derivsModule.f90
-	$(F90) $(F90FLAGS) derivsModule.f90
+	@$(F90) $(F90FLAGS) derivsModule.f90
 
 globalModule.o:  globalModule.f90
-	$(F90) $(F90FLAGS) globalModule.f90
+	@$(F90) $(F90FLAGS) globalModule.f90
 
 gridModule.o:  gridModule.f90
-	$(F90) $(F90FLAGS) gridModule.f90
+	@$(F90) $(F90FLAGS) gridModule.f90
 
 fdgridModule.o:  fdgridModule.f90
-	$(F90) $(F90FLAGS) fdgridModule.f90
+	@$(F90) $(F90FLAGS) fdgridModule.f90
 
 fdrivsModule.o:  fdrivsModule.f90
-	$(F90) $(F90FLAGS) fdrivsModule.f90
+	@$(F90) $(F90FLAGS) fdrivsModule.f90
 
 indexxModule.o:  indexxModule.f90
-	$(F90) $(F90FLAGS) indexxModule.f90
+	@$(F90) $(F90FLAGS) indexxModule.f90
 
 # interpModule.o:  interpModule.f90 \
 #          derivsModule.o   \
@@ -323,32 +323,32 @@ indexxModule.o:  indexxModule.f90
 # 	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) kapsubModule.f90
 
 machoutModule.o:  machoutModule.f90
-	$(F90) $(F90FLAGS) machoutModule.f90
+	@$(F90) $(F90FLAGS) machoutModule.f90
 
 rmachModule.o:  rmachModule.f90 
-	$(F90) $(F90FLAGS) rmachModule.f90
+	@$(F90) $(F90FLAGS) rmachModule.f90
 
 smachModule.o:  smachModule.f90 
-	$(F90) $(F90FLAGS) smachModule.f90
+	@$(F90) $(F90FLAGS) smachModule.f90
 
 smachAndSndspdModule.o:  smachAndSndspdModule.f90 
-	$(F90) $(F90FLAGS) smachAndSndspdModule.f90
+	@$(F90) $(F90FLAGS) smachAndSndspdModule.f90
 
 sndspdModule.o:  sndspdModule.f90
-	$(F90) $(F90FLAGS) sndspdModule.f90
+	@$(F90) $(F90FLAGS) sndspdModule.f90
 
 SourceTermModule.o:  SourceTermModule.f90
-	$(F90) $(F90FLAGS) SourceTermModule.f90
+	@$(F90) $(F90FLAGS) SourceTermModule.f90
 
 mmsClassObject.o: mmsClassObject.f90
-	$(F90) $(F90FLAGS) mmsClassObject.f90
+	@$(F90) $(F90FLAGS) mmsClassObject.f90
 
 L2NormModule.o: L2NormModule.f90
-	$(F90) $(F90FLAGS) L2NormModule.f90 
+	@$(F90) $(F90FLAGS) L2NormModule.f90 
 
 FindResidualVectorModule.o: FindResidualVectorModule.f90\
 							L2NormModule.o
-	$(F90) $(F90FLAGS) FindResidualVectorModule.f90
+	@$(F90) $(F90FLAGS) FindResidualVectorModule.f90
 
 swirlClassObject.o: swirlClassObject.f90
 	@$(F90) $(F90FLAGS) swirlClassObject.f90

@@ -27,12 +27,12 @@ PROGRAM MAIN
     COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         k                                            , &
         S_eig                                        , &
-        S_MMS                                        , &
+        S_actual                                        , &
         S_1                                          , &
         S_2                                          , &
         S_3                                          , &
         S_4                                          , &
-        S_array                                      , &
+        S_Expected                                      , &
         S_error                                      , &
         S_L2Array                                    , &
         eigenVector                                  , &
@@ -132,7 +132,7 @@ PROGRAM MAIN
     ci  = CMPLX(0.0, 1.0, rDef)  !imaginary number
 
     ! constants for MMS module
-    boundingConstant = 1.0_rDef
+    boundingConstant = 1.00_rDef
     eigenIndex = 1
 
     ALLOCATE(&
@@ -142,13 +142,14 @@ PROGRAM MAIN
         RateOfConvergence1(numberOfIterations - 1) , &
         RateOfConvergence2(numberOfIterations - 1) )
 
+    ! used for the following terms:
     k(1) = CMPLX(0.0040, 0.0, rDef)
     k(2) = CMPLX(10.0, 0.0, rDef)
-    k(3) = CMPLX(0.501, .0, rDef)
-    k(4) = CMPLX(0.1, 0.0, rDef)
-    k(5) = CMPLX(0.2, 0.0, rDef)
-    k(6) = CMPLX(0.5, 0.0, rDef)
-    k(7) = CMPLX(0.10, 0.0, rDef)
+    k(3) = CMPLX(0.30, 0.0, rDef)  ! M_x 
+    k(4) = CMPLX(0.0, 0.0, rDef)   !v_r  
+    k(5) = CMPLX(0.0, 0.0, rDef)   !v_th
+    k(6) = CMPLX(1.0, 0.0, rDef)   !v_X
+    k(7) = CMPLX(0.10000, 0.0, rDef)   !p
 
     facCount = 0 ! initializer for fac count
 
@@ -186,8 +187,8 @@ PROGRAM MAIN
             SoundSpeed_dr_Out(numberOfGridPoints)    , & 
             SoundSpeedExpected(numberOfGridPoints)   , &
             SoundSpeedError(numberOfGridPoints)      , &
-            S_MMS(numberOfGridPoints*4)              , &
-            S_array(numberOfGridPoints*4)            , &
+            S_actual(numberOfGridPoints*4)              , &
+            S_Expected(numberOfGridPoints*4)            , &
             S_1(numberOfGridPoints)                  , &
             S_2(numberOfGridPoints)                  , &
             S_3(numberOfGridPoints)                  , &
@@ -246,10 +247,20 @@ PROGRAM MAIN
             ELSE
             ENDIF
 
-            vR = COS(REAL(k(4),KIND = rDef)*(r(i)-r_max))
-            vT = COS(REAL(k(5),KIND = rDef)*(r(i)-r_max))
-            vX = COS(REAL(k(6),KIND = rDef)*(r(i)-r_max))
-            Pr = COS(REAL(k(7),KIND = rDef)*(r(i)-r_max))
+            CALL getPerturbationVariables(&
+                k    = k    , &
+               r     = r    , &
+               r_max = r_max, &
+               vR    = vR   , &
+               vTh   = vT  , &
+               vX    = vX   , &
+               Pr    = Pr      )
+
+           ! insert 
+            ! vR = 0.0_rDef!COS(REAL(k(4),KIND = rDef)*(r(i)-r_max))
+            ! vT = 0.0_rDef!COS(REAL(k(5),KIND = rDef)*(r(i)-r_max))
+            ! vX = 0.0_rDef!COS(REAL(k(6),KIND = rDef)*(r(i)-r_max))
+            ! Pr = 0.0_rDef!COS(REAL(k(7),KIND = rDef)*(r(i)-r_max))
 
         ENDDO
 
@@ -348,18 +359,19 @@ PROGRAM MAIN
 
         ENDDO
 
-        eigenValueMMS = CMPLX(0.0_rDef,00.00_rDef,KIND=rDef)
+        eigenValueMMS = CMPLX(0.40_rDef,0.00_rDef,KIND=rDef)
 
+        ! from swirlClassObj
         CALL FindResidualData(&
             object      = swirlClassObj(fac),&
             eigenVector = eigenVectorMMS       ,&
-            eigenValue  = eigenValueMMS        ,&
-            S           = S_MMS )
+            eigenValue  = -ci*eigenValueMMS        ,&
+            S           = S_actual )
 
         DO i = 1,numberOfGridPoints
 
             CALL getMMSSourceTerms( &
-                gam   = eigenValueMMS              ,& !WE NEED TO extract modal data to get the axial wavenumber here
+                gam   = eigenValueMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
                 i     = ci                      ,&
                 ak    = frequency               ,&
                 k     = k                       ,&
@@ -374,20 +386,20 @@ PROGRAM MAIN
                 S_3   = S_3(i)                  ,&
                 S_4   = S_4(i)     )             
 
-            S_array(i)                      = S_1(i)
-            S_array(i+numberOfGridPoints)   = S_2(i)
-            S_array(i+2*numberOfGridPoints) = S_3(i)
-            S_array(i+3*numberOfGridPoints) = S_4(i)
+            S_Expected(i)                      = S_1(i)
+            S_Expected(i+numberOfGridPoints)   = S_2(i)
+            S_Expected(i+2*numberOfGridPoints) = S_3(i)
+            S_Expected(i+3*numberOfGridPoints) = S_4(i)
 
         ENDDO
 
-        S_error = ABS(S_array - S_MMS)
+        S_error = ABS(S_Expected - S_actual)
 
         CALL getL2Norm(&
             object    = SourceTermMMS_ClassObj,&
             L2        = S_L2 ,&
-            dataSet1  = S_MMS,&
-            dataSet2  = S_array)
+            dataSet1  = S_actual,&
+            dataSet2  = S_Expected)
 
         S_L2Array(fac) = S_L2   
 
@@ -409,13 +421,13 @@ PROGRAM MAIN
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' ,'S_MMS' ,'Source Term Error'
+        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' ,'S_actual' ,'Source Term Error'
 
         DO i = 1,numberOfGridPoints
             WRITE(UNIT,*) &
                 i, &
-                REAL(S_array(i),KIND=rDef), &
-                REAL(S_MMS(i),KIND=rDef)  , &
+                REAL(S_Expected(i),KIND=rDef), &
+                REAL(S_actual(i),KIND=rDef)  , &
                 REAL(S_error(i),KIND=rDef)
         END DO
 
@@ -424,13 +436,13 @@ PROGRAM MAIN
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_MMS' ,'Source Term Error'
+        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
 
         DO i = numberOfGridPoints,numberOfGridPoints*2
             WRITE(UNIT,*) &
                 i, &
-                REAL(S_array(i),KIND=rDef), &
-                REAL(S_MMS(i),KIND=rDef)  , &
+                REAL(S_Expected(i),KIND=rDef), &
+                REAL(S_actual(i),KIND=rDef)  , &
                 REAL(S_error(i),KIND=rDef)
         END DO
 
@@ -440,13 +452,13 @@ PROGRAM MAIN
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_MMS' ,'Source Term Error'
+        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
 
         DO i = numberOfGridPoints*2,numberOfGridPoints*3
             WRITE(UNIT,*) &
             i, &
-            REAL(S_array(i),KIND=rDef), &
-            REAL(S_MMS(i),KIND=rDef)  , &
+            REAL(S_Expected(i),KIND=rDef), &
+            REAL(S_actual(i),KIND=rDef)  , &
             REAL(S_error(i),KIND=rDef)
     END DO
 
@@ -456,13 +468,13 @@ PROGRAM MAIN
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_MMS' ,'Source Term Error'
+        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
 
         DO i = numberOfGridPoints*3,numberOfGridPoints*4
             WRITE(UNIT,*) &
                 i, &
-                REAL(S_array(i),KIND=rDef), &
-                REAL(S_MMS(i),KIND=rDef)  , &
+                REAL(S_Expected(i),KIND=rDef), &
+                REAL(S_actual(i),KIND=rDef)  , &
                 REAL(S_error(i),KIND=rDef)
         END DO
 
@@ -482,8 +494,8 @@ PROGRAM MAIN
             SoundSpeed_dr_Out     ,&
             SoundSpeedExpected    ,&
             SoundSpeedError       ,&
-            S_MMS                 ,&
-            S_array                 ,&
+            S_actual                 ,&
+            S_Expected                 ,&
             S_eig                 ,&
             S_error                 ,&
             S_1                      ,&
