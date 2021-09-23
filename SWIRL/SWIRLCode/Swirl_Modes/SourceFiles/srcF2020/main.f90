@@ -8,7 +8,7 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 10 
+        numberOfIterations = 9
 
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
@@ -93,7 +93,8 @@ PROGRAM MAIN
         r3     = 0.200_rDef
 
     CHARACTER(50) :: &
-        file_name
+        file_name, &
+        dir_name
 
     CHARACTER(50):: &
         FORMAT_MEAN_FLOW , &
@@ -149,13 +150,13 @@ PROGRAM MAIN
         RateOfConvergence2(numberOfIterations - 1) )
 
     ! used for the following terms:
-    k(1) = CMPLX(0.0040, 0.0, rDef)
+    k(1) = CMPLX(0.004, 0.0, rDef)
     k(2) = CMPLX(15.0, 0.0, rDef)
-    k(3) = CMPLX(0.30, 0.0, rDef)  ! M_x 
+    k(3) = CMPLX(0.3, 0.0, rDef)  ! M_x 
     k(4) = CMPLX(1.0, 0.0, rDef)   !v_r  
     k(5) = CMPLX(0.0, 0.0, rDef)   !v_th
     k(6) = CMPLX(1.0, 0.0, rDef)   !v_X
-    k(7) = CMPLX(0.000010, 0.0, rDef)   !p
+    k(7) = CMPLX(0.001, 0.0, rDef)   !p
 
     facCount = 0 ! initializer for fac count
 
@@ -173,11 +174,6 @@ PROGRAM MAIN
         ELSE
         ENDIF
 
-        WRITE(file_id, '(i0)') numberOfGridPoints 
-
-        file_name = 'MeanFlowData/MeanFlowData' // TRIM(ADJUSTL(file_id)) // '.dat'
-
-        OPEN( NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
         ALLOCATE(&
             r(numberOfGridPoints)                    , &
@@ -216,6 +212,7 @@ PROGRAM MAIN
 
         DO i = 1, numberOfGridPoints
 
+            ! This is redundant! Include in python script
             axialMachData(i)  =&
                 REAL(k(3), rDef)*&
                 (boundingConstant)*&
@@ -254,19 +251,13 @@ PROGRAM MAIN
             ENDIF
 
             CALL getPerturbationVariables(&
-                k    = k    , &
+                k    = k     , &
                r     = r    , &
                r_max = r_max, &
                vR    = vR   , &
-               vTh   = vT  , &
+                vTh   = vT   , &
                vX    = vX   , &
                Pr    = Pr      )
-
-           ! insert 
-            ! vR = 0.0_rDef!COS(REAL(k(4),KIND = rDef)*(r(i)-r_max))
-            ! vT = 0.0_rDef!COS(REAL(k(5),KIND = rDef)*(r(i)-r_max))
-            ! vX = 0.0_rDef!COS(REAL(k(6),KIND = rDef)*(r(i)-r_max))
-            ! Pr = 0.0_rDef!COS(REAL(k(7),KIND = rDef)*(r(i)-r_max))
 
         ENDDO
 
@@ -296,38 +287,19 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
-        ! Write the resulting mean flow
-        WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) &
-            'radius','M_x','M_theta','A_expected','A_actual'
 
         DO i = 1,numberOfGridPoints
 
             SoundSpeedError(i) = ABS(SoundSpeedOut(i)-SoundSpeedExpected(i))
 
-            WRITE(UNIT,FORMAT_MEAN_FLOW) &
-                rOut(i)                 , &
-                axialMachDataOut(i)     , &
-                thetaMachDataOut(i)     , &
-                SoundSpeedExpected(i)   , &
-                SoundSpeedOut(i)               
-            IF (debug) THEN
-                WRITE(0,FORMAT_MEAN_FLOW) &
-                    rOut(i)                 , &
-                    axialMachDataOut(i)     , &
-                    thetaMachDataOut(i)     , &
-                    SoundSpeedExpected(i)   , &
-                    SoundSpeedOut(i)               
-            ELSE
-            ENDIF
         ENDDO
-
-        CLOSE(UNIT)
 
         ! Get Mode Data passes back the eigen values and modes for a given
         ! index. This is because the eigenValue in the swirlClassObj is 1xnp4 and 
         ! the eigenVector is np4xnp4 long. Each column of the eigenVector 
         ! corresponds to a single eigenVector. The user supplies the index 
         ! that corresponds to n 
+
         ! CALL GetModeData(&
         !     object     = swirlClassObj(fac) , &
         !     eigenValue = eigenValue         , &
@@ -365,7 +337,7 @@ PROGRAM MAIN
 
         ENDDO
 
-        eigenValueMMS = CMPLX(0.40_rDef,0.00_rDef,KIND=rDef)
+        eigenValueMMS = CMPLX(0.70_rDef,0.00_rDef,KIND=rDef)
 
         ! from swirlClassObj
         CALL FindResidualData(&
@@ -411,81 +383,9 @@ PROGRAM MAIN
 
         CALL DestroyObject(object = swirlClassObj(fac))
 
-        file_name = 'SoundSpeedError.dat'
+        ! Export data 
 
-        OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-        WRITE(UNIT,*) 'Grid Points' , 'Speed of Sound Error'
-
-        DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) r(i) , SoundSpeedError(i)
-        END DO
-
-        CLOSE(UNIT);
-
-        file_name = 'SourceTermData1.dat'
-
-        OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' ,'S_actual' ,'Source Term Error'
-
-        DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_Expected(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
-
-        CLOSE(UNIT);
-        file_name = 'SourceTermData2.dat'
-
-        OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
-
-        DO i = numberOfGridPoints,numberOfGridPoints*2
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_Expected(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
-
-        CLOSE(UNIT);
-
-        file_name = 'SourceTermData3.dat'
-
-        OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
-
-        DO i = numberOfGridPoints*2,numberOfGridPoints*3
-            WRITE(UNIT,*) &
-            i, &
-            REAL(S_Expected(i),KIND=rDef), &
-            REAL(S_actual(i),KIND=rDef)  , &
-            REAL(S_error(i),KIND=rDef)
-    END DO
-
-        CLOSE(UNIT);
-
-        file_name = 'SourceTermData4.dat'
-
-        OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
-
-        DO i = numberOfGridPoints*3,numberOfGridPoints*4
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_Expected(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
-
-        CLOSE(UNIT);
-
+        include 'swirl-data-export-per-grid.f90'
         DEALLOCATE(&
             r                     ,&
             rOut                  ,&
@@ -515,109 +415,20 @@ PROGRAM MAIN
             eigenVector           ,&
             eigenVectorMMS)
 
-
-
     END DO
-
-    ! Should I put the data writing in another script? : JS
-    file_name ='L2OfSoundSpeed.dat'
-
-    OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-    WRITE(UNIT,*) 'Grid Points' , 'L2 of Speed of Sound'
-
-    DO i = 1,numberOfIterations
-        WRITE(UNIT,*) 1+2**i , SoundSpeedL2Array(i)
-    END DO
-
-    CLOSE(UNIT);
-
-    IF (debug) THEN
-        WRITE(0,*) 'Grid Points' , 'L2 of Speed of Sound'
-
-        DO i = 1,numberOfIterations
-            WRITE(0,*) 1+2**i , SoundSpeedL2Array(i)
-        END DO
-
-    ENDIF
-
-    file_name ='L2OfSourceTerm.dat'
-
-    OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-    WRITE(UNIT,*) 'Grid Points' , 'L2 of Source Term'
-
-    DO i = 1,numberOfIterations
-        WRITE(UNIT,*) 1+2**i , REAL(S_L2Array(i),KIND=rDef)
-    END DO
-
-    CLOSE(UNIT);
-
-    IF (debug) THEN
-        WRITE(0,*) 'Grid Points' , 'L2 of Source Term'
-
-    DO i = 1,numberOfIterations
-        WRITE(0,*) 1+2**i , REAL(S_L2Array(i),KIND=rDef)
-    END DO
-
-    ELSE
-    END IF
-    file_name = 'RateOfConvergenceForIntegration.dat'
-
-    OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-    WRITE(UNIT,*) 'Rate Of Convergence'
 
     CALL getRateOfConvergence(&
         object            = SoundSpeedMMS_ClassObj , &
         RateOfConvergence = RateOfConvergence1 , &
         L2Array           = SoundSpeedL2Array)
 
-    WRITE(0,FORMAT_ROC_HEADERS) 'Delta r' , 'ROC'
-    DO i = 1,numberOfIterations - 1
-
-        WRITE(UNIT,FORMAT_ROC)  REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), RateOfConvergence1(i) 
-        WRITE(0,FORMAT_ROC)     REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), RateOfConvergence1(i)
-
-    ENDDO
-
-    file_name = 'RateOfConvergenceForSourceTerm.dat'
-
-    OPEN(NEWUNIT=UNIT,FILE=file_name)
-
-    WRITE(UNIT,*) 'Rate Of Convergence'
-    DO i = 1,numberOfIterations
-
-        ! IF (S_L2Array(i) .eq. 0.0_rDef) THEN
-
-
-        !     WRITE(6,*) 'Error: S_L2Array has a zero element at index',i
-        !     STOP
-        !     ELSE
-        ! ENDIF
-    ENDDO
-
     CALL getRateOfConvergence(&
         object            = SourceTermMMS_ClassObj, &
         RateOfConvergence = RateOfConvergence2 , &
         L2Array           = S_L2Array)
 
-    WRITE(0,FORMAT_ROC_HEADERS) 'Delta r' , 'ROC'
-    DO i = 1,numberOfIterations - 1
-
-        WRITE(UNIT,FORMAT_ROC) &
-            REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
-            ABS(REAL(RateOfConvergence2(i),KIND=rDef))
-
-        WRITE(0,FORMAT_ROC) &
-            REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
-            ABS(REAL(RateOfConvergence2(i),KIND=rDef))
-
-    ENDDO
-
-    CLOSE(UNIT)
-
-
+    ! Should I put the data writing in another script? : JS
+    include 'swirl-data-export-MMS.f90'
     DEALLOCATE( &
         SoundSpeedL2Array ,&
         S_L2Array ,&

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  21 SEP 2021 17:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  23 SEP 2021 01:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -424,35 +424,251 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(./MachDistribution.tex
+! Improper \prevdepth.
+\newpage ...everypar {}\fi \par \ifdim \prevdepth 
+                                                  >\z@ \vskip -\ifdim \prevd...
+l.11 ...ebox{0.75}{\include{MachDistribution.tex}}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.11 ...ebox{0.75}{\include{MachDistribution.tex}}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.11 ...ebox{0.75}{\include{MachDistribution.tex}}
+                                                  
+? 
+\openout2 = `MachDistribution.tex.aux'.
+
+No file MachDistribution.tex.tex.
+! Extra }, or forgotten \endgroup.
+\Gscale@box ...scale@y {#2}\setbox \z@ \hbox {{#3}
+                                                  }\setbox \tw@ \hbox {\Gsca...
+l.11 ...ebox{0.75}{\include{MachDistribution.tex}}
+                                                  
+? 
+! Extra }, or forgotten \endgroup.
+\Gscale@box ...cale@y {#2}\setbox \z@ \hbox {{#3}}
+                                                  \setbox \tw@ \hbox {\Gscal...
+l.11 ...ebox{0.75}{\include{MachDistribution.tex}}
+                                                  
+? 
+! Interruption.
+<to be read again> 
+                   \setbox 
+l.11 ...ebox{0.75}{\include{MachDistribution.tex}}
+                                                  
+? q
+OK, entering \batchmode...
+ (./SoundSpeedFromIntegration.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 16.
-) (./SoundSpeedFromIntegration.tex)
-(./SoundSpeedError.tex) (./L2OfSoundSpeed.tex) (./ROC.tex)
-(./SourceTermData.tex) (./L2OfSourceTerm.tex) (./ROC_Source.tex) [1{/var/lib/te
-xmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] (./plotReport.aux) ) 
-Here is how much of TeX's memory you used:
- 12525 strings out of 481239
- 266611 string characters out of 5920378
- 1182415 words of memory out of 5000000
- 27567 multiletter control sequences out of 15000+600000
- 532636 words of font info for 25 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 68i,10n,65p,413b,1202s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmsy7.pfb>
-Output written on plotReport.pdf (4 pages, 190970 bytes).
-PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
+! Interruption.
+<to be read again> 
+                   {
+l.11580329 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.13543942 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.15631157 
+           
+? 
+! Interruption.
+<to be read again> 
+                   \@@par 
+l.17596321 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.18694554 
+           
+? 
+! Interruption.
+l.28037158 
+           
+? 
+! Interruption.
+<to be read again> 
+                   \@@par 
+l.29573979 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.33546134 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.34430204 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.35194875 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.35954632 
+           
+? 
+! Interruption.
+l.38623002 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.38785692 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.38938043 
+           
+? 
+! Interruption.
+l.39092231 
+           
+? 
+! Interruption.
+l.39247852 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.39401974 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.39558075 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.39714446 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.39873324 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.40026808 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.40185941 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.40339950 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.40492921 
+           
+? 
+! Interruption.
+l.40650363 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.40809358 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.40968661 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.41128957 
+           
+? 
+! Interruption.
+l.41286522 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.41444201 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.41599548 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.41757509 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.41917724 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.49876647 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.50676663 
+           
+? 
+! Interruption.
+<to be read again> 
+                   {
+l.674168484

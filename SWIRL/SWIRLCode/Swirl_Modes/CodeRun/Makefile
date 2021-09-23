@@ -1,4 +1,8 @@
-OUTPUT_FILES = *.dat MeanFlowData/*.dat
+OUTPUT_FILES = \
+			   *.dat \
+			   01-mean-flow/*.dat \
+			   02-linearized-perturbation-equations/*.dat \
+			   03-method-of-manufactured-solutions/*.dat
 EXE = swirlF2020
 SHELL_EXT = sh
 PLOT_GNUPLOT_DIR = plottingGNUconfig
@@ -25,12 +29,12 @@ run SWIRL:
 	./$(EXE)
 clean:
 	(rm $(OUTPUT_FILES); rm *.log);
-plot: all
-	@cd $(PLOT_SHELL_SCRIPT_DIR); \
-	$(foreach var,$(PLOT_EXE),./$(var);)
-	@cd plottingScripts; mv *.tex ../plotReport/ ;
-	@cd plotReport; \
-	pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
-	xdg-open plotReport.pdf; 
+# plot: all
+# 	@cd $(PLOT_SHELL_SCRIPT_DIR); \
+# 	$(foreach var,$(PLOT_EXE),./$(var);)
+# 	@cd plottingScripts; mv *.tex ../plotReport/ ;
+# 	@cd plotReport; \
+# 	pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
+# 	xdg-open plotReport.pdf; 
 
 .PHONY: all

@@ -1,0 +1,66 @@
+\subsection{Aerodynamic Model}
+We can rewrite the Euler equations in cylindrical form.
+
+\begin{align*}
+\frac{\partial \rho}{\partial t} + %Conservation of mass
+v_r \frac{\partial \rho}{\partial r} +
+\frac{v_{\theta}   }{r}
+\frac{\partial \rho}{\partial \theta} +
+v_x \frac{\partial \rho}{\partial \theta} + 
+\rho 
+\left(
+\frac{1}{r} \frac{\partial (rv_r)	}{\partial r} +
+\frac{1}{r}	\frac{\partial v_{\theta}}{\partial \theta} +
+\frac{\partial v_x}{\partial x}
+\right) 
+&= 0 \\% \label{ConservationOfMass} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frac{\partial v_r}{\partial t} + 
+v_r \frac{\partial v_r}{\partial r} +
+\frac{v_{\theta}  }{r}
+\frac{\partial v_r}{\partial \theta}- \frac{v_{\theta}^2}{r}+ 
+v_x \frac{\partial v_r}{\partial x} 
+&= -\frac{1}{\rho} \frac{\partial p}{\partial r}\\  
+\frac{\partial v_{\theta}}{\partial t} + 
+v_r \frac{\partial v_{\theta}}{\partial r} +
+\frac{v_{\theta}}{r}
+\frac{\partial v_{\theta}}{\partial \theta} +
+\frac{v_r v_{\theta}}{r}+ 
+v_x \frac{\partial v_{\theta}}{\partial x} 
+&= -\frac{1}{\rho r} \frac{\partial p}{\partial \theta}\\ 
+\frac{\partial v_{x}}{\partial t} + 
+v_r 
+\frac{\partial v_x}{\partial r} +
+\frac{v_{\theta}}{r}
+\frac{\partial v_x}{\partial \theta}+ 
+v_x \frac{\partial v_x}{\partial x} 
+&= 
+-\frac{1}{\rho } 
+\frac{\partial p}{\partial x}\\  
+\frac{\partial p }{\partial t} +
+v_r 
+\frac{\partial p}{\partial r} +
+\frac{v_{\theta}}{r}
+\frac{\partial p}{\partial \theta} +
+v_x \frac{\partial p}{\partial \theta} + 
+\gamma p 
+\left(
+\frac{1}{r}\frac{\partial (rv_r)}{\partial r} +
+\frac{1}{r}\frac{v_{\theta}}{\partial \theta} +
+\frac{\partial v_x}{\partial x}
+\right) &= 0
+\end{align*}
+
+
+\section{Mean Flow Equations}
+
+For steady flow, the continuity, momentum and entropy equations are
+
+\[\nabla (\vec{V} \bar{\rho}) = 0\]
+\[(\vec{V}\cdot \nabla) \vec{V}\]
+\[\nabla S = 0\]
+
+If we neglect radial velocity, the velocity vector in cylindrical coordinates are
+
+\[\vec{V}(r,\theta,x) = V_x(r) \hat{e}_x + V_{\theta} (r) \hat{e}_{\theta} \]
+
+See Appendix for speed of sound derivation
