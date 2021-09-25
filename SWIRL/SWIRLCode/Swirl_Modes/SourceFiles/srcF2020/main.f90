@@ -50,7 +50,7 @@ PROGRAM MAIN
         ductAdmittance     ,&
         ci                 ,&
         S_L2               ,& 
-        eigenValueMMS              
+        axialWavenumberMMS              
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         r                   ,& !radial grid locations
@@ -174,7 +174,6 @@ PROGRAM MAIN
         ELSE
         ENDIF
 
-
         ALLOCATE(&
             r(numberOfGridPoints)                    , &
             rOut(numberOfGridPoints)                 , &
@@ -210,6 +209,7 @@ PROGRAM MAIN
 
         END DO
 
+        ! CALL getAxialMachData
         DO i = 1, numberOfGridPoints
 
             ! This is redundant! Include in python script
@@ -231,6 +231,16 @@ PROGRAM MAIN
             SoundSpeedExpected = SoundSpeedExpected , &
             thetaMachData      = thetaMachData)
 
+        CALL getPerturbationVariables(&
+            k     = k     , &
+            r     = r    , &
+            r_max = r_max, &
+            vR    = vR   , &
+            vTh   = vT   , &
+            vX    = vX   , &
+            Pr    = Pr      )
+
+
         ! Calculating Total Mach Number and checking if it is greater than one anywhere
         DO i = 1, numberOfGridPoints
             totalMachData(i)  =&
@@ -250,15 +260,6 @@ PROGRAM MAIN
             ELSE
             ENDIF
 
-            CALL getPerturbationVariables(&
-                k    = k     , &
-               r     = r    , &
-               r_max = r_max, &
-               vR    = vR   , &
-                vTh   = vT   , &
-               vX    = vX   , &
-               Pr    = Pr      )
-
         ENDDO
 
         !Create a swirlClassObj for a given flow
@@ -274,9 +275,7 @@ PROGRAM MAIN
             etad          = ductAdmittance       ,&
             ifdff         = finiteDiffFlag       )
 
-        ! get Mean Flow Data that was used as input 
-        ! (as a sanity check) and the results from
-        ! SWIRL that required the mean flow.
+        !Get mean flow data from swirlClassObj 
         CALL GetMeanFlowData(&
             object          = swirlClassObj(fac), &
             axialMach       = axialMachDataOut, &
@@ -287,11 +286,8 @@ PROGRAM MAIN
             SoundSpeed_dr   = SoundSpeed_dr_Out, &
             radialData      = rOut)
 
-
         DO i = 1,numberOfGridPoints
-
             SoundSpeedError(i) = ABS(SoundSpeedOut(i)-SoundSpeedExpected(i))
-
         ENDDO
 
         ! Get Mode Data passes back the eigen values and modes for a given
@@ -337,19 +333,19 @@ PROGRAM MAIN
 
         ENDDO
 
-        eigenValueMMS = CMPLX(0.70_rDef,0.00_rDef,KIND=rDef)
+        axialWavenumberMMS = CMPLX(100.0_rDef,0.00_rDef,KIND=rDef)
 
         ! from swirlClassObj
         CALL FindResidualData(&
             object      = swirlClassObj(fac),&
             eigenVector = eigenVectorMMS       ,&
-            eigenValue  = -ci*eigenValueMMS        ,&
+            eigenValue  = -ci*axialWavenumberMMS        ,&
             S           = S_actual )
 
         DO i = 1,numberOfGridPoints
 
             CALL getMMSSourceTerms( &
-                gam   = eigenValueMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
+                gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
                 i     = ci                      ,&
                 ak    = frequency               ,&
                 k     = k                       ,&

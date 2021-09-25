@@ -42,104 +42,104 @@
     r2C = CMPLX(r2,KIND=rDef)
     r3C = CMPLX(r3,KIND=rDef)
     r_maxC = CMPLX(r_max,KIND=rDef)
-    S_1 = -i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh &
-      ((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 &
-      - r_maxC )*k(2))*k(1)) - gam*cos((r - r_maxC )*k(3))*k(3) - m*sqrt( &
-      r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3 &
-      )*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2 &
-      ))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3) &
-      *k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2 &
-      ))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1))))/r)*cos((r - r_maxC )*k(4 &
-      ))*k(4) - sin((r - r_maxC )*k(7))*k(7)/cos((r - r_maxC )*k(7)) - two* &
-      sqrt(r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r &
-      - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC )*k(2))**2)*k(1)* &
-      k(2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - &
-      r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )* &
-      k(2))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1))))*cos((r - r_maxC )*k(5 &
-      ))*k(5)/r + (r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - &
-      tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC )*k(2))** &
-      2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + &
-      tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 &
-      - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1))))**((1.0d0/ &
-      2.0d0)*two)*(kappaC - one)*cos((r - r_maxC )*k(7))*k(7)/r
-    S_2 = i*mC*cos((r - r_maxC )*k(7))*k(7)/r - i*(ak/(one + tanh((r - r2)*k(2))*k(1 &
-      ) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1) + tanh &
-      ((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1)) - gam* &
-      cos((r - r_maxC )*k(3))*k(3) - m*sqrt(r*two*((1 - tanh((r - r2)*k(2 &
-      ))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - &
-      tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh &
-      ((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC  &
-      )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k &
-      (2))*k(1))))/r)*cos((r - r_maxC )*k(5))*k(5) + (sqrt(r*two*((1 - &
-      tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)* &
-      k(1)*k(2) + (1 - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - &
-      one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + &
-      tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh &
-      ((r3 - r_maxC )*k(2))*k(1))))/r + sqrt(r*two*((1 - tanh((r - r2)*k( &
-      2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - &
-      tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh &
-      ((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC  &
-      )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k &
-      (2))*k(1))))*(kappaC - one)*((1.0d0/2.0d0)*r*two*(-(1 - tanh((r - &
-      r2)*k(2))**2)*k(1)*k(2) - (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) &
-      - (1 - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))*((1 - tanh((r - r2)* &
-      k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 &
-      - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + &
-      tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - &
-      r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - &
-      r_maxC )*k(2))*k(1))**2) + (1.0d0/2.0d0)*r*two*(-2*(1 - tanh((r - &
-      r2)*k(2))**2)*tanh((r - r2)*k(2))*k(1)*k(2)**2 - 2*(1 - tanh((r - &
-      r3)*k(2))**2)*tanh((r - r3)*k(2))*k(1)*k(2)**2 - 2*(1 - tanh((r - &
-      r_maxC )*k(2))**2)*tanh((r - r_maxC )*k(2))*k(1)*k(2)**2)/((kappaC - &
-      one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + &
-      tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh &
-      ((r3 - r_maxC )*k(2))*k(1))) + (1.0d0/2.0d0)*two*((1 - tanh((r - r2 &
-      )*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + &
-      (1 - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + &
-      tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - &
-      r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - &
-      r_maxC )*k(2))*k(1))))*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - &
-      r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )* &
-      k(2))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1))/(r*two*((1 - tanh((r - &
-      r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) &
-      + (1 - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))) + (r*two*((1 - tanh &
-      ((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1) &
-      *k(2) + (1 - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one) &
-      *(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + &
-      tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh &
-      ((r3 - r_maxC )*k(2))*k(1))))**((1.0d0/2.0d0)*three)*(kappaC - one)/ &
-      (r*two))*cos((r - r_maxC )*k(4))*k(4)
-    S_3 = gam*i*one*cos((r - r_maxC )*k(7))*k(7) - i*(ak/(one + tanh((r - r2)*k(2 &
-      ))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1) &
-      + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1)) - &
-      gam*cos((r - r_maxC )*k(3))*k(3) - m*sqrt(r*two*((1 - tanh((r - &
-      r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) &
-      + (1 - tanh((r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one &
-      + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - &
-      r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - &
-      r_maxC )*k(2))*k(1))))/r)*cos((r - r_maxC )*k(6))*k(6) + (-sin((r - &
-      r_maxC )*k(3))*k(3)**2 + (r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)* &
-      k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
-      r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
-      (2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1 &
-      ) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1 &
-      ))))**((1.0d0/2.0d0)*two)*(kappaC - one)*cos((r - r_maxC )*k(3))*k(3 &
-      )/(r*two))*cos((r - r_maxC )*k(4))*k(4)
-    S_4 = gam*i*one*cos((r - r_maxC )*k(6))*k(6) + i*mC*cos((r - r_maxC )*k(5))*k(5)/ &
-      r - i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k &
-      (1) + tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) &
-      + tanh((r3 - r_maxC )*k(2))*k(1)) - gam*cos((r - r_maxC )*k(3))*k(3 &
-      ) - m*sqrt(r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - &
-      tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC )*k(2))** &
-      2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + &
-      tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2))*k(1) + tanh((r2 &
-      - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k(2))*k(1))))/r)*cos((r - &
-      r_maxC )*k(7))*k(7) + (one/r + (r*two*((1 - tanh((r - r2)*k(2))**2) &
-      *k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh(( &
-      r - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - &
-      r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC )*k(2 &
-      ))*k(1) + tanh((r2 - r_maxC )*k(2))*k(1) + tanh((r3 - r_maxC )*k(2))* &
-      k(1))))**((1.0d0/2.0d0)*two)*(kappaC + one)/(r*two))*cos((r - &
-      r_maxC )*k(4))*k(4) - sin((r - r_maxC )*k(4))*k(4)**2
+    S_1 = -i*(ak/(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh &
+      ((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C &
+      - r_maxC )*k(2))*k(1)) - gam*cos((rC - r_maxC )*k(3))*k(3) - mC*sqrt( &
+      rC*two*((1 - tanh((rC - r2C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C &
+      )*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2 &
+      ))/((kappaC - one)*(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C) &
+      *k(2))*k(1) + tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2 &
+      ))*k(1) + tanh((r3C - r_maxC )*k(2))*k(1))))/rC)*cos((rC - r_maxC )*k(4 &
+      ))*k(4) - sin((rC - r_maxC )*k(7))*k(7)**2 - two*sqrt(rC*two*((1 - &
+      tanh((rC - r2C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)* &
+      k(1)*k(2) + (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - &
+      one)*(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + &
+      tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh &
+      ((r3C - r_maxC )*k(2))*k(1))))*cos((rC - r_maxC )*k(5))*k(5)/rC + (rC*two &
+      *((1 - tanh((rC - r2C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2 &
+      ))**2)*k(1)*k(2) + (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/(( &
+      kappaC - one)*(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2 &
+      ))*k(1) + tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k &
+      (1) + tanh((r3C - r_maxC )*k(2))*k(1))))**((CMPLX(1.0_rDef,KIND=rDef)/CMPLX(2.0_rDef,KIND=rDef))*two)*(kappaC &
+      - one)*cos((rC - r_maxC )*k(7))*k(7)/rC
+    S_2 = i*mC*cos((rC - r_maxC )*k(7))*k(7)/rC - i*(ak/(one + tanh((rC - r2C)*k(2))*k(1 &
+      ) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - r_maxC )*k(2))*k(1) + tanh &
+      ((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - r_maxC )*k(2))*k(1)) - gam* &
+      cos((rC - r_maxC )*k(3))*k(3) - mC*sqrt(rC*two*((1 - tanh((rC - r2C)*k(2 &
+      ))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) + (1 - &
+      tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh &
+      ((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - r_maxC  &
+      )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - r_maxC )*k &
+      (2))*k(1))))/rC)*cos((rC - r_maxC )*k(5))*k(5) + (sqrt(rC*two*((1 - &
+      tanh((rC - r2C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)* &
+      k(1)*k(2) + (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - &
+      one)*(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + &
+      tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh &
+      ((r3C - r_maxC )*k(2))*k(1))))/rC + sqrt(rC*two*((1 - tanh((rC - r2C)*k( &
+      2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) + (1 - &
+      tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh &
+      ((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - r_maxC  &
+      )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - r_maxC )*k &
+      (2))*k(1))))*(kappaC - one)*((CMPLX(1.0_rDef,KIND=rDef)/CMPLX(2.0_rDef,KIND=rDef))*rC*two*(-(1 - tanh((rC - &
+      r2C)*k(2))**2)*k(1)*k(2) - (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) &
+      - (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))*((1 - tanh((rC - r2C)* &
+      k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) + (1 &
+      - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + &
+      tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - &
+      r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - &
+      r_maxC )*k(2))*k(1))**2) + (CMPLX(1.0_rDef,KIND=rDef)/CMPLX(2.0_rDef,KIND=rDef))*rC*two*(-2*(1 - tanh((rC - &
+      r2C)*k(2))**2)*tanh((rC - r2C)*k(2))*k(1)*k(2)**2 - 2*(1 - tanh((rC - &
+      r3C)*k(2))**2)*tanh((rC - r3C)*k(2))*k(1)*k(2)**2 - 2*(1 - tanh((rC - &
+      r_maxC )*k(2))**2)*tanh((rC - r_maxC )*k(2))*k(1)*k(2)**2)/((kappaC - &
+      one)*(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + &
+      tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh &
+      ((r3C - r_maxC )*k(2))*k(1))) + (CMPLX(1.0_rDef,KIND=rDef)/CMPLX(2.0_rDef,KIND=rDef))*two*((1 - tanh((rC - r2C &
+      )*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) + &
+      (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + &
+      tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - &
+      r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - &
+      r_maxC )*k(2))*k(1))))*(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - &
+      r3C)*k(2))*k(1) + tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )* &
+      k(2))*k(1) + tanh((r3C - r_maxC )*k(2))*k(1))/(rC*two*((1 - tanh((rC - &
+      r2C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) &
+      + (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))) + (rC*two*((1 - tanh &
+      ((rC - r2C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1) &
+      *k(2) + (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one) &
+      *(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + &
+      tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh &
+      ((r3C - r_maxC )*k(2))*k(1))))**((CMPLX(1.0_rDef,KIND=rDef)/CMPLX(2.0_rDef,KIND=rDef))*three)*(kappaC - one)/ &
+      (rC*two))*cos((rC - r_maxC )*k(4))*k(4)
+    S_3 = gam*i*one*cos((rC - r_maxC )*k(7))*k(7) - i*(ak/(one + tanh((rC - r2C)*k(2 &
+      ))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - r_maxC )*k(2))*k(1) &
+      + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - r_maxC )*k(2))*k(1)) - &
+      gam*cos((rC - r_maxC )*k(3))*k(3) - mC*sqrt(rC*two*((1 - tanh((rC - &
+      r2C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) &
+      + (1 - tanh((rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one &
+      + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - &
+      r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - &
+      r_maxC )*k(2))*k(1))))/rC)*cos((rC - r_maxC )*k(6))*k(6) + (-sin((rC - &
+      r_maxC )*k(3))*k(3)**2 + (rC*two*((1 - tanh((rC - r2C)*k(2))**2)*k(1)* &
+      k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - &
+      r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((rC - r2C)*k &
+      (2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - r_maxC )*k(2))*k(1 &
+      ) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - r_maxC )*k(2))*k(1 &
+      ))))**((CMPLX(1.0_rDef,KIND=rDef)/CMPLX(2.0_rDef,KIND=rDef))*two)*(kappaC - one)*cos((rC - r_maxC )*k(3))*k(3 &
+      )/(rC*two))*cos((rC - r_maxC )*k(4))*k(4)
+    S_4 = gam*i*one*cos((rC - r_maxC )*k(6))*k(6) + i*mC*cos((rC - r_maxC )*k(5))*k(5)/ &
+      rC - i*(ak/(one + tanh((rC - r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k &
+      (1) + tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) &
+      + tanh((r3C - r_maxC )*k(2))*k(1)) - gam*cos((rC - r_maxC )*k(3))*k(3 &
+      ) - mC*sqrt(rC*two*((1 - tanh((rC - r2C)*k(2))**2)*k(1)*k(2) + (1 - &
+      tanh((rC - r3C)*k(2))**2)*k(1)*k(2) + (1 - tanh((rC - r_maxC )*k(2))** &
+      2)*k(1)*k(2))/((kappaC - one)*(one + tanh((rC - r2C)*k(2))*k(1) + &
+      tanh((rC - r3C)*k(2))*k(1) + tanh((rC - r_maxC )*k(2))*k(1) + tanh((r2C &
+      - r_maxC )*k(2))*k(1) + tanh((r3C - r_maxC )*k(2))*k(1))))/rC)*cos((rC - &
+      r_maxC )*k(7))*k(7) + (one/rC + (rC*two*((1 - tanh((rC - r2C)*k(2))**2) &
+      *k(1)*k(2) + (1 - tanh((rC - r3C)*k(2))**2)*k(1)*k(2) + (1 - tanh(( &
+      rC - r_maxC )*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((rC - &
+      r2C)*k(2))*k(1) + tanh((rC - r3C)*k(2))*k(1) + tanh((rC - r_maxC )*k(2 &
+      ))*k(1) + tanh((r2C - r_maxC )*k(2))*k(1) + tanh((r3C - r_maxC )*k(2))* &
+      k(1))))**((CMPLX(1.0_rDef,KIND=rDef)/CMPLX(2.0_rDef,KIND=rDef))*two)*(kappaC + one)/(rC*two))*cos((rC - &
+      r_maxC )*k(4))*k(4) - sin((rC - r_maxC )*k(4))*k(4)**2
 
     END SUBROUTINE SourceCalc

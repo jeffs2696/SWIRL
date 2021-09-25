@@ -543,29 +543,18 @@ MODULE swirlClassObject
             S
 
         ! Local variables 
-        INTEGER :: np , i
+        INTEGER :: np 
 
         COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4) :: &
             S_A, &
             S_B
 
-
-        COMPLEX(KIND = rDef), DIMENSION(1,object%numberOfRadialPoints*4) :: &
-            eigenVectorT
-
         np = object%numberOfRadialPoints
-
-        DO i = 1,np*4
-            eigenVectorT(1,i) = eigenVector(i)
-        ENDDO
-
 
         S_A =  MATMUL(object%aa_before,eigenVector)
         S_B =  MATMUL(object%bb_before,eigenVector)
-        ! S_A =  MATMUL(eigenVector,object%aa_before)
-        ! S_B =  MATMUL(eigenVector,object%bb_before)
 
-            S = S_A - eigenValue*S_B
+        S = S_A - eigenValue*S_B
 
 
     END SUBROUTINE GetResidualVector
