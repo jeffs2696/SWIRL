@@ -1,4 +1,7 @@
  
+! Returns M_theta and the corresponding sound speed as defined in
+! SourceTermSymbolicSolver.ipynb
+
     SUBROUTINE CalcSoundSpeed(& 
     r                 , &
     r2                , &
