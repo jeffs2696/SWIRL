@@ -29,12 +29,12 @@ run SWIRL:
 	./$(EXE)
 clean:
 	(rm $(OUTPUT_FILES); rm *.log);
-# plot: all
+plot: all
+	@cd plotReport; \
+ 	pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
+ 	xdg-open plotReport.pdf; 
+
+.PHONY: all
 # 	@cd $(PLOT_SHELL_SCRIPT_DIR); \
 # 	$(foreach var,$(PLOT_EXE),./$(var);)
 # 	@cd plottingScripts; mv *.tex ../plotReport/ ;
-# 	@cd plotReport; \
-# 	pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
-# 	xdg-open plotReport.pdf; 
-
-.PHONY: all

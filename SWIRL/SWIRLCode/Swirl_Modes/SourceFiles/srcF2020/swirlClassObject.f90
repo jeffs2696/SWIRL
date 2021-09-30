@@ -97,7 +97,7 @@ MODULE swirlClassObject
             ductLinerAdmittance 
 
         COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
-            aa, bb
+            aa, bb,S_aa,S_bb
 
         !These are needed before trivial elements are removed
         COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
@@ -218,8 +218,10 @@ MODULE swirlClassObject
                     object%vph(np4),     &
                     object%wvn(np4),     &
                     object%aa(np4,np4),  &
+                    object%S_aa(np4,np4),  &
                     object%aa_before(np4,np4),  &
                     object%bb(np4,np4),  &
+                    object%S_bb(np4,np4),  &
                     object%bb_before(np4,np4),  &
                     object%vl(np4,np4),  &
                     object%vr(np4,np4))
@@ -355,7 +357,9 @@ MODULE swirlClassObject
                 rt   = object%rmt, &
                 dt   = object%drt, &
                 aa   = object%aa,  &
-                bb   = object%bb)
+                bb   = object%bb,  &
+                S_aa   = object%S_aa,  &
+                S_bb   = object%S_bb)
 
             IF (debug) THEN
                 WRITE(PrintToggle,*) 'Leaving globalM CALL'
@@ -588,8 +592,10 @@ MODULE swirlClassObject
             object%vph,   &
             object%wvn,   &
             object%aa,    &
+            object%S_aa,    &
             object%aa_before,    &
             object%bb,    &
+            object%S_bb,    &
             object%bb_before,    &
             object%vl,    &
             object%vr,    &

@@ -1,18 +1,17 @@
 dir_name = '03-method-of-manufactured-solutions/'
-! file_name = TRIM(dir_name) // 'sound-speed-L2.dat'
 
 OPEN(&
     NEWUNIT=UNIT,&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
-    'sound-speed-L2-'      // &
+    'L2-sound_speed-'      // &
     TRIM(ADJUSTL(file_id))   // &
     '.dat')
 
-WRITE(UNIT,*) 'Grid Points' , 'L2 of Speed of Sound'
+WRITE(UNIT,FORMAT_L2_HEADER) 'GridPoints ' , 'L2'
 
 DO i = 1,numberOfIterations
-    WRITE(UNIT,*) 1+2**i , SoundSpeedL2Array(i)
+    WRITE(UNIT,FORMAT_L2) 1+2**i , SoundSpeedL2Array(i)
 END DO
 
 CLOSE(UNIT);
@@ -23,10 +22,10 @@ OPEN(&
     NEWUNIT=UNIT,&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
-    'sound-speed-ROC'      // &
+    'ROC-sound_speed'      // &
     '.dat')
 
-WRITE(0,FORMAT_ROC_HEADERS) 'Delta r' , 'ROC'
+WRITE(UNIT,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
 
 DO i = 1,numberOfIterations - 1
     WRITE(UNIT,FORMAT_ROC)  REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
@@ -41,67 +40,64 @@ OPEN(&
     NEWUNIT=UNIT,&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
-    'LEE-source-term-L2'      // &
+    'L2-LEE'      // &
     '.dat')
 
-WRITE(UNIT,*) 'Grid Points' , 'L2 of Source Term'
+WRITE(UNIT,FORMAT_L2_HEADER) 'GridPoints ' , 'L2'
 
 DO i = 1,numberOfIterations
-    WRITE(UNIT,*) 1+2**i , REAL(S_L2Array(i),KIND=rDef)
+    WRITE(UNIT,FORMAT_L2) 1+2**i , REAL(S_L2Array(i),KIND=rDef)
 END DO
 
 CLOSE(UNIT);
 
-! file_name = TRIM(dir_name) // 'LPE-source-term-ROC.dat'
 
 OPEN(&
     NEWUNIT=UNIT,&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
-    'LEE-source-term-ROC'      // &
+    'ROC-LEE'      // &
     '.dat')
 
-! OPEN(NEWUNIT=UNIT,FILE=(file_name))
-
-WRITE(UNIT,FORMAT_ROC_HEADERS) 'Delta r' , 'ROC'
+WRITE(UNIT,FORMAT_ROC_HEADER) 'Delta_r ' , 'ROC'
 
 DO i = 1,numberOfIterations - 1
 
-     WRITE(UNIT,FORMAT_ROC) &
-         REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
-         ABS(REAL(RateOfConvergence2(i),KIND=rDef))
+    WRITE(UNIT,FORMAT_ROC) &
+        REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
+        ABS(REAL(RateOfConvergence2(i),KIND=rDef))
 
 ENDDO
 
 CLOSE(UNIT)
 
 ! ! IF (debug) THEN
-     WRITE(0,*) 'Grid Points' , 'L2 of Speed of Sound'
+WRITE(0,*) 'Gridpoints ' , 'L2-SoundSpeed'
 
-     DO i = 1,numberOfIterations
-         WRITE(0,*) 1+2**i , SoundSpeedL2Array(i)
-     END DO
+DO i = 1,numberOfIterations
+    WRITE(0,*) 1+2**i , SoundSpeedL2Array(i)
+END DO
 
-     WRITE(0,*) 'Grid Points' , 'L2 of Source Term'
+WRITE(0,*) 'Gridpoints ' , 'L2-Source '
 
-     DO i = 1,numberOfIterations
-         WRITE(0,*) 1+2**i , REAL(S_L2Array(i),KIND=rDef)
-     END DO
+DO i = 1,numberOfIterations
+    WRITE(0,*) 1+2**i , REAL(S_L2Array(i),KIND=rDef)
+END DO
 
-     WRITE(0,FORMAT_ROC_HEADERS) 'Delta r' , 'ROC'
-     DO i = 1,numberOfIterations - 1
-         WRITE(0,FORMAT_ROC) &
-             REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
-             RateOfConvergence1(i)
-     ENDDO
+WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
+DO i = 1,numberOfIterations - 1
+    WRITE(0,FORMAT_ROC) &
+        REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
+        RateOfConvergence1(i)
+ENDDO
 
-     WRITE(0,FORMAT_ROC_HEADERS) 'Delta r' , 'ROC'
+WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
 
-     DO i = 1,numberOfIterations - 1
-         WRITE(0,FORMAT_ROC) &
-             REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
-             RateOfConvergence2(i)
-     ENDDO
+DO i = 1,numberOfIterations - 1
+    WRITE(0,FORMAT_ROC) &
+        REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
+        RateOfConvergence2(i)
+ENDDO
 ! ! ELSE
 ! ! END IF
 

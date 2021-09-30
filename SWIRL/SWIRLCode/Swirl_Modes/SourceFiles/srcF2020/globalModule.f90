@@ -13,10 +13,10 @@ MODULE globalModule
 CONTAINS
 
     subroutine globalM1(np,np4,sig,mode,om,snd,dd, &
-        rr,rx,dr,rt,dt,aa,bb)
+        rr,rx,dr,rt,dt,aa,bb,S_aa,S_bb)
 
         INTEGER, INTENT(IN) :: &
-            np,  &
+           np,  &
             np4, &
             mode
 
@@ -36,8 +36,11 @@ CONTAINS
         COMPLEX(KIND=rDef), INTENT(IN) :: &
             om
 
-        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(OUT) :: aa, &
-            bb
+        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(OUT) ::&
+            aa, &
+            bb, &
+            S_aa,&
+            S_bb
 
 ! define local variables
 
@@ -45,6 +48,8 @@ CONTAINS
             gm = 1.4_rDef
 
         INTEGER :: &
+            row, &
+            col, &
             j,  &
             j1, &
             j2, &
@@ -69,14 +74,16 @@ CONTAINS
 
                 aa(k,j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
                 bb(k,j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
+                S_aa(k,j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
+                S_bb(k,j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
 
             enddo
         enddo
-!
+
         ci = CMPLX(0.0_rDef,1.0_rDef,rDef)
-!
+
 ! Global matrices.
-!
+
 ! np x np matrix, with 4x4 blocks in each entry
 !
 ! In this one, the matrix is (4*np)x(4*np).
@@ -223,6 +230,8 @@ CONTAINS
                             CMPLX(rt(j),KIND=rDef)*&
                             CMPLX(dt(j),KIND=rDef)    !    + (gam+1)*M_th*dMth/dr
                     endif
+
+
                     bb(k,j)   = CMPLX(rx(j),KIND=rDef)                          ! (1,1): v_r eqn, v_r entry: M_x
                     bb(k1,j1) = CMPLX(rx(j),KIND=rDef)                          ! (2,2): v_th eqn, v_th entry: M_x
                     bb(k2,j2) = CMPLX(rx(j),KIND=rDef)                          ! (3,3): v_x eqn, v_x entry: M_x
@@ -233,6 +242,44 @@ CONTAINS
             enddo
         enddo
 !
+
+        row = 1
+        col = 1
+
+        do k=1,np        ! k  == v_r
+            k1 =   np + k   ! k1 == v_{\theta}
+            k2 = 2*np + k   ! k2 == v_x
+            k3 = 3*np + k   ! k3 == p
+
+            r   = rr(k)
+
+
+            do j=1,np       ! j  == v_r
+                j1 =   np + j  ! j1 == v_{\theta}
+                j2 = 2*np + j  ! j2 == v_x
+                j3 = 3*np + j  ! j3 == p
+
+
+
+                if (row .eq. 1 .AND. col .eq.1) then
+                    S_aa(k,j)   = aa(k,j)   
+                elseif (row .eq. 2 .AND. col .eq.  2) then
+                    S_aa(k1,j1) = aa(k1,j1) 
+                else 
+                endif
+                ! S_aa(k2,j2) = aa(k2,j2) 
+                ! S_aa(k3,j3) = aa(k3,j3) 
+
+                ! S_bb(k,j)   = bb(k,j)   
+                ! S_bb(k1,j1) = bb(k1,j1) 
+                ! S_bb(k2,j2) = bb(k2,j2) 
+                ! S_bb(k3,j3) = bb(k3,j3) 
+            enddo
+        enddo 
+
+        WRITE(0,*) S_aa(k,j)
+
+!cc = with aa element that i want and Zeros else where
         return
         IF (sig > 0.0_rDef) CONTINUE ! sig is not actually used in this routine
     end

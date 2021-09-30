@@ -8,8 +8,7 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 9
-
+        numberOfIterations = 2
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
         swirlClassObj
@@ -23,7 +22,10 @@ PROGRAM MAIN
         finiteDiffFlag      ,& ! finite difference flag
         azimuthalModeNumber ,& ! mode order
         numberOfGridPoints  ,& ! number of points
-        i                   ,& ! indexer for do loops
+        i ,&!j               ,& ! indexer for do loops
+        i1,&!j1            ,& ! indexer for do loops
+        i2,&!j2            ,& ! indexer for do loops
+        i3,&!j3            ,& ! indexer for do loops
         fac                 ,& ! variable used for doubling grid points
         eigenIndex          ,&
         facCount               ! counts the outermost do loop
@@ -38,6 +40,38 @@ PROGRAM MAIN
         S_2                                          , &
         S_3                                          , &
         S_4                                          , &
+        S_A11                                        , &   
+        S_A12                                        , &   
+        S_A13                                        , &   
+        S_A14                                        , &   
+        S_A21                                        , &   
+        S_A22                                        , &   
+        S_A23                                        , &   
+        S_A24                                        , &   
+        S_A31                                        , &   
+        S_A32                                        , &   
+        S_A33                                        , &   
+        S_A34                                        , &   
+        S_A41                                        , &   
+        S_A42                                        , &   
+        S_A43                                        , &   
+        S_A44                                        , &   
+        S_B11                                        , &   
+        S_B12                                        , &   
+        S_B13                                        , &   
+        S_B14                                        , &   
+        S_B21                                        , &   
+        S_B22                                        , &   
+        S_B23                                        , &   
+        S_B24                                        , &   
+        S_B31                                        , &   
+        S_B32                                        , &   
+        S_B33                                        , &   
+        S_B34                                        , &   
+        S_B41                                        , &   
+        S_B42                                        , &   
+        S_B43                                        , &   
+        S_B44                                        , &   
         S_Expected                                   , &
         S_error                                      , &
         S_L2Array                                    , &
@@ -51,6 +85,13 @@ PROGRAM MAIN
         ci                 ,&
         S_L2               ,& 
         axialWavenumberMMS              
+
+    ! COMPLEX(KIND = rDef),DIMENSION(:,:), ALLOCATABLE :: &
+    !     S_A_expected , &
+    !     S_B_expected , &
+    !     S_A_actual   , &
+    !     S_B_actual  
+
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         r                   ,& !radial grid locations
@@ -93,15 +134,21 @@ PROGRAM MAIN
         r3     = 0.200_rDef
 
     CHARACTER(50) :: &
-        file_name, &
         dir_name
 
     CHARACTER(50):: &
-        FORMAT_MEAN_FLOW , &
-        FORMAT_MEAN_FLOW_HEADERS , &
-        FORMAT_L2        , &
-        FORMAT_ROC       , &     
-        FORMAT_ROC_HEADERS       
+        FORMAT_MEAN_FLOW         , &
+        FORMAT_PERTURB_VARS      , &
+        FORMAT_PERTURB_HEADER    , &
+        FORMAT_MEAN_FLOW_HEADER  , &
+        FORMAT_SOURCE_TERMS      , &
+        FORMAT_SOURCE_TERMS_HEADER , &
+        FORMAT_L2                , &
+        FORMAT_L2_HEADER         , &
+        FORMAT_ERROR             , &
+        FORMAT_ERROR_HEADER      , &
+        FORMAT_ROC               , &     
+        FORMAT_ROC_HEADER       
 
     CHARACTER(10):: file_id
 
@@ -116,11 +163,18 @@ PROGRAM MAIN
     ELSE
     ENDIF
 
-    FORMAT_MEAN_FLOW = "(F15.12,F15.12,F15.12,F15.12,F15.12)" 
-    FORMAT_MEAN_FLOW_HEADERS = "(A15,A15,A15,A15,A15)" 
-    FORMAT_L2 = "(F12.5,F12.5,F12.5,F12.5,F12.5)" 
-    FORMAT_ROC = "(F12.5,F12.5)" 
-    FORMAT_ROC_HEADERS = "(A12,A12)" 
+    FORMAT_MEAN_FLOW           = "(F15.12,F15.12,F15.12,F15.12,F15.12)" 
+    FORMAT_MEAN_FLOW_HEADER    = "(A15,A15,A15,A15,A15)" 
+    FORMAT_PERTURB_VARS        = "(F16.12,F16.12,F16.12,F16.12,F16.12)"
+    FORMAT_PERTURB_HEADER      = "(A12,A12,A12,A12,A12)"
+    FORMAT_SOURCE_TERMS        = "( I4, F16.12, F16.12,F16.12)" 
+    FORMAT_SOURCE_TERMS_HEADER = "( A5, A17, A17,A17)" 
+    FORMAT_L2                  = "(I4,F16.12)" 
+    FORMAT_L2_HEADER           = "(A5,A13)" 
+    FORMAT_ERROR               = "(F16.12,F16.12)" 
+    FORMAT_ERROR_HEADER        = "(A17,A17)" 
+    FORMAT_ROC                 = "(F16.12,F16.12)" 
+    FORMAT_ROC_HEADER          = "(A17,A15)" 
 
     ! inputs needed for SwirlClassType
     azimuthalModeNumber       = 1
@@ -152,11 +206,11 @@ PROGRAM MAIN
     ! used for the following terms:
     k(1) = CMPLX(0.004, 0.0, rDef)
     k(2) = CMPLX(15.0, 0.0, rDef)
-    k(3) = CMPLX(0.3, 0.0, rDef)  ! M_x 
+    k(3) = CMPLX(0.4, 0.0, rDef)  ! M_x 
     k(4) = CMPLX(1.0, 0.0, rDef)   !v_r  
-    k(5) = CMPLX(0.0, 0.0, rDef)   !v_th
-    k(6) = CMPLX(1.0, 0.0, rDef)   !v_X
-    k(7) = CMPLX(0.001, 0.0, rDef)   !p
+    k(5) = CMPLX(0.100, 0.0, rDef)   !v_th
+    k(6) = CMPLX(0.0, 0.0, rDef)   !v_X
+    k(7) = CMPLX(1.00, 0.0, rDef)   !p
 
     facCount = 0 ! initializer for fac count
 
@@ -194,6 +248,38 @@ PROGRAM MAIN
             S_2(numberOfGridPoints)                  , &
             S_3(numberOfGridPoints)                  , &
             S_4(numberOfGridPoints)                  , &
+            S_A11(numberOfGridPoints)                                        , &   
+            S_A12(numberOfGridPoints)                                        , &   
+            S_A13(numberOfGridPoints)                                        , &   
+            S_A14(numberOfGridPoints)                                        , &   
+            S_A21(numberOfGridPoints)                                        , &   
+            S_A22(numberOfGridPoints)                                        , &   
+            S_A23(numberOfGridPoints)                                        , &   
+            S_A24(numberOfGridPoints)                                        , &   
+            S_A31(numberOfGridPoints)                                        , &   
+            S_A32(numberOfGridPoints)                                        , &   
+            S_A33(numberOfGridPoints)                                        , &   
+            S_A34(numberOfGridPoints)                                        , &   
+            S_A41(numberOfGridPoints)                                        , &   
+            S_A42(numberOfGridPoints)                                        , &   
+            S_A43(numberOfGridPoints)                                        , &   
+            S_A44(numberOfGridPoints)                                        , &   
+            S_B11(numberOfGridPoints)                                        , &   
+            S_B12(numberOfGridPoints)                                        , &   
+            S_B13(numberOfGridPoints)                                        , &   
+            S_B14(numberOfGridPoints)                                        , &   
+            S_B21(numberOfGridPoints)                                        , &   
+            S_B22(numberOfGridPoints)                                        , &   
+            S_B23(numberOfGridPoints)                                        , &   
+            S_B24(numberOfGridPoints)                                        , &   
+            S_B31(numberOfGridPoints)                                        , &   
+            S_B32(numberOfGridPoints)                                        , &   
+            S_B33(numberOfGridPoints)                                        , &   
+            S_B34(numberOfGridPoints)                                        , &   
+            S_B41(numberOfGridPoints)                                        , &   
+            S_B42(numberOfGridPoints)                                        , &   
+            S_B43(numberOfGridPoints)                                        , &   
+            S_B44(numberOfGridPoints)                                        , &   
             S_eig(numberOfGridPoints*4)              , &
             S_error(numberOfGridPoints*4)              , &
             vR(numberOfGridPoints)                  ,&
@@ -335,16 +421,35 @@ PROGRAM MAIN
 
         axialWavenumberMMS = CMPLX(100.0_rDef,0.00_rDef,KIND=rDef)
 
+        ! * Comparing Source Terms *
+
         ! from swirlClassObj
         CALL FindResidualData(&
             object      = swirlClassObj(fac),&
             eigenVector = eigenVectorMMS       ,&
             eigenValue  = -ci*axialWavenumberMMS        ,&
             S           = S_actual )
+        ! 
 
         DO i = 1,numberOfGridPoints
 
-            CALL getMMSSourceTerms( &
+            ! CALL getMMSSourceTerms( &
+            !     gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
+            !     i     = ci                      ,&
+            !     ak    = frequency               ,&
+            !     k     = k                       ,&
+            !     kappa = gam                     ,&
+            !     m     = azimuthalModeNumber     ,&
+            !     r     = r(i)                    ,&
+            !     r2    = r2                      ,&
+            !     r3    = r3                      ,&
+            !     r_max = r_max                   ,&
+            !     S_1   = S_1(i)                  ,&
+            !     S_2   = S_2(i)                  ,&
+            !     S_3   = S_3(i)                  ,&
+            !     S_4   = S_4(i)     )             
+
+            CALL getMMSSourceTermComponents( &
                 gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
                 i     = ci                      ,&
                 ak    = frequency               ,&
@@ -358,12 +463,49 @@ PROGRAM MAIN
                 S_1   = S_1(i)                  ,&
                 S_2   = S_2(i)                  ,&
                 S_3   = S_3(i)                  ,&
-                S_4   = S_4(i)     )             
+                S_4   = S_4(i)                  ,&
+                S_A11 = S_A11(i)                ,&
+                S_A12 = S_A12(i)                ,&
+                S_A13 = S_A13(i)                ,&
+                S_A14 = S_A14(i)                ,&
+                S_A21 = S_A21(i)                ,&
+                S_A22 = S_A22(i)                ,&
+                S_A23 = S_A23(i)                ,&
+                S_A24 = S_A24(i)                ,&
+                S_A31 = S_A31(i)                ,&
+                S_A32 = S_A32(i)                ,&
+                S_A33 = S_A33(i)                ,&
+                S_A34 = S_A34(i)                ,&
+                S_A41 = S_A41(i)                ,&
+                S_A42 = S_A42(i)                ,&
+                S_A43 = S_A43(i)                ,&
+                S_A44 = S_A44(i)                ,&
+                S_B11 = S_B11(i)                ,&
+                S_B12 = S_B12(i)                ,&
+                S_B13 = S_B13(i)                ,&
+                S_B14 = S_B14(i)                ,&
+                S_B21 = S_B21(i)                ,&
+                S_B22 = S_B22(i)                ,&
+                S_B23 = S_B23(i)                ,&
+                S_B24 = S_B24(i)                ,&
+                S_B31 = S_B31(i)                ,&
+                S_B32 = S_B32(i)                ,&
+                S_B33 = S_B33(i)                ,&
+                S_B34 = S_B34(i)                ,&
+                S_B41 = S_B41(i)                ,&
+                S_B42 = S_B42(i)                ,&
+                S_B43 = S_B43(i)                ,&
+                S_B44 = S_B44(i)                )                                      
 
-            S_Expected(i)                      = S_1(i)
-            S_Expected(i+numberOfGridPoints)   = S_2(i)
-            S_Expected(i+2*numberOfGridPoints) = S_3(i)
-            S_Expected(i+3*numberOfGridPoints) = S_4(i)
+            i1 = i + numberOfGridPoints
+            i2 = i + 2*numberOfGridPoints
+            i3 = i + 3*numberOfGridPoints
+
+            S_Expected(i)  = S_1(i)
+            S_Expected(i1) = S_2(i)
+            S_Expected(i2) = S_3(i)
+            S_Expected(i3) = S_4(i)
+
 
         ENDDO
 
@@ -404,6 +546,38 @@ PROGRAM MAIN
             S_2                      ,&
             S_3                      ,&
             S_4                      ,&
+        S_A11                                        , &   
+        S_A12                                        , &   
+        S_A13                                        , &   
+        S_A14                                        , &   
+        S_A21                                        , &   
+        S_A22                                        , &   
+        S_A23                                        , &   
+        S_A24                                        , &   
+        S_A31                                        , &   
+        S_A32                                        , &   
+        S_A33                                        , &   
+        S_A34                                        , &   
+        S_A41                                        , &   
+        S_A42                                        , &   
+        S_A43                                        , &   
+        S_A44                                        , &   
+        S_B11                                        , &   
+        S_B12                                        , &   
+        S_B13                                        , &   
+        S_B14                                        , &   
+        S_B21                                        , &   
+        S_B22                                        , &   
+        S_B23                                        , &   
+        S_B24                                        , &   
+        S_B31                                        , &   
+        S_B32                                        , &   
+        S_B33                                        , &   
+        S_B34                                        , &   
+        S_B41                                        , &   
+        S_B42                                        , &   
+        S_B43                                        , &   
+        S_B44                                        , &   
             vR                    ,&
             vT                    ,&
             vX                    ,&
@@ -412,6 +586,8 @@ PROGRAM MAIN
             eigenVectorMMS)
 
     END DO
+    !Construct spars A and B to check each term
+
 
     CALL getRateOfConvergence(&
         object            = SoundSpeedMMS_ClassObj , &
@@ -425,6 +601,7 @@ PROGRAM MAIN
 
     ! Should I put the data writing in another script? : JS
     include 'swirl-data-export-MMS.f90'
+
     DEALLOCATE( &
         SoundSpeedL2Array ,&
         S_L2Array ,&

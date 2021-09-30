@@ -21,10 +21,10 @@
     
     numberOfGridPoints = SIZE(vR)
       DO i = 1, numberOfGridPoints
-vR(i) =cos((r(i) - r_max)*k(4))*k(4)
-vTh(i)=cos((r(i) - r_max)*k(5))*k(5)
-vX(i) =cos((r(i) - r_max)*k(6))*k(6)
-Pr(i) =cos((r(i) - r_max)*k(7))*k(7)
+vR(i) =cos((r(i) - r_max)*k(4)) - 1
+vTh(i)=sin((r(i) - r_max)*k(5))
+vX(i) =sin((r(i) - r_max)*k(6))
+Pr(i) =cos((r(i) - r_max)*k(7)) - 1
 
       END DO
     END SUBROUTINE CalcPerturbationVariables

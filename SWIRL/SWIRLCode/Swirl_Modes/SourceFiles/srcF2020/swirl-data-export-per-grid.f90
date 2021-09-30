@@ -1,166 +1,193 @@
 ! used to export data for swirl
 
 ! 01-mean-flow-data
-        WRITE(file_id, '(i0)') numberOfGridPoints
+WRITE(file_id, '(i0)') numberOfGridPoints
 
-        dir_name = '01-mean-flow/'
-        file_name = TRIM(dir_name) // 'mean-flow-' // TRIM(ADJUSTL(file_id)) // '.dat'
+dir_name  = '01-mean-flow/'
 
-         OPEN(&
-             NEWUNIT=UNIT,&
-             FILE   =&
-             TRIM(ADJUSTL(dir_name))  // &
-             'mean-flow' // &
-             TRIM(ADJUSTL(file_id))   // &
-             '.dat')
+OPEN(&
+    NEWUNIT=UNIT,&
+    FILE   =&
+    TRIM(ADJUSTL(dir_name))  // &
+    'mean-flow' // &
+    TRIM(ADJUSTL(file_id))   // &
+    '.dat')
 
-        ! Write the resulting mean flow
-        WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) &
-            'radius','M_x','M_theta','A_expected','A_actual'
+ ! Write the resulting mean flow
+WRITE(UNIT,*) &
+    'radius '    , &
+    'M_x '       , &
+    'M_theta '   , &
+    'A_expected ', &
+    'A_actual '  , &
+    'vR '        , &
+    'vTh '       , &
+    'vX '        , &
+    'Pr '        , &
+    'S_1_e '     , &
+    'S_2_e '     , &
+    'S_3_e '     , &
+    'S_4_e '     , &
+    'S_1_a '     , &
+    'S_2_a '     , &
+    'S_3_a '     , &
+    'S_4_a '     
 
-        DO i = 1,numberOfGridPoints
+DO i = 1,numberOfGridPoints
 
-            WRITE(UNIT,FORMAT_MEAN_FLOW) &
-                rOut(i)                 , &
-                axialMachDataOut(i)     , &
-                thetaMachDataOut(i)     , &
-                SoundSpeedExpected(i)   , &
-                SoundSpeedOut(i)
+    WRITE(UNIT,*) &
+        rOut(i)                             , &
+        axialMachDataOut(i)                 , &
+        thetaMachDataOut(i)                 , &
+        SoundSpeedExpected(i)               , &
+        SoundSpeedOut(i)                    , &
+        vR(i)                               , &
+        vT(i)                              , &
+        vX(i)                               , &
+        Pr(i)                               , &
+        S_expected(i)                       , &
+        S_expected(i+1*numberOfGridPoints)  , &
+        S_expected(i+2*numberOfGridPoints)  , &
+        S_expected(i+3*numberOfGridPoints)  , &
+        S_actual(i)                       , &
+        S_actual(i+1*numberOfGridPoints)  , &
+        S_actual(i+2*numberOfGridPoints)  , &
+        S_actual(i+3*numberOfGridPoints)  
 
-            IF (debug) THEN
-                WRITE(0,FORMAT_MEAN_FLOW) &
-                    rOut(i)                 , &
-                    axialMachDataOut(i)     , &
-                    thetaMachDataOut(i)     , &
-                    SoundSpeedExpected(i)   , &
-                    SoundSpeedOut(i)
-            ELSE
-            ENDIF
-        ENDDO
+    IF (debug) THEN
+        WRITE(0,FORMAT_MEAN_FLOW) &
+            rOut(i)                 , &
+            axialMachDataOut(i)     , &
+            thetaMachDataOut(i)     , &
+            SoundSpeedExpected(i)   , &
+            SoundSpeedOut(i)
+    ELSE
+    ENDIF
+ENDDO
 
-        CLOSE(UNIT);
+CLOSE(UNIT);
 
-        ! 02-linearized-perturbation-equations
+! LEE
 
-         dir_name = '02-linearized-perturbation-equations/'
+dir_name = '02-linearized-perturbation-equations/'
 
-         OPEN(&
-             NEWUNIT=UNIT,&
-             FILE   =&
-             TRIM(ADJUSTL(dir_name))  // &
-             'perturbation-variables' // &
-             TRIM(ADJUSTL(file_id))   // &
-             '.dat')
+OPEN(&
+    NEWUNIT=UNIT,&
+    FILE   =&
+    TRIM(ADJUSTL(dir_name))  // &
+    'perturbation-variables' // &
+    TRIM(ADJUSTL(file_id))   // &
+    '.dat')
 
-         WRITE(UNIT,*) 'Radius' , 'vR', 'vTh' ,'vX', 'Pr'
+WRITE(UNIT,FORMAT_PERTURB_HEADER) &
+    'Radius ' , 'vR ', 'vTh ' ,'vX ', 'Pr '
 
-         DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) r(i) , vR(i) , vT(i) , vX(i), Pr(i)
-         END DO
+DO i = 1,numberOfGridPoints
+    WRITE(UNIT,FORMAT_PERTURB_VARS) r(i) , vR(i) , vT(i) , vX(i), Pr(i)
+END DO
 
-         CLOSE(UNIT);
+CLOSE(UNIT);
 
-        dir_name = '03-method-of-manufactured-solutions/'
-        ! file_name = TRIM(dir_name) // 'sound-speed-error' // TRIM(ADJUSTL(file_id)) // '.dat'
+! MMS
+dir_name = '03-method-of-manufactured-solutions/'
 
-         OPEN(&
-             NEWUNIT=UNIT,&
-             FILE   =&
-             TRIM(ADJUSTL(dir_name))  // &
-             'sound-speed-error'      // &
-             TRIM(ADJUSTL(file_id))   // &
-             '.dat')
+OPEN(&
+    NEWUNIT=UNIT,&
+    FILE   =&
+    TRIM(ADJUSTL(dir_name))  // &
+    'sound-speed-error'      // &
+    TRIM(ADJUSTL(file_id))   // &
+    '.dat')
 
-        !   OPEN(NEWUNIT=UNIT,FILE=(file_name))
+WRITE(UNIT,FORMAT_ERROR_HEADER) 'GridPoints ' , 'SpeedofSoundError '
 
-        WRITE(UNIT,*) 'Grid Points' , 'Speed of Sound Error'
+DO i = 1,numberOfGridPoints
+    WRITE(UNIT,FORMAT_ERROR) r(i) , SoundSpeedError(i)
+END DO
 
-        DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) r(i) , SoundSpeedError(i)
-        END DO
+CLOSE(UNIT);
 
-        CLOSE(UNIT);
-
-         OPEN(&
-             NEWUNIT=UNIT,&
-             FILE   =&
-             TRIM(ADJUSTL(dir_name))  // &
-             'SourceTermData1_'      // &
-             TRIM(ADJUSTL(file_id))   // &
-             '.dat')
-
-
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' ,'S_actual' ,'Source Term Error'
-
-        DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_Expected(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
-
-        CLOSE(UNIT);
-
-         OPEN(&
-             NEWUNIT=UNIT,&
-             FILE   =&
-             TRIM(ADJUSTL(dir_name))  // &
-             'SourceTermData2_'       // &
-             TRIM(ADJUSTL(file_id))   // &
-             '.dat')
-
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
-
-        DO i = numberOfGridPoints,numberOfGridPoints*2
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_Expected(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
-
-        CLOSE(UNIT);
+OPEN(&
+    NEWUNIT=UNIT,&
+    FILE   =&
+    TRIM(ADJUSTL(dir_name))  // &
+    'SourceTermData1_'      // &
+    TRIM(ADJUSTL(file_id))   // &
+    '.dat')
 
 
+WRITE(UNIT,FORMAT_SOURCE_TERMS_HEADER) &
+    'GridPoints ' , 'S_expected ' ,'S_actual ' ,'Error '
 
-         OPEN(&
-             NEWUNIT=UNIT,&
-             FILE   =&
-             TRIM(ADJUSTL(dir_name))  // &
-             'SourceTermData3_'       // &
-             TRIM(ADJUSTL(file_id))   // &
-             '.dat')
+DO i = 1,numberOfGridPoints
+    WRITE(UNIT,FORMAT_SOURCE_TERMS) &
+        i, &
+        REAL(S_Expected(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
 
-         WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
+CLOSE(UNIT);
 
-         DO i = numberOfGridPoints*2,numberOfGridPoints*3
-             WRITE(UNIT,*) &
-                 i, &
-                 REAL(S_Expected(i),KIND=rDef), &
-                 REAL(S_actual(i),KIND=rDef)  , &
-                 REAL(S_error(i),KIND=rDef)
-         END DO
+OPEN(&
+    NEWUNIT=UNIT,&
+    FILE   =&
+    TRIM(ADJUSTL(dir_name))  // &
+    'SourceTermData2_'       // &
+    TRIM(ADJUSTL(file_id))   // &
+    '.dat')
 
-        CLOSE(UNIT);
+WRITE(UNIT,FORMAT_SOURCE_TERMS_HEADER) 'GridPoints ' , 'S_expected ' ,'S_actual ' ,'Error '
 
-         OPEN(&
-             NEWUNIT=UNIT,&
-             FILE   =&
-             TRIM(ADJUSTL(dir_name))  // &
-             'SourceTermData4_'       // &
-             TRIM(ADJUSTL(file_id))   // &
-             '.dat')
+DO i = numberOfGridPoints,numberOfGridPoints*2
+    WRITE(UNIT,FORMAT_SOURCE_TERMS) &
+        i, &
+        REAL(S_Expected(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
+CLOSE(UNIT);
 
-        DO i = numberOfGridPoints*3,numberOfGridPoints*4
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_Expected(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
 
-        CLOSE(UNIT);
+
+OPEN(&
+    NEWUNIT=UNIT,&
+    FILE   =&
+    TRIM(ADJUSTL(dir_name))  // &
+    'SourceTermData3_'       // &
+    TRIM(ADJUSTL(file_id))   // &
+    '.dat')
+
+WRITE(UNIT,FORMAT_SOURCE_TERMS_HEADER) 'GridPoints ' , 'S_expected ' ,'S_actual ' ,'Error '
+
+DO i = numberOfGridPoints*2,numberOfGridPoints*3
+    WRITE(UNIT,FORMAT_SOURCE_TERMS) &
+        i, &
+        REAL(S_Expected(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
+
+CLOSE(UNIT);
+
+OPEN(&
+    NEWUNIT=UNIT,&
+    FILE   =&
+    TRIM(ADJUSTL(dir_name))  // &
+    'SourceTermData4_'       // &
+    TRIM(ADJUSTL(file_id))   // &
+    '.dat')
+
+WRITE(UNIT,FORMAT_SOURCE_TERMS_HEADER) 'GridPoints ' , 'S_expected ' ,'S_actual ' ,'Error '
+
+DO i = numberOfGridPoints*3,numberOfGridPoints*4
+    WRITE(UNIT,FORMAT_SOURCE_TERMS) &
+        i, &
+        REAL(S_Expected(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
+
+CLOSE(UNIT);
 

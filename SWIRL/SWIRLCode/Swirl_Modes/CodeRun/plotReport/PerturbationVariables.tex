@@ -1,0 +1,127 @@
+% This file was created with tikzplotlib v0.9.12.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0,0.56078431372549,0.835294117647059}
+
+\begin{groupplot}[group style={group size=1 by 4}]
+\nextgroupplot[
+axis background/.style={fill=white!94.1176470588235!black},
+axis line style={white!94.1176470588235!black},
+scaled x ticks=manual:{}{\pgfmathparse{#1}},
+tick align=outside,
+tick pos=left,
+title={Perturbation Variables},
+x grid style={white!79.6078431372549!black},
+xmajorgrids,
+xmin=0.16, xmax=1.04,
+xtick style={color=black},
+xticklabels={},
+y grid style={white!79.6078431372549!black},
+ylabel={Radial},
+ymajorgrids,
+ymin=-0.318457955185476, ymax=0.0151646645326417,
+ytick style={color=black}
+]
+\addplot [ultra thick, color0]
+table {%
+0.2 -0.303293290652835
+0.3 -0.235157812715512
+0.4 -0.174664385090322
+0.5 -0.122417438109627
+0.6 -0.0789390059971149
+0.7 -0.044663510874394
+0.8 -0.0199334221587584
+0.9 -0.00499583472197418
+1 0
+};
+
+\nextgroupplot[
+axis background/.style={fill=white!94.1176470588235!black},
+axis line style={white!94.1176470588235!black},
+scaled x ticks=manual:{}{\pgfmathparse{#1}},
+tick align=outside,
+tick pos=left,
+x grid style={white!79.6078431372549!black},
+xmajorgrids,
+xmin=0.16, xmax=1.04,
+xtick style={color=black},
+xticklabels={},
+y grid style={white!79.6078431372549!black},
+ylabel={Tangential},
+ymajorgrids,
+ymin=-0.0839104299153256, ymax=0.00399573475787265,
+ytick style={color=black}
+]
+\addplot [ultra thick, color0]
+table {%
+0.2 -0.0799146951574529
+0.3 -0.0699428483780595
+0.4 -0.0599640073719054
+0.5 -0.0499791700148053
+0.6 -0.0399893347822038
+0.7 -0.0299955006493293
+0.8 -0.0199986669912967
+0.9 -0.00999983348317081
+1 0
+};
+
+\nextgroupplot[
+axis background/.style={fill=white!94.1176470588235!black},
+axis line style={white!94.1176470588235!black},
+scaled x ticks=manual:{}{\pgfmathparse{#1}},
+tick align=outside,
+tick pos=left,
+x grid style={white!79.6078431372549!black},
+xmajorgrids,
+xmin=0.16, xmax=1.04,
+xtick style={color=black},
+xticklabels={},
+y grid style={white!79.6078431372549!black},
+ylabel={Axial},
+ymajorgrids,
+ymin=-0.055, ymax=0.055,
+ytick style={color=black}
+]
+\addplot [ultra thick, color0]
+table {%
+0.2 -0
+0.3 -0
+0.4 -0
+0.5 -0
+0.6 -0
+0.7 -0
+0.8 -0
+0.9 -0
+1 0
+};
+
+\nextgroupplot[
+axis background/.style={fill=white!94.1176470588235!black},
+axis line style={white!94.1176470588235!black},
+tick align=outside,
+tick pos=left,
+x grid style={white!79.6078431372549!black},
+xmajorgrids,
+xmin=0.16, xmax=1.04,
+xtick style={color=black},
+y grid style={white!79.6078431372549!black},
+ylabel={Pressure},
+ymajorgrids,
+ymin=-0.318457955185476, ymax=0.0151646645326417,
+ytick style={color=black}
+]
+\addplot [ultra thick, color0]
+table {%
+0.2 -0.303293290652835
+0.3 -0.235157812715512
+0.4 -0.174664385090322
+0.5 -0.122417438109627
+0.6 -0.0789390059971149
+0.7 -0.044663510874394
+0.8 -0.0199334221587584
+0.9 -0.00499583472197418
+1 0
+};
+\end{groupplot}
+
+\end{tikzpicture}
