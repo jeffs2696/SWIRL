@@ -223,7 +223,7 @@ all:  $(OBJECTS)
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	# @(./SourceTermSymbolicSolver.py);
 	# @(sed -i -f script.sed SourceTermMMS.f90);
-	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
+	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
 #
 #  clean

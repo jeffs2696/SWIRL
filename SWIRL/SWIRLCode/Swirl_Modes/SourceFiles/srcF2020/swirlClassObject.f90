@@ -359,7 +359,10 @@ MODULE swirlClassObject
                 aa   = object%aa,  &
                 bb   = object%bb,  &
                 S_aa   = object%S_aa,  &
-                S_bb   = object%S_bb)
+                S_bb   = object%S_bb,  &
+                row    = 1 ,&
+                col    = 4)
+
 
             IF (debug) THEN
                 WRITE(PrintToggle,*) 'Leaving globalM CALL'
@@ -389,6 +392,10 @@ MODULE swirlClassObject
             ENDIF
 
             ! this is added to save A and B matricies before they are altered by the analysis CALL
+            WRITE(0,*) 'SIZE of S_aa' ,SIZE(object%S_aa)
+            WRITE(0,*) 'SIZE of aa' ,SIZE(object%aa)
+
+
             object%aa_before = object%aa
             object%bb_before = object%bb
 
@@ -430,28 +437,28 @@ MODULE swirlClassObject
             ! ENDIF
 
 ! CALL output(&
-    !     np     = object%numberOfRadialPoints,    &
-    !     np4    = object%np4,   &
-    !     mode   = object%mm,    &
-    !     rho    = object%hubTipRatio,   &
-    !     omega  = object%ak,    &
-    !     slp    = object%slope, &
-    !     ang    = object%angom, &
-    !     gam    = object%gam,   &
-    !     egv    = object%jobvr, &
-    !     attenh = object%etah,  &
-    !     attend = object%etad,  &
-    !     rmx    = object%rmx,   &
-    !     drm    = object%drm,   &
-    !     rmt    = object%rmt,   &
-    !     drt    = object%drt,   &
-    !     snd    = object%snd,   &
-    !     rr     = object%r,     &
-    !     wvn    = object%wvn,   &
-    !     vrm    = object%vr,    &
-    !     vphi   = object%vph,   &
-    !     is     = object%is,    &
-    !     icomp  = object%icomp)
+            !     np     = object%numberOfRadialPoints,    &
+            !     np4    = object%np4,   &
+            !     mode   = object%mm,    &
+            !     rho    = object%hubTipRatio,   &
+            !     omega  = object%ak,    &
+            !     slp    = object%slope, &
+            !     ang    = object%angom, &
+            !     gam    = object%gam,   &
+            !     egv    = object%jobvr, &
+            !     attenh = object%etah,  &
+            !     attend = object%etad,  &
+            !     rmx    = object%rmx,   &
+            !     drm    = object%drm,   &
+            !     rmt    = object%rmt,   &
+            !     drt    = object%drt,   &
+            !     snd    = object%snd,   &
+            !     rr     = object%r,     &
+            !     wvn    = object%wvn,   &
+            !     vrm    = object%vr,    &
+            !     vphi   = object%vph,   &
+            !     is     = object%is,    &
+            !     icomp  = object%icomp)
 
         ELSE
             WRITE(6,*) 'ERROR: The object is not initialized'
@@ -482,6 +489,7 @@ MODULE swirlClassObject
 
         TYPE(SwirlClassType), INTENT(IN) ::&
             object
+
         REAL(KIND = rDef), DIMENSION(object%numberOfRadialPoints), INTENT(OUT) :: &
             axialMach, &
             thetaMach, &
@@ -532,6 +540,8 @@ MODULE swirlClassObject
         object                  ,&
         eigenVector             ,&
         eigenValue              ,&
+        S_A                     ,&
+        S_B                     ,&
         S)
 
         TYPE(SwirlClassType), INTENT(IN) ::&
@@ -546,17 +556,20 @@ MODULE swirlClassObject
         COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
             S
 
+        COMPLEX(KIND = rDef),  DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT):: &
+            S_A, &
+            S_B
+
         ! Local variables 
         INTEGER :: np 
 
-        COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4) :: &
-            S_A, &
-            S_B
 
         np = object%numberOfRadialPoints
 
         S_A =  MATMUL(object%aa_before,eigenVector)
         S_B =  MATMUL(object%bb_before,eigenVector)
+        ! S_A =  MATMUL(object%S_aa,eigenVector)
+        ! S_B =  MATMUL(object%S_bb,eigenVector)
 
         S = S_A - eigenValue*S_B
 

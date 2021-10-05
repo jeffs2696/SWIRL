@@ -121,15 +121,19 @@ S_A12=-two*sqrt(r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
       2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3 &
       )*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k( &
       2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1))))*sin((r - r_maxC)*k(5))/ &
-      r
+    r
 S_A13=0
-S_A14=(-sin((r - r_maxC)*k(7))*k(7) + (r*two*((1 - tanh((r - r2)*k(2))**2)*k(1) &
-      *k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
-      r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
-      (2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1 &
-      ) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1 &
-      ))))**((1.0d0/2.0d0)*two)*(kappaC - one)/r)*(cos((r - r_maxC)*k(7 &
-      )) - 1)
+if (r.ne.1.0_rDef) then 
+    S_A14=(-sin((r - r_maxC)*k(7))*k(7)/(cos((r - r_maxC)*k(7)) - 1) + (r*two*((1 - &
+        tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)* &
+        k(1)*k(2) + (1 - tanh((r - r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - &
+        one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + &
+        tanh((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh &
+        ((r3 - r_maxC)*k(2))*k(1))))**((1.0d0/2.0d0)*two)*(kappaC - one)/r) &
+        *(cos((r - r_maxC)*k(7)) - 1)
+else
+    S_A14 = 0.0_rDef
+endif
 S_A21=(cos((r - r_maxC)*k(4)) - 1)*(sqrt(r*two*((1 - tanh((r - r2)*k(2))**2)*k( &
       1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
       r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
@@ -195,13 +199,17 @@ S_A33=-i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh &
       ))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))* &
       k(1))))/r)*sin((r - r_maxC)*k(6))
 S_A34=0
-S_A41=(cos((r - r_maxC)*k(4)) - 1)*(one/r - sin((r - r_maxC)*k(4))*k(4) + (r*two &
-      *((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2 &
-      ))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC)*k(2))**2)*k(1)*k(2))/(( &
-      kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2 &
-      ))*k(1) + tanh((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k &
-      (1) + tanh((r3 - r_maxC)*k(2))*k(1))))**((1.0d0/2.0d0)*two)*(kappaC &
-      + one)/(r*two))
+if (r.ne.1.0_rDef) then 
+S_A41=(cos((r - r_maxC)*k(4)) - 1)*(one/r - sin((r - r_maxC)*k(4))*k(4)/(cos((r &
+      - r_maxC)*k(4)) - 1) + (r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k &
+      (2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
+      r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
+      (2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1 &
+      ) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1 &
+      ))))**((1.0d0/2.0d0)*two)*(kappaC + one)/(r*two))
+else
+S_A41 = 0.0_rDef
+endif
 S_A42=i*mC*sin((r - r_maxC)*k(5))/r
 S_A43=0
 S_A44=-i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh &
@@ -231,11 +239,11 @@ S_B44=-gam*i*(cos((r - r_maxC)*k(7)) - 1)*sin((r - r_maxC)*k(3))
 
 
     if (r.eq.1.0_rDef) then
-        S_A14 = 0.0_rDef
-        S_A41 = 0.0_rDef
+        S_A14 = CMPLX(0.0_rDef,KIND=rDef)
+        S_A41 = CMPLX(0.0_rDef,KIND=rDef)
     elseif (r.eq.0.0_rDef) then
-        S_A14 = 0.0_rDef
-        S_A41 = 0.0_rDef
+        S_A14 = CMPLX(0.0_rDef,KIND=rDef)
+        S_A41 = CMPLX(0.0_rDef,KIND=rDef)
     else
     endif
 

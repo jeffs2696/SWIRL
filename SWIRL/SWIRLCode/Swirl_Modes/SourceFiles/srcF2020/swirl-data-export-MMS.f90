@@ -5,7 +5,6 @@ OPEN(&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
     'L2-sound_speed-'      // &
-    TRIM(ADJUSTL(file_id))   // &
     '.dat')
 
 WRITE(UNIT,FORMAT_L2_HEADER) 'GridPoints ' , 'L2'

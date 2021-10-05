@@ -8,152 +8,10 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 2
+        numberOfIterations = 9
 
-    TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
-        swirlClassObj
-
-    TYPE(mmsClassType)  :: &
-        SoundSpeedMMS_ClassObj , &
-        SourceTermMMS_ClassObj
-
-    INTEGER  :: &
-        UNIT                ,& ! for NEWUNIT
-        finiteDiffFlag      ,& ! finite difference flag
-        azimuthalModeNumber ,& ! mode order
-        numberOfGridPoints  ,& ! number of points
-        i ,&!j               ,& ! indexer for do loops
-        i1,&!j1            ,& ! indexer for do loops
-        i2,&!j2            ,& ! indexer for do loops
-        i3,&!j3            ,& ! indexer for do loops
-        fac                 ,& ! variable used for doubling grid points
-        eigenIndex          ,&
-        facCount               ! counts the outermost do loop
-
-    LOGICAL :: debug = .FALSE.!.TRUE.
-
-    COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
-        k                                            , &
-        S_eig                                        , &
-        S_actual                                     , &
-        S_1                                          , &
-        S_2                                          , &
-        S_3                                          , &
-        S_4                                          , &
-        S_A11                                        , &   
-        S_A12                                        , &   
-        S_A13                                        , &   
-        S_A14                                        , &   
-        S_A21                                        , &   
-        S_A22                                        , &   
-        S_A23                                        , &   
-        S_A24                                        , &   
-        S_A31                                        , &   
-        S_A32                                        , &   
-        S_A33                                        , &   
-        S_A34                                        , &   
-        S_A41                                        , &   
-        S_A42                                        , &   
-        S_A43                                        , &   
-        S_A44                                        , &   
-        S_B11                                        , &   
-        S_B12                                        , &   
-        S_B13                                        , &   
-        S_B14                                        , &   
-        S_B21                                        , &   
-        S_B22                                        , &   
-        S_B23                                        , &   
-        S_B24                                        , &   
-        S_B31                                        , &   
-        S_B32                                        , &   
-        S_B33                                        , &   
-        S_B34                                        , &   
-        S_B41                                        , &   
-        S_B42                                        , &   
-        S_B43                                        , &   
-        S_B44                                        , &   
-        S_Expected                                   , &
-        S_error                                      , &
-        S_L2Array                                    , &
-        eigenVector                                  , &
-        eigenVectorMMS
-
-    COMPLEX(KIND = rDef) :: &
-        frequency          ,& !non-dimensional frequency
-        hubAdmittance      ,& !Liner Admittance At the Hub
-        ductAdmittance     ,&
-        ci                 ,&
-        S_L2               ,& 
-        axialWavenumberMMS              
-
-    ! COMPLEX(KIND = rDef),DIMENSION(:,:), ALLOCATABLE :: &
-    !     S_A_expected , &
-    !     S_B_expected , &
-    !     S_A_actual   , &
-    !     S_B_actual  
-
-
-    REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
-        r                   ,& !radial grid locations
-        axialMachData       ,& !M_x
-        thetaMachData       ,& !M_th
-        totalMachData       ,& !M_total = sqrt(M_x^2+M_th^2)
-        SoundSpeedExpected  ,& !Based on Eqn 2.6 in Kousen's paper
-        rOut                ,& !radial grid after it leaves swirlClassObj
-        axialMachDataOut    ,& !M_x         after it leaves swirlClassObj
-        thetaMachDataOut    ,& !M_th        after it leaves swirlClassObj 
-        SoundSpeedOut       ,& !Sound Speed after it leaves swirlClassObj 
-        axialMachData_dr_Out,& !dM_x/dr 
-        thetaMachData_dr_Out,& !dM_th/dr
-        SoundSpeed_dr_Out   ,& !dA/dr
-        SoundSpeedError     ,& !eps_A
-        SoundSpeedL2Array   ,& !array of L2norm (eps_A)
-    ! Perturbation variables
-        vR                  ,& !radial     velocity  
-        vT                  ,& !tangential velocity
-        vX                  ,& !axial velocity
-        Pr                  ,& !pressure
-        RateOfConvergence1  ,&
-        RateOfConvergence2 
-
-    REAL(KIND = REAL64) ::  &
-        gam                      ,&
-        gm1                      ,&
-        secondOrderSmoother ,& !2nd order smoothing coefficient
-        fourthOrderSmoother ,& !4th order smoothing coefficient
-        boundingConstant    ,&
-        dr                  ,&
-        hubToTipRatio       ,&
-        SoundSpeedErrorL2
-
-
-    REAL(KIND = rDef), PARAMETER ::&
-        r_min  = 0.20_rDef  ,&
-        r_max  = 1.000_rDef  ,&
-        r2     = 0.50_rDef  ,&
-        r3     = 0.200_rDef
-
-    CHARACTER(50) :: &
-        dir_name
-
-    CHARACTER(50):: &
-        FORMAT_MEAN_FLOW         , &
-        FORMAT_PERTURB_VARS      , &
-        FORMAT_PERTURB_HEADER    , &
-        FORMAT_MEAN_FLOW_HEADER  , &
-        FORMAT_SOURCE_TERMS      , &
-        FORMAT_SOURCE_TERMS_HEADER , &
-        FORMAT_L2                , &
-        FORMAT_L2_HEADER         , &
-        FORMAT_ERROR             , &
-        FORMAT_ERROR_HEADER      , &
-        FORMAT_ROC               , &     
-        FORMAT_ROC_HEADER       
-
-    CHARACTER(10):: file_id
-
+    include '/main-scripts/main-variables.f90'
 ! Code Starts Here!
-
     CONTINUE
 
     IF (debug) THEN
@@ -163,39 +21,9 @@ PROGRAM MAIN
     ELSE
     ENDIF
 
-    FORMAT_MEAN_FLOW           = "(F15.12,F15.12,F15.12,F15.12,F15.12)" 
-    FORMAT_MEAN_FLOW_HEADER    = "(A15,A15,A15,A15,A15)" 
-    FORMAT_PERTURB_VARS        = "(F16.12,F16.12,F16.12,F16.12,F16.12)"
-    FORMAT_PERTURB_HEADER      = "(A12,A12,A12,A12,A12)"
-    FORMAT_SOURCE_TERMS        = "( I4, F16.12, F16.12,F16.12)" 
-    FORMAT_SOURCE_TERMS_HEADER = "( A5, A17, A17,A17)" 
-    FORMAT_L2                  = "(I4,F16.12)" 
-    FORMAT_L2_HEADER           = "(A5,A13)" 
-    FORMAT_ERROR               = "(F16.12,F16.12)" 
-    FORMAT_ERROR_HEADER        = "(A17,A17)" 
-    FORMAT_ROC                 = "(F16.12,F16.12)" 
-    FORMAT_ROC_HEADER          = "(A17,A15)" 
-
-    ! inputs needed for SwirlClassType
-    azimuthalModeNumber       = 1
-    hubToTipRatio             = r_min/r_max
-    frequency                 =  CMPLX(10.0, 0, rDef)
-    hubAdmittance             =  CMPLX(0,0,rDef)!CMPLX(0.40, 0 ,rDef)
-    ductAdmittance            =  CMPLX(0,0,rDef)!CMPLX(0.70,0,rDef)
-    finiteDiffFlag            =  1
-    secondOrderSmoother       =  0.0_rDef
-    fourthOrderSmoother       =  0.0_rDef
-
-    ! constants needed for calculations
-    gam = 1.4_rDef               ! ratio of specific heats
-    gm1 = gam-1.0_rDef
-
-    ci  = CMPLX(0.0, 1.0, rDef)  !imaginary number
-
-    ! constants for MMS module
-    boundingConstant = 1.00_rDef
-    eigenIndex = 1
-
+    !local variables 
+    include '/main-scripts/main-local-variables.f90'
+    
     ALLOCATE(&
         k(7) , &
         S_L2Array(numberOfIterations)              , &
@@ -205,12 +33,12 @@ PROGRAM MAIN
 
     ! used for the following terms:
     k(1) = CMPLX(0.004, 0.0, rDef)
-    k(2) = CMPLX(15.0, 0.0, rDef)
+    k(2) = CMPLX(16.0, 0.0, rDef)
     k(3) = CMPLX(0.4, 0.0, rDef)  ! M_x 
-    k(4) = CMPLX(1.0, 0.0, rDef)   !v_r  
-    k(5) = CMPLX(0.100, 0.0, rDef)   !v_th
-    k(6) = CMPLX(0.0, 0.0, rDef)   !v_X
-    k(7) = CMPLX(1.00, 0.0, rDef)   !p
+    k(4) = CMPLX(0.001, 0.0, rDef)   !v_r  
+    k(5) = CMPLX(0.200, 0.0, rDef)   !v_th
+    k(6) = CMPLX(0.10, 0.0, rDef)   !v_X
+    k(7) = CMPLX(0.00001, 0.0, rDef)   !p
 
     facCount = 0 ! initializer for fac count
 
@@ -243,6 +71,8 @@ PROGRAM MAIN
             SoundSpeedExpected(numberOfGridPoints)   , &
             SoundSpeedError(numberOfGridPoints)      , &
             S_actual(numberOfGridPoints*4)              , &
+            S_A_actual(numberOfGridPoints*4)              , &
+            S_B_actual(numberOfGridPoints*4)              , &
             S_Expected(numberOfGridPoints*4)            , &
             S_1(numberOfGridPoints)                  , &
             S_2(numberOfGridPoints)                  , &
@@ -300,9 +130,8 @@ PROGRAM MAIN
 
             ! This is redundant! Include in python script
             axialMachData(i)  =&
-                REAL(k(3), rDef)*&
                 (boundingConstant)*&
-                COS(REAL(k(3), rDef)*(r(i)-r_max))
+                SIN(REAL(k(3), rDef)*(r(i)-r_max))
 
         ENDDO
 
@@ -428,6 +257,8 @@ PROGRAM MAIN
             object      = swirlClassObj(fac),&
             eigenVector = eigenVectorMMS       ,&
             eigenValue  = -ci*axialWavenumberMMS        ,&
+            S_A         = S_A_actual ,&
+            S_B         = S_B_actual ,&
             S           = S_actual )
         ! 
 
@@ -506,6 +337,7 @@ PROGRAM MAIN
             S_Expected(i2) = S_3(i)
             S_Expected(i3) = S_4(i)
 
+            WRITE(0,*) S_A_actual(i) ,S_A14(i) 
 
         ENDDO
 
@@ -519,11 +351,11 @@ PROGRAM MAIN
 
         S_L2Array(fac) = S_L2   
 
+        include 'swirl-data-export-per-grid.f90'
         CALL DestroyObject(object = swirlClassObj(fac))
 
         ! Export data 
 
-        include 'swirl-data-export-per-grid.f90'
         DEALLOCATE(&
             r                     ,&
             rOut                  ,&
@@ -539,6 +371,8 @@ PROGRAM MAIN
             SoundSpeedExpected    ,&
             SoundSpeedError       ,&
             S_actual                 ,&
+            S_A_actual                 ,&
+            S_B_actual                 ,&
             S_Expected                 ,&
             S_eig                 ,&
             S_error                 ,&
@@ -546,38 +380,38 @@ PROGRAM MAIN
             S_2                      ,&
             S_3                      ,&
             S_4                      ,&
-        S_A11                                        , &   
-        S_A12                                        , &   
-        S_A13                                        , &   
-        S_A14                                        , &   
-        S_A21                                        , &   
-        S_A22                                        , &   
-        S_A23                                        , &   
-        S_A24                                        , &   
-        S_A31                                        , &   
-        S_A32                                        , &   
-        S_A33                                        , &   
-        S_A34                                        , &   
-        S_A41                                        , &   
-        S_A42                                        , &   
-        S_A43                                        , &   
-        S_A44                                        , &   
-        S_B11                                        , &   
-        S_B12                                        , &   
-        S_B13                                        , &   
-        S_B14                                        , &   
-        S_B21                                        , &   
-        S_B22                                        , &   
-        S_B23                                        , &   
-        S_B24                                        , &   
-        S_B31                                        , &   
-        S_B32                                        , &   
-        S_B33                                        , &   
-        S_B34                                        , &   
-        S_B41                                        , &   
-        S_B42                                        , &   
-        S_B43                                        , &   
-        S_B44                                        , &   
+            S_A11                                        , &   
+            S_A12                                        , &   
+            S_A13                                        , &   
+            S_A14                                        , &   
+            S_A21                                        , &   
+            S_A22                                        , &   
+            S_A23                                        , &   
+            S_A24                                        , &   
+            S_A31                                        , &   
+            S_A32                                        , &   
+            S_A33                                        , &   
+            S_A34                                        , &   
+            S_A41                                        , &   
+            S_A42                                        , &   
+            S_A43                                        , &   
+            S_A44                                        , &   
+            S_B11                                        , &   
+            S_B12                                        , &   
+            S_B13                                        , &   
+            S_B14                                        , &   
+            S_B21                                        , &   
+            S_B22                                        , &   
+            S_B23                                        , &   
+            S_B24                                        , &   
+            S_B31                                        , &   
+            S_B32                                        , &   
+            S_B33                                        , &   
+            S_B34                                        , &   
+            S_B41                                        , &   
+            S_B42                                        , &   
+            S_B43                                        , &   
+            S_B44                                        , &   
             vR                    ,&
             vT                    ,&
             vX                    ,&

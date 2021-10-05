@@ -30,9 +30,10 @@ run SWIRL:
 clean:
 	(rm $(OUTPUT_FILES); rm *.log);
 plot: all
-	@cd plotReport; \
- 	pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
- 	xdg-open plotReport.pdf; 
+	./PythonPlotReport.py; \
+		cd plotReport;\
+		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
+		xdg-open plotReport.pdf; 
 
 .PHONY: all
 # 	@cd $(PLOT_SHELL_SCRIPT_DIR); \
