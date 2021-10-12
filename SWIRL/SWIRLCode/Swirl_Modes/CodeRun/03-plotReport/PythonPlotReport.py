@@ -16,7 +16,7 @@ from matplotlib import pyplot as plt
 
 
 mean_flow_file_path= '01-mean-flow/'
-MMS_path = '02-method-of-manufactured-solutions/'
+MMS_path = '03-method-of-manufactured-solutions/'
 data_paths = [mean_flow_file_path,MMS_path]
 
 for i in range(len(data_paths)):
@@ -33,10 +33,10 @@ flow_data = pd.read_csv(                   '01-mean-flow/mean-flow513.dat',     
 # In[23]:
 
 
-LEE_L2_data = pd.read_csv(                      '02-method-of-manufactured-solutions/L2-LEE.dat',                       delim_whitespace=True)
-LEE_ROC_data = pd.read_csv(                     '02-method-of-manufactured-solutions/ROC-LEE.dat',                       delim_whitespace=True)
-SND_L2_data = pd.read_csv(                      '02-method-of-manufactured-solutions/L2-sound_speed-.dat',                       delim_whitespace=True)
-SND_ROC_data = pd.read_csv(                     '02-method-of-manufactured-solutions/ROC-sound_speed.dat',                       delim_whitespace=True)
+LEE_L2_data = pd.read_csv(                      '03-method-of-manufactured-solutions/L2-LEE.dat',                       delim_whitespace=True)
+LEE_ROC_data = pd.read_csv(                      '03-method-of-manufactured-solutions/ROC-LEE.dat',                       delim_whitespace=True)
+SND_L2_data = pd.read_csv(                      '03-method-of-manufactured-solutions/L2-sound_speed-.dat',                       delim_whitespace=True)
+SND_ROC_data = pd.read_csv(                      '03-method-of-manufactured-solutions/ROC-sound_speed.dat',                       delim_whitespace=True)
 
 
 # In[24]:
@@ -62,7 +62,7 @@ plt.title('Mean Flow ')
 plt.ylabel('Mach Number')
 plt.xlabel('Radius')
 plt.tight_layout()
-tikzplotlib.save("03-plotReport/MachDistribution.tex")
+tikzplotlib.save("plotReport/MachDistribution.tex")
 
 
 # In[31]:
@@ -75,7 +75,7 @@ ax.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Act
 ax.set_ylabel('Speed of Sound')
 ax.set_xlabel('Radius')
 ax.legend()
-tikzplotlib.save("03-plotReport/SoundSpeedFromIntegration.tex")
+tikzplotlib.save("plotReport/SoundSpeedFromIntegration.tex")
 
 
 # In[27]:
@@ -93,7 +93,7 @@ ax3.set_ylabel('Axial')
 ax4.plot(         flow_data['radius'],flow_data['Pr']        )
 ax4.set_ylabel('Pressure')
 
-tikzplotlib.save("03-plotReport/PerturbationVariables.tex")
+tikzplotlib.save("plotReport/PerturbationVariables.tex")
 
 
 # In[28]:
@@ -107,7 +107,7 @@ ax2.semilogy(Delta_r,LEE_ROC,label='LEE')
 ax2.legend()
 ax2.set_xlabel('Del r')
 
-tikzplotlib.save("03-plotReport/ROC.tex")
+tikzplotlib.save("plotReport/ROC.tex")
 
 
 # In[29]:
@@ -130,7 +130,7 @@ ax[2].plot(flow_data['radius'],flow_data['S_3_a'],alpha=0.5, lw=5)
 ax[3].set_ylabel('Energy')
 ax[3].plot(flow_data['radius'],flow_data['S_4_e'],alpha =0.7, lw=7)
 ax[3].plot(flow_data['radius'],flow_data['S_4_a'],alpha=0.5, lw=5) 
-tikzplotlib.save("03-plotReport/SourceTermData.tex")
+tikzplotlib.save("plotReport/SourceTermData.tex")
 
 
 # In[ ]:

@@ -35,10 +35,10 @@ PROGRAM MAIN
     k(1) = CMPLX(0.004, 0.0, rDef)
     k(2) = CMPLX(16.0, 0.0, rDef)
     k(3) = CMPLX(0.4, 0.0, rDef)  ! M_x 
-    k(4) = CMPLX(0.001, 0.0, rDef)   !v_r  
-    k(5) = CMPLX(0.200, 0.0, rDef)   !v_th
+    k(4) = CMPLX(1.80, 0.0, rDef)   !v_r  
+    k(5) = CMPLX(1.200, 0.0, rDef)   !v_th
     k(6) = CMPLX(0.10, 0.0, rDef)   !v_X
-    k(7) = CMPLX(0.00001, 0.0, rDef)   !p
+    k(7) = CMPLX(.1, 0.0, rDef)   !p
 
     facCount = 0 ! initializer for fac count
 
@@ -144,7 +144,8 @@ PROGRAM MAIN
             k                  = k                  , &
             kappa              = gam                , &
             SoundSpeedExpected = SoundSpeedExpected , &
-            thetaMachData      = thetaMachData)
+            thetaMachData      = thetaMachData      , &
+            axialMachData      = axialMachData      )
 
         CALL getPerturbationVariables(&
             k     = k     , &

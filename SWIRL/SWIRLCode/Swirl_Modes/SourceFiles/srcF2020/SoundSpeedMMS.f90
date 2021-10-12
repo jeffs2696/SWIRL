@@ -9,8 +9,8 @@
     r_max             , &
     k, kappa          , &
     SoundSpeedExpected, &
-    thetaMachData       &
-    )
+    thetaMachData     , &
+    axialMachData)
     
     REAL(KIND=rDef)   , INTENT(IN) :: &
     r2   , &
@@ -19,7 +19,7 @@
     kappa
     
     REAL(KIND=rDef)   , DIMENSION(:), INTENT(INOUT) :: &
-    SoundSpeedExpected, thetaMachData
+    SoundSpeedExpected, thetaMachData, axialMachData
     
     REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: &
     r!, r_loc
@@ -54,6 +54,7 @@
       ((kappa - one)*(one + tanh((r(i)- r2)*kR(2))*kR(1) + tanh((r(i)- r3)*kR( &
       2))*kR(1) + tanh((r(i)- r_max)*kR(2))*kR(1) + tanh((r2 - r_max)*kR(2))* &
       kR(1) + tanh((r3 - r_max)*kR(2))*kR(1))))
+        axialMachData(i)      = sin((r(i)- r_max)*kR(3))
 
 
         END DO

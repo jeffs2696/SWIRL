@@ -1,8 +1,7 @@
 OUTPUT_FILES = \
 			   *.dat \
 			   01-mean-flow/*.dat \
-			   02-linearized-perturbation-equations/*.dat \
-			   03-method-of-manufactured-solutions/*.dat
+			   02-method-of-manufactured-solutions/*.dat
 EXE = swirlF2020
 SHELL_EXT = sh
 PLOT_GNUPLOT_DIR = plottingGNUconfig
@@ -31,9 +30,9 @@ clean:
 	(rm $(OUTPUT_FILES); rm *.log);
 plot: all
 	./PythonPlotReport.py; \
-		cd plotReport;\
+		cd 03-plotReport;\
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
-		xdg-open plotReport.pdf; 
+		xdg-open plotReport.pdf;
 
 .PHONY: all
 # 	@cd $(PLOT_SHELL_SCRIPT_DIR); \

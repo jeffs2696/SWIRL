@@ -1,4 +1,4 @@
-dir_name = '03-method-of-manufactured-solutions/'
+dir_name = '02-method-of-manufactured-solutions/'
 
 OPEN(&
     NEWUNIT=UNIT,&
