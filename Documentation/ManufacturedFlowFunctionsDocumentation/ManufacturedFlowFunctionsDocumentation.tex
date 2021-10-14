@@ -1,0 +1,88 @@
+%        File: ManufacturedFlowFunctionsDocumentation.tex
+%     Created: Wed Oct 13 01:00 PM 2021 E
+% Last Change: Wed Oct 13 01:00 PM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\begin{document}
+\section{Defining Manufactured Mean Flow Functions}
+
+For SWIRL, the absolute bare minimum requirement is to define the corresponding
+flow components for the domain of interest. SWIRL assumes no flow in the radial 
+direction, leaving only two other components, axial and tangential for a 3D 
+cylindrical domain. Since SWIRL is also non dimensionalized, the mean flow 
+components are defined using the Mach number. SWIRL uses the tangential mach number
+to obtain the speed of sound using numerical integration. The speed of sound
+is then used to find the rest of the primative variables for the given flow. 
+
+The goal is to manufacture functions that will test the numerical integration used 
+to obtain the speed of sound. 
+This requires a manufactured function for either
+the tangential Mach number or the speed of sound. For example
+\subsection{Checking if guidelines for creating manufactured solutions are followed}
+
+\begin{enumerate}
+    \item smooth
+    \item general enough to exercise each term in the governing equations
+    \item Enough derivatives to appropriately test scheme
+    \item bounded by a small constant
+    \item Make the same assumptions as code (non-dimensional variables, so they
+        should not exceed one or be negative)
+    \item Defined on a connected subset oF 2d/3d space
+    \item function needs to make sense to the derivatives in the pde
+\end{enumerate}
+
+\subsection{Mean Flow (steady)}
+
+Find: A manufactured solution that meets these guidelines. This work is exploring
+how a function can be bounded  in other ways\ldots
+
+(look at the tanh method paper)
+\subsubsection{A tanh method for manufactured solutions}
+
+Suppose there are two ``kinks'' , (write notes in planner in here)
+\[ 1 = R + L \]
+
+\begin{align*}
+    \widetilde{A}(\widetilde{r}) &= 
+    \sum_{j=1}^{n} R_{ij} +
+    \sum_{j=1}^{n} L_{jn} + 
+    S_{vertical} 
+\end{align*}
+
+where,
+
+\begin{align*}
+    R_{ij} = A \tanh \left( B \left( \widetilde{r}_i - \widetilde{r}_{j} \right) \right)\\
+    L_{jn} = A \tanh \left( B \left( \widetilde{r}_j - \widetilde{r}_{n} \right) \right)\\
+\end{align*}
+
+$\widetilde{r}_i$ is the radial location, and $\widetilde{r}_j$ is the horizontal location of the kinks inflection point,
+$r_n$ is the horizontal location of the last kink
+\subsubsection{Speed of Sound}
+
+\section{appendix}
+Non-dimensionalize radius,
+\begin{align}
+    \widetilde{r}     &= \frac{r}{r_{max}}                \\
+    \widetilde{r}_{min}   &= \frac{r_{min}}{r_{max}}    \\
+    \widetilde{r}_{max}   &= \frac{r_{max}}{r_{max}} = 1
+    \label{eq:1}
+\end{align}
+Define a new radial term, $\hat{r}$ to scale the radius to 0 to 1,
+\begin{align}
+    \hat{r} = 
+    \frac{\widetilde{r}      - \widetilde{r}_{min}} 
+         {\widetilde{r}_{max} - \widetilde{r}_{min}} \\
+         \hat{r}_{max} &= 
+         \frac{\widetilde{r}_{max}      - \widetilde{r}_{min}} 
+         {\widetilde{r}_{max} - \widetilde{r}_{min}} = 1 \\
+         \hat{r}_{min}
+         \frac{\widetilde{r}_{min}      - \widetilde{r}_{min}} 
+         {\widetilde{r}_{max} - \widetilde{r}_{min}} = 0 \\
+    \label{eq:2}
+\end{align}
+
+The next step is to define the workflow for defining the manufactured solution 
+for SWIRL
+\end{document}

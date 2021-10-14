@@ -1,0 +1,16 @@
+\BOOKMARK [1][-]{section.1}{Divergence operations in new coordinate systems}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Aerodynamic Model}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Mean Flow Equations}{}% 3
+\BOOKMARK [1][-]{section.3}{Applying model to various flows}{}% 4
+\BOOKMARK [2][-]{subsection.3.1}{Axial Shear Flow}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Accounting for solid body swirl}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Linearizing the governing equations}{section.4}% 7
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Linearizing Conservation of Mass}{subsection.4.1}% 8
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Linearizing the Conservation of Momentum in the r direction}{subsection.4.1}% 9
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Linearizing the Conservation of Momentum in the \040direction}{subsection.4.1}% 10
+\BOOKMARK [3][-]{subsubsection.4.1.4}{Linearizing the Conservation of Momentum in the x direction}{subsection.4.1}% 11
+\BOOKMARK [3][-]{subsubsection.4.1.5}{Linearizing the Energy Equation}{subsection.4.1}% 12
+\BOOKMARK [1][-]{section.5}{Substituting Pertubation Variables}{}% 13
+\BOOKMARK [1][-]{section.6}{Non-Dimensionalization}{}% 14
+\BOOKMARK [1][-]{section.7}{Appendix A: Speed of Sound}{}% 15
+\BOOKMARK [1][-]{section.8}{Appendix B: Isentropic Waves}{}% 16

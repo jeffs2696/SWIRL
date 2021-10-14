@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Divergence operations in new coordinate systems}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Aerodynamic Model}{7}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Mean Flow Equations}{7}{section.2}%
+\contentsline {section}{\numberline {3}Applying model to various flows}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Axial Shear Flow}{8}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Accounting for solid body swirl}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Linearizing the governing equations}{11}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Linearizing Conservation of Mass}{11}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Linearizing the Conservation of Momentum\\ in the \textit {r} direction}{14}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Linearizing the Conservation of Momentum\\ in the \textit {$\theta $} direction}{16}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}Linearizing the Conservation of Momentum\\ in the \textit {x} direction}{17}{subsubsection.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.1.5}Linearizing the Energy Equation}{19}{subsubsection.4.1.5}%
+\contentsline {section}{\numberline {5}Substituting Pertubation Variables}{21}{section.5}%
+\contentsline {section}{\numberline {6}Non-Dimensionalization}{23}{section.6}%
+\contentsline {section}{\numberline {7}Appendix A: Speed of Sound}{26}{section.7}%
+\contentsline {section}{\numberline {8}Appendix B: Isentropic Waves}{29}{section.8}%
