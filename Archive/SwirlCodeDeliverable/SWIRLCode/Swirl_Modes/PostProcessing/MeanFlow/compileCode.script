@@ -1,4 +1,0 @@
-gfortran -c akima433.f
-gfortran -c Akima1D.f90
-gfortran -c GetMeanData.f90
-gfortran -o GetMeanData.exe GetMeanData.o akima433.o Akima1D.o

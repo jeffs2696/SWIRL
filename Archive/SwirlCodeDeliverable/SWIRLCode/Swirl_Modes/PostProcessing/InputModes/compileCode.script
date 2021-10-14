@@ -1,1 +1,0 @@
-gfortran -o GetModeData.exe GetModeData.f90
