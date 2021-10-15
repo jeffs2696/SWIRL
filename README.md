@@ -2,6 +2,9 @@
 
 SWIRL analyzes axial flows with mean shear and swirl in lined and unlined ducts.
 
+# To Do
+- [x]
+- []
 ### Table of Contents
 
 - [Description](#description)
@@ -14,6 +17,16 @@ The code was originally written in Fortran 77 and is accompanied with the paper
 "Kousen, Kenneth A. "Eigenmodes of ducted flows with radially-dependent axial 
 and swirl velocity components." (1999)." [Here is the paper](https://core.ac.uk/download/pdf/10475014.pdf)
 
+### File Directory Structure
+* SourceFiles
+* CodeRun
+* LibraryFiles
+* ModuleFiles
+* ObjectFiles
+* Documentation
+* PostProcessing
+* TestCaseFiles 
+ 
 ## How To Use
 The main Makefile is in the SourceFiles folder. The Makefile compiles SWIRL,
 runs the executable, and displays a latex report with the results plotted
