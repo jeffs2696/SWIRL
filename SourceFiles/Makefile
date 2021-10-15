@@ -110,22 +110,16 @@ OBJECTS  =                     \
     machoutModule.o 		   \
 	fdgridModule.o 			   \
    	fdrivsModule.o 			         
-
- 
-	# analysisModule.o           \
 		
 MODULES = $(OBJECTS:$(OEXT)=mod)
-# \
-# 	Akima1D.f90             \
-# 	akima433.o
 
-EXECUTABLE_LOCATION = ../../CodeRun
+EXECUTABLE_LOCATION = ../CodeRun
 
 EXE = swirlF2020
 
-LIB_FILES = ../../LibraryFiles
-MOD_FILES = ../../ModuleFiles
-OBJ_FILES = ../../ObjectFiles
+LIB_FILES = ../LibraryFiles
+MOD_FILES = ../ModuleFiles
+OBJ_FILES = ../ObjectFiles
 EXE_FILES = $(EXECUTABLE_LOCATION)
 SRC_FILES = ../srcF2020
 
@@ -221,12 +215,9 @@ all:  $(OBJECTS)
 			exit $$RESULT
 
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
-	# @(./SourceTermSymbolicSolver.py);
-	# @(sed -i -f script.sed SourceTermMMS.f90);
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
-#
-#  clean
+
 clean:
 	rm -f *.o *.c *.a *.mod
 
@@ -235,28 +226,7 @@ cleanAll:
        (cd $(FITPACK_LOCATION); rm -f *.o *.c *.a *.mod); \
        (cd $(LAPACK_LOCATION); rm -f *.o *.c *.a *.mod); \
        (cd $(BLAS_LOCATION); rm -f *.o *.c *.a *.mod)
-#                                                 
-#   Define suffixes used in transformation rules. 
-#                                                 
-# .SUFFIXES: .$(OEXT) .$(FEXT) .prj 
-#                                                               
-#   Define transformation rule for Fortran to object files.     
-#                                                               
-# .$(FEXT).$(OEXT):     ; $(F90) $(F90FLAGS) $< 
-#
-#
-#   Transformation rule from fortran to project files
-# .f.prj:
-# 	ftnchek -project -noextern -library $<
-#
-#   Set up macro PRJS containing project filenames
-# PRJS= $(OBJECTS:.o=.prj)
-#
-# check: $(PRJS)
-# 	ftnchek $(PRJS)
-#
-#   Define dependency information for object files
-#                                                               
+                                                               
 main.o: main.f90        \
          boundaryModule.o \
          derivsModule.o   \
@@ -273,19 +243,6 @@ main.o: main.f90        \
 		 mmsClassObject.o \
 	     swirlClassObject.o 
 	@$(F90) $(F90FLAGS) main.f90
-
-         # analysisModule.o \
-# akima433.o: akima433.f
-# 	$(F77) $(F77FLAGS) akima433.f
-
-# Akima1D.o:  Akima1D.f90 \
-# 	    akima433.o
-# 	$(F90) $(F90FLAGS) Akima1D.f90
-
-# analysisModule.o:  analysisModule.f90 \
-#                   $(LAPACK_LOCATION)/zggev.o\
-# 				  $(LAPACK_LOCATION)/f90_zggev.o 
-# 	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) analysisModule.f90
 
 boundaryModule.o:  boundaryModule.f90
 	@$(F90) $(F90FLAGS) boundaryModule.f90
@@ -307,20 +264,6 @@ fdrivsModule.o:  fdrivsModule.f90
 
 indexxModule.o:  indexxModule.f90
 	@$(F90) $(F90FLAGS) indexxModule.f90
-
-# interpModule.o:  interpModule.f90 \
-#          derivsModule.o   \
-#          fdgridModule.o   \
-#          fdrivsModule.o   \
-#          gridModule.o     \
-#          $(BLAS_LOCATION)/dgemv.o \
-#          $(FITPACK_LOCATION)/curv1.o \
-#          $(FITPACK_LOCATION)/curv2.o
-# 	$(F90) $(F90FLAGS) interpModule.f90
-
-# kapsubModule.o:  kapsubModule.f90 \
-#                   $(LAPACK_LOCATION)/zggev.o
-# 	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) kapsubModule.f90
 
 machoutModule.o:  machoutModule.f90
 	@$(F90) $(F90FLAGS) machoutModule.f90

@@ -15,10 +15,13 @@ The code was originally written in Fortran 77 and is accompanied with the paper
 and swirl velocity components." (1999)." [Here is the paper](https://core.ac.uk/download/pdf/10475014.pdf)
 
 ## How To Use
-Go to the corresponding folder to run a certain version of SWIRL
-src,srcF2008,srcF2020
+The main Makefile is in the SourceFiles folder. The Makefile compiles SWIRL,
+runs the executable, and displays a latex report with the results plotted
 
 #### Installation
+Prerequisites:
+Sympy
+
 
 #### API Reference 
 
@@ -28,4 +31,5 @@ src,srcF2008,srcF2020
 [Back To The Top](#SWIRL)
 ## Contributors
 - Jeffrey Severino <jseveri@rockets.utoledo.edu>
+- Zaid Sabri
 - Dr. Ray Hixon 
