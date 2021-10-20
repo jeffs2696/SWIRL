@@ -121,7 +121,6 @@ LIB_FILES = ../LibraryFiles
 MOD_FILES = ../ModuleFiles
 OBJ_FILES = ../ObjectFiles
 EXE_FILES = $(EXECUTABLE_LOCATION)
-SRC_FILES = ../srcF2020
 
 BLAS_LOCATION = $(LIB_FILES)/blas3.8.0
 BLAS_OBJS =      \
