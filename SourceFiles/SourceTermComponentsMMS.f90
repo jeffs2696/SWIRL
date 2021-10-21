@@ -108,148 +108,136 @@
     r2C = CMPLX(r2,KIND=rDef)
     r3C = CMPLX(r3,KIND=rDef)
     r_maxC = CMPLX(r_max,KIND=rDef)
-S_A11=-i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh &
-      ((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 &
-      - r_maxC)*k(2))*k(1)) - m*sqrt(r*two*((1 - tanh((r - r2)*k(2))**2) &
-      *k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh(( &
-      r - r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - &
-      r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2 &
-      ))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))* &
-      k(1))))/r)*(cos((r - r_maxC)*k(4)) - 1)
-S_A12=-two*sqrt(r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
-      r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC)*k(2))**2)*k(1)*k( &
-      2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3 &
-      )*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k( &
-      2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1))))*sin((r - r_maxC)*k(5))/ &
-    r
+S_A11=-i*(ak/(0.1d0*tanh(0.10000000000000001d0*r - 0.10000000000000001d0) + 1 &
+      ) - m*sqrt(r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))/r)*( &
+      7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0)**2 + &
+      0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh(125.0d0*r - &
+      75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + 1.8125d0)
+S_A12=-two*sqrt(r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))*sin((r - &
+      1.0d0)*k(5))/r
 S_A13=0
-if (r.eq.1.0_rDef .or. r.eq.0.2_rDef) then
-    S_A14 = 0.0_rDef
-    S_A13 = 0.0_rDef
-    S_A12 = 0.0_rDef
-    S_A11 = 0.0_rDef
-else
-    S_A14=(-sin((r - r_maxC)*k(7))*k(7)/(cos((r - r_maxC)*k(7)) - 1) + (r*two*((1 - &
-        tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)* &
-        k(1)*k(2) + (1 - tanh((r - r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - &
-        one)*(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + &
-        tanh((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh &
-        ((r3 - r_maxC)*k(2))*k(1))))**((1.0d0/2.0d0)*two)*(kappaC - one)/r) &
-        *(cos((r - r_maxC)*k(7)) - 1)
-endif
-
-S_A21=(cos((r - r_maxC)*k(4)) - 1)*(sqrt(r*two*((1 - tanh((r - r2)*k(2))**2)*k( &
-      1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
-      r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
-      (2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1 &
-      ) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1 &
-      ))))/r + sqrt(r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + (1 &
-      - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC)*k(2)) &
-      **2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1) + &
-      tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1) + tanh((r2 &
-      - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1))))*(kappaC - &
-      one)*((1.0d0/2.0d0)*r*two*(-(1 - tanh((r - r2)*k(2))**2)*k(1)*k(2 &
-      ) - (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) - (1 - tanh((r - r_maxC &
-      )*k(2))**2)*k(1)*k(2))*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + &
-      (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC)*k( &
-      2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1 &
-      ) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1) + tanh &
-      ((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1))**2) + ( &
-      1.0d0/2.0d0)*r*two*(-2*(1 - tanh((r - r2)*k(2))**2)*tanh((r - r2) &
-      *k(2))*k(1)*k(2)**2 - 2*(1 - tanh((r - r3)*k(2))**2)*tanh((r - r3 &
-      )*k(2))*k(1)*k(2)**2 - 2*(1 - tanh((r - r_maxC)*k(2))**2)*tanh((r &
-      - r_maxC)*k(2))*k(1)*k(2)**2)/((kappaC - one)*(one + tanh((r - r2)* &
-      k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k( &
-      1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1 &
-      ))) + (1.0d0/2.0d0)*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2) + &
-      (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC)*k( &
-      2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k(2))*k(1 &
-      ) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1) + tanh &
-      ((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1))))*(one + &
-      tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - &
-      r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - &
-      r_maxC)*k(2))*k(1))/(r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k(2 &
-      ) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - r_maxC &
-      )*k(2))**2)*k(1)*k(2))) + (r*two*((1 - tanh((r - r2)*k(2))**2)*k( &
-      1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
-      r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
-      (2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1 &
-      ) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1 &
-      ))))**((1.0d0/2.0d0)*three)*(kappaC - one)/(r*two))
-S_A22=-i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh &
-      ((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 &
-      - r_maxC)*k(2))*k(1)) - m*sqrt(r*two*((1 - tanh((r - r2)*k(2))**2) &
-      *k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh(( &
-      r - r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - &
-      r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2 &
-      ))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))* &
-      k(1))))/r)*sin((r - r_maxC)*k(5))
+S_A14=((-17.578125d0*r + 21.97265625d0*(r - 0.2d0)**2 - 3.90625d0*tanh(125.0d0 &
+      *r - 125.0d0)**2 - 3.90625d0*tanh(125.0d0*r - 75.0d0)**2 - &
+      3.90625d0*tanh(125.0d0*r - 25.0d0)**2 + 15.234375d0)/( &
+      7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0)**2 + &
+      0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh(125.0d0*r - &
+      75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + 1.8125d0) + (r*two &
+      *(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))**(0.5d0* &
+      two)*(kappaC - one)/r)*(7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0* &
+      (r - 0.2d0)**2 + 0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0* &
+      tanh(125.0d0*r - 75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + &
+      1.8125d0)
+S_A21=(sqrt(r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))/r + sqrt( &
+      r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))*(kappaC - &
+      one)*(0.1d0*tanh(0.10000000000000001d0*r - 0.10000000000000001d0 &
+      ) + 1)*(0.5d0*r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r &
+      - 0.10000000000000001d0)**2)*(0.01d0*tanh(0.10000000000000001d0*r &
+      - 0.10000000000000001d0)**2 - 0.01d0)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)**2) - &
+      0.005d0*r*two*(0.2d0 - 0.2d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)) + 0.5d0* &
+      two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))/(r*two*( &
+      0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)) + (r*two*(0.01d0 - 0.01d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0)**2)/((kappaC - &
+      one)*(0.1d0*tanh(0.10000000000000001d0*r - 0.10000000000000001d0 &
+      ) + 1)))**(0.5d0*three)*(kappaC - one)/(r*two))*(7.32421875d0*(r - &
+      0.2d0)**3 - 8.7890625d0*(r - 0.2d0)**2 + 0.03125d0*tanh(125.0d0*r &
+      - 125.0d0) + 0.03125d0*tanh(125.0d0*r - 75.0d0) + 0.03125d0*tanh( &
+      125.0d0*r - 25.0d0) + 1.8125d0)
+S_A22=-i*(ak/(0.1d0*tanh(0.10000000000000001d0*r - 0.10000000000000001d0) + 1 &
+      ) - m*sqrt(r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))/r)*sin((r &
+      - 1.0d0)*k(5))
 S_A23=0
-S_A24=i*mC*(cos((r - r_maxC)*k(7)) - 1)/r
-S_A31=(cos((r - r_maxC)*k(3))*k(3) + (r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)* &
-      k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
-      r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
-      (2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1 &
-      ) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1 &
-      ))))**((1.0d0/2.0d0)*two)*(kappaC - one)*sin((r - r_maxC)*k(3))/(r* &
-      two))*(cos((r - r_maxC)*k(4)) - 1)
+S_A24=i*mC*(7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0)**2 + &
+      0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh(125.0d0*r - &
+      75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + 1.8125d0)/r
+S_A31=(1 + (r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))**(0.5d0* &
+      two)*(kappaC - one)*(r - 1)/(r*two))*(7.32421875d0*(r - 0.2d0)**3 &
+      - 8.7890625d0*(r - 0.2d0)**2 + 0.03125d0*tanh(125.0d0*r - 125.0d0 &
+      ) + 0.03125d0*tanh(125.0d0*r - 75.0d0) + 0.03125d0*tanh(125.0d0*r &
+      - 25.0d0) + 1.8125d0)
 S_A32=0
-S_A33=-i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh &
-      ((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 &
-      - r_maxC)*k(2))*k(1)) - m*sqrt(r*two*((1 - tanh((r - r2)*k(2))**2) &
-      *k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh(( &
-      r - r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - &
-      r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2 &
-      ))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))* &
-      k(1))))/r)*sin((r - r_maxC)*k(6))
+S_A33=-i*(ak/(0.1d0*tanh(0.10000000000000001d0*r - 0.10000000000000001d0) + 1 &
+      ) - m*sqrt(r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))/r)*sin((r &
+      - 1.0d0)*k(6))
 S_A34=0
-if (r.eq.1.0_rDef .or. r.eq.0.0_rDef) then
-S_A41 = 0.0_rDef
-else
-S_A41=(cos((r - r_maxC)*k(4)) - 1)*(one/r - sin((r - r_maxC)*k(4))*k(4)/(cos((r &
-      - r_maxC)*k(4)) - 1) + (r*two*((1 - tanh((r - r2)*k(2))**2)*k(1)*k &
-      (2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh((r - &
-      r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - r2)*k &
-      (2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2))*k(1 &
-      ) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))*k(1 &
-      ))))**((1.0d0/2.0d0)*two)*(kappaC + one)/(r*two))
-endif
-S_A42=i*mC*sin((r - r_maxC)*k(5))/r
+S_A41=(one/r + (-17.578125d0*r + 21.97265625d0*(r - 0.2d0)**2 - 3.90625d0*tanh &
+      (125.0d0*r - 125.0d0)**2 - 3.90625d0*tanh(125.0d0*r - 75.0d0)**2 &
+      - 3.90625d0*tanh(125.0d0*r - 25.0d0)**2 + 15.234375d0)/( &
+      7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0)**2 + &
+      0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh(125.0d0*r - &
+      75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + 1.8125d0) + (r*two &
+      *(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))**(0.5d0* &
+      two)*(kappaC + one)/(r*two))*(7.32421875d0*(r - 0.2d0)**3 - &
+      8.7890625d0*(r - 0.2d0)**2 + 0.03125d0*tanh(125.0d0*r - 125.0d0) &
+      + 0.03125d0*tanh(125.0d0*r - 75.0d0) + 0.03125d0*tanh(125.0d0*r - &
+      25.0d0) + 1.8125d0)
+S_A42=i*mC*sin((r - 1.0d0)*k(5))/r
 S_A43=0
-S_A44=-i*(ak/(one + tanh((r - r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh &
-      ((r - r_maxC)*k(2))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 &
-      - r_maxC)*k(2))*k(1)) - m*sqrt(r*two*((1 - tanh((r - r2)*k(2))**2) &
-      *k(1)*k(2) + (1 - tanh((r - r3)*k(2))**2)*k(1)*k(2) + (1 - tanh(( &
-      r - r_maxC)*k(2))**2)*k(1)*k(2))/((kappaC - one)*(one + tanh((r - &
-      r2)*k(2))*k(1) + tanh((r - r3)*k(2))*k(1) + tanh((r - r_maxC)*k(2 &
-      ))*k(1) + tanh((r2 - r_maxC)*k(2))*k(1) + tanh((r3 - r_maxC)*k(2))* &
-      k(1))))/r)*(cos((r - r_maxC)*k(7)) - 1)
-S_B11=-gam*i*(cos((r - r_maxC)*k(4)) - 1)*sin((r - r_maxC)*k(3))
+S_A44=-i*(ak/(0.1d0*tanh(0.10000000000000001d0*r - 0.10000000000000001d0) + 1 &
+      ) - m*sqrt(r*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r - &
+      0.10000000000000001d0)**2)/((kappaC - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r - 0.10000000000000001d0) + 1)))/r)*( &
+      7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0)**2 + &
+      0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh(125.0d0*r - &
+      75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + 1.8125d0)
+S_B11=-gam*i*(r - 1)*(7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0) &
+      **2 + 0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh( &
+      125.0d0*r - 75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + &
+      1.8125d0)
 S_B12=0
 S_B13=0
 S_B14=0
 S_B21=0
-S_B22=-gam*i*sin((r - r_maxC)*k(3))*sin((r - r_maxC)*k(5))
+S_B22=-gam*i*(r - 1)*sin((r - 1.0d0)*k(5))
 S_B23=0
 S_B24=0
 S_B31=0
 S_B32=0
-S_B33=-gam*i*sin((r - r_maxC)*k(3))*sin((r - r_maxC)*k(6))
-S_B34=-gam*i*one*(cos((r - r_maxC)*k(7)) - 1)
+S_B33=-gam*i*(r - 1)*sin((r - 1.0d0)*k(6))
+S_B34=-gam*i*one*(7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0)**2 + &
+      0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh(125.0d0*r - &
+      75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + 1.8125d0)
 S_B41=0
 S_B42=0
-S_B43=-gam*i*one*sin((r - r_maxC)*k(6))
-S_B44=-gam*i*(cos((r - r_maxC)*k(7)) - 1)*sin((r - r_maxC)*k(3))
+S_B43=-gam*i*one*sin((r - 1.0d0)*k(6))
+S_B44=-gam*i*(r - 1)*(7.32421875d0*(r - 0.2d0)**3 - 8.7890625d0*(r - 0.2d0) &
+      **2 + 0.03125d0*tanh(125.0d0*r - 125.0d0) + 0.03125d0*tanh( &
+      125.0d0*r - 75.0d0) + 0.03125d0*tanh(125.0d0*r - 25.0d0) + &
+      1.8125d0)
 
 
-    ! if (r.eq.1.0_rDef) then
-    !     S_A14 = CMPLX(0.0_rDef,KIND=rDef)
-    !     S_A41 = CMPLX(0.0_rDef,KIND=rDef)
-    ! ! elseif (r.eq.0.20_rDef) then
-    !     ! S_A14 = CMPLX(0.0_rDef,KIND=rDef)
-    !     ! S_A41 = CMPLX(0.0_rDef,KIND=rDef)
-    ! ! else
-    ! endif
+    if (r.eq.1.0_rDef) then
+        S_A14 = CMPLX(0.0_rDef,KIND=rDef)
+        S_A41 = CMPLX(0.0_rDef,KIND=rDef)
+    elseif (r.eq.0.0_rDef) then
+        S_A14 = CMPLX(0.0_rDef,KIND=rDef)
+        S_A41 = CMPLX(0.0_rDef,KIND=rDef)
+    else
+    endif
 
     S_1 = &
     S_A11 +&
@@ -281,7 +269,7 @@ S_B44=-gam*i*(cos((r - r_maxC)*k(7)) - 1)*sin((r - r_maxC)*k(3))
     S_B33 + &
     S_B34)
     
-    S_4 = &
+  S_4 = &
     S_A41 +&
     S_A42 +&
     S_A43 +&

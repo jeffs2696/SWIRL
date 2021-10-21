@@ -4,25 +4,19 @@
 
     SUBROUTINE CalcSoundSpeed(& 
     r                 , &
-    r2                , &
-    r3                , &
-    r_max             , &
     k, kappa          , &
     SoundSpeedExpected, &
     thetaMachData     , &
     axialMachData)
     
     REAL(KIND=rDef)   , INTENT(IN) :: &
-    r2   , &
-    r3   , &
-    r_max, &
     kappa
     
     REAL(KIND=rDef)   , DIMENSION(:), INTENT(INOUT) :: &
     SoundSpeedExpected, thetaMachData, axialMachData
     
     REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: &
-    r!, r_loc
+    r
     
     COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
     k
@@ -46,15 +40,11 @@
 
         DO i = 1,numberOfGridPoints
 
-        SoundSpeedExpected(i) = one + tanh((r(i)- r2)*kR(2))*kR(1) + tanh((r(i)- r3)*kR(2))*kR(1) + tanh((r(i)- &
-      r_max)*kR(2))*kR(1) + tanh((r2 - r_max)*kR(2))*kR(1) + tanh((r3 - &
-      r_max)*kR(2))*kR(1)
-        thetaMachData(i)      = sqrt(r(i)*two*((1 - tanh((r(i)- r2)*kR(2))**2.0_rDef)*kR(1)*kR(2) + (1 - tanh((r(i)- r3)* &
-      kR(2))**2.0_rDef)*kR(1)*kR(2) + (1 - tanh((r(i)- r_max)*kR(2))**2.0_rDef)*kR(1)*kR(2))/ &
-      ((kappa - one)*(one + tanh((r(i)- r2)*kR(2))*kR(1) + tanh((r(i)- r3)*kR( &
-      2))*kR(1) + tanh((r(i)- r_max)*kR(2))*kR(1) + tanh((r2 - r_max)*kR(2))* &
-      kR(1) + tanh((r3 - r_max)*kR(2))*kR(1))))
-        axialMachData(i)      = sin((r(i)- r_max)*kR(3))
+        SoundSpeedExpected(i) = 0.1d0*tanh(0.10000000000000001d0*r(i)- 0.10000000000000001d0) + 1
+        thetaMachData(i)      = sqrt(r(i)*two*(0.01d0 - 0.01d0*tanh(0.10000000000000001d0*r(i)- &
+      0.10000000000000001d0)**2.0_rDef)/((kappa - one)*(0.1d0*tanh( &
+      0.10000000000000001d0*r(i)- 0.10000000000000001d0) + 1)))
+        axialMachData(i)      = r(i)- 1
 
 
         END DO
