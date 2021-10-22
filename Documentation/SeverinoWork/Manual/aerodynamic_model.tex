@@ -49,10 +49,7 @@ v_x \frac{\partial p}{\partial \theta} +
 \right) &= 0
 \end{align*}
 
-
-\section{Mean Flow Equations}
-
-SWIRL utilizes the following assumptions,
+SWIRL utilizes the following assumptions to simplify the aerodynamic model
 
 \begin{itemize}
     \item No flow in the radial direction. Consequentially, the flow is 
@@ -70,13 +67,13 @@ For steady flow, the continuity, momentum and entropy equations are
 If we neglect radial velocity, the velocity vector in cylindrical coordinates are
 
 \[\vec{V}(r,\theta,x) = V_x(r) \hat{e}_x + V_{\theta} (r) \hat{e}_{\theta} \]
-Starting with the radial momentum equation, 
-\begin{align*}
-\frac{\partial v_r}{\partial t} + 
-v_r \frac{\partial v_r}{\partial r} +
-\frac{v_{\theta}  }{r}
-\frac{\partial v_r}{\partial \theta}- \frac{v_{\theta}^2}{r}+ 
-v_x \frac{\partial v_r}{\partial x} 
-&= -\frac{1}{\rho} \frac{\partial p}{\partial r} 
-\end{align*}
-See Appendix for speed of sound derivation
+%Starting with the radial momentum equation, 
+%\begin{align*}
+%\frac{\partial v_r}{\partial t} + 
+%v_r \frac{\partial v_r}{\partial r} +
+%\frac{v_{\theta}  }{r}
+%\frac{\partial v_r}{\partial \theta}- \frac{v_{\theta}^2}{r}+ 
+%v_x \frac{\partial v_r}{\partial x} 
+%&= -\frac{1}{\rho} \frac{\partial p}{\partial r} 
+%\end{align*}
+%See Appendix for speed of sound derivation

@@ -45,7 +45,14 @@ table {%
 \nextgroupplot[
 axis line style={white!15!black},
 legend cell align={left},
-legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=none},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=none
+},
 log basis y={10},
 tick align=outside,
 tick pos=left,
@@ -54,20 +61,20 @@ xlabel={Del r},
 xmin=0.49602339181245, xmax=0.60495126705655,
 xtick style={color=white!15!black},
 y grid style={white!80!black},
-ymin=0.495953009052713, ymax=0.717606678492848,
+ymin=0.000828200266482687, ymax=0.516924837153657,
 ymode=log,
 ytick style={color=white!15!black}
 ]
 \addplot [semithick, color0]
 table {%
-0.6 0.530567095799
-0.555555555556 0.511009881562
-0.529411764706 0.551155594625
-0.515151515152 0.630382012803
-0.507692307692 0.705656708296
-0.503875968992 0.621575652818
-0.501945525292 0.51644487272
-0.500974658869 0.504351744029
+0.6 0.385805727593
+0.555555555556 0.275596302576
+0.529411764706 0.38398407591
+0.515151515152 0.226417156415
+0.507692307692 0.214928432422
+0.503875968992 0.06633022587
+0.501945525292 0.007144785709
+0.500974658869 0.001109670638
 };
 \addlegendentry{LEE}
 \end{groupplot}
