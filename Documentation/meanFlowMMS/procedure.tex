@@ -1,0 +1,116 @@
+
+\subsection{Procedure}
+There are a few constraints and conditions that must be followed in order for the analytical 
+function to work with SWIRL, 
+
+\begin{itemize}
+    \item The mean flow and speed of sound must be real and positive. This will 
+        occur is a speed of sound is chosen such that the tangential mach number
+        is imaginary
+    \item The derivative of the speed of sound must be positive
+    \item Any bounding constants used with the mean flow should not allow the 
+        total Mach number to exceed one.
+    \item the speed of sound should be one at the outer radius of the cylinder
+\end{itemize}
+
+Given these constraints, $tanh(r)$ is chosen as a function since it can be
+modified to meet the conditions above.
+
+The benefit of tanh(r) is that it is bounded between one and negative one, i.e.
+
+\begin{itemize}
+    \item As r $\rightarrow$ $\infty$ tanh(r) $\rightarrow$ 1
+    \item As -r $\rightarrow$ $-\infty$ tanh(r) $\rightarrow$ -1
+\end{itemize}
+
+To test the numerical integration method,  $M_{\theta}$ is defined as a result 
+of differentiating the speed of sound, $A$. This is done opposed to integrating
+$M_{\theta}$. However, a function can be defined for $M_{\theta}$, which can 
+then be integrated to find what $\widetilde{A}$ should be. 
+Instead, the procedure of choice is to back calculate what the appropriate 
+$M_{\theta}$ is for a given expression for $\widetilde{A}$.
+
+Since it is easier to take derivatives , we will solve for $M_{\theta}$ using 
+Equation \ref{eq:Mthetabackcalculated} ,
+
+\begin{align*}
+    M_{\theta} = \sqrt{ \frac{\widetilde{r}}{(\gamma -1) \widetilde{A}^2} 
+    \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}}}
+\end{align*}
+\subsection{Tanh Summaion Formulation}
+\begin{align*}
+    \bar{A} = \sum_{j=1}^n R_{ij} + \sum_{j=1}^n L_{ij} 
+\end{align*}
+where,
+\begin{align*}
+    R_{ij} = A_j \tanh(B_j (x_i - x_j)) \\ 
+    L_{ij} = A_j \tanh(B_j (x_j - x_n))  
+\end{align*}
+
+Letting $n = 3$\ldots
+%
+%\begin{align*}
+%    \bar{A} &= S_{vert} + \sum_{j=1}^3 R_{ij} + \sum_{j=1}^3 L_{ij} \\
+%    \bar{A} &=
+%    A_1 \tanh(B_1 (x_i - x_1))  + 
+%    A_{2} \tanh(B_{2} (x_i - x_{2}))  + 
+%    A_{3} \tanh(B_{3} (x_i - x_3)) +  \\
+%    A_1 \tanh(B_1 (x_1 - x_n)) &+ 
+%    A_{2} \tanh(B_{2} (x_2 - x_{n}))  +
+%    A_{3} \tanh(B_{3} (x_3 - x_n))  
+%\end{align*}
+and,
+\begin{align*}
+    A_1 = A_2 = A_3 = k_1 \\ 
+    B_1 = B_2 = B_3 = k_2  
+\end{align*}
+
+A tanh summation method was constructed to make a manufactured solution with 
+strong changes in slope. This ensures that the numerical approximation will not 
+give trivial answers. 
+then for some functions we need to impose boundary conditions. We will demonstrate
+how the careless implementation of a boundary condition can lead to close approximations
+on the interior.
+
+
+The speed of sound is defined with the subscript $analytic$ to indicate 
+that this is the analytical function of choice and has no physical relevance 
+to the actual problem.
+
+\begin{align*}
+\widetilde{A}_{analytic} = \Lambda + k_1 \tanh \left( k_2 \left( \widetilde{r} - \widetilde{r}_{max} \right) \right),
+\end{align*}
+
+where, 
+
+\begin{align*}
+    \Lambda = 1 - k_1 \tanh(k_2 (1 - \widetilde{r}_{max})),
+\end{align*}
+
+When, $\widetilde{r}=\widetilde{r}_{max}$ , $\widetilde{A}_{analytic} = 1$.  
+Taking the derivative with respect to $\widetilde{r}$,
+
+\begin{align*}
+    \frac{\partial \widetilde{A}_{analytic} }{\partial \widetilde{r}} &=
+    \left(1 - \tanh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}\right) {k}_{1} {k}_{2}, \\ 
+    &= \frac{ k_{1} k_{2}}{\cosh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}}.
+\end{align*}
+
+Substitute this into the expression for $M_{\theta}$ in Equation 
+\ref{eq:Mthetabackcalculated},
+
+\begin{align*}
+    M_{\theta} = \sqrt{2}
+    \sqrt{\frac{r {k}_{1} {k}_{2}}{\left(\kappa - 1\right) \left(\tanh{\left(\left(r - r_{max}\right) {k}_{2} \right)} {k}_{1} + \tanh{\left(\left(r_{max} - 1\right) {k}_{2} \right)} {k}_{1} + 1\right) \cosh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}}}
+\end{align*} 
+
+Now that the mean flow is defined, the integration method used to obtain the 
+speed of sound
+
+% What happens when $r = r_{max}$?
+
+
+
+
+
+

@@ -2,9 +2,6 @@
 
 SWIRL analyzes axial flows with mean shear and swirl in lined and unlined ducts.
 
-# To Do
-- [x]
-- []
 ### Table of Contents
 
 - [Description](#description)

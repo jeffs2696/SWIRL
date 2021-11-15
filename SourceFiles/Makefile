@@ -65,6 +65,7 @@ F90FLAGS  =	\
 			-Wno-error=character-truncation \
 			-Wno-error=conversion-extra \
 			-Wno-error=conversion \
+			-Wno-error=unused-dummy-argument \
 			-Wno-error=do-subscript
 			
 F77      = gfortran
@@ -80,6 +81,7 @@ F77FLAGS  = \
 			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
 			-Wno-error=compare-reals \
 			-Wno-error=array-temporaries \
+			-Wno-error=unused-dummy-argument \
 			-Wno-error=do-subscript
 
 
@@ -87,6 +89,7 @@ F77FLAGS  = \
 
 #-Wno-error=do-subscript \ -Wno-error=array-temporaries \ -Wno-error=conversion-extra 
 # -Wno-error=do-subscript
+			# -Wno-error=unused-dummy-argument\
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
 #	-v  -bloadmap:load.map
 #

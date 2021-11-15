@@ -1,0 +1,161 @@
+
+\subsection{Theory}
+
+To relate the speed of sound to a given flow, the radial momentum equation
+is used.  If the flow contains a swirling component,then the primitive variables 
+are nonuniform through the flow, and mean flow assumptions are not valid. 
+\begin{align*}
+    \frac{\partial v_r}{\partial t} +
+    v_r \frac{\partial v_r}{\partial r} + 
+    \frac{v_{\theta}}{r} 
+    \frac{\partial v_{\theta}}{\partial \theta} -
+    \frac{v_{\theta}^2}{r} 
+    v_x \frac{\partial v_r}{\partial x} =
+    \frac{1}{\rho}\frac{\partial P}{\partial r}
+\end{align*}
+
+ To account to for this, the radial momentum is simplified by assuming the 
+ flow is steady, the flow has no radial component. In addition, the viscous
+ and body forces are neglected.  Then the radial pressure derivative term is
+ set equal to the dynamic pressure term. Seperation of variables is applied.  
+
+ \begin{align*}
+     \frac{v_{\theta}^2}{r} = \frac{1}{\rho}\frac{\partial P}{\partial r} \\
+ P = \int_{r}^{r_{max}} \frac{\rho V_{\theta}^2}{  r}
+ \end{align*}
+
+To show the work, we will start with the dimensional form of the equation and
+differentiate both sides.  Applying separation of variables,
+ \[
+     \int_{r}^{r_{max}}
+     \frac{\bar{\rho} v_{\theta}^2}{r} \partial r 
+     =-\int_{P(r)}^{P(r_{max})}\partial p.
+ \]
+
+Since $\tilde{r} = r/r_{max}$,
+\[r = \tilde{r}r_{max}.\]
+Taking total derivatives (i.e. applying chain rule),
+\[dr = d(\tilde{r}r_{max}) = d(\tilde{r})r_{max}, \]
+Substituting these back in and evaluating the right hand side,
+\[
+    \int_{\tilde{r}}^{1} \frac{\bar{\rho} v_{\theta}^2}{\tilde{r}}\partial \tilde{r} 
+    =P(1)-P(\tilde{r})
+\]
+
+For reference the minimum value of $\tilde{r}$ is,
+
+\[\sigma = \frac{r_{max}}{r_{min}}\]
+
+For the radial derivative, the definition of the speed of sound is utilized,
+\[\frac{\partial A^2}{\partial r } =
+\frac{\partial}{\partial r} \left( \frac{\gamma P}{\rho} \right).\]
+
+Using the quotient rule, the definition of the speed of sound is extracted,
+
+\begin{align*}
+&= \frac{\partial P}{\partial r} \frac{\gamma \bar{\rho}}{\bar{\rho}^2} -
+\left(
+    \frac{\gamma P}{\bar{\rho}^2} 
+\right) 
+\frac{\partial \bar{\rho}}{\partial r}\\
+&=  \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} -
+\left( \frac{A^2}{\bar{\rho}} \right) 
+\frac{\partial \bar{\rho} }{\partial r}
+\end{align*}
+
+Using isentropic condition $ \partial P/A^2 = \partial \rho$, 
+
+\begin{align*}
+&= \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} -
+\left( \frac{1}{\bar{\rho}} \right) \frac{\partial  P }{\partial r}\\
+\frac{\partial A^2}{\partial r} 
+&= \frac{\partial P}{\partial r} \frac{\gamma - 1}{\bar{\rho}}  
+\end{align*}
+
+\begin{align*}
+    \frac{\bar{\rho}}{\gamma -1}\frac{\partial A^2}{\partial r} &= \frac{\partial P}{\partial r} 
+\end{align*}
+
+
+Going back to the radial momentum equation, and rearranging the terms will simplify 
+the expression. The following terms are defined to start the
+nondimensionalization.  
+
+\begin{align*}
+    M_{\theta} &= \frac{V_{\theta}}{A} \\ 
+    \widetilde{r} &= \frac{r}{r_{max}}  \\
+    \widetilde{A} &= \frac{A}{A_{r,max}}  \\
+    A &= \widetilde{A}{A_{r,max}} \\
+    r &= \widetilde{r}{r_{max}}\\
+    \frac{\partial}{\partial r} &=
+    \frac{\partial \widetilde{r}}{\partial r} \frac{\partial}{\partial \widetilde{r}}\\
+                                &= \frac{1}{r_{max}}\frac{\partial}{\partial \widetilde{r}}
+\end{align*}
+Dividing by $A$,
+\begin{align*}
+    \frac{M_{\theta}^2}{r}\left(\gamma - 1\right) 
+ &= \frac{\partial A^2}{\partial r} \frac{1}{A^2}
+\end{align*}
+
+Now there is two options, either find the derivative of  $\bar{A}$ or the integral of
+$M_{\theta}$ with respect to r.
+\begin{enumerate}
+    \item
+\begin{align*}
+\text{Integrating both sides } \int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=\int_{A^2(r)}^{A^2(r_{max})}\frac{1}{A^2}  {\partial A^2}\\
+\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln(A^2(r_{max})) - ln(A^2(r)) \\
+\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{A^2(r_{max})}{A^2(r)}\right) 
+\end{align*}
+
+Defining non dimensional speed of sound $\tilde{A} = \frac{A(r)}{A(r_{max})}$
+\begin{align*}
+\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{1}{\tilde{A}^2}\right) \\
+&= -2ln(\tilde{A})\\
+\tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
+\tilde{A}(\tilde{r}) &= exp\left[\left(\frac{1 - \gamma}{2}\right)\int_{\tilde{r}}^{1}\frac{M_{\theta}}{\tilde{r}}{\partial \tilde{r}}\right]	
+\end{align*}
+\item Or we can differentiate
+\end{enumerate}
+Solving for $M_{\theta}$ ,
+\begin{align*}
+M_{\theta}^2 
+&= \frac{\partial A^2}{\partial r} \frac{r}{A^2 \left(\gamma - 1\right)}
+\end{align*}
+Nondimensionalizing and substituting, 
+
+\begin{align} 
+    M_{\theta}^2
+    \frac{\left( \gamma - 1 \right)}{\widetilde{r} r_{max}} &=
+    \frac{1}{(\widetilde{A}A_{r,max})^2}\frac{A_{r,max}^2}{r_{max}}
+    \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}} \nonumber \\
+    M_{\theta}^2     \frac{\left( \gamma - 1 \right)}{\widetilde{r} } &=
+    \frac{1}{\widetilde{A}^2}
+    \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}} \nonumber \\
+    M_{\theta} &= \sqrt{\frac{\widetilde{r}}{(\gamma-1) \widetilde{A}^2}
+        \frac{\partial\widetilde{A}^2}{\partial \widetilde{r} }
+    } \label{eq:Mthetabackcalculated}
+\end{align}
+
+% 3.1 Guidelines for Creating Manufactured Solutions states:
+% \begin{enumerate}
+%     \item  The manufactured solutions should be composed of smooth analytic 
+%         functions 
+%     \item The manufactured solutions should exercize every term in the governing
+%         equation that is being tested,
+%     \item The solution should have non trivial derivatives.  
+%     \item The solution derivatives should be bounded by a small constant. In this case
+%         this constant should prevent the function from becoming greater than 
+%         one.
+%     \item The solution should not prevent the code from running 
+%     \item The solution should be defined on a connected subset of two- or three-
+%         dimensional space to allow flexibility in chosing the domain of the PDE.
+%         Section 3.3.1 provides more information about this.
+%     \item The solution should coincide with the differential operators of the PDE.
+%         For example, the flux term in Fourier's law of conduction requires T to 
+%         be differentiable.
+% \end{enumerate}
+% With these guidelines, a function is specified for the speed of sound to conduct
+% a method of manufactured solutions on SWIRL's speed of sound numerical 
+% integration. This is checked by observing the tangential mach number 
+% produced from the speed of sound and comparing that to the tangential mach number
+% that has been analytically defined (See Equation \ref{eq:Mthetabackcalculated}).

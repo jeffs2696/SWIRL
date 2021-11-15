@@ -9,428 +9,65 @@
 \doublespacing
 \begin{document}
 \input{introduction}
-
-\section{Methods}
-
-SWIRL is a linearized Euler equations of motion code that calculates the 
-axial wavenumber and radial mode shapes from small unsteady disturbances in a mean flow. 
-The mean flow varies along the axial and tangetial directons as a function of 
-radius. The flow domain can either be a circular or annular duct, with or without
-acoustic liner. SWIRL was originally written by Kousen [insert ref].
-
-The SWIRL code requires two mean flow parameters as a function of radius, $M_x$
-, and $M_{\theta}$. Afterwards, the speed of sound, $\widetilde{A}$ is calculated by 
-integrating $M_{\theta}$ with respect to r. To verify that SWIRL is handling 
-and returning the accompanying mean flow parameters, the error between the 
-mean flow input and output variables are computed. Since the trapezoidal rule
-is used to numerically integrate $M_{\theta}$, the discretization error and 
-order of accuracy is computed. Since finite differencing schemes are to be used 
-on the result of this integration, it is crucial to accompany the integration 
-with methods of equal or less order of accuracy. This will be determined by 
-applying another MMS on the eigenproblem which will also have an order of 
-accuracy.
-
-\subsection{Theory}
-
-To relate the speed of sound to a given flow, the radial momentum equation
-is used.  If the flow contains a swirling component,then the primitive variables 
-are nonuniform through the flow, and mean flow assumptions are not valid. 
-\begin{align*}
-    \frac{\partial v_r}{\partial t} +
-    v_r \frac{\partial v_r}{\partial r} + 
-    \frac{v_{\theta}}{r} 
-    \frac{\partial v_{\theta}}{\partial \theta} -
-    \frac{v_{\theta}^2}{r} 
-    v_x \frac{\partial v_r}{\partial x} =
-    \frac{1}{\rho}\frac{\partial P}{\partial r}
-\end{align*}
-
- To account to for this, the radial momentum is simplified by assuming the 
- flow is steady, the flow has no radial component. In addition, the viscous
- and body forces are neglected.  Then the radial pressure derivative term is
- set equal to the dynamic pressure term. Seperation of variables is applied.  
-
- \begin{align*}
-     \frac{v_{\theta}^2}{r} = \frac{1}{\rho}\frac{\partial P}{\partial r} \\
- P = \int_{r}^{r_{max}} \frac{\rho V_{\theta}^2}{  r}
- \end{align*}
-
-To show the work, we will start with the dimensional form of the equation and
-differentiate both sides.  Applying separation of variables,
- \[
-     \int_{r}^{r_{max}}
-     \frac{\bar{\rho} v_{\theta}^2}{r} \partial r 
-     =-\int_{P(r)}^{P(r_{max})}\partial p.
- \]
-
-Since $\tilde{r} = r/r_{max}$,
-\[r = \tilde{r}r_{max}.\]
-Taking total derivatives (i.e. applying chain rule),
-\[dr = d(\tilde{r}r_{max}) = d(\tilde{r})r_{max}, \]
-Substituting these back in and evaluating the right hand side,
-\[
-    \int_{\tilde{r}}^{1} \frac{\bar{\rho} v_{\theta}^2}{\tilde{r}}\partial \tilde{r} 
-    =P(1)-P(\tilde{r})
-\]
-
-For reference the minimum value of $\tilde{r}$ is,
-
-\[\sigma = \frac{r_{max}}{r_{min}}\]
-
-For the radial derivative, the definition of the speed of sound is utilized,
-\[\frac{\partial A^2}{\partial r } =
-\frac{\partial}{\partial r} \left( \frac{\gamma P}{\rho} \right).\]
-
-Using the quotient rule, the definition of the speed of sound is extracted,
-
-\begin{align*}
-&= \frac{\partial P}{\partial r} \frac{\gamma \bar{\rho}}{\bar{\rho}^2} -
-\left(
-    \frac{\gamma P}{\bar{\rho}^2} 
-\right) 
-\frac{\partial \bar{\rho}}{\partial r}\\
-&=  \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} -
-\left( \frac{A^2}{\bar{\rho}} \right) 
-\frac{\partial \bar{\rho} }{\partial r}
-\end{align*}
-
-Using isentropic condition $ \partial P/A^2 = \partial \rho$, 
-
-\begin{align*}
-&= \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} -
-\left( \frac{1}{\bar{\rho}} \right) \frac{\partial  P }{\partial r}\\
-\frac{\partial A^2}{\partial r} 
-&= \frac{\partial P}{\partial r} \frac{\gamma - 1}{\bar{\rho}}  
-\end{align*}
-
-\begin{align*}
-    \frac{\bar{\rho}}{\gamma -1}\frac{\partial A^2}{\partial r} &= \frac{\partial P}{\partial r} 
-\end{align*}
-
-
-Going back to the radial momentum equation, and rearranging the terms will simplify 
-the expression. The following terms are defined to start the
-nondimensionalization.  
-
-\begin{align*}
-    M_{\theta} &= \frac{V_{\theta}}{A} \\ 
-    \widetilde{r} &= \frac{r}{r_{max}}  \\
-    \widetilde{A} &= \frac{A}{A_{r,max}}  \\
-    A &= \widetilde{A}{A_{r,max}} \\
-    r &= \widetilde{r}{r_{max}}\\
-    \frac{\partial}{\partial r} &=
-    \frac{\partial \widetilde{r}}{\partial r} \frac{\partial}{\partial \widetilde{r}}\\
-                                &= \frac{1}{r_{max}}\frac{\partial}{\partial \widetilde{r}}
-\end{align*}
-Dividing by $A$,
-\begin{align*}
-    \frac{M_{\theta}^2}{r}\left(\gamma - 1\right) 
- &= \frac{\partial A^2}{\partial r} \frac{1}{A^2}
-\end{align*}
-
-Now there is two options, either find the derivative of  $\bar{A}$ or the integral of
-$M_{\theta}$ with respect to r.
-\begin{enumerate}
-    \item
-\begin{align*}
-\text{Integrating both sides } \int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=\int_{A^2(r)}^{A^2(r_{max})}\frac{1}{A^2}  {\partial A^2}\\
-\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln(A^2(r_{max})) - ln(A^2(r)) \\
-\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{A^2(r_{max})}{A^2(r)}\right) 
-\end{align*}
-
-Defining non dimensional speed of sound $\tilde{A} = \frac{A(r)}{A(r_{max})}$
-\begin{align*}
-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{1}{\tilde{A}^2}\right) \\
-&= -2ln(\tilde{A})\\
-\tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
-\tilde{A}(\tilde{r}) &= exp\left[\left(\frac{1 - \gamma}{2}\right)\int_{\tilde{r}}^{1}\frac{M_{\theta}}{\tilde{r}}{\partial \tilde{r}}\right]	
-\end{align*}
-\item Or we can differentiate
-\end{enumerate}
-Solving for $M_{\theta}$ ,
-\begin{align*}
-M_{\theta}^2 
-&= \frac{\partial A^2}{\partial r} \frac{r}{A^2 \left(\gamma - 1\right)}
-\end{align*}
-Nondimensionalizing and substituting, 
-
-\begin{align} 
-    M_{\theta}^2
-    \frac{\left( \gamma - 1 \right)}{\widetilde{r} r_{max}} &=
-    \frac{1}{(\widetilde{A}A_{r,max})^2}\frac{A_{r,max}^2}{r_{max}}
-    \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}} \nonumber \\
-    M_{\theta}^2     \frac{\left( \gamma - 1 \right)}{\widetilde{r} } &=
-    \frac{1}{\widetilde{A}^2}
-    \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}} \nonumber \\
-    M_{\theta} &= \sqrt{\frac{\widetilde{r}}{(\gamma-1) \widetilde{A}^2}
-        \frac{\partial\widetilde{A}^2}{\partial \widetilde{r} }
-    } \label{eq:Mthetabackcalculated}
-\end{align}
-
-% 3.1 Guidelines for Creating Manufactured Solutions states:
-% \begin{enumerate}
-%     \item  The manufactured solutions should be composed of smooth analytic 
-%         functions 
-%     \item The manufactured solutions should exercize every term in the governing
-%         equation that is being tested,
-%     \item The solution should have non trivial derivatives.  
-%     \item The solution derivatives should be bounded by a small constant. In this case
-%         this constant should prevent the function from becoming greater than 
-%         one.
-%     \item The solution should not prevent the code from running 
-%     \item The solution should be defined on a connected subset of two- or three-
-%         dimensional space to allow flexibility in chosing the domain of the PDE.
-%         Section 3.3.1 provides more information about this.
-%     \item The solution should coincide with the differential operators of the PDE.
-%         For example, the flux term in Fourier's law of conduction requires T to 
-%         be differentiable.
-% \end{enumerate}
-% With these guidelines, a function is specified for the speed of sound to conduct
-% a method of manufactured solutions on SWIRL's speed of sound numerical 
-% integration. This is checked by observing the tangential mach number 
-% produced from the speed of sound and comparing that to the tangential mach number
-% that has been analytically defined (See Equation \ref{eq:Mthetabackcalculated}).
-
-\subsection{Procedure}
-
-There are a few constraints and conditions that must be followed in order for the analytical 
-function to have physical significance.
-\begin{itemize}
-    \item The mean flow and speed of sound must be real and positive. This will 
-        occur is a speed of sound is chosen such that the tangential mach number
-        is imaginary
-    \item The derivative of the speed of sound must be positive
-    \item Any bounding constants used with the mean flow should not allow the 
-        total Mach number to exceed one.
-    \item the speed of sound should be one at the outer radius of the cylinder
-\end{itemize}
-
-Given these constraints, $tanh(r)$ is chosen as a function since it can be
-modified to meet the conditions above.
-
-The benefit of tanh(r) is that it is bounded between one and negative one, i.e.
-
-\begin{itemize}
-    \item As r $\rightarrow$ $\infty$ tanh(r) $\rightarrow$ 1
-    \item As -r $\rightarrow$ $-\infty$ tanh(r) $\rightarrow$ -1
-\end{itemize}
-
-To test the numerical integration method,  $M_{\theta}$ is defined as a result 
-of differentiating the speed of sound, $A$. This is done opposed to integrating
-$M_{\theta}$. However, a function can be defined for $M_{\theta}$, which can 
-then be integrated to find what $\widetilde{A}$ should be. 
-Instead, the procedure of choice is to back calculate what the appropriate 
-$M_{\theta}$ is for a given expression for $\widetilde{A}$.
-
-Since it is easier to take derivatives , we will solve for $M_{\theta}$ using 
-Equation \ref{eq:Mthetabackcalculated} ,
-
-\begin{align*}
-    M_{\theta} = \sqrt{ \frac{\widetilde{r}}{(\gamma -1) \widetilde{A}^2} 
-    \frac{\partial \widetilde{A}^2}{\partial \widetilde{r}}}
-\end{align*}
-
-The speed of sound is defined with the subscript $analytic$ to indicate 
-that this is the analytical function of choice and has no physical relevance 
-to the actual problem.
-
-\begin{align*}
-\widetilde{A}_{analytic} = \Lambda + k_1 \tanh \left( k_2 \left( \widetilde{r} - \widetilde{r}_{max} \right) \right),
-\end{align*}
-
-where, 
-
-\begin{align*}
-    \Lambda = 1 - k_1 \tanh(k_2 (1 - \widetilde{r}_{max})),
-\end{align*}
-
-When, $\widetilde{r}=\widetilde{r}_{max}$ , $\widetilde{A}_{analytic} = 1$.  
-Taking the derivative with respect to $\widetilde{r}$,
-
-\begin{align*}
-    \frac{\partial \widetilde{A}_{analytic} }{\partial \widetilde{r}} &=
-    \left(1 - \tanh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}\right) {k}_{1} {k}_{2}, \\ 
-    &= \frac{ k_{1} k_{2}}{\cosh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}}.
-\end{align*}
-
-Substitute this into the expression for $M_{\theta}$ in Equation 
-\ref{eq:Mthetabackcalculated},
-
-\begin{align*}
-    M_{\theta} = \sqrt{2}
-    \sqrt{\frac{r {k}_{1} {k}_{2}}{\left(\kappa - 1\right) \left(\tanh{\left(\left(r - r_{max}\right) {k}_{2} \right)} {k}_{1} + \tanh{\left(\left(r_{max} - 1\right) {k}_{2} \right)} {k}_{1} + 1\right) \cosh^{2}{\left(\left(r - r_{max}\right) {k}_{2} \right)}}}
-\end{align*} 
-
-Now that the mean flow is defined, the integration method used to obtain the 
-speed of sound
-
-% What happens when $r = r_{max}$?
-
-\subsection{Calculation of Observed Order-of-Accuracy}
-The numerical scheme used to perform the integration of the tangential velocity
-will have a theoretical order-of-accuracy. To find the theoretical 
-order-of-accuracy, the discretization error must first be defined. The error, 
-$\epsilon$, is a function of id spacing, $\Delta r$
-
-\[ \epsilon = \epsilon(\Delta r) \]
-
-The discretization error in the solution should be proportional to 
-$\left( \Delta r \right)^{\alpha}$ where $\alpha > 0$ is the theoretical order
-for the computational method.  The error for each grid is expressed as 
-\[ \epsilon_{M_{\theta}}(\Delta r) = |M_{\theta,analytic}-M_{\theta,calc}|\]
-where $M_{\theta,analytic}$ is the tangential mach number that is defined from the
-speed of sound we also defined and the $M_{\theta,calc}$ is the result from 
-SWIRL. The $\Delta r$ is to indicate that this is a discretization error for a
-specific grid spacing. Applying the same concept to to the speed of sound,
-
-If we define this error on various grid sizes and compute $\epsilon$ for
-each grid, the observed order of accuracy can be estimated and compared to
-the theoretical order of accuracy. For instance, if the numerical soution
-is second-order accurate and the error is converging to a value, the L2 norm of
-the error will decrease by a factor of 4 for every halving of the grid cell 
-size. 
-
-Since the input variables should remain unchanged (except from minor changes 
-from the Akima interpolation), the error for the axial and tangential mach 
-number should be zero. As for the speed of sound, since we are using an analytic
-expression for the tangential mach number, we know what the theoretical result
-would be from the numerical integration technique as shown above. 
-Similarly we define the discretization error for the speed of sound.
-
-\[ \epsilon_{A}(\Delta r) = |A_{analytic}-A_{calc}|\]
-
-For a perfect answer, we expect $\epsilon$ to be zero. Since a Taylor series can 
-be used to derive the numerical schemes, we know that the truncation of higher
-order terms is what indicates the error we expect from using a scheme that 
-is constructed with such truncated Taylor series.
-
-The error at each grid point $j$ is expected to satisfy the following,
-
-\begin{align*}
-    0 &= |A_{analytic}(r_j) - A_{calc}(r_j)| \\
-    \widetilde{A}_{analytic}(r_j) &= \widetilde{A}_{calc}(r_j) +
-    (\Delta r)^{\alpha} \beta(r_j)  + H.O.T
-\end{align*}
-
-where the value of $\beta(r_j)$ does not change with grid spacing, and 
-$\alpha$ is the asymptotic order of accuracy of the method. It is important to
-note that the numerical method recovers the original equations as the grid 
-spacing approached zero.  It is important to note that $\beta$ represents the
-first derivative of the Taylor Series.  Subtracting $A_{analytic}$ from both
-sides gives,
-
-\begin{align*}
-    A_{calc}(r_j) - A_{analytic}(r_j) &= A_{analytic}(r_j) - A_{analytic}(r_j)
-    + \beta(r_j) (\Delta r)^{\alpha} \\
-    \epsilon_A(r_j)(\Delta r) &= \beta(r_j) (\Delta r)^{\alpha}
-\end{align*}
-
-To estimate the order of accuracy of the accuracy, we define the global errors 
-by calculating the L2 Norm of the error which is denoted as $\hat{\epsilon}_A$ 
-
-\begin{align*}
-    \hat{\epsilon}_A = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \epsilon(r_j)^2  }
-\end{align*}
-
-\begin{align*}
-    \hat{\beta}_A(r_j) = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \beta(r_j)^2  }
-\end{align*}
-
-As the grid density increases, $\hat{\beta}$ should asymptote to a constant 
-value. Given two grid densities, $\Delta r$ and $\sigma\Delta r$, and assuming
-that the leading error term is much larger than any other error term,
-
-\begin{align*}
-    \hat{\epsilon}_{grid 1} &= \hat{\epsilon}(\Delta r) = \hat{\beta}(\Delta r)^{\alpha} \\
-    \hat{\epsilon}_{grid 2} &= \hat{\epsilon}(\sigma \Delta r) = \hat{\beta}(\sigma \Delta r)^{\alpha} \\
-                            &= \hat{\beta}(\Delta r)^{\alpha} \sigma^{\alpha}
-\end{align*}
-
-The ratio of two errors is given by,
-
-\begin{align*}
-    \frac{\hat{\epsilon}_{grid 2}}{\hat{\epsilon}_{grid 1}} &= 
-    \frac{\hat{\beta}(\Delta r )^{\alpha}}{\hat{\beta}(\Delta r )^{\alpha}} \sigma^{\alpha} \\ &= \sigma^{\alpha}
-\end{align*}
-
-Thus, $\alpha$,the asymptotic rate of convergence is computed as follows 
-
-\begin{align*}
-    \alpha = \frac{
-        \ln \frac{
-            \hat{\epsilon}_{grid 2}
-    }{\hat{\epsilon}_{grid 1} }}
-    {\ln\left( \sigma \right) }
-\end{align*}
-
-Defining  for a doubling of grid points ,
-
-\begin{align*}
-    \alpha = \frac{\ln \left( \hat{\epsilon}\left( \frac{1}{2}\Delta  r\right)
-            \right) -\ln \left( \hat{\epsilon}\left( \Delta  r\right)
-    \right)}{\ln \left( \frac{1}{2} \right)}
-\end{align*}
-
-Similarly for the eigenvalue problem, 
-
-\[ [A]x = \lambda [B]x \]
-
+\input{methods}
+\input{theory}
+\input{procedure}
+\input{order-of-accuracy}
 \section{Code Documentation}
 
 placeholder
 \section{Results And Discussion}
 
-% \input{plotReport/plotReportBody.tex}
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/MachDistribution.tex}}
-    \end{center}
-\end{figure}
-
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/SoundSpeedFromIntegration.tex}}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/SoundSpeedError.tex}}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/L2OfSoundSpeed.tex}}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/ROC.tex}}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/SourceTermError.tex}}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/L2OfSourceTerm.tex}}
-    \end{center}
-\end{figure}
-
-\begin{figure}
-    \begin{center}
-        \scalebox{0.75}{\input{plotReport/ROC_Source.tex}}
-    \end{center}
-\end{figure}
-
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/MachDistribution.tex}}
+%    \end{center}
+%\end{figure}
+%
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/SoundSpeedFromIntegration.tex}}
+%    \end{center}
+%\end{figure}
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/SoundSpeedError.tex}}
+%    \end{center}
+%\end{figure}
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/L2OfSoundSpeed.tex}}
+%    \end{center}
+%\end{figure}
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/ROC.tex}}
+%    \end{center}
+%\end{figure}
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/SourceTermError.tex}}
+%    \end{center}
+%\end{figure}
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/L2OfSourceTerm.tex}}
+%    \end{center}
+%\end{figure}
+%
+%\begin{figure}
+%    \begin{center}
+%        \scalebox{0.75}{\input{plotReport/ROC_Source.tex}}
+%    \end{center}
+%\end{figure}
+%
 
 The data in Figure 1 indicates the two flow components of the velocity vector 
 used for the MMS. This test was intended to have a large swirling component to
