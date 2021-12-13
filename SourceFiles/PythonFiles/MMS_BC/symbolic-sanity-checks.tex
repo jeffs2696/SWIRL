@@ -1,0 +1,77 @@
+\subsection{Symbolic Sanity Checks}
+We want to ensure that $f_{BCsImposed}$ has the desired boundary conditions, 
+$f_{minBC/maxBC}$ instead of the original boundary values that come along
+for the ride in the manufactured solutions, $f_{MS}(\widetilde{r}=\sigma /1)$. 
+In another iteration of this method, we will be changing the derivative values,
+so let's check the values of $\frac{\partial f_{BCsImposed}}{\partial \widetilde{r}}$ 
+to make sure those aren't effected unintentionally.
+
+\subsubsection*{Symbolic Sanity Check 1}
+The modified manufactured solution, $f_{BCsImposed}$ with the fairing functions
+$A_{min}$ and $A_{max}$ substituted in is,
+\begin{align*}
+    f_{BCsImposed}(\widetilde{r}) =
+    \left(
+        3 \left(  \frac{\widetilde{r} - \sigma }{ 1 - \sigma}\right)^2- 
+        2 \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)^3 
+    \right)
+    \left[ \Delta f_{maxBC} \right] .
+\end{align*} 
+Further simplification yields,
+\begin{align*}
+    f_{BCsImposed}(\widetilde{r} = \sigma) 
+    &=
+    \left(
+        f_{MS}(\widetilde{r} = \sigma) +
+        \Delta f_{minBC} +
+        \left( 3\left(  \frac{\sigma - \sigma}{1 - \sigma} \right)^2- 
+          2\left(  \frac{\sigma - \sigma}{1 - \sigma} \right)^3- 
+        \right)
+        \left[ \Delta f_{maxBC} - \Delta f_{minBC}  \right] 
+    \right)\\
+    &=  f_{MS}(\widetilde{r} = \sigma) + \Delta f_{minBC}\\
+    &=  f_{MS}(\widetilde{r} = \sigma) + (f_{minBC} - f_{MS}(\widetilde{r} = \sigma)) \\
+    &=  f_{minBC}
+\end{align*} 
+
+
+\begin{align*}
+    f_{BCsImposed}(\widetilde{r} = 1 ) 
+    &=
+    \left(
+        f_{MS}(\widetilde{r} = 1) +
+        \Delta f_{minBC} +
+        \left( 3\left(  \frac{1 - \sigma}{1 - \sigma} \right)^2- 
+          2\left(  \frac{1 - \sigma}{1 - \sigma} \right)^3- 
+        \right)
+        \left[ \Delta f_{maxBC} - \Delta f_{minBC}  \right] 
+    \right)\\
+    &=  f_{MS}(\widetilde{r} = 1) + \Delta f_{maxBC}\\
+    &=  f_{MS}(\widetilde{r} = 1) + (f_{maxBC} - f_{MS}(\widetilde{r} = 1)) \\
+    &=  f_{maxBC}
+\end{align*} 
+
+
+\begin{align*}
+    \frac{\partial}{\partial \widetilde{r}}\left(  f_{BCsImposed}(\widetilde{r}) =
+    \left(
+        3 \left(  \frac{\widetilde{r} - \sigma }{ 1 - \sigma}\right)^2- 
+        2 \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)^3 
+    \right)
+    \left[ \Delta f_{maxBC} \right]\right) \\
+    \frac{\partial f_{MS}}{\partial \widetilde{r}} + 
+    \left( \frac{6}{1-\sigma} \right)
+    \left( 
+        \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right) -
+    \left( \frac{r - \sigma}{1 - \sigma} \right)^2 \right)
+    \left( \Delta f_{maxBC} - \Delta f_{minBC} \right)
+\end{align*} 
+
+
+At $\widetilde{r} = \sigma$, the derivative is: 
+
+\begin{align*}
+    \frac{\partial f_{MS}}{\partial \widetilde{r}}|_{\sigma} \\
+    \frac{\partial f_{MS}}{\partial \widetilde{r}}|_{1} 
+\end{align*}
+
