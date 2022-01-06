@@ -1,0 +1,9 @@
+README.md
+setup.py
+plotReportLib/__init__.py
+plotReportLib/myfunctions.py
+plotReportLib.egg-info/PKG-INFO
+plotReportLib.egg-info/SOURCES.txt
+plotReportLib.egg-info/dependency_links.txt
+plotReportLib.egg-info/requires.txt
+plotReportLib.egg-info/top_level.txt

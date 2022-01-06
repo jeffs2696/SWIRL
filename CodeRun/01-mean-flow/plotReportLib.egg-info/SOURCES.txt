@@ -1,0 +1,5 @@
+plotReportLib.egg-info/PKG-INFO
+plotReportLib.egg-info/SOURCES.txt
+plotReportLib.egg-info/dependency_links.txt
+plotReportLib.egg-info/requires.txt
+plotReportLib.egg-info/top_level.txt
