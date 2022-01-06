@@ -7,60 +7,78 @@
 \nextgroupplot[
 axis line style={white!15!black},
 legend cell align={left},
-legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=none},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=none
+},
 log basis y={10},
 scaled x ticks=manual:{}{\pgfmathparse{#1}},
 tick align=outside,
 tick pos=left,
 title={Rate Of Convergence},
 x grid style={white!80!black},
-xmin=0.49602339181245, xmax=0.60495126705655,
+xmajorgrids,
+xmin=-9.7, xmax=269.7,
 xtick style={color=white!15!black},
 xticklabels={},
 y grid style={white!80!black},
-ymin=0.254477777741033, ymax=5.38512252366898,
+ymajorgrids,
+ymin=0.120179448142703, ymax=3.37658389826634,
 ymode=log,
 ytick style={color=white!15!black}
 ]
 \addplot [semithick, color0]
 table {%
-0.6 1.117215809769
-0.555555555556 -0.108106547515
-0.529411764706 0.292349221717
-0.515151515152 2.237072233769
-0.507692307692 4.687524066724
-0.503875968992 2.844877457911
-0.501945525292 2.011624846242
-0.500974658869 2.003715117145
+3 0.139854940165
+5 2.901549198208
+9 1.977988434508
+17 1.999649604478
+33 1.994368784807
+65 1.995803507321
+129 1.997560485834
+257 1.998695137951
 };
 \addlegendentry{Speed Of Sound}
 
 \nextgroupplot[
 axis line style={white!15!black},
 legend cell align={left},
-legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=none},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=none
+},
 log basis y={10},
 tick align=outside,
 tick pos=left,
 x grid style={white!80!black},
-xlabel={Del r},
-xmin=0.49602339181245, xmax=0.60495126705655,
+xlabel={Number of Grid Points},
+xmajorgrids,
+xmin=-9.7, xmax=269.7,
 xtick style={color=white!15!black},
 y grid style={white!80!black},
-ymin=0.220479131134367, ymax=2.15815178784938,
+ymajorgrids,
+ymin=0.297102113193698, ymax=2.13967516413312,
 ymode=log,
 ytick style={color=white!15!black}
 ]
 \addplot [semithick, color0]
 table {%
-0.6 0.374648400712
-0.555555555556 0.269558098431
-0.529411764706 0.433697553099
-0.515151515152 0.244568188021
-0.507692307692 0.704435399028
-0.503875968992 1.436704719213
-0.501945525292 1.75130748895
-0.500974658869 1.945581863657
+3 0.351974003565
+5 0.324997770678
+9 0.546016850008
+17 0.488431344335
+33 0.747052911947
+65 1.52086815256
+129 1.709461490676
+257 1.956019610491
 };
 \addlegendentry{LEE}
 \end{groupplot}

@@ -27,7 +27,7 @@ OPEN(&
 WRITE(UNIT,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
 
 DO i = 1,numberOfIterations - 1
-    WRITE(UNIT,FORMAT_ROC)  REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
+   WRITE(UNIT,FORMAT_ROC)  REAL(1+2**(i),KIND=rDef), &
         RateOfConvergence1(i) 
 ENDDO
 
@@ -63,7 +63,7 @@ WRITE(UNIT,FORMAT_ROC_HEADER) 'Delta_r ' , 'ROC'
 DO i = 1,numberOfIterations - 1
 
     WRITE(UNIT,FORMAT_ROC) &
-        REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
+       REAL(1+2**(i),KIND=rDef), &
         ABS(REAL(RateOfConvergence2(i),KIND=rDef))
 
 ENDDO
@@ -86,7 +86,7 @@ END DO
 WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
 DO i = 1,numberOfIterations - 1
     WRITE(0,FORMAT_ROC) &
-        REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
+       REAL(1+2**(i),KIND=rDef), &
         RateOfConvergence1(i)
 ENDDO
 
@@ -94,7 +94,7 @@ WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
 
 DO i = 1,numberOfIterations - 1
     WRITE(0,FORMAT_ROC) &
-        REAL(1+2**(i),KIND=rDef)/REAL(1+2**(i+1),KIND=rDef), &
+       REAL(1+2**(i),KIND=rDef), &
         RateOfConvergence2(i)
 ENDDO
 ! ! ELSE

@@ -8,15 +8,32 @@ import tikzplotlib
 import glob
 import os
 import pandas as pd
+from sympy import * 
+from numpy import *
 import matplotlib as mpl
 from matplotlib import pyplot as plt
+from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
 
+def plotEquation(x_data,y_data):
+    
+    # convert symbolic expressions using numpy
+    debug = 1 
+    fig = plt.figure(figsize=(10,6))
+    ax = plt.axes()
+    ax.grid(True,which='major',axis='both',alpha=0.3) 
+    plt.plot(x_data, y_data)
+    if debug == 0:
+        return 
+    else:
+        plt.show()
+            
+    return fig
 
 # In[21]:
 
 
 mean_flow_file_path= '01-mean-flow/'
-MMS_path = '03-method-of-manufactured-solutions/'
+MMS_path = '02-method-of-manufactured-solutions/'
 data_paths = [mean_flow_file_path,MMS_path]
 
 for i in range(len(data_paths)):
@@ -33,10 +50,10 @@ flow_data = pd.read_csv(                   '01-mean-flow/mean-flow513.dat',     
 # In[23]:
 
 
-LEE_L2_data = pd.read_csv(                      '03-method-of-manufactured-solutions/L2-LEE.dat',                       delim_whitespace=True)
-LEE_ROC_data = pd.read_csv(                      '03-method-of-manufactured-solutions/ROC-LEE.dat',                       delim_whitespace=True)
-SND_L2_data = pd.read_csv(                      '03-method-of-manufactured-solutions/L2-sound_speed-.dat',                       delim_whitespace=True)
-SND_ROC_data = pd.read_csv(                      '03-method-of-manufactured-solutions/ROC-sound_speed.dat',                       delim_whitespace=True)
+LEE_L2_data = pd.read_csv(                      '02-method-of-manufactured-solutions/L2-LEE.dat',                       delim_whitespace=True)
+LEE_ROC_data = pd.read_csv(                     '02-method-of-manufactured-solutions/ROC-LEE.dat',                       delim_whitespace=True)
+SND_L2_data = pd.read_csv(                      '02-method-of-manufactured-solutions/L2-sound_speed-.dat',                       delim_whitespace=True)
+SND_ROC_data = pd.read_csv(                     '02-method-of-manufactured-solutions/ROC-sound_speed.dat',                       delim_whitespace=True)
 
 
 # In[24]:
@@ -52,7 +69,9 @@ SND_ROC = SND_ROC_data.ROC
 
 plt.style.use('seaborn-ticks')
 # plot data
+
 plt.rcParams
+
 plt.plot(          flow_data['radius'],flow_data['M_x'],          label = '$M_{x}$',         )
 plt.plot(         flow_data['radius'],flow_data['M_theta'],          label = '$M_{\\theta}$' ,         )
 
@@ -62,7 +81,12 @@ plt.title('Mean Flow ')
 plt.ylabel('Mach Number')
 plt.xlabel('Radius')
 plt.tight_layout()
-tikzplotlib.save("plotReport/MachDistribution.tex")
+
+radius_data = flow_data['radius']
+
+ax.grid(True,which='major',axis='both',alpha=0.3) 
+
+tikzplotlib.save("03-plotReport/MachDistribution.tex")
 
 
 # In[31]:
@@ -75,7 +99,8 @@ ax.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Act
 ax.set_ylabel('Speed of Sound')
 ax.set_xlabel('Radius')
 ax.legend()
-tikzplotlib.save("plotReport/SoundSpeedFromIntegration.tex")
+ax.grid(True,which='major',axis='both',alpha=0.3) 
+tikzplotlib.save("03-plotReport/SoundSpeedFromIntegration.tex")
 
 
 # In[27]:
@@ -92,8 +117,12 @@ ax3.plot(         flow_data['radius'],flow_data['vX']        )
 ax3.set_ylabel('Axial')
 ax4.plot(         flow_data['radius'],flow_data['Pr']        )
 ax4.set_ylabel('Pressure')
+ax1.grid(True,which='major',axis='both',alpha=0.3) 
+ax2.grid(True,which='major',axis='both',alpha=0.3) 
+ax3.grid(True,which='major',axis='both',alpha=0.3) 
+ax4.grid(True,which='major',axis='both',alpha=0.3) 
 
-tikzplotlib.save("plotReport/PerturbationVariables.tex")
+tikzplotlib.save("03-plotReport/PerturbationVariables.tex")
 
 
 # In[28]:
@@ -107,7 +136,7 @@ ax2.semilogy(Delta_r,LEE_ROC,label='LEE')
 ax2.legend()
 ax2.set_xlabel('Del r')
 
-tikzplotlib.save("plotReport/ROC.tex")
+tikzplotlib.save("03-plotReport/ROC.tex")
 
 
 # In[29]:
@@ -130,7 +159,7 @@ ax[2].plot(flow_data['radius'],flow_data['S_3_a'],alpha=0.5, lw=5)
 ax[3].set_ylabel('Energy')
 ax[3].plot(flow_data['radius'],flow_data['S_4_e'],alpha =0.7, lw=7)
 ax[3].plot(flow_data['radius'],flow_data['S_4_a'],alpha=0.5, lw=5) 
-tikzplotlib.save("plotReport/SourceTermData.tex")
+tikzplotlib.save("03-plotReport/SourceTermData.tex")
 
 
 # In[ ]:

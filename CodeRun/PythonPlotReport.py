@@ -8,9 +8,26 @@ import tikzplotlib
 import glob
 import os
 import pandas as pd
+from sympy import * 
+from numpy import *
 import matplotlib as mpl
 from matplotlib import pyplot as plt
+from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
 
+def plotEquation(x_data,y_data):
+    
+    # convert symbolic expressions using numpy
+    debug = 1 
+    fig = plt.figure(figsize=(10,6))
+    ax = plt.axes()
+    ax.grid(True,which='major',axis='both',alpha=0.3) 
+    plt.plot(x_data, y_data)
+    if debug == 0:
+        return 
+    else:
+        plt.show()
+            
+    return fig
 
 # In[21]:
 
@@ -50,9 +67,12 @@ SND_ROC = SND_ROC_data.ROC
 # In[30]:
 
 
+fig, ax = plt.subplots(1,1)
 plt.style.use('seaborn-ticks')
 # plot data
+
 plt.rcParams
+
 plt.plot(          flow_data['radius'],flow_data['M_x'],          label = '$M_{x}$',         )
 plt.plot(         flow_data['radius'],flow_data['M_theta'],          label = '$M_{\\theta}$' ,         )
 
@@ -62,11 +82,16 @@ plt.title('Mean Flow ')
 plt.ylabel('Mach Number')
 plt.xlabel('Radius')
 plt.tight_layout()
+
+radius_data = flow_data['radius']
+
+ax.grid(True,which='major',axis='both',alpha=0.3) 
+
 tikzplotlib.save("03-plotReport/MachDistribution.tex")
 
+fig, ax = plt.subplots(1,1)
 
 # In[31]:
-fig, ax = plt.subplots(1,1)
 
 
 
@@ -75,6 +100,7 @@ ax.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Act
 ax.set_ylabel('Speed of Sound')
 ax.set_xlabel('Radius')
 ax.legend()
+ax.grid(True,which='major',axis='both',alpha=0.3) 
 tikzplotlib.save("03-plotReport/SoundSpeedFromIntegration.tex")
 
 
@@ -92,6 +118,10 @@ ax3.plot(         flow_data['radius'],flow_data['vX']        )
 ax3.set_ylabel('Axial')
 ax4.plot(         flow_data['radius'],flow_data['Pr']        )
 ax4.set_ylabel('Pressure')
+ax1.grid(True,which='major',axis='both',alpha=0.3) 
+ax2.grid(True,which='major',axis='both',alpha=0.3) 
+ax3.grid(True,which='major',axis='both',alpha=0.3) 
+ax4.grid(True,which='major',axis='both',alpha=0.3) 
 
 tikzplotlib.save("03-plotReport/PerturbationVariables.tex")
 
@@ -105,8 +135,12 @@ ax1.legend()
 ax1.set_title('Rate Of Convergence')
 ax2.semilogy(Delta_r,LEE_ROC,label='LEE')
 ax2.legend()
-ax2.set_xlabel('Del r')
-
+ax2.set_xlabel('Number of Grid Points')
+from matplotlib import ticker 
+ax1.yaxis.set_minor_formatter(ticker.ScalarFormatter())
+ax2.yaxis.set_minor_formatter(ticker.ScalarFormatter())
+ax1.grid(True,which='major',axis='both',alpha=0.3) 
+ax2.grid(True,which='major',axis='both',alpha=0.3) 
 tikzplotlib.save("03-plotReport/ROC.tex")
 
 
@@ -116,6 +150,10 @@ tikzplotlib.save("03-plotReport/ROC.tex")
 #plt.semilogy(Delta_r,LEE_ROC)
 fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True,figsize=(10,4))
 
+ax[0].grid(True,which='major',axis='both',alpha=0.3) 
+ax[1].grid(True,which='major',axis='both',alpha=0.3) 
+ax[2].grid(True,which='major',axis='both',alpha=0.3) 
+ax[3].grid(True,which='major',axis='both',alpha=0.3) 
 # can i loop though axes?
 ax[0].set_ylabel('Radial')
 ax[0].plot(flow_data['radius'],flow_data['S_1_e'],label='expected',alpha =0.7, lw=7)
@@ -132,8 +170,6 @@ ax[3].plot(flow_data['radius'],flow_data['S_4_e'],alpha =0.7, lw=7)
 ax[3].plot(flow_data['radius'],flow_data['S_4_a'],alpha=0.5, lw=5) 
 tikzplotlib.save("03-plotReport/SourceTermData.tex")
 
-
-# In[ ]:
 
 
 

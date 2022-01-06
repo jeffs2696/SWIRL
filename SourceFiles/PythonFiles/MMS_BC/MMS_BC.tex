@@ -13,44 +13,6 @@
 \include{min-boundary-polynomial}
 \include{max-boundary-polynomial}
 \include{symbolic-sanity-checks}
-\section{Setting the BC Derivative Values using a Fairing Function}
-
-
-The desired changes in $f'$ are defined as:
-\begin{align*}
-    \Delta f'_{minBC} = f'_{minBC} - f'_{MS}(\widetilde{r} = \sigma)\\
-    \Delta f'_{maxBC} = f'_{maxBC} - f'_{MS}(\widetilde{r} = 1) 
-\end{align*}
-We'd like to impose these changes smoothly on the manufactured solution function.
-To do this,the fairing functions, $B_{min}(\widetilde{r})$ and $B_{max}(\widetilde{r})$
-where:
-\begin{align*}
-    f_{BCsImposed}(\widetilde{r}) = f_{MS}(\widetilde{r}) +
-    B_{min}(\widetilde{r}) \Delta f'_{minBC}  +  
-    B_{max}(\widetilde{r}) \Delta f'_{maxBC}  
-\end{align*}
-Then, in order to set the condition at the appropriate boundary, the following 
-conditions are set, not the values of B at the boundaries are unaffected,
-
-
-\begin{align*}
-    B_{min}(\widetilde{r} = \sigma) &= 0\\
-    B_{min}(\widetilde{r} = 1) &= 0 \\
-    B_{max}(\widetilde{r} = 1) &= 0 \\
-    B_{max}(\widetilde{r} = \sigma) &= 0 
-    B'_{min}(\widetilde{r} = \sigma) &= 1\\
-    B'_{min}(\widetilde{r} = 1) &= 0 \\
-    B'_{max}(\widetilde{r} = 1) &= 1 \\
-    B'_{max}(\widetilde{r} = \sigma) &= 0 
-\end{align*}
-%
-%If $A_{min}(\widetilde{r})$ is defined as a function of $A_{max}(\widetilde{r})$
-%then only $A_{max}(\widetilde{r})$ needs to be defined, therefore 
-%\begin{align*}
-%    A_{min}(\widetilde{r}) = 1 - A_{max}(\widetilde{r}) 
-%\end{align*}
-%
-
 \subsection{Min boundary derivative polynomial}
 
 
