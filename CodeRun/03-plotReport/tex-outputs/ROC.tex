@@ -1,0 +1,82 @@
+% This file was created with tikzplotlib v0.9.12.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+
+\begin{groupplot}[group style={group size=1 by 2}]
+\nextgroupplot[
+axis line style={white!15!black},
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=none
+},
+log basis y={10},
+scaled x ticks=manual:{}{\pgfmathparse{#1}},
+tick align=outside,
+tick pos=left,
+title={Rate Of Convergence},
+x grid style={white!80!black},
+xmin=-20.4, xmax=538.4,
+xtick style={color=white!15!black},
+xticklabels={},
+y grid style={white!80!black},
+ymin=0.120179448142703, ymax=3.37658389826634,
+ymode=log,
+ytick style={color=white!15!black}
+]
+\addplot [semithick, color0]
+table {%
+5 0.139854940165
+9 2.901549198208
+17 1.977988434508
+33 1.999649604478
+65 1.994368784807
+129 1.995803507321
+257 1.997560485834
+513 1.998695137951
+};
+\addlegendentry{Speed Of Sound}
+
+\nextgroupplot[
+axis line style={white!15!black},
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.97)},
+  anchor=north west,
+  draw=none
+},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+x grid style={white!80!black},
+xlabel={Del r},
+xmin=-20.4, xmax=538.4,
+xtick style={color=white!15!black},
+y grid style={white!80!black},
+ymin=0.406988144058352, ymax=2.08856015532704,
+ymode=log,
+ytick style={color=white!15!black}
+]
+\addplot [semithick, color0]
+table {%
+5 0.72597886409
+9 0.4383959579
+17 0.577324517247
+33 0.485337551867
+65 0.741219384058
+129 1.526486302345
+257 1.708994456756
+513 1.938930334674
+};
+\addlegendentry{LEE}
+\end{groupplot}
+
+\end{tikzpicture}

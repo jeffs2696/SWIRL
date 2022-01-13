@@ -45,12 +45,6 @@ PROGRAM MAIN
         dr                   = &
             (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
-        IF (debug) THEN
-
-            WRITE(0, *) '# Grid Points ',  numberOfGridPoints
-
-        ELSE
-        ENDIF
 
         ALLOCATE(&
             r(numberOfGridPoints)                    , &
