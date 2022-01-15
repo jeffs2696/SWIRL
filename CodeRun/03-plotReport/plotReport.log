@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  11 JAN 2022 16:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  14 JAN 2022 18:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -547,12 +547,12 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
 (./tex-outputs/MachDistribution.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 1582.
+(Font)              <7> on input line 1572.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 1582.
+(Font)              <5> on input line 1572.
 ) (./tex-outputs/PerturbationVariables.tex)
 
-LaTeX Warning: Float too large for page by 38.0542pt on input line 21.
+LaTeX Warning: Float too large for page by 38.06694pt on input line 21.
 
 (./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/ROC.tex
 Package pgfplots info on input line 31: Using 'lua backend=false' for axis: ymo
@@ -562,15 +562,15 @@ de=log unsupported (yet).
 )
 (./tex-outputs/SourceTermData.tex)
 
-LaTeX Warning: Float too large for page by 48.6255pt on input line 57.
+LaTeX Warning: Float too large for page by 47.29749pt on input line 57.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
 (./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
- 22487 strings out of 481239
- 604426 string characters out of 5920378
- 1560505 words of memory out of 5000000
- 37405 multiletter control sequences out of 15000+600000
+ 22476 strings out of 481239
+ 604273 string characters out of 5920378
+ 1871669 words of memory out of 5000000
+ 37394 multiletter control sequences out of 15000+600000
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,21n,136p,741b,2515s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -580,7 +580,7 @@ i7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on plotReport.pdf (4 pages, 140151 bytes).
+Output written on plotReport.pdf (4 pages, 258985 bytes).
 PDF statistics:
  44 PDF objects out of 1000 (max. 8388607)
  31 compressed objects within 1 object stream

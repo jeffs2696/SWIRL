@@ -1,6 +1,8 @@
 
 \section{Setting Boundary Condition Values Using a Fairing Function}
+
 \subsection{Using $\beta$ as a scaling parameter}
+
 Defining the nondimensional radius in the same way that SWIRL does:
 
 \begin{align*}
@@ -32,16 +34,17 @@ Dividing By $r_T$
         \frac{r_T}{r_T} - \frac{r_H}{r_T}
 }\\
 &= \frac{
-    \widetilde{r} - \sigma 
+    \widetilde{r} - \widetilde{r}_H
 }{
 1 - \sigma
 }
 \end{align*}
 
-Suppose a manufactured solution (MS) was decided. the goal is to change the
-boundary conditions of the manufactured solution in such  way that allows us 
-to adequately check the boundary conditions imposed on SWIRL. Defining the 
-manufactured solution, $f_{MS}(\widetilde{r})$,   where
+Suppose a manufactured solution $f_{MS}$ with boundaries $f_{MS}(r= \sigma)$ 
+and $f_{MS}(\widetilde{r}= 1)$ is the specified analytical solution. The goal
+is to change the boundary conditions of the manufactured solution in such  way 
+that allows us to adequately check the boundary conditions imposed on SWIRL.
+Defining the manufactured solution, $f_{MS}(\widetilde{r})$,   where
 $\sigma \leq \widetilde{r} \leq 1$ and there are desired values of $f$ at the 
 boundaries desired values are going to be denoted as $f_{minBC}$ and $f_{maxBC}$.
 The desired changes in $f$ are defined as:

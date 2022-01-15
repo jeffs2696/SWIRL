@@ -373,19 +373,19 @@ MODULE swirlClassObject
                 WRITE(PrintToggle,*) 'Entering boundary CALL'
             ELSE
             ENDIF
-
-            CALL boundary(&
-                np   = object%numberOfRadialPoints,   &
-                sig  = object%hubTipRatio,  &
-                ak   = object%frequency,   &
-                etah = object%hubLinerAdmittance, &
-                etad = object%ductLinerAdmittance, &
-                rmx  = object%rmx,  &
-                rmt  = object%rmt,  &
-                dd   = object%dl1,  &
-                aa   = object%aa,   &
-                bb   = object%bb)
-
+!
+!            CALL boundary(&
+!                np   = object%numberOfRadialPoints,   &
+!                sig  = object%hubTipRatio,  &
+!                ak   = object%frequency,   &
+!                etah = object%hubLinerAdmittance, &
+!                etad = object%ductLinerAdmittance, &
+!                rmx  = object%rmx,  &
+!                rmt  = object%rmt,  &
+!                dd   = object%dl1,  &
+!                aa   = object%aa,   &
+!                bb   = object%bb)
+!
             IF (debug) THEN
                 WRITE(PrintToggle,*) 'Leaving boundary CALL'
             ELSE

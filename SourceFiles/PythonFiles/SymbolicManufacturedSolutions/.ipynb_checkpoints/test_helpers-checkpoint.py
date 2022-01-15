@@ -12,8 +12,8 @@ class TestHelpers(unittest.TestCase):
         r_min = 0
         r_max = 1
         
-        result = helpers.TanhMethodMMS(n     = n     ,\
-                                       B     = B     ,\
+        result = helpers.TanhMethod(n     = n     ,\
+                                    B     = B     ,\
                                        r_min = r_min ,\
                                        r_max = r_max)
         
@@ -37,18 +37,16 @@ class TestHelpers(unittest.TestCase):
         f_min_desired = 0.25
         f_max_desired = 0.25
         
-        A_max         = 3*r_hat**2 - 2*r_hat**3
+        A_max         = -3*r_hat**2 + 2*r_hat**3
         A_min         =  1 - A_max 
          
-        del_f_min = abs(f_min - f_min_desired)
-        del_f_max = abs(f_max - f_max_desired)
             
         result = helpers.ModifiedManufacturedSolution(\
                                                       f_MS    = f     ,\
-                                                      f_minBC = f_min ,\
-                                                      f_maxBC = f_max ,\
-                                                      f_minMS = f_min_desired ,\
-                                                      f_maxMS = f_max_desired ,\
+                                                      f_minBC = f_min_desired ,\
+                                                      f_maxBC = f_max_desired ,\
+                                                      f_minMS = f_min ,\
+                                                      f_maxMS = f_max ,\
                                                       A_min   = A_min ,\
                                                       A_max   = A_max ) 
                                                       
@@ -85,14 +83,22 @@ class TestHelpers(unittest.TestCase):
         -1*((r - r_min)/(r_max - r_min))**2 +\
            ((r - r_min)/(r_max - r_min))**3  \
         )
+        del_f_maxBC =  df_maxBC-df_maxMS
+        del_f_minBC =  df_minBC-df_minMS
         
+
         result     = helpers.diffModifiedManufacturedSolution( f_MS   , \
-                                                  df_minBC, \
-                                                  df_maxBC, \
-                                                  df_minMS, \
-                                                  df_maxMS, \
+                                                  del_f_minBC, \
+                                                  del_f_maxBC, \
                                                   B_min  , \
                                                   B_max) 
+#        result     = helpers.diffModifiedManufacturedSolution( f_MS   , \
+#                                                  df_minBC, \
+#                                                  df_maxBC, \
+#                                                  df_minMS, \
+#                                                  df_maxMS, \
+#                                                  B_min  , \
+#                                                  B_max) 
         diffresult = sp.diff(result,r)
     
                                                       
