@@ -20,7 +20,6 @@
   - [ ] Address duplicate derivation 
 ### In Progress
 
-- [ ] Integrate the fairing function with the existing symbolic solver
 - [ ] Clean up FORTRAN codes by incorporating several derived data types 
 
 
@@ -32,6 +31,5 @@
   - [x] Combine the tanh summation(TS) code with the fairing function(FF) Code
   to impose desired boundary conditions
   - [x] Incorporate the TS/FF code with the existing symbolic solver
-  - [x] BUG - FF are not imposing the boundary conditions for some reason  
-  - Note: A_min = A_max - 1 not 1 - A_max
 
+- [x] Integrate the fairing function with the existing symbolic solver

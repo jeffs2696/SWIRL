@@ -1,35 +1,31 @@
 % This file was created with tikzplotlib v0.9.12.
 \begin{tikzpicture}
 
-\definecolor{color0}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+\definecolor{color0}{rgb}{0.196078431372549,0.188235294117647,0.203921568627451}
+\definecolor{color1}{rgb}{0.694117647058824,0.686274509803922,0.709803921568627}
+\definecolor{color2}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
 
 \begin{groupplot}[group style={group size=1 by 2}]
 \nextgroupplot[
-axis line style={white!15!black},
 legend cell align={left},
-legend style={
-  fill opacity=0.8,
-  draw opacity=1,
-  text opacity=1,
-  at={(0.97,0.03)},
-  anchor=south east,
-  draw=none
-},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!90!black},
 log basis y={10},
 scaled x ticks=manual:{}{\pgfmathparse{#1}},
 tick align=outside,
 tick pos=left,
 title={Rate Of Convergence},
-x grid style={white!80!black},
+x grid style={color1},
+xmajorgrids,
 xmin=-20.4, xmax=538.4,
-xtick style={color=white!15!black},
+xtick style={color=color0},
 xticklabels={},
-y grid style={white!80!black},
+y grid style={color1},
+ymajorgrids,
 ymin=0.120179448142703, ymax=3.37658389826634,
 ymode=log,
-ytick style={color=white!15!black}
+ytick style={color=color0}
 ]
-\addplot [semithick, color0]
+\addplot [thick, color2]
 table {%
 5 0.139854940165
 9 2.901549198208
@@ -43,38 +39,39 @@ table {%
 \addlegendentry{Speed Of Sound}
 
 \nextgroupplot[
-axis line style={white!15!black},
 legend cell align={left},
 legend style={
   fill opacity=0.8,
   draw opacity=1,
   text opacity=1,
-  at={(0.03,0.97)},
-  anchor=north west,
-  draw=none
+  at={(0.97,0.03)},
+  anchor=south east,
+  draw=white!90!black
 },
 log basis y={10},
 tick align=outside,
 tick pos=left,
-x grid style={white!80!black},
+x grid style={color1},
 xlabel={Number of Gridpoints},
+xmajorgrids,
 xmin=-20.4, xmax=538.4,
-xtick style={color=white!15!black},
-y grid style={white!80!black},
-ymin=0.182663149592159, ymax=2.20088548229618,
+xtick style={color=color0},
+y grid style={color1},
+ymajorgrids,
+ymin=0.971971478387202, ymax=2.17420471312109,
 ymode=log,
-ytick style={color=white!15!black}
+ytick style={color=color0}
 ]
-\addplot [semithick, color0]
+\addplot [thick, color2]
 table {%
-5 0.679846415918
-9 0.204543118857
-17 0.589380488809
-33 0.948887262606
-65 1.818058899741
-129 1.574591716235
-257 0.917785795409
-513 1.965456850049
+5 1.387403047928
+9 2.044635014231
+17 1.008199696999
+33 1.342883646932
+65 1.994907767395
+129 2.096077766755
+257 2.074487696236
+513 2.043784651414
 };
 \addlegendentry{LEE}
 \end{groupplot}

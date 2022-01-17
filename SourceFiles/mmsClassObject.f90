@@ -337,7 +337,7 @@ CONTAINS
         object%RateOfConvergence = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            IF (REAL(L2Array(i),KIND=rDef)< 1e-13) THEN 
+            IF (REAL(L2Array(i),KIND=rDef)< 1e-15) THEN 
             ! WRITE(6,*) L2Array(i)
                 WRITE(6,*) 'WARNING: The L2 at',i,'=' ,L2Array(i) ,'is really small, double check if trivial'
                 EXIT
@@ -380,7 +380,7 @@ SUBROUTINE getROC_Complex(&
         object%RateOfConvergence = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            IF (REAL(L2Array(i),KIND=rDef) < 1e-13) THEN
+            IF (REAL(L2Array(i),KIND=rDef) < 1e-15) THEN
                 WRITE(6,*) 'WARNING: The L2 at',i,'=' ,L2Array(i) ,'is really small, double check if trivial'
                 
                 EXIT

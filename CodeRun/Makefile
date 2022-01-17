@@ -29,8 +29,7 @@ run SWIRL:
 clean:
 	(rm $(OUTPUT_FILES); rm *.log);
 plot: all
-	./03-plotReport/PythonPlotReport.py; \
-		cd 03-plotReport;\
+	cd 03-plotReport; ./PythonPlotReport.py; \
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
 		xdg-open plotReport.pdf;
 
