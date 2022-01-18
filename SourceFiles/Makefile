@@ -216,8 +216,7 @@ all:  $(OBJECTS)
 			rm -f $@.log; \
 			exit $$RESULT
 
-	@(mv $(EXE) $(EXECUTABLE_LOCATION)); \
-		(mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
+	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
 
@@ -230,74 +229,74 @@ cleanAll:
        (cd $(LAPACK_LOCATION); rm -f *.o *.c *.a *.mod); \
        (cd $(BLAS_LOCATION); rm -f *.o *.c *.a *.mod)
                                                                
-main.o: main.f90        \
-         boundaryModule.o \
-         derivsModule.o   \
-         fdgridModule.o   \
-         fdrivsModule.o   \
-         globalModule.o   \
-         gridModule.o     \
-	     machoutModule.o  \
-	     rmachModule.o    \
-	     smachAndSndspdModule.o \
-         FindResidualVectorModule.o \
-		 SourceTermModule.o  \
-	     L2NormModule.o         \
-		 mmsClassObject.o \
-	     swirlClassObject.o 
-	@$(F90) $(F90FLAGS) main.f90
+main.o: FortranFiles/main.f90        \
+         FortranFiles/boundaryModule.o \
+         FortranFiles/derivsModule.o   \
+         FortranFiles/fdgridModule.o   \
+         FortranFiles/fdrivsModule.o   \
+         FortranFiles/globalModule.o   \
+         FortranFiles/gridModule.o     \
+	     FortranFiles/machoutModule.o  \
+	     FortranFiles/rmachModule.o    \
+	     FortranFiles/smachAndSndspdModule.o \
+         FortranFiles/FindResidualVectorModule.o \
+		 FortranFiles/SourceTermModule.o  \
+	     FortranFiles/L2NormModule.o         \
+		 FortranFiles/mmsClassObject.o \
+	     FortranFiles/swirlClassObject.o 
+	@$(F90) $(F90FLAGS) FortranFiles/main.f90
 
-boundaryModule.o:  boundaryModule.f90
-	@$(F90) $(F90FLAGS) boundaryModule.f90
+FortranFiles/boundaryModule.o:  FortranFiles/boundaryModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/boundaryModule.f90
 
-derivsModule.o:  derivsModule.f90
-	@$(F90) $(F90FLAGS) derivsModule.f90
+FortranFiles/derivsModule.o:  FortranFiles/derivsModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/derivsModule.f90
 
-globalModule.o:  globalModule.f90
-	@$(F90) $(F90FLAGS) globalModule.f90
+FortranFiles/globalModule.o:  FortranFiles/globalModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/globalModule.f90
 
-gridModule.o:  gridModule.f90
-	@$(F90) $(F90FLAGS) gridModule.f90
+FortranFiles/gridModule.o:  FortranFiles/gridModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/gridModule.f90
 
-fdgridModule.o:  fdgridModule.f90
-	@$(F90) $(F90FLAGS) fdgridModule.f90
+FortranFiles/fdgridModule.o:  FortranFiles/fdgridModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/fdgridModule.f90
 
-fdrivsModule.o:  fdrivsModule.f90
-	@$(F90) $(F90FLAGS) fdrivsModule.f90
+FortranFiles/fdrivsModule.o:  FortranFiles/fdrivsModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/fdrivsModule.f90
 
-indexxModule.o:  indexxModule.f90
-	@$(F90) $(F90FLAGS) indexxModule.f90
+indexxModule.o:  FortranFiles/indexxModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/indexxModule.f90
 
-machoutModule.o:  machoutModule.f90
-	@$(F90) $(F90FLAGS) machoutModule.f90
+FortranFiles/machoutModule.o:  FortranFiles/machoutModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/machoutModule.f90
 
-rmachModule.o:  rmachModule.f90 
-	@$(F90) $(F90FLAGS) rmachModule.f90
+FortranFiles/rmachModule.o:  FortranFiles/rmachModule.f90 
+	@$(F90) $(F90FLAGS) FortranFiles/rmachModule.f90
 
-smachModule.o:  smachModule.f90 
-	@$(F90) $(F90FLAGS) smachModule.f90
+FortranFiles/smachModule.o:  FortranFiles/smachModule.f90 
+	@$(F90) $(F90FLAGS) FortranFiles/smachModule.f90
 
-smachAndSndspdModule.o:  smachAndSndspdModule.f90 
-	@$(F90) $(F90FLAGS) smachAndSndspdModule.f90
+FortranFiles/smachAndSndspdModule.o:  FortranFiles/smachAndSndspdModule.f90 
+	@$(F90) $(F90FLAGS) FortranFiles/smachAndSndspdModule.f90
 
-sndspdModule.o:  sndspdModule.f90
-	@$(F90) $(F90FLAGS) sndspdModule.f90
+FortranFiles/sndspdModule.o:  FortranFiles/sndspdModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/sndspdModule.f90
 
-SourceTermModule.o:  SourceTermModule.f90
-	@$(F90) $(F90FLAGS) SourceTermModule.f90
+FortranFiles/SourceTermModule.o:  FortranFiles/SourceTermModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/SourceTermModule.f90
 
-mmsClassObject.o: mmsClassObject.f90
-	@$(F90) $(F90FLAGS) mmsClassObject.f90
+FortranFiles/mmsClassObject.o: FortranFiles/mmsClassObject.f90
+	@$(F90) $(F90FLAGS) FortranFiles/mmsClassObject.f90
 
-L2NormModule.o: L2NormModule.f90
-	@$(F90) $(F90FLAGS) L2NormModule.f90 
+FortranFiles/L2NormModule.o: FortranFiles/L2NormModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/L2NormModule.f90 
 
-FindResidualVectorModule.o: FindResidualVectorModule.f90\
-							L2NormModule.o
-	@$(F90) $(F90FLAGS) FindResidualVectorModule.f90
+FortranFiles/FindResidualVectorModule.o: FortranFiles/FindResidualVectorModule.f90\
+							FortranFiles/L2NormModule.o
+	@$(F90) $(F90FLAGS) FortranFiles/FindResidualVectorModule.f90
 
-swirlClassObject.o: swirlClassObject.f90
-	@$(F90) $(F90FLAGS) swirlClassObject.f90
+FortranFiles/swirlClassObject.o: FortranFiles/swirlClassObject.f90
+	@$(F90) $(F90FLAGS) FortranFiles/swirlClassObject.f90
 #----------------------------------BLAS------------------------------------------
 
 $(BLAS_LOCATION)/dgemv.o: \

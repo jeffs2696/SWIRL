@@ -117,9 +117,7 @@
 
     REAL(KIND = rDef), PARAMETER ::&
         r_min  = 0.20_rDef  ,&
-        r_max  = 1.000_rDef  ,&
-        r2     = 0.50_rDef  ,&
-        r3     = 0.200_rDef
+        r_max  = 1.000_rDef  
 
     CHARACTER(50) :: &
         dir_name

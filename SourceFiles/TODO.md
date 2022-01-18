@@ -1,27 +1,21 @@
 # Necessary updates to SWIRL
 
 ### Todo
+- [ ]
+### In Progress
 
-- [ ] Clean up MMS 
-  - [ ] remove magic numbers 
-  - [ ] fix up fortran code in SoundSpeedMMS.f90
-  - [ ] Debug flag to plot symbolic funcitons in python
-    - Note: it requires the user to define values for any variables other than r
-  - [ ] Use FF to define the speed of sound (or maybe just a 2nd order polynomial)
+- [ ] Fix headers in exported data
+- [ ] Add tables to the plotReport 
+- [ ] Figure out a way to have python and FORTRAN talk to each other
 
-
-- [ ] Clean up Fortran code
+- [ ] Clean up FORTRAN code
   - [ ] Make sure all the data types are the same in SWIRL 
   - [ ] Make a debug include file for FORTRAN files
   - [ ] Write meanFlowMMS report with a test case table
-  - [ ] make an MMS test case 
+  - [x] make an MMS test case 
 
 - [ ] Clean up Documentation
   - [ ] Address duplicate derivation 
-### In Progress
-
-- [ ] Clean up FORTRAN codes by incorporating several derived data types 
-
 
 ### Done ✓
 

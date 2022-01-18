@@ -27,14 +27,6 @@ PROGRAM MAIN
         RateOfConvergence1(numberOfIterations - 1) , &
         RateOfConvergence2(numberOfIterations - 1) )
 
-    ! used for the following terms:
-    k(1) = CMPLX(0.004, 0.0, rDef)
-    k(2) = CMPLX(16.0, 0.0, rDef)
-    k(3) = CMPLX(0.4, 0.0, rDef)  ! M_x 
-    k(4) = CMPLX(1.80, 0.0, rDef)   !v_r  
-    k(5) = CMPLX(1.200, 0.0, rDef)   !v_th
-    k(6) = CMPLX(0.10, 0.0, rDef)   !v_X
-    k(7) = CMPLX(.1, 0.0, rDef)   !p
 
     facCount = 0 ! initializer for fac count
 
@@ -118,14 +110,12 @@ PROGRAM MAIN
         ! from SourceTermModule
         CALL getSoundSpeed(&
             r                  = r                  , &
-            k                  = k                  , &
             kappa              = gam                , &
             SoundSpeedExpected = SoundSpeedExpected , &
             thetaMachData      = thetaMachData      , &
             axialMachData      = axialMachData      )
 
         CALL getPerturbationVariables(&
-            k     = k     , &
             r     = r    , &
             vR    = vR   , &
             vTh   = vT   , &
@@ -250,8 +240,6 @@ PROGRAM MAIN
 !                 kappa = gam                     ,&
 !                 m     = azimuthalModeNumber     ,&
 !                 r     = r(i)                    ,&
-!                 r2    = r2                      ,&
-!                 r3    = r3                      ,&
 !                 r_max = r_max                   ,&
 !                 S_1   = S_1(i)                  ,&
 !                 S_2   = S_2(i)                  ,&
@@ -262,12 +250,9 @@ PROGRAM MAIN
                 gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
                 i     = ci                      ,&
                 ak    = frequency               ,&
-                k     = k                       ,&
                 kappa = gam                     ,&
                 m     = azimuthalModeNumber     ,&
                 r     = r(i)                    ,&
-                r2    = r2                      ,&
-                r3    = r3                      ,&
                 r_max = r_max                   ,&
                 S_1   = S_1(i)                  ,&
                 S_2   = S_2(i)                  ,&
@@ -327,7 +312,7 @@ PROGRAM MAIN
 
         S_L2Array(fac) = S_L2   
 
-        include 'swirl-data-export-per-grid.f90'
+        include '/main-scripts/swirl-data-export-per-grid.f90'
         CALL DestroyObject(object = swirlClassObj(fac))
 
         ! Export data 
@@ -410,7 +395,7 @@ PROGRAM MAIN
         L2Array           = S_L2Array)
 
     ! Should I put the data writing in another script? : JS
-    include 'swirl-data-export-MMS.f90'
+    include '/main-scripts/swirl-data-export-MMS.f90'
 
     DEALLOCATE( &
         SoundSpeedL2Array ,&

@@ -1,0 +1,5 @@
+This functionality was presented at the SciPy Conference
+
+Presentation Title: Automatic Code Generation with SymPy - Jason>, Aaron, Bjorn
+and Kenneth
+

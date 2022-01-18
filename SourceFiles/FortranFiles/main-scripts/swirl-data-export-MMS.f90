@@ -70,7 +70,7 @@ ENDDO
 
 CLOSE(UNIT)
 
-! ! IF (debug) THEN
+ IF (debug) THEN
 WRITE(0,*) 'Gridpoints ' , 'L2-SoundSpeed'
 
 DO i = 1,numberOfIterations
@@ -97,6 +97,6 @@ DO i = 1,numberOfIterations - 1
        REAL(1+2**(i),KIND=rDef), &
         RateOfConvergence2(i)
 ENDDO
-! ! ELSE
-! ! END IF
+ELSE
+END IF
 
