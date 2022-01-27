@@ -1,0 +1,3 @@
+[submodule "SourceFiles/SourceFiles/FortranFiles/tanhSummation"]
+	path = SourceFiles/SourceFiles/FortranFiles/tanhSummation
+	url = https://github.com/jeffs2696/tanhSummation.git
