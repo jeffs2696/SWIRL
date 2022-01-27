@@ -55,13 +55,13 @@ DO i = 1,numberOfGridPoints
         REAL(S_actual(i+3*numberOfGridPoints) ,KIND=rDef) 
 
     IF (debug) THEN
-        WRITE(0,FORMAT_MEAN_FLOW) &
-            rOut(i)                 , &
-            axialMachDataOut(i)     , &
-            thetaMachDataOut(i)     , &
-            SoundSpeedExpected(i)   , &
-            SoundSpeedOut(i)
-    ELSE
+!        WRITE(0,FORMAT_MEAN_FLOW) &
+!            rOut(i)                 , &
+!            axialMachDataOut(i)     , &
+!            thetaMachDataOut(i)     , &
+!            SoundSpeedExpected(i)   , &
+!            SoundSpeedOut(i)
+!    ELSE
     ENDIF
 ENDDO
 

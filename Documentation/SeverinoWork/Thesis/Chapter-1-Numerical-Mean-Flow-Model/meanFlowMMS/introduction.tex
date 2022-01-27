@@ -9,3 +9,11 @@ is being validated through code verification. SWIRL accepts a given mean flow an
 uses numerical integration to obtain the speed of sound. The integration technique
 is found to be the composite trapezoidal rule through asymptotic error analysis.
 
+For SWIRL, the absolute bare minimum requirement is to define the corresponding
+flow components for the domain of interest. SWIRL assumes no flow in the radial 
+direction, leaving only two other components, axial and tangential for a 3D 
+cylindrical domain. Since SWIRL is also non dimensionalized, the mean flow 
+components are defined using the Mach number. SWIRL uses the tangential mach number
+to obtain the speed of sound using numerical integration. The speed of sound
+is then used to find the rest of the primative variables for the given flow. 
+

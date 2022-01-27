@@ -4,25 +4,22 @@
     FORMAT_PERTURB_HEADER      = "(A12,A12,A12,A12,A12)"
     FORMAT_SOURCE_TERMS        = "( I4, F16.12, F16.12,F16.12)" 
     FORMAT_SOURCE_TERMS_HEADER = "( A5, A17, A17,A17)" 
-    FORMAT_L2                  = "(I4,F16.12)" 
-    FORMAT_L2_HEADER           = "(A5,A13)" 
-    FORMAT_ERROR               = "(F16.12,F16.12)" 
-    FORMAT_ERROR_HEADER        = "(A17,A17)" 
-    FORMAT_ROC                 = "(F16.12,F16.12)" 
-    FORMAT_ROC_HEADER          = "(A17,A15)" 
+    FORMAT_L2                  = "(I10,F20.16)" 
+    FORMAT_L2_HEADER           = "(A10,A20)" 
+    FORMAT_ERROR               = "(F20.16,F20.16)" 
+    FORMAT_ERROR_HEADER        = "(A20,A20)" 
+    FORMAT_ROC                 = "(I10,F20.16)" 
+    FORMAT_ROC_HEADER          = ("(A10,A20)")
 
     ! inputs needed for SwirlClassType
     azimuthalModeNumber       = 1
     hubToTipRatio             = r_min/r_max
-    frequency                 =  CMPLX(10.0, 0, rDef)
-    hubAdmittance             =  CMPLX(0,0,rDef)!CMPLX(0.40, 0 ,rDef)
-    ductAdmittance            =  CMPLX(0,0,rDef)!CMPLX(0.70,0,rDef)
-    finiteDiffFlag            =  1
+    finiteDiffFlag            =  2
     secondOrderSmoother       =  0.0_rDef
     fourthOrderSmoother       =  0.0_rDef
 
     ! constants needed for calculations
-    gam = 1.4_rDef               ! ratio of specific heats
+    ! gam = 1.4_rDef               ! ratio of specific heats
     gm1 = gam-1.0_rDef
 
     ci  = CMPLX(0.0, 1.0, rDef)  !imaginary number

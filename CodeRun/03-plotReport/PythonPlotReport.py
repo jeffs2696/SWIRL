@@ -28,7 +28,7 @@ SND_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-so
 Delta_r    = LEE_ROC_data.Delta_r
 LEE_ROC    = LEE_ROC_data.ROC
 SND_ROC    = SND_ROC_data.ROC
-GridPoints = LEE_L2_data.GridP
+GridPoints = LEE_L2_data.GridPoints
 
 
 # In[3]:
@@ -38,7 +38,6 @@ GridPoints = LEE_L2_data.GridP
 plt.style.use('plot_style.txt')
 # plot data
 
-plt.rcParams['figure.figsize'] = [10, 5]
 plt.plot(          flow_data['radius'],flow_data['M_x'],          label = '$M_{x}$',         )
 
 plt.plot(         flow_data['radius'],flow_data['M_theta'],          label = '$M_{\\theta}$' ,         )
@@ -52,7 +51,7 @@ plt.title('Flow Velocity')
 plt.ylabel('Mach Number, M')
 plt.xlabel(r'$\bar{r}$')
 plt.legend()
-#plt.tight_layout()
+plt.tight_layout()
 
 plt.grid(True)
 tikzplotlib.save("tex-outputs/MachDistribution.tex")
@@ -111,7 +110,7 @@ ax4.set_xlabel(r'$\bar{r}$')
 tikzplotlib.save("tex-outputs/PerturbationVariables.tex")
 
 
-# In[7]:
+# In[10]:
 
 
 fig, (ax1,ax2) = plt.subplots(                       nrows=2,                       ncols=1,                              sharex=True)
@@ -126,7 +125,8 @@ ax2.yaxis.set_major_formatter(mticker.ScalarFormatter())
 
 ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
-tikzplotlib.save("tex-outputs/ROC.tex")
+
+tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf")
 
 
 # In[ ]:
@@ -139,7 +139,7 @@ tikzplotlib.save("tex-outputs/ROC.tex")
 
 
 #plt.semilogy(Delta_r,LEE_ROC)
-fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True,figsize=(10,4))
+fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True)
 
 # can i loop though axes?
 ax[0].set_ylabel('Radial')
@@ -162,4 +162,4 @@ tikzplotlib.save("tex-outputs/SourceTermData.tex")
 
 
 
-
+plt.show()

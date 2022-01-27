@@ -219,6 +219,8 @@ all:  $(OBJECTS)
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
+plot:
+	@(cd $(EXECUTABLE_LOCATION); (make plot ))
 
 clean:
 	rm -f *.o *.c *.a *.mod

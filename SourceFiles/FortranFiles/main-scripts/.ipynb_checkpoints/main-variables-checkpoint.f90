@@ -20,13 +20,22 @@
 ! INTEGER Variables 
 
     INTEGER, PARAMETER :: &
-        rDef = REAL64   
+        rDef = REAL64   , &
+        numberOfIterations = 9
+
+
+
+
+
+
+
+
 
     INTEGER  :: &
         UNIT                ,& ! for NEWUNIT
         finiteDiffFlag      ,& ! finite difference flag
+        azimuthalModeNumber ,& ! mode order
         numberOfGridPoints  ,& ! number of points
-        azimuthalModeNumber, &
         i ,&!j               ,& ! indexer for do loops
         i1,&!j1            ,& ! indexer for do loops
         i2,&!j2            ,& ! indexer for do loops
@@ -38,7 +47,16 @@
     INTEGER, DIMENSION(:), ALLOCATABLE :: &
         numberOfGridPointsArray
  
-    LOGICAL :: debug = .TRUE.
+
+
+    TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
+        swirlClassObj
+
+    TYPE(mmsClassType)  :: &
+        SoundSpeedMMS_ClassObj , &
+        SourceTermMMS_ClassObj
+
+        LOGICAL :: debug = .TRUE.
 
     COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         k                                            , &
@@ -87,6 +105,9 @@
         eigenVectorMMS
 
     COMPLEX(KIND = rDef) :: &
+        frequency          ,& !non-dimensional frequency
+        hubAdmittance      ,& !Liner Admittance At the Hub
+        ductAdmittance     ,&
         ci                 ,&
         S_L2               ,& 
         axialWavenumberMMS              
@@ -122,6 +143,7 @@
         RateOfConvergence2 
 
     REAL(KIND = REAL64) ::  &
+        gam                      ,&
         gm1                      ,&
         secondOrderSmoother ,& !2nd order smoothing coefficient
         fourthOrderSmoother ,& !4th order smoothing coefficient
@@ -130,24 +152,9 @@
         hubToTipRatio       ,&
         SoundSpeedErrorL2
 
-! input variables:
+
     REAL(KIND = rDef), PARAMETER ::&
-        gam    = 1.40_rDef  ,&
         r_min  = 0.20_rDef  ,&
         r_max  = 1.000_rDef  
 
-    INTEGER, PARAMETER :: &
-        numberOfIterations = 9!, & azimuthalModeNumber = 1 ! mode order
-
-    COMPLEX(KIND=rDef), PARAMETER :: &
-        hubAdmittance   = CMPLX(1.0,0,rDef)   , &
-        ductAdmittance  = CMPLX(0.10,0,rDef) , &
-        frequency       = CMPLX(10,0,rDef)
-
-    TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
-        swirlClassObj
-
-    TYPE(mmsClassType)  :: &
-        SoundSpeedMMS_ClassObj , &
-        SourceTermMMS_ClassObj
 

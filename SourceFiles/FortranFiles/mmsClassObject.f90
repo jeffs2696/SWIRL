@@ -331,8 +331,6 @@ CONTAINS
 
         numberOfIterations = SIZE(RateOfConvergence)
 
-        WRITE(6,*)  SIZE(RateOfConvergence)
-
         object%L2Array = L2Array
         object%RateOfConvergence = RateOfConvergence
 
@@ -386,6 +384,7 @@ SUBROUTINE getROC_Complex(&
                 EXIT
             ELSE
             ENDIF
+
              object%RateOfConvergence(i) = &
                 (&
                  LOG((object%L2Array(i+1))) -&
@@ -393,8 +392,7 @@ SUBROUTINE getROC_Complex(&
                 )&
                 /&
                 LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
-
-        ENDDO
+         ENDDO
         RateOfConvergence = object%RateOfConvergence 
 
     END SUBROUTINE getROC_Complex

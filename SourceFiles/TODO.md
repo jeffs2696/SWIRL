@@ -4,9 +4,11 @@
 - [ ]
 ### In Progress
 
+- [ ] extract complex admittances from fortran into Python
+- [ ] fix isinitialized variable in swirlClassObject
+- [ ] Turn on analysisModule
 - [ ] Fix headers in exported data
 - [ ] Add tables to the plotReport 
-- [ ] Figure out a way to have python and FORTRAN talk to each other
 
 - [ ] Clean up FORTRAN code
   - [ ] Make sure all the data types are the same in SWIRL 
@@ -27,3 +29,4 @@
   - [x] Incorporate the TS/FF code with the existing symbolic solver
 
 - [x] Integrate the fairing function with the existing symbolic solver
+- [x] Figure out a way to have python and FORTRAN talk to each other

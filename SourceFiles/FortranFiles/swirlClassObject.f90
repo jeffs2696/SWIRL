@@ -392,8 +392,7 @@ MODULE swirlClassObject
             ENDIF
 
             ! this is added to save A and B matricies before they are altered by the analysis CALL
-            WRITE(0,*) 'SIZE of S_aa' ,SIZE(object%S_aa)
-            WRITE(0,*) 'SIZE of aa' ,SIZE(object%aa)
+            ! WRITE(0,*) 'SIZE of S_aa' ,SIZE(object%S_aa)
 
 
             object%aa_before = object%aa

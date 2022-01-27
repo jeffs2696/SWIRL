@@ -6,11 +6,6 @@ PROGRAM MAIN
 
     IMPLICIT NONE
 
-    INTEGER, PARAMETER :: &
-        rDef = REAL64   , &
-        numberOfIterations = 9
-
-
     include '/main-scripts/main-variables.f90'
 
 ! Code Starts Here!
@@ -21,22 +16,23 @@ PROGRAM MAIN
     include '/main-scripts/main-local-variables.f90'
     
     ALLOCATE(&
+        numberOfGridPointsArray(numberOfIterations) ,&
         k(7) , &
         S_L2Array(numberOfIterations)              , &
         SoundSpeedL2Array(numberOfIterations)       ,&
         RateOfConvergence1(numberOfIterations - 1) , &
         RateOfConvergence2(numberOfIterations - 1) )
 
-
     facCount = 0 ! initializer for fac count
 
     DO fac = 1, numberOfIterations
 
         facCount             = facCount + 1
-        numberOfGridPoints   = 1+(2**fac)
+        numberOfGridPoints   = 5+(2**fac)
         dr                   = &
             (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
+        numberOfGridPointsArray(fac) = numberOfGridPoints
 
         ALLOCATE(&
             r(numberOfGridPoints)                    , &
@@ -130,7 +126,6 @@ PROGRAM MAIN
                 (axialMachData(i)**2.0_rDef+&
                 thetaMachData(i)**2.0_rDef)**0.5_rDef)
 
-            WRITE(0,*) i, axialMachData(i), thetaMachData(i), totalMachData(i)
             IF(totalMachData(i) > 1.0_rDef) THEN
                 WRITE(0, *) i, 'ERROR: Total mach is greater than one at', i
                 STOP
@@ -313,7 +308,9 @@ PROGRAM MAIN
         S_L2Array(fac) = S_L2   
 
         include '/main-scripts/swirl-data-export-per-grid.f90'
+
         CALL DestroyObject(object = swirlClassObj(fac))
+
 
         ! Export data 
 
