@@ -35,7 +35,6 @@ CONTAINS
         mm, &
         ir, &
         is, &
-        slp, &
         vphi, &
         akap)
 
@@ -45,9 +44,6 @@ CONTAINS
             mm, &
             ir, &
             is
-
-        REAL(KIND=rDef), INTENT(IN) :: &
-            slp
 
         REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
             rr, &
@@ -115,7 +111,7 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .TRUE. 
+        LOGICAL :: debug = .FALSE. 
 
         INTEGER  :: &
             UNIT 
@@ -261,7 +257,7 @@ CONTAINS
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
 
-        WRITE(6,*) 'INFO = ' ,INFO
+        !WRITE(6,*) 'INFO = ' ,INFO
         IF (INFO .EQ. 0) THEN
             WRITE(0,*) 'EIGENSOLVER PASSED'
         ELSEIF (INFO .EQ. 1 .or. INFO .LT. np4) THEN
@@ -303,15 +299,15 @@ CONTAINS
 
             IF ( (ABS(REAL(alpha(j))).LT.ABS(eps)) .or. &
                 (ABS(AIMAG(alpha(j))).LT.ABS(eps)) ) THEN
-                WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
-                WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
-                WRITE(6,*) 'BETA (',j,') = ', beta(j)
-
+!                WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+!                WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
+!                WRITE(6,*) 'BETA (',j,') = ', beta(j)
+!
                 ELSE IF ( (ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
                 (ABS(AIMAG(beta(j))).LT.ABS(eps)) ) THEN
-                WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
-                WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
-                WRITE(6,*) 'BETA (',j,') = ', beta(j)
+                !WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+                !WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
+                !WRITE(6,*) 'BETA (',j,') = ', beta(j)
             ELSE 
                 WRITE(UNIT,*) j,alpha(j),beta(j)
                 if (beta(j).ne.c0) then
@@ -360,7 +356,7 @@ CONTAINS
         do i = 1,np4
 ! JS: if there is (linear shear) and (no slope) and (no swirl then) ...
 ! Note: this will never happen because we removed the swrl.input functionality 
-            if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
+            if ((ir.eq.1) .and.  (is.eq.0)) then
                 rm   = rmx(1)
 !       akap(i) = (rm*rm -1.)*gam(i)*gam(i) &
 !          -2.*real(ak)*rm*gam(i) +real(ak)*real(ak)

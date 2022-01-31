@@ -1,0 +1,91 @@
+\documentclass[conf]{new-aiaa}
+%\documentclass[journal]{new-aiaa} for journal papers
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\usepackage{longtable,tabularx}
+\setlength\LTleft{0pt} 
+
+\title{Theoretical Literature Review: Unsteady Swirling Flows and the Modeling of Rotor-Stator Interaction Noise}
+
+\author{Jeffrey Severino\footnote{M.S.M.E Student, Department of Mechanical, Industrial, and Manufacturing Engineering, Student Member AIAA.} and Ray Hixon.\footnote{Faculty Advisor/Full Professor,Department of Mechanical, Industrial, and Manufacturing Engineering, Address/Mail Stop, and AIAA Member.}}
+\affil{University of Toledo, Toledo, OH, 43606}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This literature review seeks to clarify the different approaches to analytically and numerically describing the presence of normal modes within ducted flows and how well the extension of these theories/methods could possibly describe this phenomena given the presence of rotor and stator blade rows within the duct. This review demonstrates how a fundamental understanding of these techniques yields reasonable descriptions turbomachinery acoustic responses within uniform flows. However, full descriptions of the flow coupled with a normal mode analysis approach could potentially miss certain characteristics of instabilities, which highly influences the coupling of modes. This review concludes that further literature should be analyzed for modal decomposition methods in the presence of hydrodynamic instabilities. \end{abstract}
+
+\section{Introduction}
+\subsection{Define your topic and provide an appropriate context for reviewing the literature}
+During the 1960's, the increased demand for commercialized aircraft transport introduced jet engines capable of supporting large amounts of cargo and passengers. On the contrary, this rise in innovation came with a consequence, high volume engine noise.  At the time, thee most significant source of noise within an aircraft turbo fan engine was attributed to flow interactions between the inlet rotor and adjacent stator. It is common in turbomachinery to have a stator behind the inlet rotor (or fan) to counteract the rotation in the flow due to the rotor. More importantly, this configuration causes wakes to form after the rotor, which come into contact with the stator. This is denoted as rotor/stator interaction noise \cite{Tyler1962}. The "Tyler-Sofrin selection rule" (TSSR) was a fundamental contribution to the aerospace community, because it is a powerful yet simple tool used to quickly determine whether an engine was likely to have observable noise emission from the rotor and stator before the engine was manufactured. Despite the fact, these preliminary studies were focused on axial compressor noise, the TSSR was a pivotal stepping stone. Its application towards modern turbomachinery flow has been attempted by modeling the flow as steady in the rotating reference frame of the rotor's blade row. However, turbomachinery by its very nature produces unsteady flow, and the TSSR in not suitable \cite{Holmes2011}. Despite these dissimilarities, the work of \cite{Tyler1962} set a strong foundation for the aerospace community, allowing for further advances in turbomachinery noise prediction.
+
+\subsection{Establish reasoning - i.e. point - of - view for reviewing the literature}
+\subsubsection{Prior work in non-reflecting, non-linear VGBC}
+ A large amount of aircraft noise was reduced from 1975-2000, effectively eliminating the noise pollution for 90\% of the population \cite{Administration}. Since the early 2000's, the advancement in noise reduction technologies has been gradual, leaving a requirement for drastic improvement in aeroacoustic treatment strategies to compete with the demand of quiet subsonic  flight. A previous theoretical review by Envia has been suggested that a non linear time domain computation could capture the source generation (incident turbulence) in addition to the broadband noise. Such a process would have the capabilities of  of solving all components of noise generation in an individual calculation \cite{Envia2004}. This would at minimum, require an "LES-type" fidelity code, which can tend to be computationally expensive. 
+ A promising option is NASA GRC's Broadband Aeroacoustic Stator Simulation (BASS). BASS is a high-order, high accuracy computational aeroacoustics (CAA) code which has been used to study non linear provides mean an extensive study of non linear phenomena in turbomachinery flow, and in particular, mechanisms of noise generation that are produced from unsteady disturbances. This code allows for a wide variety of finite differencing and time marching schemes as well as artificial dissipation methods. This effective computational tool allows for an in-depth modeling of realistic velocity profiles that would be representative of flow produced from a rotor blade row. In recent work, a new method of implementing realistic, three-dimensional rotor wakes free from acoustics was validated  \cite{Hixon2011}. This provides a means of studying acoustic responses non linear swirling flows within pragmatic geometric configurations, while simultaneously allow for the modeling of sources generation produced from the incident turbulence. 
+
+\subsection{Explain the order/sequence of the review}
+This review will compare studies that have considered the applicability of unsteady linearized Euler equations on cylindrical and annular ducts. First the work of Kousen will breifly summarized \cite{Kousen1996,Kousen1999}. Secondly, the alternate approached shown by Golubev and Atassi used in \cite{Golubev1996,Golubev1998} were also compared. These works have utilized a standard normal mode approach to determine the modal response of inviscid, compressible, swirling flow within a cylindrical and annular ducts. Results and findings have revealed three categories of associated wave - modes, acoustic, nearly convected, and nearly sonic. Detailed examination of the literature indicate that the hierarchical system was not initially apparent. A qualitative description of the numerical methods used to evaluate the eigensystem of solutions will be described.
+
+One key question that remains, is how well do unsteady linearized equations capture the mechanisms of noise generation within realistic turbomachinery flow? There exists a copious amount of published work describing the use of wave equations to describe the governing behavior of ducted sound propagation(See \cite{Michel2008} for extensive preliminary review). However, turbomachines inherently rely on high velocities, high temperatures to maximize efficiencies. Such mechanisms need a more thorough formulation so that a complete acoustic description of the flow can be provided. Large contributions were first made by Kousen and Atassi and as a result they will be used for comparison.
+
+%To begin exploring various geometries, we must first ask: what are the central theories that have been used `````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````112`2`312` explain the acoustic behavior of unsteady swirling flows? Do the linearized Euler equations provide an adequate means of capturing the mechanisms of noise generation within realistic turbomachinery flow? This paper will explore prior theories used to explain this and their methodologies. Large contributions were first made by Koussen and Atassi and as a result they will be used for comparison. Tam proposed a theoretical framework where the modes of a flow are characterized by an initial boundary value problem, allowing for the appearance of "continuum modes" \cite{Tarn1998}
+\subsection{State the scope (what is included and what is not)}
+This review will be a qualitative report of the findings, but a quantitative comparison "meta-analysis" should be done for potentially ideal test cases.
+\section{Main Body}
+\subsection*{Organize the literature according to common themes}  
+
+\subsection{Historical Background}
+The sound propagation characteristics of ducted compressible unsteady swirling flow in turbo machines was first studied by \cite{kapur1973sound}. It was pointed out that small disturbances in the fluid can be quantified by their pressure, vorticity and entropy. These pressure disturbances can serve as a basis of modeling linear, pressure driven potential flow. Disturbances due to vorticity represent the effect of shear and turbulence, where as the disturbances of entropy describe inconsistencies in temperature. Kapur stated that: \\ 
+
+ \textit{"It is implicit in linear aerodynamic theory that these three types of small disturbances do not interact to first order in flows which are uniform and steady in the zeroth order. The pressure disturbances propagate as sound, while shear and entropy disturbances are purely convected as shown by Kovuasznay}. \\
+ 
+ This simplification, however, is not applicable in flows with substantial rotation. Kapur also states that disturbances in the radial and tangential velocity components suggests the presence of Coriolis forces and consequently pressure fluctuations, causing a coupling between vorticity and entropy to the pressure, giving rise to nonlinear dependencies. 
+ 
+\subsection{Work by Kousen}
+The study was expanded by \cite{Kerrebrock1977,Yousefian1975,Yurkovich498} who included cases of solid body swirl. Wundrow studied the swirling potential flows using Goldstein's disturbance velocity decomposition \cite{ME1978} using a numerical approach and found that the solutions were more accurate and found more efficiently \cite{Wundrow2019}. Kousen expanded these efforts by including \cite{Kousen1999} the effect unsteady disturbances in the presence of forced solid body-swirl and free-vortex flow without the use of potential flow theory. Using normal mode analysis along with a radial spatial differencing scheme, the wave modes produced within cylindrical and annular ducts was reported. Results show (figure 4.7) two distinct families of modes, purely convected and acoustic modes. The presence of axial shear in combination solid body flows can endue coupling between these modes, which in theory would not appear unless viscous terms were present in the eigenvalue analysis. Lack of available swirl flow results "hampered" validation attempts. However, this eigenvalue approach was utilized with a new quasi-3D formulation to find the axial wavenumbers from solid body flow was proposed in his next work . 
+
+In \cite{Kousen1996}, A quasi 3D formulation was validated and used to predict the appearance of modes due to the interaction of a rotor with spatially uniform steady and unsteady flow. These modes were first classified by \cite{Tyler1962} as "spinning modes". In addition, further investigation was done on the results shown in \cite{Kousen1999}. The axial wavenumbers that were previously found to be purely convective were shown to be in part,"nearly convective" (shear) pressure modes. These were found to propagate in the axial direction with no loss in amplitude, thus never satisfying the cut-off condition. (needs lead into)
+\section{Golubev and Atassi's work}
+Similarly, a narrow annulus is once again studied but with a different theoretical and computational approach. The governing equations, similar to Wundrow \cite{Wundrow2019} were still then linearized in terms of potential and rotation. As suggested by Case \cite{Case1960}, a Fourier series analysis was used to conduct the normal mode analysis to find the corresponding wave numbers of the eigensystem. The findings show these fall into further classification which were previously denoted as purely convective and in part, nearly-convective wave modes. These two classifications of purely convective disturbance can be split into their "nearly-convected vorticity dominated" and "nearly-sonic pressure dominated" parts. These new results show the appearance of "nearly-sonic pressure dominated modes" which can propagate at varying phase speeds throughout the duct in both directions. The imposed Doppler shift from asymmetrical modes cause the sound propagate in the opposite direction of the mean flow swirl. A weak coupling relation relates the two and allows for the presence of vorticity - pressure mode coupling. Together, these nearly convected modes can be "identified with the purely convective gusts in a non swilirling flow". For the second group, these "nearly convected" vorticity dominated modes are further split as these disturbances approach the \textit{critical layer}, i.e. the location at which the viscous effects of the boundary layer begin to influence the coupling between modes. When both solid body and free vortex induced rotations are in the same direction, no instabilities arise from outside the critical layer. It was shown in later works that the influence of centrifugal and Coriolis forces created by the mean swirl prevent the decomposition of modes into their potential, rotational and entropic components. The paper ultimately proposes "a generalized definition for incident rotational waves(gusts) is proposed which accounts for both the eigenmodes and the initial value solutions" 
+
+\section{Conclusion}
+\begin{itemize}
+	\item The conclusion summarizes the key findings of the review in general terms. Notable commonalities between works, whether favorable or not, may be included here.
+	\subitem This review discusses the development of the unsteady linearized equations, and how improvements in the modal analysis capture more families of mechanisms of noise generation within non-uniform swirling flow turbomachinery flow. 
+	\item This section is the reviewer’s opportunity to justify a research proposal. Therefore, the idea should be clearly re-stated and supported according to the findings of the review.
+	\subitem This literature review should be expanded to describe specific details in the methodologies and validation techniques reported by \cite{Kousen1996,Kousen1999,Golubev1996,Golubev1998}. 
+\end{itemize}
+
+%\section{Idea one. Central acoustic theory for unsteady ducted flow}
+%\subsubsection{Main Idea - Uniform Mean Flow}
+%In ducted turbomachinery, the appearance of unsteady flow has been first understood by characterizing the acoustic response of small disturbances. These small disturbances amount to modal content that govern the behavior of these responses. 
+%\subsubsection{Evidence}
+%It was shown by (Verdon:1989) that any small disturbance can be represented at a decomposition of acoustic, vortical, and entropic components. However, in the presence of sheared mean axial floww, the acoustic response of the mean flows that arise cannot be described in the same manner and cannot be solved analytically, calling for numerical approaches \cite{Kousen1996}. Preliminary results show that these responses fall into convective and "non-convective" classifications.
+%\subsubsection{Analysis}
+%Complex analysis allows us to observe the phase change in these mode shapes which can comprise the entire continua of the flow domain
+%\subsubsection{Lead Out}
+
+%\subsection{Concept}
+%\subsubsection{Main Idea}
+%The classification of modes into "convected", "non-convected" and "nearly convected"
+%\subsubsection{Evidence}
+%\subsubsection{Analysis}
+%\subsubsection{Lead Out}
+
+
+%Tyler Sofrin selection rule serves well for rotor and stators that are evenly spaced. 
+%- Utilizes the fourier transform
+
+
+\bibliography{sample}
+
+
+\end{document}

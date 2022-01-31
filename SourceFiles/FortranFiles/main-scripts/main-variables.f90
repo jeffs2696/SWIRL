@@ -137,7 +137,7 @@
         r_max  = 1.000_rDef  
 
     INTEGER, PARAMETER :: &
-        numberOfIterations = 9!, & azimuthalModeNumber = 1 ! mode order
+        numberOfIterations = 8!, & azimuthalModeNumber = 1 ! mode order
 
     COMPLEX(KIND=rDef), PARAMETER :: &
         hubAdmittance   = CMPLX(1.0,0,rDef)   , &

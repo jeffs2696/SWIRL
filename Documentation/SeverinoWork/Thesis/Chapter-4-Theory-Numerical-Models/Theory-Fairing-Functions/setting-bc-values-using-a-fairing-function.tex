@@ -1,0 +1,93 @@
+
+\section{Setting Boundary Condition Values Using a Fairing Function}
+
+\subsection{Using $\beta$ as a scaling parameter}
+
+Defining the nondimensional radius in the same way that SWIRL does:
+
+\begin{align*}
+    \widetilde{r} = \frac{r}{r_T}
+\end{align*}
+where $r_T$ is the outer radius of the annulus.
+
+The hub-to-tip ratio is defined as:
+
+\begin{align*}
+    \sigma = \frac{r_H}{r_T}
+     &= \widetilde{r}_H
+\end{align*}
+where $\widetilde{r}_H$ is the inner radius of the annular duct. The hub-to-tip
+ratio can also be zero indicating the duct is hollow.
+
+A useful and similar parameter is introduced, $\beta$, where $ 0 \leq \beta \leq 1$
+
+\begin{align*}
+    \beta &=
+    \frac{r - r_H}{r_T - r_H}
+\end{align*}
+Dividing By $r_T$
+\begin{align*}
+    \beta &= 
+    \frac{
+        \frac{r}{r_T} - \frac{r_H}{r_T}
+}{
+        \frac{r_T}{r_T} - \frac{r_H}{r_T}
+}\\
+&= \frac{
+    \widetilde{r} - \widetilde{r}_H
+}{
+1 - \sigma
+}
+\end{align*}
+
+Suppose a manufactured solution $f_{MS}$ with boundaries $f_{MS}(r= \sigma)$ 
+and $f_{MS}(\widetilde{r}= 1)$ is the specified analytical solution. The goal
+is to change the boundary conditions of the manufactured solution in such  way 
+that allows us to adequately check the boundary conditions imposed on SWIRL.
+Defining the manufactured solution, $f_{MS}(\widetilde{r})$,   where
+$\sigma \leq \widetilde{r} \leq 1$ and there are desired values of $f$ at the 
+boundaries desired values are going to be denoted as $f_{minBC}$ and $f_{maxBC}$.
+The desired changes in $f$ are defined as:
+
+\begin{align*}
+    \Delta f_{minBC} = f_{minBC} - f_{MS}(\widetilde{r} = \sigma)\\
+    \Delta f_{maxBC} = f_{maxBC} - f_{MS}(\widetilde{r} = 1) 
+\end{align*}
+We'd like to impose these changes smoothly on the manufactured solution function.
+To do this,the fairing functions, $A_{min}(\widetilde{r})$ and $A_{max}(\widetilde{r})$
+where:
+\begin{align*}
+    f_{BCsImposed}(\widetilde{r}) = f_{MS}(\widetilde{r}) +
+    A_{min}(\widetilde{r}) \Delta f_{minBC}  +  
+    A_{max}(\widetilde{r}) \Delta f_{maxBC}  
+\end{align*}
+Then, in order to set the condition at the appropriate boundary, the following 
+conditions are set,
+
+
+\begin{align*}
+    A_{min}(\widetilde{r} = \sigma) &= 1\\
+    A_{min}(\widetilde{r} = 1) &= 0 \\
+    A_{max}(\widetilde{r} = 1) &= 1 \\
+    A_{max}(\widetilde{r} = \sigma) &= 0 
+\end{align*}
+If $A_{min}(\widetilde{r})$ is defined as a function of $A_{max}(\widetilde{r})$
+then only $A_{max}(\widetilde{r})$ needs to be defined, therefore 
+\begin{align*}
+    A_{min}(\widetilde{r}) = 1 - A_{max}(\widetilde{r}) 
+\end{align*}
+
+It is also desirable to set the derivatives for the fairing function at the 
+boundaries incase there are boundary conditions imposed on the derivatives of 
+the fairing function.
+
+\begin{align*}
+    \frac{\partial A_{max}}{\partial \widetilde{r}}|_{\widetilde{r}= \sigma} &= 0\\
+    \frac{\partial A_{max}}{\partial \widetilde{r}}|_{\widetilde{r}= 1} &= 0    
+\end{align*}
+
+\begin{align*}
+    \frac{\partial A_{min}}{\partial \widetilde{r}}|_{\widetilde{r}= \sigma} &= 0\\
+    \frac{\partial A_{min}}{\partial \widetilde{r}}|_{\widetilde{r}= 1} &= 0    
+\end{align*}
+

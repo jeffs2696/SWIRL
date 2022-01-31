@@ -106,6 +106,7 @@ OBJECTS  =                     \
 	derivsModule.o 			   \
 	globalModule.o 			   \
 	gridModule.o   			   \
+	analysisModule.o 		   \
 	boundaryModule.o 		   \
 	indexxModule.o 			   \
 	rmachModule.o 			   \
@@ -232,21 +233,27 @@ cleanAll:
        (cd $(BLAS_LOCATION); rm -f *.o *.c *.a *.mod)
                                                                
 main.o: FortranFiles/main.f90        \
-         FortranFiles/boundaryModule.o \
-         FortranFiles/derivsModule.o   \
-         FortranFiles/fdgridModule.o   \
-         FortranFiles/fdrivsModule.o   \
-         FortranFiles/globalModule.o   \
-         FortranFiles/gridModule.o     \
-	     FortranFiles/machoutModule.o  \
-	     FortranFiles/rmachModule.o    \
-	     FortranFiles/smachAndSndspdModule.o \
-         FortranFiles/FindResidualVectorModule.o \
-		 FortranFiles/SourceTermModule.o  \
-	     FortranFiles/L2NormModule.o         \
-		 FortranFiles/mmsClassObject.o \
-	     FortranFiles/swirlClassObject.o 
+	FortranFiles/analysisModule.o \
+	FortranFiles/boundaryModule.o \
+	FortranFiles/derivsModule.o   \
+	FortranFiles/fdgridModule.o   \
+	FortranFiles/fdrivsModule.o   \
+	FortranFiles/globalModule.o   \
+	FortranFiles/gridModule.o     \
+	FortranFiles/machoutModule.o  \
+	FortranFiles/rmachModule.o    \
+	FortranFiles/smachAndSndspdModule.o \
+	FortranFiles/FindResidualVectorModule.o \
+	FortranFiles/SourceTermModule.o  \
+	FortranFiles/L2NormModule.o         \
+	FortranFiles/mmsClassObject.o \
+	FortranFiles/swirlClassObject.o 
 	@$(F90) $(F90FLAGS) FortranFiles/main.f90
+
+FortranFiles/analysisModule.o:  FortranFiles/analysisModule.f90 \
+	$(LAPACK_LOCATION)/zggev.o\
+	$(LAPACK_LOCATION)/f90_zggev.o 
+	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/analysisModule.f90
 
 FortranFiles/boundaryModule.o:  FortranFiles/boundaryModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/boundaryModule.f90

@@ -1,0 +1,347 @@
+\section{Divergence operations in new coordinate systems}
+
+%\epigraph{The introduction of numbers as \textit{coordinates} is an act of violence."} {\textit{Hermann Weyl}}
+
+%Hermann Weyl was a renown mathematician and physicist who has made revolutionary contributions to the field of differential geometry and topology. In his work on manifolds, he proposed the idea of working without coordinates and showed the application of multi-variable without the need to define a coordinate system , using coordinates when only absolutely necessary. This perspective emphasizes the distinction between quantities and the various coordinates systems that can be used to describe their change and behavior.
+The divergence, ($\nabla$), represents the operation of taking derivatives of a vector field. However, understanding the mathematical and physical representation of the divergence operator into new coordinate systems serves as a good prerequisite for the application of the Navier Stokes equations for the evaluation of aerodynamic models in unusual flow domains. Although there are many resources that will provide equations in varying coordinate systems, the derivation offers insight into the advantages and drawbacks of using a new reference frame for a flow domain. The divergence operator in Cartesian coordinates is,
+%This is also important because eigenmode analysis tells us the domain of a pulse traveling through the domain at a frequency that is intrinsic to the flow itself
+
+
+
+\begin{align*}
+\vec{\nabla} \equiv
+\hat{e}_x \frac{\partial }{\partial x}  %...
++ \hat{e}_y \frac{\partial }{\partial y}  %...
+	+ \hat{e}_z \frac{\partial }{\partial z}                      = 0
+\label{Divergence_Operator}
+\end{align*}
+
+The vectors, $\hat{e}_x,\hat{e}_y,\hat{e}_z$ (commonly denoted in literature as $\hat{i}$,$\hat{j}$,$\hat{k}$) are the basis vectors of the Cartesian coordinate system. The vector hat ( $\vec{}$ ) reminds us that divergence operation includes a scalar product of  the basis vectors and the individual derivative terms themselves.
+These basis vectors \textit{scale} with the derivatives $d/dx$ $d/dy$ $d/dz$ in the direction of these basis vectors themselves. This implicitly captures the coordinate system and assumptions that corresponds to the basis vectors themselves.
+
+To relate the basis vectors of the cylindrical coordinate system to the Cartesian coordinate system, we use the following relations,
+\begin{align*}
+	r 
+	&= \sqrt{x^2 + y^2} \\
+	\theta 
+	&= \tan^{-1} \Big( \frac{y}{x} \Big) \\
+	&= \cos^{-1} \Big( \frac{x}{r} \Big) \\
+	&=\sin^{-1} \Big( \frac{y}{r} \Big)		
+\end{align*}
+	Note that the equation above also establishes $x   = r\cos \theta$ and $y = r\sin\theta$. The Cartesian basis vectors are related to the cylindrical basis vectors of the new coordinate system by,
+
+\begin{align*}
+	\hat{e}_r 
+	&= \hat{e}_x \cos \theta + \hat{e}_y \sin \theta \\
+	\hat{e}_{\theta} 
+	&= -\hat{e}_x \sin \theta + \hat{e}_y \cos \theta \\
+	\hat{e}_z 	 
+	&= \hat{e}_z %\label{eq:cylindrical_basis_vectors}
+\end{align*}
+
+Defining these relationships, (they'll be useful later)
+
+\begin{align*}
+	\frac{\partial \hat{e}_{r	  }}{\partial r} 
+	&= \frac{\partial \hat{e}_{\theta}}{\partial r} 
+	= \frac{\partial \hat{e}_{z}	   }{\partial r} = 0 \\
+	\frac{\partial \hat{e}_{r	  }}{\partial \theta} 
+	&=	-\hat{e}_x \sin \theta + \hat{e}_y \cos \theta                = \hat{e}_{\theta}\\
+	\frac{\partial \hat{e}_{\theta	  }}{\partial \theta}
+	&= -\left(
+	\hat{e}_x \cos \theta + \hat{e}_y \sin \theta
+	\right) = 
+	-\hat{e}_{r}
+\end{align*}
+
+The multi-variable chain rule for differentiation is then used to express the Cartesian variables, $\frac{\partial}{\partial x}$,$\frac{\partial}{\partial y}$,$\frac{\partial}{\partial z}$ , with respect to the cylindrical variable.
+
+\begin{align*}
+	\frac{\partial }{\partial x}
+	&= \frac{\partial }{\partial r}\frac{d r}{d x} +
+	\frac{\partial }{\partial \theta}\frac{d \theta}{d x} +
+	\frac{\partial }{\partial z}\frac{d z}{d x} 
+	%\label{ddx}
+\end{align*}
+
+\begin{align*}
+	\frac{\partial }{\partial y}
+	&=
+	\frac{\partial }{\partial r} 	 \frac{d r}{d y} +
+	\frac{\partial }{\partial \theta} \frac{d \theta}{d y} + \frac{\partial }{\partial z}     \frac{d z}{d y}
+%\label{ddy}
+\end{align*}
+
+
+By,finding the derivatives of $r$ $\&$ $\theta$ with respect to $x$ and $y$, we can substitute terms in the Cartesian divergence definition. First, $\frac{dr}{dx}$ \& $\frac{dr}{dy}$ is calculated,
+
+% dr/dx
+\begin{align*}
+ 	\frac{dr}{dx}                                      
+	&= \frac{d}{dx} \Bigg(\Big[ x^2 + y^2 \Big]^{1/2}\Bigg) \\
+	&= \frac{1}{2} \Big[ x^2 + y^2 \Big]^{-1/2} (2x) \\
+ 	&=	\frac{x}{\sqrt{x^2+y^2}}\\
+ 	&= \frac{r cos\theta}{r}\\
+ 	& \boxed{\frac{dr}{dx} = cos\theta} 
+\end{align*}
+% dr/dy
+\begin{align*}
+	\frac{dr}{d y}
+	&= \frac{d}{dy} \Bigg(\Big[ x^2 + y^2 \Big]^{1/2}\Bigg) \\
+	&= \frac{1}{2}\Big[x^2 + y^2\Big]^{-1/2}(2y) \\
+	&= \frac{y}{\sqrt{x^2+y^2}} \\
+	&= \frac{r sin\theta}{r}\\
+	& \boxed{\frac{dr}{d y} = sin\theta} 
+\end{align*}
+%d\theta/dx
+Then, $\frac{d\theta}{dx}$ \& $\frac{d\theta}{dy}$ is found.
+\begin{align*}
+	\frac{d \theta}{d x} 
+	&= \frac{d}{dx} \Bigg(tan^{-1} \Big(\frac{y}{x}\Big)\Bigg)  \\
+	&= \frac{d}{du}tan^{-1}(u) \frac{d}{dx} \Big( \frac{y}{x} \Big)\\
+	&= \frac{1}{u^2  + 1} \frac{-y}{x^2} \\
+	&= -\frac{y}{y^2 + x^2} \\
+	& \boxed{ \frac{d \theta}{d x} =-\frac{sin \theta}{r}}
+\end{align*}
+
+\begin{align*}
+	\frac{d \theta}{d y} 
+	&= \frac{d}{dy} \Bigg(tan^{-1} \Big(\frac{y}{x}\Big)\Bigg)  \\
+	&= \frac{d}{du}tan^{-1}(u) \frac{d}{dy} \Big( \frac{y}{x} \Big)\\
+	&= \frac{1}{u^2  + 1} \frac{1}{x} \\
+	&= \frac{x}{y^2 + x^2} \\
+	& \boxed{\frac{d \theta}{d y}  = \frac{cos \theta}{r}}
+\end{align*}
+
+Through substitution back into the chain rule expansion,
+%d/dx after substitution
+\begin{align*}
+	\frac{\partial} {\partial x} =
+	\frac{\partial} {\partial r} \cos \theta %...
+	- \frac{\partial} {\partial \theta} \frac{1}{r} \sin \theta \\
+	\frac{\partial} {\partial y} =
+	\frac{\partial} {\partial r} \sin \theta %...
+	+ \frac{\partial} {\partial \theta} \frac{1}{r} \cos \theta
+\end{align*}
+	\[\]
+%d/dy after substitution
+	\[\]
+
+We can now convert our divergence operator, $\vec{\nabla}$ 
+\begin{align*}
+	\vec{\nabla} &=
+	\frac{\partial }{\partial x} \hat{e}_x +
+	\frac{\partial }{\partial y} \hat{e}_y +
+	\frac{\partial }{\partial z} \hat{e}_z = 0 \\
+	&=
+	\left(
+	\frac{\partial}{\partial r} \cos \theta -
+	\frac{\partial}{\partial \theta} \frac{1}{r} \sin \theta \right)\hat{e}_x +
+	\left(
+	\frac{\partial} {\partial r} \sin \theta +
+	\frac{\partial} {\partial \theta} \frac{1}{r} \cos \theta \right)\hat{e}_y +
+	\frac{\partial }{\partial z} \hat{e}_z                        = 0
+\end{align*}
+
+Rearranging like terms (containing cylindrical derivative variables), and factoring out $1/r$
+
+\begin{align*}
+	\vec{\nabla} &=
+	\left(
+	\frac{\partial} {\partial r} \cos \theta -
+	\frac{\partial} {\partial \theta} \frac{1}{r} \sin \theta
+	\right)\hat{e}_x +
+	\left(
+	\frac{\partial} {\partial r} \sin \theta +
+	\frac{\partial} {\partial \theta} \frac{1}{r}\cos  \theta
+	\right) \hat{e}_y +
+	\frac{\partial }{\partial z} \hat{e}_z = 0 \\
+	&= \left(
+	\hat{e}_x \cos \theta +
+	\hat{e}_y \sin \theta
+	\right)
+	\frac{\partial} {\partial r} +
+	\frac{1}{r}\left(
+	\hat{e}_y  \cos \theta -
+	\hat{e}_x \sin \theta
+	\right)
+	\frac{\partial} {\partial \theta} +
+	\frac{\partial }{\partial z} \hat{e}_z = 0
+\end{align*}
+
+Recalling the definitions for $\hat{e}_r$ and $\hat{e}_{\theta}$, we can use these expressions to rewrite $\nabla$ in polar coordinates
+
+\begin{align*}
+	\vec{\nabla} 
+	&= \hat{e}_r \frac{\partial} {\partial r} + 
+	\frac{1}{r} \hat{e}_{\theta}   
+	\frac{\partial} {\partial \theta} + 
+	\frac{\partial }{\partial z} \hat{e}_z = 0
+\end{align*}
+\newpage
+\newpage
+
+
+
+\[
+\frac{DV}{dt}                                               
+= \frac{1}{\rho} \nabla \cdot \boldsymbol{\sigma}\]
+\[\boldsymbol{\sigma}                                         = -p\boldsymbol{I_3}+ \tau\]
+where $\boldsymbol{[I_3]}$ is a 3 by 3 identity matrix and $\tau$ is the shear stress tensor. The velocity vector for a three dimensional flow.
+
+\begin{align}
+\vec{V} =
+v_r(r,\theta,x,t) \hat{e}_r +
+v_{\theta}(r,\theta,x,t) \hat{e}_{\theta} +
+v_x(r,\theta,x,t) \hat{e}_x
+\end{align}
+
+In Kousen's work, a velocity vector is written as a function of radius, and the radial velocity component is neglected.
+
+\begin{align}
+\vec{V} = v_{\theta}(r) \hat{e}_{\theta} +
+v_x(r) \hat{e}_x
+\end{align}
+We will go with the first definition and cancel out the radial velocity later on.
+\begin{align*}
+\frac{DV}{dt} =
+\frac{\partial \vec{V}}{ \partial t}\frac{dt}{dt} +
+\frac{\partial \vec{V}}{ \partial r}\frac{dr}{dt} +
+\frac{\partial \vec{V}}{ \partial \theta}\frac{d\theta}{dt} +
+\frac{\partial \vec{V}}{ \partial x}\frac{dx}{dt} 
+\end{align*}
+
+
+Starting with the first term,
+
+\begin{align*}
+\frac{\partial \vec{V}}{ \partial t}\frac{dt}{dt}	
+&= \frac{\partial}{\partial t}
+\left(
+v_r 	   \hat{e}_r +
+v_{\theta} \hat{e}_{\theta} +
+v_x		   \hat{e}_x
+\right) * 1 \\ 
+&=
+\frac{\partial 		  v_r}{\partial t} 		\hat{e}_r +
+\cancel{\frac{\partial  \hat{e}_r}{\partial t} 		v_r}       +
+\frac{\partial v_{\theta}}{\partial t}		\hat{e}_{\theta} +
+\cancel{\frac{\partial \hat{e}_{\theta}}{\partial t} v_{\theta}}  +
+\frac{\partial v_x}{\partial t}\hat{e}_{x} +
+\cancel{\frac{\partial \hat{e}_{x}}{\partial t}}v_x \\  
+&\boxed{
+	\frac{\partial \vec{V}}{ \partial t} = 
+	\frac{\partial 		  v_r}{\partial t} 		\hat{e}_r +
+	\frac{\partial v_{\theta}}{\partial t}		\hat{e}_{\theta} + 
+	\frac{\partial v_x}{\partial t}\hat{e}_{x}}
+\end{align*}
+
+\begin{align*}
+\frac{\partial \vec{V}}{ \partial r}\frac{dr}{dt} 
+&= \frac{\partial \vec{V}}{ \partial r}v_r\\ 
+&= \frac{\partial}{\partial r}
+\left[
+v_r 	   \hat{e}_r +
+v_{\theta} \hat{e}_{\theta} +
+v_x		   \hat{e}_x
+\right]  v_r \\ 
+&=
+\left(
+\frac{\partial v_r}{\partial r} 		\hat{e}_r +
+\cancel{\frac{\partial  \hat{e}_r}{\partial r} 		v_r}       +
+\frac{\partial v_{\theta}}{\partial r}		\hat{e}_{\theta} +
+\cancel{\frac{\partial \hat{e}_{\theta}}{\partial r} v_{\theta}}  +
+\frac{\partial v_x}{\partial r}\hat{e}_{x} +
+\cancel{\frac{\partial \hat{e}_{x}}{\partial r} v_{\theta}} \right) v_r\\ 
+&\boxed{ 
+	\frac{\partial \vec{V}}{ \partial r}\frac{dr}{dt}     = \left[
+	\frac{\partial 		  v_r}{\partial r} 		\hat{e}_r +
+	\frac{\partial v_{\theta}}{\partial r}		\hat{e}_{\theta} +
+	\frac{\partial v_x}{\partial r}\hat{e}_{x}\right] v_r} \\
+\end{align*}
+
+Recalling that arc length is $ds = rd\theta$, and angular velocity is $d\theta/dt = v_{\theta}/r$
+\begin{align*}
+\frac{\partial \vec{V}}{ \partial \theta}\frac{d\theta}{dt} 
+&= \frac{\partial \vec{V}}{ \partial \theta}\frac{v_{\theta}}{r}\\
+&= \frac{\partial}{\partial \theta}
+\left[
+v_r 	   \hat{e}_r +
+v_{\theta} \hat{e}_{\theta} +
+v_x		   \hat{e}_x
+\right]  \frac{v_{\theta}}{r} \\
+& =
+\left[
+\frac{\partial v_r}{\partial \theta} 		\hat{e}_r +
+\underbrace{\frac{\partial  \hat{e}_r}{\partial \theta}}_{\hat{e}_{\theta}} 		v_r       +
+\frac{\partial v_{\theta}}{\partial \theta}		\hat{e}_{\theta} +
+\underbrace{\frac{\partial \hat{e}_{\theta}}{\partial \theta}}_{-\hat{e}_{r}}  v_{\theta}  +
+\frac{\partial v_x}{\partial \theta}\hat{e}_{x} 
+\right] \frac{v_{\theta}}{r} \\ 
+&\boxed{ 
+	\frac{\partial \vec{V}}{ \partial  \theta}\frac{dr}{dt}     = 
+	\left[\left(\frac{\partial 		  v_r}{\partial \theta} - v_{\theta} \right)		\hat{e}_r +
+	\left(\frac{\partial   v_{\theta}}{\partial \theta}	+ v_r	     \right)\hat{e}_{\theta} +
+	\frac{\partial v_x}{\partial \theta}\hat{e}_{x}
+	\right] \frac{v_{\theta}}{r}} \\
+\end{align*}
+
+\begin{align*}
+\frac{\partial \vec{V}}{ \partial x}\frac{dx}{dt}  &= \frac{\partial \vec{V}}{ \partial x}v_x\\
+&= \frac{\partial}{\partial x}
+\left[
+v_r 	   \hat{e}_r +
+v_{\theta} \hat{e}_{\theta} +
+v_x		   \hat{e}_x
+\right]  v_r \\ 
+&=
+\left(
+\frac{\partial v_r}{\partial x} 		\hat{e}_r +
+\cancel{\frac{\partial  \hat{e}_r}{\partial x} 		v_r}       +
+\frac{\partial v_{\theta}}{\partial x}		\hat{e}_{\theta} +
+\cancel{\frac{\partial \hat{e}_{\theta}}{\partial x} v_{\theta}}  +
+\frac{\partial v_x}{\partial r}\hat{e}_{x} +
+\cancel{\frac{\partial \hat{e}_{x}}{\partial x} v_{\theta}} \right) v_x\\ 
+&\boxed{ 
+	\frac{\partial \vec{V}}{ \partial x}\frac{dx}{dt}     = \left[
+	\frac{\partial 		  v_r}{\partial x} 		\hat{e}_r +
+	\frac{\partial v_{\theta}}{\partial x}		\hat{e}_{\theta} +
+	\frac{\partial v_x}{\partial x}\hat{e}_{x}\right] v_x} \\
+\end{align*}
+
+
+Putting these terms together,
+
+\begin{align*}
+\frac{DV}{dt} =
+\left[ 
+\frac{\partial v_r}{\partial t} + 
+v_r \frac{\partial v_r}{\partial r}  +
+\frac{v_{\theta}^2}{r}\frac{\partial v_r}{\partial \theta } -
+\frac{v_{\theta}}{r} + v_x \frac{\partial v_r}{\partial x} 
+\right] \hat{e}_r +\\
+\left[ 
+\frac{\partial v_\theta}{\partial t} + 
+v_r \frac{\partial v_\theta}{\partial r}  +
+\frac{v_{\theta}}{r}\frac{\partial v_{\theta}}{\partial \theta } +
+\frac{v_r v_\theta}{r} +
+v_x \frac{\partial v_{\theta}}{\partial x} 
+\right] \hat{e}_{\theta} +\\
+\left[ 
+\frac{\partial v_x}{\partial t} + 
+v_r \frac{\partial v_x}{\partial r}  +
+\frac{v_{\theta}}{r}\frac{\partial v_x}{\partial \theta } + v_x \frac{\partial v_x}{\partial x} 
+\right] \hat{e}_x
+\end{align*}
+If we neglect viscosity on the right hand side, we will arrive at the linearized Euler equations
+
+\begin{align*}
+\nabla \sigma &= -\nabla p [\bf{I_3}]\\
+&=-\frac{1}{\rho}\begin{Bmatrix*}
+\frac{\partial p}{\partial r} & 0 & 0\\
+\\
+0 & \frac{1}{r}\frac{\partial p}{\partial \theta} & 0\\
+\\
+0 & 0 &	\frac{\partial p}{\partial x} \\
+\end{Bmatrix*}	
+\end{align*}
