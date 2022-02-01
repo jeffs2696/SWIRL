@@ -12,26 +12,25 @@ legend style={
   fill opacity=0.8,
   draw opacity=1,
   text opacity=1,
-  at={(0.97,0.03)},
-  anchor=south east,
+  at={(0.03,0.97)},
+  anchor=north west,
   draw=white!90!black
 },
 log basis y={10},
 scaled x ticks=manual:{}{\pgfmathparse{#1}},
+scaled y ticks=false,
 tick align=outside,
 tick pos=left,
 title={Rate Of Convergence},
 x grid style={color1},
 xmajorgrids,
-xmin=-93.2, xmax=2155.2,
+xmin=2.8, xmax=139.2,
 xtick style={color=color0},
 xticklabels={},
 y grid style={color1},
 ymajorgrids,
-ymin=0.80866952727793, ymax=2.08361419183455,
+ymin=0.810313009146586, ymax=1.99664524837958,
 ymode=log,
-y filter/.code=\pgfmathparse{#1 + 6.90775527898214},
-log ticks with fixed point,
 ytick style={color=color0}
 ]
 \addplot [thick, color2]
@@ -42,10 +41,6 @@ table {%
 37 1.70393785989551
 69 1.83979055693171
 133 1.91645542626636
-261 1.95732316671352
-517 1.97852814828588
-1029 1.98959957336697
-2053 1.99587522534726
 };
 \addlegendentry{Speed Of Sound}
 
@@ -55,36 +50,33 @@ legend style={
   fill opacity=0.8,
   draw opacity=1,
   text opacity=1,
-  at={(0.97,0.03)},
-  anchor=south east,
+  at={(0.03,0.97)},
+  anchor=north west,
   draw=white!90!black
 },
-log basis y={10},
+log basis y={},
+scaled y ticks=false,
 tick align=outside,
 tick pos=left,
 x grid style={color1},
 xlabel={Number of Gridpoints},
 xmajorgrids,
-xmin=-93.2, xmax=2155.2,
+xmin=2.8, xmax=139.2,
 xtick style={color=color0},
 y grid style={color1},
 ymajorgrids,
-ymin=0.40431347849083, ymax=4.93816102847636,
+ymin=0.315756796835477, ymax=3.59662566148958,
 ymode=log,
 ytick style={color=color0}
 ]
 \addplot [thick, color2]
 table {%
-9 1.38663646822573
-13 0.453023110002881
-21 2.00238653059139
-37 4.40720355912623
-69 2.56468866188346
-133 3.61663355162715
-261 4.08586674165337
-517 4.16024634983279
-1029 4.12803759133309
-2053 4.08123354172096
+9 0.352677187081448
+13 0.494100380073483
+21 0.641558362705352
+37 1.22472649219645
+69 2.4402288829851
+133 3.22010903990214
 };
 \addlegendentry{LEE}
 \end{groupplot}

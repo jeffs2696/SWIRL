@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\pgfplotsset{
+  log ticks with fixed point,
+}
+\begin{document}
+
+\begin{figure}
+    \centering
+    \input{tex-outputs/MachDistribution.tex}
+\end{figure}
+
+ \begin{figure}
+     \centering
+         \input{tex-outputs/PerturbationVariables.tex}
+ \end{figure}
+
+ \begin{figure}
+         \input{tex-outputs/SoundSpeedFromIntegration.tex}
+     \caption{Speed of Sound from Integrating the Tangential Mach Number}
+ \end{figure}
+
+% \begin{figure}
+%         \input{tex-outputs/SoundSpeedError.tex}
+%     \caption{Speed of Sound Expected vs Actual}
+% \end{figure}
+
+% \begin{figure}
+%         \input{tex-outputs/L2OfSoundSpeed.tex}
+%     \caption{L2 of speed of sound error}
+% \end{figure}
+
+
+ \begin{figure}
+     \centering
+         \input{tex-outputs/ROC.tex}
+     \caption{Rate of Convergence for the Speed of Sound Integration}
+ \end{figure}
+
+ \begin{figure}
+         \input{tex-outputs/SourceTermData.tex}
+     \caption{Source Term Error}
+ \end{figure}
+
+% \begin{figure}
+%         \input{L2OfSourceTerm.tex}
+%     \end{center}
+%     \caption{L2 of SourceTerm error}
+% \end{figure}
+%
+% \begin{figure}
+%     \begin{center}
+%         \input{ROC_Source.tex}
+%     \end{center}
+%     \caption{Absolute Value Rate of Convergence for the Source Term}
+% \end{figure}
+
+\end{document}
+

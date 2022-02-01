@@ -1,12 +1,10 @@
 # Necessary updates to SWIRL
 
 ### Todo
-- [ ]
+ [ ]
 ### In Progress
 
-- [ ] extract complex admittances from fortran into Python
 - [ ] fix isinitialized variable in swirlClassObject
-- [ ] Turn on analysisModule
 - [ ] Fix headers in exported data
 - [ ] Add tables to the plotReport 
 
@@ -21,6 +19,8 @@
 
 ### Done ✓
 
+- [x] Turn on analysisModule
+- [x] extract complex admittances from fortran into Python
 - [x] Complete Fairing Function Script
 
 - [x] Clean up Python code 

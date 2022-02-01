@@ -19,24 +19,24 @@ from plotReportLib import myfunctions as fcn
 
 
 # importing data
-flow_data    = fcn.importPlotData('01-mean-flow/mean-flow513.dat')
-LEE_L2_data  = fcn.importPlotData('02-method-of-manufactured-solutions/L2-LEE.dat')
-LEE_ROC_data = fcn.importPlotData('02-method-of-manufactured-solutions/ROC-LEE.dat')
-SND_L2_data  = fcn.importPlotData('02-method-of-manufactured-solutions/L2-sound_speed-.dat')
-SND_ROC_data = fcn.importPlotData('02-method-of-manufactured-solutions/ROC-sound_speed.dat')
+flow_data    = fcn.importPlotData('../01-mean-flow/mean-flow513.dat')
+LEE_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-LEE.dat')
+LEE_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-LEE.dat')
+SND_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-sound_speed-.dat')
+SND_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-sound_speed.dat')
 
 Delta_r    = LEE_ROC_data.Delta_r
 LEE_ROC    = LEE_ROC_data.ROC
 SND_ROC    = SND_ROC_data.ROC
-GridPoints = LEE_L2_data.GridP
+GridPoints = LEE_L2_data.GridPoints
 
 
 # In[3]:
 
 
-plt.style.use('seaborn-ticks')
-# plot data
 
+plt.style.use('plot_style.txt')
+# plot data
 
 plt.plot(          flow_data['radius'],flow_data['M_x'],          label = '$M_{x}$',         )
 
@@ -47,13 +47,14 @@ plt.plot(         flow_data['radius'],(flow_data['M_x']**2+ flow_data['M_theta']
 
 
 # add details
-plt.title('Mean Flow ')
-plt.ylabel('Mach Number')
-plt.xlabel('Radius')
-#plt.tight_layout()
-plt.rcParams['figure.figsize'] = [10, 5]
+plt.title('Flow Velocity')
+plt.ylabel('Mach Number, M')
+plt.xlabel(r'$\bar{r}$')
+plt.legend()
+plt.tight_layout()
+
 plt.grid(True)
-tikzplotlib.save("03-plotReport/tex-outputs/MachDistribution.tex")
+tikzplotlib.save("tex-outputs/MachDistribution.tex")
 
 
 # In[4]:
@@ -79,51 +80,37 @@ def plot_measurement(args, kwargs,x_label,y_label):
 # In[5]:
 
 
-#x = flow_data['radius']        
-#Mach = [flow_data['M_x'] ,flow_data['M_theta']]
-#args = [x,Mach[0], \
-#        x,Mach[1]]
-#kwargs = { }
-# 
-#plot_measurement( args= args, \
-#                 kwargs = kwargs, \
-#                 x_label = "Radius" ,\
-#                 y_label = "Flow Speed")
+fig, ax = plt.subplots(1,1) 
+plt.plot(         flow_data['radius'],flow_data['A_expected'],          label ='Expected' ,         linestyle = 'dashed')
 
+plt.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Actual',         linestyle = 'dotted')
 
-# In[6]:
-
-
-plt.plot(         flow_data['radius'],flow_data['A_expected'],          label ='Expected' ,         marker='.',markevery=5,markersize=5)
-
-plt.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Actual' ,         marker='o',markevery=10,markersize=7)
-
-plt.ylabel('Speed of Sound')
+plt.ylabel(r'$\bar{A}$')
 plt.xlabel('Radius')
 plt.grid(True)
 plt.legend()
-tikzplotlib.save("03-plotReport/tex-outputs/SoundSpeedFromIntegration.tex")
+tikzplotlib.save("tex-outputs/SoundSpeedFromIntegration.tex")
 
 
-# In[7]:
+# In[6]:
 
 
 fig, (ax1,ax2,ax3,ax4) = plt.subplots(4,1,sharex=True)
 
 ax1.set_title('Perturbation Variables')
 ax1.plot(         flow_data['radius'],flow_data['vR']          )
-ax1.set_ylabel('Radial')
+ax1.set_ylabel(r'$\bar{v}_r$')
 ax2.plot(         flow_data['radius'],flow_data['vTh']          )
-ax2.set_ylabel('Tangential')
+ax2.set_ylabel(r'$\bar{v}_{\theta}$')
 ax3.plot(         flow_data['radius'],flow_data['vX']        )
-ax3.set_ylabel('Axial')
+ax3.set_ylabel(r'$\bar{v}_x$')
 ax4.plot(         flow_data['radius'],flow_data['Pr']        )
-ax4.set_ylabel('Pressure')
+ax4.set_ylabel(r'$\bar{p}$')
+ax4.set_xlabel(r'$\bar{r}$')
+tikzplotlib.save("tex-outputs/PerturbationVariables.tex")
 
-tikzplotlib.save("03-plotReport/tex-outputs/PerturbationVariables.tex")
 
-
-# In[8]:
+# In[10]:
 
 
 fig, (ax1,ax2) = plt.subplots(                       nrows=2,                       ncols=1,                              sharex=True)
@@ -133,44 +120,47 @@ ax1.set_title('Rate Of Convergence')
 ax2.semilogy(GridPoints[1:],LEE_ROC,label='LEE')
 ax2.legend()
 ax2.set_xlabel('Number of Gridpoints')
-
+ax1.yaxis.set_major_formatter(mticker.ScalarFormatter())
+ax2.yaxis.set_major_formatter(mticker.ScalarFormatter())
 
 ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
-tikzplotlib.save("03-plotReport/tex-outputs/ROC.tex")
+
+tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf")
+
+#,extra_axis_parameters=['yticklabel style={ /pgf/number format/fixed, #/pgf/number format/precision=5}','scaled y ticks=false']) 
+
+# In[ ]:
 
 
-# In[11]:
+
+
+
+# In[8]:
 
 
 #plt.semilogy(Delta_r,LEE_ROC)
-fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True,figsize=(10,4))
+fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True)
 
 # can i loop though axes?
 ax[0].set_ylabel('Radial')
-ax[0].plot(flow_data['radius'],flow_data['S_1_e'],label='expected', marker = '.', markersize = 2)
-ax[0].plot(flow_data['radius'],flow_data['S_1_a'],label='actual')
+ax[0].plot(flow_data['radius'],flow_data['S_1_e'],label='expected')
+ax[0].plot(flow_data['radius'],flow_data['S_1_a'],label='actual', linestyle = 'dashed')
 ax[0].legend(loc="upper right")
 ax[1].set_ylabel('Tangential')
-ax[1].plot(flow_data['radius'],flow_data['S_2_e'], marker = '.',markersize = 2)
-ax[1].plot(flow_data['radius'],flow_data['S_2_a'])
+ax[1].plot(flow_data['radius'],flow_data['S_2_e'])
+ax[1].plot(flow_data['radius'],flow_data['S_2_a'], linestyle = 'dashed')
 ax[2].set_ylabel('Axial')
-ax[2].plot(flow_data['radius'],flow_data['S_3_e'], marker = '.',markersize = 2)
-ax[2].plot(flow_data['radius'],flow_data['S_3_a'])
+ax[2].plot(flow_data['radius'],flow_data['S_3_e'])
+ax[2].plot(flow_data['radius'],flow_data['S_3_a'], linestyle = 'dashed')
 ax[3].set_ylabel('Energy')
-ax[3].plot(flow_data['radius'],flow_data['S_4_e'], marker = '.',markersize = 2)
-ax[3].plot(flow_data['radius'],flow_data['S_4_a'])
-tikzplotlib.save("03-plotReport/tex-outputs/SourceTermData.tex")
+ax[3].plot(flow_data['radius'],flow_data['S_4_e'])
+ax[3].plot(flow_data['radius'],flow_data['S_4_a'], linestyle = 'dashed')
+tikzplotlib.save("tex-outputs/SourceTermData.tex")
 
 
 # In[ ]:
 
 
 
-
-
-# In[ ]:
-
-
-
-
+#plt.show()

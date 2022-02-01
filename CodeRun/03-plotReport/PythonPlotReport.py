@@ -127,7 +127,8 @@ ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 
 tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf")
-
+vi 
+#,extra_axis_parameters=['yticklabel style={ /pgf/number format/fixed, #/pgf/number format/precision=5}','scaled y ticks=false']) 
 
 # In[ ]:
 
@@ -162,4 +163,4 @@ tikzplotlib.save("tex-outputs/SourceTermData.tex")
 
 
 
-plt.show()
+#plt.show()
