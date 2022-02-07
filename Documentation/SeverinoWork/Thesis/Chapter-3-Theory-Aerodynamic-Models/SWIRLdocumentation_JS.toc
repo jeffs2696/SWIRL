@@ -10,6 +10,6 @@
 \contentsline {subsubsection}{\numberline {3.1.4}Linearizing the Conservation of Momentum\\ in the \textit {x} direction}{17}{subsubsection.3.1.4}%
 \contentsline {subsubsection}{\numberline {3.1.5}Linearizing the Energy Equation}{19}{subsubsection.3.1.5}%
 \contentsline {section}{\numberline {4}Substituting Pertubation Variables}{21}{section.4}%
-\contentsline {section}{\numberline {5}Non-Dimensionalization}{23}{section.5}%
-\contentsline {section}{\numberline {6}Appendix A: Speed of Sound}{26}{section.6}%
-\contentsline {section}{\numberline {7}Appendix B: Isentropic Waves}{29}{section.7}%
+\contentsline {section}{\numberline {5}Non-Dimensionalization}{25}{section.5}%
+\contentsline {section}{\numberline {6}Appendix A: Speed of Sound}{29}{section.6}%
+\contentsline {section}{\numberline {7}Appendix B: Isentropic Waves}{32}{section.7}%

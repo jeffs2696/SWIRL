@@ -1,30 +1,14 @@
 \contentsline {chapter}{Abstract}{iii}%
 \contentsline {chapter}{Acknowledgments}{v}%
 \contentsline {chapter}{Contents}{vi}%
-\contentsline {chapter}{List of Tables}{viii}%
-\contentsline {chapter}{List of Figures}{ix}%
+\contentsline {chapter}{List of Tables}{vii}%
+\contentsline {chapter}{List of Figures}{viii}%
+\contentsline {chapter}{List of Symbols}{ix}%
 \contentsline {chapter}{List of Abbreviations}{x}%
 \contentsline {chapter}{List of Symbols}{xi}%
 \contentsline {chapter}{Preface}{xii}%
 \contentsline {chapter}{\numberline {1}Insert the Heading to Chapter 1}{1}%
-\contentsline {section}{\numberline {1.1}Divergence operations in new coordinate systems}{1}%
-\contentsline {section}{\numberline {1.2}Using cylindrical basis vectors to create Kousen's aerodynamic model}{7}%
-\contentsline {subsection}{\numberline {1.2.1}Aerodynamic Model}{10}%
-\contentsline {section}{\numberline {1.3}Mean Flow Equations}{10}%
-\contentsline {section}{\numberline {1.4}Back to buisness..}{11}%
-\contentsline {subsection}{\numberline {1.4.1}Axial Shear Flow}{11}%
-\contentsline {section}{\numberline {1.5}Accounting for solid body swirl}{12}%
-\contentsline {subsection}{\numberline {1.5.1}Linearizing the governing equations}{14}%
-\contentsline {subsubsection}{\numberline {1.5.1.1}Linearizing Conservation of Mass}{14}%
-\contentsline {subsubsection}{\numberline {1.5.1.2}Linearizing the Conservation of Momentum\\ in the \textit {r} direction}{18}%
-\contentsline {subsubsection}{\numberline {1.5.1.3}Linearizing the Conservation of Momentum\\ in the \textit {$\theta $} direction}{20}%
-\contentsline {subsubsection}{\numberline {1.5.1.4}Linearizing the Conservation of Momentum\\ in the \textit {x} direction}{22}%
-\contentsline {subsubsection}{\numberline {1.5.1.5}Linearizing the Energy Equation}{24}%
-\contentsline {section}{\numberline {1.6}Substituting Pertubation Variables}{26}%
-\contentsline {section}{\numberline {1.7}Non-Dimensionalization}{30}%
-\contentsline {section}{\numberline {1.8}Appendix A: Speed of Sound}{32}%
-\contentsline {section}{\numberline {1.9}Appendix B: Isentropic Waves}{36}%
-\contentsline {chapter}{\numberline {2}Insert the Heading to Chapter 2}{38}%
-\contentsline {chapter}{References}{39}%
-\contentsline {chapter}{\numberline {A}Insert the Heading to Appendix A}{40}%
-\contentsline {chapter}{\numberline {B}Insert the Heading to Appendix B}{41}%
+\contentsline {chapter}{\numberline {2}Insert the Heading to Chapter 2}{2}%
+\contentsline {chapter}{References}{3}%
+\contentsline {chapter}{\numberline {A}Insert the Heading to Appendix A}{5}%
+\contentsline {chapter}{\numberline {B}Insert the Heading to Appendix B}{6}%

@@ -12,9 +12,9 @@
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
     ! inputs needed for SwirlClassType
-    azimuthalModeNumber       = 1
-    hubToTipRatio             = r_min/r_max
-    finiteDiffFlag            =  2
+    azimuthalModeNumber       =  1
+    hubToTipRatio             =  r_min/r_max
+    finiteDiffFlag            =  1
     secondOrderSmoother       =  0.0_rDef
     fourthOrderSmoother       =  0.0_rDef
 

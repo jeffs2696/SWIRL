@@ -133,11 +133,11 @@
 ! input variables:
     REAL(KIND = rDef), PARAMETER ::&
         gam    = 1.40_rDef  ,&
-        r_min  = 0.20_rDef  ,&
+        r_min  = 0.000000010_rDef  ,&
         r_max  = 1.000_rDef  
 
     INTEGER, PARAMETER :: &
-        numberOfIterations = 8!, & azimuthalModeNumber = 1 ! mode order
+        numberOfIterations = 10!, & azimuthalModeNumber = 1 ! mode order
 
     COMPLEX(KIND=rDef), PARAMETER :: &
         hubAdmittance   = CMPLX(1.0,0,rDef)   , &

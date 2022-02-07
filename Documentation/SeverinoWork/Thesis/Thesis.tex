@@ -54,7 +54,7 @@
 %        |  2) Input to this command is case-sensitive.             |
 %        +----------------------------------------------------------+
 
-\mydocument{Dissertation}
+\mydocument{Thesis}
 
 %--------+----------------------------------------------------------+
 %        |  \degree{}{}                                 (REQUIRED)  |
@@ -86,7 +86,7 @@
 %        |  year your degree will be *conferred* by the university. |
 %        +----------------------------------------------------------+
 
-\conferraldate{December}{2021}
+\conferraldate{May}{2021}
 
 %--------+----------------------------------------------------------+
 %        |  \advisor{}                                  (REQUIRED)  |
@@ -147,14 +147,14 @@
 %        |                                                          |
 %        +----------------------------------------------------------+
 
-  \secondmember{Dr.~Anita Bath}
-   \thirdmember{Dr.~Chris P.~Bacon}
-  \fourthmember{Dr.~Adam Baum}
-   \fifthmember{Dr.~Corey O.~Graff}
-   \sixthmember{Dr.~Hugh Jass}
- \seventhmember{Dr.~Noah Lott}
-  \eighthmember{Dr.~Jean Poole}
-
+  \secondmember{Dr.~Chinhua Sheng}
+%   \thirdmember{Dr.~Chris P.~Bacon}
+%  \fourthmember{Dr.~Adam Baum}
+%   \fifthmember{Dr.~Corey O.~Graff}
+%   \sixthmember{Dr.~Hugh Jass}
+% \seventhmember{Dr.~Noah Lott}
+%  \eighthmember{Dr.~Jean Poole}
+%
 %--------+----------------------------------------------------------+
 %        |  \graduatedean{}{}                           (REQUIRED)  |
 %        |                                                          |
@@ -244,7 +244,14 @@
 
 \tableofcontents  %----->  ----->  ---->  DO NOT ALTER THIS COMMAND
 \listoftables \listoffigures
-
+\begin{listofsymbols}
+    \emblem{$A$        }{mean flow speed of sound}
+    \emblem{$A_T      $}{speed of sound at the duct radius}
+    \emblem{$\tilde{A}$}{dimensionless speed of sound, $\frac{A}{A_T}$}
+    \emblem{$D/Dt$     }{material derivative, $\partial/\partial t + V \cdot \nabla $}
+    \emblem{$D_N$      }{derivative matrix using $N$ points}
+    \emblem{$\textbf{e}_x$,$\textbf{e}_{\theta}$ }{s}
+\end{listofsymbols}
 %--------+----------------------------------------------------------+
 %        |  \captionformat{}                            (REQUIRED)  |
 %        |                                                          |
@@ -393,7 +400,7 @@
 %        +----------------------------------------------------------+
 
 \chapter{Insert the Heading to Chapter 1}
-\input{Methods/Methods.tex}
+\input{Chapter-3-Theory-Aerodynamic-Models/SWIRLDocumentation_JS.tex}
 % \input{Chapter1/meanFlowMMS/meanFlowMMSBody.tex}
 [ Insert your text to chapter 1 here.  A pretend example of a silly
 table is provided below (i.e., Table~\ref{SILLY}).~]

@@ -4,9 +4,15 @@
  [ ]
 ### In Progress
 
+- [ ] fix solver when r = 0
 - [ ] fix isinitialized variable in swirlClassObject
 - [ ] Fix headers in exported data
 - [ ] Add tables to the plotReport 
+
+- [ ] Clean up Python code
+    - [ ] refactor symbolic solver
+        - [ ] convert .ipynb to .py (notebook to script)
+        - [ ] 
 
 - [ ] Clean up FORTRAN code
   - [ ] Make sure all the data types are the same in SWIRL 
@@ -15,7 +21,8 @@
   - [x] make an MMS test case 
 
 - [ ] Clean up Documentation
-  - [ ] Address duplicate derivation 
+  - [ ] Address duplicate derivations
+  - [ ] Complete SWIRLDocumentationJS
 
 ### Done ✓
 

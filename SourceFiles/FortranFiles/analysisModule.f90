@@ -270,8 +270,6 @@ CONTAINS
             WRITE(6,*) 'if INFO = -i, the i-th argument had an illegal value.'
         ENDIF
 
-
-
         c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
 !
 ! Compute cut-off wavenumber for uniform flow.

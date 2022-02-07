@@ -9,13 +9,10 @@ import glob
 import os
 import pandas as pd
 import matplotlib as mpl
-from matplotlib import pyplot as plt
 import matplotlib.ticker as mticker
 import plotReportLib
+from matplotlib import pyplot as plt
 from plotReportLib import myfunctions as fcn
-
-
-# In[2]:
 
 
 # importing data
@@ -36,6 +33,8 @@ GridPoints = LEE_L2_data.GridPoints
 
 
 plt.style.use('plot_style.txt')
+
+
 # plot data
 
 plt.plot(          flow_data['radius'],flow_data['M_x'],          label = '$M_{x}$',         )
@@ -54,7 +53,7 @@ plt.legend()
 plt.tight_layout()
 
 plt.grid(True)
-tikzplotlib.save("tex-outputs/MachDistribution.tex")
+tikzplotlib.save("tex-outputs/MachDistribution.tex",extra_axis_parameters= ['width=2cm'])
 
 
 # In[4]:
@@ -80,7 +79,7 @@ def plot_measurement(args, kwargs,x_label,y_label):
 # In[5]:
 
 
-fig, ax = plt.subplots(1,1) 
+fig, ax = plt.subplots(1,1,figsize=(5,5)) 
 plt.plot(         flow_data['radius'],flow_data['A_expected'],          label ='Expected' ,         linestyle = 'dashed')
 
 plt.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Actual',         linestyle = 'dotted')
@@ -88,7 +87,10 @@ plt.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Ac
 plt.ylabel(r'$\bar{A}$')
 plt.xlabel('Radius')
 plt.grid(True)
+
 plt.legend()
+fig = mpl.pyplot.gcf()
+fig.set_size_inches(18.5, 10.5, forward=True)
 tikzplotlib.save("tex-outputs/SoundSpeedFromIntegration.tex")
 
 
@@ -127,7 +129,6 @@ ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 
 tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf")
-
 #,extra_axis_parameters=['yticklabel style={ /pgf/number format/fixed, #/pgf/number format/precision=5}','scaled y ticks=false']) 
 
 # In[ ]:
@@ -140,7 +141,7 @@ tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf")
 
 
 #plt.semilogy(Delta_r,LEE_ROC)
-fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True)
+fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True,figsize=(10,4))
 
 # can i loop though axes?
 ax[0].set_ylabel('Radial')

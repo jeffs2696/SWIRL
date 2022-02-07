@@ -240,7 +240,8 @@ PROGRAM MAIN
 !                 S_2   = S_2(i)                  ,&
 !                 S_3   = S_3(i)                  ,&
 !                 S_4   = S_4(i)     )             
-!!
+
+
             CALL getMMSSourceTermComponents( &
                 gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
                 i     = ci                      ,&

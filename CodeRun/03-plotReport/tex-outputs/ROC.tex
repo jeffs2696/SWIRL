@@ -7,15 +7,9 @@
 
 \begin{groupplot}[group style={group size=1 by 2}]
 \nextgroupplot[
+height=10cm,
 legend cell align={left},
-legend style={
-  fill opacity=0.8,
-  draw opacity=1,
-  text opacity=1,
-  at={(0.03,0.97)},
-  anchor=north west,
-  draw=white!90!black
-},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!90!black},
 log basis y={10},
 scaled x ticks=manual:{}{\pgfmathparse{#1}},
 tick align=outside,
@@ -23,58 +17,58 @@ tick pos=left,
 title={Rate Of Convergence},
 x grid style={color1},
 xmajorgrids,
-xmin=2.8, xmax=139.2,
+xmin=-42, xmax=1080,
 xtick style={color=color0},
 xticklabels={},
 y grid style={color1},
 ymajorgrids,
-ymin=0.810313009146586, ymax=1.99664524837958,
+ymin=4.44747255152739e-06, ymax=0.000525872241124819,
 ymode=log,
 ytick style={color=color0}
 ]
 \addplot [thick, color2]
 table {%
-9 0.844218757837066
-13 1.18435158401395
-21 1.48568400182901
-37 1.70393785989551
-69 1.83979055693171
-133 1.91645542626636
+9 0.0004233149106536
+13 0.0003694401331974
+21 0.000257059247911
+37 0.0001524859007331
+69 8.26716409174e-05
+133 4.29062388233e-05
+261 2.18291931304e-05
+517 1.10054615594e-05
+1029 5.524970416e-06
 };
 \addlegendentry{Speed Of Sound}
 
 \nextgroupplot[
+height=10cm,
 legend cell align={left},
-legend style={
-  fill opacity=0.8,
-  draw opacity=1,
-  text opacity=1,
-  at={(0.03,0.97)},
-  anchor=north west,
-  draw=white!90!black
-},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!90!black},
 log basis y={10},
 tick align=outside,
 tick pos=left,
 x grid style={color1},
 xlabel={Number of Gridpoints},
 xmajorgrids,
-xmin=2.8, xmax=139.2,
+xmin=-42, xmax=1080,
 xtick style={color=color0},
 y grid style={color1},
 ymajorgrids,
-ymin=0.315756796835477, ymax=3.59662566148958,
+ymin=0.803370913123122, ymax=1.06452015720795,
 ymode=log,
 ytick style={color=color0}
 ]
 \addplot [thick, color2]
 table {%
-9 0.352677187081448
-13 0.494100380073483
-21 0.641558362705352
-37 1.22472649219645
-69 2.4402288829851
-133 3.22010903990214
+9 0.813715083843235
+13 1.03393372106913
+21 1.05098768317644
+37 0.952815827717219
+69 0.921373980124911
+133 0.939637488923945
+261 0.964886384007406
+517 0.982351791225287
+1029 0.992848468469384
 };
 \addlegendentry{LEE}
 \end{groupplot}
