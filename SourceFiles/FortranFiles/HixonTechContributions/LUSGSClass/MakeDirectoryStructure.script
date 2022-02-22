@@ -1,4 +1,0 @@
-for m in Executables LibraryFiles Makefile ModuleFiles ObjectFiles SourceCode; do
-  mkdir $m
-  cp README.txt $m/
-done
