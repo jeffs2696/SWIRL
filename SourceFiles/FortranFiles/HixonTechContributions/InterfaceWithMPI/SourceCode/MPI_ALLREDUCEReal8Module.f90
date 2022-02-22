@@ -1,0 +1,74 @@
+MODULE MPI_ALLREDUCEReal8Call
+
+  USE IncludeMPIImplementation
+  USE MPIKindDefs
+
+  ! this module actually makes the F77 MPI_ALLREDUCE call for character data
+
+  IMPLICIT NONE
+  PRIVATE
+  PUBLIC :: MPIALLREDUCEReal8
+
+CONTAINS
+
+  SUBROUTINE MPIALLREDUCEReal8(SENDBUF, RECVBUF, COUNT, DATATYPE, OPER, &
+                              COMM, IERROR)
+    REAL(KIND=real8Kind), DIMENSION(:), INTENT(IN)  :: SENDBUF
+    REAL(KIND=real8Kind), DIMENSION(:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: COUNT
+    INTEGER, INTENT(IN)  :: DATATYPE
+    INTEGER, INTENT(IN)  :: OPER
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPI_ALLREDUCE(SENDBUF(1), RECVBUF(1), COUNT, DATATYPE, OPER, &
+                       COMM, IERROR)
+
+    IF (IERROR == MPI_SUCCESS) THEN
+      IERROR = 0
+    END IF
+
+    RETURN
+  END SUBROUTINE MPIALLREDUCEReal8
+
+END MODULE MPI_ALLREDUCEReal8Call
+
+MODULE MPI_ALLREDUCEReal8Module
+  USE MPI_ALLREDUCEReal8Call
+  USE MPIKindDefs
+
+  ! this module is the wrapper to make the new F95 MPI_ALLREDUCE
+  !  call _look like_ the standard F77 call.
+
+  IMPLICIT NONE
+  PRIVATE
+  PUBLIC :: HTMPI_ALLREDUCE
+
+  INTERFACE HTMPI_ALLREDUCE
+    MODULE PROCEDURE MPI_ALLREDUCEReal8
+  END INTERFACE
+
+CONTAINS
+
+  SUBROUTINE MPI_ALLREDUCEReal8(SENDBUF, RECVBUF, COUNT, DATATYPE, OPER, &
+                       COMM, IERROR)
+    REAL(KIND=real8Kind), DIMENSION(:), INTENT(IN)  :: SENDBUF
+    REAL(KIND=real8Kind), DIMENSION(:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: COUNT
+    INTEGER, INTENT(IN)  :: DATATYPE
+    INTEGER, INTENT(IN)  :: OPER
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPIALLREDUCEReal8(SENDBUF   = SENDBUF,   &
+                          RECVBUF   = RECVBUF,   &
+                          COUNT     = COUNT,     &
+                          DATATYPE  = DATATYPE,  &
+                          OPER      = OPER,      &
+                          COMM      = COMM,      &
+                          IERROR    = IERROR)
+
+    RETURN
+  END SUBROUTINE MPI_ALLREDUCEReal8
+
+END MODULE MPI_ALLREDUCEReal8Module

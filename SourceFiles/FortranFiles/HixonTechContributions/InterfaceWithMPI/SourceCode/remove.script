@@ -1,0 +1,5 @@
+for m in *Integer8*; do
+  echo 'removing '$m
+  rm -f $m
+  cvs remove $m
+done

@@ -1,0 +1,12 @@
+for n in BCAST IRECV ISEND RECV SEND SENDRECV; do
+  for m in Character DblePrec Integer Logical Real; do
+    for l in Module Module0D; do
+     echo moving MPI_"$n""$m""$l".f95 to MPI_"$n""$m""$l".f90
+     mv MPI_"$n""$m""$l".f95 MPI_"$n""$m""$l".f90
+     cvs remove MPI_"$n""$m""$l".f95
+    done
+  done
+done
+mv IncludeMPIImplementation.f95 IncludeMPIImplementation.f90
+cvs remove IncludeMPIImplementation.f95
+cvs add *.f90

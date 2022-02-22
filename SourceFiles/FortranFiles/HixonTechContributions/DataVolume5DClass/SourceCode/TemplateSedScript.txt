@@ -1,0 +1,30 @@
+#/bin/sh
+
+#logical
+sed 's/IntOrReal/LOGICAL/' < DataVolume5DClassRoutinesTemplate.f90 > DataVolume5DClassRoutinesLogicalTemplate.f90
+
+#real
+sed 's/IntOrReal/REAL(KIND=VarTypeDef)/' < DataVolume5DClassRoutinesTemplate.f90 > DataVolume5DClassRoutinesRealTemplate.f90
+
+#integer
+sed 's/IntOrReal/INTEGER(KIND=VarTypeDef)/' < DataVolume5DClassRoutinesTemplate.f90 > DataVolume5DClassRoutinesIntTemplate.f90
+
+for n in 4 8; do
+ sed 's/VarTypeDef/int'$n'Def/' < DataVolume5DClassRoutinesIntTemplate.f90 > scratch.txt
+ sed 's/VarType/Int'$n'/' < scratch.txt > 'DataVolume5DClassInt'$n'Routines.f90'
+done
+
+for n in SP DP; do
+ sed 's/VarTypeDef/real'$n'Def/' < DataVolume5DClassRoutinesRealTemplate.f90 > scratch.txt
+ sed 's/VarType/Real'$n'/' < scratch.txt > 'DataVolume5DClassReal'$n'Routines.f90'
+done
+
+# logical
+ sed 's/varType/logical/' < DataVolume5DClassRoutinesLogicalTemplate.f90 > scratch.txt
+ sed 's/VarType/Logical/' < scratch.txt > DataVolume5DClassLogicalRoutines.f90
+
+# cleanup
+rm DataVolume5DClassRoutinesLogicalTemplate.f90
+rm DataVolume5DClassRoutinesRealTemplate.f90
+rm DataVolume5DClassRoutinesIntTemplate.f90
+rm scratch.txt

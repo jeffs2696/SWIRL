@@ -1,0 +1,15 @@
+MODULE MPIStructureDef
+
+  IMPLICIT NONE
+  PRIVATE
+  PUBLIC :: MPIStructureType
+
+  TYPE MPIStructureType
+    CHARACTER, ALLOCATABLE, DIMENSION(:) :: charArray
+    INTEGER, ALLOCATABLE, DIMENSION(:) :: intArray
+    LOGICAL, ALLOCATABLE, DIMENSION(:) :: logicalArray
+    REAL, ALLOCATABLE, DIMENSION(:) :: realArray
+    DOUBLE PRECISION, ALLOCATABLE, DIMENSION(:) :: dblePrecArray
+  END TYPE MPIStructureType
+
+END MODULE MPIStructureDef

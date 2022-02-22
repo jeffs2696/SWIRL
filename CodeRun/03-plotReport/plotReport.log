@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  7 FEB 2022 16:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  22 FEB 2022 11:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -554,19 +554,19 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/ROC.tex
 Package pgfplots info on input line 28: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
-Package pgfplots info on input line 60: Using 'lua backend=false' for axis: ymo
+Package pgfplots info on input line 68: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
 )
 
-LaTeX Warning: Float too large for page by 38.48068pt on input line 43.
+LaTeX Warning: Float too large for page by 38.47974pt on input line 43.
 
 (./tex-outputs/SourceTermData.tex) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pd
 ftex.map}] [2] [3] [4] [5] (./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
- 22512 strings out of 481239
- 605013 string characters out of 5920378
- 1467700 words of memory out of 5000000
- 37430 multiletter control sequences out of 15000+600000
+ 22510 strings out of 481239
+ 604979 string characters out of 5920378
+ 1467180 words of memory out of 5000000
+ 37428 multiletter control sequences out of 15000+600000
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,19n,136p,741b,2495s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -577,7 +577,7 @@ blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 7.pfb>
-Output written on plotReport.pdf (5 pages, 115826 bytes).
+Output written on plotReport.pdf (5 pages, 115750 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream

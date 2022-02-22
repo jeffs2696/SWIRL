@@ -28,3 +28,14 @@
     boundingConstant = 1.00_rDef
     eigenIndex = 1
 
+
+    ALLOCATE(&
+        numberOfGridPointsArray(numberOfIterations) ,&
+        k(7) , &
+        S_L2Array(numberOfIterations)              , &
+        SoundSpeedL2Array(numberOfIterations)       ,&
+        RateOfConvergence1(numberOfIterations - 1) , &
+        RateOfConvergence2(numberOfIterations - 1) )
+
+    facCount = 0 ! initializer for fac count
+

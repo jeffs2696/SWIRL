@@ -1,0 +1,55 @@
+\subsection{Professor's sanity check (1)}
+
+First:
+
+\begin{eqnarray}
+\frac{a}{1 + b}
+&=&
+a + \left(\frac{a}{1 + b} - \frac{a + ab}{1 + b} \right)
+\nonumber
+\\
+&=&
+a - \frac{ab}{1 + b} 
+\nonumber
+\end{eqnarray}
+
+At this point, I'm going back to the inviscid form to start with.
+
+Using Maxima, I'm getting the inviscid LHS to become:
+
+\begin{eqnarray}
+L D_{-1} U 
+\left(\Delta Q \right)
+&=&
+\left(I 
++ \alpha \left(A^+ - A^- \right)
++ \alpha \Delta x \left(\delta_x^- A^+ + \delta_x^+ A^- \right) 
++ \ldots \right)
+\left(\Delta Q \right)
+\nonumber
+\end{eqnarray}
+
+Moving to the viscous form, I'm getting the LHS as:
+
+\begin{eqnarray}
+L D_{-1} U 
+\left(\Delta Q \right)
+&=&
+\left(
+\begin{array}{c}
+I 
++ \alpha \left(A^+ - A^- \right)
++ 2 \beta B
+\\
++ \alpha \Delta x \left(\delta_x^- A^+ + \delta_x^+ A^- \right) 
+\\
++ \beta \Delta x \left(\delta_x^- B - \delta_x^+ B \right) 
+\\
++ \ldots 
+\end{array}
+\right)
+\left(\Delta Q \right)
+\nonumber
+\end{eqnarray}
+
+So I think it's got a shot at working...

@@ -1,0 +1,17 @@
+for n in ABORT BARRIER COMM_GET_ATTR COMM_RANK COMM_SIZE FINALIZE FINALIZED GET_COUNT GET_VERSION INITIALIZED INIT IPROBE PROBE TEST WAIT WTICK WTIME; do
+  echo moving MPI_"$n"Module.f95 to MPI_"$n"Module.f90
+  mv MPI_"$n"Module.f95 MPI_"$n"Module.f90
+  cvs remove MPI_"$n"Module.f95
+done
+for n in BCAST IRECV ISEND RECV SEND SENDRECV; do
+  for m in Character DblePrec Integer Logical Real; do
+    for l in Module Module0D; do
+     echo MPI_"$n""$m""$l".f95
+    done
+  done
+done
+mv MessagePassingInterface.f95 MessagePassingInterface.f90
+cvs remove MessagePassingInterface.f95
+mv MessagePassingInterfaceTest.f95 MessagePassingInterfaceTest.f90
+cvs remove MessagePassingInterfaceTest.f95
+cvs add *.f90

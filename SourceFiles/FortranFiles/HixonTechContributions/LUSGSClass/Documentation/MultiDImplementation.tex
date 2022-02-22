@@ -1,0 +1,747 @@
+\section{Implementation of the viscous extension of the LU-SGS (Yoon and Jameson, 1988) Scheme}
+
+The first stage of the LU-SGS scheme in curvilinear 4D is:
+
+\begin{eqnarray}
+L \Delta Q^{\left(1 \right)} &=& -\Delta \tau RHS
+\nonumber
+\end{eqnarray}
+
+\begin{eqnarray}
+\left(
+\begin{array}{c}
+\left(
+I
++ 
+\Delta \tau
+\left(
+\begin{array}{c}
+- A_{i,j,k,l}^- 
+- B_{i,j,k,l}^- 
+\\
+- C_{i,j,k,l}^- 
+- D_{i,j,k,l}^- 
+\\
++ 2 R_{i,j,k,l} 
++ 2 S_{i,j,k,l} 
+\\
++ 2 T_{i,j,k,l} 
++ 2 U_{i,j,k,l} 
+\\
++ A^+_{i,j,k,l}
++ B^+_{i,j,k,l}
+\\
++ C^+_{i,j,k,l}
++ D^+_{i,j,k,l}
+\end{array}
+\right)
+\right) 
+\Delta Q^{\left(1 \right)}_{i,j,k,l}
+\\
+-
+\left(
+\begin{array}{r}
+\Delta \tau
+  \left(
+\begin{array}{r}
+A^+_{i-1,j,k,l} 
+\\
++ R_{i-1,j,k,l} 
+\end{array}
+\right) \Delta Q^{\left(1 \right)}_{i-1,j,k,l}
+\\
++ 
+\Delta \tau
+\left(
+\begin{array}{r}
+B^+_{i,j-1,k,l} 
+\\
++ S_{i,j-1,k,l} 
+\end{array}
+\right) \Delta Q^{\left(1 \right)}_{i,j-1,k,l}
+\\
++ 
+\Delta \tau
+\left(
+\begin{array}{r}
+C^+_{i,j,k-1,l} 
+\\
++ T_{i,j,k-1,l} 
+\end{array}
+\right) \Delta Q^{\left(1 \right)}_{i,j,k-1,l}
+\\
++ 
+\Delta \tau
+\left(
+\begin{array}{r}
+D^+_{i,j,k,l-1} 
+\\
++ U_{i,j,k,l-1} 
+\end{array}
+\right) \Delta Q^{\left(1 \right)}_{i,j,k,l-1}
+\end{array}
+\right)
+\end{array}
+\right)
+&=&
+-
+\Delta \tau
+RHS_{i,j,k,l}
+\nonumber
+\end{eqnarray}
+
+Note that:
+
+\begin{eqnarray}
+A^{\pm} &=& \frac{1}{2} \left(A \pm \epsilon_{\xi} I \right)
+\nonumber
+\\
+B^{\pm} &=& \frac{1}{2} \left(B \pm \epsilon_{\eta} I \right)
+\nonumber
+\\
+C^{\pm} &=& \frac{1}{2} \left(C \pm \epsilon_{\zeta} I \right)
+\nonumber
+\\
+D^{\pm} &=& \frac{1}{2} \left(D \pm \epsilon_{\tau} I \right)
+\nonumber
+\end{eqnarray}
+
+which means that:
+
+\begin{eqnarray}
+A^+ - A^-
+&=&
+\epsilon_{\xi} I
+\nonumber
+\\
+B^+ - B^-
+&=&
+\epsilon_{\eta} I
+\nonumber
+\\
+C^+ - C^-
+&=&
+\epsilon_{\zeta} I
+\nonumber
+\\
+D^+ - D^-
+&=&
+\epsilon_{\tau} I
+\nonumber
+\end{eqnarray}
+
+Defining:
+
+\begin{eqnarray}
+\Gamma_{i,j,k,l}
+&=&
+\left(
+\begin{array}{c}
+\left(
+1
++ \Delta \tau 
+\left(
+\epsilon_{\xi}
++
+\epsilon_{\eta}
++ 
+\epsilon_{\zeta}
++ 
+\epsilon_{\tau}
+\right)
+\right) I
+\\
++
+2 \Delta \tau
+\left(
+\begin{array}{r}
+  R_{i,j,k,l} 
+\\
++ S_{i,j,k,l} 
+\\
++ T_{i,j,k,l} 
+\\
++ U_{i,j,k,l} 
+\end{array}
+\right)
+\end{array}
+\right) 
+\nonumber
+\end{eqnarray}
+
+
+gives the first stage of the LU-SGS as:
+
+\begin{eqnarray}
+\Gamma_{i,j,k,l} 
+\Delta Q_{i,j,k,l}^{\left(1 \right)}
+&=&
+\Delta \tau
+\left(
+\begin{array}{r}
+  \left(
+\begin{array}{r}
+A^+_{i-1,j,k,l} 
+\\
++ R_{i-1,j,k,l} 
+\end{array}
+\right) \Delta Q_{i-1,j,k,l}^{\left(1 \right)}
+\\
++ \left(
+\begin{array}{r}
+B^+_{i,j-1,k,l} 
+\\
++ S_{i,j-1,k,l} 
+\end{array}
+\right) \Delta Q_{i,j-1,k,l}^{\left(1 \right)}
+\\
++ \left(
+\begin{array}{r}
+C^+_{i,j,k-1,l} 
+\\
++ T_{i,j,k-1,l} 
+\end{array}
+\right) \Delta Q_{i,j,k-1,l}^{\left(1 \right)}
+\\
++ \left(
+\begin{array}{r}
+D^+_{i,j,k,l-1} 
+\\
++ U_{i,j,k,l-1} 
+\end{array}
+\right) \Delta Q_{i,j,k,l-1}^{\left(1 \right)}
+\\
+-RHS_{i,j,k,l}
+\end{array}
+\right)
+\nonumber
+\end{eqnarray}
+
+The second stage is:
+
+\begin{eqnarray}
+U \Delta Q^{\left(2 \right)} &=& D \Delta Q^{\left(1 \right)}
+\nonumber
+\end{eqnarray}
+
+which becomes:
+
+\begin{eqnarray}
+\Gamma_{i,j,k,l} 
+\Delta Q_{i,j,k,l}^{\left(2 \right)}
+&=&
+\Delta \tau
+\left(
+\begin{array}{r}
+  \left(
+\begin{array}{r}
+-A^-_{i+1,j,k,l} 
+\\
++ R_{i+1,j,k,l} 
+\end{array}
+\right) \Delta Q_{i+1,j,k,l}^{\left(2 \right)}
+\\
++ \left(
+\begin{array}{r}
+-B^-_{i,j+1,k,l} 
+\\
++ S_{i,j+1,k,l} 
+\end{array}
+\right) \Delta Q_{i,j+1,k,l}^{\left(2 \right)}
+\\
++ \left(
+\begin{array}{r}
+-C^-_{i,j,k+1,l} 
+\\
++ T_{i,j,k+1,l} 
+\end{array}
+\right) \Delta Q_{i,j,k+1,l}^{\left(2 \right)}
+\\
++ \left(
+\begin{array}{r}
+-D^-_{i,j,k,l+1} 
+\\
++ U_{i,j,k,l+1} 
+\end{array}
+\right) \Delta Q_{i,j,k,l+1}^{\left(2 \right)}
+\\
++
+\Gamma_{i,j,k,l} 
+\Delta Q_{i,j,k,l}^{\left(1 \right)}
+\end{array}
+\right)
+\nonumber
+\end{eqnarray}
+
+Note that the $\Gamma$ matrix must be inverted at every grid point
+in both stages.  In the inviscid form of the LU-SGS, this was
+trivial because $\Gamma$ was a diagonal matrix.  However, if the
+viscous terms are retained, $\Gamma$ has nondiagonal terms and
+the inversion process is more expensive.
+
+\subsection{Flux Jacobian matrices}
+
+The inviscid flux Jacobians have the form:
+
+\begin{eqnarray}
+A
+&=&
+\left[
+\begin{array}{ccccc}
+A_{11} & A_{12} & A_{13} & A_{14} & 0 \\
+A_{21} & A_{22} & A_{23} & A_{24} & A_{25} \\
+A_{31} & A_{32} & A_{33} & A_{34} & A_{35} \\
+A_{41} & A_{42} & A_{43} & A_{44} & A_{45} \\
+A_{51} & A_{52} & A_{53} & A_{54} & A_{55}
+\end{array}
+\right]
+\nonumber
+\end{eqnarray}
+
+The viscous flux Jacobians have the form:
+
+\begin{eqnarray}
+R
+&=&
+\left[
+\begin{array}{ccccc}
+0 & 0 & 0 & 0 & 0 \\
+R_{21} & R_{22} & R_{23} & R_{24} & 0 \\
+R_{31} & R_{32} & R_{33} & R_{34} & 0 \\
+R_{41} & R_{42} & R_{43} & R_{44} & 0 \\
+R_{51} & R_{52} & R_{53} & R_{54} & R_{55}
+\end{array}
+\right]
+\nonumber
+\end{eqnarray}
+
+Defining:
+
+\begin{eqnarray}
+V_{ab} &=& 2 \Delta \tau 
+\left(
+R_{ab}
++
+S_{ab}
++
+T_{ab}
++
+U_{ab}
+\right)
+\nonumber
+\\
+\kappa
+&=&
+1 + \Delta \tau
+\left(
+\epsilon_{\xi}
++
+\epsilon_{\eta}
++
+\epsilon_{\zeta}
++
+\epsilon_{\tau}
+\right)
+\nonumber
+\end{eqnarray}
+
+gives the form of the $\Gamma$ matrix as:
+
+\begin{eqnarray}
+\Gamma
+&=&
+\left[
+\begin{array}{ccccc}
+\kappa & 0 & 0 & 0 & 0 \\
+V_{21} & V_{22} + \kappa & V_{23} & V_{24} & 0 \\
+V_{31} & V_{32} & V_{33} + \kappa & V_{34} & 0 \\
+V_{41} & V_{42} & V_{43} & V_{44} + \kappa & 0 \\
+V_{51} & V_{52} & V_{53} & V_{54} & V_{55} + \kappa
+\end{array}
+\right]
+\nonumber
+\\
+&=&
+\left[
+\begin{array}{ccccc}
+\Gamma_{11} & 0 & 0 & 0 & 0 \\
+\Gamma_{21} & \Gamma_{22} & \Gamma_{23} & \Gamma_{24} & 0 \\
+\Gamma_{31} & \Gamma_{32} & \Gamma_{33} & \Gamma_{34} & 0 \\
+\Gamma_{41} & \Gamma_{42} & \Gamma_{43} & \Gamma_{44} & 0 \\
+\Gamma_{51} & \Gamma_{52} & \Gamma_{53} & \Gamma_{54} & \Gamma_{55} 
+\end{array}
+\right]
+\nonumber
+\end{eqnarray}
+
+Maxima gives the determinant of the matrix as:
+
+\begin{eqnarray}
+\sigma 
+&=&
+\Gamma_{11} \Gamma_{55}
+\left(
+\begin{array}{r}
+ \Gamma_{22} \left( \Gamma_{33} \Gamma_{44} - \Gamma_{34} \Gamma_{43} \right)
+\\
+-\Gamma_{23} \left( \Gamma_{32} \Gamma_{44} - \Gamma_{34} \Gamma_{42} \right)
+\\
++\Gamma_{24} \left( \Gamma_{32} \Gamma_{43} - \Gamma_{33} \Gamma_{42} \right)
+\end{array}
+\right)
+\nonumber
+\end{eqnarray}
+
+Then,
+
+\begin{eqnarray}
+\Gamma^{-1}
+&=&
+\left[
+\begin{array}{ccccc}
+\phi_{11} & 0 & 0 & 0 & 0 \\
+\phi_{21} & \phi_{22} & \phi_{23} & \phi_{24} & 0 \\
+\phi_{31} & \phi_{32} & \phi_{33} & \phi_{34} & 0 \\
+\phi_{41} & \phi_{42} & \phi_{43} & \phi_{44} & 0 \\
+\phi_{51} & \phi_{52} & \phi_{53} & \phi_{54} & \phi_{55} 
+\end{array}
+\right]
+\nonumber
+\end{eqnarray}
+
+where
+
+\begin{eqnarray}
+\phi_{11} &=& \frac{1}{\Gamma_{11}}
+\nonumber
+\\
+\phi_{21} &=& \frac{\Gamma_{55}}{\sigma}
+\left(
+\begin{array}{r}
+-\Gamma_{21} \left(\Gamma_{33} \Gamma_{44} - \Gamma_{34} \Gamma_{43} \right)
+\\
++\Gamma_{23} \left(\Gamma_{31} \Gamma_{44} - \Gamma_{34} \Gamma_{41} \right)
+\\
+-\Gamma_{24} \left(\Gamma_{31} \Gamma_{43} - \Gamma_{33} \Gamma_{41} \right)
+\end{array}
+\right)
+\nonumber
+\\
+\phi_{22} &=& \frac{\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{33} \Gamma_{44} - \Gamma_{34} \Gamma_{43} \right)
+\nonumber
+\\
+\phi_{23} &=& \frac{\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{23} \Gamma_{44} - \Gamma_{24} \Gamma_{43} \right)
+\nonumber
+\\
+\phi_{24} &=& \frac{-\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{23} \Gamma_{34} - \Gamma_{24} \Gamma_{33} \right)
+\nonumber
+\\
+\phi_{31} &=& \frac{\Gamma_{55}}{\sigma}
+\left(
+\begin{array}{r}
+ \Gamma_{21} \left(\Gamma_{32} \Gamma_{44} - \Gamma_{34} \Gamma_{42} \right)
+\\
+-\Gamma_{22} \left(\Gamma_{31} \Gamma_{44} - \Gamma_{34} \Gamma_{41} \right)
+\\
++\Gamma_{24} \left(\Gamma_{31} \Gamma_{42} - \Gamma_{32} \Gamma_{41} \right)
+\end{array}
+\right)
+\nonumber
+\\
+\phi_{32} &=& \frac{-\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{32} \Gamma_{44} - \Gamma_{34} \Gamma_{42} \right)
+\nonumber
+\\
+\phi_{33} &=& \frac{\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{22} \Gamma_{44} - \Gamma_{24} \Gamma_{42} \right)
+\nonumber
+\\
+\phi_{34} &=& \frac{-\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{22} \Gamma_{34} - \Gamma_{24} \Gamma_{32} \right)
+\nonumber
+\\
+\phi_{41} &=& \frac{\Gamma_{55}}{\sigma}
+\left(
+\begin{array}{r}
+-\Gamma_{21} \left(\Gamma_{32} \Gamma_{43} - \Gamma_{33} \Gamma_{42} \right)
+\\
++\Gamma_{22} \left(\Gamma_{31} \Gamma_{43} - \Gamma_{33} \Gamma_{41} \right)
+\\
+-\Gamma_{23} \left(\Gamma_{31} \Gamma_{42} - \Gamma_{32} \Gamma_{41} \right)
+\end{array}
+\right)
+\nonumber
+\\
+\phi_{42} &=& \frac{\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{32} \Gamma_{43} - \Gamma_{33} \Gamma_{42} \right)
+\nonumber
+\\
+\phi_{43} &=& \frac{-\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{22} \Gamma_{43} - \Gamma_{23} \Gamma_{42} \right)
+\nonumber
+\\
+\phi_{44} &=& \frac{\Gamma_{11} \Gamma_{55}}{\sigma}
+\left(\Gamma_{22} \Gamma_{33} - \Gamma_{23} \Gamma_{32} \right)
+\nonumber
+\\
+\phi_{51} &=& \frac{1}{\sigma}
+\left(
+\begin{array}{r}
+ \Gamma_{21} \left(
+\begin{array}{c}
+  \Gamma_{32} \left(\Gamma_{43} \Gamma_{54} - \Gamma_{44} \Gamma_{53} \right) 
+\\
+- \Gamma_{33} \left(\Gamma_{42} \Gamma_{54} - \Gamma_{44} \Gamma_{52} \right) 
+\\
++ \Gamma_{34} \left(\Gamma_{42} \Gamma_{53} - \Gamma_{43} \Gamma_{52} \right) 
+\end{array}
+\right)
+\\
+-\Gamma_{22} \left(
+\begin{array}{c}
+  \Gamma_{31} \left(\Gamma_{43} \Gamma_{54} - \Gamma_{44} \Gamma_{53} \right) 
+\\
+- \Gamma_{33} \left(\Gamma_{41} \Gamma_{54} - \Gamma_{44} \Gamma_{51} \right) 
+\\
++ \Gamma_{34} \left(\Gamma_{41} \Gamma_{53} - \Gamma_{43} \Gamma_{51} \right) 
+\end{array}
+\right)
+\\
++\Gamma_{23} \left(
+\begin{array}{c}
+  \Gamma_{31} \left(\Gamma_{42} \Gamma_{54} - \Gamma_{44} \Gamma_{52} \right) 
+\\
+- \Gamma_{32} \left(\Gamma_{41} \Gamma_{54} - \Gamma_{44} \Gamma_{51} \right) 
+\\
++ \Gamma_{34} \left(\Gamma_{41} \Gamma_{52} - \Gamma_{42} \Gamma_{51} \right) 
+\end{array}
+\right)
+\\
+-\Gamma_{24} \left(
+\begin{array}{c}
+  \Gamma_{31} \left(\Gamma_{42} \Gamma_{53} - \Gamma_{43} \Gamma_{52} \right) 
+\\
+- \Gamma_{32} \left(\Gamma_{41} \Gamma_{53} - \Gamma_{43} \Gamma_{51} \right) 
+\\
++ \Gamma_{33} \left(\Gamma_{41} \Gamma_{52} - \Gamma_{42} \Gamma_{51} \right) 
+\end{array}
+\right)
+\end{array}
+\right)
+\nonumber
+\\
+\phi_{52} &=& \frac{-\Gamma_{11}}{\sigma}
+ \left(
+\begin{array}{c}
+  \Gamma_{32} \left(\Gamma_{43} \Gamma_{54} - \Gamma_{44} \Gamma_{53} \right) 
+\\
+- \Gamma_{33} \left(\Gamma_{42} \Gamma_{54} - \Gamma_{44} \Gamma_{52} \right) 
+\\
++ \Gamma_{34} \left(\Gamma_{42} \Gamma_{53} - \Gamma_{43} \Gamma_{52} \right) 
+\end{array}
+\right)
+\nonumber
+\\
+\phi_{53} &=& \frac{\Gamma_{11}}{\sigma}
+ \left(
+\begin{array}{c}
+  \Gamma_{22} \left(\Gamma_{43} \Gamma_{54} - \Gamma_{44} \Gamma_{53} \right) 
+\\
+- \Gamma_{23} \left(\Gamma_{42} \Gamma_{54} - \Gamma_{44} \Gamma_{52} \right) 
+\\
++ \Gamma_{24} \left(\Gamma_{42} \Gamma_{53} - \Gamma_{43} \Gamma_{52} \right) 
+\end{array}
+\right)
+\nonumber
+\\
+\phi_{54} &=& \frac{-\Gamma_{11}}{\sigma}
+ \left(
+\begin{array}{c}
+  \Gamma_{22} \left(\Gamma_{33} \Gamma_{54} - \Gamma_{34} \Gamma_{53} \right) 
+\\
+- \Gamma_{23} \left(\Gamma_{32} \Gamma_{54} - \Gamma_{34} \Gamma_{52} \right) 
+\\
++ \Gamma_{24} \left(\Gamma_{32} \Gamma_{53} - \Gamma_{33} \Gamma_{52} \right) 
+\end{array}
+\right)
+\nonumber
+\\
+\phi_{55} &=& \frac{\Gamma_{11}}{\sigma}
+ \left(
+\begin{array}{c}
+  \Gamma_{22} \left(\Gamma_{33} \Gamma_{44} - \Gamma_{34} \Gamma_{43} \right) 
+\\
+- \Gamma_{23} \left(\Gamma_{32} \Gamma_{44} - \Gamma_{34} \Gamma_{42} \right) 
+\\
++ \Gamma_{24} \left(\Gamma_{32} \Gamma_{43} - \Gamma_{33} \Gamma_{42} \right) 
+\end{array}
+\right)
+\nonumber
+\end{eqnarray}
+
+It's probably much faster to reduce the matrix.  At a grid point,
+the block equation is:
+
+\begin{eqnarray}
+\left[\Gamma \right] \left\{\Delta Q \right\} &=& \left\{R \right\}
+\nonumber
+\end{eqnarray}
+
+Expanding this out gives:
+
+\begin{eqnarray}
+\left[
+\begin{array}{ccccc}
+\Gamma_{11} & 0 & 0 & 0 & 0 \\
+\Gamma_{21} & \Gamma_{22} & \Gamma_{23} & \Gamma_{24} & 0  \\
+\Gamma_{31} & \Gamma_{32} & \Gamma_{33} & \Gamma_{34} & 0  \\
+\Gamma_{41} & \Gamma_{42} & \Gamma_{43} & \Gamma_{44} & 0  \\
+\Gamma_{51} & \Gamma_{52} & \Gamma_{53} & \Gamma_{54} & \Gamma_{55} 
+\end{array}
+\right]
+\left\{
+\begin{array}{c}
+\Delta Q_1 \\
+\Delta Q_2 \\
+\Delta Q_3 \\
+\Delta Q_4 \\
+\Delta Q_5 
+\end{array}
+\right\}
+&=&
+\left\{
+\begin{array}{c}
+R_1 \\
+R_2 \\
+R_3 \\
+R_4 \\
+R_5 
+\end{array}
+\right\}
+\nonumber
+\end{eqnarray}
+
+becomes
+
+\begin{eqnarray}
+\left[
+\begin{array}{ccccc}
+\Gamma_{11} & 0 & 0 & 0 & 0 \\
+\Gamma'_{21} & \Gamma'_{22} & \Gamma'_{23} & 0 & 0  \\
+\Gamma'_{31} & \Gamma'_{32} & \Gamma'_{33} & 0 & 0  \\
+\Gamma_{41} & \Gamma_{42} & \Gamma_{43} & \Gamma_{44} & 0  \\
+\Gamma_{51} & \Gamma_{52} & \Gamma_{53} & \Gamma_{54} & \Gamma_{55} 
+\end{array}
+\right]
+\left\{
+\begin{array}{c}
+\Delta Q_1 \\
+\Delta Q_2 \\
+\Delta Q_3 \\
+\Delta Q_4 \\
+\Delta Q_5 
+\end{array}
+\right\}
+&=&
+\left\{
+\begin{array}{c}
+R_1 \\
+R'_2 \\
+R'_3 \\
+R_4 \\
+R_5 
+\end{array}
+\right\}
+\nonumber
+\end{eqnarray}
+
+where
+
+\begin{eqnarray}
+\Gamma'_{21} &=&
+\Gamma_{21} - \frac{\Gamma_{24}}{\Gamma_{44}} \Gamma_{41}
+\nonumber
+\\
+\Gamma'_{22} &=&
+\Gamma_{22} - \frac{\Gamma_{24}}{\Gamma_{44}} \Gamma_{42}
+\nonumber
+\\
+\Gamma'_{23} &=&
+\Gamma_{23} - \frac{\Gamma_{24}}{\Gamma_{44}} \Gamma_{43}
+\nonumber
+\\
+R'_{2} &=&
+R_{2} - \frac{\Gamma_{24}}{\Gamma_{44}} R_{4}
+\nonumber
+\\
+\Gamma'_{31} &=&
+\Gamma_{31} - \frac{\Gamma_{34}}{\Gamma_{44}} \Gamma_{41}
+\nonumber
+\\
+\Gamma'_{32} &=&
+\Gamma_{32} - \frac{\Gamma_{34}}{\Gamma_{44}} \Gamma_{42}
+\nonumber
+\\
+\Gamma'_{33} &=&
+\Gamma_{33} - \frac{\Gamma_{34}}{\Gamma_{44}} \Gamma_{43}
+\nonumber
+\\
+R'_{3} &=&
+R_{3} - \frac{\Gamma_{34}}{\Gamma_{44}} R_{4}
+\nonumber
+\end{eqnarray}
+
+The equation then becomes:
+
+\begin{eqnarray}
+\left[
+\begin{array}{ccccc}
+\Gamma_{11} & 0 & 0 & 0 & 0 \\
+\Gamma''_{21} & \Gamma''_{22} & 0 & 0 & 0  \\
+\Gamma'_{31} & \Gamma'_{32} & \Gamma'_{33} & 0 & 0  \\
+\Gamma_{41} & \Gamma_{42} & \Gamma_{43} & \Gamma_{44} & 0  \\
+\Gamma_{51} & \Gamma_{52} & \Gamma_{53} & \Gamma_{54} & \Gamma_{55} 
+\end{array}
+\right]
+\left\{
+\begin{array}{c}
+\Delta Q_1 \\
+\Delta Q_2 \\
+\Delta Q_3 \\
+\Delta Q_4 \\
+\Delta Q_5 
+\end{array}
+\right\}
+&=&
+\left\{
+\begin{array}{c}
+R_1 \\
+R''_2 \\
+R'_3 \\
+R_4 \\
+R_5 
+\end{array}
+\right\}
+\nonumber
+\end{eqnarray}
+
+where
+
+\begin{eqnarray}
+\Gamma''_{21} &=&
+\Gamma'_{21} - \frac{\Gamma'_{23}}{\Gamma'_{33}} \Gamma'_{31}
+\nonumber
+\\
+\Gamma''_{22} &=&
+\Gamma'_{22} - \frac{\Gamma'_{23}}{\Gamma'_{33}} \Gamma'_{32}
+\nonumber
+\\
+R''_{2} &=&
+R'_{2} - \frac{\Gamma'_{23}}{\Gamma'_{33}} R'_{3}
+\nonumber
+\end{eqnarray}
+
+and, at this point, it can be solved by backsubstitution.

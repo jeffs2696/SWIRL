@@ -1,0 +1,4 @@
+for m in Documentation Executables LibraryFiles Makefile ModuleFiles ObjectFiles SourceCode; do
+  mkdir $m
+  cp README.txt $m/
+done

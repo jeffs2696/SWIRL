@@ -143,3 +143,87 @@ def plotSymbolicEquation(x_data,y_data,x_min,x_max):
     #mpl.show(fig)
     
     return
+
+# needs to get added to helper
+def GetInputVariables(string):
+    #opening the file that has the inputs to the FORTRAN Code
+    InputFile = open("../../FortranFiles/main-scripts/main-variables.f90","r")
+    
+    flag  = 0
+    index = 0
+    
+    for line in InputFile:
+        index += 1
+        
+        # checking if the string is present in line or not
+        if string in line:
+            result = line
+            flag = 1  
+            break
+    # checking condition for string found or not, uncomment else when debugging
+    if flag == 0:
+        print('String', string, 'Not Found')
+    #else:
+        #print('String', string, 'Found In Line', index)
+        
+    # using re.findall()
+    # getting numbers from string 
+    result = re.findall(r'\d*\.?\d+', result)
+    
+    return result
+
+def plotSymbolicEquation(title  , \
+                         x_data , \
+                         x_title, \
+                         y_data , \
+                         y_title, \
+                         x_min  , \
+                         x_max):
+    
+    # convert symbolic expressions using numpy
+    lam_x  = sp.lambdify(x_data,y_data , modules=['numpy'])
+    x_vals = linspace((x_min), (x_max), 100)
+    y_vals = lam_x(x_vals) 
+    
+    fig = mpl.figure(figsize=(10,6))
+    ax = mpl.axes()
+    
+    ax.grid(True,which='major',axis='both',alpha=0.3) 
+    mpl.title(title)
+    mpl.xlabel(x_title)
+    mpl.ylabel(y_title)
+    mpl.plot(x_vals, y_vals)
+    mpl.show(fig)
+    
+    return 
+
+def SourceSubstitution(S, \
+                       A_analytic         , \
+                       M_t_analytic       , \
+                       M_x_analytic     , \
+                       v_r_analytic     , \
+                       v_t_analytic     , \
+                       v_x_analytic     , \
+                       p_analytic       , \
+                       dp_dr_analytic   , \
+                       dv_r_dr_analytic , \
+                       dM_x_dr_analytic , \
+                       dM_t_dr_analytic , \
+                      ): 
+    
+    #print('Input Source: ', S)
+    S = S.subs({ \
+            A:A_analytic       , \
+            M_t:M_t_analytic   , \
+            M_x:M_x_analytic , \
+            v_r:v_r_analytic , \
+            v_t:v_t_analytic , \
+            v_x:v_x_analytic , \
+            p:p_analytic     , \
+            dp_dr:dp_dr_analytic, \
+            dv_r_dr:dv_r_dr_analytic, \
+            dM_x_dr:dM_x_dr_analytic, \
+            dM_t_dr:dM_t_dr_analytic, \
+               })
+    #print('Output Source', S)
+    return S

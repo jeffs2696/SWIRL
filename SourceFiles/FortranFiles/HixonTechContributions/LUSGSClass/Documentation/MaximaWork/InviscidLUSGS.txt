@@ -1,0 +1,46 @@
+b: l*(APlus - AMinus);
+
+L: 1 - l*AMinus + l*dX*dDXMinus*APlus; 
+U: 1 + l*APlus + l*dX*dDXPlus*AMinus; 
+DInv: 1 - (b/(1 + b));
+
+LUFac: expand(L*DInv*U);
+
+/*
+                      2                    2  3
+          AMinus APlus  dDXMinus dDXPlus dX  l
+(%o46) (- -------------------------------------)
+                 APlus l - AMinus l + 1
+         2                          2  3         2                   3
+   AMinus  APlus dDXMinus dDXPlus dX  l    AMinus  APlus dDXPlus dX l
+ + ------------------------------------- + ---------------------------
+          APlus l - AMinus l + 1             APlus l - AMinus l + 1
+         3             3         3              3
+   AMinus  dDXPlus dX l     APlus  dDXMinus dX l
+ - ---------------------- - ----------------------
+   APlus l - AMinus l + 1   APlus l - AMinus l + 1
+               2              3                  2  3
+   AMinus APlus  dDXMinus dX l       AMinus APlus  l
+ + ---------------------------- + ----------------------
+      APlus l - AMinus l + 1      APlus l - AMinus l + 1
+            2        3                               2         2             2
+      AMinus  APlus l       AMinus APlus dDXPlus dX l    AMinus  dDXPlus dX l
+ - ---------------------- - -------------------------- + ----------------------
+   APlus l - AMinus l + 1     APlus l - AMinus l + 1     APlus l - AMinus l + 1
+        2              2                              2
+   APlus  dDXMinus dX l     AMinus APlus dDXMinus dX l
+ - ---------------------- + ---------------------------
+   APlus l - AMinus l + 1     APlus l - AMinus l + 1
+              2  2                            2                  2  2
+         APlus  l             2 AMinus APlus l             AMinus  l
+ - ---------------------- + ---------------------- - ----------------------
+   APlus l - AMinus l + 1   APlus l - AMinus l + 1   APlus l - AMinus l + 1
+          APlus l                  AMinus l
+ - ---------------------- + ----------------------
+   APlus l - AMinus l + 1   APlus l - AMinus l + 1
+                                   2  2         2             2
+ + AMinus APlus dDXMinus dDXPlus dX  l  - AMinus  dDXPlus dX l
+        2              2                 2
+ + APlus  dDXMinus dX l  - AMinus APlus l  + AMinus dDXPlus dX l
+ + APlus dDXMinus dX l + APlus l - AMinus l + 1
+*/

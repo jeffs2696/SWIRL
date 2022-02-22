@@ -28,6 +28,7 @@ MODULE mmsClassObject
 
     INTEGER,PARAMETER :: rDef = REAL64
     INTEGER :: i
+    REAL(KIND=rDef) :: tolerance = 10e-11_rDef
 
     TYPE mmsClassType
 
@@ -335,10 +336,10 @@ CONTAINS
         object%RateOfConvergence = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            IF (REAL(L2Array(i),KIND=rDef)< 1e-15) THEN 
+            IF (REAL(L2Array(i),KIND=rDef)< tolerance) THEN 
             ! WRITE(6,*) L2Array(i)
-                WRITE(6,*) 'WARNING: The L2 at',i,'=' ,L2Array(i) ,'is really small, double check if trivial'
-                EXIT
+                WRITE(0,*) 'The numerical solution is converged, the L2 norm has reached machine precision'
+                
             ELSE
             ENDIF
              object%RateOfConvergence(i) = &
@@ -372,16 +373,15 @@ SUBROUTINE getROC_Complex(&
 
         numberOfIterations = SIZE(RateOfConvergence)
 
-        WRITE(6,*)  SIZE(RateOfConvergence)
+        WRITE(0,*)  SIZE(RateOfConvergence)
 
         object%L2Array = L2Array
         object%RateOfConvergence = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            IF (REAL(L2Array(i),KIND=rDef) < 1e-15) THEN
-                WRITE(6,*) 'WARNING: The L2 at',i,'=' ,L2Array(i) ,'is really small, double check if trivial'
+            IF (REAL(L2Array(i),KIND=rDef) < tolerance) THEN
+                WRITE(0,*) 'The numerical solution is converged, the L2 norm has reached machine precision'
                 
-                EXIT
             ELSE
             ENDIF
 

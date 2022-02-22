@@ -143,3 +143,4 @@ def plotSymbolicEquation(x_data,y_data,x_min,x_max):
     #mpl.show(fig)
     
     return
+

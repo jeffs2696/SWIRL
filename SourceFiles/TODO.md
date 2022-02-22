@@ -4,25 +4,29 @@
  [ ]
 ### In Progress
 
-- [ ] fix solver when r = 0
+- [ ] fix symbolic solver when r = 0
+    - [ x] Include L'Hopital's Defintion
+    - [  ] Change the way source terms are being calculated in Fortran by sending 
+    the entire array of data instead of sending in array entries
+
 - [ ] fix isinitialized variable in swirlClassObject
 - [ ] Fix headers in exported data
 - [ ] Add tables to the plotReport 
 
 - [ ] Clean up Python code
     - [ ] refactor symbolic solver
-        - [ ] convert .ipynb to .py (notebook to script)
-        - [ ] 
+        - [ ] convert .ipynb to .py (notebook to script) and add to Makefile
+        - [ ] fix data type conflict
 
 - [ ] Clean up FORTRAN code
-  - [ ] Make sure all the data types are the same in SWIRL 
+  - [ ] Add a method of reporting the ROC once the L2 gets low enough (10^-11)
   - [ ] Make a debug include file for FORTRAN files
-  - [ ] Write meanFlowMMS report with a test case table
   - [x] make an MMS test case 
 
 - [ ] Clean up Documentation
   - [ ] Address duplicate derivations
   - [ ] Complete SWIRLDocumentationJS
+  - [ ] Write meanFlowMMS report with a test case table
 
 ### Done ✓
 

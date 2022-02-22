@@ -1,0 +1,131 @@
+MODULE MPI_ALLGATHERLogicalCall
+
+  USE IncludeMPIImplementation
+
+  ! this module actually makes the F77 MPI_ALLGATHER call for character data
+
+  IMPLICIT NONE
+  PRIVATE
+  PUBLIC :: MPIALLGATHERLogical
+
+  INTERFACE MPIALLGATHERLogical
+    MODULE PROCEDURE MPIALLGATHERLogical1
+    MODULE PROCEDURE MPIALLGATHERLogical2
+  END INTERFACE
+
+CONTAINS
+
+  SUBROUTINE MPIALLGATHERLogical1(SENDBUF, SENDCOUNT, SENDTYPE, &
+                                  RECVBUF, RECVCOUNT, RECVTYPE, &
+                                  COMM, IERROR)
+    LOGICAL, DIMENSION(:), INTENT(IN)  :: SENDBUF
+    LOGICAL, DIMENSION(:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: SENDCOUNT
+    INTEGER, INTENT(IN)  :: RECVCOUNT
+    INTEGER, INTENT(IN)  :: SENDTYPE
+    INTEGER, INTENT(IN)  :: RECVTYPE
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPI_ALLGATHER(SENDBUF(1), SENDCOUNT, SENDTYPE, &
+                       RECVBUF(1), RECVCOUNT, RECVTYPE, &
+                       COMM, IERROR)
+
+    IF (IERROR == MPI_SUCCESS) THEN
+      IERROR = 0
+    END IF
+
+    RETURN
+  END SUBROUTINE MPIALLGATHERLogical1
+
+  SUBROUTINE MPIALLGATHERLogical2(SENDBUF, SENDCOUNT, SENDTYPE, &
+                                  RECVBUF, RECVCOUNT, RECVTYPE, &
+                                  COMM, IERROR)
+    LOGICAL, DIMENSION(:)  , INTENT(IN)  :: SENDBUF
+    LOGICAL, DIMENSION(:,:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: SENDCOUNT
+    INTEGER, INTENT(IN)  :: RECVCOUNT
+    INTEGER, INTENT(IN)  :: SENDTYPE
+    INTEGER, INTENT(IN)  :: RECVTYPE
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPI_ALLGATHER(SENDBUF(1),   SENDCOUNT, SENDTYPE, &
+                       RECVBUF(1,1), RECVCOUNT, RECVTYPE, &
+                       COMM, IERROR)
+
+    IF (IERROR == MPI_SUCCESS) THEN
+      IERROR = 0
+    END IF
+
+    RETURN
+  END SUBROUTINE MPIALLGATHERLogical2
+
+END MODULE MPI_ALLGATHERLogicalCall
+
+MODULE MPI_ALLGATHERLogicalModule
+  USE MPI_ALLGATHERLogicalCall
+
+  ! this module is the wrapper to make the new F95 MPI_ALLGATHER
+  !  call _look like_ the standard F77 call.
+
+  IMPLICIT NONE
+  PRIVATE
+  PUBLIC :: HTMPI_ALLGATHER
+
+  INTERFACE HTMPI_ALLGATHER
+    MODULE PROCEDURE MPI_ALLGATHERLogical1
+    MODULE PROCEDURE MPI_ALLGATHERLogical2
+  END INTERFACE
+
+CONTAINS
+
+  SUBROUTINE MPI_ALLGATHERLogical1(SENDBUF, SENDCOUNT, SENDTYPE, &
+                                   RECVBUF, RECVCOUNT, RECVTYPE, &
+                                   COMM, IERROR)
+    LOGICAL, DIMENSION(:)  , INTENT(IN)  :: SENDBUF
+    LOGICAL, DIMENSION(:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: SENDCOUNT
+    INTEGER, INTENT(IN)  :: RECVCOUNT
+    INTEGER, INTENT(IN)  :: SENDTYPE
+    INTEGER, INTENT(IN)  :: RECVTYPE
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPIALLGATHERLogical(SENDBUF   = SENDBUF,   &
+                             SENDCOUNT = SENDCOUNT, &
+                             SENDTYPE  = SENDTYPE,  &
+                             RECVBUF   = RECVBUF,   &
+                             RECVCOUNT = RECVCOUNT, &
+                             RECVTYPE  = RECVTYPE,  &
+                             COMM      = COMM,      &
+                             IERROR    = IERROR)
+
+    RETURN
+  END SUBROUTINE MPI_ALLGATHERLogical1
+
+  SUBROUTINE MPI_ALLGATHERLogical2(SENDBUF, SENDCOUNT, SENDTYPE, &
+                                   RECVBUF, RECVCOUNT, RECVTYPE, &
+                                   COMM, IERROR)
+    LOGICAL, DIMENSION(:)  , INTENT(IN)  :: SENDBUF
+    LOGICAL, DIMENSION(:,:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: SENDCOUNT
+    INTEGER, INTENT(IN)  :: RECVCOUNT
+    INTEGER, INTENT(IN)  :: SENDTYPE
+    INTEGER, INTENT(IN)  :: RECVTYPE
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPIALLGATHERLogical(SENDBUF   = SENDBUF,   &
+                             SENDCOUNT = SENDCOUNT, &
+                             SENDTYPE  = SENDTYPE,  &
+                             RECVBUF   = RECVBUF,   &
+                             RECVCOUNT = RECVCOUNT, &
+                             RECVTYPE  = RECVTYPE,  &
+                             COMM      = COMM,      &
+                             IERROR    = IERROR)
+
+    RETURN
+  END SUBROUTINE MPI_ALLGATHERLogical2
+
+END MODULE MPI_ALLGATHERLogicalModule
