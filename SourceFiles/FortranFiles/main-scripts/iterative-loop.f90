@@ -8,27 +8,27 @@
         numberOfGridPointsArray(fac) = numberOfGridPoints
 
         ALLOCATE(&
-            r(numberOfGridPoints)                    , &
-            rOut(numberOfGridPoints)                 , &
-            thetaMachData(numberOfGridPoints)        , &
-            thetaMachDataOut(numberOfGridPoints)     , &
-            thetaMachData_dr_Out(numberOfGridPoints) , &
-            axialMachData(numberOfGridPoints)        , &
-            axialMachDataOut(numberOfGridPoints)     , &
-            axialMachData_dr_Out(numberOfGridPoints) , &
-            totalMachData(numberOfGridPoints)        , &
-            SoundSpeedOut(numberOfGridPoints)        , &
-            SoundSpeed_dr_Out(numberOfGridPoints)    , & 
-            SoundSpeedExpected(numberOfGridPoints)   , &
-            SoundSpeedError(numberOfGridPoints)      , &
-            S_actual(numberOfGridPoints*4)              , &
-            S_A_actual(numberOfGridPoints*4)              , &
-            S_B_actual(numberOfGridPoints*4)              , &
-            S_Expected(numberOfGridPoints*4)            , &
-            S_1(numberOfGridPoints)                  , &
-            S_2(numberOfGridPoints)                  , &
-            S_3(numberOfGridPoints)                  , &
-            S_4(numberOfGridPoints)                  , &
+            r(numberOfGridPoints)                                            , &
+            rOut(numberOfGridPoints)                                         , &
+            thetaMachData(numberOfGridPoints)                                , &
+            thetaMachDataOut(numberOfGridPoints)                             , &
+            thetaMachData_dr_Out(numberOfGridPoints)                         , &
+            axialMachData(numberOfGridPoints)                                , &
+            axialMachDataOut(numberOfGridPoints)                             , &
+            axialMachData_dr_Out(numberOfGridPoints)                         , &
+            totalMachData(numberOfGridPoints)                                , &
+            SoundSpeedOut(numberOfGridPoints)                                , &
+            SoundSpeed_dr_Out(numberOfGridPoints)                            , & 
+            SoundSpeedExpected(numberOfGridPoints)                           , &
+            SoundSpeedError(numberOfGridPoints)                              , &
+            S_actual(numberOfGridPoints*4)                                      , &
+            S_A_actual(numberOfGridPoints*4)                                      , &
+            S_B_actual(numberOfGridPoints*4)                                 , &
+            S_Expected(numberOfGridPoints*4)                                 , &
+            S_1(numberOfGridPoints)                                          , &
+            S_2(numberOfGridPoints)                                          , &
+            S_3(numberOfGridPoints)                                          , &
+            S_4(numberOfGridPoints)                                          , &
             S_A11(numberOfGridPoints)                                        , &   
             S_A12(numberOfGridPoints)                                        , &   
             S_A13(numberOfGridPoints)                                        , &   
@@ -176,7 +176,7 @@
             eigenVectorMMS(i +   numberOfGridPoints) = &
                 CMPLX(vT(i), KIND = rDef)
 
-            eigenVectorMMS(i + 2*numberOfGridPoints) =&
+            eigenVectorMMS(i + 2*numberOfGridPoints) = &
                 CMPLX(vX(i), KIND = rDef)
 
             eigenVectorMMS(i + 3*numberOfGridPoints) = &
