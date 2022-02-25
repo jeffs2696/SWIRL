@@ -1,0 +1,169 @@
+" Jeff's .vimrc configuration
+
+" General Vim Settings
+
+" enable syntax and plugins (for netrw)
+:filetype plugin indent on
+"
+" Turn syntax highlighting on
+:syntax on
+" define leader key
+:let mapleader = " "
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+" use find to see the true power
+:set path+=**
+
+" setting some convenient environment variables
+:let $RTP=split(&runtimepath, ',')[0]
+:let $RC="$HOME/.vim/vimrc"
+
+" enter the current millenium of vim
+:set nocompatible
+
+
+
+" Display all matching files when we tab complete
+:set wildmenu
+
+:set hidden 
+
+"Center screen after we go into insert mode
+:set scrolloff=999
+
+:set colorcolumn=80
+
+" No error bell at the end of line
+:set noerrorbells
+
+" set line numbers
+:set number
+" :set relativenumber
+
+" don't wrap text
+:set nowrap
+
+" case sensitive searching until I give a capital letter
+:set smartcase
+
+" makes tab into spaces
+:set tabstop=4
+:set shiftwidth=4
+:set expandtab
+" remove silly .swp files, replace with undodir
+:set noswapfile
+:set nobackup
+:set undodir=~/.vim/undodir
+:set undofile
+
+ " enhance searches by going to search word 
+:set incsearch
+" workaround to fix unwanted highlighting when scrolling for wsl
+:set t_ut=
+
+" auto indenting
+:filetype indent on 
+:set smartindent
+:set autoindent
+:autocmd BufRead,BufWritePre *.sh normal gg=G
+
+:set backspace=indent,eol,start
+
+
+" toggle blankspaces for chararcters
+noremap <F5> :set list!<CR>
+inoremap <F5> <C-o>:set list!<CR>
+cnoremap <F5> <C-c>:set list!<CR>
+
+:set foldmethod=syntax
+"keep folds in file (check ~/.vim/view for saved folds) 
+" autocmd BufWinLeave *.* mkview
+augroup remember_folds
+      autocmd!
+      autocmd BufWinLeave * mkview "saves current folds  
+      autocmd BufWinEnter * silent! loadview "restore your folds
+augroup END" autocmd BufWinEnter *.* silent loadview 
+" In normal mode, press Space to toggle the current fold open/closed.
+" However, if the cursor is not in a fold, move to the right
+"  (the default behavior).In addition, with the manual fold method, 
+"  you can create a fold by visually selecting some lines, then pressing Space.
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+
+" resize windows shortcuts
+:nnoremap + :vertical resize +5<CR>
+:nnoremap _ :vertical resize -5<CR>
+:nnoremap = :resize +5<CR>
+:nnoremap - :resize -5<CR>
+
+:imap ;; <Esc>
+:nnoremap <Leader>\t :botright vertical terminal<CR>
+
+" Center the screen everytime we go into insert mode
+" Switch splits easily 
+:nnoremap <c-j> <c-w>j
+:nnoremap <c-k> <c-w>k
+:nnoremap <c-h> <c-w>h
+:nnoremap <c-l> <c-w>l
+call plug#begin('~/.vim/plugged')
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'arcticicestudio/nord-vim'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+Plug 'sirver/ultisnips'
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+Plug 'lervag/vimtex'
+let g:tex_flavor='latex'
+let g:vimtex_view_method='general'
+let g:vimtex_quickfix_mode=0
+
+Plug 'KeitaNakamura/tex-conceal.vim'
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+setlocal spell
+set spelllang=en_us
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-latex/vim-latex'
+Plug 'morhetz/gruvbox'
+Plug 'preservim/nerdtree'
+Plug 'vim-utils/vim-man'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'https://github.com/wikitopian/hardmode'
+" A Vim Plugin for Lively Previewing LaTeX PDF Output
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+call plug#end()
+
+:colorscheme PaperColor 
+:let g:airline_theme='papercolor'
+
+if exists('+termguicolors')
+      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      set termguicolors
+    endif
+
+:set background=light
+
+" NERDTree configuration
+map <C-H> :NERDTreeToggle<CR>
+
+" nnoremap gob  :s/\((\zs\\|,\ *\zs\\|)\)/\r&/g<CR><Bar>:'[,']normal ==<CR>
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+"TAG JUMPING:
+
+" Create the `tags` file (may need to install ctags first)
+command! MakeTags !ctags -R .
+set tags=./tags,tags;$HOME
+" NOW WE CAN:
+" - Use ^] to jump to tag under cursor
+" - Use g^] for ambiguous tags
+" - Use ^t to jump back up the tag stack

@@ -8,16 +8,20 @@ from numpy import linspace
 import sympy as sp
 import matplotlib.pyplot as mpl
 
+
 # custom libraries
 from packages.manufactured_solution_modifiers import modifiers as msm
 from packages.manufactured_solution_generators import generators as msg
 from packages.fortran_helpers import f_helpers as f_help
+from packages.fortran_helpers.create_sound_speed_f_file import\
+        SoundSpeedFortranFile  
+from packages.fortran_helpers.create_fluctuation_f_file import\
+        fluctuation_fortran_file  
+from packages.fortran_helpers.create_LEE_f_file import\
+        LEE_f_file  
+from packages.fortran_helpers.create_LEE_components_f_file import\
+        LEE_components_f_file  
 from packages.symbolic_helpers import sympy_helpers as sp_help 
-
-
-# In[3]:
-
-# In[1]:
 
 # Defining symbolic variables needed for this code.
 # all units are dimensionless!
@@ -353,7 +357,7 @@ for j in range(len(S)):
 
         lambda_B_times_x[i, j] = Lambda*BB[i, j]*XX[j]
 
-for i,p in enumerate(S):
+for i,pr in enumerate(S):
     match = (
             S[i].equals(
                 A_times_x[i, 0]
@@ -390,7 +394,7 @@ print(S[3].equals(SS[3]))
 # In[17]:
 
 
-for i,p in enumerate(S):
+for i,pr in enumerate(S):
     S[i] = S[i].subs(
             {
                 A:A_analytic,
@@ -423,7 +427,7 @@ for i,p in enumerate(S):
                 }
             )
 
-for i,p in enumerate(A_times_x[:, 0]):
+for i,pr in enumerate(A_times_x[:, 0]):
     for j,pp in enumerate(A_times_x[0, :]):
         A_times_x[i, j] = A_times_x[i, j].subs(
                 {
@@ -456,3 +460,21 @@ for i,p in enumerate(A_times_x[:, 0]):
                     dM_t_dr:dM_t_dr_analytic
                     }
                 )
+
+
+SoundSpeedFortranFile(
+        A_analytic,
+        M_t_analytic,
+        M_x_analytic)
+
+        
+fluctuation_fortran_file(
+        v_r_analytic, 
+        v_t_analytic,
+        v_x_analytic,
+        p_analytic)
+
+LEE_f_file(S[0], S[1], S[2], S[3]) 
+      
+LEE_components_f_file(A_times_x,lambda_B_times_x)
+

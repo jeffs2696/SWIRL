@@ -201,7 +201,9 @@ LAPACK_OBJS =           \
          $(LAPACK_LOCATION)/zunm2r.o       \
          $(LAPACK_LOCATION)/zunmqr.o
 
+
 all:  $(OBJECTS)
+	@cd PythonFiles/SymbolicManufacturedSolutions && make
 	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
 	@$(F90) -o $(EXE) $(BLAS_OBJS) \
              $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \
@@ -219,8 +221,10 @@ all:  $(OBJECTS)
 
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
-	
 	#@(cd $(EXECUTABLE_LOCATION); (make plot ))
+	
+MMS:
+	cd PythonFiles/SymbolicManufacturedSolutions && make
 plot:
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
 

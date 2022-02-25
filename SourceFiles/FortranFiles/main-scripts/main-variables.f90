@@ -133,7 +133,7 @@
 ! input variables:
     REAL(KIND = rDef), PARAMETER ::&
         gam    = 1.40_rDef  ,&
-        r_min  = 0.20000000_rDef  ,&
+        r_min  = 0.10000000_rDef  ,&
         r_max  = 1.000_rDef  
 
     INTEGER, PARAMETER :: &

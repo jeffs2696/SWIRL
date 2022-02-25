@@ -139,7 +139,7 @@ CONTAINS
             ELSE
             ENDIF
 
-            IF ( (rm.ne.0.0_rDef) .and. (r.ne.0.0_rDef) ) THEN
+            IF ( (rm.gt.0.0_rDef) .and. (r.gt.0.0_rDef) ) THEN
 
                 cvct(j) = (ak/CMPLX(as,KIND=rDef) - CMPLX(mm,KIND=rDef)*CMPLX(rs,KIND=rDef)/CMPLX(r,KIND=rDef))/CMPLX(rm,KIND=rDef)
 
