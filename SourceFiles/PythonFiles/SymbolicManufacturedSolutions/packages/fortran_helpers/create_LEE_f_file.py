@@ -12,45 +12,26 @@ def LEE_f_file(
     fS_2 = sp.fcode(S_2,source_format='free',standard=95)
     fS_3 = sp.fcode(S_3,source_format='free',standard=95)
     fS_4 = sp.fcode(S_4,source_format='free',standard=95)
-    
-    fS_1 = "    S_1(jj) = " + re.sub(r"gamma",'gam',fS_1) + "\n"
-    fS_2 = "    S_2(jj) = " + re.sub(r"gamma",'gam',fS_2) + "\n"
-    fS_3 = "    S_3(jj) = " + re.sub(r"gamma",'gam',fS_3) + "\n"
-    fS_4 = "    S_4(jj) = " + re.sub(r"gamma",'gam',fS_4) + "\n"
-#
-#    fS_1 = re.sub(r"\*m\*","*mC*",fS_1)
-#    fS_2 = re.sub(r"\*m\*","*mC*",fS_2)
-#    fS_3 = re.sub(r"\*m\*","*mC*",fS_3)
-#    fS_4 = re.sub(r"\*m\*","*mC*",fS_4)
-#
-#    fS_1 = re.sub(r"kappa","kappaC",fS_1)
-#    fS_2 = re.sub(r"kappa","kappaC",fS_2)
-#    fS_3 = re.sub(r"kappa","kappaC",fS_3)
-#    fS_4 = re.sub(r"kappa","kappaC",fS_4)
-#
-#    fS_1 = re.sub(r"r_max","r_maxC ",fS_1)
-#    fS_2 = re.sub(r"r_max","r_maxC ",fS_2)
-#    fS_3 = re.sub(r"r_max","r_maxC ",fS_3)
-#    fS_4 = re.sub(r"r_max","r_maxC ",fS_4)
-#
+
+    fS_1 = "S_1(jj) = " + re.sub(r"gamma",'gam',fS_1) + "\n"
+    fS_2 = "S_2(jj) = " + re.sub(r"gamma",'gam',fS_2) + "\n"
+    fS_3 = "S_3(jj) = " + re.sub(r"gamma",'gam',fS_3) + "\n"
+    fS_4 = "S_4(jj) = " + re.sub(r"gamma",'gam',fS_4) + "\n"
+
     fS_1 = re.sub(r"\b[r]\b","r(jj)",fS_1)
     fS_2 = re.sub(r"\b[r]\b","r(jj)",fS_2)
     fS_3 = re.sub(r"\b[r]\b","r(jj)",fS_3)
     fS_4 = re.sub(r"\b[r]\b","r(jj)",fS_4)
-#    fS_1 = re.sub(r"r ","r(jj) ",fS_1)
-#    fS_2 = re.sub(r"r ","r(jj) ",fS_2)
-#    fS_3 = re.sub(r"r ","r(jj) ",fS_3)
-#    fS_4 = re.sub(r"r ","r(jj) ",fS_4)
-#
-#    fS_1 = re.sub(r"r\*","r(jj)* ",fS_1)
-#    fS_2 = re.sub(r"r\*","r(jj)* ",fS_2)
-#    fS_3 = re.sub(r"r\*","r(jj)* ",fS_3)
-#    fS_4 = re.sub(r"r\*","r(jj)* ",fS_4)
- 
-    #fS_1 = re.sub(r"r)*","r(jj))*",fS_1)
-    #fS_2 = re.sub(r"r)*","r(jj))*",fS_2)
-    #fS_3 = re.sub(r"r)*","r(jj))*",fS_3)
-    #fS_4 = re.sub(r"r\)*","r(jj)*",fS_4)
+#    fS_1 = re.sub(r"\*m\*","*mC*",fS_1)
+#    fS_2 = re.sub(r"\*m\*","*mC*",fS_2)
+#    fS_3 = re.sub(r"\*m\*","*mC*",fS_3)
+#    fS_4 = re.sub(r"\*m\*","*mC*",fS_4)
+
+#    fS_1 = re.sub(r"kappa","kappaC",fS_1)
+#    fS_2 = re.sub(r"kappa","kappaC",fS_2)
+#    fS_3 = re.sub(r"kappa","kappaC",fS_3)
+#    fS_4 = re.sub(r"kappa","kappaC",fS_4)
+
     S_list = []
     S_list.append(fS_1)
     S_list.append(fS_2)
@@ -63,48 +44,39 @@ def LEE_f_file(
     ! ak  - reduced frequency
     ! kappa - ratio of specific heats
     ! i - imaginary number
-
-        SUBROUTINE SourceCalc(& 
-        gam  , &
-        i    , &
-        ak   , &
-        kappa, &
-        m    , & 
-        r    , &
-        r_max, &
-        S_1  , &
-        S_2  , &
-        S_3  , &
-        S_4)
-
-        INTEGER, INTENT(IN) :: m
-        REAL(KIND=rDef)   , INTENT(IN) :: kappa,r_max
-        REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: r
-        COMPLEX(KIND=rDef), INTENT(IN) :: i, gam, ak           
-        !COMPLEX(KIND=rDef), INTENT(INOUT) :: S_1, S_2, S_3, S_4
-        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(INOUT) :: S_1, S_2, S_3, S_4
-
-        ! Local variables
-        COMPLEX(KIND=rDef) :: mC, kappaC, r_maxC
-       ! , rC, 
-
-        INTEGER :: jj, numberOfGridPoints
-
-        mC = CMPLX(m,KIND=rDef)
-        kappaC = CMPLX(kappa,KIND=rDef)
-        !rC = CMPLX(r,KIND=rDef)
-        r_maxC = CMPLX(r_max,KIND=rDef) 
-
-numberOfGridPoints = SIZE(r)
-DO jj = 1,numberOfGridPoints
+    
+    SUBROUTINE SourceCalc(& 
+    gam  , &
+    m    , & 
+    r    , &
+    S_1  , &
+    S_2  , &
+    S_3  , &
+    S_4)
+    
+    INTEGER, INTENT(IN) :: m
+    REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: r
+    COMPLEX(KIND=rDef), INTENT(IN) ::  gam
+    !COMPLEX(KIND=rDef), INTENT(INOUT) :: S_1, S_2, S_3, S_4
+    COMPLEX(KIND=rDef), DIMENSION(:), INTENT(INOUT) :: S_1, S_2, S_3, S_4
+    
+    ! Local variables
+    COMPLEX(KIND=rDef) :: i   
+    ! , rC,
+    INTEGER :: jj, numberOfGridPoints
+    i = CMPLX(0.0, 1.0,KIND= rDef)
+    
+    
+    numberOfGridPoints = SIZE(r)
+    DO jj = 1,numberOfGridPoints
     '''
-
+    
     f_code_footer2 = '''
-END DO 
-            
-        
-            
-        END SUBROUTINE SourceCalc
+    END DO
+    
+    
+    
+    END SUBROUTINE SourceCalc
     '''
     #print(fS_1)
     #print(fS_2)

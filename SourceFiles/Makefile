@@ -203,7 +203,6 @@ LAPACK_OBJS =           \
 
 
 all:  $(OBJECTS)
-	@cd PythonFiles/SymbolicManufacturedSolutions && make
 	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
 	@$(F90) -o $(EXE) $(BLAS_OBJS) \
              $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \

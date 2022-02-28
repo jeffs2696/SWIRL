@@ -3,41 +3,32 @@
     ! ak  - reduced frequency
     ! kappa - ratio of specific heats
     ! i - imaginary number
-
-        SUBROUTINE SourceCalc(& 
-        gam  , &
-        i    , &
-        ak   , &
-        kappa, &
-        m    , & 
-        r    , &
-        r_max, &
-        S_1  , &
-        S_2  , &
-        S_3  , &
-        S_4)
-
-        INTEGER, INTENT(IN) :: m
-        REAL(KIND=rDef)   , INTENT(IN) :: kappa,r_max
-        REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: r
-        COMPLEX(KIND=rDef), INTENT(IN) :: i, gam, ak           
-        !COMPLEX(KIND=rDef), INTENT(INOUT) :: S_1, S_2, S_3, S_4
-        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(INOUT) :: S_1, S_2, S_3, S_4
-
-        ! Local variables
-        COMPLEX(KIND=rDef) :: mC, kappaC, r_maxC
-       ! , rC, 
-
-        INTEGER :: jj, numberOfGridPoints
-
-        mC = CMPLX(m,KIND=rDef)
-        kappaC = CMPLX(kappa,KIND=rDef)
-        !rC = CMPLX(r,KIND=rDef)
-        r_maxC = CMPLX(r_max,KIND=rDef) 
-
-numberOfGridPoints = SIZE(r)
-DO jj = 1,numberOfGridPoints
-        S_1(jj) = -i*(-1.58113883008419d0*m*sqrt(r(jj)*1d0/(0.187658336365052d0*tanh( &
+    
+    SUBROUTINE SourceCalc(& 
+    gam  , &
+    m    , & 
+    r    , &
+    S_1  , &
+    S_2  , &
+    S_3  , &
+    S_4)
+    
+    INTEGER, INTENT(IN) :: m
+    REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: r
+    COMPLEX(KIND=rDef), INTENT(IN) ::  gam
+    !COMPLEX(KIND=rDef), INTENT(INOUT) :: S_1, S_2, S_3, S_4
+    COMPLEX(KIND=rDef), DIMENSION(:), INTENT(INOUT) :: S_1, S_2, S_3, S_4
+    
+    ! Local variables
+    COMPLEX(KIND=rDef) :: i   
+    ! , rC,
+    INTEGER :: jj, numberOfGridPoints
+    i = CMPLX(0.0, 1.0,KIND= rDef)
+    
+    
+    numberOfGridPoints = SIZE(r)
+    DO jj = 1,numberOfGridPoints
+    S_1(jj) = -i*(-1.58113883008419d0*m*sqrt(r(jj)*1d0/(0.187658336365052d0*tanh( &
       0.0033333333333333335d0*r(jj) - 0.0033333333333333335d0) + &
       0.187658336365052d0*tanh(0.0033333333333333335d0*r(jj) - &
       0.0018333333333333335d0) + 0.187658336365052d0*tanh( &
@@ -105,7 +96,7 @@ DO jj = 1,numberOfGridPoints
       11.111111111111111d0*r(jj) - 3.6111111111111112d0) + 0.125d0*tanh( &
       11.111111111111111d0*r(jj) - 1.1111111111111112d0) + &
       0.644292158234312d0)/r(jj)
-    S_2(jj) = i*m*(-1.4260751904522d0*r(jj) - 3.28673187539388d0*(r(jj) - 0.1d0)**3 + &
+S_2(jj) = i*m*(-1.4260751904522d0*r(jj) - 3.28673187539388d0*(r(jj) - 0.1d0)**3 + &
       4.54258667724583d0*(r(jj) - 0.1d0)**2 + 0.125d0*tanh( &
       11.111111111111111d0*r(jj) - 11.111111111111111d0) + 0.125d0*tanh( &
       11.111111111111111d0*r(jj) - 8.6111111111111107d0) + 0.125d0*tanh( &
@@ -223,7 +214,7 @@ DO jj = 1,numberOfGridPoints
       1.1111111111111112d0*r(jj) - 0.3611111111111111d0) + 0.125d0*tanh( &
       1.1111111111111112d0*r(jj) - 0.11111111111111112d0) + &
       0.262972366000846d0)
-    S_3(jj) = -i*(0.125d0*tanh(22.222222222222221d0*r(jj) - 22.222222222222221d0) + &
+S_3(jj) = -i*(0.125d0*tanh(22.222222222222221d0*r(jj) - 22.222222222222221d0) + &
       0.125d0*tanh(22.222222222222221d0*r(jj) - 17.222222222222221d0) + &
       0.125d0*tanh(22.222222222222221d0*r(jj) - 12.222222222222223d0) + &
       0.125d0*tanh(22.222222222222221d0*r(jj) - 7.2222222222222223d0) + &
@@ -286,7 +277,7 @@ DO jj = 1,numberOfGridPoints
       1.1111111111111112d0*r(jj) - 0.3611111111111111d0) + 0.125d0*tanh( &
       1.1111111111111112d0*r(jj) - 0.11111111111111112d0) + &
       0.262972366000846d0)
-    S_4(jj) = i*m*(0.125d0*tanh(22.222222222222221d0*r(jj) - 22.222222222222221d0) + &
+S_4(jj) = i*m*(0.125d0*tanh(22.222222222222221d0*r(jj) - 22.222222222222221d0) + &
       0.125d0*tanh(22.222222222222221d0*r(jj) - 17.222222222222221d0) + &
       0.125d0*tanh(22.222222222222221d0*r(jj) - 12.222222222222223d0) + &
       0.125d0*tanh(22.222222222222221d0*r(jj) - 7.2222222222222223d0) + &
@@ -351,9 +342,9 @@ DO jj = 1,numberOfGridPoints
       0.138888888888889d0*tanh(1.1111111111111112d0*r(jj) - &
       0.11111111111111112d0)**2 + 1.08403313481607d0
 
-END DO 
-            
-        
-            
-        END SUBROUTINE SourceCalc
+    END DO
+    
+    
+    
+    END SUBROUTINE SourceCalc
     

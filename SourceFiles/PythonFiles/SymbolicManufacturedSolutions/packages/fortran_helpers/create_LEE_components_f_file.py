@@ -31,14 +31,8 @@ def LEE_components_f_file(A_times_x,lambda_B_times_x):
 
     for i in range(len(fS_B)): 
         fS_A[i] = re.sub(r"gamma",'gam'     , fS_A[i])
-        fS_A[i] = re.sub(r"\*m\*","*mC*"     , fS_A[i])
-        fS_A[i] = re.sub(r"kappa","kappaC" , fS_A[i])
-        fS_A[i] = re.sub(r"r_max","r_maxC" , fS_A[i])
         
         fS_B[i] = re.sub(r"gamma",'gam'     , fS_B[i])
-        fS_B[i] = re.sub(r"\*m\*","*mC*"     , fS_B[i])
-        fS_B[i] = re.sub(r"kappa","kappaC" , fS_B[i])
-        fS_B[i] = re.sub(r"r_max","r_maxC" , fS_B[i])
         
     for i in range(len(fS_A)):
         S_list.append(lhs_A[i] + '=' + fS_A[i] + "\n")        
@@ -68,17 +62,14 @@ def LEE_components_f_file(A_times_x,lambda_B_times_x):
     f_code_header2 = ''' 
     ! gam - axial wavenumber t
     ! ak  - reduced frequency
-    ! kappa - ratio of specific heats
     ! i - imaginary number
      
         SUBROUTINE SourceCalcComponents(& 
         gam  , &
         i    , &
         ak   , &
-        kappa, &
         m    , & 
         r    , &
-        r_max, &
         S_1  , &
         S_2  , &
         S_3  , &
@@ -117,7 +108,7 @@ def LEE_components_f_file(A_times_x,lambda_B_times_x):
         S_B44 )
         
         INTEGER, INTENT(IN) :: m
-        REAL(KIND=rDef)   , INTENT(IN) :: kappa,r,r_max
+        REAL(KIND=rDef)   , INTENT(IN) :: r
         !REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: r_loc
         COMPLEX(KIND=rDef), INTENT(IN) :: i, gam, ak           
         COMPLEX(KIND=rDef), INTENT(INOUT) :: &
@@ -158,18 +149,6 @@ def LEE_components_f_file(A_times_x,lambda_B_times_x):
     
         
         ! Local variables
-        COMPLEX(KIND=rDef) :: mC, kappaC, rC, r_maxC
-        
-        REAL(KIND=rDef) :: one,two,three
-    
-        one = REAL(1.0,KIND=rDef)    
-        two = REAL(2.0,KIND=rDef)    
-        three = REAL(3.0,KIND=rDef)
-    
-        mC = CMPLX(m,KIND=rDef)
-        kappaC = CMPLX(kappa,KIND=rDef)
-        rC = CMPLX(r,KIND=rDef)
-        r_maxC = CMPLX(r_max,KIND=rDef)
     '''
     
     
