@@ -1,0 +1,7 @@
+1. First, describe a situation
+ Growth In numerical analysis applied to cfd aNd caA 
+2. Next, describe a problem or question that arises from that situation
+gIven more complex geoMetries -> more complex Flows -> morE cOmplex aCoustics
+3. Now describe how others have approached that problem or question
+4. Explain a need To approach it in a different way or expand upon what's been done befOre
+5. What you aim to do

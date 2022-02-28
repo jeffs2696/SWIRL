@@ -2,31 +2,30 @@
     ! Returns M_theta and the corresponding sound speed as defined in
     ! SourceTermSymbolicSolver.ipynb
     
-        SUBROUTINE CalcSoundSpeed(& 
-        r                 , &
-        kappa          , &
-        SoundSpeedExpected, &
-        thetaMachData     , &
-        axialMachData)
-        
-        REAL(KIND=rDef)   , INTENT(IN) :: &
-        kappa
-        
-        REAL(KIND=rDef)   , DIMENSION(:), INTENT(INOUT) :: &
-        SoundSpeedExpected, thetaMachData, axialMachData
-        
-        REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: &
-        r
-        
-         
-        ! Local variables 
-        INTEGER :: &
-        numberOfGridPoints, i!, j
+    SUBROUTINE CalcSoundSpeed(& 
+    r                 , &
+    kappa          , &
+    SoundSpeedExpected, &
+    thetaMachData     , &
+    axialMachData)
+           
+    REAL(KIND=rDef)   , INTENT(IN) :: &
+    kappa 
     
-        
-        numberOfGridPoints = SIZE(SoundSpeedExpected)
+    REAL(KIND=rDef)   , DIMENSION(:), INTENT(INOUT) :: &
+    SoundSpeedExpected, thetaMachData, axialMachData
     
-            DO i = 1,numberOfGridPoints
+    REAL(KIND=rDef)   , DIMENSION(:), INTENT(IN) :: &
+    r
+    
+    
+    ! Local variables 
+    INTEGER :: &
+    numberOfGridPoints, i!, j
+    
+    numberOfGridPoints = SIZE(SoundSpeedExpected)
+    
+    DO i = 1,numberOfGridPoints
     
             SoundSpeedExpected(i) = 0.1875d0*tanh(0.0033333333333333335d0*r(i)- 0.0033333333333333335d0) + &
       0.1875d0*tanh(0.0033333333333333335d0*r(i)- 0.0018333333333333335d0 &
@@ -50,7 +49,7 @@
       0.0500000000003472d0
 
     
-            END DO
+    END DO
     
-        END SUBROUTINE CalcSoundSpeed
+    END SUBROUTINE CalcSoundSpeed
     

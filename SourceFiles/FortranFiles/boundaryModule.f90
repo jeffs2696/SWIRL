@@ -69,7 +69,8 @@ CONTAINS
             bb(np,np)   = CMPLX(0.0_rDef,KIND=rDef)
             bb(np,4*np) = etad*CMPLX(rmd,KIND=rDef)
 
-            if (sig.ne.0.0_rDef) then
+            ! sig can only be greater than 0
+            if (sig.gt.0.0_rDef) then
                 aa(1,1)    = -ci*ak
                 aa(1,np+1) = CMPLX(0.0_rDef,KIND=rDef)
                 do j=1,np
@@ -85,7 +86,7 @@ CONTAINS
 ! no liner; hard wall conditions
 !dp/dr = 0 at wall
 
-            if (sig.ne.0.0_rDef) then ! there is an inner wall : BC: v_r = 0
+            if (sig.gt.0.0_rDef) then ! there is an inner wall : BC: v_r = 0
                 do j = 1,np
                     aa(1,  np+j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at inner wall, v_th entries
                     aa(1,3*np+j) = CMPLX(0.0_rDef,KIND=rDef) ! v_r eqn at inner wall, p entries

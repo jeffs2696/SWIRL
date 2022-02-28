@@ -197,73 +197,72 @@
             S_B         = S_B_actual ,&
             S           = S_actual )
         ! 
+
+             CALL getMMSSourceTerms( &
+                 gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
+                 i     = ci                      ,&
+                 ak    = frequency               ,&
+                 kappa = gam                     ,&
+                 m     = azimuthalModeNumber     ,&
+                 r     = r                    ,&
+                 r_max = r_max                   ,&
+                 S_1   = S_1                  ,&
+                 S_2   = S_2                  ,&
+                 S_3   = S_3                  ,&
+                 S_4   = S_4     )             
+
 !
-!             CALL getMMSSourceTerms( &
-!                 gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
-!                 i     = ci                      ,&
-!                 ak    = frequency               ,&
-!                 k     = k                       ,&
-!                 kappa = gam                     ,&
-!                 m     = azimuthalModeNumber     ,&
-!                 r     = r(i)                    ,&
-!                 r_max = r_max                   ,&
-!                 S_1   = S_1(i)                  ,&
-!                 S_2   = S_2(i)                  ,&
-!                 S_3   = S_3(i)                  ,&
-!                 S_4   = S_4(i)     )             
+       DO i = 1,numberOfGridPoints
 !
-
-        DO i = 1,numberOfGridPoints
-
-            CALL getMMSSourceTermComponents( &
-                gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
-                i     = ci                      ,&
-                ak    = frequency               ,&
-                kappa = gam                     ,&
-                m     = azimuthalModeNumber     ,&
-                r     = r(i)                    ,&
-                r_max = r_max                   ,&
-                S_1   = S_1(i)                  ,&
-                S_2   = S_2(i)                  ,&
-                S_3   = S_3(i)                  ,&
-                S_4   = S_4(i)                  ,&
-                S_A11 = S_A11(i)                ,&
-                S_A12 = S_A12(i)                ,&
-                S_A13 = S_A13(i)                ,&
-                S_A14 = S_A14(i)                ,&
-                S_A21 = S_A21(i)                ,&
-                S_A22 = S_A22(i)                ,&
-                S_A23 = S_A23(i)                ,&
-                S_A24 = S_A24(i)                ,&
-                S_A31 = S_A31(i)                ,&
-                S_A32 = S_A32(i)                ,&
-                S_A33 = S_A33(i)                ,&
-                S_A34 = S_A34(i)                ,&
-                S_A41 = S_A41(i)                ,&
-                S_A42 = S_A42(i)                ,&
-                S_A43 = S_A43(i)                ,&
-                S_A44 = S_A44(i)                ,&
-                S_B11 = S_B11(i)                ,&
-                S_B12 = S_B12(i)                ,&
-                S_B13 = S_B13(i)                ,&
-                S_B14 = S_B14(i)                ,&
-                S_B21 = S_B21(i)                ,&
-                S_B22 = S_B22(i)                ,&
-                S_B23 = S_B23(i)                ,&
-                S_B24 = S_B24(i)                ,&
-                S_B31 = S_B31(i)                ,&
-                S_B32 = S_B32(i)                ,&
-                S_B33 = S_B33(i)                ,&
-                S_B34 = S_B34(i)                ,&
-                S_B41 = S_B41(i)                ,&
-                S_B42 = S_B42(i)                ,&
-                S_B43 = S_B43(i)                ,&
-                S_B44 = S_B44(i)                )                                      
-
+!            CALL getMMSSourceTermComponents( &
+!                gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
+!                i     = ci                      ,&
+!                ak    = frequency               ,&
+!                kappa = gam                     ,&
+!                m     = azimuthalModeNumber     ,&
+!                r     = r(i)                    ,&
+!                r_max = r_max                   ,&
+!                S_1   = S_1(i)                  ,&
+!                S_2   = S_2(i)                  ,&
+!                S_3   = S_3(i)                  ,&
+!                S_4   = S_4(i)                  ,&
+!                S_A11 = S_A11(i)                ,&
+!                S_A12 = S_A12(i)                ,&
+!                S_A13 = S_A13(i)                ,&
+!                S_A14 = S_A14(i)                ,&
+!                S_A21 = S_A21(i)                ,&
+!                S_A22 = S_A22(i)                ,&
+!                S_A23 = S_A23(i)                ,&
+!                S_A24 = S_A24(i)                ,&
+!                S_A31 = S_A31(i)                ,&
+!                S_A32 = S_A32(i)                ,&
+!                S_A33 = S_A33(i)                ,&
+!                S_A34 = S_A34(i)                ,&
+!                S_A41 = S_A41(i)                ,&
+!                S_A42 = S_A42(i)                ,&
+!                S_A43 = S_A43(i)                ,&
+!                S_A44 = S_A44(i)                ,&
+!                S_B11 = S_B11(i)                ,&
+!                S_B12 = S_B12(i)                ,&
+!                S_B13 = S_B13(i)                ,&
+!                S_B14 = S_B14(i)                ,&
+!                S_B21 = S_B21(i)                ,&
+!                S_B22 = S_B22(i)                ,&
+!                S_B23 = S_B23(i)                ,&
+!                S_B24 = S_B24(i)                ,&
+!                S_B31 = S_B31(i)                ,&
+!                S_B32 = S_B32(i)                ,&
+!                S_B33 = S_B33(i)                ,&
+!                S_B34 = S_B34(i)                ,&
+!                S_B41 = S_B41(i)                ,&
+!                S_B42 = S_B42(i)                ,&
+!                S_B43 = S_B43(i)                ,&
+!                S_B44 = S_B44(i)                )                                      
+!
             i1 = i + numberOfGridPoints
             i2 = i + 2*numberOfGridPoints
             i3 = i + 3*numberOfGridPoints
-
+!
             S_Expected(i)  = S_1(i)
             S_Expected(i1) = S_2(i)
             S_Expected(i2) = S_3(i)

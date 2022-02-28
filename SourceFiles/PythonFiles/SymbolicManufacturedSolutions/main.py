@@ -1,12 +1,7 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# Importing libraries
-from numpy import linspace
 
 # general libraries
 import sympy as sp
-import matplotlib.pyplot as mpl
 
 
 # custom libraries
@@ -14,14 +9,14 @@ from packages.manufactured_solution_modifiers import modifiers as msm
 from packages.manufactured_solution_generators import generators as msg
 from packages.fortran_helpers import f_helpers as f_help
 from packages.fortran_helpers.create_sound_speed_f_file import\
-        SoundSpeedFortranFile  
+        SoundSpeedFortranFile
 from packages.fortran_helpers.create_fluctuation_f_file import\
-        fluctuation_fortran_file  
+        fluctuation_fortran_file
 from packages.fortran_helpers.create_LEE_f_file import\
-        LEE_f_file  
+        LEE_f_file
 from packages.fortran_helpers.create_LEE_components_f_file import\
-        LEE_components_f_file  
-from packages.symbolic_helpers import sympy_helpers as sp_help 
+        LEE_components_f_file
+from packages.symbolic_helpers import sympy_helpers as sp_help
 
 # Defining symbolic variables needed for this code.
 # all units are dimensionless!
@@ -65,12 +60,11 @@ eta_min = float(f_help.GetInputVariables(eta_min_string)[0])
 eta_max = float(f_help.GetInputVariables(eta_max_string)[0])
 ak      = float(f_help.GetInputVariables(ak_string)     [0])
 gamma   = ak*r_max
-ci      = (-1)**0.5
+ci      = (-1.0)**0.5
 
 sigma  = r_min
 
 # In[6]:
-
 
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
@@ -87,10 +81,6 @@ M_t_analytic      = (
 # scalar multiplier below
 M_x_analytic      = 0.1*msg.TanhMethod(5 ,50,r_min,r_max )
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
-
-
-# In[7]:
-
 
 f     = msg.TanhMethod(5,1,r_min,r_max)
 df    = f.diff(r)
@@ -116,8 +106,6 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-
-# In[8]:
 v_t_analytic = msg.TanhMethod(5,20,r_min,r_max)
 v_x_analytic = msg.TanhMethod(5,20,r_min,r_max)
 
@@ -127,8 +115,6 @@ v_r_analytic = f_imposed
 dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
-
-
 
 f      = msg.TanhMethod(5,10,r_min,r_max)
 df     = f.diff(r)
@@ -196,16 +182,8 @@ p_analytic = p_analytic.subs(
             }
         )
 
-
-# In[10]:
-
-
 dp_dr_analytic   = p_analytic.diff(r)
-
-
-# In[11]:
-
-
+#
 #sp_help.plotSymbolicEquation('Speed Of Sound', \
 #                     r               , \
 #                     'radius'        , \
@@ -237,9 +215,6 @@ dp_dr_analytic   = p_analytic.diff(r)
 #plotSymbolicEquation('dpdr',r,'radius',dp_dr_analytic,'dpdr',r_min,r_max)
 
 
-# In[12]:
-
-
 S = list(range(4))
 S[0] = -i*( ak/A - (m/r)*M_t - gamma*M_x)*v_r \
 - (2.0/r)*M_t*v_t + dp_dr + ( (kappa - 1.0)/r)*(M_t**2.0)*p
@@ -253,10 +228,6 @@ S[2] = -i*( ak/A - (m/r)*M_t - gamma*M_x )*v_x \
 S[3] = -i*( ak/A - (m/r)*M_t - gamma*M_x)*p \
         + dv_r_dr + ( ( (kappa + 1.0)/(2.0*r))*M_t**2.0 + 1.0/r)*v_r \
         + i*m*v_t/r + i*gamma*v_x
-
-
-# In[13]:
-
 
 S_at_r = list(range(4))
 S_at_r[0] = -i*( ak/A - (m*dM_t_dr) - gamma*M_x)*v_r \
@@ -272,50 +243,48 @@ S_at_r[2] = -i*( ak/A - m*dM_t_dr - gamma*M_x)*v_x \
 S_at_r[3] = -i*( ak/A - m*dM_t_dr - gamma*M_x)*p \
         + dv_r_dr + (kappa + 1.0)*M_t*dM_t_dr*v_r + i*m*v_t/r + i*gamma*v_x
 
-
-# In[14]:
-
+# Creating Matrix
 AA = sp.Matrix(sp.zeros(4,4))
 
-AA[0,0] = -i*(ak/A - (m/r)*M_t)
-AA[1,1] = AA[0,0]
-AA[2,2] = AA[0,0]
-AA[3,3] = AA[0,0]
+AA[0, 0] = -i*(ak/A - (m/r)*M_t)
+AA[1, 1] = AA[0, 0]
+AA[2, 2] = AA[0, 0]
+AA[3, 3] = AA[0, 0]
 
-AA[0,2] = 0
-AA[1,2] = 0
-AA[3,2] = 0
-AA[2,1] = 0
-AA[2,3] = 0
+AA[0, 2] = 0.0
+AA[1, 2] = 0.0
+AA[3, 2] = 0.0
+AA[2, 1] = 0.0
+AA[2, 3] = 0.0
 
-AA[1,3] = (i*m)/r
-AA[3,1] = AA[1,3]
+AA[1, 3] = (i*m)/r
+AA[3, 1] = AA[1, 3]
 
 A12 = (-2.0/r)*M_t
 A21 = M_t/r + dM_t_dr + (kappa - 1.0)/(2.0*r)*M_t**3.0
 A31 = dM_x_dr + (kappa - 1.0)/(2.0*r)*M_t**2.0*M_x
 
-AA[0,1] = A12
-AA[1,0] = A21
-AA[2,0] = A31
+AA[0, 1] = A12
+AA[1, 0] = A21
+AA[2, 0] = A31
 
 # note that these terms only have derivative operators , See Eqn 2.52
 
 A41 = (1.0/v_r)*dv_r_dr + 1.0/r + (kappa + 1.0)/(2.0*r)*M_t**2.0
 A14 = (1.0/p)*dp_dr + (kappa - 1.0)/r * M_t**2.0
 
-AA[3,0] = A41
-AA[0,3] = A14
+AA[3, 0] = A41
+AA[0, 3] = A14
 
 BB = sp.zeros(4,4)
 
-BB[0,0] = M_x
-BB[1,1] = BB[0,0]
-BB[2,2] = BB[0,0]
-BB[3,3] = BB[0,0]
+BB[0, 0] = M_x
+BB[1, 1] = BB[0, 0]
+BB[2, 2] = BB[0, 0]
+BB[3, 3] = BB[0, 0]
 
-BB[2,3] = 1.0
-BB[3,2] = BB[2,3]
+BB[2, 3] = 1.0
+BB[3, 2] = BB[2,3]
 
 XX = sp.Matrix(
         [
@@ -329,10 +298,6 @@ XX = sp.Matrix(
 Lambda = -i*gamma
 
 SS = AA*XX - Lambda*BB*XX
-
-
-# In[15]:
-
 
 # now that we set the matricies up lets get our individual terms
 
@@ -373,27 +338,21 @@ for i,pr in enumerate(S):
                     )
                 )
             )
-    print(match)
+
+    if match != True:
+        print(match)
 
 # notes on differences between system of equations and Ax-lambda Bx
 # multiplying (1/p) and not (one/p) by dp_dr made  S_1 and SS[1] the same
 # multiplied i gamma p term by "one" in S_3
 # multiplied by 1/v_r by d_v_dr and i v_x gamma terM by one
 
-
-# In[16]:
-
-
 # Checking if the matrix expressions equal the linear system of equations
-print(S[0].equals(SS[0]))
-print(S[1].equals(SS[1]))
-print(S[2].equals(SS[2]))
-print(S[3].equals(SS[3]))
-
-
-# In[17]:
-
-
+#print(S[0].equals(SS[0]))
+#print(S[1].equals(SS[1]))
+#print(S[2].equals(SS[2]))
+#print(S[3].equals(SS[3]))
+#
 for i,pr in enumerate(S):
     S[i] = S[i].subs(
             {
@@ -461,20 +420,17 @@ for i,pr in enumerate(A_times_x[:, 0]):
                     }
                 )
 
-
 SoundSpeedFortranFile(
         A_analytic,
         M_t_analytic,
         M_x_analytic)
 
-        
 fluctuation_fortran_file(
-        v_r_analytic, 
+        v_r_analytic,
         v_t_analytic,
         v_x_analytic,
         p_analytic)
 
-LEE_f_file(S[0], S[1], S[2], S[3]) 
-      
-LEE_components_f_file(A_times_x,lambda_B_times_x)
+LEE_f_file(S[0], S[1], S[2], S[3])
 
+LEE_components_f_file(A_times_x,lambda_B_times_x)

@@ -1,6 +1,6 @@
 MODULE analysisModule
     USE, INTRINSIC :: ISO_FORTRAN_ENV
-    USE F90_ZGGEV 
+    USE F90_ZGGEV
     IMPLICIT NONE
     PRIVATE
     PUBLIC :: analysis
@@ -56,7 +56,7 @@ CONTAINS
             akap
 
         COMPLEX(KIND=rDef), INTENT(IN) :: &
-            ak ! axial wavenumber      
+            ak ! axial wavenumber
 
         COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
             alpha, &
@@ -85,7 +85,7 @@ CONTAINS
 
         LOGICAL, DIMENSION(np4) :: &
             col, &
-            row 
+            row
 
         COMPLEX(KIND=rDef) :: &
             c0, &
@@ -95,7 +95,7 @@ CONTAINS
         COMPLEX(KIND=rDef), DIMENSION(np4) :: &
             cvct
 
-        COMPLEX(KIND=rDef), DIMENSION(np4,np4) :: aa_before, bb_before 
+        COMPLEX(KIND=rDef), DIMENSION(np4,np4) :: aa_before, bb_before
 
         INTEGER :: &
             i, &
@@ -111,14 +111,14 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .FALSE. 
+        LOGICAL :: debug = .FALSE.
 
         INTEGER  :: &
-            UNIT 
+            UNIT
 
         CHARACTER(10) :: &
             file_id
-        CHARACTER :: &
+        CHARACTER(12) :: &
             file_name
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
@@ -129,17 +129,18 @@ CONTAINS
         do j=1,np
 
             ! get mean flow, i.e. . .
-            rm = rmx(j) !axial ,. . . 
+            rm = rmx(j) !axial ,. . .
             rs = rmt(j) !and tangential mach numbers +  ...
             as = snd(j) ! the speed of sound.
-            r  = rr(j)  ! Don't forget, we need this data at each radial point! 
+            r  = rr(j)  ! Don't forget, we need this data at each radial point!
 
-            IF (debug) THEN 
+            IF (debug) THEN
                 ! WRITE(6,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
             ELSE
             ENDIF
 
-            IF ( (rm.gt.0.0_rDef) .and. (r.gt.0.0_rDef) ) THEN
+            IF ( (rm.gt.0.0_rDef) .and.(rm.lt.0.0_rDef) .and.&
+                (r.gt.0.0_rDef) .and. (r.lt.0.0_rDef) ) THEN
 
                 cvct(j) = (ak/CMPLX(as,KIND=rDef) - CMPLX(mm,KIND=rDef)*CMPLX(rs,KIND=rDef)/CMPLX(r,KIND=rDef))/CMPLX(rm,KIND=rDef)
 
@@ -193,7 +194,7 @@ CONTAINS
             IF (col(j)) THEN
 
 
-                    WRITE(6,20) j
+                WRITE(6,20) j
 
                 badcol = .true.
 
@@ -223,15 +224,15 @@ CONTAINS
 
             if (row(k)) then
 
-                    write(6,25) k
-                    badrow = .true.
+                write(6,25) k
+                badrow = .true.
             endif
 
         enddo
 !
         if (badrow.or.badcol) return
- 20      format(1x,'Column ',i4,' contains all zeros.')
- 25      format(1x,'Row    ',i4,' contains all zeros.')
+20      format(1x,'Column ',i4,' contains all zeros.')
+25      format(1x,'Row    ',i4,' contains all zeros.')
 
         nmax4 = np4
 
@@ -265,7 +266,7 @@ CONTAINS
             WRITE(0,*) 'The QZ iteration. No eigenvectors are calculated'
             WRITE(0,*) 'But ALPHA(j) and BETA(j) should be correct for  '
             WRITE(0,*) 'j = INFO + 1,...,N'
-        ELSEIF (INFO .LT. 0) THEN 
+        ELSEIF (INFO .LT. 0) THEN
             WRITE(0,*) 'EIGENSOLVER FAILED'
             WRITE(6,*) 'if INFO = -i, the i-th argument had an illegal value.'
         ENDIF
@@ -290,7 +291,7 @@ CONTAINS
 
         SMALL = CMPLX(eps,eps,KIND=rDef)
 
-        WRITE(file_id, '(i0)') np 
+        WRITE(file_id, '(i0)') np
         OPEN(NEWUNIT=UNIT,FILE='alpha_beta'//TRIM(ADJUSTL(file_id)) // '.dat')
 
         DO j=1,np4
@@ -301,14 +302,17 @@ CONTAINS
 !                WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
 !                WRITE(6,*) 'BETA (',j,') = ', beta(j)
 !
-                ELSE IF ( (ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
+            ELSE IF ( (ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
                 (ABS(AIMAG(beta(j))).LT.ABS(eps)) ) THEN
                 !WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
                 !WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
                 !WRITE(6,*) 'BETA (',j,') = ', beta(j)
-            ELSE 
+            ELSE
                 WRITE(UNIT,*) j,alpha(j),beta(j)
-                if (beta(j).ne.c0) then
+                !  When imaginary part of complex number is zero then it is real number. 
+                ! thats why we can look at the real part of beta
+                if ( (REAL(beta(j),KIND=rDef).gt.0.0_rDef) .and. &
+                    (REAL(beta(j),KIND=rDef).lt.0.0_rDef)) then
 
                     gam(j) = ci*alpha(j)/beta(j)
 
@@ -323,7 +327,7 @@ CONTAINS
                     endif
                     vphi(j)  = ak/gam(j)
 
-                    IF (debug) THEN 
+                    IF (debug) THEN
                         ! write(6,10) j,gam(j),gam(j)/ak,vphi(j)
                     ELSE
                     ENDIF
@@ -353,7 +357,7 @@ CONTAINS
 
         do i = 1,np4
 ! JS: if there is (linear shear) and (no slope) and (no swirl then) ...
-! Note: this will never happen because we removed the swrl.input functionality 
+! Note: this will never happen because we removed the swrl.input functionality
             if ((ir.eq.1) .and.  (is.eq.0)) then
                 rm   = rmx(1)
 !       akap(i) = (rm*rm -1.)*gam(i)*gam(i) &

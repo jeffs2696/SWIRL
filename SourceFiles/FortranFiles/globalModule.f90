@@ -18,7 +18,7 @@ CONTAINS
         INTEGER, INTENT(IN) :: &
             row, &
             col, &
-           np,  &
+            np,  &
             np4, &
             mode
 
@@ -47,7 +47,8 @@ CONTAINS
 ! define local variables
 
         REAL(KIND=rDef), PARAMETER :: &
-            gm = 1.4_rDef
+            gm = 1.4_rDef , &
+            tolerance = 10e-11_rDef
 
         INTEGER :: &
             j,  &
@@ -102,7 +103,7 @@ CONTAINS
 
 ! dd is the derivative matrix for the radial direction
 
-! derivatives appear in two locations in the [A] block matrix: 
+! derivatives appear in two locations in the [A] block matrix:
 !       (1,4) and (4,1)
 
                 aa(k,j3) = CMPLX(dd(k,j),KIND=rDef)  ! (1,4) : v_r eqn, p entry     d/dr
@@ -117,7 +118,7 @@ CONTAINS
                     aa(k1,j)  = CMPLX(dt(j),KIND=rDef)         ! (2,1) : v_theta eqn, v_r entry: dM_th/dr
                     aa(k2,j)  = CMPLX(dr(j),KIND=rDef)         ! (3,1) : v_x eqn, v_r entry: dM_x/dr
 
-                    if (r.ne.0.0_rDef) then
+                    if (r.gt.0.0_rDef) then
 
                         aa(k1,j3) = ci*CMPLX(mode,KIND=rDef)/CMPLX(r,KIND=rDef) ! (2,4): v_theta eqn, p entry: i m/r
 
@@ -138,7 +139,7 @@ CONTAINS
 
                         ! (1,1): v_r eqn, v_r entry:
 
-                        aa(k,j)   = aa(k,j) &                  
+                        aa(k,j)   = aa(k,j) &
                             +ci*&
                             CMPLX(mode,KIND=rDef)*&
                             CMPLX(rt(j),KIND=rDef)/&
@@ -189,7 +190,9 @@ CONTAINS
                             CMPLX(r       ,KIND=rDef)&
                             ) ! +((gam-1)*M_x*M_th^2)/(2 r)
 
-                    elseif (r.eq.1.0_rDef) THEN ! r == 0
+                        !
+
+                    elseif (r.lt.tolerance) THEN ! r == 0
                         aa(k1,j3) = CMPLX(0.0_rDef,0.0_rDef,rDef) ! (2,4): v_th eqn, p entry: 0
                         aa(k3,j1) = CMPLX(0.0_rDef,0.0_rDef,rDef) ! (4,2): p eqn, v_th entry: 0
                         aa(k,j)   = aa(k,j) &                     ! (1,1): v_r eqn, v_r entry:
@@ -205,7 +208,7 @@ CONTAINS
                         aa(k,j1)  = CMPLX(-2.0_rDef,KIND=rDef)*CMPLX(dt(j),KIND=rDef)               ! (1,2): v_r eqn, v_th entry: - 2 M_th
                         aa(k,j3)  = aa(k,j3) &                    ! (1,4): v_r eqn, p entry:
                             +CMPLX(2.0_rDef,KIND=rDef)*CMPLX((gm -1.0_rDef),KIND=rDef)*CMPLX(rt(j),KIND=rDef)*CMPLX(dt(j),KIND=rDef)  ! + 2 (gam-1)*M_th*dM_th/dr
-                        aa(k1,j)  = aa(k1,j) &                    ! (2,1): v_th eqn, v_r entry: 
+                        aa(k1,j)  = aa(k1,j) &                    ! (2,1): v_th eqn, v_r entry:
                             +(&
                             CMPLX(1.0_rDef,KIND=rDef) +&
                             CMPLX(3.0_rDef,KIND=rDef)*&
@@ -246,7 +249,7 @@ CONTAINS
                         aa(k,j1)  = CMPLX(-2.0_rDef,KIND=rDef)*CMPLX(dt(j),KIND=rDef)               ! (1,2): v_r eqn, v_th entry: - 2 M_th
                         aa(k,j3)  = aa(k,j3) &                    ! (1,4): v_r eqn, p entry:
                             +CMPLX(2.0_rDef,KIND=rDef)*CMPLX((gm -1.0_rDef),KIND=rDef)*CMPLX(rt(j),KIND=rDef)*CMPLX(dt(j),KIND=rDef)  ! + 2 (gam-1)*M_th*dM_th/dr
-                        aa(k1,j)  = aa(k1,j) &                    ! (2,1): v_th eqn, v_r entry: 
+                        aa(k1,j)  = aa(k1,j) &                    ! (2,1): v_th eqn, v_r entry:
                             +(&
                             CMPLX(1.0_rDef,KIND=rDef) +&
                             CMPLX(3.0_rDef,KIND=rDef)*&
@@ -257,20 +260,20 @@ CONTAINS
                         !        +(1+3*((gam-1)/2)*Mth^2)*dM_th/dr
                         aa(k2,j)  = aa(k2,j) &                    ! (3,1): v_x eqn, v_r entry:
                             +&
-                             CMPLX((gm -1.0_rDef),KIND=rDef)/&
-                             CMPLX(2.0_rDef,KIND=rDef)*&
-                             CMPLX(rt(j),KIND=rDef)*(&
-                             CMPLX(dr(j),KIND=rDef)*&
-                             CMPLX(rt(j),KIND=rDef) +&
-                             CMPLX(2.0_rDef,KIND=rDef)*&
-                             CMPLX(rx(j),KIND=rDef)*&
-                             CMPLX(dt(j),KIND=rDef))
-                         !  +((gam-1)/2)*Mth*(Mth*dMx/dr + 2*Mx*dMth/dr)
-                         aa(k3,j) = aa(k3,j) &                     ! (4,1): p eqn, v_r entry:
-                             +&
-                             CMPLX((gm +1.0_rDef),KIND=rDef)*&
-                             CMPLX(rt(j),KIND=rDef)*&
-                             CMPLX(dt(j),KIND=rDef)    !    + (gam+1)*M_th*dMth/dr
+                            CMPLX((gm -1.0_rDef),KIND=rDef)/&
+                            CMPLX(2.0_rDef,KIND=rDef)*&
+                            CMPLX(rt(j),KIND=rDef)*(&
+                            CMPLX(dr(j),KIND=rDef)*&
+                            CMPLX(rt(j),KIND=rDef) +&
+                            CMPLX(2.0_rDef,KIND=rDef)*&
+                            CMPLX(rx(j),KIND=rDef)*&
+                            CMPLX(dt(j),KIND=rDef))
+                        !  +((gam-1)/2)*Mth*(Mth*dMx/dr + 2*Mx*dMth/dr)
+                        aa(k3,j) = aa(k3,j) &                     ! (4,1): p eqn, v_r entry:
+                            +&
+                            CMPLX((gm +1.0_rDef),KIND=rDef)*&
+                            CMPLX(rt(j),KIND=rDef)*&
+                            CMPLX(dt(j),KIND=rDef)    !    + (gam+1)*M_th*dMth/dr
                     endif
 
 
@@ -306,28 +309,28 @@ CONTAINS
                 !v_r
                 if (row .eq. 1 .AND. col .eq.1) then
 
-                    S_aa(k ,j)  = aa(k ,j)   
+                    S_aa(k ,j)  = aa(k ,j)
 
                 elseif (row .eq. 2 .AND. col .eq.  1) then
 
-                    S_aa(k1,j) = aa(k1,j) 
+                    S_aa(k1,j) = aa(k1,j)
 
                 elseif (row .eq. 3 .AND. col .eq.  1) then
 
-                    S_aa(k2,j) = aa(k2,j) 
+                    S_aa(k2,j) = aa(k2,j)
 
                 elseif (row .eq. 4 .AND. col .eq.  1) then
 
                     S_aa(k3,j) = aa(k3,j)
 
-                    !v_theta   
+                    !v_theta
                 elseif (row .eq. 1 .AND. col .eq.  2) then
 
-                    S_aa(k ,j1) = aa(k ,j1)   
+                    S_aa(k ,j1) = aa(k ,j1)
 
                 elseif (row .eq. 2 .AND. col .eq.  2) then
 
-                    S_aa(k1,j1) = aa(k1,j1) 
+                    S_aa(k1,j1) = aa(k1,j1)
 
                 elseif (row .eq. 3 .AND. col .eq.  2) then
 
@@ -335,16 +338,16 @@ CONTAINS
 
                 elseif (row .eq. 4 .AND. col .eq.  2) then
 
-                    S_aa(k3,j1) = aa(k3,j1) 
+                    S_aa(k3,j1) = aa(k3,j1)
 
                     !v_x
                 elseif (row .eq. 1 .AND. col .eq.  3) then
 
-                    S_aa(k ,j2) = aa(k ,j2)   
+                    S_aa(k ,j2) = aa(k ,j2)
 
                 elseif (row .eq. 2 .AND. col .eq.  3) then
 
-                    S_aa(k1,j2) = aa(k1,j2) 
+                    S_aa(k1,j2) = aa(k1,j2)
 
                 elseif (row .eq. 3 .AND. col .eq.  3) then
 
@@ -352,16 +355,16 @@ CONTAINS
 
                 elseif (row .eq. 4 .AND. col .eq.  3) then
 
-                    S_aa(k3,j2) = aa(k3,j2) 
+                    S_aa(k3,j2) = aa(k3,j2)
 !pressure
 
                 elseif (row .eq. 1 .AND. col .eq.  4) then
 
-                    S_aa(k ,j3) = aa(k ,j3)   
+                    S_aa(k ,j3) = aa(k ,j3)
 
                 elseif (row .eq. 2 .AND. col .eq.  4) then
 
-                    S_aa(k1,j3) = aa(k1,j3) 
+                    S_aa(k1,j3) = aa(k1,j3)
 
                 elseif (row .eq. 3 .AND. col .eq.  4) then
 
@@ -369,18 +372,18 @@ CONTAINS
 
                 elseif (row .eq. 4 .AND. col .eq.  4) then
 
-                    S_aa(k3,j3) = aa(k3,j3) 
+                    S_aa(k3,j3) = aa(k3,j3)
                 else
                 endif
-                ! S_aa(k2,j2) = aa(k2,j2) 
-                ! S_aa(k3,j3) = aa(k3,j3) 
+                ! S_aa(k2,j2) = aa(k2,j2)
+                ! S_aa(k3,j3) = aa(k3,j3)
 
-                ! S_bb(k,j)   = bb(k,j)   
-                ! S_bb(k1,j1) = bb(k1,j1) 
-                ! S_bb(k2,j2) = bb(k2,j2) 
-                ! S_bb(k3,j3) = bb(k3,j3) 
+                ! S_bb(k,j)   = bb(k,j)
+                ! S_bb(k1,j1) = bb(k1,j1)
+                ! S_bb(k2,j2) = bb(k2,j2)
+                ! S_bb(k3,j3) = bb(k3,j3)
             enddo
-        enddo 
+        enddo
 
         ! WRITE(0,*) 'S_aa(k,j)', S_aa(k,j)
 
