@@ -93,9 +93,11 @@ flow_1 = fc.FlowClass(
         axial_mach = M_x_analytic,
         sound_speed = A_analytic
         )
-flow_1.get_tangential_mach()
 
-#M_t_analytic = flow_1.tangential_mach
+M_T_test  = flow_1.get_tangential_mach()
+print(M_T_test)
+print(M_t_analytic == M_T_test)
+
 
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
 #print(M_t_analytic)
