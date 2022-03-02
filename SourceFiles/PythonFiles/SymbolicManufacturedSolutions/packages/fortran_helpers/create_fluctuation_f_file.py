@@ -8,10 +8,10 @@ def fluctuation_fortran_file(v_r_analytic,v_t_analytic,v_x_analytic,p_analytic):
     fv_x  = sp.fcode(v_x_analytic,source_format='free',standard=95)
     fp    = sp.fcode(p_analytic,source_format='free',standard=95)  
     
-    fv_r  = "vR(i) =" + re.sub(r"r ","r(i) ",fv_r) + "\n"
-    fv_th = "vTh(i)=" + re.sub(r"r ","r(i) ",fv_th)+ "\n"
-    fv_x  = "vX(i) =" + re.sub(r"r ","r(i) ",fv_x) + "\n"
-    fp    = "Pr(i) =" + re.sub(r"r ","r(i) ",fp)   + "\n"
+    fv_r  = "vR(i) =" + re.sub(r"\b[r]\b","r(i) ",fv_r) + "\n"
+    fv_th = "vTh(i)=" + re.sub(r"\b[r]\b","r(i) ",fv_th)+ "\n"
+    fv_x  = "vX(i) =" + re.sub(r"\b[r]\b","r(i) ",fv_x) + "\n"
+    fp    = "Pr(i) =" + re.sub(r"\b[r]\b","r(i) ",fp)   + "\n"
     
     
     

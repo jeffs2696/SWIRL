@@ -14,12 +14,9 @@ def SoundSpeedFortranFile(A_analytic,M_t_analytic,M_x_analytic):
     f_M_t = "        thetaMachData(i)      = " + f_M_t + "\n"
     f_M_x = "        axialMachData(i)      = " + f_M_x + "\n"
 
-    f_A = re.sub(r"r ","r(i)",f_A)
-    f_A = re.sub(r"r\*","r(i)*",f_A)
-    f_M_t = re.sub(r"r ","r(i)",f_M_t)
-    f_M_t = re.sub(r"r\*","r(i)*",f_M_t)
-    f_M_x = re.sub(r"r ","r(i)",f_M_x)
-    f_M_x = re.sub(r"r\*","r(i)*",f_M_x)
+    f_A = re.sub(r"\b[r]\b","r(i)",f_A)
+    f_M_t = re.sub(r"\b[r]\b","r(i)",f_M_t)
+    f_M_x = re.sub(r"\b[r]\b","r(i)",f_M_x)
 
     S_list = []
     S_list.append(f_A)

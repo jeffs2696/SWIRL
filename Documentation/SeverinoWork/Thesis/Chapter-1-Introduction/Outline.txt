@@ -1,7 +1,41 @@
 1. First, describe a situation
- Growth In numerical analysis applied to cfd aNd caA 
+ There is a growth of CFD that is tandem with an engineers ability to access for rigorous 
+ computational tools
 2. Next, describe a problem or question that arises from that situation
-gIven more complex geoMetries -> more complex Flows -> morE cOmplex aCoustics
+However,given more complex geometries , there are more complex Flows and therefore
+more complex aeroacoustic behavior.
 3. Now describe how others have approached that problem or question
+Aeroacoustic contributions
 4. Explain a need To approach it in a different way or expand upon what's been done befOre
+Provide a means of V&V that is formal and can aid the engineer in synthesizing the results 
 5. What you aim to do
+
+State a Situation for why I am to do what I do:
+
+UntiL the mid 90s, an aeroacoustics model for swirling flow had not been published.
+It was only with the work in 1996 by Kousen (with his approach)that it waS first investigated. Golubev and 
+Attassi had their contribution however this is work is not expanding on that
+
+Our theory is a response to this "discovery" Or a response to a "preexisting theory"
+
+Lit Review Notes:
+
+1. You do not have to show how much you read 
+
+2. Every paper is a rePsonse to a probleM or question or situation (or a previous
+paper)
+
+3. You can set these with the context of a general situation that exists with 
+the literature
+
+Example:
+
+Research into ... has gained pace in recent years, especially since the development
+of new techniques allowing ...
+
+One of the main aims of this research has been to ...
+
+This chapter will outline the most recent developments, key discoveries and 
+current state of the art regarding...
+
+

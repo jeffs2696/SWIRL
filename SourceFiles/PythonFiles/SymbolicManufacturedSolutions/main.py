@@ -14,10 +14,13 @@ from packages.fortran_helpers.create_fluctuation_f_file import\
         fluctuation_fortran_file
 from packages.fortran_helpers.create_LEE_f_file import\
         LEE_f_file
+from packages.fortran_helpers.create_LEE_LHopital_f_file import\
+        LEE_LH_f_file
 from packages.fortran_helpers.create_LEE_components_f_file import\
         LEE_components_f_file
 from packages.symbolic_helpers import sympy_helpers as sp_help
 
+from classes.flow_classes import flow_class as fc 
 # Defining symbolic variables needed for this code.
 # all units are dimensionless!
 
@@ -52,6 +55,7 @@ kappa_string    = 'gam'
 eta_max_string  = 'ductAdmittance'
 eta_min_string  = 'hubAdmittance'
 ak_string       = 'frequency'
+m_string        = 'azimuthalModeNumber ='
 
 r_max   = float(f_help.GetInputVariables(r_max_string)  [0])
 r_min   = float(f_help.GetInputVariables(r_min_string)  [0])
@@ -59,16 +63,18 @@ kappa   = float(f_help.GetInputVariables(kappa_string)  [0])
 eta_min = float(f_help.GetInputVariables(eta_min_string)[0])
 eta_max = float(f_help.GetInputVariables(eta_max_string)[0])
 ak      = float(f_help.GetInputVariables(ak_string)     [0])
+print(ak)
+m       = float(f_help.GetInputVariables(m_string)     [0])
 gamma   = ak*r_max
 ci      = (-1.0)**0.5
-
+    
 sigma  = r_min
 
 # In[6]:
-
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-A_analytic        = msg.TanhMethod(3,0.003,r_min,r_max)
+A_analytic        = msg.TanhMethod(6,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
+
 dA_analytic_dr    = sp.diff(A_analytic,r)
 dA_analytic_sq_dr = sp.diff(A_analytic**2.0,r)
 
@@ -79,10 +85,21 @@ M_t_analytic      = (
         )**0.5
 
 # scalar multiplier below
-M_x_analytic      = 0.1*msg.TanhMethod(5 ,50,r_min,r_max )
-M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
+M_x_analytic      = sp.Symbol('0.0')#1*r/2#msg.TanhMethod(1 ,50,r_min,r_max )
 
-f     = msg.TanhMethod(5,1,r_min,r_max)
+flow_1 = fc.FlowClass(
+        radius = r,
+        ratio_of_specific_heats = kappa,
+        axial_mach = M_x_analytic,
+        sound_speed = A_analytic
+        )
+flow_1.get_tangential_mach()
+
+#M_t_analytic = flow_1.tangential_mach
+
+M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
+#print(M_t_analytic)
+f     = sp.Symbol('0.0')#msg.TanhMethod(1,1,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -106,8 +123,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = msg.TanhMethod(5,20,r_min,r_max)
-v_x_analytic = msg.TanhMethod(5,20,r_min,r_max)
+v_t_analytic = 0#msg.TanhMethod(1,20,r_min,r_max)
+v_x_analytic = 0#msg.TanhMethod(1,20,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -116,7 +133,7 @@ dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
 
-f      = msg.TanhMethod(5,10,r_min,r_max)
+f      = r**2#msg.TanhMethod(1,10,r_min,r_max)
 df     = f.diff(r)
 r_hat  = (r - r_min)/(r_max - r_min)
 f_min  = f.subs(r,r_min)
@@ -135,30 +152,37 @@ B_min  = (1 - sigma)*(
         +  (
             (r - sigma)/(1 - sigma))**3
         )
-
 B_max = (1 - sigma)* (-1*((r - sigma)/(1 - sigma))**2 +  ((r - sigma)/(1 - sigma))**3  )
+if r_min > 0:
+    psi_1 = (2/r)*M_t_analytic*v_t_analytic     -  ((kappa - 1)/r)*(M_t_analytic**2)*f - df
+    psi_2 = dv_r_dr_analytic + ci*gamma*v_x_analytic +(
+            (
+                (kappa + 1)/(2*r)
+                )*M_t_analytic**2
+            + 1/r
+            )*v_t_analytic
+elif r_min == 0:
+    psi_1 = 2*dM_t_dr_analytic*v_t_analytic - (2.0*(kappa - 1) *M_t_analytic*dM_t_dr_analytic*f) - df
+    psi_2 = dv_r_dr_analytic + ci*gamma*v_x_analytic +(
+            (
+                (kappa + 1))*M_t_analytic*dM_t_dr_analytic
+            )*v_t_analytic
+    #print('r_min = 0')
 
-psi_1 = (2/r)*M_t_analytic*v_t_analytic     -  ((kappa - 1)/r)*(M_t_analytic**2)*f - df
-
-psi_2 = dv_r_dr_analytic + ci*gamma*v_x_analytic +(
-        (
-            (kappa + 1)/(2*r)
-            )*M_t_analytic**2
-        + 1/r
-        )*v_t_analytic
-
-L = eta*((1-(gamma/ak))*M_total)*f
-
+L = eta*((1-(gamma/ak))*M_total) 
 del_dp_BC    = psi_1 + L*psi_2
+
+
+#print(del_dp_BC)
 
 del_dp_minBC = del_dp_BC.subs(
         {'r'    :r_min  ,
             'ak'   :ak     ,
             'eta'  :eta_min,
             'kappa':kappa  ,
-            'ci'   :ci                                      }
+            'ci'   : ci                                      }
         )
-
+#print(del_dp_minBC)
 del_dp_maxBC = del_dp_BC.subs(
         {'r'    :r_max  ,
             'ak'   :ak     ,
@@ -173,7 +197,6 @@ p_analytic = msm.diffModifiedManufacturedSolution(f           ,
         del_dp_maxBC,
         B_min       ,
         B_max)
-
 p_analytic = p_analytic.subs(
         {
             'ak':ak,
@@ -183,7 +206,7 @@ p_analytic = p_analytic.subs(
         )
 
 dp_dr_analytic   = p_analytic.diff(r)
-#
+##
 #sp_help.plotSymbolicEquation('Speed Of Sound', \
 #                     r               , \
 #                     'radius'        , \
@@ -192,7 +215,7 @@ dp_dr_analytic   = p_analytic.diff(r)
 #                     r_min           , \
 #                     r_max)
 #
-#plotSymbolicEquation('M_t'       , \
+#sp_help.plotSymbolicEquation('M_t'       , \
 #                     r           , \
 #                     'radius'    , \
 #                     M_t_analytic, \
@@ -200,21 +223,20 @@ dp_dr_analytic   = p_analytic.diff(r)
 #                     r_min       , \
 #                     r_max)
 #
-#plotSymbolicEquation('Mx'        , \
+#sp_help.plotSymbolicEquation('Mx'        , \
 #                     r           , \
 #                     'radius'    , \
 #                     M_x_analytic, \
 #                     'M_x'       , \
 #                     r_min       , \
 #                     r_max)
-#plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
-#plotSymbolicEquation('dvdr'  ,r,'radius',dv_r_dr_analytic,'v',r_min,r_max)
-#plotSymbolicEquation('vt'  ,r,'radius',v_t_analytic,'v',r_min,r_max)
-#plotSymbolicEquation('vx'  ,r,'radius',v_x_analytic,'v',r_min,r_max)
-#plotSymbolicEquation('p'   ,r,'radius',p_analytic,'p',r_min,r_max)
-#plotSymbolicEquation('dpdr',r,'radius',dp_dr_analytic,'dpdr',r_min,r_max)
-
-
+##sp_help.plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
+#sp_help.plotSymbolicEquation('dvdr'  ,r,'radius',dv_r_dr_analytic,'v',r_min,r_max)
+#sp_help.plotSymbolicEquation('vt'  ,r,'radius',v_t_analytic,'v',r_min,r_max)
+#sp_help.plotSymbolicEquation('vx'  ,r,'radius',v_x_analytic,'v',r_min,r_max)
+#sp_help.plotSymbolicEquation('p'   ,r,'radius',p_analytic,'p',r_min,r_max)
+#sp_help.plotSymbolicEquation('dpdr',r,'radius',dp_dr_analytic,'dpdr',r_min,r_max)
+#
 S = list(range(4))
 S[0] = -i*( ak/A - (m/r)*M_t - gamma*M_x)*v_r \
 - (2.0/r)*M_t*v_t + dp_dr + ( (kappa - 1.0)/r)*(M_t**2.0)*p
@@ -228,7 +250,6 @@ S[2] = -i*( ak/A - (m/r)*M_t - gamma*M_x )*v_x \
 S[3] = -i*( ak/A - (m/r)*M_t - gamma*M_x)*p \
         + dv_r_dr + ( ( (kappa + 1.0)/(2.0*r))*M_t**2.0 + 1.0/r)*v_r \
         + i*m*v_t/r + i*gamma*v_x
-
 S_at_r = list(range(4))
 S_at_r[0] = -i*( ak/A - (m*dM_t_dr) - gamma*M_x)*v_r \
         -2.0*dM_t_dr*v_t + dp_dr + 2*((kappa - 1.0))*(M_t*dM_t_dr)*p
@@ -430,7 +451,11 @@ fluctuation_fortran_file(
         v_t_analytic,
         v_x_analytic,
         p_analytic)
-
-LEE_f_file(S[0], S[1], S[2], S[3])
+#print(S,p_analytic)
+if r_min == 0:
+    r_min = sp.Symbol('r')
+    LEE_LH_f_file(S, S_at_r) #   use lhopital rule
+else: 
+    LEE_f_file(S, S_at_r)
 
 LEE_components_f_file(A_times_x,lambda_B_times_x)

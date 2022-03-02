@@ -197,8 +197,6 @@
         !
 
         CALL getMMSSourceTerms( &
-            gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
-            m     = azimuthalModeNumber     ,&
             r     = r                    ,&
             S_1   = S_1                  ,&
             S_2   = S_2                  ,&
@@ -207,22 +205,13 @@
 
 !
         DO i = 1,numberOfGridPoints
-            i1 = i + numberOfGridPoints
-            i2 = i + 2*numberOfGridPoints
-            i3 = i + 3*numberOfGridPoints
 
-            S_Expected(i)  = S_1(i)
-            S_Expected(i1) = S_2(i)
-            S_Expected(i2) = S_3(i)
-            S_Expected(i3) = S_4(i)
-        ENDDO
 
 !
 !            CALL getMMSSourceTermComponents( &
 !                gam   = axialWavenumberMMS           ,& !WE NEED TO extract modal data to get the axial wavenumber here
 !                i     = ci                      ,&
 !                ak    = frequency               ,&
-!                kappa = gam                     ,&
 !                m     = azimuthalModeNumber     ,&
 !                r     = r(i)                    ,&
 !                S_1   = S_1(i)                  ,&
@@ -262,6 +251,15 @@
 !                S_B43 = S_B43(i)                ,&
 !                S_B44 = S_B44(i)                )
 !
+            i1 = i + numberOfGridPoints
+            i2 = i + 2*numberOfGridPoints
+            i3 = i + 3*numberOfGridPoints
+
+            S_Expected(i)  = S_1(i)
+            S_Expected(i1) = S_2(i)
+            S_Expected(i2) = S_3(i)
+            S_Expected(i3) = S_4(i)
+        ENDDO
         S_error = ABS(S_Expected - S_actual)
 
         CALL getL2Norm(&

@@ -145,10 +145,8 @@ def LEE_components_f_file(A_times_x,lambda_B_times_x):
         S_B42, &
         S_B43, &
         S_B44
-        
-    
-        
-        ! Local variables
+
+! Local variables
     '''
     
     

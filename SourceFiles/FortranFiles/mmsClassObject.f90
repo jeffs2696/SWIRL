@@ -338,7 +338,8 @@ CONTAINS
         DO i = 1,numberOfIterations 
             IF (REAL(L2Array(i),KIND=rDef)< tolerance) THEN 
             ! WRITE(6,*) L2Array(i)
-                WRITE(0,*) 'The numerical solution is converged, the L2 norm has reached machine precision'
+                WRITE(0,*) 'A numerical solution has converged, the L2 norm < tolerance = 10e-11 on the ',i+1, 'iteration'
+
                 
             ELSE
             ENDIF
@@ -373,14 +374,13 @@ SUBROUTINE getROC_Complex(&
 
         numberOfIterations = SIZE(RateOfConvergence)
 
-        WRITE(0,*)  SIZE(RateOfConvergence)
 
         object%L2Array = L2Array
         object%RateOfConvergence = RateOfConvergence
 
         DO i = 1,numberOfIterations 
             IF (REAL(L2Array(i),KIND=rDef) < tolerance) THEN
-                WRITE(0,*) 'The numerical solution is converged, the L2 norm has reached machine precision'
+                WRITE(0,*) 'The numerical solution is converged, the L2 norm has reached machine precision on the ',i, 'iteration'
                 
             ELSE
             ENDIF

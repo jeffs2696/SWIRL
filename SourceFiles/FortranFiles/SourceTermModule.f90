@@ -5,7 +5,7 @@ MODULE SourceTermModule
     PRIVATE
     PUBLIC :: &
         getMMSSourceTerms ,&
-        getMMSSourceTermComponents ,&
+    !getMMSSourceTermComponents ,&
         getSoundSpeed     ,&
         getPerturbationVariables
 
@@ -13,10 +13,10 @@ MODULE SourceTermModule
         MODULE PROCEDURE SourceCalc
     END INTERFACE getMMSSourceTerms
 
-    INTERFACE getMMSSourceTermComponents
-        MODULE PROCEDURE SourceCalcComponents
-    END INTERFACE getMMSSourceTermComponents
-
+!    INTERFACE getMMSSourceTermComponents
+!        MODULE PROCEDURE SourceCalcComponents
+!    END INTERFACE getMMSSourceTermComponents
+!
     INTERFACE getSoundSpeed
         MODULE PROCEDURE CalcSoundSpeed
     END INTERFACE getSoundSpeed 
@@ -32,7 +32,7 @@ CONTAINS
 
     include 'SourceTermMMS.f90'
 
-    include 'SourceTermComponentsMMS.f90'
+!include 'SourceTermComponentsMMS.f90'
 
     include 'SoundSpeedMMS.f90'
 

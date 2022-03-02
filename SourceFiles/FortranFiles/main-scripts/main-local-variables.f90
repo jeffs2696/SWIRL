@@ -4,11 +4,11 @@
     FORMAT_PERTURB_HEADER      = "(A12,A12,A12,A12,A12)"
     FORMAT_SOURCE_TERMS        = "( I4, F16.12, F16.12,F16.12)" 
     FORMAT_SOURCE_TERMS_HEADER = "( A5, A17, A17,A17)" 
-    FORMAT_L2                  = "(I10,F20.16)" 
+    FORMAT_L2                  = "(I10,F20.12)" 
     FORMAT_L2_HEADER           = "(A10,A20)" 
-    FORMAT_ERROR               = "(F20.16,F20.16)" 
+    FORMAT_ERROR               = "(F20.12,F20.12)" 
     FORMAT_ERROR_HEADER        = "(A20,A20)" 
-    FORMAT_ROC                 = "(I10,F20.16)" 
+    FORMAT_ROC                 = "(I10,F20.12)" 
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
     ! inputs needed for SwirlClassType
