@@ -1,5 +1,6 @@
 import flow_class as fc
 import sympy as sp
+import logging
 
 from flow_class import FlowClass 
 from sympy import Symbol
@@ -16,8 +17,6 @@ flow_1 = fc.FlowClass(
         axial_mach = M_x,
         sound_speed = function)
 
-print(flow_1.get_tangential_mach())
 
-
-
+flow_1.get_tangential_mach()
 

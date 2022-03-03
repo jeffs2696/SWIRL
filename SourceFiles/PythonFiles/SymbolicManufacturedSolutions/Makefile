@@ -20,3 +20,4 @@ test:
 clean:
 	 rm -rf __pycache__
 	 rm -rf $(VENV)
+	 rm *.log

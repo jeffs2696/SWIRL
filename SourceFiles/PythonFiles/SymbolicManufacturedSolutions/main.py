@@ -63,7 +63,6 @@ kappa   = float(f_help.GetInputVariables(kappa_string)  [0])
 eta_min = float(f_help.GetInputVariables(eta_min_string)[0])
 eta_max = float(f_help.GetInputVariables(eta_max_string)[0])
 ak      = float(f_help.GetInputVariables(ak_string)     [0])
-print(ak)
 m       = float(f_help.GetInputVariables(m_string)     [0])
 gamma   = ak*r_max
 ci      = (-1.0)**0.5
@@ -73,7 +72,7 @@ sigma  = r_min
 # In[6]:
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-A_analytic        = msg.TanhMethod(1,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
+A_analytic        = sp.Symbol('0.0')#msg.TanhMethod(1,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
 M_x_analytic      = sp.Symbol('0.0')#msg.TanhMethod(1 ,50,r_min,r_max )
@@ -90,7 +89,7 @@ M_t_analytic = flow_1.get_tangential_mach()
 
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
 #print(M_t_analytic)
-f     =msg.TanhMethod(1,1,r_min,r_max)
+f     =sp.Symbol('0.0')#msg.TanhMethod(1,1,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -164,7 +163,7 @@ L = eta*((1-(gamma/ak))*M_total)
 del_dp_BC    = psi_1 + L*psi_2
 
 
-#print(del_dp_BC)
+print(del_dp_BC)
 
 del_dp_minBC = del_dp_BC.subs(
         {'r'    :r_min  ,
@@ -173,7 +172,6 @@ del_dp_minBC = del_dp_BC.subs(
             'kappa':kappa  ,
             'ci'   : ci                                      }
         )
-print('del_dp_minBC',del_dp_minBC)
 del_dp_maxBC = del_dp_BC.subs(
         {'r'    :r_max  ,
             'ak'   :ak     ,
@@ -195,7 +193,6 @@ p_analytic = p_analytic.subs(
             'ci':ci
             }
         )
-print(p_analytic)
 dp_dr_analytic   = p_analytic.diff(r)
 
 #sp_help.plotSymbolicEquation('Speed Of Sound', \
@@ -254,7 +251,7 @@ S_at_r[2] = -i*( ak/A - m*dM_t_dr - gamma*M_x)*v_x \
         i*gamma*p
 
 S_at_r[3] = -i*( ak/A - m*dM_t_dr - gamma*M_x)*p \
-        + dv_r_dr + (kappa + 1.0)*M_t*dM_t_dr*v_r + i*m*v_t/r + i*gamma*v_x
+        + dv_r_dr + (kappa + 1.0)*M_t*dM_t_dr*v_r +  i*gamma*v_x
 
 # Creating Matrix
 AA = sp.Matrix(sp.zeros(4,4))
@@ -399,7 +396,7 @@ for i,pr in enumerate(S):
                 }
             )
 
-    print('satr' ,S_at_r)
+    #print('satr' ,S_at_r)
 for i,pr in enumerate(A_times_x[:, 0]):
     for j,pp in enumerate(A_times_x[0, :]):
         A_times_x[i, j] = A_times_x[i, j].subs(
@@ -444,7 +441,6 @@ fluctuation_fortran_file(
         v_t_analytic,
         v_x_analytic,
         p_analytic)
-print(S_at_r)
 if r_min == 0:
     r_min = sp.Symbol('r')
     LEE_LH_f_file(S, S_at_r) #   use lhopital rule

@@ -1,0 +1,19 @@
+INFO: classes.flow_classes.flow_class: 1.58113883008419*(r*(0.000833333333333333 - 0.000833333333333333*tanh(0.00111111111111111*r - 0.00111111111111111)**2)/(0.375*tanh(0.00111111111111111*r - 0.00111111111111111) + 1)**1.0)**0.5
+INFO: classes.flow_classes.flow_class: 1.58113883008419*(r*(0.000833333333333333 - 0.000833333333333333*tanh(0.00111111111111111*r - 0.00111111111111111)**2)/(0.375*tanh(0.00111111111111111*r - 0.00111111111111111) + 1)**1.0)**0.5
+INFO: classes.flow_classes.flow_class: 1.58113883008419*(r*(0.000833333333333333 - 0.000833333333333333*tanh(0.00111111111111111*r - 0.00111111111111111)**2)/(0.375*tanh(0.00111111111111111*r - 0.00111111111111111) + 1)**1.0)**0.5
+INFO: classes.flow_classes.flow_class: 1.58113883008419*(r*(0.000833333333333333 - 0.000833333333333333*tanh(0.00111111111111111*r - 0.00111111111111111)**2)/(0.375*tanh(0.00111111111111111*r - 0.00111111111111111) + 1)**1.0)**0.5
+INFO: classes.flow_classes.flow_class: 1.58113883008419*(r*(0.00075 - 0.00075*tanh(0.001*r - 0.001)**2)/(0.375*tanh(0.001*r - 0.001) + 1)**1.0)**0.5
+INFO: classes.flow_classes.flow_class: 1.58113883008419*(r*(0.00075 - 0.00075*tanh(0.001*r - 0.001)**2)/(0.375*tanh(0.001*r - 0.001) + 1)**1.0)**0.5
+INFO: classes.flow_classes.flow_class: 4.47213595499958
+INFO: classes.flow_classes.flow_class: 3.16227766016838
+INFO: classes.flow_classes.flow_class: 3.16227766016838
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
