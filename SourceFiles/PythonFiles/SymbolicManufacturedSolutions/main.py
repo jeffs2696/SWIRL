@@ -73,19 +73,10 @@ sigma  = r_min
 # In[6]:
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-A_analytic        = msg.TanhMethod(6,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
-
-dA_analytic_dr    = sp.diff(A_analytic,r)
-dA_analytic_sq_dr = sp.diff(A_analytic**2.0,r)
-
-M_t_analytic      = (
-        r/(
-            (kappa - 1.0)*A_analytic**2.0
-            )*dA_analytic_sq_dr
-        )**0.5
+A_analytic        = msg.TanhMethod(1,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = sp.Symbol('0.0')#1*r/2#msg.TanhMethod(1 ,50,r_min,r_max )
+M_x_analytic      = sp.Symbol('0.0')#msg.TanhMethod(1 ,50,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -94,14 +85,12 @@ flow_1 = fc.FlowClass(
         sound_speed = A_analytic
         )
 
-M_T_test  = flow_1.get_tangential_mach()
-print(M_T_test)
-print(M_t_analytic == M_T_test)
+M_t_analytic = flow_1.get_tangential_mach()
 
 
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
 #print(M_t_analytic)
-f     = sp.Symbol('0.0')#msg.TanhMethod(1,1,r_min,r_max)
+f     =msg.TanhMethod(1,1,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -135,7 +124,7 @@ dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
 
-f      = r**2#msg.TanhMethod(1,10,r_min,r_max)
+f      = 1.0*r#msg.TanhMethod(1,10,r_min,r_max)
 df     = f.diff(r)
 r_hat  = (r - r_min)/(r_max - r_min)
 f_min  = f.subs(r,r_min)
@@ -184,7 +173,7 @@ del_dp_minBC = del_dp_BC.subs(
             'kappa':kappa  ,
             'ci'   : ci                                      }
         )
-#print(del_dp_minBC)
+print('del_dp_minBC',del_dp_minBC)
 del_dp_maxBC = del_dp_BC.subs(
         {'r'    :r_max  ,
             'ak'   :ak     ,
@@ -206,9 +195,9 @@ p_analytic = p_analytic.subs(
             'ci':ci
             }
         )
-
+print(p_analytic)
 dp_dr_analytic   = p_analytic.diff(r)
-##
+
 #sp_help.plotSymbolicEquation('Speed Of Sound', \
 #                     r               , \
 #                     'radius'        , \
@@ -232,7 +221,7 @@ dp_dr_analytic   = p_analytic.diff(r)
 #                     'M_x'       , \
 #                     r_min       , \
 #                     r_max)
-##sp_help.plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
+#sp_help.plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
 #sp_help.plotSymbolicEquation('dvdr'  ,r,'radius',dv_r_dr_analytic,'v',r_min,r_max)
 #sp_help.plotSymbolicEquation('vt'  ,r,'radius',v_t_analytic,'v',r_min,r_max)
 #sp_help.plotSymbolicEquation('vx'  ,r,'radius',v_x_analytic,'v',r_min,r_max)
@@ -253,11 +242,12 @@ S[3] = -i*( ak/A - (m/r)*M_t - gamma*M_x)*p \
         + dv_r_dr + ( ( (kappa + 1.0)/(2.0*r))*M_t**2.0 + 1.0/r)*v_r \
         + i*m*v_t/r + i*gamma*v_x
 S_at_r = list(range(4))
+
 S_at_r[0] = -i*( ak/A - (m*dM_t_dr) - gamma*M_x)*v_r \
         -2.0*dM_t_dr*v_t + dp_dr + 2*((kappa - 1.0))*(M_t*dM_t_dr)*p
 
 S_at_r[1] = -i*(ak/A - m*dM_t_dr - gamma*M_x)*v_t \
-        + ( dM_t_dr + dM_t_dr + ((kappa - 1.0)/(2.0*r))*M_t**3.0)*v_r
+        + ( dM_t_dr + dM_t_dr*(1 + 3.0*((kappa - 1.0)/(2.0))*M_t**2.0))*v_r
 
 S_at_r[2] = -i*( ak/A - m*dM_t_dr - gamma*M_x)*v_x \
         + (dM_x_dr + ((kappa - 1.0)/2.0)*(dM_x_dr*M_t+2*M_x*dM_t_dr))*v_r +\
@@ -409,6 +399,7 @@ for i,pr in enumerate(S):
                 }
             )
 
+    print('satr' ,S_at_r)
 for i,pr in enumerate(A_times_x[:, 0]):
     for j,pp in enumerate(A_times_x[0, :]):
         A_times_x[i, j] = A_times_x[i, j].subs(
@@ -453,7 +444,7 @@ fluctuation_fortran_file(
         v_t_analytic,
         v_x_analytic,
         p_analytic)
-#print(S,p_analytic)
+print(S_at_r)
 if r_min == 0:
     r_min = sp.Symbol('r')
     LEE_LH_f_file(S, S_at_r) #   use lhopital rule
