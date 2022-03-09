@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  22 FEB 2022 11:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  9 MAR 2022 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -554,33 +554,37 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/ROC.tex
 Package pgfplots info on input line 28: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
-Package pgfplots info on input line 68: Using 'lua backend=false' for axis: ymo
-de=log unsupported (yet).
-)
 
-LaTeX Warning: Float too large for page by 38.47974pt on input line 43.
+NOTE: coordinate (9,-0) has been dropped because it is unbounded (in y). (see a
+lso unbounded coords=jump). 
+NOTE: coordinate (13,-0) has been dropped because it is unbounded (in y). (see 
+also unbounded coords=jump). 
+NOTE: coordinate (21,-0) has been dropped because it is unbounded (in y). (see 
+also unbounded coords=jump). 
+NOTE: coordinate (37,0) has been dropped because it is unbounded (in y). (see a
+lso unbounded coords=jump). 
+NOTE: coordinate (69,0) has been dropped because it is unbounded (in y). (see a
+lso unbounded coords=jump). 
+NOTE: coordinate (133,0) has been dropped because it is unbounded (in y). (see 
+also unbounded coords=jump). 
 
-(./tex-outputs/SourceTermData.tex) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pd
-ftex.map}] [2] [3] [4] [5] (./plotReport.aux) ) 
+Package pgfplots Warning: the current plot has no coordinates (or all have been
+ filtered away) on input line 37.
+
+ [warning /pgfplots/warning/plot without coordinates]
+Missing character: There is no ; in font nullfont!
+! Missing } inserted.
+<inserted text> 
+                }
+l.64 ]
+       
 Here is how much of TeX's memory you used:
- 22510 strings out of 481239
- 604979 string characters out of 5920378
- 1467180 words of memory out of 5000000
- 37428 multiletter control sequences out of 15000+600000
+ 22472 strings out of 481239
+ 604182 string characters out of 5920378
+ 1331154 words of memory out of 5000000
+ 37397 multiletter control sequences out of 15000+600000
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,19n,136p,741b,2495s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb>
-Output written on plotReport.pdf (5 pages, 115750 bytes).
-PDF statistics:
- 47 PDF objects out of 1000 (max. 8388607)
- 33 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 78i,19n,136p,741b,2478s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+!  ==> Fatal error occurred, no output PDF file produced!

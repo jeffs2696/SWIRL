@@ -133,16 +133,16 @@
 ! input variables:
     REAL(KIND = rDef), PARAMETER ::&
         gam    = 1.40_rDef  ,&
-        r_min  = 0.0_rDef  ,&
+        r_min  = 0.10_rDef  ,&
         r_max  = 1.000_rDef  
 
     INTEGER, PARAMETER :: &
-        numberOfIterations = 7!, & azimuthalModeNumber = 0 ! mode order
+        numberOfIterations = 7!, & azimuthalModeNumber = 2 ! mode order
 
     COMPLEX(KIND=rDef), PARAMETER :: &
-        hubAdmittance   = CMPLX(1.0,0,rDef)   , &
-        ductAdmittance  = CMPLX(0.10,0,rDef) , &
-        frequency       = CMPLX(10,0,rDef)
+        hubAdmittance   = CMPLX(0.0,0,rDef)   , &
+        ductAdmittance  = CMPLX(0.0,0.0,rDef) , &
+        frequency       = CMPLX(-1,0,rDef)
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
         swirlClassObj

@@ -25,8 +25,7 @@
 \title{ Something About Swirling Modes
        \protect\\ with Asymmetric Price Information and No Goods}
 
-\author{Elmer J.~Fudd}
-
+\author{Jeffrey Severino} 
 %--------+----------------------------------------------------------+
 %        |  \copyrightpage{}                            (REQUIRED)  |
 %        |                                                          |
@@ -209,7 +208,8 @@
 %        +----------------------------------------------------------+
 
 \begin{dedication}
-\noindent [Insert your dedication here]
+\noindent For my friends and family, who have always believed in my potential 
+when I did not believe it myself. 
 \end{dedication}
 
 %--------+----------------------------------------------------------+
@@ -223,7 +223,23 @@
 %        +----------------------------------------------------------+
 
 \begin{acknowledgments}
-\noindent [Insert your acknowledgements here]
+\noindent This work is supported by the NASa Advanced Air Transport Technologies
+(AATT) Project. I would like to thank Edmane Envia(?) of the NASA Glenn Research Center, who
+is the technical monitor of this work. 
+A very special thanks goes to Dr. Ray Hixon who supervised and guided me through
+out my course work and Master's Thesis. His rigor and tenacity in his profession has 
+been the model example for an aspiring aeroacoustician. 
+I would like to also thank all of my committee members, Dr. Chunhua Sheng and 
+Dr. Sorin Cioc. Their contributions have been instrumental. Thanks to Dr. Clifford
+Brown for his programatic insights. 
+
+I would also like to thank my focus group peers, Zaid Sabri, and Matthew Gibbons 
+for their patience and support over the years. I wish them the best in all of 
+their endevours.
+I would also like to thank Copper Moon Coffee Shop for the endless supply of caffine 
+and conversations.
+
+
 \end{acknowledgments}
 
 %--------+----------------------------------------------------------+
@@ -334,27 +350,6 @@
 %        |          -) see "Read_Me_First_(v12).pdf" for details.   |
 %        +----------------------------------------------------------+
 
-\begin{listofsymbols}
-
- \emblem{$\ddagger$}{the degree to which the flayrod has gone out of
-                    skew on tredel}
-\emblem{$\triangle$}{the ratio of the M2 monetary aggregate to the
-                    Monetary Base}
-
-       \emblemskip
-
-  \emblem{$\alpha$}{angle of rotation around internal rotation axis}
-   \emblem{$\beta$}{the number of people named ``Bob''}
-
-       \emblemskip
-
-         \emblem{Q}{Tobin's q; the ratio of the market value of
-                    installed capital to the replacement cost of
-                    capital}
-         \emblem{Y}{Gross Domestic Product (adjusted for inflation)}
-
-\end{listofsymbols}
-
 %--------+----------------------------------------------------------+
 %        |  Preface Environment                         (OPTIONAL)  |
 %        |                                                          |
@@ -398,52 +393,22 @@
 %        |  Leslie Lamport's "LaTeX: A Document Preparation         |
 %        |  System." Addison Wesley: Reading Massachusetts, 1985.   |
 %        +----------------------------------------------------------+
-
-\chapter{Insert the Heading to Chapter 1}
-\input{Chapter-3-Theory-Aerodynamic-Models/SWIRLDocumentation_JS.tex}
+\chapter{Chapter 1: Introduction}
+\chapter{Chapter 2: Literature Review}
+\chapter{Chapter 3: Theory}
+\include{Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical}
+\include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model}
+\include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
+\include{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations}
 % \input{Chapter1/meanFlowMMS/meanFlowMMSBody.tex}
-[ Insert your text to chapter 1 here.  A pretend example of a silly
-table is provided below (i.e., Table~\ref{SILLY}).~]
 
-%        +----------------------------------------------------------+
-%        |                                                          |
-%        |  IMPORTANT:                                              |
-%        |                                                          |
-%        |  Delete the following material.  I included this         |
-%        |  material here as silly table to provide an example in   |
-%        |  the List of Tables page for this template file.         |
-%        |                                                          |
-%        +----------------------------------------------------------+
+\chapter{Chapter 4: Numerical Models}
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction}
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods}
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory}
+%\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure}
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy}
 
-     \vfill
-     %\begin{table}[ht]
-     %\caption{A silly glossary for research reports.\label{SILLY}}
-     %\begin{center}
-     %\begin{tabular}{p{2.75in}|p{2.5in}}
-     % \rule[-0.5em]{0pt}{1.75em} \bf When Professors write \ldots
-     % & \bf they REALLY mean \ldots \\ \hline\hline
-     % %--------+------------------------------------
-     % \rule[-0.5em]{0pt}{1.75em} Typical results are shown \ldots
-     % & The best results are shown \ldots \\ \hline
-     % %--------+------------------------------------
-     % \rule[-0.5em]{0pt}{1.75em} It is generally believed that
-     % \ldots & A couple of other guys think so too  \\ \hline
-     % %--------+------------------------------------
-     % \rule[-0.5em]{0pt}{1.75em}Thanks to Al K.~Seltzer for
-     % assistance and to I.P. Daly for valuable discussions &
-     % Seltzer did the work and Daly explained
-     % what it meant \\
-     %\end{tabular}
-     %\end{center}
-     %\end{table}
-     \vfill
-
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-\chapter{Insert the Heading to Chapter 2}
 
 [~Insert your text to chapter 2 here. A pretend example of a silly
 figure is provided below (i.e., Figure~\ref{DOWD}).~]
@@ -611,9 +576,9 @@ figure is provided below (i.e., Figure~\ref{DOWD}).~]
 
 \appendix
 
-\chapter{Insert the Heading to Appendix A}
-
-[Insert text to Appendix A (if appendix is needed)]
+\chapter{Chapter 3 Appendix}
+\include{Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation}
+\include{Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships}
 
 %====================================================================
 

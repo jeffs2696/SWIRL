@@ -1,4 +1,9 @@
+# How to run
 
+make MMS
+make all 
+
+# Notes 
 
 Important flags:
 

@@ -1,14 +1,34 @@
 \contentsline {chapter}{Abstract}{iii}%
 \contentsline {chapter}{Acknowledgments}{v}%
 \contentsline {chapter}{Contents}{vi}%
-\contentsline {chapter}{List of Tables}{vii}%
-\contentsline {chapter}{List of Figures}{viii}%
-\contentsline {chapter}{List of Symbols}{ix}%
-\contentsline {chapter}{List of Abbreviations}{x}%
-\contentsline {chapter}{List of Symbols}{xi}%
+\contentsline {chapter}{List of Tables}{viii}%
+\contentsline {chapter}{List of Figures}{ix}%
+\contentsline {chapter}{List of Symbols}{x}%
+\contentsline {chapter}{List of Abbreviations}{xi}%
 \contentsline {chapter}{Preface}{xii}%
-\contentsline {chapter}{\numberline {1}Insert the Heading to Chapter 1}{1}%
-\contentsline {chapter}{\numberline {2}Insert the Heading to Chapter 2}{2}%
-\contentsline {chapter}{References}{3}%
-\contentsline {chapter}{\numberline {A}Insert the Heading to Appendix A}{5}%
-\contentsline {chapter}{\numberline {B}Insert the Heading to Appendix B}{6}%
+\contentsline {chapter}{\numberline {1}Chapter 1: Introduction}{1}%
+\contentsline {chapter}{\numberline {2}Chapter 2: Literature Review}{2}%
+\contentsline {chapter}{\numberline {3}Chapter 3: Theory}{3}%
+\contentsline {section}{\numberline {3.1}Divergence operations in new coordinate systems}{4}%
+\contentsline {subsection}{\numberline {3.1.1}Setting up SWIRL's Aerodynamic Model}{12}%
+\contentsline {section}{\numberline {3.2}Applying model to various flows}{13}%
+\contentsline {subsection}{\numberline {3.2.1}Axial Shear Flow}{13}%
+\contentsline {section}{\numberline {3.3}Accounting for solid body swirl}{14}%
+\contentsline {subsection}{\numberline {3.3.1}Linearizing the governing equations}{17}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}Linearizing Conservation of Mass}{17}%
+\contentsline {subsubsection}{\numberline {3.3.1.2}Linearizing the Conservation of Momentum\\ in the \textit {r} direction}{20}%
+\contentsline {subsubsection}{\numberline {3.3.1.3}Linearizing the Conservation of Momentum\\ in the \textit {$\theta $} direction}{22}%
+\contentsline {subsubsection}{\numberline {3.3.1.4}Linearizing the Conservation of Momentum\\ in the \textit {x} direction}{24}%
+\contentsline {subsubsection}{\numberline {3.3.1.5}Linearizing the Energy Equation}{26}%
+\contentsline {section}{\numberline {3.4}Substituting Pertubation Variables}{28}%
+\contentsline {section}{\numberline {3.5}Non-Dimensionalization}{33}%
+\contentsline {chapter}{\numberline {4}Chapter 4: Numerical Models}{39}%
+\contentsline {section}{\numberline {4.1}Introduction}{40}%
+\contentsline {section}{\numberline {4.2}Methods}{41}%
+\contentsline {subsection}{\numberline {4.2.1}Theory}{42}%
+\contentsline {subsection}{\numberline {4.2.2}Calculation of Observed Order-of-Accuracy}{46}%
+\contentsline {chapter}{References}{50}%
+\contentsline {chapter}{\numberline {A}Chapter 3 Appendix}{51}%
+\contentsline {section}{\numberline {A.1}Appendix A: Speed of Sound}{52}%
+\contentsline {section}{\numberline {A.2}Appendix B: Isentropic Waves}{56}%
+\contentsline {chapter}{\numberline {B}Insert the Heading to Appendix B}{58}%

@@ -27,9 +27,9 @@
     
     DO i = 1,numberOfGridPoints
     
-            SoundSpeedExpected(i) = 0.0
+            SoundSpeedExpected(i) = 1.0
         thetaMachData(i)      = 0
-        axialMachData(i)      = 0.0
+        axialMachData(i)      = 0.5
 
     
     END DO

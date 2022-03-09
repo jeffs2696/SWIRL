@@ -220,7 +220,7 @@ all:  $(OBJECTS)
 
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
-	#@(cd $(EXECUTABLE_LOCATION); (make plot ))
+	@(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:
 	cd PythonFiles/SymbolicManufacturedSolutions && make

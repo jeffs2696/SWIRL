@@ -72,10 +72,10 @@ sigma  = r_min
 # In[6]:
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-A_analytic        = sp.Symbol('0.0')#msg.TanhMethod(1,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
+A_analytic        = sp.Symbol('1.0')#msg.TanhMethod(1,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = sp.Symbol('0.0')#msg.TanhMethod(1 ,50,r_min,r_max )
+M_x_analytic      = sp.Symbol('0.5')#msg.TanhMethod(1 ,50,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,

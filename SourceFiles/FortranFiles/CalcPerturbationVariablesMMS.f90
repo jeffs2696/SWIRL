@@ -18,11 +18,13 @@
         
         numberOfGridPoints = SIZE(vR)
           DO i = 1, numberOfGridPoints
-    vR(i) =-0.0*(-2.0d0*r(i) **3 + 3.0d0*r(i) **2) - 0.0*(2.0d0*r(i) **3 - 3.0d0*r(i) **2 + 1) + &
-      0.0
+    vR(i) =-0.0*(-2.74348422496571d0*(r(i)  - 0.1d0)**3 + 3.7037037037037d0*(r(i)  - 0.1d0) &
+      **2) - 0.0*(2.74348422496571d0*(r(i)  - 0.1d0)**3 - 3.7037037037037d0 &
+      *(r(i)  - 0.1d0)**2 + 1) + 0.0
 vTh(i)=0
 vX(i) =0
-Pr(i) =-2.0d0*r(i) **3 + 3.0d0*r(i) **2
+Pr(i) =-2.46913580246914d0*(r(i)  - 0.1d0)**3 + 3.33333333333333d0*(r(i)  - 0.1d0)**2 + &
+      0.1d0
 
           END DO
         END SUBROUTINE CalcPerturbationVariables
