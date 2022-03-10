@@ -1,0 +1,72 @@
+MODULE MPI_ALLREDUCEDblePrecCall
+
+  USE IncludeMPIImplementation
+
+  ! this module actually makes the F77 MPI_ALLREDUCE call for character data
+
+  IMPLICIT NONE
+  PRIVATE
+  PUBLIC :: MPIALLREDUCEDblePrec
+
+CONTAINS
+
+  SUBROUTINE MPIALLREDUCEDblePrec(SENDBUF, RECVBUF, COUNT, DATATYPE, OPER, &
+                                  COMM, IERROR)
+    DOUBLE PRECISION, DIMENSION(:), INTENT(IN)  :: SENDBUF
+    DOUBLE PRECISION, DIMENSION(:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: COUNT
+    INTEGER, INTENT(IN)  :: DATATYPE
+    INTEGER, INTENT(IN)  :: OPER
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPI_ALLREDUCE(SENDBUF, RECVBUF, COUNT, DATATYPE, OPER, &
+                       COMM, IERROR)
+
+    IF (IERROR == MPI_SUCCESS) THEN
+      IERROR = 0
+    END IF
+
+    RETURN
+  END SUBROUTINE MPIALLREDUCEDblePrec
+
+END MODULE MPI_ALLREDUCEDblePrecCall
+
+MODULE MPI_ALLREDUCEDblePrecModule
+  USE MPI_ALLREDUCEDblePrecCall
+
+  ! this module is the wrapper to make the new F95 MPI_ALLREDUCE
+  !  call _look like_ the standard F77 call.
+
+  IMPLICIT NONE
+  PRIVATE
+  PUBLIC :: MPI_ALLREDUCE
+
+  INTERFACE MPI_ALLREDUCE
+    MODULE PROCEDURE MPI_ALLREDUCEDblePrec
+  END INTERFACE
+
+CONTAINS
+
+  SUBROUTINE MPI_ALLREDUCEDblePrec(SENDBUF, RECVBUF, COUNT, DATATYPE, OPER, &
+                                   COMM, IERROR)
+    DOUBLE PRECISION, DIMENSION(:), INTENT(IN)  :: SENDBUF
+    DOUBLE PRECISION, DIMENSION(:), INTENT(OUT) :: RECVBUF
+    INTEGER, INTENT(IN)  :: COUNT
+    INTEGER, INTENT(IN)  :: DATATYPE
+    INTEGER, INTENT(IN)  :: OPER
+    INTEGER, INTENT(IN)  :: COMM
+    INTEGER, INTENT(OUT) :: IERROR
+
+    CALL MPIALLREDUCEDblePrec(SENDBUF   = SENDBUF,   &
+                              RECVBUF   = RECVBUF,   &
+                              COUNT     = COUNT,     &
+                              DATATYPE  = DATATYPE,  &
+                              OPER      = OPER,      &
+                              COMM      = COMM,      &
+                              IERROR    = IERROR)
+
+    RETURN
+  END SUBROUTINE MPI_ALLREDUCEDblePrec
+
+END MODULE MPI_ALLREDUCEDblePrecModule

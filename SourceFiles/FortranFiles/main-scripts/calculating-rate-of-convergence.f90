@@ -1,6 +1,7 @@
 
     CALL getRateOfConvergence(&
         object            = SoundSpeedMMS_ClassObj , &
+        ExpectedRateOfConvergence = ExpectedRateOfConvergenceSoundSpeed   , &
         RateOfConvergence = RateOfConvergence1 , &
         L2Array           = SoundSpeedL2Array)
 

@@ -20,8 +20,8 @@ MODULE swirlClassObject
         CreateObject   ,&
         DestroyObject  ,&
         SwirlClassType ,&
-        GetMeanFlowData, & 
-        FindResidualData, & 
+        GetMeanFlowData, &
+        FindResidualData, &
         GetModeData
 
 ! Interfaces
@@ -48,14 +48,12 @@ MODULE swirlClassObject
         MODULE PROCEDURE SortModeData
     END INTERFACE GetSortedModeData
 
-! Deallocates any arrays
     INTERFACE DestroyObject
         MODULE PROCEDURE DestroySwirlClassObject
     END INTERFACE DestroyObject
 
     INTEGER, PARAMETER:: rDef = REAL64
 
-! Type Declaration and necessary variables
     TYPE SwirlClassType
         PRIVATE  ! prevents user from accessing any of the following variables
 
@@ -94,7 +92,7 @@ MODULE swirlClassObject
         COMPLEX(KIND = REAL64) ::&
             frequency        , &
             hubLinerAdmittance, &
-            ductLinerAdmittance 
+            ductLinerAdmittance
 
         COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE ::&
             aa, bb,S_aa,S_bb
@@ -121,218 +119,218 @@ MODULE swirlClassObject
 ! Local Variable Declaration
 
     LOGICAL :: debug = .FALSE. ! turns on/off printing to console
-    !CHARACTER :: &
-! jobvl = 'N' ,& ! needed for zggev
-! jobvr = 'V'    !
-!
+    CHARACTER :: &
+        jobvl = 'N' ,& ! needed for zggev
+     jobvr = 'V'    !
+    
 ! additional variables, implicitly defined in the original code
 
-        INTEGER ::&
-!        ir      = 2,  & ! axial mach number "knob" to switch between analytical solutions
-!        is      = 5,  & ! tangential mach number
-    PrintToggle = 0 ! set this variable to 6 to see progress in terminal
+    INTEGER ::&
+        ir      = 2,  & ! axial mach number "knob" to switch between analytical solutions
+        is      = 5,  & ! tangential mach number
+        PrintToggle = 0 ! set this variable to 6 to see progress in terminal
 
 ! JS: added i and j to zero out matricies
 !        object%slope  = 0.00_rDef
 
-    CONTAINS
+CONTAINS
 
-        SUBROUTINE CreateSwirlClassObject(&
-            object          , &
-            azimuthalMode   , &
-            np              , &
-            sig             , &
-            AxialMachData   , &
-            ThetaMachData   , &
-            ak              , &
-            etah            , &
-            etad            , &
-            ifdff           )
+    SUBROUTINE CreateSwirlClassObject(&
+        object          , &
+        azimuthalMode   , &
+        np              , &
+        sig             , &
+        AxialMachData   , &
+        ThetaMachData   , &
+        ak              , &
+        etah            , &
+        etad            , &
+        ifdff           )
 
-            TYPE(SwirlClassType), INTENT(INOUT) ::&
-                object
+        TYPE(SwirlClassType), INTENT(INOUT) ::&
+            object
 
-            INTEGER, INTENT(INOUT) :: &
-                ifdff,   &
-                azimuthalMode, &
-                np
+        INTEGER, INTENT(INOUT) :: &
+            ifdff,   &
+            azimuthalMode, &
+            np
 
-            REAL(KIND = REAL64), INTENT(INOUT) :: &
-                sig
+        REAL(KIND = REAL64), INTENT(INOUT) :: &
+            sig
 
-            REAL(KIND = REAL64), DIMENSION(:), INTENT(INOUT) :: &
-                AxialMachData, &
-                ThetaMachData
+        REAL(KIND = REAL64), DIMENSION(:), INTENT(INOUT) :: &
+            AxialMachData, &
+            ThetaMachData
 
-! Local variables            
-            INTEGER ::&
-                np4
+! Local variables
+        INTEGER ::&
+            np4
 
-            REAL(KIND = REAL64) :: &
-                ed2 ,   &
-                ed4
+        REAL(KIND = REAL64) :: &
+            ed2 ,   &
+            ed4
 
-            COMPLEX(KIND = REAL64), INTENT(IN) ::&
-                etah, etad, ak
+        COMPLEX(KIND = REAL64), INTENT(IN) ::&
+            etah, etad, ak
 
-            object%isInitialized = .TRUE.
+        object%isInitialized = .TRUE.
 
-            IF (object%isInitialized) THEN
+        IF (object%isInitialized) THEN
 ! Set user input to the object 'properties';
-                ed2 = 0.0_rDef
-                ed4 = 0.0_rDef
-                object%azimuthalMode        = azimuthalMode
-                object%numberOfRadialPoints = np
-                object%hubTipRatio          = sig
-                object%frequency            = ak
-                object%hubLinerAdmittance   = etah
-                object%ductLinerAdmittance  = etad
-                object%FiniteDifferenceFlag = ifdff
-                object%secondOrderSmoother  = ed2
-                object%fourthOrderSmoother  = ed4
-                object%rmx                  = AxialMachData
-                object%rmt                  = ThetaMachData
-                np4                         = object%numberOfRadialPoints*4
+            ed2 = 0.0_rDef
+            ed4 = 0.0_rDef
+            object%azimuthalMode        = azimuthalMode
+            object%numberOfRadialPoints = np
+            object%hubTipRatio          = sig
+            object%frequency            = ak
+            object%hubLinerAdmittance   = etah
+            object%ductLinerAdmittance  = etad
+            object%FiniteDifferenceFlag = ifdff
+            object%secondOrderSmoother  = ed2
+            object%fourthOrderSmoother  = ed4
+            object%rmx                  = AxialMachData
+            object%rmt                  = ThetaMachData
+            np4                         = object%numberOfRadialPoints*4
 
 
 ! NEW: allocate data arrays
 !
 
-                ALLOCATE(&
-                    object%dl1(object%numberOfRadialPoints,object%numberOfRadialPoints),   &
-                    object%y(object%numberOfRadialPoints),        &
-                    object%rwork(8*np4), &
-                    object%r(object%numberOfRadialPoints),        &
-                    object%drm(object%numberOfRadialPoints),      &
-                    object%drt(object%numberOfRadialPoints),      &
-                    object%snd(object%numberOfRadialPoints),      &
-                    object%dsn(object%numberOfRadialPoints),      &
-                    object%rho(object%numberOfRadialPoints),      &
-                    object%akap(np4),    & ! was np in code, but may go to np4 in analysisModule
-                    object%alpha(np4),   &
-                    object%beta(np4),    &
-                    object%work(2*np4),  &
-                    object%S_MMS(np4)        ,&
-                    object%vph(np4),     &
-                    object%wvn(np4),     &
-                    object%aa(np4,np4),  &
-                    object%S_aa(np4,np4),  &
-                    object%aa_before(np4,np4),  &
-                    object%bb(np4,np4),  &
-                    object%S_bb(np4,np4),  &
-                    object%bb_before(np4,np4),  &
-                    object%vl(np4,np4),  &
-                    object%vr(np4,np4))
+            ALLOCATE(&
+                object%dl1(object%numberOfRadialPoints,object%numberOfRadialPoints),   &
+                object%y(object%numberOfRadialPoints),        &
+                object%rwork(8*np4), &
+                object%r(object%numberOfRadialPoints),        &
+                object%drm(object%numberOfRadialPoints),      &
+                object%drt(object%numberOfRadialPoints),      &
+                object%snd(object%numberOfRadialPoints),      &
+                object%dsn(object%numberOfRadialPoints),      &
+                object%rho(object%numberOfRadialPoints),      &
+                object%akap(np4),    & ! was np in code, but may go to np4 in analysisModule
+                object%alpha(np4),   &
+                object%beta(np4),    &
+                object%work(2*np4),  &
+                object%S_MMS(np4)        ,&
+                object%vph(np4),     &
+                object%wvn(np4),     &
+                object%aa(np4,np4),  &
+                object%S_aa(np4,np4),  &
+                object%aa_before(np4,np4),  &
+                object%bb(np4,np4),  &
+                object%S_bb(np4,np4),  &
+                object%bb_before(np4,np4),  &
+                object%vl(np4,np4),  &
+                object%vr(np4,np4))
 
 
-                ! Set up Gauss-Lobatto grid and compute Chebyshev derivative matrix.
-                ! if (is .ne. -1) then
+            ! Set up Gauss-Lobatto grid and compute Chebyshev derivative matrix.
+            ! if (is .ne. -1) then
 
-                if (object%FiniteDifferenceFlag.eq.0) then
-                    CALL grid(&
-                        np  = object%numberOfRadialPoints,  &
-                        sig = object%hubTipRatio, &
-                        x   = object%y,   &
-                        r   = object%r)
+            if (object%FiniteDifferenceFlag.eq.0) then
+                CALL grid(&
+                    np  = object%numberOfRadialPoints,  &
+                    sig = object%hubTipRatio, &
+                    x   = object%y,   &
+                    r   = object%r)
 
-                    CALL derivs(&
-                        np  = object%numberOfRadialPoints,  &
-                        sig = object%hubTipRatio, &
-                        dl1 = object%dl1, &
-                        ed2 = object%secondOrderSmoother, &
-                        ed4 = object%fourthOrderSmoother)
-                else
-
-                    IF (debug) THEN
-                        WRITE(PrintToggle,*) 'Entering fdgrid CALL'
-                    ELSE
-                    ENDIF
-
-
-                    ! Finite Difference grid
-                    CALL fdgrid(&
-                        np  = object%numberOfRadialPoints,  &
-                        sig = object%hubTipRatio, &
-                        x   = object%y,   &
-                        r   = object%r)
-
-                    IF (debug) THEN
-                        WRITE(PrintToggle,*) 'Leaving fdgrid CALL'
-                    ELSE
-                    ENDIF
-
-                    IF (debug) THEN
-                        WRITE(PrintToggle,*) 'Entering fdrivs CALL'
-                    ELSE
-                    ENDIF
-
-
-                    CALL fdrivs(&
-                        np     = object%numberOfRadialPoints,    &
-                        sig    = object%hubTipRatio,   &
-                        dl1    = object%dl1,   &
-                        iorder = object%FiniteDifferenceFlag, &
-                        ed2    = object%secondOrderSmoother,   &
-                        ed4    = object%fourthOrderSmoother)
-                    IF (debug) THEN
-                        WRITE(PrintToggle,*) 'Leaving fdrivs CALL'
-                    ELSE
-                    ENDIF
-
-
-                endif
+                CALL derivs(&
+                    np  = object%numberOfRadialPoints,  &
+                    sig = object%hubTipRatio, &
+                    dl1 = object%dl1, &
+                    ed2 = object%secondOrderSmoother, &
+                    ed4 = object%fourthOrderSmoother)
+            else
 
                 IF (debug) THEN
-                    WRITE(PrintToggle,*) 'Entering smachAndSndspd CALL'
+                    WRITE(PrintToggle,*) 'Entering fdgrid CALL'
                 ELSE
                 ENDIF
 
-                CALL smachAndSndspd(&
-                    npts  = object%numberOfRadialPoints,    &
-                    rr    = object%r,     &
-                    rmsw  = object%rmt,   &
-                    rmswp = object%drt,   &
-                    snd   = object%snd,   &
-                    dsn   = object%dsn,   &
-                    dd    = object%dl1   )
+
+                ! Finite Difference grid
+                CALL fdgrid(&
+                    np  = object%numberOfRadialPoints,  &
+                    sig = object%hubTipRatio, &
+                    x   = object%y,   &
+                    r   = object%r)
 
                 IF (debug) THEN
-                    WRITE(PrintToggle,*) 'Leaving smachAndSndspd CALL'
+                    WRITE(PrintToggle,*) 'Leaving fdgrid CALL'
                 ELSE
                 ENDIF
 
                 IF (debug) THEN
-                    WRITE(PrintToggle,*) 'Entering rmach CALL'
+                    WRITE(PrintToggle,*) 'Entering fdrivs CALL'
                 ELSE
                 ENDIF
 
-                CALL rmach(&
-                    npts  = object%numberOfRadialPoints,    &
-                    rmch  = object%rmx,   &
-                    drm   = object%drm,   &
-                    dd    = object%dl1    &
-                    )
+
+                CALL fdrivs(&
+                    np     = object%numberOfRadialPoints,    &
+                    sig    = object%hubTipRatio,   &
+                    dl1    = object%dl1,   &
+                    iorder = object%FiniteDifferenceFlag, &
+                    ed2    = object%secondOrderSmoother,   &
+                    ed4    = object%fourthOrderSmoother)
                 IF (debug) THEN
-                    WRITE(PrintToggle,*) 'Leaving rmach CALL'
+                    WRITE(PrintToggle,*) 'Leaving fdrivs CALL'
                 ELSE
                 ENDIF
+
+
+            endif
+
+            IF (debug) THEN
+                WRITE(PrintToggle,*) 'Entering smachAndSndspd CALL'
+            ELSE
+            ENDIF
+
+            CALL smachAndSndspd(&
+                npts  = object%numberOfRadialPoints,    &
+                rr    = object%r,     &
+                rmsw  = object%rmt,   &
+                rmswp = object%drt,   &
+                snd   = object%snd,   &
+                dsn   = object%dsn,   &
+                dd    = object%dl1   )
+
+            IF (debug) THEN
+                WRITE(PrintToggle,*) 'Leaving smachAndSndspd CALL'
+            ELSE
+            ENDIF
+
+            IF (debug) THEN
+                WRITE(PrintToggle,*) 'Entering rmach CALL'
+            ELSE
+            ENDIF
+
+            CALL rmach(&
+                npts  = object%numberOfRadialPoints,    &
+                rmch  = object%rmx,   &
+                drm   = object%drm,   &
+                dd    = object%dl1    &
+                )
+            IF (debug) THEN
+                WRITE(PrintToggle,*) 'Leaving rmach CALL'
+            ELSE
+            ENDIF
 
             ! else
-                ! JS: Future release will allow interpolation for mean flow
-                ! CALL interp(&
-                !     np    = object%numberOfRadialPoints,    &
-                !     sig   = object%hubTipRatio,   &
-                !     rr    = object%r,     &
-                !     rmx   = object%rmx,   &
-                !     drm   = object%drm,   &
-                !     rmt   = object%rmt,   &
-                !     drt   = object%drt,   &
-                !     snd   = object%snd,   &
-                !     dsn   = object%dsn,   &
-                !     dd    = object%dl1,   &
-                !     ifdff = object%FiniteDifferenceFlag, &
-                !     ed2   = object%secondOrderSmoother,   &
-                !     ed4   = object%fourthOrderSmoother)
+            ! JS: Future release will allow interpolation for mean flow
+            ! CALL interp(&
+            !     np    = object%numberOfRadialPoints,    &
+            !     sig   = object%hubTipRatio,   &
+            !     rr    = object%r,     &
+            !     rmx   = object%rmx,   &
+            !     drm   = object%drm,   &
+            !     rmt   = object%rmt,   &
+            !     drt   = object%drt,   &
+            !     snd   = object%snd,   &
+            !     dsn   = object%dsn,   &
+            !     dd    = object%dl1,   &
+            !     ifdff = object%FiniteDifferenceFlag, &
+            !     ed2   = object%secondOrderSmoother,   &
+            !     ed4   = object%fourthOrderSmoother)
             ! endif
 
             ! Set up global matrices.
@@ -402,35 +400,35 @@ MODULE swirlClassObject
             ! ELSE
             ! ENDIF
 
-! CALL analysis(&
-!     np    = object%numberOfRadialPoints,    &
-!     np4   = np4,   &
-!     ak    = object%frequency,    &
-!     rr    = object%r,     &
-!     snd   = object%snd,   &
-!     rmx   = object%rmx,   &
-!     rmt   = object%rmt,   &
-!     aa    = object%aa,    &
-!     bb    = object%bb,    &
-!     alpha = object%alpha, &
-!     beta  = object%beta,  &
-!     vl    = object%vl,    &
-!     vr    = object%vr,    &
-!     work  = object%work,  &
-!     rwork = object%rwork, &
-!     gam   = object%wvn,   &
-!     jobvl = jobvl, &
-!     jobvr = jobvr, &
-!     mm    = object%azimuthalMode,    &
-!     ir    = ir,    &
-!     is    = is,    &
-!     vphi  = object%vph,   &
-!     akap  = object%akap)
-!
-            ! IF (debug) THEN
-            !     WRITE(PrintToggle,*) 'Leaving analysis CALL'
-            ! ELSE
-            ! ENDIF
+            CALL analysis(&
+                np    = object%numberOfRadialPoints,    &
+                np4   = np4,   &
+                ak    = object%frequency,    &
+                rr    = object%r,     &
+                snd   = object%snd,   &
+                rmx   = object%rmx,   &
+                rmt   = object%rmt,   &
+                aa    = object%aa,    &
+                bb    = object%bb,    &
+                alpha = object%alpha, &
+                beta  = object%beta,  &
+                vl    = object%vl,    &
+                vr    = object%vr,    &
+                work  = object%work,  &
+                rwork = object%rwork, &
+                gam   = object%wvn,   &
+                jobvl = jobvl, &
+                jobvr = jobvr, &
+                mm    = object%azimuthalMode,    &
+                ir    = ir,    &
+                is    = is,    &
+                vphi  = object%vph,   &
+                akap  = object%akap)
+
+             IF (debug) THEN
+                 WRITE(PrintToggle,*) 'Leaving analysis CALL'
+             ELSE
+             ENDIF
 
 ! CALL output(&
             !     np     = object%numberOfRadialPoints,    &
@@ -480,7 +478,7 @@ MODULE swirlClassObject
 
 ! The goal of this subroutine is to extract the mean flow data that we input plus the rest of the mean flow parameters
 ! that SWIRL generated
-! 
+!
 !
 
         TYPE(SwirlClassType), INTENT(IN) ::&
@@ -516,7 +514,7 @@ MODULE swirlClassObject
             object
 
         INTEGER, INTENT(IN) :: &
-            eigenIndex 
+            eigenIndex
 
         COMPLEX(KIND = rDef), INTENT(INOUT) :: &
             eigenValue
@@ -530,7 +528,7 @@ MODULE swirlClassObject
         eigenVector= object%vr(:,eigenIndex)
 
 
-    END SUBROUTINE GetRadialModeData 
+    END SUBROUTINE GetRadialModeData
 
     SUBROUTINE GetResidualVector(&
         object                  ,&
@@ -547,7 +545,7 @@ MODULE swirlClassObject
             eigenVector
 
         COMPLEX(KIND = rDef), INTENT(IN) :: &
-            eigenValue 
+            eigenValue
 
         COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4), INTENT(INOUT) :: &
             S
@@ -556,8 +554,8 @@ MODULE swirlClassObject
             S_A, &
             S_B
 
-        ! Local variables 
-        INTEGER :: np 
+        ! Local variables
+        INTEGER :: np
 
 
         np = object%numberOfRadialPoints

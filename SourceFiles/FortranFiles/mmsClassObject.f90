@@ -316,11 +316,16 @@ CONTAINS
     END SUBROUTINE LMax
     SUBROUTINE getROC(&
         object           ,&
+        ExpectedRateOfConvergence ,&
         RateOfConvergence,&
         L2Array          )
 
+
         TYPE(mmsClassType) , INTENT(INOUT) :: &
             object
+
+        REAL(KIND = rDef),  INTENT(IN) :: &
+            ExpectedRateOfConvergence 
 
         REAL(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
             RateOfConvergence
@@ -338,11 +343,13 @@ CONTAINS
         DO i = 1,numberOfIterations 
             IF (REAL(L2Array(i),KIND=rDef)< tolerance) THEN 
             ! WRITE(6,*) L2Array(i)
-                WRITE(0,*) 'A numerical solution has converged, the L2 norm < tolerance = 10e-11 on the ',i+1, 'iteration'
+                WRITE(0,*) 'A numerical solution has converged, the L2 norm < 10e-11 on the ',i+1, 'iteration'
+                object%RateOfConvergence(i) = ExpectedRateOfConvergence
+                object%L2Array(i) = 10e-10_rDef
+                object%L2Array(i+1) = 10e-10_rDef
 
                 
             ELSE
-            ENDIF
              object%RateOfConvergence(i) = &
                 (&
                 LOG((object%L2Array(i+1))) -&
@@ -351,6 +358,7 @@ CONTAINS
                 /&
                 LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
+            ENDIF
         ENDDO
         RateOfConvergence = object%RateOfConvergence 
 

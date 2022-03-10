@@ -1,0 +1,247 @@
+### MAKEFILE DEFINITIONS ###
+
+#SHELL=/bin/csh -f
+
+F95_IFC      = ifort
+#F95FLAGS_IFC = -c  -O3 -pad -align -prec_div
+F95FLAGS_IFC = -c -g -Zp8 -pc80 -fp-model strict -fno-alias -O0 -C \
+               -debug extended -traceback -ftrapuv \
+               -debug-parameters all -fp-stack-check -heap-arrays
+F95FLAGS2_IFC = -c -g -Zp8 -pc80 -fp-model strict -fno-alias -O0 -C \
+                -debug extended -traceback -ftrapuv \
+                -debug-parameters all -fp-stack-check -heap-arrays
+LDFLAGS_IFC  = -static
+
+F95_G95      = mpif77
+#F95_G95      = mpif90
+F95FLAGS_G95 = -c -O3
+F95FLAGS2_G95 = -c -O3
+#F95FLAGS_G95 = -c -O0 -Wall -Werror -Wline-truncation -Wmissing-intent -Wuninitialized -Wprecision-loss -std=f95 -fbounds-check
+#F95FLAGS2_G95 = -c -O0 -Wall -Werror -Wline-truncation -Wmissing-intent -Wuninitialized -Wprecision-loss -fbounds-check
+LDFLAGS_G95  =
+
+F95_GFORTRAN      = mpif90
+F95FLAGS_GFORTRAN = -c -g -O0 -Wall -Werror -Wline-truncation -Wuninitialized -std=f95 -fbounds-check
+F95FLAGS2_GFORTRAN = -c -g -O0 -Wall -Werror -Wline-truncation -Wuninitialized -fbounds-check
+#F95FLAGS_GFORTRAN = -c -g -O0 -Wall -Wline-truncation -Wuninitialized -std=f95 -fbounds-check
+#F95FLAGS2_GFORTRAN = -c -g -O0 -Wall -Wline-truncation -Wuninitialized -fbounds-check
+LDFLAGS_GFORTRAN  =
+
+F95_SICOR      = mpif90
+F95FLAGS_SICOR = -c -O3 -64
+LDFLAGS_SICOR  = -v -64
+
+F95_GRCGX      = pgf90
+F95FLAGS_GRCGX = -c -O3 
+LDFLAGS_GRCGX  = -v 
+
+F95      = $(F95_GFORTRAN)
+F95FLAGS = $(F95FLAGS_GFORTRAN)
+F95FLAGS2 = $(F95FLAGS2_GFORTRAN)
+LDFLAGS  = $(LDFLAGS_GFORTRAN)
+
+# define locations for files
+
+LIB_FILES = ../LibraryFiles
+MOD_FILES = ../ModuleFiles
+OBJ_FILES = ../ObjectFiles
+EXE_FILES = ../Executables
+SRC_FILES = ../SourceCode
+
+MPICH2MPI_INCLUDE_LOCATION = /usr/local/include
+MPICH2MPI_LIBRARY_LOCATION = /usr/local/lib
+MPICH2MPI_LIBRARIES = -lmpich  \
+                      -lfmpich \
+                      -lpthread \
+                      -lmpl
+
+#MPICH2MPI_LIBRARIES = -lmpi_f90 \
+                   -lmpi_f77       \
+                   -lmpi       \
+                   -lopen-rte       \
+                   -lopen-pal       \
+                   -ldl        \
+                   -lnsl      \
+                   -lutil      \
+                   -lm      \
+                   -pthread
+
+#MPICH2_MPI_TEST_RUN_CMD = mpirun -machinefile ~/mpd.hosts -np 2
+MPICH2MPI_TEST_RUN_CMD = mpiexec -n 2
+MPICH2_TEST_RUN_CMD_LOCAL = mpiexec -n 2
+#MPICH2_VALGRIND_TEST_RUN_CMD_LOCAL = mpiexec -n 2 valgrind --tool=memcheck --leak-check=yes --track-origins=yes
+MPICH2_VALGRIND_TEST_RUN_CMD_LOCAL = mpiexec -n 2 valgrind --tool=memcheck --leak-check=yes --track-origins=yes
+
+OPENMPI_INCLUDE_LOCATION = /usr/lib64/mpi/gcc/openmpi/include
+OPENMPI_LIBRARY_LOCATION = /usr/lib64/mpi/gcc/openmpi/lib64
+OPENMPI_LIBRARIES = -lmpi_f90 \
+                   -lmpi_f77       \
+                   -lmpi       \
+                   -lopen-rte       \
+                   -lopen-pal       \
+                   -ldl        \
+                   -lnsl      \
+                   -lutil      \
+                   -lm      \
+                   -pthread
+
+OPENMPI_TEST_RUN_CMD = mpirun -np 2
+
+LAMMPI_INCLUDE_LOCATION = /usr/local/include
+LAMMPI_LIBRARY_LOCATION = /usr/local/library
+LAMMPI_LIBRARIES = -llamf77mpi \
+                   -lmpi       \
+                   -llam       \
+                   -lutil      \
+                   -ldl        \
+                   -pthread
+
+LAMMPI_TEST_RUN_CMD = lamboot -v; mpirun -np 2 -s n0
+
+SICORMPI_INCLUDE_LOCATION = /usr/include/gentoo-multilib/n64
+SICORMPI_LIBRARY_LOCATION = /usr/lib
+SICORMPI_LIBRARIES = -lscmpi_debug
+
+SICORMPI_TEST_RUN_CMD = srun -p sca -n 2 
+
+GRCGXMPI_INCLUDE_LOCATION = /usr/include/mpich/pgi5/x86_64
+GRCGXMPI_LIBRARY_LOCATION = /usr/lib
+GRCGXMPI_LIBRARIES = 
+
+GRCGXMPI_TEST_RUN_CMD = mpirun -np 2 -s n0
+
+DEFAULT_MPI_INCLUDE_LOCATION = ../
+DEFAULT_MPI_LIBRARY_LOCATION = ../
+DEFAULT_MPI_LIBRARIES =
+DEFAULT_MPI_TEST_RUN_CMD = mpiexec -np 2
+DEFAULT_MPI_TEST_RUN_CMD_LOCAL = mpiexec -np 2
+
+MPI_INCLUDE_LOCATION = $(DEFAULT_MPI_INCLUDE_LOCATION)
+MPI_LIBRARY_LOCATION = $(DEFAULT_MPI_LIBRARY_LOCATION)
+MPI_LIBRARIES = $(DEFAULT_MPI_LIBRARIES)
+TEST_RUN_CMD = $(DEFAULT_MPI_TEST_RUN_CMD)
+TEST_RUN_CMD_LOCAL = $(DEFAULT_MPI_TEST_RUN_CMD_LOCAL)
+VALGRIND_TEST_RUN_CMD_LOCAL = $(MPICH2_VALGRIND_TEST_RUN_CMD_LOCAL)
+
+CMD = MessagePassingInterfaceTest.exe
+
+TEST_SUCCESS = MessagePassingInterfaceTest.PASSED
+VALGRIND_TEST_SUCCESS = MessagePassingInterfaceValgrindTest.PASSED
+
+
+# define commands
+
+MV_LIB = mv libMessagePassingInterface.a $(LIB_FILES)
+MV_LIB_MOD = mv *.mod $(LIB_FILES)
+MV_OBJ = mv *.o $(OBJ_FILES)
+MV_MOD = mv *.mod $(MOD_FILES)
+MV_EXE = mv $(CMD) $(EXE_FILES)
+RM_TEST_RESULTS = rm -f $(EXE_FILES)/MessagePassingInterfaceTest.*
+
+MESSAGE_PASSING_INTERFACE_LIBS =            \
+    $(LIB_FILES)/MessagePassingInterface.a  \
+
+MESSAGE_PASSING_INTERFACE_OBJS =            \
+    $(OBJ_FILES)/MessagePassingInterface.o  \
+    $(OBJ_FILES)/IncludeMPIImplementation.o \
+    $(OBJ_FILES)/MPIKindDefs.o  
+
+OBJS = \
+ $(MESSAGE_PASSING_INTERFACE_OBJS)
+
+TEST_OBJS = \
+ $(OBJ_FILES)/MessagePassingInterfaceTest.o
+
+LIBS = \
+ -lMessagePassingInterface
+
+INCLUDE_MODS = \
+ -I$(MOD_FILES)
+
+# Linkage rule
+
+all: $(LIB_FILES)/libMessagePassingInterface.a
+	@echo " "
+	@echo "-------------------------------------------------- "
+	@echo "-   Hixon Technologies MPI Interface routines    - "
+	@echo "-    Copyright 2007 by Hixon Technologies, LLC   - "
+	@echo "-    Used with permission.                       - "
+	@echo "-    These routines come with no warranty.       - "
+	@echo "-                                                - "
+	@echo "-   Contact:  Ray Hixon, Hixon Technologies      - "
+	@echo "-             rhixon@wideopenwest.com            - "
+	@echo "-------------------------------------------------- "
+	@echo " "
+
+valgrindTest: $(VALGRIND_TEST_SUCCESS)
+
+test: $(TEST_SUCCESS)
+
+$(VALGRIND_TEST_SUCCESS): \
+      $(TEST_OBJS) \
+      $(LIB_FILES)/libMessagePassingInterface.a
+	$(RM_TEST_RESULTS)
+	$(F95) -o $(CMD) $(TEST_OBJS) $(LIBS) -L$(LIB_FILES) -L$(MPI_LIBRARY_LOCATION) $(MPI_LIBRARIES) $(INCLUDE_MODS)
+	$(MV_EXE)
+	cd $(EXE_FILES); $(VALGRIND_TEST_RUN_CMD_LOCAL) ./$(CMD) &> outValInterfaceWithMPITest.txt
+	cp $(EXE_FILES)/$(TEST_SUCCESS) $(VALGRIND_TEST_SUCCESS)
+
+$(TEST_SUCCESS): \
+      $(TEST_OBJS) \
+      $(LIB_FILES)/libMessagePassingInterface.a
+	$(RM_TEST_RESULTS)
+	$(F95) -o $(CMD) $(TEST_OBJS) $(LIBS) -L$(LIB_FILES) -L$(MPI_LIBRARY_LOCATION) $(MPI_LIBRARIES) $(INCLUDE_MODS)
+	$(MV_EXE)
+	cd $(EXE_FILES); $(TEST_RUN_CMD) ./$(CMD)
+	cp $(EXE_FILES)/$(TEST_SUCCESS) .
+
+clean:
+	/bin/rm -f *.a 
+	/bin/rm -f *.o 
+	/bin/rm -f *.d 
+	/bin/rm -f *.mod 
+	/bin/rm -f ifc*
+	/bin/rm -f *.pc
+	/bin/rm -f *.pcl
+	/bin/rm -f $(LIB_FILES)/*.a
+	/bin/rm -f $(OBJ_FILES)/*.o
+	/bin/rm -f $(OBJ_FILES)/*.d
+	/bin/rm -f $(LIB_FILES)/*.mod 
+	/bin/rm -f $(MOD_FILES)/*.mod 
+
+cleanTest:
+	rm -f *.FAILED
+	rm -f ../Executables/*.FAILED
+	rm -f *.PASSED
+	rm -f ../Executables/*.PASSED
+
+# Dependency definitions
+
+$(LIB_FILES)/libMessagePassingInterface.a: \
+        $(OBJS)
+	ar r libMessagePassingInterface.a $(OBJS)
+	$(MV_LIB)
+
+$(OBJ_FILES)/MessagePassingInterfaceTest.o:                \
+    $(SRC_FILES)/MessagePassingInterfaceTest.f90      \
+    $(OBJ_FILES)/MessagePassingInterface.o
+	$(F95) $(F95FLAGS) $(SRC_FILES)/MessagePassingInterfaceTest.f90 $(INCLUDE_MODS) -I$(MPI_INCLUDE_LOCATION)
+	$(MV_OBJ)
+
+$(OBJ_FILES)/IncludeMPIImplementation.o: \
+    $(SRC_FILES)/IncludeMPIImplementation.f90
+	$(F95) $(F95FLAGS2) $(INCLUDE_MODS) -I$(MPI_INCLUDE_LOCATION) $(SRC_FILES)/IncludeMPIImplementation.f90
+	$(MV_OBJ); $(MV_MOD)
+
+$(OBJ_FILES)/MessagePassingInterface.o:                \
+    $(SRC_FILES)/MessagePassingInterface.f90      \
+    $(OBJ_FILES)/IncludeMPIImplementation.o \
+    $(OBJ_FILES)/MPIKindDefs.o  
+	$(F95) $(F95FLAGS) $(INCLUDE_MODS) -I$(MPI_INCLUDE_LOCATION) $(SRC_FILES)/MessagePassingInterface.f90
+	$(MV_OBJ); $(MV_MOD)
+
+$(OBJ_FILES)/MPIKindDefs.o: \
+    $(SRC_FILES)/MPIKindDefs.f90 
+	$(F95) $(F95FLAGS) $(INCLUDE_MODS) -I$(MPI_INCLUDE_LOCATION) $(SRC_FILES)/MPIKindDefs.f90
+	$(MV_OBJ); $(MV_MOD)
+

@@ -1,0 +1,1096 @@
+
+SUBROUTINE AddLLEntryInt(object,          &
+                         messageData,     &
+                         numberOfEntries, &
+                         errorInfoObject)
+
+  TYPE(MPIStructLLType), INTENT(INOUT) :: object
+  INTEGER, INTENT(INOUT) :: messageData
+  INTEGER, INTENT(IN) :: numberOfEntries
+  TYPE(ErrorInformationType), INTENT(INOUT) :: errorInfoObject
+
+! local data
+
+  TYPE(MPIStructLLEntryType), POINTER :: newEntry => NULL()
+
+  INTEGER :: mpiIerror
+
+  CHARACTER(LEN=*), PARAMETER :: location = &
+    'SUBROUTINE AddLLEntryInt0D'
+
+  IF (object%isInitialized) THEN
+   CONTINUE
+  ELSE
+
+   charStringObject%charString = 'MPIStructLLType object is not initialized.'
+   CALL SetError(object          = errorInfoObject, &
+                 errorInfoString = charStringObject)
+
+   charStringObject%charString = ' in '//location//moduleLocation
+   CALL AddErrorInformation(object          = errorInfoObject, &
+                            errorInfoString = charStringObject)
+
+   RETURN
+  END IF
+
+  ALLOCATE(newEntry)
+  NULLIFY(newEntry%previousEntry)
+  NULLIFY(newEntry%nextEntry)
+
+  object%numberOfLLEntries = object%numberOfLLEntries + 1 
+
+  CALL MPI_GET_ADDRESS(messageData,                           &
+                       newEntry%entryData%initialDataAddress, &
+                       mpiIerror) 
+
+  IF (mpiIerror /= mpiSuccess) THEN
+   WRITE(charStringObject%charString,'(a40,i5)')  &
+      'Error in MPI_GET_ADDRESS call:  IERROR = ',mpiIerror
+
+   CALL SetError(object          = errorInfoObject, &
+                 errorInfoString = charStringObject)
+
+   charStringObject%charString = ' in '//location//moduleLocation
+   CALL AddErrorInformation(object          = errorInfoObject, &
+                            errorInfoString = charStringObject)
+
+   RETURN
+  END IF
+
+  newEntry%entryData%dataLength = numberOfEntries
+  newEntry%entryData%dataType = MPI_INTEGER
+
+  IF (ASSOCIATED(object%tailOfLL)) THEN
+   object%tailOfLL%nextEntry => newEntry
+   newEntry%previousEntry => object%tailOfLL
+   object%tailOfLL => newEntry 
+  ELSE ! no list yet
+   object%headOfLL => newEntry
+   object%tailOfLL => newEntry
+  END IF
+
+  NULLIFY(newEntry)
+
+  RETURN
+END SUBROUTINE AddLLEntryInt
+
+SUBROUTINE AddLLEntryInt0D(object,        &
+                           messageData,   &
+                           errorInfoObject)
+
+  TYPE(MPIStructLLType), INTENT(INOUT) :: object
+  INTEGER :: messageData
+  TYPE(ErrorInformationType), INTENT(INOUT) :: errorInfoObject
+
+! local data
+
+  CHARACTER(LEN=*), PARAMETER :: location = &
+    'SUBROUTINE AddLLEntryInt0D'
+
+  IF (object%isInitialized) THEN
+   CONTINUE
+  ELSE
+
+   charStringObject%charString = 'MPIStructLLType object is not initialized.'
+   CALL SetError(object          = errorInfoObject, &
+                 errorInfoString = charStringObject)
+
+   charStringObject%charString = ' in '//location//moduleLocation
+   CALL AddErrorInformation(object          = errorInfoObject, &
+                            errorInfoString = charStringObject)
+
+   RETURN
+  END IF
+
+  CALL AddLLEntryInt(object          = object,        &
+                     messageData     = messageData,   &
+                     numberOfEntries = 1,             &
+                     errorInfoObject = errorInfoObject)
+
+  IF (CheckForError(errorInfoObject)) THEN
+   GO TO 101
+  ELSE
+   CONTINUE
+  END IF
+
+  RETURN
+
+ 101 CONTINUE
+
+  charStringObject%charString = ' in '//location//moduleLocation
+  CALL AddErrorInformation(object          = errorInfoObject, &
+                           errorInfoString = charStringObject)
+
+  RETURN
+END SUBROUTINE AddLLEntryInt0D
+
+SUBROUTINE AddLLEntryInt1D(object,        &
+                           messageData,   &
+                           iStart,        &
+                           iEnd,          &
+                           deltaI,        &
+                           errorInfoObject)
+
+  TYPE(MPIStructLLType), INTENT(INOUT) :: object
+  INTEGER, INTENT(IN) :: iStart,iEnd,deltaI
+  INTEGER, DIMENSION(:) :: messageData
+  TYPE(ErrorInformationType), INTENT(INOUT) :: errorInfoObject
+
+! local data
+
+  INTEGER :: numEntries,i
+
+  CHARACTER(LEN=*), PARAMETER :: location = &
+    'SUBROUTINE AddLLEntryInt1D'
+
+  IF (object%isInitialized) THEN
+   CONTINUE
+  ELSE
+
+   charStringObject%charString = 'MPIStructLLType object is not initialized.'
+   CALL SetError(object          = errorInfoObject, &
+                 errorInfoString = charStringObject)
+
+   charStringObject%charString = ' in '//location//moduleLocation
+   CALL AddErrorInformation(object          = errorInfoObject, &
+                            errorInfoString = charStringObject)
+
+   RETURN
+  END IF
+
+  IF (deltaI == 1) THEN
+
+   numEntries = iEnd+1-iStart
+
+   CALL AddLLEntryInt(object          = object,              &
+                      messageData     = messageData(iStart), &
+                      numberOfEntries = numEntries,          &
+                      errorInfoObject = errorInfoObject)
+
+   IF (CheckForError(errorInfoObject)) THEN
+    GO TO 101
+   ELSE
+    CONTINUE
+   END IF
+  ELSE ! have to do this one by one
+   numEntries = 1
+   DO i=iStart,iEnd,deltaI
+    CALL AddLLEntryInt(object          = object,         &
+                       messageData     = messageData(i), &
+                       numberOfEntries = numEntries,     &
+                       errorInfoObject = errorInfoObject)
+ 
+    IF (CheckForError(errorInfoObject)) THEN
+     GO TO 101
+    ELSE
+     CONTINUE
+    END IF
+   END DO
+  END IF 
+
+  RETURN
+
+ 101 CONTINUE
+
+  charStringObject%charString = ' in '//location//moduleLocation
+  CALL AddErrorInformation(object          = errorInfoObject, &
+                           errorInfoString = charStringObject)
+
+  RETURN
+END SUBROUTINE AddLLEntryInt1D
+
+SUBROUTINE AddLLEntryInt2D(object,        &
+                           messageData,   &
+                           iOrder,        &  
+                           iStart,        &
+                           iEnd,          &
+                           deltaI,        &
+                           errorInfoObject)
+
+  TYPE(MPIStructLLType), INTENT(INOUT) :: object
+  INTEGER, DIMENSION(:), INTENT(IN) :: iOrder
+  INTEGER, DIMENSION(:), INTENT(IN) :: iStart,iEnd,deltaI
+  INTEGER, DIMENSION(:,:) :: messageData
+  TYPE(ErrorInformationType), INTENT(INOUT) :: errorInfoObject
+
+! local data
+
+  INTEGER :: i1,i2,numEntries,i,j
+
+  CHARACTER(LEN=*), PARAMETER :: location = &
+    'SUBROUTINE AddLLEntryInt2D'
+
+  IF (object%isInitialized) THEN
+   CONTINUE
+  ELSE
+
+   charStringObject%charString = 'MPIStructLLType object is not initialized.'
+   CALL SetError(object          = errorInfoObject, &
+                 errorInfoString = charStringObject)
+
+   charStringObject%charString = ' in '//location//moduleLocation
+   CALL AddErrorInformation(object          = errorInfoObject, &
+                            errorInfoString = charStringObject)
+
+   RETURN
+  END IF
+
+  i1 = iOrder(1)
+  i2 = iOrder(2)
+
+  IF ((i1 == 1) .AND. (deltaI(1) == 1)) THEN ! special case where data length is not 1
+   i = iStart(1)
+   DO j=iStart(2),iEnd(2),deltaI(2)
+
+    numEntries = iEnd(1)+1-iStart(1)
+
+    CALL AddLLEntryInt(object          = object,           &
+                       messageData     = messageData(i,j), &
+                       numberOfEntries = numEntries,       &
+                       errorInfoObject = errorInfoObject)
+
+    IF (CheckForError(errorInfoObject)) THEN
+     GO TO 101
+    ELSE
+     CONTINUE
+    END IF
+   END DO
+  ELSE  
+   numEntries = 1
+
+   IF (iOrder(1) == 1) THEN
+    DO j=iStart(2),iEnd(2),deltaI(2)
+     DO i=iStart(1),iEnd(1),deltaI(1)
+      CALL AddLLEntryInt(object          = object,           &
+                         messageData     = messageData(i,j), &
+                         numberOfEntries = numEntries,       &
+                         errorInfoObject = errorInfoObject)
+ 
+      IF (CheckForError(errorInfoObject)) THEN
+       GO TO 101
+      ELSE
+       CONTINUE
+      END IF
+     END DO
+    END DO
+
+   ELSE ! other way
+    DO i=iStart(1),iEnd(1),deltaI(1)
+     DO j=iStart(2),iEnd(2),deltaI(2)
+      CALL AddLLEntryInt(object          = object,           &
+                         messageData     = messageData(i,j), &
+                         numberOfEntries = numEntries,       &
+                         errorInfoObject = errorInfoObject)
+ 
+      IF (CheckForError(errorInfoObject)) THEN
+       GO TO 101
+      ELSE
+       CONTINUE
+      END IF
+     END DO
+    END DO
+
+   END IF
+  END IF
+
+  RETURN
+
+ 101 CONTINUE
+
+  charStringObject%charString = ' in '//location//moduleLocation
+  CALL AddErrorInformation(object          = errorInfoObject, &
+                           errorInfoString = charStringObject)
+
+  RETURN
+END SUBROUTINE AddLLEntryInt2D
+
+SUBROUTINE AddLLEntryInt3D(object,        &
+                           messageData,   &
+                           iOrder,        &  
+                           iStart,        &
+                           iEnd,          &
+                           deltaI,        &
+                           errorInfoObject)
+
+  TYPE(MPIStructLLType), INTENT(INOUT) :: object
+  INTEGER, DIMENSION(:), INTENT(IN) :: iOrder
+  INTEGER, DIMENSION(:), INTENT(IN) :: iStart,iEnd,deltaI
+  INTEGER, DIMENSION(:,:,:) :: messageData
+  TYPE(ErrorInformationType), INTENT(INOUT) :: errorInfoObject
+
+! local data
+
+  INTEGER :: i1,i2,i3,numEntries,i,j,k
+
+  CHARACTER(LEN=*), PARAMETER :: location = &
+    'SUBROUTINE AddLLEntryInt3D'
+
+  IF (object%isInitialized) THEN
+   CONTINUE
+  ELSE
+
+   charStringObject%charString = 'MPIStructLLType object is not initialized.'
+   CALL SetError(object          = errorInfoObject, &
+                 errorInfoString = charStringObject)
+
+   charStringObject%charString = ' in '//location//moduleLocation
+   CALL AddErrorInformation(object          = errorInfoObject, &
+                            errorInfoString = charStringObject)
+
+   RETURN
+  END IF
+
+  i1 = iOrder(1)
+  i2 = iOrder(2)
+  i3 = iOrder(3)
+
+  IF ((i1 == 1) .AND. (deltaI(1) == 1)) THEN ! special case where data length is not 1
+   i = iStart(1)
+   IF (i2 == 2) THEN
+    DO k=iStart(3),iEnd(3),deltaI(3)
+     DO j=iStart(2),iEnd(2),deltaI(2)
+
+      numEntries = iEnd(1)+1-iStart(1)
+
+      CALL AddLLEntryInt(object          = object,             &
+                         messageData     = messageData(i,j,k), &
+                         numberOfEntries = numEntries,         &
+                         errorInfoObject = errorInfoObject)
+
+      IF (CheckForError(errorInfoObject)) THEN
+       GO TO 101
+      ELSE
+       CONTINUE
+      END IF
+     END DO
+    END DO
+   ELSE
+    DO j=iStart(3),iEnd(3),deltaI(3)
+     DO k=iStart(2),iEnd(2),deltaI(2)
+
+      numEntries = iEnd(1)+1-iStart(1)
+
+      CALL AddLLEntryInt(object          = object,             &
+                         messageData     = messageData(i,j,k), &
+                         numberOfEntries = numEntries,         &
+                         errorInfoObject = errorInfoObject)
+
+      IF (CheckForError(errorInfoObject)) THEN
+       GO TO 101
+      ELSE
+       CONTINUE
+      END IF
+     END DO
+    END DO
+   END IF
+  ELSE   
+   numEntries = 1
+
+   IF (iOrder(1) == 1) THEN
+    IF (iOrder(2) == 2) THEN ! ijk
+     DO k=iStart(3),iEnd(3),deltaI(3)
+      DO j=iStart(2),iEnd(2),deltaI(2)
+       DO i=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    ELSE ! ikj
+     DO j=iStart(3),iEnd(3),deltaI(3)
+      DO k=iStart(2),iEnd(2),deltaI(2)
+       DO i=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF ! i first
+   ELSE IF (iOrder(1) == 2) THEN
+    IF (iOrder(2) == 3) THEN ! jki
+     DO i=iStart(3),iEnd(3),deltaI(3)
+      DO k=iStart(2),iEnd(2),deltaI(2)
+       DO j=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    ELSE ! jik
+     DO k=iStart(3),iEnd(3),deltaI(3)
+      DO i=iStart(2),iEnd(2),deltaI(2)
+       DO j=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF
+   ELSE ! k is innermost
+    IF (iOrder(2) == 1) THEN ! kij
+     DO j=iStart(3),iEnd(3),deltaI(3)
+      DO i=iStart(2),iEnd(2),deltaI(2)
+       DO k=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    ELSE ! kji
+     DO i=iStart(3),iEnd(3),deltaI(3)
+      DO j=iStart(2),iEnd(2),deltaI(2)
+       DO k=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF 
+   END IF
+  END IF
+
+  RETURN
+
+ 101 CONTINUE
+
+  charStringObject%charString = ' in '//location//moduleLocation
+  CALL AddErrorInformation(object          = errorInfoObject, &
+                           errorInfoString = charStringObject)
+
+  RETURN
+END SUBROUTINE AddLLEntryInt3D
+
+SUBROUTINE AddLLEntryInt4D(object,        &
+                           messageData,   &
+                           iOrder,        &  
+                           iStart,        &
+                           iEnd,          &
+                           deltaI,        &
+                           errorInfoObject)
+
+  TYPE(MPIStructLLType), INTENT(INOUT) :: object
+  INTEGER, DIMENSION(:), INTENT(IN) :: iOrder
+  INTEGER, DIMENSION(:), INTENT(IN) :: iStart,iEnd,deltaI
+  INTEGER, DIMENSION(:,:,:,:) :: messageData
+  TYPE(ErrorInformationType), INTENT(INOUT) :: errorInfoObject
+
+! local data
+
+  INTEGER :: i1,i2,i3,i4,numEntries,i,j,k,l
+
+  CHARACTER(LEN=*), PARAMETER :: location = &
+    'SUBROUTINE AddLLEntryInt4D'
+
+  IF (object%isInitialized) THEN
+   CONTINUE
+  ELSE
+
+   charStringObject%charString = 'MPIStructLLType object is not initialized.'
+   CALL SetError(object          = errorInfoObject, &
+                 errorInfoString = charStringObject)
+
+   charStringObject%charString = ' in '//location//moduleLocation
+   CALL AddErrorInformation(object          = errorInfoObject, &
+                            errorInfoString = charStringObject)
+
+   RETURN
+  END IF
+
+  i1 = iOrder(1)
+  i2 = iOrder(2)
+  i3 = iOrder(3)
+  i4 = iOrder(4)
+
+  IF ((i1 == 1) .AND. (deltaI(1) == 1)) THEN ! special case where data length is not 1
+   i = iStart(1)
+   numEntries = iEnd(1)+1-iStart(1)
+
+   IF (i2 == 2) THEN  ! ij
+
+    IF (i3 == 3) THEN ! ijkl
+
+     DO l=iStart(4),iEnd(4),deltaI(4)
+      DO k=iStart(3),iEnd(3),deltaI(3)
+       DO j=iStart(2),iEnd(2),deltaI(2)
+
+        numEntries = iEnd(1)+1-iStart(1)
+
+        CALL AddLLEntryInt(object          = object,               &
+                           messageData     = messageData(i,j,k,l), &
+                           numberOfEntries = numEntries,           &
+                           errorInfoObject = errorInfoObject)
+
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+
+    ELSE ! ijlk
+
+     DO k=iStart(4),iEnd(4),deltaI(4)
+      DO l=iStart(3),iEnd(3),deltaI(3)
+       DO j=iStart(2),iEnd(2),deltaI(2)
+
+        numEntries = iEnd(1)+1-iStart(1)
+
+        CALL AddLLEntryInt(object          = object,               &
+                           messageData     = messageData(i,j,k,l), &
+                           numberOfEntries = numEntries,           &
+                           errorInfoObject = errorInfoObject)
+
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+
+    END IF
+
+   ELSE IF (i2 == 3) THEN ! ik
+
+    IF (i3 == 4) THEN ! iklj
+
+     DO j=iStart(4),iEnd(4),deltaI(4)
+      DO l=iStart(3),iEnd(3),deltaI(3)
+       DO k=iStart(2),iEnd(2),deltaI(2)
+
+        numEntries = iEnd(1)+1-iStart(1)
+
+        CALL AddLLEntryInt(object          = object,               &
+                           messageData     = messageData(i,j,k,l), &
+                           numberOfEntries = numEntries,           &
+                           errorInfoObject = errorInfoObject)
+
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+
+    ELSE ! ikjl
+
+     DO l=iStart(4),iEnd(4),deltaI(4)
+      DO j=iStart(3),iEnd(3),deltaI(3)
+       DO k=iStart(2),iEnd(2),deltaI(2)
+
+        numEntries = iEnd(1)+1-iStart(1)
+
+        CALL AddLLEntryInt(object          = object,               &
+                           messageData     = messageData(i,j,k,l), &
+                           numberOfEntries = numEntries,           &
+                           errorInfoObject = errorInfoObject)
+
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF
+   ELSE ! il
+    IF (i3 == 2) THEN ! iljk
+
+     DO k=iStart(4),iEnd(4),deltaI(4)
+      DO j=iStart(3),iEnd(3),deltaI(3)
+       DO l=iStart(2),iEnd(2),deltaI(2)
+
+        numEntries = iEnd(1)+1-iStart(1)
+
+        CALL AddLLEntryInt(object          = object,               &
+                           messageData     = messageData(i,j,k,l), &
+                           numberOfEntries = numEntries,           &
+                           errorInfoObject = errorInfoObject)
+
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+
+    ELSE ! ilkj
+
+     DO j=iStart(4),iEnd(4),deltaI(4)
+      DO k=iStart(3),iEnd(3),deltaI(3)
+       DO l=iStart(2),iEnd(2),deltaI(2)
+
+        numEntries = iEnd(1)+1-iStart(1)
+
+        CALL AddLLEntryInt(object          = object,               &
+                           messageData     = messageData(i,j,k,l), &
+                           numberOfEntries = numEntries,           &
+                           errorInfoObject = errorInfoObject)
+
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF
+
+   ELSE ! one data point per entry -- all I have to do is to get it in the right order
+
+    numEntries = 1
+
+! ijkl
+! ijlk
+! iklj
+! ikjl
+! iljk
+! ilkj
+
+   IF (iOrder(1) == 1) THEN
+    IF (iOrder(2) == 2) THEN
+     IF (iOrder(3) == 3) THEN ! ijkl
+
+      DO l=iStart(4),iEnd(4),deltaI(4)
+       DO k=iStart(3),iEnd(3),deltaI(3)
+        DO j=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     ELSE ! ijlk
+      DO k=iStart(4),iEnd(4),deltaI(4)
+       DO l=iStart(3),iEnd(3),deltaI(3)
+        DO j=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     END IF
+    ELSE IF (iOrder(2) == 3) THEN ! ik
+     IF (iOrder(3) == 2) THEN ! ikjl
+
+      DO l=iStart(4),iEnd(4),deltaI(4)
+       DO j=iStart(3),iEnd(3),deltaI(3)
+        DO k=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     ELSE ! iklj
+      DO j=iStart(4),iEnd(4),deltaI(4)
+       DO l=iStart(3),iEnd(3),deltaI(3)
+        DO k=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     END IF
+    ELSE IF (iOrder(2) == 4) THEN ! il
+     IF (iOrder(3) == 2) THEN ! iljk
+
+      DO k=iStart(4),iEnd(4),deltaI(4)
+       DO j=iStart(3),iEnd(3),deltaI(3)
+        DO l=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     ELSE ! ilkj
+      DO k=iStart(4),iEnd(4),deltaI(4)
+       DO j=iStart(3),iEnd(3),deltaI(3)
+        DO l=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     END IF
+
+    END IF
+   ELSE IF (iOrder(1) == 2) THEN ! j
+    IF (iOrder(2) == 1) THEN     ! ji
+     IF (iOrder(3) == 3) THEN    ! jikl
+
+      DO l=iStart(4),iEnd(4),deltaI(4)
+       DO k=iStart(3),iEnd(3),deltaI(3)
+        DO i=iStart(2),iEnd(2),deltaI(2)
+         DO j=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     ELSE ! jilk
+      DO k=iStart(4),iEnd(4),deltaI(4)
+       DO l=iStart(3),iEnd(3),deltaI(3)
+        DO i=iStart(2),iEnd(2),deltaI(2)
+         DO j=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     END IF
+    ELSE IF (iOrder(2) == 3) THEN ! jk
+     IF (iOrder(3) == 1) THEN ! jkil
+
+      DO l=iStart(4),iEnd(4),deltaI(4)
+       DO j=iStart(3),iEnd(3),deltaI(3)
+        DO k=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     ELSE ! iklj
+      DO j=iStart(4),iEnd(4),deltaI(4)
+       DO l=iStart(3),iEnd(3),deltaI(3)
+        DO k=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     END IF
+    ELSE IF (iOrder(2) == 4) THEN ! il
+     IF (iOrder(3) == 2) THEN ! iljk
+
+      DO k=iStart(4),iEnd(4),deltaI(4)
+       DO j=iStart(3),iEnd(3),deltaI(3)
+        DO l=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     ELSE ! ilkj
+      DO k=iStart(4),iEnd(4),deltaI(4)
+       DO j=iStart(3),iEnd(3),deltaI(3)
+        DO l=iStart(2),iEnd(2),deltaI(2)
+         DO i=iStart(1),iEnd(1),deltaI(1)
+
+          CALL AddLLEntryInt(object          = object,               &
+                             messageData     = messageData(i,j,k,l), &
+                             numberOfEntries = numEntries,           &
+                             errorInfoObject = errorInfoObject)
+
+          IF (CheckForError(errorInfoObject)) THEN
+           GO TO 101
+          ELSE
+           CONTINUE
+          END IF
+         END DO
+        END DO
+       END DO
+      END DO
+     END IF
+
+    END IF
+
+
+   
+  ELSE   
+   numEntries = 1
+
+   IF (iOrder(1) == 1) THEN
+    IF (iOrder(2) == 2) THEN ! ijk
+     DO k=iStart(3),iEnd(3),deltaI(3)
+      DO j=iStart(2),iEnd(2),deltaI(2)
+       DO i=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    ELSE ! ikj
+     DO j=iStart(3),iEnd(3),deltaI(3)
+      DO k=iStart(2),iEnd(2),deltaI(2)
+       DO i=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF ! i first
+   ELSE IF (iOrder(1) == 2) THEN
+    IF (iOrder(2) == 3) THEN ! jki
+     DO i=iStart(3),iEnd(3),deltaI(3)
+      DO k=iStart(2),iEnd(2),deltaI(2)
+       DO j=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    ELSE ! jik
+     DO k=iStart(3),iEnd(3),deltaI(3)
+      DO i=iStart(2),iEnd(2),deltaI(2)
+       DO j=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF
+   ELSE ! k is innermost
+    IF (iOrder(2) == 1) THEN ! kij
+     DO j=iStart(3),iEnd(3),deltaI(3)
+      DO i=iStart(2),iEnd(2),deltaI(2)
+       DO k=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+  
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    ELSE ! kji
+     DO i=iStart(3),iEnd(3),deltaI(3)
+      DO j=iStart(2),iEnd(2),deltaI(2)
+       DO k=iStart(1),iEnd(1),deltaI(1)
+        CALL AddLLEntryInt(object          = object,             &
+                           messageData     = messageData(i,j,k), &
+                           numberOfEntries = numEntries,         &
+                           errorInfoObject = errorInfoObject)
+        IF (CheckForError(errorInfoObject)) THEN
+         GO TO 101
+        ELSE
+         CONTINUE
+        END IF
+       END DO
+      END DO
+     END DO
+    END IF 
+   END IF
+  END IF
+
+  RETURN
+
+ 101 CONTINUE
+
+  charStringObject%charString = ' in '//location//moduleLocation
+  CALL AddErrorInformation(object          = errorInfoObject, &
+                           errorInfoString = charStringObject)
+
+  RETURN
+END SUBROUTINE AddLLEntryInt4D
+

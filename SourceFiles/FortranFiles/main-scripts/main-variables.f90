@@ -25,6 +25,7 @@
     INTEGER  :: &
         UNIT                ,& ! for NEWUNIT
         finiteDiffFlag      ,& ! finite difference flag
+        numericalIntegrationFlag      ,& !  numerical integration flag
         numberOfGridPoints  ,& ! number of points
         azimuthalModeNumber, &
         i ,&!j               ,& ! indexer for do loops
@@ -122,6 +123,8 @@
         RateOfConvergence2 
 
     REAL(KIND = REAL64) ::  &
+        ExpectedRateOfConvergenceSoundSpeed ,&
+        ExpectedRateOfConvergenceSourceTerm ,&
         gm1                      ,&
         secondOrderSmoother ,& !2nd order smoothing coefficient
         fourthOrderSmoother ,& !4th order smoothing coefficient
@@ -137,7 +140,7 @@
         r_max  = 1.000_rDef  
 
     INTEGER, PARAMETER :: &
-        numberOfIterations = 7!, & azimuthalModeNumber = 2 ! mode order
+        numberOfIterations = 5!, & azimuthalModeNumber = 2 ! mode order
 
     COMPLEX(KIND=rDef), PARAMETER :: &
         hubAdmittance   = CMPLX(0.0,0,rDef)   , &

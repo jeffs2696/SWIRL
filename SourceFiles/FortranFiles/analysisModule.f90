@@ -134,15 +134,19 @@ CONTAINS
             as = snd(j) ! the speed of sound.
             r  = rr(j)  ! Don't forget, we need this data at each radial point!
 
-            IF (debug) THEN
-                ! WRITE(6,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
+            IF (debug.eqv..TRUE.) THEN
+                WRITE(0,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
             ELSE
             ENDIF
+! Check Convective wave number calculation
+! what is 'as' is zero??? - JS
+            IF ( (rm.ne.0.0_rDef) .and.(r.gt.0.0_rDef) ) THEN
 
-            IF ( (rm.gt.0.0_rDef) .and.(rm.lt.0.0_rDef) .and.&
-                (r.gt.0.0_rDef) .and. (r.lt.0.0_rDef) ) THEN
-
-                cvct(j) = (ak/CMPLX(as,KIND=rDef) - CMPLX(mm,KIND=rDef)*CMPLX(rs,KIND=rDef)/CMPLX(r,KIND=rDef))/CMPLX(rm,KIND=rDef)
+                cvct(j) = (&
+                    ak/CMPLX(as,KIND=rDef) &
+                    - CMPLX(mm,KIND=rDef)*CMPLX(rs,KIND=rDef)/CMPLX(r,KIND=rDef)&
+                    )&
+                    /CMPLX(rm,KIND=rDef)
 
             ENDIF
 
@@ -152,9 +156,10 @@ CONTAINS
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
         DO j=1,np
-            WRITE(UNIT,19) cvct(j)
+
+            WRITE(UNIT,*) cvct(j)
             IF (debug) THEN
-                ! WRITE(0,19) cvct(j)
+                 WRITE(0,19) cvct(j)
             ELSE
             ENDIF
         ENDDO
@@ -259,14 +264,14 @@ CONTAINS
             INFO  = INFO )     ! INFO
 
         !WRITE(6,*) 'INFO = ' ,INFO
-        IF (INFO .EQ. 0) THEN
-            WRITE(0,*) 'EIGENSOLVER PASSED'
-        ELSEIF (INFO .EQ. 1 .or. INFO .LT. np4) THEN
+        IF ((INFO .EQ. 0).and.(debug.eqv..TRUE.)) THEN
+            !WRITE(0,*) 'EIGENSOLVER PASSED'
+        ELSEIF ((INFO .EQ. 1 .or. INFO .LT. np4).and.(debug.eqv..TRUE.)) THEN
             WRITE(0,*) 'EIGENSOLVER FAILED'
             WRITE(0,*) 'The QZ iteration. No eigenvectors are calculated'
             WRITE(0,*) 'But ALPHA(j) and BETA(j) should be correct for  '
             WRITE(0,*) 'j = INFO + 1,...,N'
-        ELSEIF (INFO .LT. 0) THEN
+        ELSEIF ((INFO .LT. 0).and.(debug.eqv..TRUE.)) THEN
             WRITE(0,*) 'EIGENSOLVER FAILED'
             WRITE(6,*) 'if INFO = -i, the i-th argument had an illegal value.'
         ENDIF
