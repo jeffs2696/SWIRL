@@ -72,10 +72,10 @@ sigma  = r_min
 # In[6]:
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-A_analytic        = sp.Symbol('1.0')#msg.TanhMethod(1,0.001,r_min,r_max)# 0.0001*(r/5+4)**4#
+A_analytic        = msg.TanhMethod(7,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = sp.Symbol('0.5')#msg.TanhMethod(1 ,50,r_min,r_max )
+M_x_analytic      = 0.3*msg.TanhMethod(3 ,50,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -86,10 +86,9 @@ flow_1 = fc.FlowClass(
 
 M_t_analytic = flow_1.get_tangential_mach()
 
-
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
-#print(M_t_analytic)
-f     =sp.Symbol('0.0')#msg.TanhMethod(1,1,r_min,r_max)
+
+f     =msg.TanhMethod(1,1,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -101,9 +100,6 @@ f_max_desired  = 0
 A_max          = 3*r_hat**2 - 2*r_hat**3
 A_min          =  1 - A_max
 
-del_f_min = (f_min_desired - f_min)
-del_f_max = (f_max_desired - f_max)
-
 f_imposed = msm.ModifiedManufacturedSolution(
         f_MS = f,
         f_minBC       = f_min_desired,
@@ -113,8 +109,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = 0#msg.TanhMethod(1,20,r_min,r_max)
-v_x_analytic = 0#msg.TanhMethod(1,20,r_min,r_max)
+v_t_analytic = msg.TanhMethod(5,20,r_min,r_max)
+v_x_analytic = msg.TanhMethod(5,20,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -123,7 +119,7 @@ dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
 
-f      = 1.0*r#msg.TanhMethod(1,10,r_min,r_max)
+f      = msg.TanhMethod(1,10,r_min,r_max)
 df     = f.diff(r)
 r_hat  = (r - r_min)/(r_max - r_min)
 f_min  = f.subs(r,r_min)
@@ -163,7 +159,7 @@ L = eta*((1-(gamma/ak))*M_total)
 del_dp_BC    = psi_1 + L*psi_2
 
 
-print(del_dp_BC)
+#print(del_dp_BC)
 
 del_dp_minBC = del_dp_BC.subs(
         {'r'    :r_min  ,
@@ -350,7 +346,7 @@ for i,pr in enumerate(S):
             )
 
     if match != True:
-        print(match)
+        print('LEE equation',i,'does not match ->',match)
 
 # notes on differences between system of equations and Ax-lambda Bx
 # multiplying (1/p) and not (one/p) by dp_dr made  S_1 and SS[1] the same

@@ -19,20 +19,23 @@ def LEE_f_file(S,S_at_r):
     fS_3 = sp.fcode(S_3,source_format='free',standard=95)
     fS_4 = sp.fcode(S_4,source_format='free',standard=95)
 
-    fS_at_r_1 = sp.fcode(S_at_r_1,source_format='free',standard=95)
-    fS_at_r_2 = sp.fcode(S_at_r_2,source_format='free',standard=95)
-    fS_at_r_3 = sp.fcode(S_at_r_3,source_format='free',standard=95)
-    fS_at_r_4 = sp.fcode(S_at_r_4,source_format='free',standard=95)
-    
     fS_1 = "S_1(jj) = " + re.sub(r"\b[r]\b","r(jj)",fS_1) + "\n"
     fS_2 = "S_2(jj) = " + re.sub(r"\b[r]\b","r(jj)",fS_2) + "\n"
     fS_3 = "S_3(jj) = " + re.sub(r"\b[r]\b","r(jj)",fS_3) + "\n"
     fS_4 = "S_4(jj) = " + re.sub(r"\b[r]\b","r(jj)",fS_4) + "\n"
 
+
+    fS_at_r_1 = sp.fcode(S_at_r_1,source_format='free',standard=95)
+    fS_at_r_2 = sp.fcode(S_at_r_2,source_format='free',standard=95)
+    fS_at_r_3 = sp.fcode(S_at_r_3,source_format='free',standard=95)
+    fS_at_r_4 = sp.fcode(S_at_r_4,source_format='free',standard=95)
+    
     fS_at_r_1 = "S_1(1) = " + re.sub(r"\b[r]\b","r(1)",fS_at_r_1) + "\n"
     fS_at_r_2 = "S_2(1) = " + re.sub(r"\b[r]\b","r(1)",fS_at_r_2) + "\n"
     fS_at_r_3 = "S_3(1) = " + re.sub(r"\b[r]\b","r(1)",fS_at_r_3) + "\n"
     fS_at_r_4 = "S_4(1) = " + re.sub(r"\b[r]\b","r(1)",fS_at_r_4) + "\n"
+
+
 
 #    fS_2 = re.sub(r"\*m\*","*mC*",fS_2)
 #    fS_3 = re.sub(r"\*m\*","*mC*",fS_3)

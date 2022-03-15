@@ -1,0 +1,54 @@
+During the 1960s, the increased demand for commercialized aircraft transport
+introduced jet engines to support large cargo and passengers. Consequently,
+this rise in innovation resulted in high volume engine noise. After 1975, 
+efforts to reduce aircraft noise eliminated the noise pollution for 90\% of
+the population \cite{FAAPolicy}. However, since the early 2000s,
+the advancement in noise reduction technologies has been moderately increasing,
+leaving a requirement for drastic improvement in aeroacoustic modeling and treatment
+strategies to compete with the demand for quiet subsonic flight.  
+A turbomachine's general flow condition includes a series of axial, tangential,
+and radial velocity components that vary depending on the location of concern.
+The swirling flow between fan stages has been an area of interest due to the
+potential for acoustic treatment in a location previously avoided for its flow complexity, among 
+other reasons.
+
+In general, jet engine designers can model flow within a turbomachine with 
+the Navier Stokes Equations, a set 
+of partial differential equations that describe the mass, momentum and energy
+of a given viscous fluid. It is common in practice to utilize the Euler equations,
+a closely related set of PDEs that model inviscid fluid, as they provide an 
+approximation for higher Reynold number flows where viscosity 
+does not play a critical role. A popular approach to modeling sound propagation 
+within a flow is to ``linearize'' the Euler equations, which decomposes the 
+flow solution into a mean and fluctuating component (insert refs). Another method
+decomposes the flow into vortical and potential parts (ref Golubev \& Atassi). 
+In either case, this presents an initial value problem and for certain flows and
+domains, can obtain analytical solutions.  Swirling flow has been a difficult
+problem to investigate in comparison to flows parallel to the wall domain of a duct \cite{COOPER2001}.   
+. 
+.
+
+
+
+
+%
+%- the problem that we're addressing
+%
+%-- being able to conduct component level code verification tests for the problem
+%of characterizing the duct acoustics for flow using a LEE model.
+%
+%why is it a problem? there is multiple ways of arriving at the same solution. 
+%This can be used to give a metric to either method for the various computational
+%methods that may be needed to arrive at the final answer.
+%
+%In the mid 90's,an aeroacoustics model for swirling flow had been proposed and 
+%has bypassed using a single PDE and has instead used an eigenvalue approach on the 
+%four governing flow equations. (Why Is this better? does this capturE the problem
+%differently? why not use the PDE alone instead\ldots)
+%
+%The proposed component verification from Kleb and Wood will be presented to addreess the characterization of 
+%modes and the presence of numerical ones. Using higher accuracy methods should 
+%further improve The result. another thing is to determine how many grid points are needed
+%for each method
+%
+%

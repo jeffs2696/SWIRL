@@ -9,35 +9,6 @@
 \nextgroupplot[
 height=10cm,
 legend cell align={left},
-legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!90!black},
-log basis y={10},
-scaled x ticks=manual:{}{\pgfmathparse{#1}},
-tick align=outside,
-tick pos=left,
-title={Rate Of Convergence},
-x grid style={color1},
-xmajorgrids,
-xmin=7.6, xmax=38.4,
-xtick style={color=color0},
-xticklabels={},
-y grid style={color1},
-ymajorgrids,
-ymin=0.891250938133746, ymax=11.2201845430196,
-ymode=log,
-ytick style={color=color0}
-]
-\addplot [thick, color2]
-table {%
-9 2
-13 2
-21 2
-37 2
-};
-\addlegendentry{Speed Of Sound}
-
-\nextgroupplot[
-height=10cm,
-legend cell align={left},
 legend style={
   fill opacity=0.8,
   draw opacity=1,
@@ -47,25 +18,52 @@ legend style={
   draw=white!90!black
 },
 log basis y={10},
+scaled x ticks=manual:{}{\pgfmathparse{#1}},
 tick align=outside,
 tick pos=left,
+title={Rate Of Convergence},
 x grid style={color1},
-xlabel={Number of Gridpoints},
 xmajorgrids,
-xmin=7.6, xmax=38.4,
+xmin=8.4, xmax=21.6,
 xtick style={color=color0},
+xticklabels={},
 y grid style={color1},
 ymajorgrids,
-ymin=0.739531892731824, ymax=1.72938971016645,
+ymin=0.820688685798126, ymax=1.52826424908362,
 ymode=log,
 ytick style={color=color0}
 ]
 \addplot [thick, color2]
 table {%
-9 0.768646624665
-13 1.109144011501
-21 1.425622093247
-37 1.66388403278
+9 0.844213092014
+13 1.184345418732
+21 1.485678426451
+};
+\addlegendentry{Speed Of Sound}
+
+\nextgroupplot[
+height=10cm,
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!90!black},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+x grid style={color1},
+xlabel={Number of Gridpoints},
+xmajorgrids,
+xmin=8.4, xmax=21.6,
+xtick style={color=color0},
+y grid style={color1},
+ymajorgrids,
+ymin=0.636979184708076, ymax=1.38941952097665,
+ymode=log,
+ytick style={color=color0}
+]
+\addplot [thick, color2]
+table {%
+9 0.659965245766
+13 1.341027151607
+21 0.693983030407
 };
 \addlegendentry{LEE}
 \end{groupplot}

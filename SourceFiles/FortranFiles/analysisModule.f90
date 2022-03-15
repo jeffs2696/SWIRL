@@ -114,16 +114,18 @@ CONTAINS
         LOGICAL :: debug = .FALSE.
 
         INTEGER  :: &
-            UNIT
+            UNIT , &
+            UNIT2 , &
+            UNIT3
 
         CHARACTER(10) :: &
             file_id
-        CHARACTER(12) :: &
+        CHARACTER(26) :: &
             file_name
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 1.e-12_rDef !JS: is this sufficient
+        eps     = 10.e-11_rDef !JS: is this sufficient
 
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
@@ -152,7 +154,7 @@ CONTAINS
 
         ENDDO
 
-        file_name = 'cv.waves.dat'
+        file_name = '04-EVanalysis/cv.waves.dat'
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
         DO j=1,np
@@ -199,7 +201,7 @@ CONTAINS
             IF (col(j)) THEN
 
 
-                WRITE(6,20) j
+                WRITE(0,20) j
 
                 badcol = .true.
 
@@ -229,7 +231,7 @@ CONTAINS
 
             if (row(k)) then
 
-                write(6,25) k
+                write(0,25) k
                 badrow = .true.
             endif
 
@@ -263,17 +265,18 @@ CONTAINS
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
 
-        !WRITE(6,*) 'INFO = ' ,INFO
         IF ((INFO .EQ. 0).and.(debug.eqv..TRUE.)) THEN
-            !WRITE(0,*) 'EIGENSOLVER PASSED'
+            WRITE(0,*) 'INFO = ' ,INFO
+            WRITE(0,*) 'EIGENSOLVER PASSED'
         ELSEIF ((INFO .EQ. 1 .or. INFO .LT. np4).and.(debug.eqv..TRUE.)) THEN
             WRITE(0,*) 'EIGENSOLVER FAILED'
             WRITE(0,*) 'The QZ iteration. No eigenvectors are calculated'
             WRITE(0,*) 'But ALPHA(j) and BETA(j) should be correct for  '
             WRITE(0,*) 'j = INFO + 1,...,N'
         ELSEIF ((INFO .LT. 0).and.(debug.eqv..TRUE.)) THEN
+            WRITE(0,*) 'INFO = ' ,INFO
             WRITE(0,*) 'EIGENSOLVER FAILED'
-            WRITE(6,*) 'if INFO = -i, the i-th argument had an illegal value.'
+            WRITE(0,*) 'if INFO = -i, the i-th argument had an illegal value.'
         ENDIF
 
         c0  = CMPLX(0.0_rDef,0.0_rDef,rDef)
@@ -284,41 +287,42 @@ CONTAINS
         !  if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
         !      rm = rmx(1)
         !      gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
-        !      write(6,30) gamco
+        !      write(0,30) gamco
         !  endif
 ! 30      format(/,1x,'Cut-off wavenumber: ',e15.5,/)
 
 !
 ! Print the gammas to the display.
-        ! write(6,500)
+        ! write(0,500)
 ! 500     format(1x)
         ! write(6,50)
 
         SMALL = CMPLX(eps,eps,KIND=rDef)
 
         WRITE(file_id, '(i0)') np
-        OPEN(NEWUNIT=UNIT,FILE='alpha_beta'//TRIM(ADJUSTL(file_id)) // '.dat')
+!        OPEN(NEWUNIT=UNIT,FILE='alpha_beta'//TRIM(ADJUSTL(file_id)) // '.dat')
 
         DO j=1,np4
 
-            IF ( (ABS(REAL(alpha(j))).LT.ABS(eps)) .or. &
-                (ABS(AIMAG(alpha(j))).LT.ABS(eps)) ) THEN
-!                WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
-!                WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
-!                WRITE(6,*) 'BETA (',j,') = ', beta(j)
-!
-            ELSE IF ( (ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
-                (ABS(AIMAG(beta(j))).LT.ABS(eps)) ) THEN
-                !WRITE(6,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
-                !WRITE(6,*) 'ALPHA(',j,') = ', alpha(j)
-                !WRITE(6,*) 'BETA (',j,') = ', beta(j)
-            ELSE
+            IF ( ((ABS(REAL(alpha(j))).LT.ABS(eps)) .or. &
+                (ABS(AIMAG(alpha(j))).LT.ABS(eps)) ).and.&
+                (debug.eqv..TRUE.)) THEN
+                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
+                WRITE(0,*) 'BETA (',j,') = ', beta(j)
+                
+                ELSE IF ( ((ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
+                (ABS(AIMAG(beta(j))).LT.ABS(eps)) ).and.&
+                    (debug.eqv..TRUE.)) THEN
+                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
+                WRITE(0,*) 'BETA (',j,') = ', beta(j)
+                ELSE
                 WRITE(UNIT,*) j,alpha(j),beta(j)
                 !  When imaginary part of complex number is zero then it is real number. 
                 ! thats why we can look at the real part of beta
                 if ( (REAL(beta(j),KIND=rDef).gt.0.0_rDef) .and. &
                     (REAL(beta(j),KIND=rDef).lt.0.0_rDef)) then
-
                     gam(j) = ci*alpha(j)/beta(j)
 
 
@@ -327,34 +331,45 @@ CONTAINS
                         gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
 
                     else
-                        ! WRITE(6,*) 'Bad Eigenvalue at' , j
+
+                        IF (debug) THEN
+                            WRITE(0,*) 'Bad Eigenvalue at' , j
+                        ELSE
+                        ENDIF
 
                     endif
                     vphi(j)  = ak/gam(j)
 
                     IF (debug) THEN
-                        ! write(6,10) j,gam(j),gam(j)/ak,vphi(j)
+                        WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
                     ELSE
                     ENDIF
                 ELSE
 
-                    WRITE(6,*) 'Bad Eigenvalue at' , j
+                    IF (debug) THEN
+                        WRITE(0,*) 'Bad Eigenvalue at' , j
+                    ELSE
+                    ENDIF
                 endif
             ENDIF
 
         enddo
-        CLOSE(UNIT)
+!        CLOSE(UNIT)
 !970  format(1x,i4,4e13.4)
 !
 ! Print all the gammas to a file.
-        open(unit=15,file='gammas.dat',status='unknown')
-        open(unit=35,file='gam.acc',status='unknown')
-        open(unit=55,file='gammasOnly.dat',status='unknown')
-        rewind 15
-        rewind 35
-        rewind 55
-        write(15,50)
-        write(35,55)
+
+        OPEN(NEWUNIT=UNIT,FILE='04-EVanalysis/' //'gammas'//TRIM(ADJUSTL(file_id)) // '.dat')
+        OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
+        OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
+
+!        open(unit=15,file='gammas.dat',status='unknown')
+!
+!        rewind 15
+!        rewind 35
+!        rewind 55
+        write(UNIT,50)
+        write(UNIT2,55)
 50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
             6x,'Im{gam}/k',6x,'kappa')
 55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
@@ -372,22 +387,25 @@ CONTAINS
                     +REAL(ak,rDef)*REAL(ak,rDef)
                 if (akap(i).gt.0.0_rDef) then
                     akap(i) = SQRT(akap(i))
-                    write(15,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
+                    write(UNIT,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
                 else
-                    write(15,10) i,gam(i),gam(i)/ak,vphi(i)
+                    write(UNIT,10) i,gam(i),gam(i)/ak,vphi(i)
                 endif
 ! JS: if there is not linear shear and there is no swirl flag then proceed
             endif
 ! because gam has blank entries (gives 1e-310 because previous loop omitted some entries)
-            ! write(35,12) i,gam(i),gam(i)/ak,vphi(i)
-            ! write(15,10) i,gam(i),gam(i)/ak,vphi(i)
-            ! write(55,*) REAL(gam(i)),AIMAG(gam(i))
+            !write(UNIT2,12) i,gam(i),gam(i)/ak,vphi(i)
+            !write(UNIT,10) i,gam(i),gam(i)/ak,vphi(i)
+            !write(UNIT3,*) REAL(gam(i)),AIMAG(gam(i))
         enddo
-        close(15)
-        close(35)
-        close(55)
+        CLOSE(UNIT)
+        CLOSE(UNIT2)
+        CLOSE(UNIT3)
+        !close(15)
+        !close(35)
+        !close(55)
 10      format(1x,i4,9e15.6)
-! 12      format(1x,i4,6e20.12)
+!12      format(1x,i4,6e20.12)
 !
 
         ! SS = MATMUL(aa_before,VR(:,1)) - gam(1)*MATMUL(bb_before,VR(:,1))

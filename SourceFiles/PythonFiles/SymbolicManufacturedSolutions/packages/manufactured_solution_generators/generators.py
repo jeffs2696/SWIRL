@@ -21,7 +21,7 @@ def TanhMethod(n,B,r_min,r_max):
     A          = []
     
     # maximum allowed amplitude 
-    max_amplitude = 0.75
+    max_amplitude = 0.25
    
     # vertical shift along the y axis
     # one is chosed to keep the inflection points above 

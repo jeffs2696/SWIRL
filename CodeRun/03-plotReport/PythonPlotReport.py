@@ -72,7 +72,6 @@ plt.legend()
 plt.tight_layout()
 
 plt.grid(True)
-plt.show()
 tikzplotlib.save("tex-outputs/MachDistribution.tex",extra_axis_parameters= ['width=10cm'])
 
 

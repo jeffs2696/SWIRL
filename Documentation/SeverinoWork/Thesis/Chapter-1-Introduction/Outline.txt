@@ -1,3 +1,5 @@
+Writing an introdution: 
+
 1. First, describe a situation
  There is a growth of CFD that is tandem with an engineers ability to access for rigorous 
  computational tools
@@ -10,8 +12,32 @@ Aeroacoustic contributions
 Provide a means of V&V that is formal and can aid the engineer in synthesizing the results 
 5. What you aim to do
 
-Example
+Example 1
 
+Worldwide, the number of PhD students is increasing.
+
+However, there is also evidence of disproportionate levels of stress among PhD
+
+While there have been a limited number of studies to date which have highlighted 
+the scale of the problem, and individual institutions have made efforts to provide
+better support, there has been little research into the effectiveness of 
+different interventions
+
+This research will..
+
+Example 2
+
+Over the last 10 years, there has been a huge increase in the number of students 
+in doctoral programs worldwide. Recent statistics from the UN estimate that...
+
+While the increase in the numbers of doctoral students is seen globally, it is even more marked 
+in developing nations such as...
+
+This is in part due to the concerted effort at government level to ...
+
+Although increasing engagement in doctoral research has a number of benefits, 
+recent evidence has shown evidence of disproportionate levels of stress among PhD
+students
 
 State a Situation for why I am to do what I do:
 
@@ -20,25 +46,4 @@ It was only with the work in 1996 by Kousen (with his approach)that it waS first
 Attassi had their contribution however this is work is not expanding on that
 
 Our theory is a response to this "discovery" Or a response to a "preexisting theory"
-
-Lit Review Notes:
-
-1. You do not have to show how much you read 
-
-2. Every paper is a rePsonse to a probleM or question or situation (or a previous
-paper)
-
-3. You can set these with the context of a general situation that exists with 
-the literature
-
-Example:
-
-Research into ... has gained pace in recent years, especially since the development
-of new techniques allowing ...
-
-One of the main aims of this research has been to ...
-
-This chapter will outline the most recent developments, key discoveries and 
-current state of the art regarding...
-
 

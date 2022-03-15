@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Thesis.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy.aux
+The style file: unsrt.bst
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.aux
+Database file #1: references.bib
+Warning--entry type for "FAAPolicy" isn't style-file defined
+--line 1 of file references.bib
+Warning--I didn't find a database entry for "Kousen1999"
+You've used 2 entries,
+            1791 wiz_defined-function locations,
+            472 strings with 4580 characters,
+and the built_in function-call counts, 365 in all, are:
+= -- 29
+> -- 12
+< -- 0
++ -- 5
+- -- 3
+* -- 20
+:= -- 62
+add.period$ -- 5
+call.type$ -- 2
+change.case$ -- 2
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 14
+empty$ -- 42
+format.name$ -- 3
+if$ -- 80
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 1
+newline$ -- 12
+num.names$ -- 2
+pop$ -- 8
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 8
+stack$ -- 0
+substring$ -- 21
+swap$ -- 2
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 3
+width$ -- 3
+write$ -- 21
+(There were 2 warnings)
