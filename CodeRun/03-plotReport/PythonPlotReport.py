@@ -14,18 +14,28 @@ import plotReportLib
 from matplotlib import pyplot as plt
 from plotReportLib import myfunctions as fcn
 
-list_of_files = glob.glob('../01-mean-flow/*.dat')
+list_of_files = glob.glob('../01-mean-flow/mean-flow????.dat')
 #getting mean flow file with highest grid number 
 last_file = os.path.basename(list_of_files[-1])
 #getting number of grid points
-max_grid = int(re.findall('\d+',last_file)[0])
-print(round(int(max_grid)/10))
+print(last_file)
+def extract_number(f):
+    s = re.findall("\d+$",f)
+    return (int(s[0]) if s else -1,f)
+
+max_grid = (max(list_of_files,key=extract_number))
+#max_grid = int(re.findall('\d+$',last_file)[0])
+
+
+#print(round(int(max_grid)/10))
+print(max_grid)
 # importing data
 flow_data    = fcn.importPlotData((list_of_files[-1]))
 LEE_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-LEE.dat')
 LEE_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-LEE.dat')
 SND_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-sound_speed-.dat')
 SND_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-sound_speed.dat')
+cv_wave_data = fcn.importPlotData('../04-EVanalysis/cv.waves.dat')
 
 Delta_r    = LEE_ROC_data.Delta_r
 LEE_ROC    = LEE_ROC_data.ROC
@@ -34,7 +44,7 @@ GridPoints = LEE_L2_data.GridPoints
 
 
 # In[3]:
-markers = ['>', '+', '.', ',', 'o', 'v', 'x', 'X', 'D', '|']
+markers = ['->', '-+', '-.', '-o', '--', 'v', 'x', 'X', 'D', '|']
 
 
 plt.style.use('plot_style.txt')
@@ -46,19 +56,23 @@ plt.plot(
         flow_data['radius'],
         flow_data['M_x'],
         markers[1%10], 
-        markevery=int((max_grid)/10),
+        #markevery=int((max_grid)/10),
         label = '$M_{x}$',
         )
 
 plt.plot(
         flow_data['radius'],
         flow_data['M_theta'],
+        markers[2%10], 
+        #markevery=int((max_grid)/10),
         label = '$M_{\\theta}$' ,
         )
 
 plt.plot(
         flow_data['radius'],
         (flow_data['M_x']**2+ flow_data['M_theta']**2)**0.5,
+        markers[3%10], 
+        #markevery=int((max_grid)/10),
         label = '$M_{Total}$' ,
         )
 
@@ -71,6 +85,7 @@ plt.xlabel(r'$\bar{r}$')
 plt.legend()
 plt.tight_layout()
 
+#plt.show()
 plt.grid(True)
 tikzplotlib.save("tex-outputs/MachDistribution.tex",extra_axis_parameters= ['width=10cm'])
 
@@ -181,6 +196,15 @@ tikzplotlib.save("tex-outputs/SourceTermData.tex",extra_axis_parameters=['width=
 
 # In[ ]:
 
-
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=(10,4)
+        )
+plt.plot(
+        cv_wave_data['REAL'],
+        cv_wave_data['IMAG'],
+        marker = 'o')
 
 #plt.show()

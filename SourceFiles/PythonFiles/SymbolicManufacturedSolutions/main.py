@@ -182,6 +182,7 @@ p_analytic = msm.diffModifiedManufacturedSolution(f           ,
         del_dp_maxBC,
         B_min       ,
         B_max)
+
 p_analytic = p_analytic.subs(
         {
             'ak':ak,
@@ -444,3 +445,32 @@ else:
     LEE_f_file(S, S_at_r)
 
 LEE_components_f_file(A_times_x,lambda_B_times_x)
+
+
+
+A_analytic_str = "  \\bar{{A}} = {latex_expr} "
+A_analytic_tex = sp.latex(A_analytic)
+str = A_analytic_tex
+#n = 40
+#chunks = [str[i:i+n] for i in range(0,len(str),n)]
+#
+#print(Sp.latex(chunks))
+
+A_analytic_tex = A_analytic_str.format(latex_expr = A_analytic_tex)
+
+
+#M_x_tex = "M_x = {latex_expr}"
+#M_x_tex = M_x_tex.format(latex_expr = sp.latex(M_x_analytic))
+#
+#M_t_tex = "  M_{{\\theta}} = {latex_expr} "
+#M_t_tex = M_t_tex.format(latex_expr = sp.latex(M_t_analytic))
+#
+out_file = open("../../../CodeRun/03-plotReport/manufactured_solutions.tex","w")
+
+out_file.write(
+        A_analytic_tex)
+#
+#+ "\n"
+#        + M_x_tex + "\n"
+#        + M_t_tex + "\n")
+out_file.close()

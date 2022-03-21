@@ -156,10 +156,12 @@ CONTAINS
 
         file_name = '04-EVanalysis/cv.waves.dat'
 
+
         OPEN(NEWUNIT=UNIT,FILE=file_name)
+        WRITE(UNIT,*) 'REAL ' , 'IMAG'
         DO j=1,np
 
-            WRITE(UNIT,*) cvct(j)
+            WRITE(UNIT,*) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
             IF (debug) THEN
                  WRITE(0,19) cvct(j)
             ELSE
@@ -318,7 +320,7 @@ CONTAINS
                 WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
                 WRITE(0,*) 'BETA (',j,') = ', beta(j)
                 ELSE
-                WRITE(UNIT,*) j,alpha(j),beta(j)
+                !WRITE(UNIT,*) j,alpha(j),beta(j)
                 !  When imaginary part of complex number is zero then it is real number. 
                 ! thats why we can look at the real part of beta
                 if ( (REAL(beta(j),KIND=rDef).gt.0.0_rDef) .and. &

@@ -1,48 +1,43 @@
 ! Character Variables
-    CHARACTER(50) :: &
-        dir_name
 
-    CHARACTER(50):: &
-        FORMAT_MEAN_FLOW         , &
-        FORMAT_PERTURB_VARS      , &
-        FORMAT_PERTURB_HEADER    , &
-        FORMAT_MEAN_FLOW_HEADER  , &
-        FORMAT_SOURCE_TERMS      , &
-        FORMAT_SOURCE_TERMS_HEADER , &
-        FORMAT_L2                , &
-        FORMAT_L2_HEADER         , &
-        FORMAT_ERROR             , &
-        FORMAT_ERROR_HEADER      , &
-        FORMAT_ROC               , &     
-        FORMAT_ROC_HEADER       
+!    CHARACTER(50) :: &
+!        dir_name
+!
+!    CHARACTER(50):: &
+!    !FORMAT_MEAN_FLOW         , &
+!        FORMAT_PERTURB_VARS      , &
+!        FORMAT_PERTURB_HEADER    , &
+!    !FORMAT_MEAN_FLOW_HEADER  , &
+!        FORMAT_SOURCE_TERMS      , &
+!        FORMAT_SOURCE_TERMS_HEADER , &
+!        FORMAT_L2                , &
+!        FORMAT_L2_HEADER         , &
+!        FORMAT_ERROR             , &
+!        FORMAT_ERROR_HEADER      , &
+!        FORMAT_ROC               , &     
+!        FORMAT_ROC_HEADER       
+!
 
-    CHARACTER(10):: file_id
+ !CHARACTER(10):: file_id
 ! INTEGER Variables 
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   
 
     INTEGER  :: &
-        UNIT                ,& ! for NEWUNIT
+    !UNIT                ,& ! for NEWUNIT
         finiteDiffFlag      ,& ! finite difference flag
         numericalIntegrationFlag      ,& !  numerical integration flag
         numberOfGridPoints  ,& ! number of points
         azimuthalModeNumber, &
         i ,&!j               ,& ! indexer for do loops
-        i1,&!j1            ,& ! indexer for do loops
-        i2,&!j2            ,& ! indexer for do loops
-        i3,&!j3            ,& ! indexer for do loops
         fac                 ,& ! variable used for doubling grid points
         eigenIndex          ,&
         facCount               ! counts the outermost do loop
 
-    INTEGER, DIMENSION(:), ALLOCATABLE :: &
-        numberOfGridPointsArray
- 
     LOGICAL :: debug = .TRUE.
 
     COMPLEX(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
-        k                                            , &
         S_eig                                        , &
         S_actual                                     , &
         S_1                                          , &
@@ -83,18 +78,14 @@
         S_B44                                        , &   
         S_Expected                                   , &
         S_error                                      , &
-        S_L2Array                                    , &
+    !S_L2Array                                    , &
         eigenVector                                  , &
         eigenVectorMMS
 
     COMPLEX(KIND = rDef) :: &
-        ci                 ,&
-        S_L2               ,& 
-        axialWavenumberMMS              
+        ci!                 ,& S_L2                
 
      COMPLEX(KIND = rDef),DIMENSION(:), ALLOCATABLE :: &
-     !     S_A_expected , &
-     !     S_B_expected , &
          S_A_actual   , &
          S_B_actual  
 
@@ -104,7 +95,7 @@
         axialMachData       ,& !M_x
         thetaMachData       ,& !M_th
         totalMachData       ,& !M_total = sqrt(M_x^2+M_th^2)
-        SoundSpeedExpected  ,& !Based on Eqn 2.6 in Kousen's paper
+    !SoundSpeedExpected  ,& !Based on Eqn 2.6 in Kousen's paper
         rOut                ,& !radial grid after it leaves swirlClassObj
         axialMachDataOut    ,& !M_x         after it leaves swirlClassObj
         thetaMachDataOut    ,& !M_th        after it leaves swirlClassObj 
@@ -112,16 +103,13 @@
         axialMachData_dr_Out,& !dM_x/dr 
         thetaMachData_dr_Out,& !dM_th/dr
         SoundSpeed_dr_Out   ,& !dA/dr
-        SoundSpeedError     ,& !eps_A
-        SoundSpeedL2Array   ,& !array of L2norm (eps_A)
+    !SoundSpeedError     ,& !eps_A
+    !SoundSpeedL2Array   ,& !array of L2norm (eps_A)
     ! Perturbation variables
         vR                  ,& !radial     velocity  
         vT                  ,& !tangential velocity
         vX                  ,& !axial velocity
-        Pr                  ,& !pressure
-        RateOfConvergence1  ,&
-        RateOfConvergence2 
-
+        Pr                  !,& !pressure 
     REAL(KIND = REAL64) ::  &
         ExpectedRateOfConvergenceSoundSpeed ,&
         ExpectedRateOfConvergenceSourceTerm ,&
@@ -130,8 +118,7 @@
         fourthOrderSmoother ,& !4th order smoothing coefficient
         boundingConstant    ,&
         dr                  ,&
-        hubToTipRatio       ,&
-        SoundSpeedErrorL2
+        hubToTipRatio      ! ,& SoundSpeedErrorL2
 
 ! input variables:
     REAL(KIND = rDef), PARAMETER ::&
@@ -149,8 +136,8 @@
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
         swirlClassObj
-
-    TYPE(mmsClassType)  :: &
-        SoundSpeedMMS_ClassObj , &
-        SourceTermMMS_ClassObj
-
+!
+!    TYPE(mmsClassType)  :: &
+!        SoundSpeedMMS_ClassObj , &
+!        SourceTermMMS_ClassObj
+!

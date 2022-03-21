@@ -12,24 +12,27 @@ PROGRAM MAIN
 ! Code Starts Here!
     CONTINUE
 
-    include '/main-scripts/debug-script.f90'
+
+    IF (debug) THEN
+
+        WRITE(0, *) 'Number of Grid Study Iterations: ' , numberOfIterations
+
+    ELSE
+    ENDIF
+
     ! local variables 
     include '/main-scripts/main-local-variables.f90'
     
     DO fac = 1, numberOfIterations
         include '/main-scripts/iterative-loop.f90'
     END DO
+
     ! Construct spars A and B to check each term
 
-    include '/main-scripts/calculating-rate-of-convergence.f90'
-
-    ! Should I put the data writing in another script? : JS
-    include '/main-scripts/swirl-data-export-MMS.f90'
-
-    DEALLOCATE( &
-        SoundSpeedL2Array ,&
-        S_L2Array ,&
-        RateOfConvergence1 ,&
-        RateOfConvergence2)
+!    include '/main-scripts/calculating-rate-of-convergence.f90'
+!
+!    ! Should I put the data writing in another script? : JS
+!    include '/main-scripts/swirl-data-export-MMS.f90'
+!
 
 END PROGRAM MAIN
