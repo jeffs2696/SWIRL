@@ -3,7 +3,15 @@
 make MMS
 make all 
 
-# Notes 
+## FORTRAN
+### Naming Convention
+
+*Strong Suggestions
+    - All FORTRAN commands are capitalized. It is not necessary but it is used to be 
+    - all SUBROUTINE calls start with a verb (create,destroy,calculate etc) 
+    - The variables should be descriptive and upper case letters and underscore use should be consistent
+
+### Compiling Notes 
 
 Important flags:
 

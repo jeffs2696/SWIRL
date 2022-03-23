@@ -1,4 +1,4 @@
- 
+
     ! gam - axial wavenumber t
     ! ak  - reduced frequency
     ! kappa - ratio of specific heats
