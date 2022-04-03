@@ -6,26 +6,26 @@
 
         OPEN( NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
-        ! Write the resulting mean flow
-        WRITE(UNIT,FORMAT_MEAN_FLOW_HEADERS) &
+        ! Write the resulting mean flow 
+        WRITE(UNIT,*) &
             'radius','M_x','M_theta','A_expected','A_actual'
 
         DO i = 1,numberOfGridPoints
 
 
-            WRITE(UNIT,FORMAT_MEAN_FLOW) &
+            WRITE(UNIT,*) &
                 rOut(i)                 , &
-                axialMachDataOut(i)     , &
-                thetaMachDataOut(i)     , &
-                SoundSpeedExpected(i)   , &
+                axialMachDataMMSOut(i)     , &
+                thetaMachDataMMSOut(i)     , &
+                speedOfSoundMMS(i)   , &
                 SoundSpeedOut(i)
 
             IF (debug) THEN
-                WRITE(0,FORMAT_MEAN_FLOW) &
+                WRITE(0,*) &!FORMAT_MEAN_FLOW) &
                     rOut(i)                 , &
-                    axialMachDataOut(i)     , &
-                    thetaMachDataOut(i)     , &
-                    SoundSpeedExpected(i)   , &
+                    axialMachDataMMSOut(i)     , &
+                    thetaMachDataMMSOut(i)     , &
+                    speedOfSoundMMS(i)   , &
                     SoundSpeedOut(i)
             ELSE
             ENDIF
@@ -40,7 +40,7 @@
         WRITE(UNIT,*) 'Radius' , 'vR', 'vTh' ,'vX', 'Pr'
 
         DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) r(i) , vR(i) , vT(i) , vX(i), Pr(i)
+            WRITE(UNIT,*) r(i) , vR(i) , vTh(i) , vX(i), Pr(i)
         END DO
 
         CLOSE(UNIT);
@@ -67,7 +67,7 @@
         DO i = 1,numberOfGridPoints
             WRITE(UNIT,*) &
                 i, &
-                REAL(S_Expected(i),KIND=rDef), &
+                REAL(S_MMS(i),KIND=rDef), &
                 REAL(S_actual(i),KIND=rDef)  , &
                 REAL(S_error(i),KIND=rDef)
         END DO
@@ -82,7 +82,7 @@
         DO i = numberOfGridPoints,numberOfGridPoints*2
             WRITE(UNIT,*) &
                 i, &
-                REAL(S_Expected(i),KIND=rDef), &
+                REAL(S_MMS(i),KIND=rDef), &
                 REAL(S_actual(i),KIND=rDef)  , &
                 REAL(S_error(i),KIND=rDef)
         END DO
@@ -98,7 +98,7 @@
         DO i = numberOfGridPoints*2,numberOfGridPoints*3
             WRITE(UNIT,*) &
                 i, &
-                REAL(S_Expected(i),KIND=rDef), &
+                REAL(S_MMS(i),KIND=rDef), &
                 REAL(S_actual(i),KIND=rDef)  , &
                 REAL(S_error(i),KIND=rDef)
         END DO
@@ -114,7 +114,7 @@
         DO i = numberOfGridPoints*3,numberOfGridPoints*4
             WRITE(UNIT,*) &
                 i, &
-                REAL(S_Expected(i),KIND=rDef), &
+                REAL(S_MMS(i),KIND=rDef), &
                 REAL(S_actual(i),KIND=rDef)  , &
                 REAL(S_error(i),KIND=rDef)
         END DO

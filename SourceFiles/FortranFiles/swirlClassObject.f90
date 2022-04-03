@@ -83,6 +83,7 @@ MODULE swirlClassObject
             fourthOrderSmoother  !"          "
 
         REAL(KIND = REAL64), DIMENSION(:), ALLOCATABLE :: &
+            soundSpeed_L2array , &
             vRad   , &
             vT   , &
             vX   , &
@@ -127,6 +128,7 @@ MODULE swirlClassObject
             S_2   ,&
             S_3   ,&
             S_4   ,&
+            eigenVectorMMS , &
             wvn
 
         COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE :: &
@@ -153,7 +155,6 @@ CONTAINS
 
     SUBROUTINE CreateSwirlClassObject(&
         object          , &
-        radius          , &
         azimuthalMode   , &
         np              , &
         sig             , &
@@ -176,7 +177,6 @@ CONTAINS
             sig
 
         REAL(KIND = REAL64), DIMENSION(:), INTENT(INOUT) :: &
-            radius , &
             axialMachData, &
             tangentialMachData
 
@@ -209,21 +209,20 @@ CONTAINS
         object%rmt                  = tangentialMachData
         np4                         = object%numberOfRadialPoints*4
 
-
         object%dr =  &
             (1.0_rDef-object%hubTipRatio)/REAL(object%numberOfRadialPoints - 1, rDef)
-! NEW: allocate data arrays
-!
 
         ALLOCATE(&
-        !object%S_actual(object%numberOfRadialPoints*4) , &
-        !object%S_Expected(object%numberOfRadialPoints*4) , &
-        !object%S_1(object%numberOfRadialPoints) , &
+            object%eigenVectorMMS(object%numberOfRadialPoints*4) , &
+            object%S_actual(object%numberOfRadialPoints*4) , &
+            object%S_Expected(object%numberOfRadialPoints*4) , &
+            object%S_1(object%numberOfRadialPoints) , &
             object%S_2(object%numberOfRadialPoints) , &
             object%S_3(object%numberOfRadialPoints) , &
             object%S_4(object%numberOfRadialPoints) , &
             object%snd(object%numberOfRadialPoints),&
             object%SoundSpeedExpected(object%numberOfRadialPoints) , &
+            object%soundSpeed_L2array(object%numberOfRadialPoints) , &
             object%vRad(object%numberOfRadialPoints),&
             object%vT(object%numberOfRadialPoints),&
             object%vX(object%numberOfRadialPoints),&
@@ -411,63 +410,11 @@ CONTAINS
             object%aa_before = object%aa
             object%bb_before = object%bb
 
-!            WRITE(0,*) SIZE(eigenVectorMMS)
-!            IF (object%mmsFlag) THEN
-!                DO i = 1,object%numberOfRadialPoints
-!
-!                    eigenVectorMMS(i) = &
-!                        CMPLX(object%vRad(i),KIND = rDef)
-!
-!                    eigenVectorMMS(i +   object%numberOfRadialPoints) = &
-!                        CMPLX(object%vT(i), KIND = rDef)
-!
-!                    eigenVectorMMS(i + 2*object%numberOfRadialPoints) = &
-!                        CMPLX(object%vX(i), KIND = rDef)
-!
-!                    eigenVectorMMS(i + 3*object%numberOfRadialPoints) = &
-!                        CMPLX(object%Pr(i), KIND = rDef)
-!
-!                    i1 = i + object%numberOfRadialPoints
-!                    i2 = i + 2*object%numberOfRadialPoints
-!                    i3 = i + 3*object%numberOfRadialPoints
-!
-!                    object%S_Expected(i)  = object%S_1(i)
-!                    object%S_Expected(i1) = object%S_2(i)
-!                    object%S_Expected(i2) = object%S_3(i)
-!                    object%S_Expected(i3) = object%S_4(i)
-!                ENDDO
-!
-!                ci  = CMPLX(0.0, 1.0, rDef)  !imaginary number
-!
-!                axialWavenumberMMS = CMPLX(100.0_rDef,0.00_rDef,KIND=rDef) ! the value Is arbitrary, up to user
-!
-!                S_A = MATMUL(object%aa_before,eigenVectorMMS)
-!                S_B = MATMUL(object%bb_before,eigenVectorMMS)
-!
-!                object%S_actual = S_A - (-ci*axialWavenumberMMS)*S_B
-!
-!
-!                CALL getL2Norm(&
-!                    object    = SoundSpeedMMS_ClassObj ,&
-!                    L2        = SoundSpeedErrorL2      ,&
-!                    dataSet1  = object%SoundSpeedExpected     ,&
-!                    dataSet2  = object%snd           )
-!
-!
-!                CALL getL2Norm(&
-!                    object    = SourceTermMMS_ClassObj,&
-!                    L2        = S_L2 ,&
-!                    dataSet1  = object%S_actual,&
-!                    dataSet2  = object%S_Expected)
-!
-!            ELSE
-!            ENDIF
-!
-            ! WRITE(6,*) SIZE(object%aa_before,1), SIZE(object%aa_before,2)
 
-            !     WRITE(0,*) 'Entering analysis CALL'
-            ! ELSE
-            ! ENDIF
+            IF (debug) THEN
+                WRITE(0,*) 'Entering analysis CALL'
+            ELSE
+            ENDIF
 
             CALL analysis(&
                 np    = object%numberOfRadialPoints,    &
@@ -504,72 +451,109 @@ CONTAINS
         ENDIF
 
     END SUBROUTINE runSWIRL
-    SUBROUTINE CreateSwirlClassObjectMMS(&
-        manufacturedObject , &
-        MMSflag )
-
-        LOGICAL , INTENT(INOUT) :: MMSflag
-!        CHARACTER(LEN=*) , INTENT(IN) :: outfile
-
-        ! Local Vars
-        TYPE(SwirlClassType) , INTENT(INOUT) :: manufacturedObject
-        REAL(KIND = rDef) :: &
-            ExpectedRateOfConvergenceSoundSpeed , &
-            ExpectedRateOfConvergenceSourceTerm
-
-        IF (MMSflag) THEN
-
-            CALL getSoundSpeed(&
-                r                  = manufacturedObject%r                  , &
-                kappa              = manufacturedObject%kappa                , &
-                SoundSpeedExpected = manufacturedObject%SoundSpeedExpected , &
-                thetaMachData      = manufacturedObject%rmt      , &
-                axialMachData      = manufacturedObject%rmx      )
-
-            CALL getPerturbationVariables(&
-                r     = manufacturedObject%r    , &
-                vR    = manufacturedObject%vRad   , &
-                vTh   = manufacturedObject%vT   , &
-                vX    = manufacturedObject%vX   , &
-                Pr    = manufacturedObject%Pr      )
-
-            CALL getMMSSourceTerms( &
-                r     = manufacturedObject%r                    ,&
-                S_1   = manufacturedObject%S_1                  ,&
-                S_2   = manufacturedObject%S_2                  ,&
-                S_3   = manufacturedObject%S_3                  ,&
-                S_4   = manufacturedObject%S_4     )
-
-            CALL CreateObject(&
-                object          = manufacturedObject , &
-                radius          = manufacturedObject%r          , &
-                azimuthalMode   = manufacturedObject%azimuthalMode, &
-                np              = manufacturedObject%numberOfRadialPoints , &
-                sig             = manufacturedObject%hubTipRatio             , &
-                axialMachData   = manufacturedObject%rmx , &
-                tangentialMachData   = manufacturedObject%rmt, &
-                ak = manufacturedObject%frequency              , &
-                etah = manufacturedObject%hubLinerAdmittance            , &
-                etad = manufacturedObject%ductLinerAdmittance            , &
-                ifdff = manufacturedObject%FiniteDifferenceFlag           )
-            CALL runSwirlClassMethods(object = manufacturedObject)
-
-            IF (manufacturedObject%FiniteDifferenceFlag.eq.1) THEN
-                ExpectedRateOfConvergenceSoundSpeed = 2.0_rDef
-            ELSEIF (manufacturedObject%FiniteDifferenceFlag.eq.2) THEN 
-                ExpectedRateOfConvergenceSoundSpeed = 4.0_rDef
-            ENDIF
-            
-            IF (manufacturedObject%FiniteDifferenceFlag.eq.1) THEN
-                ExpectedRateOfConvergenceSourceTerm = 2.0_rDef
-            ELSEIF (manufacturedObject%FiniteDifferenceFlag.eq.2) THEN 
-                ExpectedRateOfConvergenceSourceTerm = 4.0_rDef
-            ENDIF
-
-            CALL DestroyObject(object = manufacturedObject)
-
-        ELSE
-        ENDIF
+    SUBROUTINE CreateSwirlClassObjectMMS()!&
+!        TYPE(SwirlClassType) :: manufacturedObject
+!        TYPE(mmsClassType) :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
+!
+!        INTEGER :: &
+!            i 
+!
+!
+!        REAL(KIND = rDef) :: &
+!            ExpectedRateOfConvergenceSoundSpeed , &
+!            ExpectedRateOfConvergenceSourceTerm
+!
+!        REAL(KIND = rDef) ,DIMENSION(:), ALLOCATABLE ::&
+!            SoundSpeedExpected , &
+!            thetaMachData, & 
+!            axialMachData 
+!
+!        COMPLEX(KIND = rDef) :: &
+!            axialWavenumberMMS 
+!
+!
+!        COMPLEX(KIND = rDef) , DIMENSION(:) , ALLOCATABLE :: &
+!            S_A, S_B
+!
+!
+!            CALL CreateObject(&
+!                object          = manufacturedObject , &
+!                azimuthalMode   = azimuthalModeNumber, &
+!                np              = numberOfGridPoints , &
+!                sig             = hubToTipRatio             , &
+!                axialMachData   = axialMachData , &
+!                tangentialMachData   = thetaMachData, &
+!                ak = frequency, &
+!                etah = hubAdmittance            , &
+!                etad = ductAdmittance            , &
+!                ifdff = finiteDiffFlag           )
+!
+!            CALL runSwirlClassMethods(object = manufacturedObject)
+!
+!            IF (manufacturedObject%FiniteDifferenceFlag.eq.1) THEN
+!                ExpectedRateOfConvergenceSoundSpeed = 2.0_rDef
+!            ELSEIF (manufacturedObject%FiniteDifferenceFlag.eq.2) THEN
+!                ExpectedRateOfConvergenceSoundSpeed = 4.0_rDef
+!            ENDIF
+!
+!            IF (manufacturedObject%FiniteDifferenceFlag.eq.1) THEN
+!                ExpectedRateOfConvergenceSourceTerm = 2.0_rDef
+!            ELSEIF (manufacturedObject%FiniteDifferenceFlag.eq.2) THEN
+!                ExpectedRateOfConvergenceSourceTerm = 4.0_rDef
+!            ENDIF
+!            DO i = 1,manufacturedObject%numberOfRadialPoints
+!
+!                manufacturedObject%eigenVectorMMS(i) = &
+!                    CMPLX(manufacturedObject%vRad(i),KIND = rDef)
+!
+!                manufacturedObject%eigenVectorMMS(i +   manufacturedObject%numberOfRadialPoints) = &
+!                    CMPLX(manufacturedObject%vT(i), KIND = rDef)
+!
+!                manufacturedObject%eigenVectorMMS(i + 2*manufacturedObject%numberOfRadialPoints) = &
+!                    CMPLX(manufacturedObject%vX(i), KIND = rDef)
+!
+!                manufacturedObject%eigenVectorMMS(i + 3*manufacturedObject%numberOfRadialPoints) = &
+!                    CMPLX(manufacturedObject%Pr(i), KIND = rDef)
+!
+!                manufacturedObject%S_Expected(i)  =&
+!                    manufacturedObject%S_1(i)
+!
+!                manufacturedObject%S_Expected(i + manufacturedObject%numberOfRadialPoints)  =&
+!                    manufacturedObject%S_2(i)
+!
+!                manufacturedObject%S_Expected(i + 2*manufacturedObject%numberOfRadialPoints)  =&
+!                    manufacturedObject%S_3(i)
+!
+!                manufacturedObject%S_Expected(i + 3*manufacturedObject%numberOfRadialPoints)  =&
+!                    manufacturedObject%S_4(i)
+!
+!            ENDDO
+!
+!
+!            axialWavenumberMMS = CMPLX(100.0_rDef,0.00_rDef,KIND=rDef) ! the value Is arbitrary, up to user
+!
+!            S_A = MATMUL(manufacturedObject%aa_before,manufacturedObject%eigenVectorMMS)
+!            S_B = MATMUL(manufacturedObject%bb_before,manufacturedObject%eigenVectorMMS)
+!
+!            manufacturedObject%S_actual = S_A - (-CMPLX(0.0, 1.0, KIND=rDef)*axialWavenumberMMS)*S_B
+!
+!
+!            CALL getL2Norm(&
+!                object    = SoundSpeedMMS_ClassObj ,&
+!                L2        = SoundSpeedErrorL2      ,&
+!                dataSet1  = manufacturedObject%SoundSpeedExpected     ,&
+!                dataSet2  = manufacturedObject%snd           )
+!
+!
+!            CALL getL2Norm(&
+!                object    = SourceTermMMS_ClassObj,&
+!                L2        = S_L2 ,&
+!                dataSet1  = manufacturedObject%S_actual,&
+!                dataSet2  = manufacturedObject%S_Expected)
+!
+!            CALL DestroyObject(object = manufacturedObject)
+!            DEALLOCATE(SoundSpeedExpected,thetaMachData,axialMachData)
+!        
     END SUBROUTINE CreateSwirlClassObjectMMS
     SUBROUTINE GetMeanData(&
         object   ,&
@@ -693,6 +677,8 @@ CONTAINS
             object%rmt,   &
             object%drt,   &
             object%snd,   &
+            object%SoundSpeedExpected , &
+            object%soundSpeed_L2array , &
             object%dsn,   &
             object%rho,   &
             object%akap,  &
@@ -710,9 +696,9 @@ CONTAINS
             object%vl,    &
             object%vr,    &
             object%S_MMS , &
-        !object%S_actual , &
-        !object%S_Expected , &
-        !object%S_1,&
+            object%S_actual , &
+            object%S_Expected , &
+            object%S_1,&
             object%S_2,&
             object%S_3,&
             object%S_4,&
