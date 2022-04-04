@@ -1,5 +1,4 @@
-PROGRAM MAIN
-
+PROGRAM MAIN 
     USE, INTRINSIC  :: ISO_FORTRAN_ENV
     USE swirlClassObject               ! Runs SWIRL for a given set of parameters
     USE mmsClassObject                 ! Calculates L2Norm, L2Max, and Rate Of Convergence
@@ -8,13 +7,26 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     ! 2) Start defining the variables  
-    CHARACTER(50) :: file_name,dir_name,file_id
+    CHARACTER(50) :: dir_name,file_id , &
+        FORMAT_MEAN_FLOW         , &
+        FORMAT_PERTURB_VARS      , &
+        FORMAT_PERTURB_HEADER    , &
+        FORMAT_MEAN_FLOW_HEADER  , &
+        FORMAT_SOURCE_TERMS      , &
+        FORMAT_SOURCE_TERMS_HEADER , &
+        FORMAT_L2                , &
+        FORMAT_L2_HEADER         , &
+        FORMAT_ERROR             , &
+        FORMAT_ERROR_HEADER      , &
+        FORMAT_ROC               , &     
+        FORMAT_ROC_HEADER       
+
     LOGICAL :: &
-        debug = .FALSE.
+        debug = .TRUE.
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 4
+        numberOfIterations = 8
 
     INTEGER  :: &
         UNIT , & ! for NEWUNIT
@@ -25,6 +37,9 @@ PROGRAM MAIN
         i                        ,& ! indexer for do loops
         fac                      ,& ! variable used for doubling grid points
         facCount                    ! counts the outermost do loop
+
+    INTEGER, DIMENSION(:), ALLOCATABLE :: &
+        numberOfGridPointsArray
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         r                   ,& !radial grid locations
@@ -39,12 +54,18 @@ PROGRAM MAIN
         axialMach_drMMSOut, &
         thetaMach_drMMSOut, &
         SoundSpeedOut , &
+        SoundSpeedL2Array, &
         SoundSpeed_drOut, &
         axialMachData       ,& !M_x
         thetaMachData       ,& !M_th
-        totalMachData          !M_total = sqrt(M_x^2+M_th^2)
+        totalMachData       ,& !M_total = sqrt(M_x^2+M_th^2)
+        RateOfConvergence1  ,&
+        RateOfConvergence2  ,&
+        S_error
 
     REAL(KIND = REAL64) ::  &
+        ExpectedRateOfConvergenceSoundSpeed, &
+        ExpectedRateOfConvergenceSourceTerm, &
         r_min                   ,& !radial grid locations
         r_max                 ,& !radial grid locations
         secondOrderSmoother ,& !2nd order smoothing coefficient
@@ -60,16 +81,40 @@ PROGRAM MAIN
         ductAdmittance  ,&
         frequency       
 
-    COMPLEX(KIND=rDef) , DIMENSION(:), ALLOCATABLE :: S_1, S_2, S_3, S_4, S_MMS, S_error, S_actual, eigenVectorMMS
+    COMPLEX(KIND=rDef) , DIMENSION(:), ALLOCATABLE :: &
+        S_1 , &
+        S_2 , &
+        S_3 , &
+        S_4 , &
+        S_MMS , &  
+        S_actual, &
+        S_L2Array , &
+        eigenVectorMMS
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
         swirlClassObj, swirlClassObjMMS
 
     TYPE(mmsClassType) :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
-! Code Starts Here!
-    CONTINUE
 
-    ! local variables 
+    !                  !
+    ! Code Starts Here !
+    !                  !
+
+    CONTINUE 
+    
+    FORMAT_MEAN_FLOW           = "(F15.12,F15.12,F15.12,F15.12,F15.12)" 
+    FORMAT_MEAN_FLOW_HEADER    = "(A15,A15,A15,A15,A15)" 
+    FORMAT_PERTURB_VARS        = "(F16.12,F16.12,F16.12,F16.12,F16.12)"
+    FORMAT_PERTURB_HEADER      = "(A12,A12,A12,A12,A12)"
+    FORMAT_SOURCE_TERMS        = "( I4, F16.12, F16.12,F16.12)" 
+    FORMAT_SOURCE_TERMS_HEADER = "( A5, A17, A17,A17)" 
+    FORMAT_L2                  = "(I10,F20.12)" 
+    FORMAT_L2_HEADER           = "(A10,A20)" 
+    FORMAT_ERROR               = "(F20.12,F20.12)" 
+    FORMAT_ERROR_HEADER        = "(A20,A20)" 
+    FORMAT_ROC                 = "(I10,F20.12)" 
+    FORMAT_ROC_HEADER          = ("(A10,A20)")
+
     ! inputs needed for SwirlClassType
     
     r_min                     = 0.30_rDef  
@@ -84,18 +129,40 @@ PROGRAM MAIN
     hubAdmittance             = CMPLX(0.0,0,rDef)   
     ductAdmittance            = CMPLX(0.3,0.0,rDef) 
     frequency                 = CMPLX(30,0,rDef)
+    
+    IF (numericalIntegrationFlag.eq.1) THEN
+        ExpectedRateOfConvergenceSoundSpeed = 2.0_rDef
+    ELSEIF (numericalIntegrationFlag.eq.2) THEN 
+        ExpectedRateOfConvergenceSoundSpeed = 4.0_rDef
+    ENDIF 
 
-    eigenValueMMS = CMPLX(100,9,KIND=rDef)
+    IF (finiteDiffFlag.eq.1) THEN
+        ExpectedRateOfConvergenceSourceTerm = 2.0_rDef
+    ELSEIF (finiteDiffFlag.eq.2) THEN 
+        ExpectedRateOfConvergenceSourceTerm = 4.0_rDef
+    ENDIF
 
-    facCount = 0 ! initializer for fac count 
+    eigenValueMMS = CMPLX(0,0,KIND=rDef)
+
+    facCount = 0 ! initializer for far count 
+
+    ALLOCATE(&
+        RateOfConvergence1(numberOfIterations - 1) , &
+        RateOfConvergence2(numberOfIterations - 1) , &
+        S_L2Array(numberOfIterations)         , &
+        SoundSpeedL2Array(numberOfIterations) , &
+        numberOfGridPointsArray(numberOfIterations))
+
     DO fac = 1, numberOfIterations
-        facCount             = facCount + 1
-        numberOfGridPoints   = 5+(2**fac)
-        dr                   = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
+
+        facCount                     = facCount + 1
+        numberOfGridPoints           = 5+(2**fac)
+        numberOfGridPointsArray(fac) = numberOfGridPoints
+        dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
         ALLOCATE(&
             axialMachDataMMSOut(numberOfGridPoints)       ,& !M_x
-            thetaMachDataMMSOut(numberOfGridPoints)     ,& !M_th
+            thetaMachDataMMSOut(numberOfGridPoints)     ,& !M_Th
             axialMach_drMMSOut(numberOfGridPoints), &
             thetaMach_drMMSOut(numberOfGridPoints), &
             SoundSpeedOut(numberOfGridPoints) , &
@@ -125,48 +192,54 @@ PROGRAM MAIN
         DO i = 1, numberOfGridPoints
 
             r(i)             = (r_min+REAL(i-1, rDef)*dr)/r_max
-            axialMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
-            thetaMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
-        END DO 
-            CALL getSoundSpeed(&
-                r                  = r                  , &
-                SoundSpeedExpected = speedOfSoundMMS , &
-                thetaMachData      = thetaMachDataMMS, &
-                axialMachData      = axialMachDataMMS      )
+            !axialMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
+            !thetaMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
 
-            CALL getPerturbationVariables(&
-                r     = r    , &
-                vR    = vR   , &
-                vTh   = vTh   , &
-                vX    = vX   , &
-                Pr    = Pr      )
-            DO i = 1,numberOfGridPoints
+        END DO
 
-                eigenVectorMMS(i) = &
-                    CMPLX(vR(i), KIND = rDef)
-                eigenVectorMMS(i + numberOfGridPoints) = &
-                    CMPLX(vTh(i), KIND = rDef)
-                eigenVectorMMS(i + 2*numberOfGridPoints) = &
-                    CMPLX(vX(i), KIND = rDef)
-                eigenVectorMMS(i + 3*numberOfGridPoints) = &
-                    CMPLX(Pr(i), KIND = rDef)
-            ENDDO
-                CALL getMMSSourceTerms( &
-                r     = r                    ,&
-                S_1   = S_1                  ,&
-                S_2   = S_2                  ,&
-                S_3   = S_3                  ,&
-                    S_4   = S_4     )
+        CALL getSoundSpeed(&
+            r                  = r                  , &
+            SoundSpeedExpected = speedOfSoundMMS , &
+            thetaMachData      = thetaMachDataMMS, &
+            axialMachData      = axialMachDataMMS      )
+
+        axialMachData = axialMachDataMMS
+        thetaMachData = thetaMachDataMMS
+
+        CALL getPerturbationVariables(&
+            r     = r    , &
+            vR    = vR   , &
+            vTh   = vTh   , &
+            vX    = vX   , &
+            Pr    = Pr      )
+
+        DO i = 1,numberOfGridPoints
+
+            eigenVectorMMS(i) = &
+                CMPLX(vR(i), KIND = rDef)
+            eigenVectorMMS(i + numberOfGridPoints) = &
+                CMPLX(vTh(i), KIND = rDef)
+            eigenVectorMMS(i + 2*numberOfGridPoints) = &
+                CMPLX(vX(i), KIND = rDef)
+            eigenVectorMMS(i + 3*numberOfGridPoints) = &
+                CMPLX(Pr(i), KIND = rDef)
+        ENDDO
+        CALL getMMSSourceTerms( &
+            r     = r                    ,&
+            S_1   = S_1                  ,&
+            S_2   = S_2                  ,&
+            S_3   = S_3                  ,&
+            S_4   = S_4     )
 
 
-                DO i = 1,numberOfGridPoints
+        DO i = 1,numberOfGridPoints
 
-                    S_MMS(i) = S_1(i) 
-                    S_MMS(i+numberOfGridPoints) = S_2(i)
-                    S_MMS(i+2*numberOfGridPoints) = S_3(i)
-                    S_MMS(i+3*numberOfGridPoints) = S_4(i)
-                ENDDO
-        !Create a swirlClassObj for a given flow
+            S_MMS(i) = S_1(i)
+            S_MMS(i+numberOfGridPoints) = S_2(i)
+            S_MMS(i+2*numberOfGridPoints) = S_3(i)
+            S_MMS(i+3*numberOfGridPoints) = S_4(i)
+        ENDDO
+        !Create a swirl Class Obj for a given flow
         CALL CreateObject(&
             object        = swirlClassObj(fac)  ,&
             azimuthalMode = azimuthalModeNumber  ,&
@@ -178,7 +251,7 @@ PROGRAM MAIN
             etah          = hubAdmittance        ,&
             etad          = ductAdmittance       ,&
             ifdff         = finiteDiffFlag       )
-        
+
         CALL runSwirlClassMethods(&
             object = swirlClassObj(fac))
 
@@ -202,7 +275,7 @@ PROGRAM MAIN
             axialMach   = axialMachDataMMSOut, &
             thetaMach    = thetaMachDataMMSOut, &
             axialMach_dr = axialMach_drMMSOut, &
-            thetaMach_dr = thetaMach_drMMSOut, & 
+            thetaMach_dr = thetaMach_drMMSOut, &
             SoundSpeed = SoundSpeedOut   , &
             SoundSpeed_dr = SoundSpeed_drOut, &
             radialData = rOut)
@@ -215,30 +288,42 @@ PROGRAM MAIN
 
 
         DO i = 1,numberOfGridPoints
-            SoundSpeedError(i) = speedOfSoundMMS(i) - SoundSpeedOut(i)
-            S_error(i) = ABS(S_actual(i) - S_MMS(i))
-            S_error(i + numberOfGridPoints) = ABS(S_actual(i + numberOfGridPoints) - S_MMS(i + numberOfGridPoints))
-            S_error(i + 2*numberOfGridPoints) = ABS(S_actual(i + 2*numberOfGridPoints) - S_MMS(i + 2*numberOfGridPoints))
-            S_error(i + 3*numberOfGridPoints) = ABS(S_actual(i + 3*numberOfGridPoints) - S_MMS(i + 3*numberOfGridPoints))
+
+            SoundSpeedError(i) = &
+                speedOfSoundMMS(i) - SoundSpeedOut(i)
+            S_error(i) = &
+                ABS(S_actual(i) - S_MMS(i))
+            S_error(i + numberOfGridPoints) = &
+                ABS(S_actual(i + numberOfGridPoints) - S_MMS(i + numberOfGridPoints))
+            S_error(i + 2*numberOfGridPoints) = &
+                ABS(S_actual(i + 2*numberOfGridPoints) - S_MMS(i + 2*numberOfGridPoints))
+            S_error(i + 3*numberOfGridPoints) = &
+                ABS(S_actual(i + 3*numberOfGridPoints) - S_MMS(i + 3*numberOfGridPoints))
+
         ENDDO
 
         CALL getL2Norm(&
-            object = SoundSpeedMMS_ClassObj , & 
-            L2     = SoundSpeedErrorL2 , &
+            object   = SoundSpeedMMS_ClassObj , &
+            L2       = SoundSpeedErrorL2 , &
             dataSet1 = speedOfSoundMMS , &
-            dataSet2 = SoundSpeedOut) 
+            dataSet2 = SoundSpeedOut)
+
         CALL getL2Norm(&
-            object = SourceTermMMS_ClassObj , & 
-            L2     = S_L2 , &
-            dataSet1 =  S_MMS, &
-            dataSet2 = S_actual) 
+            object      = SourceTermMMS_ClassObj , &
+            L2          = S_L2 , &
+            dataSet1    = S_MMS, &
+            dataSet2    = S_actual)
+
+        S_L2Array(fac) = S_L2
+        SoundSpeedL2Array(fac) = SoundSpeedErrorL2
+
+
+
+        include 'main-scripts/swirl-data-export-per-grid.f90'
 
         CALL DestroyObject(object = swirlClassObjMMS(fac))
 
         CALL DestroyObject(object = swirlClassObj(fac))
-
-
-        include 'swirlDataExport.f90'
         DEALLOCATE(&
             axialMachDataMMSOut, &
             thetaMachDataMMSOut, &
@@ -256,10 +341,17 @@ PROGRAM MAIN
             axialMachDataMMS         ,&
             vR,vTh,vX,Pr, &
             eigenVectorMMS, &
-            S_MMS,S_actual, S_error, S_1, S_2, S_3, S_4,&
-            totalMachData         )
+            totalMachData , &
+            S_MMS,S_actual, S_error, S_1, S_2, S_3, S_4)
 
     END DO
 
+    include 'main-scripts/calculating-rate-of-convergence.f90'
+    include 'main-scripts/swirl-data-export-MMS.f90'
+
+    DEALLOCATE(&
+        RateOfConvergence1 , &
+        RateOfConvergence2 , &
+        S_L2Array)
 
 END PROGRAM MAIN

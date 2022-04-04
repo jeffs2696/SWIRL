@@ -1,123 +1,122 @@
-! used to export data for swirl
+! used to export data for swirl 
+WRITE(file_id, '(i0.4)') numberOfGridPoints
+dir_name = '01-mean-flow/'
+file_name = TRIM(dir_name) // 'mean-flow-' // TRIM(ADJUSTL(file_id)) // '.dat'
 
-        WRITE(file_id, '(i0)') numberOfGridPoints
-        dir_name = '01-mean-flow/'
-        file_name = TRIM(dir_name) // 'mean-flow-' // TRIM(ADJUSTL(file_id)) // '.dat'
+OPEN( NEWUNIT = UNIT, FILE = TRIM(file_name) )
 
-        OPEN( NEWUNIT = UNIT, FILE = TRIM(file_name) )
+! Write the resulting mean flow
+WRITE(UNIT,*) &
+    'radius','M_x','M_theta','A_expected','A_actual'
 
-        ! Write the resulting mean flow 
-        WRITE(UNIT,*) &
-            'radius','M_x','M_theta','A_expected','A_actual'
+DO i = 1,numberOfGridPoints
 
-        DO i = 1,numberOfGridPoints
+    
+    WRITE(UNIT,*) &
+        rOut(i)                 , &
+        axialMachDataMMSOut(i)     , &
+        thetaMachDataMMSOut(i)     , &
+        speedOfSoundMMS(i)   , &
+        SoundSpeedOut(i)
+    
+    IF (debug) THEN
+        WRITE(0,*) &!FORMAT_MEAN_FLOW) &
+            rOut(i)                 , &
+            axialMachDataMMSOut(i)     , &
+            thetaMachDataMMSOut(i)     , &
+            speedOfSoundMMS(i)   , &
+            SoundSpeedOut(i)
+    ELSE
+    ENDIF
+ENDDO
 
+CLOSE(UNIT);
+dir_name = '02-linearized-perturbation-equations'
+file_name =  TRIM(dir_name) // 'PerturbationVariables.dat'
 
-            WRITE(UNIT,*) &
-                rOut(i)                 , &
-                axialMachDataMMSOut(i)     , &
-                thetaMachDataMMSOut(i)     , &
-                speedOfSoundMMS(i)   , &
-                SoundSpeedOut(i)
+OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
 
-            IF (debug) THEN
-                WRITE(0,*) &!FORMAT_MEAN_FLOW) &
-                    rOut(i)                 , &
-                    axialMachDataMMSOut(i)     , &
-                    thetaMachDataMMSOut(i)     , &
-                    speedOfSoundMMS(i)   , &
-                    SoundSpeedOut(i)
-            ELSE
-            ENDIF
-        ENDDO
+WRITE(UNIT,*) 'Radius' , 'vR', 'vTh' ,'vX', 'Pr'
 
-        CLOSE(UNIT);
-        dir_name = '02-linearized-perturbation-equations'
-        file_name =  TRIM(dir_name) // 'PerturbationVariables.dat'
+DO i = 1,numberOfGridPoints
+    WRITE(UNIT,*) r(i) , vR(i) , vTh(i) , vX(i), Pr(i)
+END DO
 
-        OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
+CLOSE(UNIT);
 
-        WRITE(UNIT,*) 'Radius' , 'vR', 'vTh' ,'vX', 'Pr'
+dir_name = '03-method-of-manufactured-solutions'
+file_name = TRIM(dir_name) // 'SoundSpeedError.dat'
 
-        DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) r(i) , vR(i) , vTh(i) , vX(i), Pr(i)
-        END DO
+OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
 
-        CLOSE(UNIT);
+WRITE(UNIT,*) 'Grid Points' , 'Speed of Sound Error'
 
-        dir_name = '03-method-of-manufactured-solutions'
-        file_name = TRIM(dir_name) // 'SoundSpeedError.dat'
+DO i = 1,numberOfGridPoints
+    WRITE(UNIT,*) r(i) , SoundSpeedError(i)
+END DO
 
-        OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
+CLOSE(UNIT);
 
-        WRITE(UNIT,*) 'Grid Points' , 'Speed of Sound Error'
+file_name = TRIM(dir_name) // 'SourceTermData1.dat'
 
-        DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) r(i) , SoundSpeedError(i)
-        END DO
+OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
 
-        CLOSE(UNIT);
+WRITE(UNIT,*) 'Grid Points' , 'S_Actual' ,'S_actual' ,'Source Term Error'
 
-        file_name = TRIM(dir_name) // 'SourceTermData1.dat'
+DO i = 1,numberOfGridPoints
+    WRITE(UNIT,*) &
+        i, &
+        REAL(S_MMS(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
 
-        OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
+CLOSE(UNIT);
+file_name = TRIM(dir_name) // 'SourceTermData2.dat'
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' ,'S_actual' ,'Source Term Error'
+OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
 
-        DO i = 1,numberOfGridPoints
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_MMS(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
+WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
 
-        CLOSE(UNIT);
-        file_name = TRIM(dir_name) // 'SourceTermData2.dat'
+DO i = numberOfGridPoints,numberOfGridPoints*2
+    WRITE(UNIT,*) &
+        i, &
+        REAL(S_MMS(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
 
-        OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
+CLOSE(UNIT);
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
+file_name = TRIM(dir_name) // 'SourceTermData3.dat'
 
-        DO i = numberOfGridPoints,numberOfGridPoints*2
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_MMS(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
+OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
 
-        CLOSE(UNIT);
+WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
 
-        file_name = TRIM(dir_name) // 'SourceTermData3.dat'
+DO i = numberOfGridPoints*2,numberOfGridPoints*3
+    WRITE(UNIT,*) &
+        i, &
+        REAL(S_MMS(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
 
-        OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
+CLOSE(UNIT);
 
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
+file_name = TRIM(dir_name) // 'SourceTermData4.dat'
 
-        DO i = numberOfGridPoints*2,numberOfGridPoints*3
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_MMS(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
+OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
 
-        CLOSE(UNIT);
+WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
 
-        file_name = TRIM(dir_name) // 'SourceTermData4.dat'
+DO i = numberOfGridPoints*3,numberOfGridPoints*4
+    WRITE(UNIT,*) &
+        i, &
+        REAL(S_MMS(i),KIND=rDef), &
+        REAL(S_actual(i),KIND=rDef)  , &
+        REAL(S_error(i),KIND=rDef)
+END DO
 
-        OPEN(NEWUNIT=UNIT,FILE=TRIM(file_name))
-
-        WRITE(UNIT,*) 'Grid Points' , 'S_Actual' , 'S_actual' ,'Source Term Error'
-
-        DO i = numberOfGridPoints*3,numberOfGridPoints*4
-            WRITE(UNIT,*) &
-                i, &
-                REAL(S_MMS(i),KIND=rDef), &
-                REAL(S_actual(i),KIND=rDef)  , &
-                REAL(S_error(i),KIND=rDef)
-        END DO
-
-        CLOSE(UNIT);
+CLOSE(UNIT);
 
