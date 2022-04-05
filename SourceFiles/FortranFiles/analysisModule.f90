@@ -89,8 +89,7 @@ CONTAINS
 
         COMPLEX(KIND=rDef) :: &
             c0, &
-            ci, &
-            SMALL
+            ci
 
         COMPLEX(KIND=rDef), DIMENSION(np4) :: &
             cvct
@@ -111,10 +110,10 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .FALSE.
+        LOGICAL :: debug = .TRUE.
 
         INTEGER  :: &
-            UNIT , &
+            UNIT , & 
             UNIT2 , &
             UNIT3
 
@@ -125,7 +124,7 @@ CONTAINS
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 10.e-11_rDef !JS: is this sufficient
+        eps     = 10.e-8 !JS: is this sufficient
 
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
@@ -286,6 +285,8 @@ CONTAINS
 ! Compute cut-off wavenumber for uniform flow.
 ! getting -Werror=compare-reals error with the if statements
 
+! if there is only axial flow, no shear or swirl, then... JS
+
         !  if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
         !      rm = rmx(1)
         !      gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
@@ -295,89 +296,101 @@ CONTAINS
 
 !
 ! Print the gammas to the display.
-        ! write(0,500)
-! 500     format(1x)
-        ! write(6,50)
+        !WRITE(0,500)
+!500     format(1x)
+!        WRITE(0,50)
 
-        SMALL = CMPLX(eps,eps,KIND=rDef)
+        
+        WRITE(file_id, '(i0.4)') np
+        write(6,500)
+500  format(1x)
+     
+     write(6,50)
+     do j=1,np4
+         if (beta(j).ne.c0) then
+             gam(j) = ci*alpha(j)/beta(j)
+             if (abs(AIMAG(gam(j))).lt.eps) then
+                 gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
+             endif 
+             vphi(j)  = ak/gam(j)
+             write(6,10) j,gam(j),gam(j)/ak,vphi(j)
+         endif
+     enddo
 
-        WRITE(file_id, '(i0)') np
-!        OPEN(NEWUNIT=UNIT,FILE='alpha_beta'//TRIM(ADJUSTL(file_id)) // '.dat')
-
-        DO j=1,np4
-
-            IF ( ((ABS(REAL(alpha(j))).LT.ABS(eps)) .or. &
-                (ABS(AIMAG(alpha(j))).LT.ABS(eps)) ).and.&
-                (debug.eqv..TRUE.)) THEN
-                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
-                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
-                WRITE(0,*) 'BETA (',j,') = ', beta(j)
-                
-                ELSE IF ( ((ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
-                (ABS(AIMAG(beta(j))).LT.ABS(eps)) ).and.&
-                    (debug.eqv..TRUE.)) THEN
-                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
-                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
-                WRITE(0,*) 'BETA (',j,') = ', beta(j)
-                ELSE
-                !WRITE(UNIT,*) j,alpha(j),beta(j)
-                !  When imaginary part of complex number is zero then it is real number. 
-                ! thats why we can look at the real part of beta
-                if ( (REAL(beta(j),KIND=rDef).gt.0.0_rDef) .and. &
-                    (REAL(beta(j),KIND=rDef).lt.0.0_rDef)) then
-                    gam(j) = ci*alpha(j)/beta(j)
-
-
-                    if (abs(AIMAG(gam(j))).lt.eps) then
-
-                        gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
-
-                    else
-
-                        IF (debug) THEN
-                            WRITE(0,*) 'Bad Eigenvalue at' , j
-                        ELSE
-                        ENDIF
-
-                    endif
-                    vphi(j)  = ak/gam(j)
-
-                    IF (debug) THEN
-                        WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
-                    ELSE
-                    ENDIF
-                ELSE
-
-                    IF (debug) THEN
-                        WRITE(0,*) 'Bad Eigenvalue at' , j
-                    ELSE
-                    ENDIF
-                endif
-            ENDIF
-
-        enddo
-!        CLOSE(UNIT)
+!
+!        iO j=1,np4
+!
+!            IF ( ((ABS(REAL(alpha(j))).LT.ABS(eps)) .or. &
+!                (ABS(AIMAG(alpha(j))).LT.ABS(eps)) ).and.&
+!                (debug.eqv..TRUE.)) THEN
+!                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+!                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
+!                WRITE(0,*) 'BETA (',j,') = ', beta(j)
+!                !alpha(j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef) 
+!                ELSE IF ( ((ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
+!                (ABS(AIMAG(beta(j))).LT.ABS(eps)) ).and.&
+!                    (debug.eqv..TRUE.)) THEN
+!                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
+!                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
+!                WRITE(0,*) 'BETA (',j,') = ', beta(j)
+!                !beta(j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef) 
+!                ELSE
+!                !WRITE(UNIT,*) j,alpha(j),beta(j)
+!                !  When imaginary part of complex number is zero then it is real number. 
+!                ! thats why we can look at the real part of beta
+!                IF ( (REAL(beta(j),KIND=rDef).gt.0.0_rDef) .or. &
+!                    (REAL(beta(j),KIND=rDef).lt.0.0_rDef)) THEN
+!                    gam(j) = ci*alpha(j)/beta(j)
+!
+!
+!                    IF (abs(AIMAG(gam(j))).lt.eps) THEN
+!
+!                        gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
+!
+!                    ELSE
+!
+!                        IF (debug) THEN
+!                            WRITE(0,*) 'Bad Eigenvalue at' , j
+!                        ELSE
+!                        ENDIF
+!
+!                    ENDIF
+!                    vphi(j)  = ak/gam(j)
+!
+!                    WRITE(UNIT,*) j,gam(j),gam(j)/ak,vphi(j)
+!                    IF (debug) THEN
+!                        WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
+!                    ELSE
+!                    ENDIF
+!                ELSE
+!
+!                    IF (debug) THEN
+!                        WRITE(0,*) 'Bad Eigenvalue at' , j
+!                    ELSE
+!                    ENDIF
+!                ENDIF
+!            ENDIF
+!        ENDDO
+        !CLOSE(UNIT)
 !970  format(1x,i4,4e13.4)
 !
 ! Print all the gammas to a file.
-
+        
         OPEN(NEWUNIT=UNIT,FILE='04-EVanalysis/' //'gammas'//TRIM(ADJUSTL(file_id)) // '.dat')
         OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
         OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
 
-!        open(unit=15,file='gammas.dat',status='unknown')
-!
-!        rewind 15
-!        rewind 35
-!        rewind 55
-        write(UNIT,50)
+        rewind UNIT
+        rewind UNIT2
+        rewind UNIT3
+        WRITE(UNIT,50)
         write(UNIT2,55)
-50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
+50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', & 
             6x,'Im{gam}/k',6x,'kappa')
 55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
             10x,'Im{gam/ak}',5x,'nz')
 
-        do i = 1,np4
+        DO i = 1,np4
 ! JS: if there is (linear shear) and (no slope) and (no swirl then) ...
 ! Note: this will never happen because we removed the swrl.input functionality
             if ((ir.eq.1) .and.  (is.eq.0)) then
@@ -387,32 +400,33 @@ CONTAINS
                 akap(i) = (rm*rm -1.0_rDef)*REAL(gam(i)*gam(i),rDef) &
                     -2.0_rDef*REAL(ak,rDef)*rm*REAL(gam(i),rDef)      &
                     +REAL(ak,rDef)*REAL(ak,rDef)
-                if (akap(i).gt.0.0_rDef) then
+
+                IF (akap(i).gt.0.0_rDef) then
                     akap(i) = SQRT(akap(i))
-                    write(UNIT,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
-                else
-                    write(UNIT,10) i,gam(i),gam(i)/ak,vphi(i)
-                endif
+                    WRITE(UNIT,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
+                ELSE
+                    WRITE(UNIT,10) i,gam(i),gam(i)/ak,vphi(i)
+                ENDIF
+
 ! JS: if there is not linear shear and there is no swirl flag then proceed
-            endif
+
+            ENDIF
+
 ! because gam has blank entries (gives 1e-310 because previous loop omitted some entries)
-            !write(UNIT2,12) i,gam(i),gam(i)/ak,vphi(i)
-            !write(UNIT,10) i,gam(i),gam(i)/ak,vphi(i)
-            !write(UNIT3,*) REAL(gam(i)),AIMAG(gam(i))
-        enddo
+
+            WRITE(UNIT ,12) i,gam(i),gam(i)/ak, vphi(i)
+            WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i) 
+            WRITE(UNIT3,*) REAL(gam(i)),AIMAG(gam(i))
+        ENDDO
         CLOSE(UNIT)
         CLOSE(UNIT2)
         CLOSE(UNIT3)
-        !close(15)
-        !close(35)
-        !close(55)
 10      format(1x,i4,9e15.6)
-!12      format(1x,i4,6e20.12)
-!
+12      format(1x,i4,6e20.12)
 
-        ! SS = MATMUL(aa_before,VR(:,1)) - gam(1)*MATMUL(bb_before,VR(:,1))
-        ! return
 
-    end
+        !return
+
+        end
 
 END MODULE analysisModule

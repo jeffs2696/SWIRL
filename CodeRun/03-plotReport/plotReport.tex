@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{verbatim}
 \usepackage{pgfplots}
 \DeclareUnicodeCharacter{2212}{−}
 \usepgfplotslibrary{groupplots,dateplot}
@@ -9,13 +10,18 @@
   log ticks with fixed point,
 }
 \begin{document}
-\begin{equation}
-    \resizebox{0.9\hsize}{!}{
-    $\input{manufactured_solutions.tex}$}
-\end{equation}
+
+\section{Results}
+%
+%\begin{equation}
+%    \resizebox{0.9\hsize}{!}{
+%    $\input{manufactured_solutions.tex}$}
+%\end{equation}
+%
 \begin{figure}
     \centering
     \input{tex-outputs/MachDistribution.tex}
+    \caption{Mach distribution for method of manufactured solution case}
 \end{figure}
 
  \begin{figure}
@@ -49,13 +55,18 @@
          \input{tex-outputs/SourceTermData.tex}
      \caption{Source Term Error}
  \end{figure}
+ \begin{figure}
+         \input{tex-outputs/cv_wave.tex}
+     %\caption{}
+ \end{figure}
 
-% \begin{figure}
-%         \input{L2OfSourceTerm.tex}
-%     \end{center}
-%     \caption{L2 of SourceTerm error}
-% \end{figure}
-%
+ \begin{tiny}
+     \verbatiminput{../04-EVanalysis/cv.waves.dat}
+ \end{tiny}
+
+ \begin{tiny}
+     \verbatiminput{../04-EVanalysis/gammas0007.dat}
+ \end{tiny}
 % \begin{figure}
 %     \begin{center}
 %         \input{ROC_Source.tex}

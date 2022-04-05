@@ -26,7 +26,7 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 8
+        numberOfIterations = 4
 
     INTEGER  :: &
         UNIT , & ! for NEWUNIT
@@ -192,8 +192,8 @@ PROGRAM MAIN
         DO i = 1, numberOfGridPoints
 
             r(i)             = (r_min+REAL(i-1, rDef)*dr)/r_max
-            !axialMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
-            !thetaMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
+            axialMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
+            thetaMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
 
         END DO
 

@@ -19,24 +19,34 @@ list_of_files = glob.glob('../01-mean-flow/mean-flow????.dat')
 last_file = os.path.basename(list_of_files[-1])
 #getting number of grid points
 print(last_file)
+list_of_files2 = glob.glob('../04-EVanalysis/gammas???.dat')
+#getting mean flow file with highest grid number 
+last_file2 = os.path.basename(list_of_files2[-1])
+#getting number of grid points
+print(last_file2)
+
 def extract_number(f):
     s = re.findall("\d+$",f)
     return (int(s[0]) if s else -1,f)
 
+#max_grid = int(re.findall('\d+$',last_file)[0])
+
+
 max_grid = (max(list_of_files,key=extract_number))
+max_grid = (max(list_of_files2,key=extract_number))
 #max_grid = int(re.findall('\d+$',last_file)[0])
 
 
 #print(round(int(max_grid)/10))
-print(max_grid)
+#print(max_grid)
 # importing data
 flow_data    = fcn.importPlotData((list_of_files[-1]))
+cv_wave_data = fcn.importPlotData((list_of_files2[-1]))
 LEE_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-LEE.dat')
 LEE_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-LEE.dat')
 SND_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-sound_speed-.dat')
 SND_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-sound_speed.dat')
 cv_wave_data = fcn.importPlotData('../04-EVanalysis/cv.waves.dat')
-
 Delta_r    = LEE_ROC_data.Delta_r
 LEE_ROC    = LEE_ROC_data.ROC
 SND_ROC    = SND_ROC_data.ROC
@@ -206,5 +216,4 @@ plt.plot(
         cv_wave_data['REAL'],
         cv_wave_data['IMAG'],
         marker = 'o')
-
-plt.show()
+tikzplotlib.save("tex-outputs/cv_wave.tex",extra_axis_parameters=['width=10cm','height=5cm'])
