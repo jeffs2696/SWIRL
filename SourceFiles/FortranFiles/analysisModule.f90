@@ -110,7 +110,7 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .TRUE.
+        LOGICAL :: debug = .FALSE.
 
         INTEGER  :: &
             UNIT , & 
@@ -124,7 +124,7 @@ CONTAINS
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 10.e-8 !JS: is this sufficient
+        eps     = 10.e-4 !JS: is this sufficient
 
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
@@ -232,7 +232,7 @@ CONTAINS
 
             if (row(k)) then
 
-                write(0,25) k
+                WRITE(0,25) k
                 badrow = .true.
             endif
 
@@ -290,7 +290,7 @@ CONTAINS
         !  if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
         !      rm = rmx(1)
         !      gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
-        !      write(0,30) gamco
+        !      WRITE(0,30) gamco
         !  endif
 ! 30      format(/,1x,'Cut-off wavenumber: ',e15.5,/)
 
@@ -302,20 +302,21 @@ CONTAINS
 
         
         WRITE(file_id, '(i0.4)') np
-        write(6,500)
-500  format(1x)
-     
-     write(6,50)
-     do j=1,np4
-         if (beta(j).ne.c0) then
-             gam(j) = ci*alpha(j)/beta(j)
-             if (abs(AIMAG(gam(j))).lt.eps) then
-                 gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
-             endif 
-             vphi(j)  = ak/gam(j)
-             write(6,10) j,gam(j),gam(j)/ak,vphi(j)
-         endif
-     enddo
+
+        WRITE(0,50)
+        do j=1,np4
+!            WRITE(0,*) alpha(j),beta(j)
+            if (beta(j).ne.c0) then
+                gam(j) = ci*alpha(j)/beta(j)
+                if (abs(AIMAG(gam(j))).lt.eps) then
+                    gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
+                elseif (abs(REAL(gam(j))).lt.eps) then 
+                    gam(j) =CMPLX(0.0_rDef,AIMAG(gam(j)),KIND=rDef)
+                endif
+                vphi(j)  = ak/gam(j)
+                WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
+            endif
+        enddo
 
 !
 !        iO j=1,np4
@@ -380,11 +381,11 @@ CONTAINS
         OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
         OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
 
-        rewind UNIT
-        rewind UNIT2
-        rewind UNIT3
+!        rewind UNIT
+!        rewind UNIT2
+!        rewind UNIT3
         WRITE(UNIT,50)
-        write(UNIT2,55)
+        WRITE(UNIT2,55)
 50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', & 
             6x,'Im{gam}/k',6x,'kappa')
 55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
@@ -405,7 +406,7 @@ CONTAINS
                     akap(i) = SQRT(akap(i))
                     WRITE(UNIT,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
                 ELSE
-                    WRITE(UNIT,10) i,gam(i),gam(i)/ak,vphi(i)
+                    WRITE(UNIT,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
                 ENDIF
 
 ! JS: if there is not linear shear and there is no swirl flag then proceed
@@ -414,6 +415,10 @@ CONTAINS
 
 ! because gam has blank entries (gives 1e-310 because previous loop omitted some entries)
 
+
+
+!            WRITE(0 ,*) i,gam(i)!gam(i)/ak!, vphi(i)
+
             WRITE(UNIT ,12) i,gam(i),gam(i)/ak, vphi(i)
             WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i) 
             WRITE(UNIT3,*) REAL(gam(i)),AIMAG(gam(i))
@@ -421,11 +426,11 @@ CONTAINS
         CLOSE(UNIT)
         CLOSE(UNIT2)
         CLOSE(UNIT3)
-10      format(1x,i4,9e15.6)
+10      format(1x,i4,9e20.12)
 12      format(1x,i4,6e20.12)
 
 
-        !return
+        return
 
         end
 

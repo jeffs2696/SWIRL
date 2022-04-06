@@ -319,6 +319,7 @@ PROGRAM MAIN
 
 
 
+!        CALL GetModeData(
         include 'main-scripts/swirl-data-export-per-grid.f90'
 
         CALL DestroyObject(object = swirlClassObjMMS(fac))

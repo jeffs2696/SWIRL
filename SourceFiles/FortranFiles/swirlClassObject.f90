@@ -1,4 +1,4 @@
-MODULE swirlClassObject
+modulE swirlClassObject
 !
     USE, INTRINSIC :: ISO_FORTRAN_ENV
     USE analysisModule
@@ -10,10 +10,10 @@ MODULE swirlClassObject
     USE gridModule
     USE rmachModule
     USE smachAndSndspdModule
+    USE outputModule
     USE FindResidualVectorModule
     USE SourceTermModule
     USE mmsClassObject
-
     IMPLICIT NONE
 
     PRIVATE
@@ -450,6 +450,26 @@ CONTAINS
             WRITE(6,*) 'ERROR: The object is not initialized'
             CONTINUE
         ENDIF
+        
+        CALL output(&
+            np     = object%numberOfRadialPoints,    &
+            np4    = object%numberOfRadialPoints*4,   &
+            mode   = object%azimuthalMode,    &
+            rho    = object%hubTipRatio,   &
+            omega  = object%frequency,    &
+            egv    = jobvr, &
+            attenh = object%hubLinerAdmittance,  &
+            attend = object%ductLinerAdmittance,  &
+            rmx    = object%rmx,   &
+            drm    = object%drm,   &
+            rmt    = object%rmt,   &
+            drt    = object%drt,   &
+            snd    = object%snd,   &
+            rr     = object%r,     &
+            wvn    = object%wvn,   &
+            vrm    = object%vr,    &
+            vphi   = object%vph,   &
+            is     = is)
 
     END SUBROUTINE runSWIRL
     SUBROUTINE CreateSwirlClassObjectMMS()!&

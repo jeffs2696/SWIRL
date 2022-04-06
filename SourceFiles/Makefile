@@ -113,6 +113,7 @@ OBJECTS  =                     \
 	smachAndSndspdModule.o     \
     machoutModule.o 		   \
 	fdgridModule.o 			   \
+	outputModule.o 			   \
    	fdrivsModule.o 			         
 		
 MODULES = $(OBJECTS:$(OEXT)=mod)
@@ -241,6 +242,7 @@ main.o: FortranFiles/main.f90        \
 	FortranFiles/boundaryModule.o \
 	FortranFiles/derivsModule.o   \
 	FortranFiles/fdgridModule.o   \
+	FortranFiles/outputModule.o   \
 	FortranFiles/fdrivsModule.o   \
 	FortranFiles/globalModule.o   \
 	FortranFiles/gridModule.o     \
@@ -277,7 +279,11 @@ FortranFiles/fdgridModule.o:  FortranFiles/fdgridModule.f90
 FortranFiles/fdrivsModule.o:  FortranFiles/fdrivsModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/fdrivsModule.f90
 
-indexxModule.o:  FortranFiles/indexxModule.f90
+#FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
+#							$(LAPACK_LOCATION)/zggev.o
+#	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/kapsubModule.f90
+#
+FortranFiles/indexxModule.o:  FortranFiles/indexxModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/indexxModule.f90
 
 FortranFiles/machoutModule.o:  FortranFiles/machoutModule.f90
@@ -294,6 +300,10 @@ FortranFiles/smachAndSndspdModule.o:  FortranFiles/smachAndSndspdModule.f90
 
 FortranFiles/sndspdModule.o:  FortranFiles/sndspdModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/sndspdModule.f90
+
+FortranFiles/outputModule.o:  FortranFiles/outputModule.f90 \
+						      FortranFiles/indexxModule.o 
+	@$(F90) $(F90FLAGS) FortranFiles/outputModule.f90
 
 FortranFiles/SourceTermModule.o:  FortranFiles/SourceTermModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/SourceTermModule.f90
