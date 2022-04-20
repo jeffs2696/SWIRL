@@ -5,7 +5,6 @@ A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/divergence-in-cyli
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux
-A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.aux
 A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux
 A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux
 A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy.aux
@@ -18,7 +17,7 @@ Warning--entry type for "FAAPolicy" isn't style-file defined
 Warning--I didn't find a database entry for "Kousen1999"
 You've used 2 entries,
             1791 wiz_defined-function locations,
-            472 strings with 4580 characters,
+            471 strings with 4501 characters,
 and the built_in function-call counts, 365 in all, are:
 = -- 29
 > -- 12

@@ -26,7 +26,7 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 4
+        numberOfIterations = 9 
 
     INTEGER  :: &
         UNIT , & ! for NEWUNIT

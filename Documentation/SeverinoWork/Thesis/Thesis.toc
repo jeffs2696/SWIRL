@@ -1,11 +1,11 @@
 \contentsline {chapter}{Abstract}{iii}%
 \contentsline {chapter}{Acknowledgments}{v}%
 \contentsline {chapter}{Contents}{vi}%
-\contentsline {chapter}{List of Tables}{viii}%
-\contentsline {chapter}{List of Figures}{ix}%
-\contentsline {chapter}{List of Symbols}{x}%
-\contentsline {chapter}{List of Abbreviations}{xi}%
-\contentsline {chapter}{Preface}{xii}%
+\contentsline {chapter}{List of Tables}{ix}%
+\contentsline {chapter}{List of Figures}{x}%
+\contentsline {chapter}{List of Symbols}{xi}%
+\contentsline {chapter}{List of Abbreviations}{xii}%
+\contentsline {chapter}{Preface}{xiii}%
 \contentsline {chapter}{\numberline {1}Background}{1}%
 \contentsline {section}{\numberline {1.1}Introduction}{1}%
 \contentsline {chapter}{\numberline {2}Chapter 2: Literature Review}{3}%
@@ -24,12 +24,25 @@
 \contentsline {section}{\numberline {3.4}Substituting Pertubation Variables}{29}%
 \contentsline {section}{\numberline {3.5}Non-Dimensionalization}{34}%
 \contentsline {chapter}{\numberline {4}Chapter 4: Numerical Models}{40}%
-\contentsline {section}{\numberline {4.1}Introduction}{41}%
-\contentsline {section}{\numberline {4.2}Methods}{42}%
-\contentsline {subsection}{\numberline {4.2.1}Theory}{43}%
-\contentsline {subsection}{\numberline {4.2.2}Calculation of Observed Order-of-Accuracy}{47}%
-\contentsline {chapter}{References}{51}%
-\contentsline {chapter}{\numberline {A}Chapter 3 Appendix}{52}%
-\contentsline {section}{\numberline {A.1}Appendix A: Speed of Sound}{53}%
-\contentsline {section}{\numberline {A.2}Appendix B: Isentropic Waves}{57}%
-\contentsline {chapter}{\numberline {B}Insert the Heading to Appendix B}{59}%
+\contentsline {section}{\numberline {4.1}Numerical Integration}{40}%
+\contentsline {section}{\numberline {4.2}Introduction}{40}%
+\contentsline {section}{\numberline {4.3}Methods}{42}%
+\contentsline {subsection}{\numberline {4.3.1}Theory}{43}%
+\contentsline {subsection}{\numberline {4.3.2}Calculation of Observed Order-of-Accuracy}{47}%
+\contentsline {section}{\numberline {4.4}Fairing Functions}{50}%
+\contentsline {section}{\numberline {4.5}Setting Boundary Condition Values Using a Fairing Function}{50}%
+\contentsline {subsection}{\numberline {4.5.1}Using $\beta $ as a scaling parameter}{50}%
+\contentsline {subsection}{\numberline {4.5.2}Minimum Boundary Fairing Function}{52}%
+\contentsline {subsection}{\numberline {4.5.3}Max boundary polynomial}{54}%
+\contentsline {subsection}{\numberline {4.5.4}Corrected function}{54}%
+\contentsline {subsection}{\numberline {4.5.5}Symbolic Sanity Checks}{55}%
+\contentsline {subsection}{\numberline {4.5.6}Min boundary derivative polynomial}{56}%
+\contentsline {subsection}{\numberline {4.5.7}Polynomial function, max boundary derivative}{57}%
+\contentsline {subsection}{\numberline {4.5.8}Putting it together}{59}%
+\contentsline {chapter}{\numberline {5}Results and Discusssion}{60}%
+\contentsline {chapter}{References}{61}%
+\contentsline {chapter}{\numberline {A}Theory Appendix}{62}%
+\contentsline {chapter}{\numberline {B}Chapter 3 Appendix}{63}%
+\contentsline {section}{\numberline {B.1}Appendix A: Speed of Sound}{64}%
+\contentsline {section}{\numberline {B.2}Appendix B: Isentropic Waves}{68}%
+\contentsline {chapter}{\numberline {C}Insert the Heading to Appendix B}{70}%

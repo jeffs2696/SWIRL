@@ -110,10 +110,10 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .FALSE.
+        LOGICAL :: debug = .TRUE.
 
         INTEGER  :: &
-            UNIT , & 
+            UNIT , &
             UNIT2 , &
             UNIT3
 
@@ -124,7 +124,7 @@ CONTAINS
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 10.e-4 !JS: is this sufficient
+        eps     = 10.e-8 !JS: is this sufficient
 
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
@@ -157,12 +157,13 @@ CONTAINS
 
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
-        WRITE(UNIT,*) 'REAL ' , 'IMAG'
+        !WRITE(UNIT,*) 'REAL ' , 'IMAG'
+
         DO j=1,np
 
             WRITE(UNIT,*) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
             IF (debug) THEN
-                 WRITE(0,19) cvct(j)
+                WRITE(0,19) cvct(j)
             ELSE
             ENDIF
         ENDDO
@@ -296,11 +297,12 @@ CONTAINS
 
 !
 ! Print the gammas to the display.
-        !WRITE(0,500)
-!500     format(1x)
+        WRITE(0,500)
+500     format(1x)
+
 !        WRITE(0,50)
 
-        
+
         WRITE(file_id, '(i0.4)') np
 
         WRITE(0,50)
@@ -310,7 +312,7 @@ CONTAINS
                 gam(j) = ci*alpha(j)/beta(j)
                 if (abs(AIMAG(gam(j))).lt.eps) then
                     gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
-                elseif (abs(REAL(gam(j))).lt.eps) then 
+                elseif (abs(REAL(gam(j))).lt.eps) then
                     gam(j) =CMPLX(0.0_rDef,AIMAG(gam(j)),KIND=rDef)
                 endif
                 vphi(j)  = ak/gam(j)
@@ -327,17 +329,17 @@ CONTAINS
 !                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
 !                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
 !                WRITE(0,*) 'BETA (',j,') = ', beta(j)
-!                !alpha(j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef) 
+!                !alpha(j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
 !                ELSE IF ( ((ABS(REAL(beta(j))).LT.ABS(eps)) .or. &
 !                (ABS(AIMAG(beta(j))).LT.ABS(eps)) ).and.&
 !                    (debug.eqv..TRUE.)) THEN
 !                WRITE(0,*) 'Eigenvalue (',j,')',' is numerically infinite or undetermined'
 !                WRITE(0,*) 'ALPHA(',j,') = ', alpha(j)
 !                WRITE(0,*) 'BETA (',j,') = ', beta(j)
-!                !beta(j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef) 
+!                !beta(j) = CMPLX(0.0_rDef,0.0_rDef,KIND=rDef)
 !                ELSE
 !                !WRITE(UNIT,*) j,alpha(j),beta(j)
-!                !  When imaginary part of complex number is zero then it is real number. 
+!                !  When imaginary part of complex number is zero then it is real number.
 !                ! thats why we can look at the real part of beta
 !                IF ( (REAL(beta(j),KIND=rDef).gt.0.0_rDef) .or. &
 !                    (REAL(beta(j),KIND=rDef).lt.0.0_rDef)) THEN
@@ -376,7 +378,7 @@ CONTAINS
 !970  format(1x,i4,4e13.4)
 !
 ! Print all the gammas to a file.
-        
+
         OPEN(NEWUNIT=UNIT,FILE='04-EVanalysis/' //'gammas'//TRIM(ADJUSTL(file_id)) // '.dat')
         OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
         OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
@@ -384,9 +386,9 @@ CONTAINS
 !        rewind UNIT
 !        rewind UNIT2
 !        rewind UNIT3
-        WRITE(UNIT,50)
-        WRITE(UNIT2,55)
-50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', & 
+        WRITE(UNIT2,50)
+        WRITE(UNIT,55)
+50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
             6x,'Im{gam}/k',6x,'kappa')
 55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
             10x,'Im{gam/ak}',5x,'nz')
@@ -404,9 +406,9 @@ CONTAINS
 
                 IF (akap(i).gt.0.0_rDef) then
                     akap(i) = SQRT(akap(i))
-                    WRITE(UNIT,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
+                    WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
                 ELSE
-                    WRITE(UNIT,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
+                    WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i)
                 ENDIF
 
 ! JS: if there is not linear shear and there is no swirl flag then proceed
@@ -419,8 +421,10 @@ CONTAINS
 
 !            WRITE(0 ,*) i,gam(i)!gam(i)/ak!, vphi(i)
 
+            WRITE(0 ,12) i!,gam(i)!,gam(i)/ak, vphi(i)
+            WRITE(0 ,12) i,gam(i)!,gam(i)/ak, vphi(i)
             WRITE(UNIT ,12) i,gam(i),gam(i)/ak, vphi(i)
-            WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i) 
+            WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i)
             WRITE(UNIT3,*) REAL(gam(i)),AIMAG(gam(i))
         ENDDO
         CLOSE(UNIT)
@@ -432,6 +436,6 @@ CONTAINS
 
         return
 
-        end
+    end
 
 END MODULE analysisModule

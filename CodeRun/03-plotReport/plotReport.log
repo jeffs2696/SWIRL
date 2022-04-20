@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  6 APR 2022 17:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  20 APR 2022 03:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -557,41 +557,61 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 133.
 ) (./tex-outputs/PerturbationVariables.tex)
-(./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/ROC.tex
+(./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/L2.tex
+Package pgfplots info on input line 28: Using 'lua backend=false' for axis: ymo
+de=log unsupported (yet).
+Package pgfplots info on input line 60: Using 'lua backend=false' for axis: ymo
+de=log unsupported (yet).
+)
+Overfull \hbox (52.86037pt too wide) in paragraph at lines 76--39
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--39
+
+ []
+
+
+LaTeX Warning: Float too large for page by 46.59705pt on input line 40.
+
+(./tex-outputs/ROC.tex
 Package pgfplots info on input line 35: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
-Package pgfplots info on input line 61: Using 'lua backend=false' for axis: ymo
+Package pgfplots info on input line 73: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
 )
 
-LaTeX Warning: Float too large for page by 36.54196pt on input line 52.
+LaTeX Warning: Float too large for page by 36.53815pt on input line 46.
 
 (./tex-outputs/SourceTermData.tex) (./tex-outputs/cv_wave.tex)
 File: "../04-EVanalysis/cv.waves.dat"  (verbatim)
-File: "../04-EVanalysis/gammas0007.dat"  (verbatim)
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] [5] [6] (./plotReport.aux) ) 
+] [2] [3] [4] [5] [6] [7] [8] [9] [10]
+[11]
+File: "../04-EVanalysis/gammas0007.dat"  (verbatim)
+ [12] (./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
- 22562 strings out of 481239
- 605924 string characters out of 5920378
- 1041263 words of memory out of 5000000
- 37468 multiletter control sequences out of 15000+600000
+ 22591 strings out of 481239
+ 606434 string characters out of 5920378
+ 1065359 words of memory out of 5000000
+ 37494 multiletter control sequences out of 15000+600000
  533111 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,19n,136p,741b,2499s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on plotReport.pdf (6 pages, 94234 bytes).
+ 78i,19n,136p,741b,2497s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on plotReport.pdf (12 pages, 103793 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
- 41 compressed objects within 1 object stream
+ 78 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

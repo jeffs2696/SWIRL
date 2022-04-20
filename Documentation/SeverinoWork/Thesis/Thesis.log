@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  4 APR 2022 12:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  19 APR 2022 08:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -561,8 +561,6 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux)
-(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.
-aux)
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux)
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux)
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
@@ -622,28 +620,28 @@ ABD: EveryShipout initializing macros [1
 ] (./Thesis.toc [6
 
 
-])
+]
+[7])
 \tf@toc=\write4
 \openout4 = `Thesis.toc'.
 
-
-[7] (./Thesis.lot)
+ [8] (./Thesis.lot)
 \tf@lot=\write5
 \openout5 = `Thesis.lot'.
 
- [8
+ [9
 
 ] (./Thesis.lof)
 \tf@lof=\write6
 \openout6 = `Thesis.lof'.
 
- [9
-
-] [10
+ [10
 
 ] [11
 
 ] [12
+
+] [13
 
 ]
 Chapter 1.
@@ -737,25 +735,18 @@ Overfull \hbox (83.80112pt too wide) detected at line 948
 
 [38]) [39]
 Chapter 4.
-[40
-
-
-]
-\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/int
-roduction.aux'.
-
 
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.
-tex) [41
+tex) [40
 
-]
+
+] [41]
 \openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/met
 hods.aux'.
 
 
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.tex)
 [42
-
 
 ]
 \openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/the
@@ -776,39 +767,68 @@ racy.tex [47
 
 
 ] [48]) [49]
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/intro.tex)
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/setting-bc-values
+-using-a-fairing-function.tex [50
 
-LaTeX Warning: Reference `DOWD' on page 50 undefined on input line 415.
+] [51])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-poly
+nomial.tex [52] [53])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/max-boundary-poly
+nomial.tex [54])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/symbolic-sanity-c
+hecks.tex
+Overfull \hbox (18.29695pt too wide) in paragraph at lines 2--8
+[]\OT1/cmr/m/n/12 We want to en-sure that $\OML/cmm/m/it/12 f[]$ \OT1/cmr/m/n/1
+2 has the de-sired bound-ary con-di-tions, $\OML/cmm/m/it/12 f[]$
+ []
 
-(./Thesis.bbl [50
 
-]) [51
+Overfull \hbox (110.35847pt too wide) detected at line 35
+[]
+ []
+
+
+Overfull \hbox (105.42238pt too wide) detected at line 52
+[]
+ []
+
+[55]) [56] [57] [58] [59]
+Chapter 5.
+(./Thesis.bbl [60
+
+]) [61
 
 ]
 Appendix A.
-[52
+[62
+
+]
+Appendix B.
+[63
 
 ]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux'
 .
 
  (./Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.tex
-[53
+[64
 
-] [54]
+] [65]
 Overfull \hbox (33.22014pt too wide) detected at line 112
 [] \OT1/cmr/m/n/12 + [] [] + [] = [] + [] [] + []
  []
 
-[55]) [56]
+[66]) [67]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.aux'.
 
  (./Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.tex
-[57
+[68
 
 
-]) [58]
-Appendix B.
-[59
+]) [69]
+Appendix C.
+[70
 
 
 ] (./Thesis.aux
@@ -816,8 +836,6 @@ Appendix B.
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux)
-(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.
-aux)
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux)
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux)
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
@@ -828,32 +846,33 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 14627 strings out of 481239
- 301195 string characters out of 5920378
- 542553 words of memory out of 5000000
- 29522 multiletter control sequences out of 15000+600000
- 541576 words of font info for 55 fonts, out of 8000000 for 9000
+ 14648 strings out of 481239
+ 302191 string characters out of 5920378
+ 542001 words of memory out of 5000000
+ 29529 multiletter control sequences out of 15000+600000
+ 543260 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,20n,65p,708b,249s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (71 pages, 290199 bytes).
+exmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb>
+Output written on Thesis.pdf (83 pages, 316411 bytes).
 PDF statistics:
- 301 PDF objects out of 1000 (max. 8388607)
- 209 compressed objects within 3 object streams
+ 344 PDF objects out of 1000 (max. 8388607)
+ 239 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

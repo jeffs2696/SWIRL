@@ -9,7 +9,7 @@ OPEN(&
     'L2-sound_speed-'        // &
     '.dat')
 
-WRITE(UNIT,*) 'GridPoints ' , 'L2'
+WRITE(UNIT,FORMAT_L2_HEADER) 'GridPoints ' , 'L2'
 
 DO i = 1,numberOfIterations
     WRITE(UNIT,FORMAT_L2) numberOfGridPointsArray(i) , SoundSpeedL2Array(i)
