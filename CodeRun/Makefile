@@ -1,7 +1,9 @@
 OUTPUT_FILES = \
-			   *.dat \
 			   01-mean-flow/*.dat \
-			   02-method-of-manufactured-solutions/*.dat
+			   02-method-of-manufactured-solutions/*.dat \
+			   04-EVanalysis/*.dat \
+			   04-EVanalysis/gam*
+
 EXE = swirlF2020
 SHELL_EXT = sh
 PLOT_GNUPLOT_DIR = plottingGNUconfig
@@ -27,7 +29,7 @@ NUMBERS =
 run SWIRL:
 	./$(EXE)
 clean:
-	(rm $(OUTPUT_FILES); rm *.log);
+	(rm $(OUTPUT_FILES));
 plot: all
 	@cd 03-plotReport; ./PythonPlotReport.py; \
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \

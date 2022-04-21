@@ -441,7 +441,6 @@ CONTAINS
                 vphi  = object%vph,   &
                 akap  = object%akap)
 
-            WRITE(0,*) SIZE(object%vr)
             IF (debug) THEN
                 WRITE(0,*) 'Leaving analysis CALL'
             ELSE

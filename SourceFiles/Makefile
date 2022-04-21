@@ -109,6 +109,7 @@ OBJECTS  =                     \
 	analysisModule.o 		   \
 	boundaryModule.o 		   \
 	indexxModule.o 			   \
+	egvModule.o				   \
 	rmachModule.o 			   \
 	smachAndSndspdModule.o     \
     machoutModule.o 		   \
@@ -218,7 +219,6 @@ all:  $(OBJECTS)
 			cat $@.log; \
 			rm -f $@.log; \
 			exit $$RESULT
-
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
@@ -230,6 +230,7 @@ plot:
 
 clean:
 	rm -f *.o *.c *.a *.mod
+	@(cd $(EXECUTABLE_LOCATION); (make clean))
 
 cleanAll:
 	rm -f *.o *.c *.a *.mod;                         \
@@ -279,6 +280,8 @@ FortranFiles/fdgridModule.o:  FortranFiles/fdgridModule.f90
 FortranFiles/fdrivsModule.o:  FortranFiles/fdrivsModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/fdrivsModule.f90
 
+FortranFiles/egvModule.o: FortranFiles/egvModule.f90
+		$(F90) $(F90FLAGS)  FortranFiles/egvModule.f90
 #FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
 #							$(LAPACK_LOCATION)/zggev.o
 #	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/kapsubModule.f90
@@ -302,7 +305,8 @@ FortranFiles/sndspdModule.o:  FortranFiles/sndspdModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/sndspdModule.f90
 
 FortranFiles/outputModule.o:  FortranFiles/outputModule.f90 \
-						      FortranFiles/indexxModule.o 
+						      FortranFiles/indexxModule.o \
+						      FortranFiles/egvModule.o
 	@$(F90) $(F90FLAGS) FortranFiles/outputModule.f90
 
 FortranFiles/SourceTermModule.o:  FortranFiles/SourceTermModule.f90

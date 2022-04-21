@@ -110,7 +110,7 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .TRUE.
+        LOGICAL :: debug = .FALSE.
 
         INTEGER  :: &
             UNIT , &
@@ -157,24 +157,26 @@ CONTAINS
 
 
         OPEN(NEWUNIT=UNIT,FILE=file_name)
-        !WRITE(UNIT,*) 'REAL ' , 'IMAG'
+        WRITE(UNIT,*) 'REAL ' , 'IMAG'
 
         DO j=1,np
 
             WRITE(UNIT,*) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
+
             IF (debug) THEN
-                WRITE(0,19) cvct(j)
+!                WRITE(0,19) cvct(j)
             ELSE
             ENDIF
+
         ENDDO
 
         IF (debug) THEN
-            WRITE(0,17) (cvct(j), j=1,np)
+            !WRITE(0,17) (cvct(j), j=1,np)
 
         ELSE
         ENDIF
-17      FORMAT(1x,'Convected wavenumbers: ',/,8(f10.5))
-19      FORMAT(1x,2e15.5)
+!17      FORMAT(1x,'Convected wavenumbers: ',/,8(f10.5))
+!19      FORMAT(1x,2e15.5)
 
         CLOSE(UNIT)
 
@@ -305,7 +307,7 @@ CONTAINS
 
         WRITE(file_id, '(i0.4)') np
 
-        WRITE(0,50)
+        !WRITE(0,50)
         do j=1,np4
 !            WRITE(0,*) alpha(j),beta(j)
             if (beta(j).ne.c0) then
@@ -316,7 +318,7 @@ CONTAINS
                     gam(j) =CMPLX(0.0_rDef,AIMAG(gam(j)),KIND=rDef)
                 endif
                 vphi(j)  = ak/gam(j)
-                WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
+                !WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
             endif
         enddo
 
@@ -421,8 +423,6 @@ CONTAINS
 
 !            WRITE(0 ,*) i,gam(i)!gam(i)/ak!, vphi(i)
 
-            WRITE(0 ,12) i!,gam(i)!,gam(i)/ak, vphi(i)
-            WRITE(0 ,12) i,gam(i)!,gam(i)/ak, vphi(i)
             WRITE(UNIT ,12) i,gam(i),gam(i)/ak, vphi(i)
             WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i)
             WRITE(UNIT3,*) REAL(gam(i)),AIMAG(gam(i))

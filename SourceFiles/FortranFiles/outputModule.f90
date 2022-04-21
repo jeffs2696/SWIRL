@@ -1,6 +1,7 @@
 MODULE outputModule
     USE, INTRINSIC :: ISO_FORTRAN_ENV
     USE indexxModule
+    USE egvModule
 !   USE kapsubModule
     IMPLICIT NONE
     PRIVATE
@@ -54,9 +55,8 @@ CONTAINS
             jj, &
             jtmp, &
             kk, &
-            mumax!, & n
+            mumax !, & UNIT12,UNIT14,UNIT16!, & n
 
-        INTEGER, DIMENSION(np) :: mu
 
         INTEGER, DIMENSION(np4) :: izeros, &
             indx
@@ -119,7 +119,7 @@ CONTAINS
 !     character*15 basen,basem
 !
 ! Output files:
-!               output.data: has everything.
+!               output.dat : has everything.
 !               gam.nonconv: nonconvecting mode data.
 !               gam.non.acc: nonconvecting mode data with more digits of accuracy.
 !               gam.compare: compares the result from spectral and q3d methods.
@@ -131,10 +131,10 @@ CONTAINS
         alm2 = -10000
 !
 ! Output everything to an unformatted file.
-        WRITE(6,*) 'omega = ',omega
+!        WRITE(0,*) 'omega = ',omega
 
         open(unit=12,             &
-            file='output.data',  &
+            file='04-EVanalysis/output.dat',  &
             form='unformatted')
 
         rewind(12)
@@ -173,7 +173,7 @@ CONTAINS
             cvcmax = cvcmax -eps
         endif
 
-        WRITE(6,*) 'convection speed: ',cvcmin,cvcmax
+!        WRITE(0,*) 'convection speed: ',cvcmin,cvcmax
 !
 ! Compute number of zero crossings for nonconvected modes.
 
@@ -230,7 +230,7 @@ CONTAINS
                     endif
                 else
                     if (gam1a .eq. 0.0_rDef .or. gam2a .eq. 0.0_rDef) then
-                        print*, 'gam1a = ',gam1a,'  gam2a = ',gam2a
+                        !print*, 'gam1a = ',gam1a,'  gam2a = ',gam2a
                         IF (gam1a == 0.0_rDef) THEN
                             alm1 = 0.0_rDef
                             alm2 = 2.0_rDef*PI/gam2a
@@ -253,6 +253,10 @@ CONTAINS
             endif
         enddo
 1000    continue
+        CALL saveEGV(np = np,&
+        !np4 = np4,&
+            vrm = vrm,&
+            rr = rr)
 !
 ! Eigenvector output.
 !$$$      ncols = np4/15
@@ -292,10 +296,10 @@ CONTAINS
 !$$$      enddo
 !
         open(unit=14,             &
-            file='gam.nonconv',  &
+            file='04-EVanalysis/gam.nonconv',  &
             status='unknown')
         open(unit=16,             &
-            file='gam.non.acc')
+            file='04-EVanalysis/gam.non.acc')
         rewind 14
         rewind 16
         write(14,40)
@@ -373,9 +377,9 @@ CONTAINS
             kk = i/2
             if (mod(i,2) .eq. 1) then
 !                write(0,*) izeros(indx(i)),wvn(indx(i))!,gam2(jj)
-                write(15,*) izeros(indx(i)),wvn(indx(i))!,gam2(jj)
+!                write(15,*) izeros(indx(i)),wvn(indx(i))!,gam2(jj)
             else
-                write(15,*) izeros(indx(i)),wvn(indx(i)),mu(kk)! ,gam1(kk)
+!                write(15,*) izeros(indx(i)),wvn(indx(i)),mu(kk)! ,gam1(kk)
             endif
         endif
     enddo

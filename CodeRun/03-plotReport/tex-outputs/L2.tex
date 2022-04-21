@@ -17,26 +17,20 @@ tick pos=left,
 title={L2 Norm of the Error for the Manufactured Solution as a function of Grid Points},
 x grid style={color1},
 xmajorgrids,
-xmin=-18.5, xmax=542.5,
+xmin=6.7, xmax=13.3,
 xtick style={color=color0},
 xticklabels={},
 y grid style={color1},
 ymajorgrids,
-ymin=1.27786156290139e-12, ymax=2.43500555172433e-08,
+ymin=3.55412302880615e-09, ymax=1.6691221299654e-08,
 ymode=log,
 ytick style={color=color0}
 ]
-\addplot [thick, color2]
+\addplot [thick, color2, dash pattern=on 1pt off 3pt on 3pt off 3pt]
 table {%
 7 1.5558e-08
 9 8.666e-09
 13 3.813e-09
-21 1.362e-09
-37 4.18e-10
-69 1.17e-10
-133 3.1e-11
-261 8e-12
-517 2e-12
 };
 \addlegendentry{Speed Of Sound}
 
@@ -50,25 +44,19 @@ tick pos=left,
 x grid style={color1},
 xlabel={Number of Gridpoints},
 xmajorgrids,
-xmin=-18.5, xmax=542.5,
+xmin=6.7, xmax=13.3,
 xtick style={color=color0},
 y grid style={color1},
 ymajorgrids,
-ymin=1.47233525017305e-05, ymax=0.0773850221003131,
+ymin=0.0122196784487539, ymax=0.0561893986107781,
 ymode=log,
 ytick style={color=color0}
 ]
-\addplot [thick, color2]
+\addplot [thick, color2, dash pattern=on 1pt off 3pt on 3pt off 3pt]
 table {%
 7 0.052424759557
 9 0.033179291821
 13 0.013097177537
-21 0.008095953516
-37 0.003486847524
-69 0.001122800012
-133 0.000317623946
-261 8.4369909e-05
-517 2.1733375e-05
 };
 \addlegendentry{LEE}
 \end{groupplot}

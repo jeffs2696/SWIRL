@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{booktabs}
 \usepackage{verbatim}
 \usepackage{pgfplots}
 \DeclareUnicodeCharacter{2212}{−}
@@ -53,7 +55,9 @@
          \input{tex-outputs/cv_wave.tex}
      %\caption{}
  \end{figure}
-
+ \begin{small}
+     \input{tex-outputs/cv_wave_table.tex}
+ \end{small}
  \begin{tiny}
      \verbatiminput{../04-EVanalysis/cv.waves.dat}
  \end{tiny}
