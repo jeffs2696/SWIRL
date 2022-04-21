@@ -26,7 +26,7 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 3 
+        numberOfIterations = 8 
 
     INTEGER  :: &
         UNIT , & ! for NEWUNIT
@@ -130,6 +130,11 @@ PROGRAM MAIN
     ductAdmittance            = CMPLX(0.3,0.0,rDef) 
     frequency                 = CMPLX(30,0,rDef)
     
+
+    eigenValueMMS = CMPLX(0,0,KIND=rDef)
+
+    facCount = 0 ! initializer for far count 
+
     IF (numericalIntegrationFlag.eq.1) THEN
         ExpectedRateOfConvergenceSoundSpeed = 2.0_rDef
     ELSEIF (numericalIntegrationFlag.eq.2) THEN 
@@ -141,11 +146,6 @@ PROGRAM MAIN
     ELSEIF (finiteDiffFlag.eq.2) THEN 
         ExpectedRateOfConvergenceSourceTerm = 4.0_rDef
     ENDIF
-
-    eigenValueMMS = CMPLX(0,0,KIND=rDef)
-
-    facCount = 0 ! initializer for far count 
-
     ALLOCATE(&
         RateOfConvergence1(numberOfIterations - 1) , &
         RateOfConvergence2(numberOfIterations - 1) , &
@@ -192,6 +192,7 @@ PROGRAM MAIN
         DO i = 1, numberOfGridPoints
 
             r(i)             = (r_min+REAL(i-1, rDef)*dr)/r_max
+
             axialMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
             thetaMachData(i) = 0.2_rDef*COS(0.2_rDef*r(i))
 
@@ -320,6 +321,7 @@ PROGRAM MAIN
 
 
 !        CALL GetModeData(
+        include 'main-scripts/swirl-data-export-per-grid-MMS.f90'
         include 'main-scripts/swirl-data-export-per-grid.f90'
 
         CALL DestroyObject(object = swirlClassObjMMS(fac))
@@ -348,7 +350,7 @@ PROGRAM MAIN
     END DO
 
     include 'main-scripts/calculating-rate-of-convergence.f90'
-    include 'main-scripts/swirl-data-export-MMS.f90'
+    !include 'main-scripts/swirl-data-export-MMS.f90'
 
     DEALLOCATE(&
         RateOfConvergence1 , &

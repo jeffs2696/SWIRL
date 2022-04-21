@@ -9,40 +9,53 @@
 \contentsline {chapter}{\numberline {1}Background}{1}%
 \contentsline {section}{\numberline {1.1}Introduction}{1}%
 \contentsline {chapter}{\numberline {2}Chapter 2: Literature Review}{3}%
-\contentsline {chapter}{\numberline {3}Chapter 3: Theory}{4}%
-\contentsline {section}{\numberline {3.1}Divergence operations in new coordinate systems}{5}%
-\contentsline {subsection}{\numberline {3.1.1}Setting up SWIRL's Aerodynamic Model}{13}%
-\contentsline {section}{\numberline {3.2}Applying model to various flows}{14}%
-\contentsline {subsection}{\numberline {3.2.1}Axial Shear Flow}{14}%
-\contentsline {section}{\numberline {3.3}Accounting for solid body swirl}{15}%
-\contentsline {subsection}{\numberline {3.3.1}Linearizing the governing equations}{18}%
-\contentsline {subsubsection}{\numberline {3.3.1.1}Linearizing Conservation of Mass}{18}%
-\contentsline {subsubsection}{\numberline {3.3.1.2}Linearizing the Conservation of Momentum\\ in the \textit {r} direction}{21}%
-\contentsline {subsubsection}{\numberline {3.3.1.3}Linearizing the Conservation of Momentum\\ in the \textit {$\theta $} direction}{23}%
-\contentsline {subsubsection}{\numberline {3.3.1.4}Linearizing the Conservation of Momentum\\ in the \textit {x} direction}{25}%
-\contentsline {subsubsection}{\numberline {3.3.1.5}Linearizing the Energy Equation}{27}%
-\contentsline {section}{\numberline {3.4}Substituting Pertubation Variables}{29}%
-\contentsline {section}{\numberline {3.5}Non-Dimensionalization}{34}%
-\contentsline {chapter}{\numberline {4}Chapter 4: Numerical Models}{40}%
-\contentsline {section}{\numberline {4.1}Numerical Integration}{40}%
-\contentsline {section}{\numberline {4.2}Introduction}{40}%
-\contentsline {section}{\numberline {4.3}Methods}{42}%
-\contentsline {subsection}{\numberline {4.3.1}Theory}{43}%
-\contentsline {subsection}{\numberline {4.3.2}Calculation of Observed Order-of-Accuracy}{47}%
-\contentsline {section}{\numberline {4.4}Fairing Functions}{50}%
-\contentsline {section}{\numberline {4.5}Setting Boundary Condition Values Using a Fairing Function}{50}%
-\contentsline {subsection}{\numberline {4.5.1}Using $\beta $ as a scaling parameter}{50}%
-\contentsline {subsection}{\numberline {4.5.2}Minimum Boundary Fairing Function}{52}%
-\contentsline {subsection}{\numberline {4.5.3}Max boundary polynomial}{54}%
-\contentsline {subsection}{\numberline {4.5.4}Corrected function}{54}%
-\contentsline {subsection}{\numberline {4.5.5}Symbolic Sanity Checks}{55}%
-\contentsline {subsection}{\numberline {4.5.6}Min boundary derivative polynomial}{56}%
-\contentsline {subsection}{\numberline {4.5.7}Polynomial function, max boundary derivative}{57}%
-\contentsline {subsection}{\numberline {4.5.8}Putting it together}{59}%
-\contentsline {chapter}{\numberline {5}Results and Discusssion}{60}%
-\contentsline {chapter}{References}{61}%
-\contentsline {chapter}{\numberline {A}Theory Appendix}{62}%
-\contentsline {chapter}{\numberline {B}Chapter 3 Appendix}{63}%
-\contentsline {section}{\numberline {B.1}Appendix A: Speed of Sound}{64}%
-\contentsline {section}{\numberline {B.2}Appendix B: Isentropic Waves}{68}%
-\contentsline {chapter}{\numberline {C}Insert the Heading to Appendix B}{70}%
+\contentsline {section}{\numberline {2.1}Introduction}{3}%
+\contentsline {subsection}{\numberline {2.1.1}Define your topic and provide an appropriate context for reviewing the literature}{3}%
+\contentsline {subsection}{\numberline {2.1.2}Establish reasoning - i.e. point - of - view for reviewing the literature}{4}%
+\contentsline {subsubsection}{\numberline {2.1.2.1}Prior work in non-reflecting, non-linear VGBC}{4}%
+\contentsline {subsection}{\numberline {2.1.3}Explain the order/sequence of the review}{5}%
+\contentsline {subsection}{\numberline {2.1.4}State the scope (what is included and what is not)}{6}%
+\contentsline {subsection}{\numberline {2.1.5}Work by Kousen}{6}%
+\contentsline {section}{\numberline {2.2}Golubev and Atassi's work}{7}%
+\contentsline {section}{\numberline {2.3}Conclusion}{8}%
+\contentsline {chapter}{\numberline {3}Chapter 3: Theory}{9}%
+\contentsline {section}{\numberline {3.1}Divergence operations in new coordinate systems}{10}%
+\contentsline {subsection}{\numberline {3.1.1}Setting up SWIRL's Aerodynamic Model}{18}%
+\contentsline {section}{\numberline {3.2}Applying model to various flows}{19}%
+\contentsline {subsection}{\numberline {3.2.1}Axial Shear Flow}{19}%
+\contentsline {section}{\numberline {3.3}Accounting for solid body swirl}{20}%
+\contentsline {subsection}{\numberline {3.3.1}Linearizing the governing equations}{23}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}Linearizing Conservation of Mass}{23}%
+\contentsline {subsubsection}{\numberline {3.3.1.2}Linearizing the Conservation of Momentum\\ in the \textit {r} direction}{26}%
+\contentsline {subsubsection}{\numberline {3.3.1.3}Linearizing the Conservation of Momentum\\ in the \textit {$\theta $} direction}{28}%
+\contentsline {subsubsection}{\numberline {3.3.1.4}Linearizing the Conservation of Momentum\\ in the \textit {x} direction}{30}%
+\contentsline {subsubsection}{\numberline {3.3.1.5}Linearizing the Energy Equation}{32}%
+\contentsline {section}{\numberline {3.4}Substituting Pertubation Variables}{34}%
+\contentsline {section}{\numberline {3.5}Non-Dimensionalization}{39}%
+\contentsline {chapter}{\numberline {4}Chapter 4: Numerical Models}{45}%
+\contentsline {section}{\numberline {4.1}Numerical Integration}{45}%
+\contentsline {section}{\numberline {4.2}Introduction}{45}%
+\contentsline {section}{\numberline {4.3}Methods}{47}%
+\contentsline {subsection}{\numberline {4.3.1}Theory}{48}%
+\contentsline {subsection}{\numberline {4.3.2}Calculation of Observed Order-of-Accuracy}{52}%
+\contentsline {section}{\numberline {4.4}Fairing Functions}{56}%
+\contentsline {section}{\numberline {4.5}Setting Boundary Condition Values Using a Fairing Function}{56}%
+\contentsline {subsection}{\numberline {4.5.1}Using $\beta $ as a scaling parameter}{56}%
+\contentsline {subsection}{\numberline {4.5.2}Minimum Boundary Fairing Function}{58}%
+\contentsline {subsection}{\numberline {4.5.3}Max boundary polynomial}{60}%
+\contentsline {subsection}{\numberline {4.5.4}Corrected function}{60}%
+\contentsline {subsection}{\numberline {4.5.5}Symbolic Sanity Checks}{61}%
+\contentsline {subsection}{\numberline {4.5.6}Min boundary derivative polynomial}{62}%
+\contentsline {subsection}{\numberline {4.5.7}Polynomial function, max boundary derivative}{63}%
+\contentsline {subsection}{\numberline {4.5.8}Putting it together}{65}%
+\contentsline {chapter}{\numberline {5}Results and Discusssion}{66}%
+\contentsline {section}{\numberline {5.1}Verification}{66}%
+\contentsline {subsection}{\numberline {5.1.1}Method of Manufactured Solution Results}{66}%
+\contentsline {section}{\numberline {5.2}Validation}{66}%
+\contentsline {subsection}{\numberline {5.2.1}Comparison to Kousen}{66}%
+\contentsline {subsection}{\numberline {5.2.2}Comparison to Maldanado}{66}%
+\contentsline {chapter}{References}{67}%
+\contentsline {chapter}{\numberline {A}Theory Appendix}{68}%
+\contentsline {chapter}{\numberline {B}Chapter 3 Appendix}{69}%
+\contentsline {section}{\numberline {B.1}Appendix A: Speed of Sound}{70}%
+\contentsline {section}{\numberline {B.2}Appendix B: Isentropic Waves}{74}%

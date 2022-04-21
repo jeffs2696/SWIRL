@@ -1,8 +1,10 @@
 OUTPUT_FILES = \
 			   01-mean-flow/*.dat \
 			   02-method-of-manufactured-solutions/*.dat \
+			   03-plotReport/tex-outputs/*.tex \
 			   04-EVanalysis/*.dat \
-			   04-EVanalysis/gam*
+			   04-EVanalysis/gam* \
+			   fort.*
 
 EXE = swirlF2020
 SHELL_EXT = sh

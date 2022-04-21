@@ -1,0 +1,53 @@
+\section{Introduction}
+\subsection{Define your topic and provide an appropriate context for reviewing the literature}
+During the 1960's, the increased demand for commercialized aircraft transport 
+introduced jet engines capable of supporting large amounts of cargo and passengers. 
+On the contrary, this rise in innovation came with a consequence, high volume 
+engine noise.  At the time, thee most significant source of noise within an 
+aircraft turbo fan engine was attributed to flow interactions between the 
+inlet rotor and adjacent stator. 
+It is common in turbomachinery to have a stator behind the inlet rotor (or fan) 
+to counteract the rotation in the flow due to the rotor. More importantly, 
+this configuration causes wakes to form after the rotor, which come into contact 
+with the stator. This is denoted as rotor/stator interaction noise \cite{Tyler1962}. 
+The ``Tyler-Sofrin selection rule'' (TSSR) was a fundamental contribution 
+to the aerospace community, because it is a powerful yet simple 
+tool used to quickly determine whether an engine was likely to have 
+observable noise emission from the rotor and stator before the engine was manufactured. 
+Despite the fact, these preliminary studies were focused on axial compressor noise, the 
+TSSR was a pivotal stepping stone. Its application towards modern 
+turbomachinery flow has been attempted by modeling the flow as steady in the 
+rotating reference frame of the rotor's blade row. However, turbomachinery by 
+its very nature produces unsteady flow, and the TSSR in 
+not suitable \cite{Holmes2011}. Despite these dissimilarities, the work of 
+\cite{Tyler1962} set a strong foundation for the aerospace community, 
+allowing for further advances in turbomachinery noise prediction.
+
+\subsection{Establish reasoning - i.e. point - of - view for reviewing the literature}
+\subsubsection{Prior work in non-reflecting, non-linear VGBC}
+A large amount of aircraft noise was reduced from 1975-2000, 
+effectively eliminating the noise pollution for 90\% of the population \cite{Administration}. 
+Since the early 2000's, the advancement in noise reduction technologies has been gradual, 
+leaving a requirement for drastic improvement in aeroacoustic treatment 
+strategies to compete with the demand of quiet subsonic  flight. 
+A previous theoretical review by Envia has been suggested that a non linear 
+time domain computation could capture the source generation (incident turbulence) 
+in addition to the broadband noise. Such a process would have the capabilities 
+of  of solving all components of noise generation in an individual calculation \cite{Envia2004}. 
+This would at minimum, require an ``LES-type'' fidelity code, which can tend 
+to be computationally expensive.  A promising option is NASA GRC's Broadband 
+Aeroacoustic Stator Simulation (BASS).  BASS is a high-order, high 
+accuracy computational aeroacoustics (CAA) code which has been used to study 
+non linear provides mean an extensive study of non linear phenomena in 
+turbomachinery flow, and in particular, mechanisms of noise generation that are 
+produced from unsteady disturbances. This code allows for a wide variety of 
+finite differencing and time marching schemes as well as artificial dissipation methods. This effective computational tool allows for an in-depth modeling of realistic velocity profiles that would be representative of flow produced from a rotor blade row. In recent work, a new method of implementing realistic, three-dimensional rotor wakes free from acoustics was validated  \cite{Hixon2011}. This provides a means of studying acoustic responses non linear swirling flows within pragmatic geometric configurations, while simultaneously allow for the modeling of sources generation produced from the incident turbulence. 
+
+\subsection{Explain the order/sequence of the review}
+This review will compare studies that have considered the applicability of unsteady linearized Euler equations on cylindrical and annular ducts. First the work of Kousen will breifly summarized \cite{Kousen1996,Kousen1999}. Secondly, the alternate approached shown by Golubev and Atassi used in \cite{Golubev1996,Golubev1998} were also compared. These works have utilized a standard normal mode approach to determine the modal response of inviscid, compressible, swirling flow within a cylindrical and annular ducts. Results and findings have revealed three categories of associated wave - modes, acoustic, nearly convected, and nearly sonic. Detailed examination of the literature indicate that the hierarchical system was not initially apparent. A qualitative description of the numerical methods used to evaluate the eigensystem of solutions will be described.
+
+One key question that remains, is how well do unsteady linearized equations capture the mechanisms of noise generation within realistic turbomachinery flow? There exists a copious amount of published work describing the use of wave equations to describe the governing behavior of ducted sound propagation(See \cite{Michel2008} for extensive preliminary review). However, turbomachines inherently rely on high velocities, high temperatures to maximize efficiencies. Such mechanisms need a more thorough formulation so that a complete acoustic description of the flow can be provided. Large contributions were first made by Kousen and Atassi and as a result they will be used for comparison.
+
+%To begin exploring various geometries, we must first ask: what are the central theories that have been used `````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````112\sqrt{`312` explain the acoustic behavior of unsteady swirling flows? Do the linearized Euler equations provide an adequate means of capturing the mechanisms of noise generation within realistic turbomachinery flow? This paper will explore prior theories used to explain this and their methodologies. Large contributions were first made by Koussen and Atassi and as a result they will be used for comparison. Tam proposed a theoretical framework where the modes of a flow are characterized by an initial boundary value problem, allowing for the appearance of ''continuum modes`` \cite{Tarn1998}
+\subsection{State the scope (what is included and what is not)}
+This review will be a qualitative report of the findings, but a quantitative comparison ''meta-analysis`` should be done for potentially ideal test cases.

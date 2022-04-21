@@ -13,8 +13,8 @@ legend style={
   fill opacity=0.8,
   draw opacity=1,
   text opacity=1,
-  at={(0.03,0.97)},
-  anchor=north west,
+  at={(0.97,0.03)},
+  anchor=south east,
   draw=white!90!black
 },
 log basis y={10},
@@ -24,19 +24,24 @@ tick pos=left,
 title={Rate Of Convergence},
 x grid style={color1},
 xmajorgrids,
-xmin=8.8, xmax=13.2,
+xmin=-3.6, xmax=273.6,
 xtick style={color=color0},
 xticklabels={},
 y grid style={color1},
 ymajorgrids,
-ymin=0.830043337185886, ymax=1.20456350068436,
+ymin=0.808580357974222, ymax=2.08813653136233,
 ymode=log,
 ytick style={color=color0}
 ]
-\addplot [thick, color2]
+\addplot [line width=2.4pt, color2]
 table {%
 9 0.844213092014
 13 1.184345418732
+21 1.485678426451
+37 1.70393218834
+69 1.839783697645
+133 1.9164330736
+261 2
 };
 \addlegendentry{Speed Of Sound}
 
@@ -57,18 +62,23 @@ tick pos=left,
 x grid style={color1},
 xlabel={Number of Gridpoints},
 xmajorgrids,
-xmin=8.8, xmax=13.2,
+xmin=-3.6, xmax=273.6,
 xtick style={color=color0},
 y grid style={color1},
 ymajorgrids,
-ymin=0.636979184708076, ymax=1.38941952097665,
+ymin=0.625773011285144, ymax=2.01701926788512,
 ymode=log,
 ytick style={color=color0}
 ]
-\addplot [thick, color2]
+\addplot [line width=2.4pt, color2]
 table {%
 9 0.659965245766
 13 1.341027151607
+21 0.693983030407
+37 1.215277728398
+69 1.63482229427
+133 1.82170939735
+261 1.912519226099
 };
 \addlegendentry{LEE}
 \end{groupplot}

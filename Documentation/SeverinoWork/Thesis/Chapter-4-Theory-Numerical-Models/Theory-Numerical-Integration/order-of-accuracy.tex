@@ -105,6 +105,14 @@ Defining  for a doubling of grid points ,
 %\end{align*}
 %
 Similarly for the eigenvalue problem, 
+Initially the source terms were defined without mention of the indicies of the 
+matricies they make up. In other words, there was no fore sight on the fact 
+that these source terms are sums of the elements within A,B, and X. 
+To investigate the source terms in greater detail, the FORTRAN code 
+that calls the source terms will output the terms within the source term 
+and then sum them, instead of just their sum.
 
-\[ [A]x = \lambda [B]x \]
+\[ [A]x - \lambda [B]x = 0 \]
+
+
 

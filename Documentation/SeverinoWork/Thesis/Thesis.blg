@@ -14,10 +14,25 @@ A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/isentropic_relatio
 Database file #1: references.bib
 Warning--entry type for "FAAPolicy" isn't style-file defined
 --line 1 of file references.bib
+Warning--I didn't find a database entry for "Tyler1962"
+Warning--I didn't find a database entry for "Holmes2011"
+Warning--I didn't find a database entry for "Administration"
+Warning--I didn't find a database entry for "Envia2004"
+Warning--I didn't find a database entry for "Hixon2011"
+Warning--I didn't find a database entry for "Kousen1996"
 Warning--I didn't find a database entry for "Kousen1999"
+Warning--I didn't find a database entry for "Golubev1996"
+Warning--I didn't find a database entry for "Golubev1998"
+Warning--I didn't find a database entry for "Michel2008"
+Warning--I didn't find a database entry for "Kerrebrock1977"
+Warning--I didn't find a database entry for "Yousefian1975"
+Warning--I didn't find a database entry for "Yurkovich498"
+Warning--I didn't find a database entry for "ME1978"
+Warning--I didn't find a database entry for "Wundrow2019"
+Warning--I didn't find a database entry for "Case1960"
 You've used 2 entries,
             1791 wiz_defined-function locations,
-            471 strings with 4501 characters,
+            501 strings with 4815 characters,
 and the built_in function-call counts, 365 in all, are:
 = -- 29
 > -- 12
@@ -56,4 +71,4 @@ warning$ -- 0
 while$ -- 3
 width$ -- 3
 write$ -- 21
-(There were 2 warnings)
+(There were 17 warnings)

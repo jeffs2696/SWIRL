@@ -23,9 +23,12 @@ def extract_number(f):
 
 list_of_files = glob.glob('../01-mean-flow/mean-flow????.dat')
 list_of_files2 = glob.glob('../04-EVanalysis/gammas????.dat')
+list_of_files3 = glob.glob('../04-EVanalysis/gam????.acc')
 
 last_file = (max(list_of_files,key=extract_number))
 last_file2 = (max(list_of_files2,key=extract_number))
+last_file3 = (max(list_of_files3,key=extract_number))
+
 #getting mean flow file with highest grid number 
 #getting number of grid points
 #print(last_file)
@@ -46,12 +49,17 @@ last_file2 = (max(list_of_files2,key=extract_number))
 #print(max_grid)
 # importing data
 flow_data    = fcn.importPlotData(last_file)
-cv_wave_data = fcn.importPlotData(last_file2)
+gammas_data = fcn.importPlotData(last_file2)
+gam_acc_data = fcn.importPlotData(last_file3)
+
+cv_wave_data = fcn.importPlotData('../04-EVanalysis/cv.waves.dat')
+gam_non_acc_data = fcn.importPlotData('../04-EVanalysis/gam.non.acc')
+
 LEE_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-LEE.dat')
 LEE_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-LEE.dat')
 SND_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-sound_speed-.dat')
 SND_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-sound_speed.dat')
-#cv_wave_data = fcn.importPlotData('../04-EVanalysis/cv.waves.dat')
+
 Delta_r    = LEE_ROC_data.Delta_r
 LEE_ROC    = LEE_ROC_data.ROC
 SND_ROC    = SND_ROC_data.ROC
@@ -72,9 +80,22 @@ GridPoints = LEE_L2_data.GridPoints
 #print('\nTexttable Table:')
 #print(table.draw())
 #
-with open('../03-plotReport/tex-outputs/cv_wave_table.tex','w') as tex_file:
-    contents = cv_wave_data.to_latex(index=False)
+with open('../03-plotReport/tex-outputs/gammas.table.tex','w') as tex_file:
+    contents = gammas_data.to_latex(index=False)
     tex_file.write(contents)
+
+with open('../03-plotReport/tex-outputs/cv.waves.table.tex','w') as tex_file:
+    contents = cv_wave_data.to_latex(index=True)
+    tex_file.write(contents)
+
+with open('../03-plotReport/tex-outputs/gam.acc.table.tex','w') as tex_file:
+    contents = gam_acc_data.to_latex(index=False)
+    tex_file.write(contents)
+
+with open('../03-plotReport/tex-outputs/gam.non.acc.table.tex','w') as tex_file:
+    contents = gam_non_acc_data.to_latex(index=False)
+    tex_file.write(contents)
+
 
 #print(tabulate(cv_wave_data.iloc[0:],headers =cv_wave_data.columns,tablefmt='latex'))
 
@@ -118,29 +139,19 @@ plt.tight_layout()
 plt.grid(True)
 tikzplotlib.save("tex-outputs/MachDistribution.tex",extra_axis_parameters= ['width=10cm'])
 
-# In[4]:
-
-def plot_measurement(args, kwargs,x_label,y_label):
-    # Keyword arguments can be accessed as a normal dictionary
-    mpl.rcParams['lines.linewidth'] = 2
-    mpl.rcParams['lines.color'] = 'r'
-    
-    mpl.pyplot.plot(*args, **kwargs)
-    mpl.pyplot.xlabel(x_label)
-    mpl.pyplot.ylabel(y_label)
-    mpl.pyplot.legend()
-
-
 fig, ax = plt.subplots(1,1,figsize=(5,5)) 
 plt.plot(
         flow_data['radius'],
         flow_data['A_expected'],
         markers[1%10], 
-        markevery = 25,
         label ='Expected' ,
         linestyle = 'dashed')
 
-plt.plot(         flow_data['radius'],flow_data['A_actual'],          label ='Actual',         linestyle = 'dotted')
+plt.plot(
+        flow_data['radius'],
+        flow_data['A_actual'],
+        label ='Actual',
+        linestyle = 'dotted')
 
 plt.ylabel(r'$\bar{A}$')
 plt.xlabel('Radius')
@@ -261,8 +272,51 @@ fig, ax = plt.subplots(
         figsize=(10,4)
         )
 plt.scatter(
-        cv_wave_data['Re{gam/ak}'],
-        cv_wave_data['Im{gam/ak}'],
-        marker = 'o',
+        cv_wave_data['REAL'],
+        cv_wave_data['IMAG'],
+        marker = '.',
         s = 1)
-tikzplotlib.save("tex-outputs/cv_wave.tex",extra_axis_parameters=['width=10cm','height=5cm'])
+ax.set_ylabel('Imaginary')
+ax.set_ylabel('Real')
+ax.set_title('Convecting Wavenumbers')
+tikzplotlib.save("tex-outputs/cv.waves.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=(10,4)
+        )
+plt.scatter(
+        gammas_data['Re{gam/ak}'],
+        gammas_data['Im{gam/ak}'],
+        marker = '.',
+        s = 1)
+tikzplotlib.save("tex-outputs/gammas.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=(10,4)
+        )
+print(gam_acc_data.columns)
+plt.scatter(
+        gam_acc_data['Re{gam}/k'],
+        gam_acc_data['Im{gam}/k'],
+        marker = '.',
+        s = 1)
+tikzplotlib.save("tex-outputs/gam.acc.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=(10,4)
+        )
+plt.scatter(
+        gam_non_acc_data['Re{gam/ak}'],
+        gam_non_acc_data['Im{gam/ak}'],
+        marker = '.',
+        s = 1)
+tikzplotlib.save("tex-outputs/gam.non.acc.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])

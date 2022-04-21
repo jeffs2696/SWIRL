@@ -1,0 +1,66 @@
+% This file was created with tikzplotlib v0.9.12.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.196078431372549,0.188235294117647,0.203921568627451}
+\definecolor{color1}{rgb}{0.694117647058824,0.686274509803922,0.709803921568627}
+\definecolor{color2}{rgb}{0.12156862745098,0.466666666666667,0.705882352941177}
+
+\begin{groupplot}[group style={group size=1 by 2}]
+\nextgroupplot[
+height=10cm,
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!90!black},
+log basis y={10},
+scaled x ticks=manual:{}{\pgfmathparse{#1}},
+tick align=outside,
+tick pos=left,
+title={L2 Norm of the Error for the Manufactured Solution as a function of Grid Points},
+x grid style={color1},
+xmajorgrids,
+xmin=6.3, xmax=21.7,
+xtick style={color=color0},
+xticklabels={},
+y grid style={color1},
+ymajorgrids,
+ymin=1.20583608079041e-09, ymax=1.75728661113791e-08,
+ymode=log,
+ytick style={color=color0}
+]
+\addplot [line width=2.4pt, color2, dash pattern=on 1pt off 3pt on 3pt off 3pt]
+table {%
+7 1.5558e-08
+9 8.666e-09
+13 3.813e-09
+21 1.362e-09
+};
+\addlegendentry{Speed Of Sound}
+
+\nextgroupplot[
+height=10cm,
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!90!black},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+x grid style={color1},
+xlabel={Number of Gridpoints},
+xmajorgrids,
+xmin=6.3, xmax=21.7,
+xtick style={color=color0},
+y grid style={color1},
+ymajorgrids,
+ymin=0.00737402463026547, ymax=0.0575572279375027,
+ymode=log,
+ytick style={color=color0}
+]
+\addplot [line width=2.4pt, color2, dash pattern=on 1pt off 3pt on 3pt off 3pt]
+table {%
+7 0.052424759557
+9 0.033179291821
+13 0.013097177537
+21 0.008095953516
+};
+\addlegendentry{LEE}
+\end{groupplot}
+
+\end{tikzpicture}

@@ -389,13 +389,15 @@ and conversations.
 \section{Introduction}
 \input{Chapter-1-Introduction/Ch-1-Intro}
 \chapter{Chapter 2: Literature Review}
+\input{Chapter-2-Literature-Review/Ch-2-intro}
+\input{Chapter-2-Literature-Review/Ch-2-main-body}
+\input{Chapter-2-Literature-Review/Ch-2-golubev-atassi-work}
+\input{Chapter-2-Literature-Review/Ch-2-conclusion}
 \chapter{Chapter 3: Theory}
 \include{Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical}
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model}
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
 \include{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations}
-% \input{Chapter1/meanFlowMMS/meanFlowMMSBody.tex}
-
 \chapter{Chapter 4: Numerical Models}
 \section{Numerical Integration}
 \input{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction}
@@ -409,142 +411,13 @@ and conversations.
 \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-polynomial}
 \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/max-boundary-polynomial}
 \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/symbolic-sanity-checks}
-\subsection{Min boundary derivative polynomial}
-
-The polynomial is of the form: 
-
-\begin{align*}
-    B_{min} \left( \beta \right) &= 
-    a + b \beta + c \beta^2 + d \beta^3                   \\
-    B_{min} \left( \widetilde{r} \right) &= 
-    a + b \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)+
-    c\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)  ^2+
-    d\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)^3                    \\
-\end{align*}
-Taking the derivative,
-\begin{align*}
-    B'_{min} \left( \widetilde{r} \right) &= 
-    b \left( \frac{1}{1 - \sigma} \right)+
-    2 c\left( \frac{1}{1 - \sigma} \right)\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)  +
-    3 d\left( \frac{1}{1-\sigma} \right)\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)^2\\
-    B'_{min} \left( \beta \right) &= 
-    \left( \frac{1}{1 - \sigma} \right)
-    \left[
-    b +
-    2 c \beta + 
-    3 d \beta^2
-    \right]
-\end{align*}
-
-
-Applying the four constraints gives:
-\begin{align*}
-    a &= 0\\
-    b &= \left( 1 - \sigma \right) \\
-    a + b + c + d &= 0\\
-    2 + 2c + 3d &= 0
-\end{align*}
-\begin{align*}
-    c + d &= -b  \\
-    2c + 3d &= -b
-\end{align*}
-\begin{align*}
-    c &= -2b \\
-    d &= b
-\end{align*}
-
-and the min boundary derivative polynomial is: 
-\begin{align*}
-    B_{min}\left( \widetilde{r} \right) &= 
-    b \left( \frac{\widetilde{r} - \sigma }{1 - \sigma}\right) -
-    2b\left( \frac{\widetilde{r} - \sigma }{1 - \sigma}\right) ^2 +
-    b \left( \frac{\widetilde{r} - \sigma }{1 - \sigma}\right)^3 \\
-    &=  \left( 1 - \sigma \right)
-    \left( \left( \frac{\widetilde{r} - \sigma }{1 - \sigma}\right)  - 
-    2\left( \frac{\widetilde{r} - \sigma }{1 - \sigma}\right)^2 +
-    \left( \frac{\widetilde{r} - \sigma }{1 - \sigma}\right)^3\right)
-\end{align*} 
-\subsection{Polynomial function, max boundary derivative}
-The polynomial is of the form:
-
-The polynomial is of the form: 
-
-\begin{align*}
-    B_{max} \left( \beta \right) &= 
-    a + b \beta + c \beta^2 + d \beta^3                   \\
-    B_{max} \left( \widetilde{r} \right) &= 
-    a + b \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)+
-    c\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)  ^2+
-    d\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)^3                    \\
-\end{align*}
-which has the derivative,
-
-
-\begin{align*}
-    B'_{max} \left( \widetilde{r} \right) &= 
-    b \left( \frac{1}{1 - \sigma} \right)+
-    2 c\left( \frac{1}{1 - \sigma} \right)\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)  +
-    3 d\left( \frac{1}{1-\sigma} \right)\left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)^2\\
-    B'_{max} \left( \beta \right) &= 
-    \left( \frac{1}{1 - \sigma} \right)
-    \left[
-    b +
-    2 c \beta + 
-    3 d \beta^2
-    \right]
-\end{align*}
-Applying the four constraints gives:
-\begin{align*}
-    a &= 0 \\
-    b &= 0 \\
-    a + b + c + d &= 0 \\
-    b + 2c + 3d &= (1-\sigma)
-\end{align*} 
-
-working this out: 
-
-\begin{align*}
-    c + d &=  0 \\
-    2c + 3d &= (1 - \sigma)
-\end{align*} 
-
-gives 
-
-\begin{align*}
-    c &= -\left( 1 - \sigma\right)
-    d &= \left( 1 - \sigma\right)
-\end{align*}
-and the max boundary derivative polynomial is:
-
-\begin{align*}
-    B_{max} \left( \widetilde{r} \right) &= 
-    \left( 1 - \sigma \right) \left( 
-        - \left( \frac{\widetilde{r}-\sigma}{1 - \sigma} \right)^2 +
-        \left( \frac{\widetilde{r}-\sigma}{1-\sigma} \right)^3
-    \right)
-\end{align*}
-\subsection{Putting it together}
-
-The corrected function is then: 
-\begin{align*}
-    f_{BCsImposed} \left( \widetilde{r} \right) &= 
-    f_{MS} + 
-    B_{min}\left( \widetilde{r} \right) \Delta f'_{minBC} +
-    B_{max}\left( \widetilde{r} \right) \Delta f'_{maxBC}
-\end{align*}
-\begin{align*}
-    &= 
-    f_{MS} + \\
-    \left( 1 - \sigma \right) \left( 
-        \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right) 
-        - \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right) ^2
-\right) \Delta f'_{minBC} + \\
-\left( 1 - \sigma \right) \left( - \left( \frac{\widetilde{r} - \sigma}{1 - \sigma} \right)^2 + 
-    \left( \frac{\widetilde{r} - \sigma}{1 - \sigma}  \right)^3
-\right)
-\left( \Delta f'_{minBC} + \Delta f'_{maxBC} \right) 
-\end{align*}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-polynomial-derivative}
 \chapter{Results and Discusssion}
+\section{Verification}
+\subsection{Method of Manufactured Solution Results}
+\section{Validation}
+\subsection{Comparison to Kousen}
+\subsection{Comparison to Maldanado}
 
 %--------+----------------------------------------------------------+
 %        |  \appendix                                  (IF NEEDED)  |
@@ -569,16 +442,6 @@ The corrected function is then:
 \include{Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation}
 \include{Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships}
 
-%====================================================================
-
-\chapter{Insert the Heading to Appendix B}
-
-[Insert text to Appendix B (if appendix is needed)]
-
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 %--------+----------------------------------------------------------+
 %        |  \end{document}                              (REQUIRED)  |
@@ -592,4 +455,4 @@ The corrected function is then:
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+

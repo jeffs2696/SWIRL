@@ -161,7 +161,7 @@ CONTAINS
 
         DO j=1,np
 
-            WRITE(UNIT,*) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
+            WRITE(UNIT,19) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
 
             IF (debug) THEN
 !                WRITE(0,19) cvct(j)
@@ -176,7 +176,7 @@ CONTAINS
         ELSE
         ENDIF
 !17      FORMAT(1x,'Convected wavenumbers: ',/,8(f10.5))
-!19      FORMAT(1x,2e15.5)
+19      FORMAT(1x,2e15.5)
 
         CLOSE(UNIT)
 
