@@ -124,7 +124,7 @@ CONTAINS
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 10.e-8 !JS: is this sufficient
+        eps     = 10.e-4 !JS: is this sufficient
 
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
@@ -161,7 +161,7 @@ CONTAINS
 
         DO j=1,np
 
-            WRITE(UNIT,19) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
+            WRITE(UNIT,*) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
 
             IF (debug) THEN
 !                WRITE(0,19) cvct(j)
@@ -176,7 +176,7 @@ CONTAINS
         ELSE
         ENDIF
 !17      FORMAT(1x,'Convected wavenumbers: ',/,8(f10.5))
-19      FORMAT(1x,2e15.5)
+!19      FORMAT(1x,2e15.5)
 
         CLOSE(UNIT)
 
@@ -205,7 +205,8 @@ CONTAINS
             IF (col(j)) THEN
 
 
-                WRITE(0,20) j
+                WRITE(0,*) j
+                !WRITE(0,20) j
 
                 badcol = .true.
 
@@ -235,15 +236,16 @@ CONTAINS
 
             if (row(k)) then
 
-                WRITE(0,25) k
+                ! WRITE(0,25) k
+                WRITE(0,*) k
                 badrow = .true.
             endif
 
         enddo
 !
         if (badrow.or.badcol) return
-20      format(1x,'Column ',i4,' contains all zeros.')
-25      format(1x,'Row    ',i4,' contains all zeros.')
+!20      format(1x,'Column ',i4,' contains all zeros.')
+!25      format(1x,'Row    ',i4,' contains all zeros.')
 
         nmax4 = np4
 
@@ -299,15 +301,21 @@ CONTAINS
 
 !
 ! Print the gammas to the display.
-        WRITE(0,500)
-500     format(1x)
-
+!        WRITE(0,500)
+!500     format(1x)
+!
 !        WRITE(0,50)
 
 
         WRITE(file_id, '(i0.4)') np
 
         !WRITE(0,50)
+        OPEN(NEWUNIT=UNIT,FILE='04-EVanalysis/' //'gammas'//TRIM(ADJUSTL(file_id)) // '.dat')
+        OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
+        OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
+        WRITE(UNIT2,50)
+        WRITE(UNIT,55)
+
         do j=1,np4
 !            WRITE(0,*) alpha(j),beta(j)
             if (beta(j).ne.c0) then
@@ -318,10 +326,16 @@ CONTAINS
                     gam(j) =CMPLX(0.0_rDef,AIMAG(gam(j)),KIND=rDef)
                 endif
                 vphi(j)  = ak/gam(j)
-                !WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
+                ! WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
+                WRITE(UNIT ,12) j,gam(j),gam(j)/ak, vphi(j)
+                WRITE(UNIT2,10) j,gam(j),gam(j)/ak,vphi(j)
+                WRITE(UNIT3,*) REAL(gam(j)),AIMAG(gam(j))
             endif
         enddo
 
+        CLOSE(UNIT)
+        CLOSE(UNIT2)
+        CLOSE(UNIT3)
 !
 !        iO j=1,np4
 !
@@ -381,15 +395,9 @@ CONTAINS
 !
 ! Print all the gammas to a file.
 
-        OPEN(NEWUNIT=UNIT,FILE='04-EVanalysis/' //'gammas'//TRIM(ADJUSTL(file_id)) // '.dat')
-        OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
-        OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
-
 !        rewind UNIT
 !        rewind UNIT2
 !        rewind UNIT3
-        WRITE(UNIT2,50)
-        WRITE(UNIT,55)
 50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
             6x,'Im{gam}/k',6x,'kappa')
 55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
@@ -421,20 +429,13 @@ CONTAINS
 
 
 
-!            WRITE(0 ,*) i,gam(i)!gam(i)/ak!, vphi(i)
-
-            WRITE(UNIT ,12) i,gam(i),gam(i)/ak, vphi(i)
-            WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i)
-            WRITE(UNIT3,*) REAL(gam(i)),AIMAG(gam(i))
+            !WRITE(0 ,*) i!,gam(i),gam(i)/ak!, vphi(i)
         ENDDO
-        CLOSE(UNIT)
-        CLOSE(UNIT2)
-        CLOSE(UNIT3)
 10      format(1x,i4,9e20.12)
 12      format(1x,i4,6e20.12)
 
 
-        return
+        !return
 
     end
 

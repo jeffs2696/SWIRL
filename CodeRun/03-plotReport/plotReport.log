@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  21 APR 2022 15:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  24 APR 2022 13:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -594,30 +594,25 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
 (./tex-outputs/MachDistribution.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 853.
+(Font)              <7> on input line 3137.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 853.
+(Font)              <5> on input line 3137.
 ) (./tex-outputs/PerturbationVariables.tex)
-(./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/L2.tex
-Package pgfplots info on input line 28: Using 'lua backend=false' for axis: ymo
-de=log unsupported (yet).
-Package pgfplots info on input line 59: Using 'lua backend=false' for axis: ymo
-de=log unsupported (yet).
-)
-Overfull \hbox (52.8606pt too wide) in paragraph at lines 74--41
+(./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/L2.tex)
+Overfull \hbox (18.01385pt too wide) in paragraph at lines 70--41
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 74--41
+Underfull \hbox (badness 10000) in paragraph at lines 70--41
 
  []
 
 
-LaTeX Warning: Float too large for page by 46.603pt on input line 42.
+LaTeX Warning: Float too large for page by 46.59427pt on input line 42.
 
 (./tex-outputs/ROC.tex
-Package pgfplots info on input line 35: Using 'lua backend=false' for axis: ymo
+Package pgfplots info on input line 34: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
 Package pgfplots info on input line 72: Using 'lua backend=false' for axis: ymo
 de=log unsupported (yet).
@@ -625,51 +620,29 @@ de=log unsupported (yet).
 
 LaTeX Warning: Float too large for page by 36.5366pt on input line 48.
 
-(./tex-outputs/SourceTermData.tex) (./tex-outputs/cv.waves.scatter.tex)
-(./tex-outputs/cv.waves.table.tex)
+(./tex-outputs/SourceTermData.tex) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pd
+ftex.map}
 
-LaTeX Warning: Float too large for page by 2605.14157pt on input line 63.
-
-(./tex-outputs/gam.non.acc.scatter.tex) (./tex-outputs/gam.non.acc.table.tex
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
-.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
-)
-Overfull \hbox (50.11208pt too wide) in paragraph at lines 1--73
- [][] 
- []
-
-
-LaTeX Warning: Float too large for page by 11990.14157pt on input line 73.
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-] [2] [3] [4] [5] [6]
-[7] [8] [9] [10] (./plotReport.aux) ) 
+] [2] [3] [4] [5] [6] (./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
- 22785 strings out of 481239
- 609326 string characters out of 5920378
- 2093486 words of memory out of 5000000
- 37671 multiletter control sequences out of 15000+600000
+ 22719 strings out of 481239
+ 607866 string characters out of 5920378
+ 2121266 words of memory out of 5000000
+ 37620 multiletter control sequences out of 15000+600000
  532943 words of font info for 26 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,19n,136p,741b,2491s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on plotReport.pdf (10 pages, 192671 bytes).
+ 78i,19n,136p,741b,2513s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on plotReport.pdf (6 pages, 181135 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 54 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

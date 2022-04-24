@@ -2,6 +2,7 @@
 
 ! 01-mean-flow-data
 WRITE(file_id, '(i0.4)') numberOfGridPoints
+!WRITE(FDfac_id, '(i0)') FDfac
 
 dir_name  = '01-mean-flow/'
 
@@ -13,6 +14,16 @@ OPEN(&
     TRIM(ADJUSTL(file_id))   // &
     '.dat')
 
+!OPEN(&
+!    NEWUNIT=UNIT,&
+!    FILE   =&
+!    TRIM(ADJUSTL(dir_name))  // &
+!    'mean-flow-MMS' // &
+!    TRIM(ADJUSTL(file_id))   // &
+!    'finite-diff-method' // &
+!    TRIM(ADJUSTL(FDfac_id)) // &
+!    '.dat')
+!
  ! Write the resulting mean flow
 WRITE(UNIT,*) &
     'radius '    , &

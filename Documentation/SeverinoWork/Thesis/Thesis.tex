@@ -9,6 +9,12 @@
 \usepackage{graphicx}
 \usepackage[noend]{algpseudocode}
 \usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
 \begin{document} %---> %---> %---> %---> DO NOT ALTER THIS COMMAND
 
 %--------+----------------------------------------------------------+
@@ -394,7 +400,6 @@ and conversations.
 \input{Chapter-2-Literature-Review/Ch-2-golubev-atassi-work}
 \input{Chapter-2-Literature-Review/Ch-2-conclusion}
 \chapter{Chapter 3: Theory}
-\include{Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical}
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model}
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
 \include{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations}
@@ -415,6 +420,14 @@ and conversations.
 \chapter{Results and Discusssion}
 \section{Verification}
 \subsection{Method of Manufactured Solution Results}
+\input{Chapter-5-Results/tex-outputs/MachDistribution_R1}
+\input{Chapter-5-Results/tex-outputs/PerturbationVariables_R1}
+\input{Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1}
+\input{Chapter-5-Results/tex-outputs/SourceTermData_R1}
+\input{Chapter-5-Results/tex-outputs/L2_R1}
+\input{Chapter-5-Results/tex-outputs/ROC_R1}
+
+
 \section{Validation}
 \subsection{Comparison to Kousen}
 \subsection{Comparison to Maldanado}
@@ -439,6 +452,7 @@ and conversations.
 \chapter{Theory Appendix}
 
 \chapter{Chapter 3 Appendix}
+\include{Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical}
 \include{Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation}
 \include{Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships}
 

@@ -126,7 +126,7 @@ CONTAINS
 !
         pi  = 4.0_rDef*ATAN(1.0_rDef)
         ci  = CMPLX(0.0_rDef,1.0_rDef,rDef)
-        eps = 1.e-4_rDef
+        eps = 1.e-12_rDef
         alm1 = -10000
         alm2 = -10000
 !
@@ -159,6 +159,7 @@ CONTAINS
             rt =  rmt(i)
             as =  snd(i)
             cv = (omega/as -mode/r*rt)/rx
+!            WRITE(0,*) cv 
             if (abs(cv).gt.cvcmax) cvcmax = abs(cv)
             if (abs(cv).lt.cvcmin) cvcmin = abs(cv)
         enddo
@@ -173,12 +174,15 @@ CONTAINS
             cvcmax = cvcmax -eps
         endif
 
-!        WRITE(0,*) 'convection speed: ',cvcmin,cvcmax
+        WRITE(0,*) 'convection speed: ',cvcmin,cvcmax
 !
 ! Compute number of zero crossings for nonconvected modes.
 
         do i = 1,np4
+            !WRITE(0,*) i, wvn(i)
             gamma1 = wvn(i)
+
+            WRITE(0,*) gamma1 
             akx   = real(gamma1)
             if (akx .le. cvcmin .or. akx .ge. cvcmax) then
                 izeros(i) = 0
@@ -253,8 +257,8 @@ CONTAINS
             endif
         enddo
 1000    continue
-        CALL saveEGV(np = np,&
-        !np4 = np4,&
+        CALL saveEGV(&
+            np = np,&
             vrm = vrm,&
             rr = rr)
 !

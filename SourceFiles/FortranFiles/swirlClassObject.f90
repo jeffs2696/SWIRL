@@ -140,17 +140,17 @@ modulE swirlClassObject
 ! Local Variable Declaration
 
     LOGICAL :: debug = .FALSE. ! turns on/off printing to console
-
-    CHARACTER :: &
-        jobvl = 'N' ,& ! needed for zggev
-        jobvr = 'V'    !
-
-! additional variables, implicitly defined in the original code
-
-    INTEGER ::&
-        ir      = 2,  & ! axial mach number "knob" to switch between analytical solutions
-        is      = 5     ! tangential mach number
-
+!
+!    CHARACTER :: &
+!        jobvl = 'N' ,& ! needed for zggev
+!        jobvr = 'V'    !
+!
+!! additional variables, implicitly defined in the original code
+!
+!    INTEGER ::&
+!        ir      = 2,  & ! axial mach number "knob" to switch between analytical solutions
+!        is      = 5     ! tangential mach number
+!
 CONTAINS
 
     SUBROUTINE CreateSwirlClassObject(&
@@ -415,60 +415,61 @@ CONTAINS
                 WRITE(0,*) 'Entering analysis CALL'
             ELSE
             ENDIF
-
-            CALL analysis(&
-                np    = object%numberOfRadialPoints,    &
-                np4   = object%numberOfRadialPoints*4,   &
-                ak    = object%frequency,    &
-                rr    = object%r,     &
-                snd   = object%snd,   &
-                rmx   = object%rmx,   &
-                rmt   = object%rmt,   &
-                aa    = object%aa,    &
-                bb    = object%bb,    &
-                alpha = object%alpha, &
-                beta  = object%beta,  &
-                vl    = object%vl,    &
-                vr    = object%vr,    &
-                work  = object%work,  &
-                rwork = object%rwork, &
-                gam   = object%wvn,   &
-                jobvl = jobvl, &
-                jobvr = jobvr, &
-                mm    = object%azimuthalMode,    &
-                ir    = ir,    &
-                is    = is,    &
-                vphi  = object%vph,   &
-                akap  = object%akap)
-
+!
+!            CALL analysis(&
+!                np    = object%numberOfRadialPoints,    &
+!                np4   = object%numberOfRadialPoints*4,   &
+!                ak    = object%frequency,    &
+!                rr    = object%r,     &
+!                snd   = object%snd,   &
+!                rmx   = object%rmx,   &
+!                rmt   = object%rmt,   &
+!                aa    = object%aa,    &
+!                bb    = object%bb,    &
+!                alpha = object%alpha, &
+!                beta  = object%beta,  &
+!                vl    = object%vl,    &
+!                vr    = object%vr,    &
+!                work  = object%work,  &
+!                rwork = object%rwork, &
+!                gam   = object%wvn,   &
+!                jobvl = jobvl, &
+!                jobvr = jobvr, &
+!                mm    = object%azimuthalMode,    &
+!                ir    = ir,    &
+!                is    = is,    &
+!                vphi  = object%vph,   &
+!                akap  = object%akap)
+!
             IF (debug) THEN
                 WRITE(0,*) 'Leaving analysis CALL'
             ELSE
             ENDIF
+!
+!            CALL output(&
+!                np     = object%numberOfRadialPoints,    &
+!                np4    = object%numberOfRadialPoints*4,   &
+!                mode   = object%azimuthalMode,    &
+!                rho    = object%hubTipRatio,   &
+!                omega  = object%frequency,    &
+!                egv    = jobvr, &
+!                attenh = object%hubLinerAdmittance,  &
+!                attend = object%ductLinerAdmittance,  &
+!                rmx    = object%rmx,   &
+!                drm    = object%drm,   &
+!                rmt    = object%rmt,   &
+!                drt    = object%drt,   &
+!                snd    = object%snd,   &
+!                rr     = object%r,     &
+!                wvn    = object%wvn,   &
+!                vrm    = object%vr,    &
+!                vphi   = object%vph,   &
+!                is     = is)
+!
         ELSE
             WRITE(6,*) 'ERROR: The object is not initialized'
             CONTINUE
         ENDIF
-        
-        CALL output(&
-            np     = object%numberOfRadialPoints,    &
-            np4    = object%numberOfRadialPoints*4,   &
-            mode   = object%azimuthalMode,    &
-            rho    = object%hubTipRatio,   &
-            omega  = object%frequency,    &
-            egv    = jobvr, &
-            attenh = object%hubLinerAdmittance,  &
-            attend = object%ductLinerAdmittance,  &
-            rmx    = object%rmx,   &
-            drm    = object%drm,   &
-            rmt    = object%rmt,   &
-            drt    = object%drt,   &
-            snd    = object%snd,   &
-            rr     = object%r,     &
-            wvn    = object%wvn,   &
-            vrm    = object%vr,    &
-            vphi   = object%vph,   &
-            is     = is)
 
     END SUBROUTINE runSWIRL
     SUBROUTINE CreateSwirlClassObjectMMS()!&
@@ -476,7 +477,7 @@ CONTAINS
 !        TYPE(mmsClassType) :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
 !
 !        INTEGER :: &
-!            i 
+!            i
 !
 !
 !        REAL(KIND = rDef) :: &
@@ -485,11 +486,11 @@ CONTAINS
 !
 !        REAL(KIND = rDef) ,DIMENSION(:), ALLOCATABLE ::&
 !            SoundSpeedExpected , &
-!            thetaMachData, & 
-!            axialMachData 
+!            thetaMachData, &
+!            axialMachData
 !
 !        COMPLEX(KIND = rDef) :: &
-!            axialWavenumberMMS 
+!            axialWavenumberMMS
 !
 !
 !        COMPLEX(KIND = rDef) , DIMENSION(:) , ALLOCATABLE :: &
@@ -573,7 +574,7 @@ CONTAINS
 !
 !            CALL DestroyObject(object = manufacturedObject)
 !            DEALLOCATE(SoundSpeedExpected,thetaMachData,axialMachData)
-!        
+!
     END SUBROUTINE CreateSwirlClassObjectMMS
     SUBROUTINE GetMeanData(&
         object   ,&
@@ -725,7 +726,8 @@ CONTAINS
             object%vRad,&
             object%vT,&
             object%vX,&
-            object%Pr)
+            object%Pr,&
+            object%eigenVectorMMS)
 
     END SUBROUTINE DestroySwirlClassObject
 !

@@ -12,6 +12,7 @@ import matplotlib as mpl
 import matplotlib.ticker as mticker
 import plotReportLib
 from matplotlib import pyplot as plt
+import matplotlib as mpl
 from plotReportLib import myfunctions as fcn
 from tabulate import tabulate
 from texttable import Texttable
@@ -20,6 +21,7 @@ import latextable
 def extract_number(f):
     s = re.findall("\d+$",f)
     return (int(s[0]) if s else -1,f)
+mpl.rcParams['lines.linewidth'] = 4
 
 list_of_files = glob.glob('../01-mean-flow/mean-flow????.dat')
 list_of_files2 = glob.glob('../04-EVanalysis/gammas????.dat')
@@ -105,7 +107,7 @@ with open('../03-plotReport/tex-outputs/gam.non.acc.table.tex','w') as tex_file:
 markers = ['->', '-+', '-.', '-o', '--', 'v', 'x', 'X', 'D', '|']
 
 
-plt.style.use('plot_style.txt')
+plt.style.use('seaborn-whitegrid')
 
 
 # plot data
@@ -143,8 +145,8 @@ fig, ax = plt.subplots(1,1,figsize=(5,5))
 plt.plot(
         flow_data['radius'],
         flow_data['A_expected'],
-        markers[1%10], 
         label ='Expected' ,
+        linewidth = 4,
         linestyle = 'dashed')
 
 plt.plot(
@@ -187,7 +189,7 @@ fig, (ax1,ax2) = plt.subplots(
         ncols=1,
         sharex=True)
 
-ax1.semilogy(
+ax1.plot(
         GridPoints[0:],
         SND_L2,
         markers[2%10],
@@ -196,7 +198,7 @@ ax1.semilogy(
 ax1.legend()
 ax1.set_title('L2 Norm of the Error for the Manufactured Solution as a function of Grid Points')
 
-ax2.semilogy(
+ax2.plot(
         GridPoints[0:],
         LEE_L2,
         markers[2%10],
@@ -212,7 +214,15 @@ ax2.yaxis.set_major_formatter(mticker.ScalarFormatter())
 ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 
-tikzplotlib.save("tex-outputs/L2.tex",figure="gcf",extra_axis_parameters= ['height=10cm'])
+#
+ax1.xaxis.set_major_formatter(mticker.ScalarFormatter())
+ax2.xaxis.set_major_formatter(mticker.ScalarFormatter())
+
+ax1.xaxis.set_minor_formatter(mticker.ScalarFormatter())
+ax2.xaxis.set_minor_formatter(mticker.ScalarFormatter())
+
+tikzplotlib.save("tex-outputs/L2.tex",encoding='utf-8',
+        figure="gcf",extra_axis_parameters= ['height=10cm'])
 #,extra_axis_parameters=['yticklabel style={ /pgf/number format/fixed, #/pgf/number format/precision=5}','scaled y ticks=false']) 
 
 # In[10]:
@@ -300,7 +310,7 @@ fig, ax = plt.subplots(
         sharex=True,
         figsize=(10,4)
         )
-print(gam_acc_data.columns)
+#print(gam_acc_data.columns)
 plt.scatter(
         gam_acc_data['Re{gam}/k'],
         gam_acc_data['Im{gam}/k'],
