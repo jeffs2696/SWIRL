@@ -3,5 +3,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5-1}{\ignorespaces Mach distribution for method of manufactured solution case}}{74}%
+\contentsline {figure}{\numberline {5-2}{\ignorespaces Speed of Sound from Integrating the Tangential Mach Number}}{75}%
+\contentsline {figure}{\numberline {5-3}{\ignorespaces L2 Norm of the Error for the MMS as a function of Grid Points}}{76}%
+\contentsline {figure}{\numberline {5-4}{\ignorespaces Rate of Convergence for the Speed of Sound Integration}}{77}%
+\contentsline {figure}{\numberline {5-5}{\ignorespaces Source Term Error}}{78}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  24 APR 2022 13:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  25 APR 2022 10:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -702,7 +702,12 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__pdf_internal_box=\box63
 )
 (./Thesis.aux
-(./Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical.aux)
+
+LaTeX Warning: Label `eqn:besselsolution' multiply defined.
+
+
+LaTeX Warning: Label `eqn:besselsolution' multiply defined.
+
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux)
@@ -713,20 +718,20 @@ racy.aux) (./Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.aux))
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -770,27 +775,28 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 ] (./Thesis.toc [6
 
 
-] [7])
+] [7] [8])
 \tf@toc=\write4
 \openout4 = `Thesis.toc'.
 
- [8] (./Thesis.lot)
+ [9]
+(./Thesis.lot)
 \tf@lot=\write5
 \openout5 = `Thesis.lot'.
 
-[9
+ [10
 
 ] (./Thesis.lof)
 \tf@lof=\write6
 \openout6 = `Thesis.lof'.
 
- [10
-
-] [11
+ [11
 
 ] [12
 
 ] [13
+
+] [14
 
 ]
 Chapter 1.
@@ -802,61 +808,53 @@ Chapter 1.
 Chapter 2.
 (./Chapter-2-Literature-Review/Ch-2-intro.tex
 
-LaTeX Warning: Citation `Tyler1962' on page 3 undefined on input line 12.
+LaTeX Warning: Citation `Administration' on page 3 undefined on input line 13.
 
 
-LaTeX Warning: Citation `Holmes2011' on page 3 undefined on input line 22.
+LaTeX Warning: Citation `Envia2004' on page 3 undefined on input line 20.
 
 
-LaTeX Warning: Citation `Tyler1962' on page 3 undefined on input line 23.
+LaTeX Warning: Citation `Hixon2011' on page 3 undefined on input line 28.
 
 [3
 
 ]
 
-LaTeX Warning: Citation `Administration' on page 4 undefined on input line 29.
+LaTeX Warning: Citation `Kousen1996' on page 4 undefined on input line 31.
 
 
-LaTeX Warning: Citation `Envia2004' on page 4 undefined on input line 36.
+LaTeX Warning: Citation `Kousen1999' on page 4 undefined on input line 31.
 
 
-LaTeX Warning: Citation `Hixon2011' on page 4 undefined on input line 44.
+LaTeX Warning: Citation `Golubev1996' on page 4 undefined on input line 31.
+
+
+LaTeX Warning: Citation `Golubev1998' on page 4 undefined on input line 31.
 
 [4]
 
-LaTeX Warning: Citation `Kousen1996' on page 5 undefined on input line 47.
+LaTeX Warning: Citation `Michel2008' on page 5 undefined on input line 33.
+
+) (./Chapter-2-Literature-Review/Ch-2-main-body.tex
+
+LaTeX Warning: Citation `Kerrebrock1977' on page 5 undefined on input line 2.
 
 
-LaTeX Warning: Citation `Kousen1999' on page 5 undefined on input line 47.
+LaTeX Warning: Citation `Yousefian1975' on page 5 undefined on input line 2.
 
 
-LaTeX Warning: Citation `Golubev1996' on page 5 undefined on input line 47.
+LaTeX Warning: Citation `Yurkovich498' on page 5 undefined on input line 2.
 
 
-LaTeX Warning: Citation `Golubev1998' on page 5 undefined on input line 47.
+LaTeX Warning: Citation `ME1978' on page 5 undefined on input line 4.
 
 
-LaTeX Warning: Citation `Michel2008' on page 5 undefined on input line 49.
-
-) (./Chapter-2-Literature-Review/Ch-2-main-body.tex [5]
-
-LaTeX Warning: Citation `Kerrebrock1977' on page 6 undefined on input line 2.
+LaTeX Warning: Citation `Wundrow2019' on page 5 undefined on input line 5.
 
 
-LaTeX Warning: Citation `Yousefian1975' on page 6 undefined on input line 2.
+LaTeX Warning: Citation `Kousen1999' on page 5 undefined on input line 5.
 
-
-LaTeX Warning: Citation `Yurkovich498' on page 6 undefined on input line 2.
-
-
-LaTeX Warning: Citation `ME1978' on page 6 undefined on input line 4.
-
-
-LaTeX Warning: Citation `Wundrow2019' on page 6 undefined on input line 5.
-
-
-LaTeX Warning: Citation `Kousen1999' on page 6 undefined on input line 5.
-
+[5]
 
 LaTeX Warning: Citation `Kousen1996' on page 6 undefined on input line 14.
 
@@ -873,36 +871,37 @@ LaTeX Warning: Citation `Wundrow2019' on page 6 undefined on input line 4.
 
 LaTeX Warning: Citation `Case1960' on page 6 undefined on input line 4.
 
-[6]) (./Chapter-2-Literature-Review/Ch-2-conclusion.tex [7]
+[6]) (./Chapter-2-Literature-Review/Ch-2-conclusion.tex
 
-LaTeX Warning: Citation `Kousen1996' on page 8 undefined on input line 12.
-
-
-LaTeX Warning: Citation `Kousen1999' on page 8 undefined on input line 12.
+LaTeX Warning: Citation `Kousen1996' on page 7 undefined on input line 12.
 
 
-LaTeX Warning: Citation `Golubev1996' on page 8 undefined on input line 12.
+LaTeX Warning: Citation `Kousen1999' on page 7 undefined on input line 12.
 
 
-LaTeX Warning: Citation `Golubev1998' on page 8 undefined on input line 12.
+LaTeX Warning: Citation `Golubev1996' on page 7 undefined on input line 12.
 
-) [8]
+
+LaTeX Warning: Citation `Golubev1998' on page 7 undefined on input line 12.
+
+) [7]
 Chapter 3.
-[9
+(./Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes.tex [8
 
-]
-\openout2 = `Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical.aux'
-.
+] [9] [10]
+[11] [12] [13] [14] [15]
 
- (./Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical.tex
-[10
+LaTeX Warning: Citation `wolphram:bessel' on page 16 undefined on input line 42
+2.
 
-] [11] [12] [13] [14] [15] [16]) [17]
+[16] [17] [18] [19] [20] [21] [22] [23]
+
+LaTeX Warning: Citation `Amr2001' on page 24 undefined on input line 754.
+
+) [24]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux'.
 
-
-(./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.tex) [18
-
+ (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.tex) [25
 
 ]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_case
@@ -910,38 +909,38 @@ s.aux'.
 
 
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.tex
-[19
+[26
 
 
 ]
 
-LaTeX Warning: Citation `Kousen1999' on page 20 undefined on input line 59.
+LaTeX Warning: Citation `Kousen1999' on page 27 undefined on input line 59.
 
-[20] [21]) [22]
+[27] [28]) [29]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux
 '.
 
 
-(./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.tex [23
+(./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.tex [30
 
 
 ]
-[24] [25]
+[31] [32]
 Overfull \hbox (74.87093pt too wide) detected at line 211
 []
  []
 
-[26] [27] [28] [29]
+[33] [34] [35] [36]
 Overfull \hbox (13.99374pt too wide) detected at line 408
 []
  []
 
-[30] [31] [32] [33] [34]
+[37] [38] [39] [40] [41]
 Overfull \hbox (51.42525pt too wide) detected at line 628
 []
  []
 
-[35] [36] [37]
+[42] [43] [44]
 Overfull \hbox (36.46649pt too wide) detected at line 743
 []
  []
@@ -956,30 +955,30 @@ Overfull \hbox (72.20944pt too wide) detected at line 766
 []
  []
 
-[38]
+[45]
 Overfull \hbox (48.38712pt too wide) detected at line 800
 []
  []
 
-[39] [40] [41] [42]
+[46] [47] [48] [49]
 Overfull \hbox (83.80112pt too wide) detected at line 948
 [] [] \OT1/cmr/m/n/12 = 0
  []
 
-[43]) [44]
+[50]) [51]
 Chapter 4.
 
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.
-tex) [45
+tex) [52
 
 
-] [46]
+] [53]
 \openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/met
 hods.aux'.
 
 
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.tex)
-[47
+[54
 
 ]
 \openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/the
@@ -987,28 +986,28 @@ ory.aux'.
 
 
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.tex
-[48
+[55
 
 
-] [49] [50]) [51]
+] [56] [57]) [58]
 \openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/ord
 er-of-accuracy.aux'.
 
 
 (./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
-racy.tex [52
+racy.tex [59
 
 
-] [53] [54]) [55]
+] [60] [61]) [62]
 (./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/intro.tex)
 (./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/setting-bc-values
--using-a-fairing-function.tex [56
+-using-a-fairing-function.tex [63
 
-] [57])
+] [64])
 (./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-poly
-nomial.tex [58] [59])
+nomial.tex [65] [66])
 (./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/max-boundary-poly
-nomial.tex [60])
+nomial.tex [67])
 (./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/symbolic-sanity-c
 hecks.tex
 Overfull \hbox (18.29695pt too wide) in paragraph at lines 2--8
@@ -1026,44 +1025,91 @@ Overfull \hbox (105.42238pt too wide) detected at line 52
 []
  []
 
-[61])
+[68])
 (./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-poly
-nomial-derivative.tex [62] [63] [64]) [65]
+nomial-derivative.tex [69] [70] [71]) [72]
 Chapter 5.
-(./Chapter-5-Results/tex-outputs/MachDistribution_R1.tex) (./Thesis.bbl
-[66
+<Chapter-5-Results/tex-outputs/MachDistribution_R1.pdf, id=294, 314.24402pt x 2
+18.8175pt>
+File: Chapter-5-Results/tex-outputs/MachDistribution_R1.pdf Graphic file (type 
+pdf)
+<use Chapter-5-Results/tex-outputs/MachDistribution_R1.pdf>
+Package pdftex.def Info: Chapter-5-Results/tex-outputs/MachDistribution_R1.pdf 
+ used on input line 436.
+(pdftex.def)             Requested size: 433.62pt x 301.96512pt.
+<Chapter-5-Results/tex-outputs/PerturbationVariables_R1.pdf, id=295, 320.96913p
+t x 218.8175pt>
+File: Chapter-5-Results/tex-outputs/PerturbationVariables_R1.pdf Graphic file (
+type pdf)
+<use Chapter-5-Results/tex-outputs/PerturbationVariables_R1.pdf>
+Package pdftex.def Info: Chapter-5-Results/tex-outputs/PerturbationVariables_R1
+.pdf  used on input line 442.
+(pdftex.def)             Requested size: 433.62pt x 295.64128pt.
+<Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf, id=296, 318.49
+991pt x 203.65083pt>
+File: Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf Graphic fi
+le (type pdf)
+<use Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf>
+Package pdftex.def Info: Chapter-5-Results/tex-outputs/SoundSpeedFromIntegratio
+n_R1.pdf  used on input line 447.
+(pdftex.def)             Requested size: 433.62pt x 277.28464pt.
+<Chapter-5-Results/tex-outputs/L2_R1.pdf, id=297, 307.53897pt x 203.65083pt>
+File: Chapter-5-Results/tex-outputs/L2_R1.pdf Graphic file (type pdf)
+<use Chapter-5-Results/tex-outputs/L2_R1.pdf>
+Package pdftex.def Info: Chapter-5-Results/tex-outputs/L2_R1.pdf  used on input
+ line 453.
+(pdftex.def)             Requested size: 433.62pt x 287.14459pt.
+<Chapter-5-Results/tex-outputs/ROC_R1.pdf, id=298, 300.51273pt x 218.8175pt>
+File: Chapter-5-Results/tex-outputs/ROC_R1.pdf Graphic file (type pdf)
+<use Chapter-5-Results/tex-outputs/ROC_R1.pdf>
+Package pdftex.def Info: Chapter-5-Results/tex-outputs/ROC_R1.pdf  used on inpu
+t line 459.
+(pdftex.def)             Requested size: 433.62pt x 315.75136pt.
+<Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf, id=299, 344.9989pt x 213.
+22661pt>
+File: Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf Graphic file (type pd
+f)
+<use Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf>
+Package pdftex.def Info: Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf  u
+sed on input line 465.
+(pdftex.def)             Requested size: 433.62pt x 268.01947pt.
+[73
 
-] [67]) [68
+] [74 <./Chapter-5-Results/tex-outputs/MachDistribution_R1.pdf>] [75 <./Chapter
+-5-Results/tex-outputs/PerturbationVariables_R1.pdf> <./Chapter-5-Results/tex-o
+utputs/SoundSpeedFromIntegration_R1.pdf>] [76 <./Chapter-5-Results/tex-outputs/
+L2_R1.pdf>] [77 <./Chapter-5-Results/tex-outputs/ROC_R1.pdf>] [78 <./Chapter-5-
+Results/tex-outputs/SourceTermData_R1.pdf>] [79] (./Thesis.bbl [80])
+[81
 
 ]
 Appendix A.
-[69
+[82
 
 ]
 Appendix B.
-[70
+[83
 
 ]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux'
 .
 
  (./Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.tex
-[71
+[84
 
-] [72]
+] [85]
 Overfull \hbox (33.22014pt too wide) detected at line 112
 [] \OT1/cmr/m/n/12 + [] [] + [] = [] + [] [] + []
  []
 
-[73]) [74]
+[86]) [87]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.aux'.
 
  (./Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.tex
-[75
+[88
 
 
-]) [76] (./Thesis.aux
-(./Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical.aux)
+]) [89] (./Thesis.aux
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux)
@@ -1075,35 +1121,39 @@ racy.aux) (./Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 25475 strings out of 481239
- 664516 string characters out of 5920378
- 1886359 words of memory out of 5000000
- 40184 multiletter control sequences out of 15000+600000
- 543260 words of font info for 61 fonts, out of 8000000 for 9000
+ 25041 strings out of 481239
+ 652894 string characters out of 5920378
+ 1031051 words of memory out of 5000000
+ 39760 multiletter control sequences out of 15000+600000
+ 540492 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,20n,136p,939b,2147s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,20n,136p,939b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (89 pages, 352655 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/latxfont/line10.pfb>
+Output written on Thesis.pdf (103 pages, 440009 bytes).
 PDF statistics:
- 363 PDF objects out of 1000 (max. 8388607)
- 252 compressed objects within 3 object streams
+ 553 PDF objects out of 1000 (max. 8388607)
+ 381 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

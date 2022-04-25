@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  24 APR 2022 13:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  25 APR 2022 11:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -75,16 +75,32 @@ Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
 \verbatim@line=\toks19
 \verbatim@in@stream=\read2
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
-(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
-Package: pgfplots 2018/03/28 v1.16 Data Visualization (1.16)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks20
+\pgfutil@tempdima=\dimen155
+\pgfutil@tempdimb=\dimen156
 
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box47
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2020/01/08 v3.1.5b (3.1.5b)
+))
+Package: pgf 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks20
+\KV@toks@=\toks21
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
@@ -100,30 +116,9 @@ Package graphics Info: Driver file: pdftex.def on input line 105.
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen155
-\Gin@req@width=\dimen156
+\Gin@req@height=\dimen157
+\Gin@req@width=\dimen158
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks21
-\pgfutil@tempdima=\dimen157
-\pgfutil@tempdimb=\dimen158
-
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
-ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box47
-(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
-Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
-))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
-Package: pgfrcs 2020/01/08 v3.1.5b (3.1.5b)
-))
-Package: pgf 2020/01/08 v3.1.5b (3.1.5b)
-
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
@@ -339,7 +334,12 @@ Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
 .sty
 Package: pgfcomp-version-1-18 2020/01/08 v3.1.5b (3.1.5b)
-)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2018/03/28 v1.16 Data Visualization (1.16)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
@@ -551,21 +551,21 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 (./plotReport.aux)
 \openout1 = `plotReport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
-LaTeX Font Info:    ... okay on input line 14.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+ ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count289
@@ -588,61 +588,67 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-ABD: EveryShipout initializing macros
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
-(./tex-outputs/MachDistribution.tex
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 3137.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 3137.
-) (./tex-outputs/PerturbationVariables.tex)
-(./tex-outputs/SoundSpeedFromIntegration.tex) (./tex-outputs/L2.tex)
-Overfull \hbox (18.01385pt too wide) in paragraph at lines 70--41
-[][]
- []
+<tex-outputs/MachDistribution.pdf, id=4, 314.24402pt x 218.8175pt>
+File: tex-outputs/MachDistribution.pdf Graphic file (type pdf)
+<use tex-outputs/MachDistribution.pdf>
+Package pdftex.def Info: tex-outputs/MachDistribution.pdf  used on input line 2
+5.
+(pdftex.def)             Requested size: 314.24324pt x 218.81696pt.
+<tex-outputs/PerturbationVariables.pdf, id=5, 320.96913pt x 218.8175pt>
+File: tex-outputs/PerturbationVariables.pdf Graphic file (type pdf)
+<use tex-outputs/PerturbationVariables.pdf>
+Package pdftex.def Info: tex-outputs/PerturbationVariables.pdf  used on input l
+ine 31.
+(pdftex.def)             Requested size: 320.96834pt x 218.81696pt.
+<tex-outputs/SoundSpeedFromIntegration.pdf, id=6, 318.49991pt x 203.65083pt>
+File: tex-outputs/SoundSpeedFromIntegration.pdf Graphic file (type pdf)
+<use tex-outputs/SoundSpeedFromIntegration.pdf>
+Package pdftex.def Info: tex-outputs/SoundSpeedFromIntegration.pdf  used on inp
+ut line 36.
+(pdftex.def)             Requested size: 318.49911pt x 203.65033pt.
+<tex-outputs/L2.pdf, id=7, 307.53897pt x 203.65083pt>
+File: tex-outputs/L2.pdf Graphic file (type pdf)
+<use tex-outputs/L2.pdf>
+Package pdftex.def Info: tex-outputs/L2.pdf  used on input line 42.
+(pdftex.def)             Requested size: 307.53821pt x 203.65033pt.
+<tex-outputs/ROC.pdf, id=8, 300.51273pt x 218.8175pt>
+File: tex-outputs/ROC.pdf Graphic file (type pdf)
+<use tex-outputs/ROC.pdf>
+Package pdftex.def Info: tex-outputs/ROC.pdf  used on input line 48.
+(pdftex.def)             Requested size: 300.51198pt x 218.81696pt.
+<tex-outputs/SourceTermData.pdf, id=9, 344.9989pt x 213.22661pt>
+File: tex-outputs/SourceTermData.pdf Graphic file (type pdf)
+<use tex-outputs/SourceTermData.pdf>
+Package pdftex.def Info: tex-outputs/SourceTermData.pdf  used on input line 53.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 70--41
-
- []
-
-
-LaTeX Warning: Float too large for page by 46.59427pt on input line 42.
-
-(./tex-outputs/ROC.tex
-Package pgfplots info on input line 34: Using 'lua backend=false' for axis: ymo
-de=log unsupported (yet).
-Package pgfplots info on input line 72: Using 'lua backend=false' for axis: ymo
-de=log unsupported (yet).
-)
-
-LaTeX Warning: Float too large for page by 36.5366pt on input line 48.
-
-(./tex-outputs/SourceTermData.tex) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pd
-ftex.map}
-
-] [2] [3] [4] [5] [6] (./plotReport.aux) ) 
+(pdftex.def)             Requested size: 344.99805pt x 213.22607pt.
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./tex-outputs/MachDistri
+bution.pdf> <./tex-outputs/PerturbationVariables.pdf>] [2 <./tex-outputs/SoundS
+peedFromIntegration.pdf> <./tex-outputs/L2.pdf>] [3 <./tex-outputs/ROC.pdf> <./
+tex-outputs/SourceTermData.pdf>] (./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
- 22719 strings out of 481239
- 607866 string characters out of 5920378
- 2121266 words of memory out of 5000000
- 37620 multiletter control sequences out of 15000+600000
- 532943 words of font info for 26 fonts, out of 8000000 for 9000
+ 22135 strings out of 481239
+ 592566 string characters out of 5920378
+ 942953 words of memory out of 5000000
+ 37050 multiletter control sequences out of 15000+600000
+ 532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,19n,136p,741b,2513s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on plotReport.pdf (6 pages, 181135 bytes).
+ 78i,6n,136p,741b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
+Output written on plotReport.pdf (3 pages, 151058 bytes).
 PDF statistics:
- 54 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
+ 182 PDF objects out of 1000 (max. 8388607)
+ 122 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

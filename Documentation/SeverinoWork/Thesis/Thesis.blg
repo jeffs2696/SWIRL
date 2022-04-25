@@ -1,7 +1,6 @@
 This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
-A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical.aux
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux
@@ -14,8 +13,6 @@ A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/isentropic_relatio
 Database file #1: references.bib
 Warning--entry type for "FAAPolicy" isn't style-file defined
 --line 1 of file references.bib
-Warning--I didn't find a database entry for "Tyler1962"
-Warning--I didn't find a database entry for "Holmes2011"
 Warning--I didn't find a database entry for "Administration"
 Warning--I didn't find a database entry for "Envia2004"
 Warning--I didn't find a database entry for "Hixon2011"
@@ -29,10 +26,13 @@ Warning--I didn't find a database entry for "Yousefian1975"
 Warning--I didn't find a database entry for "Yurkovich498"
 Warning--I didn't find a database entry for "ME1978"
 Warning--I didn't find a database entry for "Wundrow2019"
+Warning--I didn't find a database entry for "Tyler1962"
 Warning--I didn't find a database entry for "Case1960"
+Warning--I didn't find a database entry for "wolphram:bessel"
+Warning--I didn't find a database entry for "Amr2001"
 You've used 2 entries,
             1791 wiz_defined-function locations,
-            501 strings with 4815 characters,
+            501 strings with 4759 characters,
 and the built_in function-call counts, 365 in all, are:
 = -- 29
 > -- 12
@@ -71,4 +71,4 @@ warning$ -- 0
 while$ -- 3
 width$ -- 3
 write$ -- 21
-(There were 17 warnings)
+(There were 18 warnings)

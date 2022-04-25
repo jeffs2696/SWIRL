@@ -9,6 +9,7 @@ import glob
 import os
 import pandas as pd
 import matplotlib as mpl
+mpl.use('pgf')
 import matplotlib.ticker as mticker
 import plotReportLib
 from matplotlib import pyplot as plt
@@ -17,19 +18,85 @@ from plotReportLib import myfunctions as fcn
 from tabulate import tabulate
 from texttable import Texttable
 import latextable
+from my_plot import set_size
+
+plt.style.use('seaborn-whitegrid')
+width =345
+
+tex_fonts = {
+        # Use LaTeX to write all text
+        "text.usetex": True,
+        "font.family": "serif",
+        # Use 10pt font in plots, to match 10pt font in document
+        "axes.labelsize": 10,
+        "font.size": 10,
+        # Make the legend/label fonts a little smaller
+        "legend.fontsize": 8,
+        "xtick.labelsize": 8,
+        "ytick.labelsize": 8
+        }
+mpl.rcParams.update(tex_fonts) 
+
 
 def extract_number(f):
     s = re.findall("\d+$",f)
     return (int(s[0]) if s else -1,f)
-mpl.rcParams['lines.linewidth'] = 4
+#pgf_with_pdflatex = {
+#        "pgf.texsystem": "lualatex",
+#        "pgf.preamble": [
+#            r'\usepackage{amsmath}',
+#            r'\usepackage[scientific-notation=true]{siunitx}',
+#            ##      r"\usepackage[utf8x]{inputenc}",
+#            ##      r"\usepackage[T1]{fontenc}",
+#            ]
+#        }
+#mpl.rcParams.update(pgf_with_pdflatex)
+#
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##
+#mpl.rcParams['lines.linewidth'] = 4
+#mpl.rcParams.update({
+#    "pgf.texsystem": "xelatex",
+#    'font.family': 'serif',
+#    'text.usetex': True,
+#    'pgf.rcfonts': False,
+#    })
+#
+##
+#pgf_with_pdflatex = {
+#        "pgf.texsystem": "lualatex",
+#        "pgf.preamble": [
+#            r'\usepackage{amsmath}',
+#            r'\usepackage[scientific-notation=true]{siunitx}',
+#            ##      r"\usepackage[utf8x]{inputenc}",
+#            ##      r"\usepackage[T1]{fontenc}",
+#            ]
+#        }
+#mpl.rcParams.update(pgf_with_pdflatex)
 list_of_files = glob.glob('../01-mean-flow/mean-flow????.dat')
-list_of_files2 = glob.glob('../04-EVanalysis/gammas????.dat')
-list_of_files3 = glob.glob('../04-EVanalysis/gam????.acc')
+#list_of_files2 = glob.glob('../04-EVanalysis/gammas????.dat')
+#list_of_files3 = glob.glob('../04-EVanalysis/gam????.acc')
 
 last_file = (max(list_of_files,key=extract_number))
-last_file2 = (max(list_of_files2,key=extract_number))
-last_file3 = (max(list_of_files3,key=extract_number))
+#last_file2 = (max(list_of_files2,key=extract_number))
+#last_file3 = (max(list_of_files3,key=extract_number))
 
 #getting mean flow file with highest grid number 
 #getting number of grid points
@@ -51,11 +118,11 @@ last_file3 = (max(list_of_files3,key=extract_number))
 #print(max_grid)
 # importing data
 flow_data    = fcn.importPlotData(last_file)
-gammas_data = fcn.importPlotData(last_file2)
-gam_acc_data = fcn.importPlotData(last_file3)
+#gammas_data = fcn.importPlotData(last_file2)
+#gam_acc_data = fcn.importPlotData(last_file3)
 
-cv_wave_data = fcn.importPlotData('../04-EVanalysis/cv.waves.dat')
-gam_non_acc_data = fcn.importPlotData('../04-EVanalysis/gam.non.acc')
+#cv_wave_data = fcn.importPlotData('../04-EVanalysis/cv.waves.dat')
+#gam_non_acc_data = fcn.importPlotData('../04-EVanalysis/gam.non.acc')
 
 LEE_L2_data  = fcn.importPlotData('../02-method-of-manufactured-solutions/L2-LEE.dat')
 LEE_ROC_data = fcn.importPlotData('../02-method-of-manufactured-solutions/ROC-LEE.dat')
@@ -82,22 +149,22 @@ GridPoints = LEE_L2_data.GridPoints
 #print('\nTexttable Table:')
 #print(table.draw())
 #
-with open('../03-plotReport/tex-outputs/gammas.table.tex','w') as tex_file:
-    contents = gammas_data.to_latex(index=False)
-    tex_file.write(contents)
-
-with open('../03-plotReport/tex-outputs/cv.waves.table.tex','w') as tex_file:
-    contents = cv_wave_data.to_latex(index=True)
-    tex_file.write(contents)
-
-with open('../03-plotReport/tex-outputs/gam.acc.table.tex','w') as tex_file:
-    contents = gam_acc_data.to_latex(index=False)
-    tex_file.write(contents)
-
-with open('../03-plotReport/tex-outputs/gam.non.acc.table.tex','w') as tex_file:
-    contents = gam_non_acc_data.to_latex(index=False)
-    tex_file.write(contents)
-
+#with open('../03-plotReport/tex-outputs/gammas.table.tex','w') as tex_file:
+#    contents = gammas_data.to_latex(index=False)
+#    tex_file.write(contents)
+#
+#with open('../03-plotReport/tex-outputs/cv.waves.table.tex','w') as tex_file:
+#    contents = cv_wave_data.to_latex(index=True)
+#    tex_file.write(contents)
+#
+#with open('../03-plotReport/tex-outputs/gam.acc.table.tex','w') as tex_file:
+#    contents = gam_acc_data.to_latex(index=False)
+#    tex_file.write(contents)
+#
+#with open('../03-plotReport/tex-outputs/gam.non.acc.table.tex','w') as tex_file:
+#    contents = gam_non_acc_data.to_latex(index=False)
+#    tex_file.write(contents)
+#
 
 #print(tabulate(cv_wave_data.iloc[0:],headers =cv_wave_data.columns,tablefmt='latex'))
 
@@ -107,41 +174,45 @@ with open('../03-plotReport/tex-outputs/gam.non.acc.table.tex','w') as tex_file:
 markers = ['->', '-+', '-.', '-o', '--', 'v', 'x', 'X', 'D', '|']
 
 
-plt.style.use('seaborn-whitegrid')
 
 
+fig, ax = plt.subplots(1, 1, figsize=set_size(width))
 # plot data
 
-plt.plot(
+ax.plot(
         flow_data['radius'],
         flow_data['M_x'],
         label = '$M_{x}$',
         )
 
-plt.plot(
+ax.plot(
         flow_data['radius'],
         flow_data['M_theta'],
         label = '$M_{\\theta}$' ,
         )
 
-plt.plot(
+ax.plot(
         flow_data['radius'],
         (flow_data['M_x']**2+ flow_data['M_theta']**2)**0.5,
         label = '$M_{Total}$' ,
         )
 
 # add details
-plt.title('Flow Velocity')
-plt.ylabel('Mach Number, M')
-plt.xlabel(r'$\bar{r}$')
-plt.legend()
-plt.tight_layout()
+ax.set_title('Flow Velocity')
+ax.set_ylabel('Mach Number, M')
+ax.set_xlabel(r'$\bar{r}$')
+ax.legend()
+#ax.tight_layout()
 
 #plt.show()
-plt.grid(True)
-tikzplotlib.save("tex-outputs/MachDistribution.tex",extra_axis_parameters= ['width=10cm'])
+ax.grid(True)
+plt.savefig('tex-outputs/MachDistribution.pdf', 
+        format = 'pdf', 
+        bbox_inches='tight')
 
-fig, ax = plt.subplots(1,1,figsize=(5,5)) 
+#tikzplotlib.save("tex-outputs/MachDistribution.tex",extra_axis_parameters= ['width=10cm'])
+
+fig, ax = plt.subplots(1,1,figsize=set_size(width)) 
 plt.plot(
         flow_data['radius'],
         flow_data['A_expected'],
@@ -160,15 +231,20 @@ plt.xlabel('Radius')
 plt.grid(True)
 
 plt.legend()
-fig = mpl.pyplot.gcf()
-fig.set_size_inches(18.5, 10.5, forward=True)
-tikzplotlib.save("tex-outputs/SoundSpeedFromIntegration.tex",extra_axis_parameters=['width = 10cm','height=10cm'])
+#fig = mpl.pyplot.gcf()
+#fig.set_size_inches(18.5, 10.5, forward=True)
+#
+plt.savefig('tex-outputs/SoundSpeedFromIntegration.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+#tikzplotlib.save("tex-outputs/SoundSpeedFromIntegration.tex",extra_axis_parameters=['width = 10cm','height=10cm'])
 
 
 # In[6]:
 
 
-fig, (ax1,ax2,ax3,ax4) = plt.subplots(4,1,sharex=True)
+fig, (ax1,ax2,ax3,ax4) = plt.subplots(4,1,sharex=True,figsize=set_size(width))
 
 ax1.set_title('Perturbation Variables')
 ax1.plot(         flow_data['radius'],flow_data['vR']          )
@@ -180,25 +256,30 @@ ax3.set_ylabel(r'$\bar{v}_x$')
 ax4.plot(         flow_data['radius'],flow_data['Pr']        )
 ax4.set_ylabel(r'$\bar{p}$')
 ax4.set_xlabel(r'$\bar{r}$')
-tikzplotlib.save("tex-outputs/PerturbationVariables.tex",extra_axis_parameters= ['width=10cm','height=5cm'])
+#
+plt.savefig('tex-outputs/PerturbationVariables.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+#tikzplotlib.save("tex-outputs/PerturbationVariables.tex",extra_axis_parameters= ['width=10cm','height=5cm'])
 
 
 
 fig, (ax1,ax2) = plt.subplots(
         nrows=2,
         ncols=1,
+        figsize=set_size(width),
         sharex=True)
 
-ax1.plot(
+ax1.loglog(
         GridPoints[0:],
         SND_L2,
         markers[2%10],
         label='Speed Of Sound')
 
 ax1.legend()
-ax1.set_title('L2 Norm of the Error for the Manufactured Solution as a function of Grid Points')
 
-ax2.plot(
+ax2.loglog(
         GridPoints[0:],
         LEE_L2,
         markers[2%10],
@@ -208,27 +289,36 @@ ax2.legend()
 
 ax2.set_xlabel('Number of Gridpoints')
 
-ax1.yaxis.set_major_formatter(mticker.ScalarFormatter())
-ax2.yaxis.set_major_formatter(mticker.ScalarFormatter())
-
-ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
-ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
-
+#ax1.yaxis.set_major_formatter(mticker.ScalarFormatter())
+#ax2.yaxis.set_major_formatter(mticker.ScalarFormatter())
+#
+#ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
+#ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
+#
 #
 ax1.xaxis.set_major_formatter(mticker.ScalarFormatter())
 ax2.xaxis.set_major_formatter(mticker.ScalarFormatter())
+#
+#ax1.xaxis.set_minor_formatter(mticker.ScalarFormatter())
+#ax2.xaxis.set_minor_formatter(mticker.ScalarFormatter())
+#
+plt.savefig('tex-outputs/L2.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
 
-ax1.xaxis.set_minor_formatter(mticker.ScalarFormatter())
-ax2.xaxis.set_minor_formatter(mticker.ScalarFormatter())
 
-tikzplotlib.save("tex-outputs/L2.tex",encoding='utf-8',
-        figure="gcf",extra_axis_parameters= ['height=10cm'])
+#tikzplotlib.save("tex-outputs/L2.tex",encoding='utf-8', figure="gcf",extra_axis_parameters= ['height=10cm'])
 #,extra_axis_parameters=['yticklabel style={ /pgf/number format/fixed, #/pgf/number format/precision=5}','scaled y ticks=false']) 
 
 # In[10]:
 
 
-fig, (ax1,ax2) = plt.subplots(                       nrows=2,                       ncols=1,                              sharex=True)
+fig, (ax1,ax2) = plt.subplots(
+        nrows=2,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width), 
+        )
 ax1.semilogy(GridPoints[1:],SND_ROC,label='Speed Of Sound')
 ax1.legend()
 ax1.set_title('Rate Of Convergence')
@@ -240,8 +330,12 @@ ax2.yaxis.set_major_formatter(mticker.ScalarFormatter())
 
 ax1.yaxis.set_minor_formatter(mticker.ScalarFormatter())
 ax2.yaxis.set_minor_formatter(mticker.ScalarFormatter())
+plt.savefig('tex-outputs/ROC.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
 
-tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf",extra_axis_parameters= ['height=10cm'])
+
+#tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf",extra_axis_parameters= ['height=10cm'])
 #,extra_axis_parameters=['yticklabel style={ /pgf/number format/fixed, #/pgf/number format/precision=5}','scaled y ticks=false']) 
 
 # In[ ]:
@@ -254,7 +348,7 @@ tikzplotlib.save("tex-outputs/ROC.tex",figure="gcf",extra_axis_parameters= ['hei
 
 
 #plt.semilogy(Delta_r,LEE_ROC)
-fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True,figsize=(10,4))
+fig, ax = plt.subplots(nrows =4, ncols=1,sharex=True,figsize=set_size(width))
 
 # can i loop though axes?
 ax[0].set_ylabel('Radial')
@@ -270,63 +364,64 @@ ax[2].plot(flow_data['radius'],flow_data['S_3_a'], linestyle = 'dashed')
 ax[3].set_ylabel('Energy')
 ax[3].plot(flow_data['radius'],flow_data['S_4_e'])
 ax[3].plot(flow_data['radius'],flow_data['S_4_a'], linestyle = 'dashed')
-tikzplotlib.save("tex-outputs/SourceTermData.tex",extra_axis_parameters=['width=10cm','height=5cm'])
+plt.savefig('tex-outputs/SourceTermData.pdf')
+#tikzplotlib.save("tex-outputs/SourceTermData.tex",extra_axis_parameters=['width=10cm','height=5cm'])
 
 
 # In[ ]:
 
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=(10,4)
-        )
-plt.scatter(
-        cv_wave_data['REAL'],
-        cv_wave_data['IMAG'],
-        marker = '.',
-        s = 1)
-ax.set_ylabel('Imaginary')
-ax.set_ylabel('Real')
-ax.set_title('Convecting Wavenumbers')
-tikzplotlib.save("tex-outputs/cv.waves.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
-
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=(10,4)
-        )
-plt.scatter(
-        gammas_data['Re{gam/ak}'],
-        gammas_data['Im{gam/ak}'],
-        marker = '.',
-        s = 1)
-tikzplotlib.save("tex-outputs/gammas.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
-
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=(10,4)
-        )
-#print(gam_acc_data.columns)
-plt.scatter(
-        gam_acc_data['Re{gam}/k'],
-        gam_acc_data['Im{gam}/k'],
-        marker = '.',
-        s = 1)
-tikzplotlib.save("tex-outputs/gam.acc.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
-
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=(10,4)
-        )
-plt.scatter(
-        gam_non_acc_data['Re{gam/ak}'],
-        gam_non_acc_data['Im{gam/ak}'],
-        marker = '.',
-        s = 1)
-tikzplotlib.save("tex-outputs/gam.non.acc.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
+#fig, ax = plt.subplots(
+#        nrows=1,
+#        ncols=1,
+#        sharex=True,
+#        figsize=(10,4)
+#        )
+#plt.scatter(
+#        cv_wave_data['REAL'],
+#        cv_wave_data['IMAG'],
+#        marker = '.',
+#        s = 1)
+#ax.set_ylabel('Imaginary')
+#ax.set_ylabel('Real')
+#ax.set_title('Convecting Wavenumbers')
+#tikzplotlib.save("tex-outputs/cv.waves.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
+#
+#fig, ax = plt.subplots(
+#        nrows=1,
+#        ncols=1,
+#        sharex=True,
+#        figsize=(10,4)
+#        )
+#plt.scatter(
+#        gammas_data['Re{gam/ak}'],
+#        gammas_data['Im{gam/ak}'],
+#        marker = '.',
+#        s = 1)
+#tikzplotlib.save("tex-outputs/gammas.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
+#
+#fig, ax = plt.subplots(
+#        nrows=1,
+#        ncols=1,
+#        sharex=True,
+#        figsize=(10,4)
+#        )
+##print(gam_acc_data.columns)
+#plt.scatter(
+#        gam_acc_data['Re{gam}/k'],
+#        gam_acc_data['Im{gam}/k'],
+#        marker = '.',
+#        s = 1)
+#tikzplotlib.save("tex-outputs/gam.acc.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])
+#
+#fig, ax = plt.subplots(
+#        nrows=1,
+#        ncols=1,
+#        sharex=True,
+#        figsize=(10,4)
+#        )
+#plt.scatter(
+#        gam_non_acc_data['Re{gam/ak}'],
+#        gam_non_acc_data['Im{gam/ak}'],
+#        marker = '.',
+#        s = 1)
+#tikzplotlib.save("tex-outputs/gam.non.acc.scatter.tex",extra_axis_parameters=['width=10cm','height=8cm'])

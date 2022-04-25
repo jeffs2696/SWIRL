@@ -29,7 +29,7 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 10 
+        numberOfIterations = 8 
 
     INTEGER  :: &
         UNIT , & ! for NEWUNIT
@@ -129,7 +129,7 @@ PROGRAM MAIN
     numericalIntegrationFlag  =  1
 !    DO FDfac = 1,2
 
-        FDfac = 1
+        FDfac = 2
         finiteDiffFlag            = FDfac
         secondOrderSmoother       =  0.0_rDef
         fourthOrderSmoother       =  0.0_rDef
@@ -354,7 +354,7 @@ PROGRAM MAIN
         END DO
 !    END DO
     include 'main-scripts/calculating-rate-of-convergence.f90'
-    !include 'main-scripts/swirl-data-export-MMS.f90'
+    include 'main-scripts/swirl-data-export-MMS.f90'
 
     DEALLOCATE(&
         RateOfConvergence1 , &
