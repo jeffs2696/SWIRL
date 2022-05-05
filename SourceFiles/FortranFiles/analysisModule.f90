@@ -111,12 +111,12 @@ CONTAINS
             rm, &
             rs
         LOGICAL :: debug = .FALSE.
-
-        INTEGER  :: &
-            UNIT , &
-            UNIT2 , &
-            UNIT3
-
+!
+!        INTEGER  :: &
+!            UNIT , &
+!            UNIT2 , &
+!            UNIT3
+!
         CHARACTER(10) :: &
             file_id
         CHARACTER(26) :: &
@@ -156,12 +156,12 @@ CONTAINS
         file_name = '04-EVanalysis/cv.waves.dat'
 
 
-        OPEN(NEWUNIT=UNIT,FILE=file_name)
-        WRITE(UNIT,*) 'REAL ' , 'IMAG'
+        ! OPEN(NEWUNIT=UNIT,FILE=file_name)
+        ! WRITE(UNIT,*) 'REAL ' , 'IMAG'
 
         DO j=1,np
 
-            WRITE(UNIT,*) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
+            ! WRITE(UNIT,*) REAL(cvct(j),KIND=rDef), AIMAG(cvct(j))
 
             IF (debug) THEN
 !                WRITE(0,19) cvct(j)
@@ -178,7 +178,7 @@ CONTAINS
 !17      FORMAT(1x,'Convected wavenumbers: ',/,8(f10.5))
 !19      FORMAT(1x,2e15.5)
 
-        CLOSE(UNIT)
+        ! CLOSE(UNIT)
 
 ! Check for zero rows and columns in A.
 
@@ -310,11 +310,11 @@ CONTAINS
         WRITE(file_id, '(i0.4)') np
 
         !WRITE(0,50)
-        OPEN(NEWUNIT=UNIT,FILE='04-EVanalysis/' //'gammas'//TRIM(ADJUSTL(file_id)) // '.dat')
-        OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
-        OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
-        WRITE(UNIT2,50)
-        WRITE(UNIT,55)
+        ! OPEN(NEWUNIT=UNIT,FILE='04-EVanalysis/' //'gammas'//TRIM(ADJUSTL(file_id)) // '.dat')
+        ! OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
+        ! OPEN(NEWUNIT=UNIT3,FILE='04-EVanalysis/' //'gammasOnly'//TRIM(ADJUSTL(file_id)) // '.dat')
+        ! WRITE(UNIT2,50)
+        ! WRITE(UNIT,55)
 
         do j=1,np4
 !            WRITE(0,*) alpha(j),beta(j)
@@ -327,15 +327,15 @@ CONTAINS
                 endif
                 vphi(j)  = ak/gam(j)
                 ! WRITE(0,10) j,gam(j),gam(j)/ak,vphi(j)
-                WRITE(UNIT ,12) j,gam(j),gam(j)/ak, vphi(j)
-                WRITE(UNIT2,10) j,gam(j),gam(j)/ak,vphi(j)
-                WRITE(UNIT3,*) REAL(gam(j)),AIMAG(gam(j))
+                ! WRITE(UNIT ,12) j,gam(j),gam(j)/ak, vphi(j)
+                ! WRITE(UNIT2,10) j,gam(j),gam(j)/ak,vphi(j)
+                ! WRITE(UNIT3,*) REAL(gam(j)),AIMAG(gam(j))
             endif
         enddo
 
-        CLOSE(UNIT)
-        CLOSE(UNIT2)
-        CLOSE(UNIT3)
+        ! CLOSE(UNIT)
+        ! CLOSE(UNIT2)
+        ! CLOSE(UNIT3)
 !
 !        iO j=1,np4
 !
@@ -398,15 +398,18 @@ CONTAINS
 !        rewind UNIT
 !        rewind UNIT2
 !        rewind UNIT3
-50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
-            6x,'Im{gam}/k',6x,'kappa')
-55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
-            10x,'Im{gam/ak}',5x,'nz')
+        ! OPEN(NEWUNIT=UNIT2,FILE='04-EVanalysis/' //'gam'//TRIM(ADJUSTL(file_id)) // '.acc')
+        ! WRITE(UNIT2,50)
+! 50      format('#',3x,'j',7x,'Re{gam}',7x,'Im{gam}',6x,'Re{gam}/k', &
+!             6x,'Im{gam}/k',6x,'kappa')
+! 55      format('#',3x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
+!             10x,'Im{gam/ak}',5x,'nz')
 
         DO i = 1,np4
 ! JS: if there is (linear shear) and (no slope) and (no swirl then) ...
 ! Note: this will never happen because we removed the swrl.input functionality
-            if ((ir.eq.1) .and.  (is.eq.0)) then
+            if ((rmx(1).gt.0.0_rDef) .and.  (rmt(1).eq.0.0_rDef)) then
+                !if ((ir.eq.1) .and.  (is.eq.0)) then
                 rm   = rmx(1)
 !       akap(i) = (rm*rm -1.)*gam(i)*gam(i) &
 !          -2.*real(ak)*rm*gam(i) +real(ak)*real(ak)
@@ -416,9 +419,9 @@ CONTAINS
 
                 IF (akap(i).gt.0.0_rDef) then
                     akap(i) = SQRT(akap(i))
-                    WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
+                    ! WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i),akap(i)
                 ELSE
-                    WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i)
+                    ! WRITE(UNIT2,10) i,gam(i),gam(i)/ak,vphi(i)
                 ENDIF
 
 ! JS: if there is not linear shear and there is no swirl flag then proceed
@@ -431,8 +434,9 @@ CONTAINS
 
             !WRITE(0 ,*) i!,gam(i),gam(i)/ak!, vphi(i)
         ENDDO
-10      format(1x,i4,9e20.12)
-12      format(1x,i4,6e20.12)
+! 10      format(1x,i4,9e20.12)
+! 12      format(1x,i4,6e20.12)
+        ! CLOSE(UNIT2)
 
 
         !return

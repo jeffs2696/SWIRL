@@ -2,7 +2,7 @@ MODULE outputModule
     USE, INTRINSIC :: ISO_FORTRAN_ENV
     USE indexxModule
     USE egvModule
-!   USE kapsubModule
+    USE kapsubModule
     IMPLICIT NONE
     PRIVATE
     PUBLIC :: output
@@ -18,15 +18,17 @@ CONTAINS
     subroutine output1(np,np4,mode,rho,omega, &
         egv,attenh,attend,rmx,drm,rmt,drt,snd,rr,wvn,vrm,vphi,is)
 
-        INTEGER, INTENT(IN) :: np, &
+        INTEGER, INTENT(IN) :: &
+            ! myunit1, &
+            ! myunit2, &
+            np, &
             np4, &
             mode, &
             is!, & icomp
 
         REAL(KIND=rDef), INTENT(IN) :: &
             rho!, &
-        !ang, &
-        !gam!swirl magn JS
+        !ang!, & gam!swirl magn JS
 
         REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: rmx, &
             drm, &
@@ -46,17 +48,22 @@ CONTAINS
 
         CHARACTER, INTENT(IN) :: egv
 
+        CHARACTER(10) :: file_id
 !
 ! local variables
 !
 
-        INTEGER :: i, &
+        INTEGER :: &
+            i, &
+            ! icomp ,&
             j, &
-            jj, &
+            ! jj, &
             jtmp, &
-            kk, &
-            mumax !, & UNIT12,UNIT14,UNIT16!, & n
+            ! kk, &
+            mumax !,&
+            !, & UNIT12,UNIT14,UNIT16!, & n
 
+        ! INTEGER, DIMENSION(np) :: mu
 
         INTEGER, DIMENSION(np4) :: izeros, &
             indx
@@ -75,32 +82,32 @@ CONTAINS
             vold, &
             gam1a, &
             gam2a, &
-        !aki, &
+            ! aki, &
             alm1, &
             alm2, &
-        !disc, &
+            ! disc, &
             fac, &
-        !fn, &
-        !fn1, &
+            ! fn, &
+            ! fn1, &
             gim1, &
             gim2, &
-        !rm, &
-        !rmav, &
-        !term, &
-        !tot, &
+            ! rm, &
+            ! rmav, &
+            ! term, &
+            ! tot, &
             as
 
         REAL(KIND=rDef), DIMENSION(np4) :: phi, &
             azeros
 
-!        REAL(KIND=rDef), DIMENSION(np) :: akappa
+       ! REAL(KIND=rDef), DIMENSION(np) :: akappa
 
         COMPLEX(KIND=rDef) :: ci, &
             cv, &
             gamma1
 
-!      COMPLEX(KIND=rDef), DIMENSION(np) :: gam1, &
-!                                           gam2
+        ! COMPLEX(KIND=rDef), DIMENSION(np) :: gam1, &
+        !     gam2
 !
 !
 !     implicit real*8 (a-h,o-z)
@@ -126,7 +133,7 @@ CONTAINS
 !
         pi  = 4.0_rDef*ATAN(1.0_rDef)
         ci  = CMPLX(0.0_rDef,1.0_rDef,rDef)
-        eps = 1.e-12_rDef
+        eps = 1.e-8_rDef
         alm1 = -10000
         alm2 = -10000
 !
@@ -158,7 +165,12 @@ CONTAINS
             rx =  rmx(i)
             rt =  rmt(i)
             as =  snd(i)
-            cv = (omega/as -mode/r*rt)/rx
+            if (r.lt. 10e-12_rDef ) then
+                cv = (omega/as - mode*rt)/rx 
+            else 
+            ! WRITE(0,*) rx, r
+                cv = (omega/as -mode/r*rt)/rx
+            endif
 !            WRITE(0,*) cv 
             if (abs(cv).gt.cvcmax) cvcmax = abs(cv)
             if (abs(cv).lt.cvcmin) cvcmin = abs(cv)
@@ -174,7 +186,7 @@ CONTAINS
             cvcmax = cvcmax -eps
         endif
 
-        WRITE(0,*) 'convection speed: ',cvcmin,cvcmax
+        !WRITE(0,*) 'convection speed: ',cvcmin,cvcmax
 !
 ! Compute number of zero crossings for nonconvected modes.
 
@@ -182,10 +194,11 @@ CONTAINS
             !WRITE(0,*) i, wvn(i)
             gamma1 = wvn(i)
 
-            WRITE(0,*) gamma1 
             akx   = real(gamma1)
             if (akx .le. cvcmin .or. akx .ge. cvcmax) then
                 izeros(i) = 0
+                ! Calculate phase of the mode i
+
                 aim    = aimag(vrm(3*np+1,i))
                 are    =  real(vrm(3*np+1,i))
                 phi(i) = atan2(aim,are)
@@ -299,18 +312,18 @@ CONTAINS
 !$$$       close(mfile(n))
 !$$$      enddo
 !
+        WRITE(file_id, '(i0.4)') np
         open(unit=14,             &
-            file='04-EVanalysis/gam.nonconv',  &
-            status='unknown')
+            file='04-EVanalysis/gam.nonconv.'// TRIM(ADJUSTL(file_id)) )
         open(unit=16,             &
-            file='04-EVanalysis/gam.non.acc')
+            file='04-EVanalysis/gam.nonconv_acc.'// TRIM(ADJUSTL(file_id))  )
         rewind 14
         rewind 16
         write(14,40)
         write(16,42)
-40      format('#',2x,'j',6x,'Re{gam}',6x,'Im{gam}',4x,'Re{gam/ak}',    &
+40      format('#',2x,'Re{gam}',6x,'Im{gam}',4x,'Re{gam/ak}',    &
             3x,'Im{gam/ak}',2x,'nz')
-42      format('#',2x,'j',10x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
+42      format('#',2x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
             10x,'Im{gam/ak}',5x,'nz')
         do j=1,np4
             gamma1 = wvn(indx(j))
@@ -327,28 +340,30 @@ CONTAINS
 !
         mumax = int(REAL(np,rDef)/PI)
 
-!        if (icomp .eq. 1) then
+        ! took out gamma comparison JS
+        ! icomp = 0
+        !if (icomp .eq. 1) then
 !
-!            open(unit=15,            &
-!                file='gam.compare', &
-!                status='unknown')
-!            rewind 15
-!            write(15,35)
-!35          format(4x,'i',18x,'gam_spec',32x,'gam_q3d',17x,'mu')
-!!
-!! Compute kappas.
+!           open(unit=15,            &
+!               file='gam.compare', &
+!               status='unknown')
+!           rewind 15
+!           write(15,35)
+!5          format(4x,'i',18x,'gam_spec',32x,'gam_q3d',17x,'mu')
 !
-!!      mumax = int(REAL(np,rDef)/PI)
+! Compute kappas.
 !
-!! test -- don't we already have the kappas?
+!      mumax = int(REAL(np,rDef)/PI)
+!
+! test -- don't we already have the kappas?
 !!
-!!       CALL kappa(mm    = mode,  &
-!!                  mumax = mumax, &
-!!                  sig   = rho,   &
-!!                  mu    = mu,    &
-!!                  akap  = akappa)
-!!
-!!
+!       CALL kappa(mm    = mode,  &
+!                  mumax = mumax, &
+!                  sig   = rho,   &
+!                  mu    = mu,    &
+!                  akap  = akappa)
+!
+!
 !! Compute average axial Mach number.
 !            tot = 0.0_rDef
 !            do n = 2,np
@@ -361,34 +376,34 @@ CONTAINS
 !            write(6,*) rmav
 !            do i = 1,mumax
 !                aki  = akappa(i)
-!!        term = real(omega) -mode*ang
-!!        disc = term*term +(rm*rm -1.0_rDef)*aki*aki
-!!        if (disc .ge. 0.0_rDef) then
-!!         gam1(i) = (rm*term +sqrt(disc))/(rm*rm -1.0_rDef)
-!!         gam2(i) = (rm*term -sqrt(disc))/(rm*rm -1.0_rDef)
-!!            else
-!!         gam1(i) = (rm*term +ci*sqrt(-disc))/(rm*rm -1.0_rDef)
-!!         gam2(i) = (rm*term -ci*sqrt(-disc))/(rm*rm -1.0_rDef)
-!!            endif
+!        term = real(omega) -mode*ang
+!        disc = term*term +(rm*rm -1.0_rDef)*aki*aki
+!        if (disc .ge. 0.0_rDef) then
+!         gam1(i) = (rm*term +sqrt(disc))/(rm*rm -1.0_rDef)
+!         gam2(i) = (rm*term -sqrt(disc))/(rm*rm -1.0_rDef)
+!            else
+!         gam1(i) = (rm*term +ci*sqrt(-disc))/(rm*rm -1.0_rDef)
+!         gam2(i) = (rm*term -ci*sqrt(-disc))/(rm*rm -1.0_rDef)
+!            endif
 !            enddo 
 !        endif
-!
-!25  format(1x,i4,4e20.12,i4)
 
-    do i = 1,2*np
-        if (izeros(indx(i)).lt.mumax) then
-            jj = (i +1)/2
-            kk = i/2
-            if (mod(i,2) .eq. 1) then
-!                write(0,*) izeros(indx(i)),wvn(indx(i))!,gam2(jj)
+!25  format(1x,i4,4e20.12,i4)
+!
+!    do i = 1,2*np
+!        if (izeros(indx(i)).lt.mumax) then
+!            jj = (i +1)/2
+!            kk = i/2
+!            if (mod(i,2) .eq. 1) then
+!!                write(0,*) izeros(indx(i)),wvn(indx(i))!,gam2(jj)
 !                write(15,*) izeros(indx(i)),wvn(indx(i))!,gam2(jj)
-            else
+!            else
 !                write(15,*) izeros(indx(i)),wvn(indx(i)),mu(kk)! ,gam1(kk)
-            endif
-        endif
-    enddo
+!            endif
+!        endif
+!    enddo
 !
     return
     WRITE(6,*) drm,drt,egv,is,vphi
-end
+end subroutine
 END MODULE outputModule

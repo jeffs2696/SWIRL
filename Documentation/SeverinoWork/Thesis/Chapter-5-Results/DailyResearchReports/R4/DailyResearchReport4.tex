@@ -1,0 +1,204 @@
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Weekly Research Report}
+
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+
+\section{Research Performed In the Past 24 hours}
+\subsection{Current Validation Work}
+
+A comparison was conducted for a hollow cylinder undergoing uniform flow with
+acoustic liners along the outer duct perimeter. The azimuthal mode number, reduced 
+frequency, mach number and duct liner admittance is reported below,
+\begin{align*}
+    m &= 2 \\
+    k &= \frac{\omega r_T}{A_T} = -1 \\
+    M_x &= 0.5 \\
+    \eta_T &= 0.72 + 0.42i
+\end{align*} 
+%\begin{figure}[h!]
+%    \centering
+%    \includegraphics[width=\textwidth]{tex-outputs/gam.acc.scatter.Table4.3.pdf}
+%\end{figure}
+%
+
+
+
+
+
+
+The results shown in \ref{Table43} are in moderately good agreement. The 
+results were obtained by visually comparing the output in \verb|gam.acc| for 32 
+grid points. Note that the indicies for the SWIRL deliverable are different that 
+the ones obtained for the most recent version of the code. While the 
+convective axial wavenumbers show agreement to machine precision, this is not 
+particularly insightful given that there are an infinite number of possible solutions 
+that could satisfy the eigenvalue problem. The results that are of concern 
+are propagating modes that are not convecting with the mean flow.  The scatter plot
+of the axial wavenumbers show some sporadic behaviour around the imaginary axis.
+The results from the MMS along with this plot indicate that more grid points are going 
+to be needed if a finite difference technique is to be used. It should be 
+noted that a spectral differencing method were using for Kousen's report and for
+srcF2008. Using a higher order scheme would also improve accuracy.
+
+
+\begin{table}
+ \centering
+ \begin{adjustbox}{width=1\textwidth}
+     \small
+ \begin{tabular}{c | r | r | r | r | r | r}
+ \hline
+ $\gamma^{\pm}_n$ & Kousen Ref. [15] & Kousen report & srcF2008 & index  & current & index\\
+ \hline
+ $\gamma_0^{+}$ & $ 0.620 - 5.014  i $ & $ 0.6195 - 5.0139 i$ & $ 0.61954  - 5.01386 i$ & 60  & 0.620755853112 - 5.00592416941i& 34 \\
+ $\gamma_1^{+}$ & $-5.820 - 3.897  i $ & $-5.8195 - 3.8968 i$ & $-5.81953  - 3.89677 i$ & 58  &-0.581267772517 - 3.90050864568i& 33 \\
+ $\gamma_2^{+}$ & $ 0.445 - 9.187  i $ & $ 0.4453 - 9.1868 i$ & $ 0.44533  - 9.18684 i$ & 59  &0.451569491142 -  9.12191317214i & 31 \\
+ $\gamma_3^{+}$ & $ 0.453 - 13.062 i $ & $ 0.4539 - 13.062 i$ & $ 0.45389  - 13.0615 i$ & 57  &0.464247902898 - 12.8487472519i & 29 \\ 
+ $\gamma_4^{+}$ & $ 0.480 - 16.822 i $ & $ 0.4795 - 16.822 i$ & $ 0.47952  - 16.8216 i$ & 55  &0.492340380223 - 16.3292825150i & 27 \\
+ $\gamma_5^{+}$ & $ 0.503 - 20.531 i $ & $ 0.5029 - 20.531 i$ & $ 0.50287  - 20.5307 i$ & 51  &0.514522630594 -19.5817182568i& 25 \\
+ $\gamma_6^{+}$ & $ 0.522 - 24.213 i $ & $ 0.5220 - 24.213 i$ & $ 0.52202  - 24.2129 i$ & 50  &0.516658239854 -22.5715880605i& 23 \\
+ $\gamma_7^{+}$ & $ 0.538 - 27.880 i $ & $ 0.5376 - 27.880 i$ & $ 0.53754  - 27.8800 i$ & 48  & - & - \\
+ $\gamma_8^{+}$ & $ 0.550 - 31.537 i $ & $ 0.5502 - 31.537 i$ & $ 0.55024  - 31.5368 i$ & 47  & - & - \\
+ $\gamma_9^{+}$ & $ 0.589 - 49.75  i $ & $ 0.5891 - 49.754 i$ & $ 0.58745  - 49.7669 i$ & 33  &- &- \\ \hline
+ $\gamma_0^{-}$ & $ 0.410 + 1.290  i $ & $ 0.4101 + 1.2904 i$ & $ 0.41009  + 1.29037 i$ & 64  &0.409973310292  + 1.29020083859i& 64 \\
+ $\gamma_1^{-}$ & $ 1.259 + 6.085  i $ & $ 1.2595 + 6.0852 i$ & $ 1.25949  + 6.08517 i$ & 63  &1.25530612217  + 6.07214375548i & 62 \\
+ $\gamma_2^{-}$ & $ 1.146 + 9.668  i $ & $ 1.1457 + 9.6679 i$ & $ 1.14567  + 9.66787 i$ & 62  &1.13696444935  + 9.59622801724i &  60\\
+$\gamma_3^{-}$ & $ 1.022 + 13.315 i $ & $ 1.0218 + 13.315 i$ & $ 1.02183  + 13.3150 i$ & 61  &1.00950576515 + 13.0957277529i & 58  \\
+ $\gamma_4^{-}$ & $ 0.943 + 16.977 i $ & $ 0.9425 + 16.977 i$ & $ 0.94250  + 16.9767 i$ & 56  &0.928059983039 +  16.4791343118i& 56  \\
+ $\gamma_5^{-}$ & $ 0.891 + 20.635 i $ & $ 0.8908 + 20.635 i$ & $ 0.89075  + 20.6353 i$ & 54  &0.856678172769 +  22.6544943903i & 52 \\
+ $\gamma_6^{-}$ & $ 0.855 + 24.288 i $ & $ 0.8549 + 24.288 i$ & $ 0.85490  + 24.2883 i$ & 53  &0.941762848775 +  25.3460188358i & 50 \\
+ $\gamma_7^{-}$ & $ 0.829 + 27.937 i $ & $ 0.8288 + 27.937 i$ & $ 0.82877  + 27.9369 i$ & 52  &- & - \\
+ $\gamma_8^{-}$ & $ 0.809 + 31.581 i $ & $ 0.8089 + 31.581 i$ & $ 0.80891  + 31.5812 i$ & 49  &- & - \\
+ $\gamma_9^{-}$ & $ 0.755 + 49.77  i $ & $ 0.7547 + 49.772 i$ & $ 0.75658  + 49.7851 i$ & 39  &- & - \\ \hline
+ \end{tabular}
+\end{adjustbox}
+ \caption{Table 4.3 data}
+ \label{Table43}
+\end{table}
+
+
+\begin{table}
+ \centering
+ \begin{adjustbox}{width=1\textwidth}
+     \small
+ \begin{tabular}{c | r | r | r | r | r | r }
+ \hline
+ $\gamma^{\pm}_n$ & srcF2008 & index  & 32 points & index & 64 points& index\\
+ \hline
+ $\gamma_0^{+}$ &  $ 0.61954  - 5.01386 i$ &$ 60$  &$ 0.620755853112 - 5.00592416941i$ & $34 $ & $0.619830466387E+00 -0.501195898338E+01i$ &68 \\
+ $\gamma_1^{+}$ &  $-5.81953  - 3.89677 i$ &$ 58$  &$-0.581267772517 - 3.90050864568i$& $33 $ & $-0.581874144252E+01 -0.389719406459E+01 i$ &67\\
+ $\gamma_2^{+}$ &  $ 0.44533  - 9.18684 i$ &$ 59$  &$ 0.451569491142 -  9.12191317214i$ &$ 31$&$0.446784510254E+00 -0.917151486382E+01 i$& 65 \\
+ $\gamma_3^{+}$ &  $ 0.45389  - 13.0615 i$ &$ 57$  &$ 0.464247902898 - 12.8487472519i $& $29 $&$  0.456385619609E+00 -0.130115227368E+02i$& 63   \\ 
+ $\gamma_4^{+}$ &  $ 0.47952  - 16.8216 i$ &$ 55$  &$ 0.492340380223 - 16.3292825150i $& $27 $&$ 0.482906458331E+00 -0.167063669858E+02i$ &61\\
+ $\gamma_5^{+}$ &  $ 0.50287  - 20.5307 i$ &$ 51$  &$ 0.514522630594 -19.5817182568i$& $25$ & $0.506963241913E+00 -0.203096267281E+02i$ &59 \\
+ $\gamma_6^{+}$ &  $ 0.52202  - 24.2129 i$ &$ 50$  &$ 0.516658239854 -22.5715880605i$& $23$ & $0.526558860613E+00 -0.238358532167E+02i$ & 55 \\
+ $\gamma_7^{+}$ &  $ 0.53754  - 27.8800 i$ &$ 48$  & - & -&$0.542123590089E+00 -0.272859574060E+02i$ & 53 \\                       
+ $\gamma_8^{+}$ &  $ 0.55024  - 31.5368 i$ &$ 47$  & - & - & $0.554191417366E+00 -0.306549838386E+02i $ & 51 \\ 
+ $\gamma_9^{+}$ &  $ 0.58745  - 49.7669 i$ &$ 33$  &- &- \\ \hline  
+ $\gamma_0^{-}$ &  $ 0.41009  + 1.29037 i$ &$ 64$  &$0.409973310292  + 1.29020083859i$& $64 $ & $0.410069261267E+00  0.129033632980E+01i $ &128 \\
+ $\gamma_1^{-}$ &  $ 1.25949  + 6.08517 i$ &$ 63$  &$1.25530612217  + 6.07214375548i $& $62 $&$0.125845417744E+01  0.608210427128E+01i$ & 126\\
+ $\gamma_2^{-}$ &  $ 1.14567  + 9.66787 i$ &$ 62$  &$1.13696444935  + 9.59622801724i $& $ 60$ &$0.114350845928E+01  0.965104848780E+01i$& 124 \\
+ $\gamma_3^{-}$ & $ 1.02183  + 13.3150 i$ & $61  $&$1.00950576515 + 13.0957277529i $&$ 58 $ & $0.101870775473E+01  0.132634680645E+02i $& 122\\
+ $\gamma_4^{-}$ &  $ 0.94250  + 16.9767 i$ &$ 56$  &$0.928059983039 +  16.4791343118i$& $56 $&$0.938535330387E+00  0.168600097406E+02i $& 120\\
+ $\gamma_5^{-}$ &  $ 0.89075  + 20.6353 i$ &$ 54$  &$0.856678172769 +  22.6544943903i$ &$ 52$ &$0.886130853983E+00  0.204129469402E+02i$ &118 \\
+ $\gamma_6^{-}$ &  $ 0.85490  + 24.2883 i$ &$ 53$  &$0.941762848775 +  25.3460188358i$ &$ 50$ & $0.849927767573E+00  0.239101576350E+02i$ & 116 \\
+ $\gamma_7^{-}$ &  $ 0.82877  + 27.9369 i$ &$ 52$  &- & -& $0.823875448687E+00  0.273421537697E+02i$ & 114 \\
+ $\gamma_8^{-}$ &  $ 0.80891  + 31.5812 i$ & 49  &- & -& $0.804827463709E+00  0.306993188999E+02i$ & 112 \\
+ $\gamma_9^{-}$ &  $ 0.75658  + 49.7851 i$ & 39  &- & -& $$ & \\ \hline
+ \end{tabular}
+\end{adjustbox}
+\caption{Table 4.3 data with higher resolution}
+ \label{Table43_64}
+\end{table}
+
+Using more grid points improved the comparison between wavenumbers, however 
+$\gamma_9^{\pm}$ were difficult to identify, however with 32 grid points, $\gamma_{7-9}^{\pm}$ were 
+also difficult to identify. In general, there is okay agreement, but this shows 
+that more grid is needed or a higher order scheme. Note the dissimilarity between
+indicies, but the wavenumbers are relatively near each other, being only 2-5
+indicies away from each other. 
+%
+%\begin{table}
+% \centering
+% \begin{adjustbox}{width=1\textwidth}
+%     \small
+% \begin{tabular}{c | r | r | r | r | r | r }
+% \hline
+% $\gamma^{\pm}_n$ & srcF2008 & index  & 128 points & index & 216 points& index\\
+% \hline
+% $\gamma_0^{+}$ &  $ 0.61954  - 5.01386 i$ &$ 60$  &$0.619612254146E+00 -0.501339663670E+01i $ & $234 $ & $ $ & \\
+% $\gamma_1^{+}$ &  $-5.81953  - 3.89677 i$ &$ 58$  &$-0.581944739477E+01 -0.389682536102E+01i$& $233 $ & $$ &\\
+% $\gamma_2^{+}$ &  $ 0.44533  - 9.18684 i$ &$ 59$  &$0.445682448956E+00 -0.918312004621E+01 i$ &$ 231$ & $$ & \\
+% $\gamma_3^{+}$ &  $ 0.45389  - 13.0615 i$ & $ 57$  & $0.454498201155E+00 -0.130494173106E+02i $& $229 $&$  $&    \\ 
+% $\gamma_4^{+}$ &  $ 0.47952  - 16.8216 i$ &$ 55$  &$0.480366242866E+00 -0.167938280084E+02 i $& $227 $&$ $ &\\
+% $\gamma_5^{+}$ &  $ 0.50287  - 20.5307 i$ &$ 51$0.503933832131E+00 -0.204773938405E+02i$  &$ 223$&  & & \\
+% $\gamma_6^{+}$ &  $ 0.52202  - 24.2129 i$ &$ 50$  &$ 0.523283526071E+00 -0.241223020317E+02i$& $213$ &  & \\
+% $\gamma_7^{+}$ &  $ 0.53754  - 27.8800 i$ &$ 48$  &$0.538981982328E+00 -0.277373286147E+02i$ $119$  & &$$ & \\                       
+% \end{tabular}
+%\end{adjustbox}
+% \caption{Table 4.3 data}
+% \label{Table43}
+%\end{table}
+%
+
+
+\section{Issues and Concerns}
+I need to move faster. Using vsplit between the output data and the report saves
+a bit of time as well as using the visual mode to copy and paste the numbers between files.
+\section{Planned Research}
+Documenting the wavenumbers took a bit longer than expected in tex format. I have
+ran 32 grid points and doubled the each time until 1024 for both fourth order 
+and second order. 
+
+
+\end{document}
+
+

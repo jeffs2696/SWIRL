@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  25 APR 2022 11:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  4 MAY 2022 23:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -591,64 +591,257 @@ e
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
-<tex-outputs/MachDistribution.pdf, id=4, 314.24402pt x 218.8175pt>
-File: tex-outputs/MachDistribution.pdf Graphic file (type pdf)
-<use tex-outputs/MachDistribution.pdf>
-Package pdftex.def Info: tex-outputs/MachDistribution.pdf  used on input line 2
-5.
-(pdftex.def)             Requested size: 314.24324pt x 218.81696pt.
-<tex-outputs/PerturbationVariables.pdf, id=5, 320.96913pt x 218.8175pt>
-File: tex-outputs/PerturbationVariables.pdf Graphic file (type pdf)
-<use tex-outputs/PerturbationVariables.pdf>
-Package pdftex.def Info: tex-outputs/PerturbationVariables.pdf  used on input l
-ine 31.
-(pdftex.def)             Requested size: 320.96834pt x 218.81696pt.
-<tex-outputs/SoundSpeedFromIntegration.pdf, id=6, 318.49991pt x 203.65083pt>
-File: tex-outputs/SoundSpeedFromIntegration.pdf Graphic file (type pdf)
-<use tex-outputs/SoundSpeedFromIntegration.pdf>
-Package pdftex.def Info: tex-outputs/SoundSpeedFromIntegration.pdf  used on inp
-ut line 36.
-(pdftex.def)             Requested size: 318.49911pt x 203.65033pt.
-<tex-outputs/L2.pdf, id=7, 307.53897pt x 203.65083pt>
-File: tex-outputs/L2.pdf Graphic file (type pdf)
-<use tex-outputs/L2.pdf>
-Package pdftex.def Info: tex-outputs/L2.pdf  used on input line 42.
-(pdftex.def)             Requested size: 307.53821pt x 203.65033pt.
-<tex-outputs/ROC.pdf, id=8, 300.51273pt x 218.8175pt>
-File: tex-outputs/ROC.pdf Graphic file (type pdf)
-<use tex-outputs/ROC.pdf>
-Package pdftex.def Info: tex-outputs/ROC.pdf  used on input line 48.
-(pdftex.def)             Requested size: 300.51198pt x 218.81696pt.
-<tex-outputs/SourceTermData.pdf, id=9, 344.9989pt x 213.22661pt>
-File: tex-outputs/SourceTermData.pdf Graphic file (type pdf)
-<use tex-outputs/SourceTermData.pdf>
-Package pdftex.def Info: tex-outputs/SourceTermData.pdf  used on input line 53.
 
-(pdftex.def)             Requested size: 344.99805pt x 213.22607pt.
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./tex-outputs/MachDistri
-bution.pdf> <./tex-outputs/PerturbationVariables.pdf>] [2 <./tex-outputs/SoundS
-peedFromIntegration.pdf> <./tex-outputs/L2.pdf>] [3 <./tex-outputs/ROC.pdf> <./
-tex-outputs/SourceTermData.pdf>] (./plotReport.aux) ) 
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4
+_3_32pts1.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 1.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
+.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
+)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4
+_3_32pts2.tex)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4
+_3_64pts.tex)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4
+_3_128pts.tex)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4
+_3_256pts.tex)
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatte
+r32.pdf, id=4, 300.60306pt x 189.91954pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.s
+catter32.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.sc
+atter32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/gam.nonconv.scatter32.pdf  used on input line 97.
+(pdftex.def)             Requested size: 345.0pt x 217.97397pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatte
+r64.pdf, id=5, 300.60306pt x 189.91954pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.s
+catter64.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.sc
+atter64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/gam.nonconv.scatter64.pdf  used on input line 103.
+(pdftex.def)             Requested size: 345.0pt x 217.97397pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatte
+r128.pdf, id=6, 300.60306pt x 191.37498pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.s
+catter128.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.sc
+atter128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/gam.nonconv.scatter128.pdf  used on input line 110.
+(pdftex.def)             Requested size: 345.0pt x 219.64441pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatte
+r256.pdf, id=7, 300.60306pt x 191.114pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.s
+catter256.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.sc
+atter256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/gam.nonconv.scatter256.pdf  used on input line 117.
+(pdftex.def)             Requested size: 345.0pt x 219.34488pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv1.pdf, id=8, 32
+1.10966pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv1.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv1.pdf  used on input line 124.
+(pdftex.def)             Requested size: 345.0pt x 218.8116pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 125.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv2.pdf, id=9, 31
+6.84373pt x 204.765pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv2.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv2.pdf  used on input line 131.
+(pdftex.def)             Requested size: 345.0pt x 222.98006pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv3.pdf, id=10, 3
+20.96913pt x 205.18657pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv3.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv3.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv3.pdf  used on input line 138.
+(pdftex.def)             Requested size: 345.0pt x 220.56813pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv4.pdf, id=11, 3
+21.10966pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv4.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv4.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv4.pdf  used on input line 145.
+(pdftex.def)             Requested size: 345.0pt x 218.8116pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv5.pdf, id=12, 3
+20.96913pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv5.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv5.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv5.pdf  used on input line 152.
+(pdftex.def)             Requested size: 345.0pt x 218.91727pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv6.pdf, id=13, 3
+20.96913pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv6.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv6.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv6.pdf  used on input line 159.
+(pdftex.def)             Requested size: 345.0pt x 218.91727pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv7.pdf, id=14, 3
+20.96913pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv7.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv7.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv7.pdf  used on input line 166.
+(pdftex.def)             Requested size: 345.0pt x 218.91727pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv8.pdf, id=15, 3
+16.84373pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv8.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv8.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv8.pdf  used on input line 172.
+(pdftex.def)             Requested size: 345.0pt x 221.7668pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv9.pdf, id=16, 3
+16.84373pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv9.pdf Grap
+hic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv9.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egv9.pdf  used on input line 179.
+(pdftex.def)             Requested size: 345.0pt x 221.7668pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag1.pdf, id=17
+, 310.11859pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag1.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag1.pdf  used on input line 187.
+(pdftex.def)             Requested size: 345.0pt x 226.57404pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag2.pdf, id=18
+, 310.11859pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag2.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag2.pdf  used on input line 194.
+(pdftex.def)             Requested size: 345.0pt x 226.57404pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag3.pdf, id=19
+, 310.11859pt x 204.7349pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag3.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag3.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag3.pdf  used on input line 201.
+(pdftex.def)             Requested size: 345.0pt x 227.7801pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag4.pdf, id=20
+, 310.11859pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag4.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag4.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag4.pdf  used on input line 208.
+(pdftex.def)             Requested size: 345.0pt x 226.57404pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag5.pdf, id=21
+, 310.11859pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag5.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag5.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag5.pdf  used on input line 215.
+(pdftex.def)             Requested size: 345.0pt x 226.57404pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag6.pdf, id=22
+, 310.11859pt x 205.5178pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag6.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag6.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag6.pdf  used on input line 222.
+(pdftex.def)             Requested size: 345.0pt x 228.65117pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag7.pdf, id=23
+, 310.11859pt x 204.9758pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag7.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag7.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag7.pdf  used on input line 229.
+(pdftex.def)             Requested size: 345.0pt x 228.04813pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag8.pdf, id=24
+, 310.11859pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag8.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag8.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag8.pdf  used on input line 235.
+(pdftex.def)             Requested size: 345.0pt x 226.57404pt.
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag9.pdf, id=25
+, 310.11859pt x 203.65083pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag9.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag9.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/egvMag9.pdf  used on input line 242.
+(pdftex.def)             Requested size: 345.0pt x 226.57404pt.
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+[3] [4] [5] [6 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam
+.nonconv.scatter32.pdf> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/gam.nonconv.scatter64.pdf>] [7 </home/jeff-severino/SWIRL/CodeRun/03-plot
+Report/tex-outputs/gam.nonconv.scatter128.pdf> </home/jeff-severino/SWIRL/CodeR
+un/03-plotReport/tex-outputs/gam.nonconv.scatter256.pdf>] [8 </home/jeff-severi
+no/SWIRL/CodeRun/03-plotReport/tex-outputs/egv1.pdf> </home/jeff-severino/SWIRL
+/CodeRun/03-plotReport/tex-outputs/egv2.pdf>] [9 </home/jeff-severino/SWIRL/Cod
+eRun/03-plotReport/tex-outputs/egv3.pdf> </home/jeff-severino/SWIRL/CodeRun/03-
+plotReport/tex-outputs/egv4.pdf>] [10 </home/jeff-severino/SWIRL/CodeRun/03-plo
+tReport/tex-outputs/egv5.pdf> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/
+tex-outputs/egv6.pdf>] [11 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex
+-outputs/egv7.pdf> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs
+/egv8.pdf>] [12 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/eg
+v9.pdf> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag1.pd
+f>] [13 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag2.pd
+f> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag3.pdf>]
+[14 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag4.pdf> <
+/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag5.pdf>]
+[15 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag6.pdf> <
+/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag7.pdf>]
+[16 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag8.pdf> <
+/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag9.pdf>]
+(./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
- 22135 strings out of 481239
- 592566 string characters out of 5920378
- 942953 words of memory out of 5000000
- 37050 multiletter control sequences out of 15000+600000
- 532338 words of font info for 24 fonts, out of 8000000 for 9000
+ 22286 strings out of 481239
+ 602533 string characters out of 5920378
+ 1011953 words of memory out of 5000000
+ 37161 multiletter control sequences out of 15000+600000
+ 534161 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,6n,136p,741b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
-Output written on plotReport.pdf (3 pages, 151058 bytes).
+ 78i,8n,136p,741b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on plotReport.pdf (16 pages, 446020 bytes).
 PDF statistics:
- 182 PDF objects out of 1000 (max. 8388607)
- 122 compressed objects within 2 object streams
+ 449 PDF objects out of 1000 (max. 8388607)
+ 292 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 123 words of extra memory for PDF output out of 10000 (max. 10000000)
 

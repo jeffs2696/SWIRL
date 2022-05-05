@@ -3,6 +3,7 @@ OUTPUT_FILES = \
 			   02-method-of-manufactured-solutions/*.dat \
 			   03-plotReport/tex-outputs/*.tex \
 			   04-EVanalysis/*.dat \
+			   04-EVanalysis/egv* \
 			   04-EVanalysis/gam* \
 			   fort.*
 

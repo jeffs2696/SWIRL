@@ -67,8 +67,9 @@ F90FLAGS  =	\
 			-Wno-error=conversion-extra \
 			-Wno-error=conversion \
 			-Wno-error=unused-dummy-argument \
+			-Wno-error=array-temporaries \
 			-Wno-error=do-subscript
-#
+
 # -Wconversion-extra \
 			
 
@@ -114,6 +115,7 @@ OBJECTS  =                     \
 	boundaryModule.o 		   \
 	indexxModule.o 			   \
 	egvModule.o				   \
+	kapsubModule.o			   \
 	rmachModule.o 			   \
 	smachAndSndspdModule.o     \
     machoutModule.o 		   \
@@ -225,7 +227,7 @@ all:  $(OBJECTS)
 			exit $$RESULT
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
-	@(cd $(EXECUTABLE_LOCATION); (make plot ))
+	# @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:
 	cd PythonFiles/SymbolicManufacturedSolutions && make
@@ -286,10 +288,11 @@ FortranFiles/fdrivsModule.o:  FortranFiles/fdrivsModule.f90
 
 FortranFiles/egvModule.o: FortranFiles/egvModule.f90
 		$(F90) $(F90FLAGS)  FortranFiles/egvModule.f90
-#FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
-#							$(LAPACK_LOCATION)/zggev.o
-#	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/kapsubModule.f90
-#
+
+FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
+							$(LAPACK_LOCATION)/zggev.o
+	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/kapsubModule.f90
+
 FortranFiles/indexxModule.o:  FortranFiles/indexxModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/indexxModule.f90
 
@@ -310,6 +313,7 @@ FortranFiles/sndspdModule.o:  FortranFiles/sndspdModule.f90
 
 FortranFiles/outputModule.o:  FortranFiles/outputModule.f90 \
 						      FortranFiles/indexxModule.o \
+							  FortranFiles/kapsubModule.o \
 						      FortranFiles/egvModule.o
 	@$(F90) $(F90FLAGS) FortranFiles/outputModule.f90
 
