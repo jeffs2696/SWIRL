@@ -29,11 +29,14 @@ NUMBERS =
 # all: 
 	# echo $(PLOT_EXE)
 
+plot:
+	@cd 03-plotReport; ./PythonPlotReport.py;
+
 run SWIRL:
 	./$(EXE)
 clean:
 	(rm $(OUTPUT_FILES));
-plot: all
+report: all
 	@cd 03-plotReport; ./PythonPlotReport.py; \
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
 		xdg-open plotReport.pdf;

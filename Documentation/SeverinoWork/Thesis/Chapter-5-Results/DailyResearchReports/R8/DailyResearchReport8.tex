@@ -40,7 +40,7 @@
 \begin{titlepage}
 
     \title{
-    Weekly Research Report}
+    Methods, Results, and Discussion: Code Validation for SWIRL}
 
 
     \author{ Jeffrey Severino \\
@@ -52,12 +52,17 @@
     \maketitle
 
 \end{titlepage}
-\section{Current Research Direction}
-The goal is to answer: What modes are physical and what modes are numerical?
-\section{Research Performed In the Past 24 hours}
-
-\subsection{Current Validation Work}
-
+% \section{Introduction}
+% \begin{enumerate}
+%     \item Get the reader\'s attention
+%     \item Summary of previous research - what is already known about the topic
+%     \item Set up research by formulating a clear problem to be solved - what
+%         is not known yet.
+%     \item Propose a hypothesis to test
+%     \item State the main purpose
+% \end{enumerate}
+% Hypothesis: Increasing the number of grid points will 
+\subsection{Methods}
 A comparison was conducted for a hollow cylinder undergoing uniform flow with
 acoustic liners along the outer duct perimeter. The azimuthal mode number, reduced 
 frequency, mach number and duct liner admittance is reported below,
@@ -67,72 +72,75 @@ frequency, mach number and duct liner admittance is reported below,
     M_x &= 0.5 \\
     \eta_T &= 0.72 + 0.42i
 \end{align*} 
-These results are with no dissipation applied to the radial derivatives and 
-second order central differencing] was used.
-\begin{figure}
-    \centering
-    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_32pts1.tex}
-    \caption{Propagating Modes - 32 Gridpoints}
-\end{figure}
+\section{Results}
 
-\begin{figure}
-    \centering
-    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_32pts2.tex}
-    \caption{Propagating Modes - 32 Gridpoints}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_64pts.tex}
-    \caption{Propagating Modes - 64 Gridpoints}
-\end{figure}
-\begin{figure}
-    \centering
-    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_128pts.tex}
-    \caption{Propagating Modes - 128 Gridpoints}
-\end{figure}
-\begin{figure}
-    \centering
-    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_256pts.tex}
-    \caption{Propagating Modes - 256 Gridpoints}
-\end{figure}
+Notes about results
+\begin{itemize}
+    \item Figure \ref{fig:1} shows the effect of varying grid points. The wavenumbers seem to fall more 
+        into their categories as opposed to being sporadic.  
+    \item Figures \ref{fig:2}-\ref{fig:10} show the cut on modes 
+    \item Figures \ref{fig:11}-\ref{fig:19} show the cut off modes. Notice how they 
+        decay down to zero at the walls
+    \item Figure \ref{fig;19} shows point to point waves 
+    \item The axial wavenumbers and propagating radial pressure modes are
+        indexed according to the number of zero crossings that occur for the real
+        component of the mode. The superscript indicates the sign of the axial wavenumber while
+        the subscript indicates the number of times that the corresponding 
+        radial pressure mode crosses zero
+\end{itemize}
+%%
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_32pts1.tex}
+%%    \caption{Propagating Modes - 32 Gridpoints}
+%%\end{figure}
+%%
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_32pts2.tex}
+%%    \caption{Propagating Modes - 32 Gridpoints}
+%%\end{figure}
+%%
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_64pts.tex}
+%%    \caption{Propagating Modes - 64 Gridpoints}
+%%\end{figure}
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_128pts.tex}
+%%    \caption{Propagating Modes - 128 Gridpoints}
+%%\end{figure}
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_256pts.tex}
+%%    \caption{Propagating Modes - 256 Gridpoints}
+%%\end{figure}
 %%
 %% \begin{figure}
 %%     \centering
 %%     \includegraphics{tex-outputs/gam.non.acc.scatter.pdf}
 %% \end{figure}
 
+% Scatter plots for axial wavenumbers
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatter32.pdf}
-     \caption{Propagating Modes - 32 points}
+     \caption{Discrete Acoustic Disturbances: Cylinder, Uniform Mean Flow with Liner.}
+     \label{fig:1} 
  \end{figure}
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatter64.pdf}
-     \caption{Propagating Modes - 64 points}
- \end{figure}
+ 
+ 
 
 
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatter128.pdf}
-     \caption{Propagating Modes - 128 points}
- \end{figure}
 
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatter256.pdf}
-     \caption{Propagating Modes - 256 points}
- \end{figure}
-
+\subsection{Propagating (Cut-on) pressure modes}
 
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv1.pdf}
      \caption{Propagating Mode $\gamma^+_0 = 0.620-5.014i$}
+     \label{fig:2} 
  \end{figure}
 
 
@@ -140,114 +148,146 @@ second order central differencing] was used.
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv2.pdf}
      \caption{Propagating Mode $\gamma^+_1 = -5.820-3.897i$}
+     \label{fig:3} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv3.pdf}
+     \caption{Propagating Mode $\gamma^+_2 = 0.445-9.187i$}
+     \label{fig:4} 
  \end{figure}
 
 
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv4.pdf}
-     \caption{Propagating Mode $\gamma^+_2 = -0.445-9.187i$}
+     \caption{Propagating Mode $\gamma^+_3 = 0.453-13.062i$}
+     \label{fig:5} 
  \end{figure}
 
 
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv5.pdf}
-     \caption{Propagating Mode $\gamma^+_3 = -0.453-13.062i$}
+     \caption{Propagating Mode $\gamma^+_4 = 0.480 - 16.822i$}
+     \label{fig:6} 
  \end{figure}
 
 
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv6.pdf}
-     \caption{Propagating Mode $\gamma^+_4 = 0.480 - 16.822i$}
+     \caption{Propagating Mode $\gamma^+_5 = 0.503 - 20.531$}
+     \label{fig:7} 
  \end{figure}
 
 
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv7.pdf}
-     \caption{Propagating Mode $\gamma^+_5 = 0.503 - 20.531$}
+     \caption{Propagating Mode $\gamma^+_6 = 0.522 - 24.213i$}
+     \label{fig:8} 
  \end{figure}
-
 
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv8.pdf}
-     \caption{Propagating Mode $\gamma^+_6 = 0.522 - 24.213i$}
+     \caption{Propagating Mode $\gamma^+_7 = 0.538 - 27.880i$}
+     \label{fig:9} 
  \end{figure}
+
 
  \begin{figure}
      \centering
      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv9.pdf}
-     \caption{Propagating Mode $\gamma^+_7 = 0.538 - 27.880i$}
- \end{figure}
-
-Mode Magnitudes (duplicated in each figure)
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag1.pdf}
-     \caption{Propagating Mode $\gamma^+_0 = 0.620-5.014i$}
- \end{figure}
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag2.pdf}
-     \caption{Propagating Mode $\gamma^+_1 = -5.820-3.897i$}
- \end{figure}
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag3.pdf}
-     \caption{Propagating Mode $\gamma^+_2 = -0.445-9.187i$}
- \end{figure}
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag4.pdf}
-     \caption{Propagating Mode $\gamma^+_3 = -0.453-13.062i$}
- \end{figure}
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag5.pdf}
-     \caption{Propagating Mode $\gamma^+_4 = 0.480 - 16.822i$}
- \end{figure}
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag6.pdf}
-     \caption{Propagating Mode $\gamma^+_5 = 0.503 - 20.531$}
- \end{figure}
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag7.pdf}
-     \caption{Propagating Mode $\gamma^+_6 = 0.522 - 24.213i$}
- \end{figure}
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag8.pdf}
-     \caption{Propagating Mode $\gamma^+_7 = 0.538 - 27.880i$}
- \end{figure}
-
-
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egvMag9.pdf}
      \caption{Propagating Mode $\gamma^+_8 = 0.550 - 31.537$}
+     \label{fig:10} 
  \end{figure}
 
 
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m1.pdf}
+     \caption{Propagating Mode $\gamma^+_0 = 0.620-5.014i$}
+     \label{fig:11} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m2.pdf}
+     \caption{Propagating Mode $\gamma^+_1 = -5.820-3.897i$}
+     \label{fig:12} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m3.pdf}
+     \caption{Propagating Mode $\gamma^+_2 = 0.445-9.187i$}
+     \label{fig:13} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m4.pdf}
+     \caption{Propagating Mode $\gamma^+_3 = 0.453-13.062i$}
+     \label{fig:14} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m5.pdf}
+     \caption{Propagating Mode $\gamma^+_4 = 0.480 - 16.822i$}
+     \label{fig:15} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m6.pdf}
+     \caption{Propagating Mode $\gamma^+_5 = 0.503 - 20.531$}
+     \label{fig:16} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m7.pdf}
+     \caption{Propagating Mode $\gamma^+_6 = 0.522 - 24.213i$}
+     \label{fig:17} 
+ \end{figure}
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m8.pdf}
+     \caption{Propagating Mode $\gamma^+_7 = 0.538 - 27.880i$}
+     \label{fig:18} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m9.pdf}
+     \caption{Propagating Mode $\gamma^+_8 = 0.550 - 31.537$}
+     \label{fig:19} 
+ \end{figure}
+
+\subsection{Discussion} 
+
+Notes to ponder on\dots
+\begin{itemize}
+    \item The cut-on line is not parallel to the imaginary axis.
+    \item Modes are only shown for two radial modes with the same azimuthal mode 
+        in Kousen's work
+    \item Maldanado's plot of axial wave numbers has much less points. This could
+        have been by choice or they were eliminated using the Tam dissipation
+        filter
+\end{itemize}
 
 \section{Issues and Concerns}
 Looking at the magnitude shows the phase shift a bit more clearly. 
@@ -256,9 +296,12 @@ The number of zero crossings don't seem to correspond to the subscript of
 $\gamma$\ldots 
 
 \section{Planned Research}
-
-I will plot the upstream modes, then rerun with fourth order differencing.
-
+\begin{itemize}
+    \item I would like to document the methods for this section to describe 
+        the validation. Also there is no comparison to an analytical mode at the moment.
+    \item To complete the validation for Table4.3, a fourth order scheme needs to be 
+        shown. 
+\end{itemize}<++>
 \end{document}
 
 
