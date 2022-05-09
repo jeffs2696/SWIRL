@@ -140,19 +140,19 @@ CONTAINS
 ! Output everything to an unformatted file.
 !        WRITE(0,*) 'omega = ',omega
 
-        open(unit=12,             &
-            file='04-EVanalysis/output.dat',  &
-            form='unformatted')
+!         open(unit=12,             &
+!             file='04-EVanalysis/output.dat',  &
+!             form='unformatted')
 
-        rewind(12)
+!         rewind(12)
 
-        write(12) np,np4,mode,rho,omega,attenh,attend!ang,gam
-        write(12) (wvn(i), i=1,np4)
-        write(12) (rr(i), i=1,np)
-        write(12) ((vrm(i,j), i=1,np4), j=1,np4)
-!      write(12) wvn
-!      write(12) vrm
-        close(12)
+!         write(12) np,np4,mode,rho,omega,attenh,attend!ang,gam
+!         write(12) (wvn(i), i=1,np4)
+!         write(12) (rr(i), i=1,np)
+!         write(12) ((vrm(i,j), i=1,np4), j=1,np4)
+! !      write(12) wvn
+! !      write(12) vrm
+!         close(12)
 !
 ! Compute range of convected wavenumbers.
 !

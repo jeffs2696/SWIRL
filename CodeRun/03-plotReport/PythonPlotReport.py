@@ -49,7 +49,6 @@ mpl.rcParams.update(tex_fonts)
 
 # modes with 32 points
 # downstream
- 
 mode_data_re1_32 = fcn.importPlotData('../04-EVanalysis/SWIRLVerification/Table4_3/32pts/egvre.034')
 mode_data_im1_32 = fcn.importPlotData('../04-EVanalysis/SWIRLVerification/Table4_3/32pts/egvim.034')
 

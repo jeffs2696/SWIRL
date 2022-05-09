@@ -82,11 +82,10 @@ CONTAINS
         CHARACTER(10) :: &
             ff
 
-        CHARACTER(100) :: &
+        CHARACTER(1000) :: &
             formatHeader, &
             formatData, &
-            basen     , &
-            basem
+            basen     
 
 
         COMPLEX(KIND=rDef) ::&
@@ -95,30 +94,29 @@ CONTAINS
 
         REAL(KIND=rDef) :: phi
 
-        INTEGER :: j,n,  np4,  myunit1, myunit2
+        INTEGER :: j,n,  np4,  myunit1
 
         ci  = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
 
-        formatHeader = "(7a16)"
-        formatData   = "(7f16.12)"
+        formatHeader = "(13a16)"
+        formatData   = "(13f16.12)"
         np4 = np*4
         ! the output is currently done such that the real values are stored in basen and imaginary values are stored with basem
         DO n = 1,np4
             ! assign a value to the character variable ff, to be appended to the file names
-            WRITE(ff,'(i0.3)') n
+            WRITE(ff,'(i0.4)') n
 
 ! redefining file name for each eigenvalue
-            basen    = '04-EVanalysis/egvre.'
-            basem    = '04-EVanalysis/egvim.'
+            basen    = '04-EVanalysis/egv.'
 
             open(newunit=myunit1,file=TRIM(ADJUSTL(basen))//TRIM(ADJUSTL(ff)))!,status='old')
-            open(newunit=myunit2,file=TRIM(ADJUSTL(basem))//TRIM(ADJUSTL(ff)))!,status='old')
 
-            WRITE(myunit1,formatHeader) 'Rad','v_r','v_t','v_x','p  ','p_mg','p_no_phase'
-            WRITE(myunit2,formatHeader) 'Rad','v_r','v_t','v_x','p  ','p_mg','p_no_phase'
+            WRITE(myunit1,formatHeader) &
+            'Rad','v_r[Re]','v_t[Re]','v_x[Re]','p[Re]  ','p_mg[Re]','p_no_phase[Re]', &
+                  'v_r[Im]','v_t[Im]','v_x[Im]','p[Im]  ','p_mg[Im]','p_no_phase[Im]'
 
-            phi = atan2(aimag(vrm(3*np+1,n)),real(vrm(3*np+1,n)))
+            phi = atan2(aimag(vrm(np4,n)),real(vrm(np4,n)))
             DO j = 1,np
                 write(myunit1,formatData) &
                     rr(j),&
@@ -127,10 +125,7 @@ CONTAINS
                     real(vrm(j+2*np,n)), &
                     real(vrm(j+3*np,n)), &
                     SQRT(real(vrm(j+3,n))**2.0_rDef+aimag(vrm(j+3,n))**2.0_rDef) , &
-                    real(vrm(j+3*np,n)*exp(-ci*phi))
-
-                write(myunit2,formatData) &
-                    rr(j),&
+                    real(vrm(j+3*np,n)*exp(-ci*phi)), &
                     aimag(vrm(j,n)), &
                     aimag(vrm(j+1*np,n)), &
                     aimag(vrm(j+2*np,n)), &
@@ -140,7 +135,6 @@ CONTAINS
             ENDDO
 
             close(myunit1)
-            close(myunit2)
             
             
         ENDDO

@@ -1,0 +1,307 @@
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Methods, Results, and Discussion: Code Validation for SWIRL}
+
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+% \section{Introduction}
+% \begin{enumerate}
+%     \item Get the reader\'s attention
+%     \item Summary of previous research - what is already known about the topic
+%     \item Set up research by formulating a clear problem to be solved - what
+%         is not known yet.
+%     \item Propose a hypothesis to test
+%     \item State the main purpose
+% \end{enumerate}
+% Hypothesis: Increasing the number of grid points will 
+\subsection{Methods}
+A comparison was conducted for a hollow cylinder undergoing uniform flow with
+acoustic liners along the outer duct perimeter. The azimuthal mode number, reduced 
+frequency, mach number and duct liner admittance is reported below,
+\begin{align*}
+    m &= 2 \\
+    k &= \frac{\omega r_T}{A_T} = -1 \\
+    M_x &= 0.5 \\
+    \eta_T &= 0.72 + 0.42i
+\end{align*} 
+
+\section{Results}
+
+Figure \ref{fig:1} shows the effect of varying grid points on the dimensionless 
+axial wavenumbers for four different grids using a second order differencing 
+scheme to obtain the radial derivatives in the LEE. When compared to the thirty-two 
+point grid , the one hundred twenty eight point gird shows axial wave numbers 
+that are more parallel to the imaginary axis. However, the wavenumbers show
+consistent agreement for the convective wavenumbers across all four grids.  
+into their categories as opposed to being sporadic. The imaginary component of 
+the wavenumbers change the most with varying grid points. 
+
+Once the axial wavenumbers are computed, they are sorted according to the number 
+of times that the associated radial pressure mode crosses zero. This is done by 
+computing the phase of each mode $\phi$ , where 
+$\phi = \arctan \frac{Im{p_{i=1}}}{Re{p_{i=1}}}$, and then multiplying the 
+$i=2$ through $i=n$ points by  $\exp{-i\phi}$. The index $n$ is the last grid point. 
+By doing this, the phase of each mode was shifted such that it was in agreement
+with the phase of the pressure mode at the first grid point. After this was
+completed, then the zero crossings were found by identifying a sign change in 
+the mode. The modes that were reported in Kousen's Table 4.3 are shown in Figures \ref{fig:2}-\ref{fig:19}.
+Figures \ref{fig:2}-\ref{fig:10} show the propagating (cut-on) modes and Figures
+\ref{fig:11}-\ref{fig:19} show the decaying modes (cut-off).  
+    % \item The axial wavenumbers and propagating radial pressure modes are
+    %     indexed according to the number of zero crossings that occur for the real
+    %     component of the mode. The superscript indicates the sign of the axial wavenumber while
+    %     the subscript indicates the number of times that the corresponding 
+    %     radial pressure mode crosses zero
+% \end{itemize}
+
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_32pts1.tex}
+%%    \caption{Propagating Modes - 32 Gridpoints}
+%%\end{figure}
+%%
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_32pts2.tex}
+%%    \caption{Propagating Modes - 32 Gridpoints}
+%%\end{figure}
+%%
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_64pts.tex}
+%%    \caption{Propagating Modes - 64 Gridpoints}
+%%\end{figure}
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_128pts.tex}
+%%    \caption{Propagating Modes - 128 Gridpoints}
+%%\end{figure}
+%%\begin{figure}
+%%    \centering
+%%    \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.non.acc.table4_3_256pts.tex}
+%%    \caption{Propagating Modes - 256 Gridpoints}
+%%\end{figure}
+%%
+%% \begin{figure}
+%%     \centering
+%%     \includegraphics{tex-outputs/gam.non.acc.scatter.pdf}
+%% \end{figure}
+
+% Scatter plots for axial wavenumbers
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/gam.nonconv.scatter32.pdf}
+     \caption{The Dimensionless Axial Wavenumbers that Represent the 
+     Discrete Acoustic Disturbances obtained in Table 4.3 in [Kousens] -  Cylinder, Uniform Mean Flow with Liner.}
+     \label{fig:1} 
+ \end{figure}
+ 
+ 
+
+
+
+\subsection{Propagating (Cut-on) pressure modes}
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv1.pdf}
+     \caption{Propagating Mode $\gamma^+_0 = 0.620-5.014i$}
+     \label{fig:2} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv2.pdf}
+     \caption{Propagating Mode $\gamma^+_1 = -5.820-3.897i$}
+     \label{fig:3} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv3.pdf}
+     \caption{Propagating Mode $\gamma^+_2 = 0.445-9.187i$}
+     \label{fig:4} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv4.pdf}
+     \caption{Propagating Mode $\gamma^+_3 = 0.453-13.062i$}
+     \label{fig:5} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv5.pdf}
+     \caption{Propagating Mode $\gamma^+_4 = 0.480 - 16.822i$}
+     \label{fig:6} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv6.pdf}
+     \caption{Propagating Mode $\gamma^+_5 = 0.503 - 20.531$}
+     \label{fig:7} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv7.pdf}
+     \caption{Propagating Mode $\gamma^+_6 = 0.522 - 24.213i$}
+     \label{fig:8} 
+ \end{figure}
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv8.pdf}
+     \caption{Propagating Mode $\gamma^+_7 = 0.538 - 27.880i$}
+     \label{fig:9} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv9.pdf}
+     \caption{Propagating Mode $\gamma^+_8 = 0.550 - 31.537$}
+     \label{fig:10} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m1.pdf}
+     \caption{Propagating Mode $\gamma^-_0 = 0.410 + 1.290i$}
+     \label{fig:11} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m2.pdf}
+     \caption{Propagating Mode $\gamma^-_1 =1.259 + 6.085i $}
+     \label{fig:12} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m3.pdf}
+     \caption{Propagating Mode $\gamma^-_2 =1.146 + 9.668i $}
+     \label{fig:13} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m4.pdf}
+     \caption{Propagating Mode $\gamma^-_3 =1.022 + 13.315i$}
+     \label{fig:14} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m5.pdf}
+     \caption{Propagating Mode $\gamma^-_4 = 0.943 + 16.977i$}
+     \label{fig:15} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m6.pdf}
+     \caption{Propagating Mode $\gamma^-_5 =0.891 + 20.635i$}
+     \label{fig:16} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m7.pdf}
+     \caption{Propagating Mode $\gamma^-_6 =0.855 + 24.288i $}
+     \label{fig:17} 
+ \end{figure}
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m8.pdf}
+     \caption{Propagating Mode $\gamma^-_7 = 0.829 + 27.937i$}
+     \label{fig:18} 
+ \end{figure}
+
+
+ \begin{figure}
+     \centering
+     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/egv_m9.pdf}
+     \caption{Propagating Mode $\gamma^-_8 =0.809 + 31.581i $}
+     \label{fig:19} 
+ \end{figure}
+
+\section{Issues and Concerns}
+
+\section{Planned Research}
+\begin{itemize}
+    \item Compute the L2 of $\phi$ from grid to grid. 
+    \item Clean up axial wavenumber plots so that varying grids are easier to
+        see.
+    \item Report the findings from the fourth order study
+    \item Complete the results section draft (add better captions)
+    \item Discuss Results
+\end{itemize}
+\end{document}
+
+
