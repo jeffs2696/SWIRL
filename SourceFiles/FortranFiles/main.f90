@@ -129,7 +129,7 @@ PROGRAM MAIN
     numericalIntegrationFlag  =  1
 !    DO FDfac = 1,2
 
-        FDfac = 1
+        FDfac = 2
         finiteDiffFlag            = FDfac
         secondOrderSmoother       =  0.0_rDef
         fourthOrderSmoother       =  0.0_rDef
@@ -164,7 +164,7 @@ PROGRAM MAIN
         DO fac = 1, numberOfIterations
 
             !facCount                     = facCount + 1
-            numberOfGridPoints           = 32!5+(2**fac)
+            numberOfGridPoints           = 256!5+(2**fac)
 !            numberOfGridPoints           = 5+(2**fac)
             numberOfGridPointsArray(fac) = numberOfGridPoints
             dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
