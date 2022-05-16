@@ -126,14 +126,14 @@ PROGRAM MAIN
     hubToTipRatio             =  r_min/r_max
 
     azimuthalModeNumber       =  2
-    numericalIntegrationFlag  =  1
+    numericalIntegrationFlag  =  2
 !    DO FDfac = 1,2
 
-        FDfac = 2
+        FDfac = 1
         finiteDiffFlag            = FDfac
         secondOrderSmoother       =  0.0_rDef
         fourthOrderSmoother       =  0.0_rDef
-        ductAdmittance            = CMPLX(0.72,0.420,rDef)
+        ductAdmittance            = CMPLX(0.0,0.0,rDef)
         hubAdmittance             = CMPLX(0.0,0.0,rDef)
         frequency                 = CMPLX(-1.0,0,rDef)
 
@@ -164,7 +164,7 @@ PROGRAM MAIN
         DO fac = 1, numberOfIterations
 
             !facCount                     = facCount + 1
-            numberOfGridPoints           = 256!5+(2**fac)
+            numberOfGridPoints           = 128!5+(2**fac)
 !            numberOfGridPoints           = 5+(2**fac)
             numberOfGridPointsArray(fac) = numberOfGridPoints
             dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
@@ -203,7 +203,7 @@ PROGRAM MAIN
                 r(i)             = (r_min+REAL(i-1, rDef)*dr)/r_max
 
                 ! Plug flow for T4.1
-                 axialMachData(i) = 0.5_rDef
+                 axialMachData(i) = 0.3_rDef
 
                 thetaMachData(i) = 0.0_rDef
 

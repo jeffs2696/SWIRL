@@ -5,7 +5,7 @@
 import time
 import re
 import sys
-import tikzplotlib
+# import tikzplotlib
 import glob
 import os
 import pandas as pd
@@ -30,7 +30,7 @@ def extract_number(f):
     return (int(s[0]) if s else -1,f)
 
 plt.style.use('seaborn-whitegrid')
-width =345
+width = 345
 
 tex_fonts = {
         # Use LaTeX to write all text
@@ -46,19 +46,91 @@ tex_fonts = {
         }
 
 mpl.rcParams.update(tex_fonts) 
-#directories = [
-#        '../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/32pts/',
-#        '../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/64pts/',
-#        '../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/128pts/',
-#        '../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/256pts/'
-#        ]
-       
 
 directory_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/32pts/'
+directory_4th_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/32pts/'
 directory_64  ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/64pts/'
+directory_4th_64  ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/64pts/'
 directory_128 ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/128pts/'
+directory_4th_128 ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/128pts/'
 directory_256 ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/256pts/'
 
+# 2. Plot Axial Wavenumbers/Eigenvalues
+gam_data = fcn.importPlotData()
+gam_non_acc_data32 = fcn.importPlotData(directory_32+'gam.nonconv.0032')
+gam_non_acc_data_4th_32 = fcn.importPlotData(directory_4th_32+'gam.nonconv.0032')
+gam_non_acc_data64 = fcn.importPlotData(directory_64+'gam.nonconv.0064')
+gam_non_acc_data_4th_64 = fcn.importPlotData(directory_4th_64+'gam.nonconv.0064')
+gam_non_acc_data128 = fcn.importPlotData(directory_128+'gam.nonconv.0128')
+gam_non_acc_data_4th_128 = fcn.importPlotData(directory_4th_128+'gam.nonconv.0128')
+gam_non_acc_data256 = fcn.importPlotData(directory_256+'gam.nonconv.0256')
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+plt.scatter(
+        gam_non_acc_data32['Re{gam/ak}'],
+        gam_non_acc_data32['Im{gam/ak}'],
+        marker = '.',
+        label = '32',
+        s = 2)
+plt.scatter(
+        gam_non_acc_data64['Re{gam/ak}'],
+        gam_non_acc_data64['Im{gam/ak}'],
+        marker = '.',
+        label = '64',
+        s = 2)
+plt.scatter(
+        gam_non_acc_data128['Re{gam/ak}'],
+        gam_non_acc_data128['Im{gam/ak}'],
+        marker = '.',
+        label = '128',
+        s = 2)
+plt.scatter(
+        gam_non_acc_data256['Re{gam/ak}'],
+        gam_non_acc_data256['Im{gam/ak}'],
+        marker = '.',
+        label = '256',
+        s = 2)
+
+ax.legend()
+plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_order_comp.pdf', 
+        format = 'pdf', 
+        bbox_inches='tight')
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+plt.scatter(
+        gam_non_acc_data_4th_32['Re{gam/ak}'],
+        gam_non_acc_data_4th_32['Im{gam/ak}'],
+        marker = '.',
+        label = '32',
+        s = 2)
+plt.scatter(
+        gam_non_acc_data_4th_64['Re{gam/ak}'],
+        gam_non_acc_data_4th_64['Im{gam/ak}'],
+        marker = '.',
+        label = '64',
+        s = 2)
+plt.scatter(
+        gam_non_acc_data_4th_128['Re{gam/ak}'],
+        gam_non_acc_data_4th_128['Im{gam/ak}'],
+        marker = '.',
+        label = '128',
+        s = 2)
+ax.legend()
+plt.savefig('tex-outputs/gam.nonconv.scatter_4th_order_comp.pdf', 
+        format = 'pdf', 
+        bbox_inches='tight')
+# indices that correspond to the wavenumbers reported in Table 4.3, used visual
+# inspection 
 propagation_index_32 = ['0034', '0033', '0031', '0029', '0027', '0025', '0023', 
                         '0064', '0062', '0060', '0058', '0056', '0054', '0052']
 
@@ -84,6 +156,7 @@ mode_data_256  = [(fcn.importPlotData(str(egvfile_256[i]))) for i,j in (enumerat
 markers = ['o-', '+-', '--', '-', 'o-', '.', 'x', 'X', 'D', '|']
 y_str = ['p_no_phase[Re]', 'p_no_phase[Im]']
 
+# 2. Plot Pressure Mode Shapes/Eigenvectors
 Tot = 10
 Cols = 2
 
@@ -307,7 +380,7 @@ Rows = Tot // Cols
 Rows += Tot % Cols
 Position = range(1,Tot + 1)
 fig = plt.figure(constrained_layout=False, figsize=set_size(2*width))
-fig.suptitle('Propagating Modes [Imaginary]')
+fig.suptitle('Decaying Modes [Imaginary]')
 
 s = fig.add_gridspec(Rows, Cols,hspace=0)
 
@@ -1514,41 +1587,6 @@ plt.savefig('tex-outputs/egv_decay_im.pdf',
 #        format = 'pdf', 
 #        bbox_inches='tight')
 #
-#fig, ax = plt.subplots(
-#        nrows=1,
-#        ncols=1,
-#        sharex=True,
-#        figsize=set_size(width),
-#        )
-#plt.scatter(
-#        gam_non_acc_data32['Re{gam/ak}'],
-#        gam_non_acc_data32['Im{gam/ak}'],
-#        marker = '.',
-#        label = '32',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data64['Re{gam/ak}'],
-#        gam_non_acc_data64['Im{gam/ak}'],
-#        marker = '.',
-#        label = '64',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data128['Re{gam/ak}'],
-#        gam_non_acc_data128['Im{gam/ak}'],
-#        marker = '.',
-#        label = '128',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data256['Re{gam/ak}'],
-#        gam_non_acc_data256['Im{gam/ak}'],
-#        marker = '.',
-#        label = '256',
-#        s = 2)
-#
-#ax.legend()
-#plt.savefig('tex-outputs/gam.nonconv.scatter32.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
 #fig, ax = plt.subplots(
 #        nrows=1,
 #        ncols=1,

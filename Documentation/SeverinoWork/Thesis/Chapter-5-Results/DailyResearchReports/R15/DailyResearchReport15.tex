@@ -1,0 +1,93 @@
+
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+The goal is to find the analytical solution for a uniform flow case without
+liner. It isn't clear how the analytical solution changes with liner or if
+it changes at all. I suspect the boundary conditions have to be implemented because
+my current results do not match Table 4.3. There is a case that has shear flow
+in a cylinder but then the question becomes, what is the analytical case for sheared
+flow? If I could find a test case for uniform 
+
+\section{Research Performed}
+The literature on duct modes in turbomachinery was reviewed to find test cases
+that can be used outside of Kousen's references but there is not any ``readily''
+available. The best reference I could find was Maldanado's Figure 10 $m = 2$
+, $"Mach = 0.3"$, $"He = 10"$. The quotes are to indicate that a different variable
+was used. Since the case says it is uniform flow, the Mach number must be axial.
+A non dimensional frequency is often indicated as the Helmholtz number. There is
+no definiton offered, but Rienstra often uses this and defines it just like we 
+defined $k$. MaldanAdo also shows the effect of liner on the same case. After
+scanning literature, I think the best step is to replicate these results.
+
+The analytical cut-on mode was calculated for this case and it was validated, 
+but this doesn't provide the axial wavenumbers for this case. Perhaps I need to 
+grab the values from this Figure!
+
+\section{Issues and concerns}
+It is unfortunate how cryptic it is to replicate these results easily. The steps 
+are not clearly outlined from step to step and the conflicts between variable
+naming conventions can make it easy to make a mistake. Kerrebrocks and Rienstra's reference is 
+a good starting point to replicate as they both cited Pridmore-Brown (1958) who
+cited Moore (1930s). It seems thats how far back this theory goes, but test cases
+are rarely provided. Maldanado's work helps in this endevor alot.
+
+
+\section{Planned Research}
+After reviewing the literature, Maldanado's Figure 10 in Sound Propagation in Lined Annular Ducts with MeanSwirling Flow
+has the best case to replicate because it has uniform flow in a cylindrical
+duct that is NOT lined
+\end{document}
+
+
