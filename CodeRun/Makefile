@@ -30,14 +30,14 @@ NUMBERS =
 	# echo $(PLOT_EXE)
 
 plot:
-	@cd 03-plotReport; ./PythonPlotReport.py;
+	@cd 03-plotReport; ./plotReport.py;
 
 run SWIRL:
 	./$(EXE)
 clean:
 	(rm $(OUTPUT_FILES));
 report: all
-	@cd 03-plotReport; ./PythonPlotReport.py; \
+	@cd 03-plotReport; ./plotReport.py; \
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
 		xdg-open plotReport.pdf;
 

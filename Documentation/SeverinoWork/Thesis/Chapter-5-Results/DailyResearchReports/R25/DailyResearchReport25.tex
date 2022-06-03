@@ -1,0 +1,78 @@
+
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+The current research direction is to
+\begin{enumerate}
+    \item The MMS was used to create a closed analytic form for the solution
+        that I want for the ``final'' test problem. The issue is that one MMS
+        cannot simultaneously test all conditions.
+\subitem The first solution tests an annular duct with liners and with arbitrary
+axial and swirling flow. This was done to exhaust each variable in the LEE. The 
+manufactured solutions were generated using a summation of tangents for the 
+mean flow profile and for the perturbation variables. Although each variable
+is set to a non zero value, this does not test the implementation of the L'Hopital's rule.
+\item The second solution tests a cylindrical duct with hard walls with
+    a uniform mean flow profile. The objective here is to use the MMS along 
+    with the actual analytical solution. This will set up the framework for a 
+    solution validation. The reason for doing this is because there are aspects 
+    of SWIRL that do not get tested by calculating a rate of convergence. The first
+    component that needs to be tested is the radial mode zero crossing method. 
+\subitem The main question that needs to be addressed is when and how should the modes 
+that do not have a physical meaning be removed. The question of when is referring 
+to which combination of grid points and numerical schemes give a sufficient answer?
+If a sufficient answer is decided when we have a certain order of accuracy, this 
+does not necessarily mean we will have the correct modes. 
+\subitem If we know that a certain scheme (2nd order or 4th order) needs a certain
+number of grid points per wavelength, then there is an inherent mode limit that comes 
+from the numerical scheme of choice. This can determine the bounds of the ``reduced mode
+problem''\ldots 
+\end{enumerate}
+
+
+\section{Research Performed}
+The L2 and Error was added to the output for all four LEE equations and speed of
+sound at each grid. The Error better shows a comparison between the actual and expected 
+solutions. 
+
+\section{Issues and Concerns}
+I'd like to start using second order or fourth order dissipation but by finishing 
+my first attempt at a solution validation, I'll get a better idea of what I would
+need for dissipation if I need it at all for the scheme and grid I choose. 
+
+\section{Planned Research}
+Make is going to be used to call the different modules for the two (or more MMS 
+tests). I have been switching back and fourth and Make will just make it so the 
+files can be run as needed. The MMS results for the second solution will be 
+reported.
+After a certain mode, the modes begin to get noisy and the hypothesis is because
+there is not enough resolution (in one of the numerical methods or derivatives) 
+so the number of modes to look at at once will be decided. If we are only looking
+at 4 modes for example, then we need to have enough resolution for that test.
+
+
+
+
+
+
+\end{document}
+
+

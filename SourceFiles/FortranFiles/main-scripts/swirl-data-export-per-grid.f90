@@ -24,8 +24,8 @@ DO i = 1,numberOfGridPoints
 
     WRITE(UNIT,*) &
         r(i)                             , &
-        axialMachData(i)                 , &
-        thetaMachData(i)                 
+        axialMachDataMMSOut(i)                 , &
+        thetaMachDataMMSOut(i)                 
 
 ENDDO
 

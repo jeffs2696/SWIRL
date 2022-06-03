@@ -102,7 +102,7 @@
 ! input variables:
     REAL(KIND = rDef), PARAMETER ::&
         gam    = 1.40_rDef  ,&
-        r_min  = 0.30_rDef  ,&
+        r_min  = 0.10_rDef  ,&
         r_max  = 1.000_rDef  
 
     INTEGER, PARAMETER :: &
@@ -110,8 +110,8 @@
 
     COMPLEX(KIND=rDef), PARAMETER :: &
         hubAdmittance   = CMPLX(0.0,0,rDef)   , &
-        ductAdmittance  = CMPLX(0.3,0.0,rDef) , &
-        frequency       = CMPLX(30,0,rDef)
+        ductAdmittance  = CMPLX(0.0,0.0,rDef) , &
+        frequency       = CMPLX(1,0,rDef)
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
         swirlClassObj

@@ -47,16 +47,15 @@ tex_fonts = {
 
 mpl.rcParams.update(tex_fonts) 
 
-directory_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/32pts/'
-directory_4th_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/32pts/'
-directory_64  ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/64pts/'
-directory_4th_64  ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/64pts/'
-directory_128 ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/128pts/'
-directory_4th_128 ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/128pts/'
-directory_256 ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/256pts/'
+directory_32  ='../04-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/32pts/'
+directory_4th_32  ='../04-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/32pts/'
+directory_64  ='../04-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/64pts/'
+directory_4th_64  ='../04-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/64pts/'
+directory_128 ='../04-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/128pts/'
+directory_4th_128 ='../04-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/128pts/'
+directory_256 ='../04-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/256pts/'
 
 # 2. Plot Axial Wavenumbers/Eigenvalues
-gam_data = fcn.importPlotData()
 gam_non_acc_data32 = fcn.importPlotData(directory_32+'gam.nonconv.0032')
 gam_non_acc_data_4th_32 = fcn.importPlotData(directory_4th_32+'gam.nonconv.0032')
 gam_non_acc_data64 = fcn.importPlotData(directory_64+'gam.nonconv.0064')
@@ -83,12 +82,14 @@ plt.scatter(
         marker = '.',
         label = '64',
         s = 2)
+
 plt.scatter(
         gam_non_acc_data128['Re{gam/ak}'],
         gam_non_acc_data128['Im{gam/ak}'],
         marker = '.',
         label = '128',
         s = 2)
+
 plt.scatter(
         gam_non_acc_data256['Re{gam/ak}'],
         gam_non_acc_data256['Im{gam/ak}'],
@@ -97,7 +98,7 @@ plt.scatter(
         s = 2)
 
 ax.legend()
-plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_order_comp.pdf', 
+plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_ord_comp.pdf', 
         format = 'pdf', 
         bbox_inches='tight')
 
@@ -129,19 +130,20 @@ ax.legend()
 plt.savefig('tex-outputs/gam.nonconv.scatter_4th_order_comp.pdf', 
         format = 'pdf', 
         bbox_inches='tight')
+
 # indices that correspond to the wavenumbers reported in Table 4.3, used visual
 # inspection 
-propagation_index_32 = ['0034', '0033', '0031', '0029', '0027', '0025', '0023', 
+propagation_index_32 = ['0036', '0034', '0032', '0030', '0028', '0024', '0023', 
                         '0064', '0062', '0060', '0058', '0056', '0054', '0052']
 
-propagation_index_64 = ['0068', '0067', '0065', '0063', '0061', '0059', '0055', '0053', '0051',
-                        '0128', '0126', '0124', '0122', '0120', '0118', '0116', '0114', '0113']
+propagation_index_64 = ['0070', '0068', '0066', '0064', '0062', '0060', '0058', '0056', '0052',
+                        '0128', '0126', '0124', '0122', '0120', '0118', '0116', '0114', '0112']
 
-propagation_index_128 = ['0234', '0233', '0231', '0229', '0227', '0223', '0213', '0119','0117' ,
+propagation_index_128 = ['0134', '0132', '0130', '0128', '0126', '0124', '0122', '0120','0118' ,
                          '0256', '0254', '0252', '0250', '0248', '0246', '0244', '0242','0240' ]
 
-propagation_index_256 = ['0494', '0493', '0491', '0489', '0487', '0485', '0481', '0477', '0473', '0451',
-                         '0512', '0510', '0508', '0506', '0504', '0502', '0500', '0498', '0496', '0467']
+propagation_index_256 = ['0508', '0502', '0496', '0490', '0486', '0480', '0472', '0250', '0248', '0246',
+                         '0512', '0510', '0506', '0504', '0502', '0500', '0498', '0494', '0492', '0488']
 
 egvfile_32  = [(directory_32  + 'egv.'+  propagation_index_32[i])  for i,j in (enumerate(propagation_index_32)) ]
 egvfile_64  = [(directory_64  + 'egv.'+  propagation_index_64[i])  for i,j in (enumerate(propagation_index_64)) ]

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # general libraries
+import sys
 import sympy as sp
 
 
@@ -55,7 +56,7 @@ kappa_string    = 'gam'
 eta_max_string  = 'ductAdmittance'
 eta_min_string  = 'hubAdmittance'
 ak_string       = 'frequency'
-m_string        = 'azimuthalModeNumber ='
+m_string        = 'azimuthalModeNumber'
 
 r_max   = float(f_help.GetInputVariables(r_max_string)  [0])
 r_min   = float(f_help.GetInputVariables(r_min_string)  [0])
@@ -72,10 +73,11 @@ sigma  = r_min
 # In[6]:
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-A_analytic        = msg.TanhMethod(7,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
+print(eta_min, r_min,r_max)
+A_analytic        = msg.TanhMethod(3,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = 0.3*msg.TanhMethod(3 ,50,r_min,r_max )
+M_x_analytic      = 0.2*msg.TanhMethod(3 ,50,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -355,11 +357,11 @@ for i,pr in enumerate(S):
 # multiplied by 1/v_r by d_v_dr and i v_x gamma terM by one
 
 # Checking if the matrix expressions equal the linear system of equations
-#print(S[0].equals(SS[0]))
-#print(S[1].equals(SS[1]))
-#print(S[2].equals(SS[2]))
-#print(S[3].equals(SS[3]))
-#
+print(S[0].equals(SS[0]))
+print(S[1].equals(SS[1]))
+print(S[2].equals(SS[2]))
+print(S[3].equals(SS[3]))
+
 for i,pr in enumerate(S):
     S[i] = S[i].subs(
             {

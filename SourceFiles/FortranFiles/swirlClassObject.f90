@@ -446,25 +446,25 @@ CONTAINS
            ELSE
            ENDIF
 
-            CALL output(&
-                np     = object%numberOfRadialPoints,    &
-                np4    = object%numberOfRadialPoints*4,   &
-                mode   = object%azimuthalMode,    &
-                rho    = object%hubTipRatio,   &
-                omega  = object%frequency,    &
-                egv    = jobvr, &
-                attenh = object%hubLinerAdmittance,  &
-                attend = object%ductLinerAdmittance,  &
-                rmx    = object%rmx,   &
-                drm    = object%drm,   &
-                rmt    = object%rmt,   &
-                drt    = object%drt,   &
-                snd    = object%snd,   &
-                rr     = object%r,     &
-                wvn    = object%wvn,   &
-                vrm    = object%vr,    &
-                vphi   = object%vph,   &
-                is     = is)
+            ! CALL output(&
+            !     np     = object%numberOfRadialPoints,    &
+            !     np4    = object%numberOfRadialPoints*4,   &
+            !     mode   = object%azimuthalMode,    &
+            !     rho    = object%hubTipRatio,   &
+            !     omega  = object%frequency,    &
+            !     egv    = jobvr, &
+            !     attenh = object%hubLinerAdmittance,  &
+            !     attend = object%ductLinerAdmittance,  &
+            !     rmx    = object%rmx,   &
+            !     drm    = object%drm,   &
+            !     rmt    = object%rmt,   &
+            !     drt    = object%drt,   &
+            !     snd    = object%snd,   &
+            !     rr     = object%r,     &
+            !     wvn    = object%wvn,   &
+            !     vrm    = object%vr,    &
+            !     vphi   = object%vph,   &
+            !     is     = is)
 
         ELSE
             WRITE(6,*) 'ERROR: The object is not initialized'

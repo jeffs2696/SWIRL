@@ -1,0 +1,61 @@
+
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+The current research direction is to investigate the Taylor Series central spatial
+differencing for the radial derivatives needed in SWIRL. The investigation will 
+be done by looking at the wavenumber performance.
+\section{Research Performed}
+Defining the numerical wavenumber $(k \Delta x )*$ as 
+
+\begin{equation}
+    \left( \frac{\partial f}{\partial x} \right)|_{numerical}=
+    ik \left( \frac{\left( k  \Delta x \right)*}{k \Delta x} \right) \exp^{ikx_0}
+\end{equation}
+If we plot the parameter $\left[ k \Delta x \right]*$ as a function of 
+$k \Delta x $ from $0 \leq k \Delta x \leq \pi$ we could compare second order
+fourth order and the RDRP schemes used in SWIRL. 
+The second order scheme was analyzed, but the fourth order and RDRP.
+
+The next two plots should be the numerical wavespeed and its error
+
+\begin{equation}
+    \tilde{c} = \left( \frac{\left( k \Delta x  \right)^*}{k \Delta x} \right) 
+\end{equation}
+
+
+\begin{equation}
+    \epsilon = \left( \frac{\left( k \Delta x  \right)^*}{k \Delta x} - 1 \right) 
+\end{equation}
+\section{Issues and Concerns}
+None at the moment. The question is how many grid points per wavelength is needed
+to attain $90\%$?$99\%$?$99.9\%$?
+
+
+\section{Planned Research}
+Complete the analysis for these schemes and provide plots that show their performance.
+
+
+
+
+\end{document}
+
+

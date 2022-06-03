@@ -29,13 +29,10 @@ def SoundSpeedFortranFile(A_analytic,M_t_analytic,M_x_analytic):
     
     SUBROUTINE CalcSoundSpeed(& 
     r                 , &
-    kappa          , &
     SoundSpeedExpected, &
     thetaMachData     , &
     axialMachData)
            
-    REAL(KIND=rDef)   , INTENT(IN) :: &
-    kappa 
     
     REAL(KIND=rDef)   , DIMENSION(:), INTENT(INOUT) :: &
     SoundSpeedExpected, thetaMachData, axialMachData

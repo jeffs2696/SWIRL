@@ -9,3 +9,7 @@
         RateOfConvergence = RateOfConvergence2 , &
         L2Array           = S_L2Array)
 
+
+!     IF (debug)
+!     WRITE(0,*) RateOfConvergence1(1)
+!     ENDIF
