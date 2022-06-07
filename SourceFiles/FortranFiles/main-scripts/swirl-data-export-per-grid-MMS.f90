@@ -109,10 +109,10 @@ OPEN(&
     TRIM(ADJUSTL(file_id))   // &
     '.dat')
 
-WRITE(UNIT,FORMAT_ERROR_HEADER) 'radius ' , 'SpeedofSoundError '
+WRITE(UNIT,FORMAT_ERROR_HEADER) 'radius ' , 'SpeedofSoundError ', 'Expected ', 'Actual '
 
 DO i = 1,numberOfGridPoints
-    WRITE(UNIT,FORMAT_ERROR) r(i) , SoundSpeedError(i)
+    WRITE(UNIT,FORMAT_ERROR) r(i) , SoundSpeedError(i), speedOfSoundMMS(i), SoundSpeedOut(i)
 END DO
 
 CLOSE(UNIT);

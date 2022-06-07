@@ -29,7 +29,7 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         rDef = REAL64   , &
-        numberOfIterations = 9 
+        numberOfIterations = 9
 
     INTEGER  :: &
         UNIT , & ! for NEWUNIT
@@ -116,8 +116,8 @@ PROGRAM MAIN
     FORMAT_SOURCE_TERMS_HEADER = "( A6, A17, A17,A17)"
     FORMAT_L2                  = "(I10,F20.12)"
     FORMAT_L2_HEADER           = "(A10,A20)"
-    FORMAT_ERROR               = "(F20.12,F20.12)"
-    FORMAT_ERROR_HEADER        = "(A20,A20)"
+    FORMAT_ERROR               = "(F20.12,F20.12,F20.12,F20.12)"
+    FORMAT_ERROR_HEADER        = "(A20, A20, A20,A20)"
     FORMAT_ROC                 = "(I10,F20.12)"
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 

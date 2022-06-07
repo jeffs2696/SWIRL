@@ -31,7 +31,7 @@ def diffModifiedManufacturedSolution(f_MS, \
                     del_f_maxBC,\
                     B_min, \
                     B_max):
-    
+    print(del_f_minBC,del_f_maxBC,B_min,B_max)
     
     f_BCsImposed  = f_MS + \
     B_min*(del_f_minBC ) + \

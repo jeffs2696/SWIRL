@@ -73,11 +73,11 @@ sigma  = r_min
 # In[6]:
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-print(eta_min, r_min,r_max)
-A_analytic        = msg.TanhMethod(3,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
+print('eta_min' ,eta_min, r_min,r_max)
+A_analytic        = msg.TanhMethod(1,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = 0.2*msg.TanhMethod(3 ,50,r_min,r_max )
+M_x_analytic      = 0.2*msg.TanhMethod(1 ,50,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -111,8 +111,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = msg.TanhMethod(5,20,r_min,r_max)
-v_x_analytic = msg.TanhMethod(5,20,r_min,r_max)
+v_t_analytic = msg.TanhMethod(1,20,r_min,r_max)
+v_x_analytic = msg.TanhMethod(1,20,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -155,14 +155,13 @@ elif r_min == 0:
             (
                 (kappa + 1))*M_t_analytic*dM_t_dr_analytic
             )*v_t_analytic
-    #print('r_min = 0')
+    print('r_min = 0')
 
 L = eta*((1-(gamma/ak))*M_total) 
 del_dp_BC    = psi_1 + L*psi_2
 
 
-#print(del_dp_BC)
-
+print('del_dp_BC =',del_dp_BC)
 del_dp_minBC = del_dp_BC.subs(
         {'r'    :r_min  ,
             'ak'   :ak     ,
@@ -185,6 +184,9 @@ p_analytic = msm.diffModifiedManufacturedSolution(f           ,
         B_min       ,
         B_max)
 
+print(del_dp_minBC)
+
+print(p_analytic)
 p_analytic = p_analytic.subs(
         {
             'ak':ak,

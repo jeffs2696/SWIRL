@@ -50,6 +50,9 @@ mpl.rcParams.update(tex_fonts)
 # input
 directories = ['../01-mean-flow/', '../02-method-of-manufactured-solutions/',
         '../04-EVanalysis/']
+SpeedOfSoundData1 =fcn.importPlotData(directories[1] + 'sound-speed-error0007.dat')
+SpeedOfSoundData2 =fcn.importPlotData(directories[1] + 'sound-speed-error0013.dat')
+SpeedOfSoundData3 =fcn.importPlotData(directories[1] + 'sound-speed-error0021.dat')
 
 SourceTermData1_1 = fcn.importPlotData(directories[1] + 'SourceTermData1_0007.dat')
 SourceTermData1_2 = fcn.importPlotData(directories[1] + 'SourceTermData1_0013.dat')
@@ -71,6 +74,70 @@ MeanFlowData1 = fcn.importPlotData(directories[0] + 'mean-flow0007.dat')
 MeanFlowData2 = fcn.importPlotData(directories[0] + 'mean-flow0013.dat')
 MeanFlowData3 = fcn.importPlotData(directories[0] + 'mean-flow0021.dat')
 
+LEE_L2_data = fcn.importPlotData(directories[1] + 'L2-LEE.dat')
+LEE_ROC_data = fcn.importPlotData(directories[1] + 'ROC-LEE.dat')
+
+
+SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed-.dat')
+SND_ROC_data = fcn.importPlotData(directories[1] + 'ROC-sound_speed.dat')
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('L2 of Speed of Sound Integration')
+ax.loglog(
+        SND_L2_data['GridPoints'],
+        SND_L2_data['L2'])
+
+plt.savefig('tex-outputs/SND_L2.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('Rate of Convergence of Speed of Sound Integration')
+ax.loglog(
+        SND_ROC_data['Delta_r'],
+        SND_ROC_data['ROC'])
+
+plt.savefig('tex-outputs/SND_ROC.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('L2 of LEE Matrix')
+ax.loglog(
+        LEE_L2_data['GridPoints'],
+        LEE_L2_data['L2'])
+
+plt.savefig('tex-outputs/LEE_L2.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('Rate of Convergence of LEE Matrix')
+ax.loglog(
+        LEE_ROC_data['Delta_r'],
+        LEE_ROC_data['ROC'])
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -78,6 +145,11 @@ fig, ax = plt.subplots(
         figsize=set_size(width),
         )
 
+plt.savefig('tex-outputs/LEE_ROC.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+fig.suptitle('MMS Mean Flow Profile')
 ax.plot(
         MeanFlowData1['radius'],
         MeanFlowData1['M_x'])
@@ -88,11 +160,72 @@ ax.plot(
 ax.plot(
         MeanFlowData3['radius'],
         MeanFlowData3['M_theta'])
+plt.legend()
+
+
+plt.savefig('tex-outputs/MMS_meanFlow.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('Speed Of Sound Computation at 7 grid points')
+ax.plot(
+        SpeedOfSoundData1['radius'],
+        SpeedOfSoundData1['Expected'], 
+        label ='Expected')
+
+ax.plot(
+        SpeedOfSoundData2['radius'],
+        SpeedOfSoundData2['Actual'],
+        marker = '.' ,
+        label = 'Actual')
+
+plt.legend()
+
+plt.savefig('tex-outputs/SpeedOfSoundComparison1.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
 
 
 
-plt.show()
-sys.exit()
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('Speed Of Sound Error at Multiple Grids')
+ax.plot(
+        SpeedOfSoundData1['radius'],
+        SpeedOfSoundData1['SpeedofSoundError'], 
+        label ='7')
+
+ax.plot(
+        SpeedOfSoundData2['radius'],
+        SpeedOfSoundData2['SpeedofSoundError'],
+        marker = '.' ,
+        label = '13')
+
+
+ax.plot(
+        SpeedOfSoundData3['radius'],
+        SpeedOfSoundData3['SpeedofSoundError'],
+        marker = '.' ,
+        label = '21')
+
+plt.legend()
+
+plt.savefig('tex-outputs/SpeedOfSoundComparison2.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
 fig, axs = plt.subplots(
         nrows=2,
         ncols=2,
@@ -110,7 +243,7 @@ axs[0,0].plot(
 axs[0,0].plot(
         SourceTermData1_3['radius'],
         SourceTermData1_3['S_actual'])
-
+axs[0,0].set(title='$S_1$')
 axs[0,1].plot(
         SourceTermData2_1['radius'],
         SourceTermData2_1['S_actual'])
@@ -121,6 +254,7 @@ axs[0,1].plot(
         SourceTermData2_3['radius'],
         SourceTermData2_3['S_actual'])
 
+axs[0,1].set(title='$S_2$')
 axs[1,0].plot(
         SourceTermData3_1['radius'],
         SourceTermData3_1['S_actual'])
@@ -132,6 +266,7 @@ axs[1,0].plot(
         SourceTermData3_3['S_actual'],
         )
 
+axs[1,0].set(title='$S_3$')
 axs[1,1].plot(
         SourceTermData4_1['radius'],
         SourceTermData4_1['S_actual'])
@@ -143,6 +278,11 @@ axs[1,1].plot(
         SourceTermData4_3['S_actual'],
         )
 
+axs[1,1].set(title='$S_4$')
+
+plt.savefig('tex-outputs/SourceTermActual.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
 
 fig, axs = plt.subplots(
         nrows=2,
@@ -194,6 +334,11 @@ axs[1,1].plot(
         SourceTermData4_3['S_expected'],
         )
 
+
+plt.savefig('tex-outputs/SourceTermExpected.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
 fig, axs = plt.subplots(
         nrows=2,
         ncols=2,
@@ -242,6 +387,14 @@ axs[1,1].plot(
         SourceTermData4_3['radius'],
         SourceTermData4_3['Error'],
         )
+
+plt.savefig('tex-outputs/SourceTermError.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+
+plt.show()
+sys.exit()
 #ax.legend()
 #directory_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/32pts/'
 #directory_4th_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/32pts/'
