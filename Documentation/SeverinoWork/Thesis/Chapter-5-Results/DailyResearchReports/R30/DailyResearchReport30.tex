@@ -1,0 +1,97 @@
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+The goal here is to stop running SWIRL on Tuesday, June 14th. All the data that 
+will be needed for the thesis needs to be final.
+\section{Research Performed}
+The Fortran F/OSS Programmers Group has released a utility called ford that 
+automatically generates FORTRAN documentation. The installation details (2 commands)
+are provided in the README file on the github page \href{https://github.com/Fortran-FOSS-Programmers/ford}{here}. 
+The output is an HTML link that serves as user manual for the code. The workflow is 
+quite simple. After installation of \verb|ford|, a \verb|project-file.md| is used
+as a way of formatting the output of \verb|ford|. Initally, it can just be created 
+using a \verb|touch| command in the source directory. Right now it is blank. Then,
+from within the source directory the command,
+
+\begin{verbatim}
+ford -d . project-file.md
+\end{verbatim}
+will generate a \verb|doc/| directory with the HTML file and other goodies. To make
+comments register to \verb|ford| from within your FORTRAN code, simply comment with
+\verb|!!| instead of \verb|!|. The output will be \verb|index.html| and can be 
+opened in linux using \verb|xdg-open|. The home page is included in this directory.  
+
+As I wrap up my SWIRL code work, I now know a method of documentation that will
+guide the user in using the code moving forward.
+
+
+
+\section{Issues and Concerns}
+This does count as refactoring and should not be done simultaneously. Comments will
+be added as I finish up data analysis. It is more important that the framework is in
+place. The comments can be improved after the thesis is complete unless It is okay 
+to put my code in the Thesis itself.
+
+One issue I am having is that LAPACK gives an odd error at high number of iterations
+and the error is a \verb|SIGFPE| from within the \verb|f90_zggev.f90 INTERFACE SUBROUTINE| .
+Catching this error has been a bit brutal.
+
+\section{Planned Research}
+Finish write up on MMS, the data is gathered, but writing about it is a challenge. The doubling of 
+grid points per iteration makes the code quite long to run\dots
+
+\end{document}
+
+

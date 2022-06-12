@@ -1,4 +1,5 @@
 PROGRAM MAIN
+!! The main SWIRL code that generates the executable
     USE, INTRINSIC  :: ISO_FORTRAN_ENV
     USE swirlClassObject               ! Runs SWIRL for a given set of parameters
     USE mmsClassObject                 ! Calculates L2Norm, L2Max, and Rate Of Convergence
@@ -6,11 +7,12 @@ PROGRAM MAIN
 
     IMPLICIT NONE
 
-    ! 2) Start defining the variables
+    ! Variable Definitions
     CHARACTER(50) :: &
+    !! headers, formatters, and filename variables
         dir_name,&
-    file_id , &
-    !FDfac_id, &
+        file_id , &
+        FDfac_id, &
         FORMAT_MEAN_FLOW         , &
         FORMAT_PERTURB_VARS      , &
         FORMAT_PERTURB_HEADER    , &
@@ -24,14 +26,18 @@ PROGRAM MAIN
         FORMAT_ROC               , &
         FORMAT_ROC_HEADER
 
-   LOGICAL :: &
-       debug = .TRUE.
+    LOGICAL :: &
+    !! Logical "flag" for debugging, set to .TRUE. to print WRITE statements in the directory
+        debug = .TRUE.
 
     INTEGER, PARAMETER :: &
+    !! Code parameters for double precision and number of iterations
+        numberOfFiniteDifferenceSchemes = 2 , &
         rDef = REAL64   , &
-        numberOfIterations = 9
+        numberOfIterations =7 
 
     INTEGER  :: &
+    !! Integers for flags and loop indicies
         UNIT , & ! for NEWUNIT
         finiteDiffFlag           ,& ! finite difference flag
         numericalIntegrationFlag ,& !  numerical integration flag
@@ -39,48 +45,51 @@ PROGRAM MAIN
         azimuthalModeNumber      ,& ! mode order
         i                        ,& ! indexer for do loops
         fac                      ,& ! variable used for doubling grid points
-        ! FDfac                    ,&
+        FDfac                    ,&
         facCount                    ! counts the outermost do loop
 
     INTEGER, DIMENSION(:), ALLOCATABLE :: &
+    !! Integer arrays to store the number of grid points
         numberOfGridPointsArray
 
+    REAL(KIND = REAL64) ::  &
+        gam                                , &
+        SoundSpeedErrorL2                  , &
+        ExpectedRateOfConvergenceSoundSpeed, &
+        ExpectedRateOfConvergenceSourceTerm, &
+        r_min                              , &!radial grid locations
+        r_max                              , &!radial grid locations
+        secondOrderSmoother                , &!2nd order smoothing coefficient
+        fourthOrderSmoother                , &!4th order smoothing coefficient
+        dr                                 , &!radial grid spacing 
+        start_time                         , &
+        end_time                           , &
+        hubToTipRatio
+
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
-        r                   ,& !radial grid locations
-        rOut , &
+    !! real values arrays
+        r                   , & !radial grid locations
+        rOut                , &
         vR, vX, vTh, Pr     , &
         speedOfSoundMMS     , &
         SoundSpeedError     , &
-        axialMachDataMMS       ,& !M_x
-        thetaMachDataMMS     ,& !M_th
-        axialMachDataMMSOut       ,& !M_x
-        thetaMachDataMMSOut     ,& !M_th
-        axialMach_drMMSOut, &
-        thetaMach_drMMSOut, &
-        SoundSpeedOut , &
-        SoundSpeedL2Array, &
-        SoundSpeed_drOut, &
-        axialMachData       ,& !M_x
-        thetaMachData       ,& !M_th
-        totalMachData       ,& !M_total = sqrt(M_x^2+M_th^2)
-        RateOfConvergence1  ,&
-        RateOfConvergence2  ,&
+        axialMachDataMMS    , & !M_x
+        thetaMachDataMMS    , & !M_th
+        axialMachDataMMSOut , & !M_x
+        thetaMachDataMMSOut , & !M_th
+        axialMach_drMMSOut  , &
+        thetaMach_drMMSOut  , &
+        SoundSpeedOut       , &
+        SoundSpeedL2Array   , &
+        SoundSpeed_drOut    , &
+        axialMachData       , & !M_x
+        thetaMachData       , & !M_th
+        totalMachData       , & !M_total = sqrt(M_x^2+M_th^2)
+        RateOfConvergence1  , &
         S_error
 
-    REAL(KIND = REAL64) ::  &
-        gam, &
-        SoundSpeedErrorL2 , &
-        ExpectedRateOfConvergenceSoundSpeed, &
-        ExpectedRateOfConvergenceSourceTerm, &
-        r_min                   ,& !radial grid locations
-        r_max                 ,& !radial grid locations
-        secondOrderSmoother ,& !2nd order smoothing coefficient
-        fourthOrderSmoother ,& !4th order smoothing coefficient
-        dr                  ,&
-        hubToTipRatio       
-
     COMPLEX(KIND=rDef) :: &
-    S_L2            ,&
+        S_L2            ,&
         eigenValueMMS   ,&
         hubAdmittance   ,&
         ductAdmittance  ,&
@@ -94,13 +103,14 @@ PROGRAM MAIN
         S_MMS , &
         S_actual, &
         S_L2Array , &
+        RateOfConvergence2  , &
         eigenVectorMMS
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
-        ! swirlClassObj, &
+    ! swirlClassObj, &
         swirlClassObjMMS
 
-   TYPE(mmsClassType) :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
+    TYPE(mmsClassType) :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
 
     !                  !
     ! Code Starts Here !
@@ -108,6 +118,7 @@ PROGRAM MAIN
 
     CONTINUE
 
+    CALL CPU_TIME(start_time)
     FORMAT_MEAN_FLOW           = "(F15.12,F15.12,F15.12,F15.12,F15.12)"
     FORMAT_MEAN_FLOW_HEADER    = "(A15,A15,A15,A15,A15)"
     FORMAT_PERTURB_VARS        = "(F16.12,F16.12,F16.12,F16.12,F16.12)"
@@ -121,37 +132,40 @@ PROGRAM MAIN
     FORMAT_ROC                 = "(I10,F20.12)"
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
-    ! inputs needed for SwirlClassType
+    finiteDiffFlag            = FDfac ! from FDfac loop
+    !!include statements with inputs needed for SwirlClassType
     include 'InputVariables.f90'
-        eigenValueMMS = CMPLX(0,0,KIND=rDef)
+    eigenValueMMS = CMPLX(0,0,KIND=rDef)
 
-        facCount = 0 ! initializer for far count
+    facCount = 0 ! initializer for far count
 
-        IF (numericalIntegrationFlag.eq.1) THEN
-            ExpectedRateOfConvergenceSoundSpeed = 2.0_rDef
-        ELSEIF (numericalIntegrationFlag.eq.2) THEN
-            ExpectedRateOfConvergenceSoundSpeed = 4.0_rDef
-        ENDIF
+    ALLOCATE( &
+        RateOfConvergence1(numberOfIterations - 1) , &
+        RateOfConvergence2(numberOfIterations - 1) , &
+        S_L2Array(numberOfIterations)         , &
+        SoundSpeedL2Array(numberOfIterations) , &
+        numberOfGridPointsArray(numberOfIterations))
 
-        IF (finiteDiffFlag.eq.1) THEN
-            ExpectedRateOfConvergenceSourceTerm = 2.0_rDef
-        ELSEIF (finiteDiffFlag.eq.2) THEN
-            ExpectedRateOfConvergenceSourceTerm = 4.0_rDef
-        ENDIF
-
-
-        ALLOCATE( &
-            RateOfConvergence1(numberOfIterations - 1) , &
-            RateOfConvergence2(numberOfIterations - 1) , &
-            S_L2Array(numberOfIterations)         , &
-            SoundSpeedL2Array(numberOfIterations) , &
-            numberOfGridPointsArray(numberOfIterations))
-
+    DO FDfac = 2, numberOfFiniteDifferenceSchemes
         DO fac = 1, numberOfIterations
+
+            finiteDiffFlag            = FDfac ! from FDfac loop
+
+            IF (numericalIntegrationFlag.eq.1) THEN
+                ExpectedRateOfConvergenceSoundSpeed = 2.0_rDef
+            ELSEIF (numericalIntegrationFlag.eq.2) THEN
+                ExpectedRateOfConvergenceSoundSpeed = 4.0_rDef
+            ENDIF
+
+            IF (finiteDiffFlag.eq.1) THEN
+                ExpectedRateOfConvergenceSourceTerm = 2.0_rDef
+            ELSEIF (finiteDiffFlag.eq.2) THEN
+                ExpectedRateOfConvergenceSourceTerm = 4.0_rDef
+            ENDIF
 
             facCount                     = facCount + 1
             ! numberOfGridPoints           = 256
-           numberOfGridPoints           = 5+(2**fac)
+            numberOfGridPoints           = 5+(2**fac)
             numberOfGridPointsArray(fac) = numberOfGridPoints
             dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
@@ -189,7 +203,7 @@ PROGRAM MAIN
                 r(i)             = (r_min+REAL(i-1, rDef)*dr)/r_max
 
                 ! Plug flow for T4.1
-                  axialMachData(i) = 0.3_rDef
+                axialMachData(i) = 0.3_rDef
 
                 thetaMachData(i) = 0.0_rDef
 
@@ -309,17 +323,18 @@ PROGRAM MAIN
                 dataSet1 = speedOfSoundMMS , &
                 dataSet2 = SoundSpeedOut)
 
+            
             CALL getL2Norm(&
                 object      = SourceTermMMS_ClassObj , &
                 L2          = S_L2 , &
                 dataSet1    = S_MMS, &
                 dataSet2    = S_actual)
 
-            S_L2Array(fac) = S_L2
+            S_L2Array(fac) = REAL(S_L2, KIND = rDef)
             SoundSpeedL2Array(fac) = SoundSpeedErrorL2
 
-            include 'main-scripts/swirl-data-export-per-grid-MMS.f90' 
-           include 'main-scripts/swirl-data-export-per-grid.f90'
+            include 'main-scripts/swirl-data-export-per-grid-MMS.f90'
+            include 'main-scripts/swirl-data-export-per-grid.f90'
 
             CALL DestroyObject(object = swirlClassObjMMS(fac))
 
@@ -345,13 +360,30 @@ PROGRAM MAIN
                 S_MMS,S_actual, S_error, S_1, S_2, S_3, S_4)
 
         END DO
-!    END DO
-   include 'main-scripts/calculating-rate-of-convergence.f90'
-   include 'main-scripts/swirl-data-export-MMS.f90'
 
+    CALL getRateOfConvergence(&
+        object            = SoundSpeedMMS_ClassObj , &
+        ExpectedRateOfConvergence = ExpectedRateOfConvergenceSoundSpeed   , &
+        RateOfConvergence = RateOfConvergence1 , &
+        L2Array           = SoundSpeedL2Array)
+
+     CALL getRateOfConvergence(&
+         object            = SourceTermMMS_ClassObj, &
+         RateOfConvergence = RateOfConvergence2 , &
+         L2Array           = S_L2Array)
+
+    include 'main-scripts/swirl-data-export-MMS.f90'
+
+    END DO
     DEALLOCATE(&
         RateOfConvergence1 , &
         RateOfConvergence2 , &
         S_L2Array)
 
+    CALL CPU_TIME(end_time)
+    if ((end_time-start_time) .lt. 60.0_rDef) THEN
+        WRITE(0,*) 'SWIRL''s run time:', (end_time-start_time), 'seconds'!/60.0_rDef
+    ELSE
+        WRITE(0,*) 'SWIRL''s run time:', (end_time-start_time)/60.0_rDef, 'minutes'
+    endif
 END PROGRAM MAIN

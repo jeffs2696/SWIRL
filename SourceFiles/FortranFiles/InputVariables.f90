@@ -8,9 +8,6 @@
     numericalIntegrationFlag  =  1
 !    DO FDfac = 1,2
 
-        ! FDfac = 1
-    finiteDiffFlag            = 1
-        ! finiteDiffFlag            = FDfac
         secondOrderSmoother       =  0.0_rDef
         fourthOrderSmoother       =  0.0_rDef
         ductAdmittance            = CMPLX(0.0,0.0,rDef)

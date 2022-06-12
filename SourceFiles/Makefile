@@ -64,9 +64,8 @@ F90FLAGS  =	\
 			-Wno-error=unused-function \
 			-Wno-error=compare-reals \
 			-Wno-error=character-truncation \
-			-Wno-error=conversion-extra \
-			-Wno-error=conversion \
 			-Wno-error=unused-dummy-argument \
+			-Wno-error=unused-variable\
 			-Wno-error=array-temporaries \
 			-Wno-error=do-subscript
 
@@ -89,10 +88,12 @@ F77FLAGS  = \
 			-Wno-error=unused-dummy-argument \
 			-Wno-error=do-subscript
 
+			# -Wno-error=conversion \
+			-Wno-error=conversion-extra \
 
 
 
-#-Wno-error=do-subscript \ -Wno-error=array-temporaries \ -Wno-error=conversion-extra 
+#-Wno-error=do-subscript \ -Wno-error=array-temporaries \  
 # -Wno-error=do-subscript
 			# -Wno-error=unused-dummy-argument\
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
@@ -227,7 +228,7 @@ all:  $(OBJECTS)
 			exit $$RESULT
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
-	@(cd $(EXECUTABLE_LOCATION); (make plot ))
+	# @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:
 	cd PythonFiles/SymbolicManufacturedSolutions && make

@@ -2,7 +2,7 @@
 
 ! 01-mean-flow-data
 WRITE(file_id, '(i0.4)') numberOfGridPoints
-!WRITE(FDfac_id, '(i0)') FDfac
+WRITE(FDfac_id, '(i0)') FDfac
 
 dir_name  = '01-mean-flow/'
 
@@ -12,6 +12,8 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'mean-flow' // &
     TRIM(ADJUSTL(file_id))   // &
+    'FDmethod'  // &
+    TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
 !OPEN(&
