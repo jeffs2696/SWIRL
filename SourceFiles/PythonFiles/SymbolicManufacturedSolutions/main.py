@@ -74,7 +74,7 @@ sigma  = r_min
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
 print('eta_min' ,eta_min, r_min,r_max)
-A_analytic        = sp.Symbol('1.0') #.1 + sp.cos(math.pi/6*r)#msg.TanhMethod(1,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
+A_analytic        = msg.TanhMethod(1,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
 M_x_analytic      = sp.Symbol('0.5') #(math.pi/6*r)#0.2*msg.TanhMethod(1 ,0.03,r_min,r_max )

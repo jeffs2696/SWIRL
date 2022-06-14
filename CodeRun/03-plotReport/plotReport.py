@@ -23,6 +23,29 @@ from texttable import Texttable
 import latextable
 from my_plot import set_size
 start = time.time()
+def tryint(s):
+    """
+    Return an int if possible, or `s` unchanged.
+    """
+    try:
+        return int(s)
+    except ValueError:
+        return s
+
+def alphanum_key(s):
+    """
+    Turn a string into a list of string and number chunks.  
+    >>> alphanum_key("z23a")
+    ["z", 23, "a"]
+    """
+    return [ tryint(c) for c in re.split('([0-9]+)', s) ]
+
+def human_sort(l):
+    """
+    Sort a list in the way that humans expect.
+    """
+    l.sort(key=alphanum_key)
+
 def savefig(*args, **kwargs):
     plt.savefig(*args, **kwargs) 
     plt.close(plt.gcf())
@@ -61,8 +84,29 @@ directories = [
 
 # [I] Manufactured Solutions 
 # 1. Mean Flow Profile 
+M_int = 3
 
-MeanFlowData1 = fcn.importPlotData(directories[0] + 'mean-flow0007.dat')
+MeanFlowData1 = fcn.importPlotData(directories[0] + 'mean-flow0005_FDmethod1.dat')
+MeanFlowData1 = fcn.importPlotData(directories[0] + 'mean-flow0005_FDmethod2.dat')
+
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('MMS Mean Flow Profile')
+ax.plot(
+        MeanFlowData1['radius'],
+        MeanFlowData1['M_x'])
+
+ax.plot(
+        MeanFlowData1['radius'],
+        MeanFlowData1['M_theta'])
+
+plt.show()
+sys.exit()
 MeanFlowData2 = fcn.importPlotData(directories[0] + 'mean-flow0013.dat')
 MeanFlowData3 = fcn.importPlotData(directories[0] + 'mean-flow0021.dat')
 # 3. Perturbation Variables

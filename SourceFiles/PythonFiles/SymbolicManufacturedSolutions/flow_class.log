@@ -204,3 +204,5 @@ INFO: classes.flow_classes.flow_class: 0
 INFO: classes.flow_classes.flow_class: 0
 INFO: classes.flow_classes.flow_class: 0
 INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 0
+INFO: classes.flow_classes.flow_class: 1.58113883008419*(r*(0.00833333333333333 - 0.00833333333333333*tanh(0.0333333333333333*r - 0.0333333333333333)**2)/(0.125*tanh(0.0333333333333333*r - 0.0333333333333333) + 1)**1.0)**0.5

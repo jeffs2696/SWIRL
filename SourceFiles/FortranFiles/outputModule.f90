@@ -193,7 +193,7 @@ CONTAINS
 ! Compute number of zero crossings for nonconvected modes.
 
         do i = 1,np4
-            !WRITE(0,*) i, wvn(i)
+            WRITE(0,*) i, wvn(i)
             gamma1 = wvn(i)
 
             akx   = real(gamma1)
