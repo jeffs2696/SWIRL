@@ -77,7 +77,7 @@ print('eta_min' ,eta_min, r_min,r_max)
 A_analytic        = msg.TanhMethod(1,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = 0.2*msg.TanhMethod(1 ,50,r_min,r_max )
+M_x_analytic      = 0.2*msg.TanhMethod(1 ,0.03,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -90,7 +90,7 @@ M_t_analytic = flow_1.get_tangential_mach()
 
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
 
-f     =msg.TanhMethod(1,1,r_min,r_max)
+f     =msg.TanhMethod(1,0.03,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -111,8 +111,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = msg.TanhMethod(1,20,r_min,r_max)
-v_x_analytic = msg.TanhMethod(1,20,r_min,r_max)
+v_t_analytic = msg.TanhMethod(1,0.03,r_min,r_max)
+v_x_analytic = msg.TanhMethod(1,0.03,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -121,7 +121,7 @@ dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
 
-f      = msg.TanhMethod(1,10,r_min,r_max)
+f      = msg.TanhMethod(1,0.03,r_min,r_max)
 df     = f.diff(r)
 r_hat  = (r - r_min)/(r_max - r_min)
 f_min  = f.subs(r,r_min)

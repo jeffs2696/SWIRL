@@ -98,7 +98,7 @@ ENDDO
 WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
 
 DO i = 1,numberOfIterations - 1
-    WRITE(0,FORMAT_ROC) &
+    WRITE(0,*) &
         numberOfGridPointsArray(i), & 
         RateOfConvergence2(i)
 ENDDO

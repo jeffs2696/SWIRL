@@ -15,6 +15,7 @@ import matplotlib as mpl
 import matplotlib.ticker as mticker
 import plotReportLib
 from matplotlib import pyplot as plt
+from pyGCS import GCS
 import matplotlib as mpl
 from plotReportLib import myfunctions as fcn
 from tabulate import tabulate
@@ -47,39 +48,60 @@ tex_fonts = {
         }
 
 mpl.rcParams.update(tex_fonts) 
+
 # input
-directories = ['../01-mean-flow/', '../02-method-of-manufactured-solutions/',
+directories = [
+        '../01-mean-flow/', 
+        '../02-method-of-manufactured-solutions/',
         '../04-EVanalysis/']
-SpeedOfSoundData1 =fcn.importPlotData(directories[1] + 'sound-speed-error0007.dat')
-SpeedOfSoundData2 =fcn.importPlotData(directories[1] + 'sound-speed-error0013.dat')
-SpeedOfSoundData3 =fcn.importPlotData(directories[1] + 'sound-speed-error0021.dat')
+# create a grid convergence study object based on a representative grid size
+gcs = GCS(dimension=1, simulation_order=2, grid_size=[0.5], cells=[18000, 8000, 4500], solution=[6.063, 5.972, 5.863])
+# output information to Markdown-formated table
+gcs_tble = gcs.print_table(output_type='latex', output_path='.')
+print(gcs_tble)
 
-SourceTermData1_1 = fcn.importPlotData(directories[1] + 'SourceTermData1_0007.dat')
-SourceTermData1_2 = fcn.importPlotData(directories[1] + 'SourceTermData1_0013.dat')
-SourceTermData1_3 = fcn.importPlotData(directories[1] + 'SourceTermData1_0021.dat')
 
-SourceTermData2_1 = fcn.importPlotData(directories[1] + 'SourceTermData2_0007.dat')
-SourceTermData2_2 = fcn.importPlotData(directories[1] + 'SourceTermData2_0013.dat')
-SourceTermData2_3 = fcn.importPlotData(directories[1] + 'SourceTermData2_0021.dat')
+sys.exit()
+# Files to plot from SWIRL
 
-SourceTermData3_1 = fcn.importPlotData(directories[1] + 'SourceTermData3_0007.dat')
-SourceTermData3_2 = fcn.importPlotData(directories[1] + 'SourceTermData3_0013.dat')
-SourceTermData3_3 = fcn.importPlotData(directories[1] + 'SourceTermData3_0021.dat')
-
-SourceTermData4_1 = fcn.importPlotData(directories[1] + 'SourceTermData4_0007.dat')
-SourceTermData4_2 = fcn.importPlotData(directories[1] + 'SourceTermData4_0013.dat')
-SourceTermData4_3 = fcn.importPlotData(directories[1] + 'SourceTermData4_0021.dat')
+# [I] Manufactured Solutions 
+# 1. Mean Flow Profile 
 
 MeanFlowData1 = fcn.importPlotData(directories[0] + 'mean-flow0007.dat')
 MeanFlowData2 = fcn.importPlotData(directories[0] + 'mean-flow0013.dat')
 MeanFlowData3 = fcn.importPlotData(directories[0] + 'mean-flow0021.dat')
+# 3. Perturbation Variables
 
+# [II] Source Terms  - Created symbolically with SciPy, computed with F90
+
+# 4a. 1
+SourceTermData1_1 = fcn.importPlotData(directories[1] + 'SourceTermData1_0007.dat')
+SourceTermData1_2 = fcn.importPlotData(directories[1] + 'SourceTermData1_0013.dat')
+SourceTermData1_3 = fcn.importPlotData(directories[1] + 'SourceTermData1_0021.dat')
+
+# 4b. 2
+SourceTermData2_1 = fcn.importPlotData(directories[1] + 'SourceTermData2_0007.dat')
+SourceTermData2_2 = fcn.importPlotData(directories[1] + 'SourceTermData2_0013.dat')
+SourceTermData2_3 = fcn.importPlotData(directories[1] + 'SourceTermData2_0021.dat')
+
+# 4c. 3
+SourceTermData3_1 = fcn.importPlotData(directories[1] + 'SourceTermData3_0007.dat')
+SourceTermData3_2 = fcn.importPlotData(directories[1] + 'SourceTermData3_0013.dat')
+SourceTermData3_3 = fcn.importPlotData(directories[1] + 'SourceTermData3_0021.dat')
+
+# 4d. 4
+SourceTermData4_1 = fcn.importPlotData(directories[1] + 'SourceTermData4_0007.dat')
+SourceTermData4_2 = fcn.importPlotData(directories[1] + 'SourceTermData4_0013.dat')
+SourceTermData4_3 = fcn.importPlotData(directories[1] + 'SourceTermData4_0021.dat')
+
+# [III] Grid Convergence Study
+
+# Rates of convergence for each source term 
 LEE_L2_data = fcn.importPlotData(directories[1] + 'L2-LEE.dat')
 LEE_ROC_data = fcn.importPlotData(directories[1] + 'ROC-LEE.dat')
-
-
 SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed-.dat')
 SND_ROC_data = fcn.importPlotData(directories[1] + 'ROC-sound_speed.dat')
+
 
 fig, ax = plt.subplots(
         nrows=1,

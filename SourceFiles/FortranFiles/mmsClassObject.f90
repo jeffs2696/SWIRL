@@ -266,7 +266,7 @@ CONTAINS
             dataSum_real = dataSum_real + dataErrorSquared_real(i)
         ENDDO
 
-        L2_real = SQRT(dataSum_real/numPoints)
+        L2_real = SQRT(dataSum_real/REAL(numPoints,KIND=rDef))
 
         DO i = 1,numPoints
             dataError_complex(i) = (ABS(CMPLX(dataSet1(i),KIND = rDef) - CMPLX(dataSet2(i),KIND = rDef)))
@@ -280,6 +280,7 @@ CONTAINS
         ! WRITE(0,*) L2_complex
 
         L2 = CMPLX(REAL(L2_real,KIND=rDef),REAL(L2_complex,KIND=rDef),KIND=rDef)
+        ! L2 = L2_real !CMPLX(REAL(L2_real,KIND=rDef),REAL(L2_complex,KIND=rDef),KIND=rDef)
         DEALLOCATE(&
             dataError_real , &
             dataError_complex , &
@@ -354,13 +355,15 @@ CONTAINS
         object           ,&
         ExpectedRateOfConvergence ,&
         RateOfConvergence,&
-        L2Array          )
+        L2Array, &
+        gridSpacingRatio)
 
 
         TYPE(mmsClassType) , INTENT(INOUT) :: &
             object
 
         REAL(KIND = rDef),  INTENT(IN) :: &
+            gridSpacingRatio                 , &
             ExpectedRateOfConvergence 
 
         REAL(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
@@ -368,6 +371,7 @@ CONTAINS
 
         REAL(KIND = rDef), DIMENSION(:), INTENT(IN) :: &
             L2Array
+
 
         INTEGER ::  numberOfIterations, i
 
@@ -392,7 +396,7 @@ CONTAINS
                 LOG((object%L2Array(i  )))&
                 )&
                 /&
-                LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+                 LOG(gridSpacingRatio) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
             ENDIF
         ENDDO
@@ -437,7 +441,7 @@ SUBROUTINE getROC_Complex(&
                 /&
                 LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
          ENDDO
-         ! RateOfConvergence = object%RateOfConvergence
+         RateOfConvergence = object%RateOfConvergence_complex
 
     END SUBROUTINE getROC_Complex
 

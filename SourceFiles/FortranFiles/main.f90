@@ -32,9 +32,9 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
     !! Code parameters for double precision and number of iterations
-        numberOfFiniteDifferenceSchemes = 2 , &
+        numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations =7 
+        numberOfIterations = 8
 
     INTEGER  :: &
     !! Integers for flags and loop indicies
@@ -50,7 +50,8 @@ PROGRAM MAIN
 
     INTEGER, DIMENSION(:), ALLOCATABLE :: &
     !! Integer arrays to store the number of grid points
-        numberOfGridPointsArray
+        numberOfGridPointsArray, &
+        gridSpacingArray
 
     REAL(KIND = REAL64) ::  &
         gam                                , &
@@ -62,12 +63,14 @@ PROGRAM MAIN
         secondOrderSmoother                , &!2nd order smoothing coefficient
         fourthOrderSmoother                , &!4th order smoothing coefficient
         dr                                 , &!radial grid spacing 
+        gridSpacingRatio              ,& ! the difference between two grid spacing
         start_time                         , &
         end_time                           , &
         hubToTipRatio
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
     !! real values arrays
+        drArray             , &
         r                   , & !radial grid locations
         rOut                , &
         vR, vX, vTh, Pr     , &
@@ -118,6 +121,8 @@ PROGRAM MAIN
 
     CONTINUE
 
+    include 'InputVariables.f90'
+
     CALL CPU_TIME(start_time)
     FORMAT_MEAN_FLOW           = "(F15.12,F15.12,F15.12,F15.12,F15.12)"
     FORMAT_MEAN_FLOW_HEADER    = "(A15,A15,A15,A15,A15)"
@@ -134,8 +139,8 @@ PROGRAM MAIN
 
     finiteDiffFlag            = FDfac ! from FDfac loop
     !!include statements with inputs needed for SwirlClassType
-    include 'InputVariables.f90'
-    eigenValueMMS = CMPLX(0,0,KIND=rDef)
+
+    eigenValueMMS = CMPLX(0,0,KIND=rDef)!frequency*r_max
 
     facCount = 0 ! initializer for far count
 
@@ -144,9 +149,10 @@ PROGRAM MAIN
         RateOfConvergence2(numberOfIterations - 1) , &
         S_L2Array(numberOfIterations)         , &
         SoundSpeedL2Array(numberOfIterations) , &
+        drArray(numberOfIterations)                               , &
         numberOfGridPointsArray(numberOfIterations))
 
-    DO FDfac = 2, numberOfFiniteDifferenceSchemes
+    DO FDfac = 1, numberOfFiniteDifferenceSchemes
         DO fac = 1, numberOfIterations
 
             finiteDiffFlag            = FDfac ! from FDfac loop
@@ -164,10 +170,17 @@ PROGRAM MAIN
             ENDIF
 
             facCount                     = facCount + 1
-            ! numberOfGridPoints           = 256
-            numberOfGridPoints           = 5+(2**fac)
+            numberOfGridPoints           = 1+(2**fac)*3
             numberOfGridPointsArray(fac) = numberOfGridPoints
             dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
+            drArray(fac) = dr
+            IF (facCount .gt. 1) THEN
+                gridSpacingRatio =drArray(fac)/drArray(fac-1) 
+                WRITE(0,*) &
+                    numberOfGridPointsArray(fac-1), &
+                    numberOfGridPointsArray(fac)  , &
+                    gridSpacingRatio
+            END IF
 
             ALLOCATE(&
                 axialMachDataMMSOut(numberOfGridPoints)       ,& !M_x
@@ -334,7 +347,7 @@ PROGRAM MAIN
             SoundSpeedL2Array(fac) = SoundSpeedErrorL2
 
             include 'main-scripts/swirl-data-export-per-grid-MMS.f90'
-            include 'main-scripts/swirl-data-export-per-grid.f90'
+            ! include 'main-scripts/swirl-data-export-per-grid.f90'
 
             CALL DestroyObject(object = swirlClassObjMMS(fac))
 
@@ -365,7 +378,8 @@ PROGRAM MAIN
         object            = SoundSpeedMMS_ClassObj , &
         ExpectedRateOfConvergence = ExpectedRateOfConvergenceSoundSpeed   , &
         RateOfConvergence = RateOfConvergence1 , &
-        L2Array           = SoundSpeedL2Array)
+        L2Array           = SoundSpeedL2Array, &
+        gridSpacingRatio = gridSpacingRatio)
 
      CALL getRateOfConvergence(&
          object            = SourceTermMMS_ClassObj, &

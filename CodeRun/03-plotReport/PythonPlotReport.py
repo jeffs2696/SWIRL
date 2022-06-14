@@ -452,7 +452,7 @@ plt.savefig('tex-outputs/egv_decay_im.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
-# plt.show()
+plt.show()
 end = time.time()
 print(end-start)
 

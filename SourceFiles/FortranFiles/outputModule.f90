@@ -166,10 +166,12 @@ CONTAINS
             rt =  rmt(i)
             as =  snd(i)
             if (r.lt. 10e-12_rDef ) then
-                cv = (omega/as - mode*rt)/rx 
+                cv = (&
+                    omega/CMPLX(as,KIND=rDef) -&
+                    CMPLX(mode,KIND=rDef)*CMPLX(rt,KIND=rDef))/CMPLX(rx , KIND = rDef)
             else 
             ! WRITE(0,*) rx, r
-                cv = (omega/as -mode/r*rt)/rx
+                cv = (omega/CMPLX(as,KIND=rDef) -CMPLX(mode,KIND=rDef)/CMPLX(r*rt,KIND=rDef))/CMPLX(rx,KIND=rDef)
             endif
 !            WRITE(0,*) cv 
             if (abs(cv).gt.cvcmax) cvcmax = abs(cv)
@@ -202,10 +204,10 @@ CONTAINS
                 aim    = aimag(vrm(3*np+1,i))
                 are    =  real(vrm(3*np+1,i))
                 phi(i) = atan2(aim,are)
-                vold   = real(vrm(3*np+1,i)*exp(-ci*phi(i)))
+                vold   = real(vrm(3*np+1,i)*exp(-ci*CMPLX(phi(i),KIND=rDef)))
                
                 do j = 3*np+2,np4
-                    val = real(vrm(j,i)*exp(-ci*phi(i)))
+                    val = real(vrm(j,i)*exp(-ci*CMPLX(phi(i),KIND = rDef)))
                     if (val*vold.lt.0.0_rDef) then
                         izeros(i) = izeros(i) +1
                     endif 

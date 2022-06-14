@@ -59,9 +59,11 @@ F90FLAGS  =	\
 			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
-			-Wconversion -Wsurprising -Warray-temporaries \
+			-Wconversion \
+			-Wsurprising -Warray-temporaries \
 			-Wextra -Werror \
 			-Wno-error=unused-function \
+			-Wno-error=conversion-extra \
 			-Wno-error=compare-reals \
 			-Wno-error=character-truncation \
 			-Wno-error=unused-dummy-argument \
@@ -75,7 +77,7 @@ F90FLAGS  =	\
 F77      = gfortran
 F77FLAGS  = \
 			-g -c \
-			-O0 \
+			-O0\
 			-std=legacy \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
 			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
@@ -227,7 +229,8 @@ all:  $(OBJECTS)
 			rm -f $@.log; \
 			exit $$RESULT
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
-	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
+	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
+	@(spd-say done);
 	# @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:

@@ -125,13 +125,13 @@ CONTAINS
                     real(vrm(j+2*np,n)), &
                     real(vrm(j+3*np,n)), &
                     SQRT(real(vrm(j+3,n))**2.0_rDef+aimag(vrm(j+3,n))**2.0_rDef) , &
-                    real(vrm(j+3*np,n)*exp(-ci*phi)), &
+                    real(vrm(j+3*np,n)*exp(-ci*CMPLX(phi,KIND=rDef))), &
                     aimag(vrm(j,n)), &
                     aimag(vrm(j+1*np,n)), &
                     aimag(vrm(j+2*np,n)), &
                     aimag(vrm(j+3*np,n)) ,&
                     SQRT(real(vrm(j+3,n))**2.0_rDef+aimag(vrm(j+3,n))**2.0_rDef),&
-                    aimag(vrm(j+3*np,n)*exp(-ci*phi))
+                    aimag(vrm(j+3*np,n)*exp(-ci*CMPLX(phi,KIND=rDef)))
             ENDDO
 
             close(myunit1)

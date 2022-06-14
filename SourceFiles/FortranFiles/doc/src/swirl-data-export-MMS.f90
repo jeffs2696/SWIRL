@@ -79,13 +79,13 @@ IF (debug) THEN
 WRITE(0,FORMAT_L2_HEADER) 'Gridpoints' , 'L2-SoundSpeed'
 
 DO i = 1,numberOfIterations
-    WRITE(0,FORMAT_L2) 5+2**i , SoundSpeedL2Array(i)
+    WRITE(0,*) 5+2**i , SoundSpeedL2Array(i)
 END DO
 
 WRITE(0,FORMAT_L2_HEADER) 'Gridpoints' , 'L2-Source'
 
 DO i = 1,numberOfIterations
-    WRITE(0,FORMAT_L2) 5+2**i , REAL(S_L2Array(i),KIND=rDef)
+    WRITE(0,*) 5+2**i , S_L2Array(i)
 END DO
 
 WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
@@ -98,7 +98,7 @@ ENDDO
 WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
 
 DO i = 1,numberOfIterations - 1
-    WRITE(0,FORMAT_ROC) &
+    WRITE(0,*) &
         numberOfGridPointsArray(i), & 
         RateOfConvergence2(i)
 ENDDO
