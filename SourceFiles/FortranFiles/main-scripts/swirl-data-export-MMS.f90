@@ -6,7 +6,9 @@ OPEN(&
     NEWUNIT=UNIT,&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
-    'L2-sound_speed-'        // &
+    'L2-sound_speed'        // &
+    '_numberOfIterations'        // &
+    CHAR(numberOfIterations)  // &
     '.dat')
 
 WRITE(UNIT,FORMAT_L2_HEADER) 'GridPoints ' , 'L2'
@@ -43,6 +45,10 @@ OPEN(&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
     'L2-LEE'      // &
+    '_numberOfIterations'        // &
+    CHAR(numberOfIterations)  // &
+    '_FDmethod'  // &
+    TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
 WRITE(UNIT,FORMAT_L2_HEADER) 'GridPoints' , 'L2'
@@ -61,6 +67,10 @@ OPEN(&
     FILE   =&
     TRIM(ADJUSTL(dir_name))  // &
     'ROC-LEE'      // &
+    '_numberOfIterations'        // &
+    CHAR(numberOfIterations)  // &
+    '_FDmethod'  // &
+    TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
 WRITE(UNIT,FORMAT_ROC_HEADER) 'Delta_r ' , 'ROC'

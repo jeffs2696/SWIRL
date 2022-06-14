@@ -12,7 +12,7 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'mean-flow' // &
     TRIM(ADJUSTL(file_id))   // &
-    'FDmethod'  // &
+    '_FDmethod'  // &
     TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
@@ -125,6 +125,8 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'SourceTermData1_'      // &
     TRIM(ADJUSTL(file_id))   // &
+    '_FDmethod'  // &
+    TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
 
@@ -148,6 +150,8 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'SourceTermData2_'       // &
     TRIM(ADJUSTL(file_id))   // &
+    '_FDmethod'  // &
+    TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
 WRITE(UNIT,FORMAT_SOURCE_TERMS_HEADER) 'radius ' , 'S_expected ' ,'S_actual ' ,'Error '
@@ -170,6 +174,8 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'SourceTermData3_'       // &
     TRIM(ADJUSTL(file_id))   // &
+    '_FDmethod'  // &
+    TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
 WRITE(UNIT,FORMAT_SOURCE_TERMS_HEADER) 'radius ' , 'S_expected ' ,'S_actual ' ,'Error '
@@ -190,6 +196,8 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'SourceTermData4_'       // &
     TRIM(ADJUSTL(file_id))   // &
+    '_FDmethod'  // &
+    TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
 
 WRITE(UNIT,FORMAT_SOURCE_TERMS_HEADER) 'radius ' , 'S_expected ' ,'S_actual ' ,'Error '

@@ -59,10 +59,9 @@
 \contentsline {subsection}{\numberline {5.1.1}Method of Manufactured Solution Results}{73}%
 \contentsline {section}{\numberline {5.2}Validation}{79}%
 \contentsline {subsection}{\numberline {5.2.1}Comparison to Kousen}{79}%
-\contentsline {subsubsection}{\numberline {5.2.1.1}Test Case 1}{79}%
-\contentsline {subsection}{\numberline {5.2.2}Comparison to Maldanado}{80}%
-\contentsline {chapter}{References}{82}%
-\contentsline {chapter}{\numberline {A}Theory Appendix}{83}%
-\contentsline {chapter}{\numberline {B}Chapter 3 Appendix}{84}%
-\contentsline {section}{\numberline {B.1}Appendix A: Speed of Sound}{85}%
-\contentsline {section}{\numberline {B.2}Appendix B: Isentropic Waves}{89}%
+\contentsline {subsection}{\numberline {5.2.2}Comparison to Maldanado}{79}%
+\contentsline {chapter}{References}{80}%
+\contentsline {chapter}{\numberline {A}Theory Appendix}{81}%
+\contentsline {chapter}{\numberline {B}Chapter 3 Appendix}{82}%
+\contentsline {section}{\numberline {B.1}Appendix A: Speed of Sound}{83}%
+\contentsline {section}{\numberline {B.2}Appendix B: Isentropic Waves}{87}%

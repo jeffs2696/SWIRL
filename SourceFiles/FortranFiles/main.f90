@@ -32,9 +32,10 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
     !! Code parameters for double precision and number of iterations
+        M_int = 3 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 6
+        numberOfIterations = 8
 
     INTEGER  :: &
     !! Integers for flags and loop indicies
@@ -154,6 +155,7 @@ PROGRAM MAIN
 
     DO FDfac = 1, numberOfFiniteDifferenceSchemes
         DO fac = 1, numberOfIterations
+            WRITE(0,*) fac 
 
             finiteDiffFlag            = FDfac ! from FDfac loop
 
@@ -170,7 +172,7 @@ PROGRAM MAIN
             ENDIF
 
             facCount                     = facCount + 1
-            numberOfGridPoints           = 1+(2**fac)*3
+            numberOfGridPoints           = 1+(2**fac)*M_int
             numberOfGridPointsArray(fac) = numberOfGridPoints
             dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
             drArray(fac) = dr

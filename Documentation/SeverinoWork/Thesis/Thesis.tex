@@ -445,47 +445,6 @@ and conversations.
      \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/PerturbationVariables_R1.pdf}
  \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  \begin{figure}
      \centering
          \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf}
@@ -578,65 +537,64 @@ and conversations.
     \subsection{Comparison to Kousen}
 
 
-    \input{Chapter-5-Results/Ch-5-results-and-discussion}
-%There are four key test cases to run and make sure that the data is post processed 
-%for.
-%\begin{itemize}
-%    \item Kousen's Test Cases
-%        \subitem Cylinder, Uniform Flow with Liner (Table 4.3)
-%        \begin{align*}
-%            m &= 2 \\
-%            k &= \frac{\omega r_T}{A_T} = -1 \\
-%            M_x &= 0.5 \\
-%            \eta_T &= 0.72 + 0.42i\\
-%            \text{Confirm if 32 grid points is enough}
-%        \end{align*} 
-%        \subitem Cylinder, Shear Flow without Liner (Table 4.4)
-%        \begin{align*}
-%            m &= 0 \\
-%            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 20 \\
-%            b &= r_{max} - r_{min} \\
-%            \tilde{r} = \frac{r}{b} \\
-%            M_x &= 0.3(1-\tilde{r})^{\frac{1}{7}} \\
-%            \eta_T &= 0\\
-%            \text{Confirm if 32 grid points is enough}
-%        \end{align*}
-%        \subitem Annulus, Shear Flow without Liner (Table 4.5)
-%        \begin{align*}
-%            m &= 0 \\
-%            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
-%            b &= r_{max} - r_{min}  = \frac{1}{7}\\
-%            k &= 70 \\
-%            \tilde{r} = \frac{r}{b} = 6.0 \\
-%            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
-%            \eta_T &= 0\\
-%            \text{Confirm if 32 grid points is enough}
-%        \end{align*}
-%        \subitem Annulus, Shear Flow with Liner (Table 4.6)
-%        \begin{align*}
-%            m &= 0 \\
-%            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
-%            b &= r_{max} - r_{min}  = \frac{1}{3}\\
-%            k &= 30 \\
-%            \tilde{r} = \frac{r}{b} = 2.0 \\
-%            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
-%            \eta_T &= 0.3 + 0.1i\\
-%            \text{Confirm if 32 grid points is enough}
-%        \end{align*}
-%\end{itemize}
-%\subsubsection{Test Case 1}
-%\begin{figure}[h!]
-%    \centering
-%    \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/gam.acc.scatter.pdf}
-%    \caption{i}
-%\end{figure}
-%\begin{tiny}
-% \begin{figure}
-%     \centering
-%     \input{Chapter-5-Results/tex-outputs/gam.acc.table.tex}
-% \end{figure}
-%\end{tiny}
-%
+There are four key test cases to run and make sure that the data is post processed 
+for.
+\begin{itemize}
+    \item Kousen's Test Cases
+        \subitem Cylinder, Uniform Flow with Liner (Table 4.3)
+        \begin{align*}
+            m &= 2 \\
+            k &= \frac{\omega r_T}{A_T} = -1 \\
+            M_x &= 0.5 \\
+            \eta_T &= 0.72 + 0.42i\\
+            \text{Confirm if 32 grid points is enough}
+        \end{align*} 
+        \subitem Cylinder, Shear Flow without Liner (Table 4.4)
+        \begin{align*}
+            m &= 0 \\
+            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 20 \\
+            b &= r_{max} - r_{min} \\
+            \tilde{r} = \frac{r}{b} \\
+            M_x &= 0.3(1-\tilde{r})^{\frac{1}{7}} \\
+            \eta_T &= 0\\
+            \text{Confirm if 32 grid points is enough}
+        \end{align*}
+        \subitem Annulus, Shear Flow without Liner (Table 4.5)
+        \begin{align*}
+            m &= 0 \\
+            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
+            b &= r_{max} - r_{min}  = \frac{1}{7}\\
+            k &= 70 \\
+            \tilde{r} = \frac{r}{b} = 6.0 \\
+            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
+            \eta_T &= 0\\
+            \text{Confirm if 32 grid points is enough}
+        \end{align*}
+        \subitem Annulus, Shear Flow with Liner (Table 4.6)
+        \begin{align*}
+            m &= 0 \\
+            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
+            b &= r_{max} - r_{min}  = \frac{1}{3}\\
+            k &= 30 \\
+            \tilde{r} = \frac{r}{b} = 2.0 \\
+            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
+            \eta_T &= 0.3 + 0.1i\\
+            \text{Confirm if 32 grid points is enough}
+        \end{align*}
+\end{itemize}
+\subsubsection{Test Case 1}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/gam.acc.scatter.pdf}
+    \caption{i}
+\end{figure}
+\begin{tiny}
+ \begin{figure}
+     \centering
+     \input{Chapter-5-Results/tex-outputs/gam.acc.table.tex}
+ \end{figure}
+\end{tiny}
+
 
 
 

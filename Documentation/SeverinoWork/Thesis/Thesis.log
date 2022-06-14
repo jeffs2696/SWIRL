@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  28 APR 2022 10:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  14 JUN 2022 03:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1142,19 +1142,19 @@ File: Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf Graphic fi
 le (type pdf)
 <use Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf>
 Package pdftex.def Info: Chapter-5-Results/tex-outputs/SoundSpeedFromIntegratio
-n_R1.pdf  used on input line 450.
+n_R1.pdf  used on input line 491.
 (pdftex.def)             Requested size: 433.62pt x 277.28464pt.
 <Chapter-5-Results/tex-outputs/L2_R1.pdf, id=297, 299.60933pt x 203.83151pt>
 File: Chapter-5-Results/tex-outputs/L2_R1.pdf Graphic file (type pdf)
 <use Chapter-5-Results/tex-outputs/L2_R1.pdf>
 Package pdftex.def Info: Chapter-5-Results/tex-outputs/L2_R1.pdf  used on input
- line 456.
+ line 497.
 (pdftex.def)             Requested size: 433.62pt x 295.01627pt.
 <Chapter-5-Results/tex-outputs/ROC_R1.pdf, id=298, 300.51273pt x 218.8175pt>
 File: Chapter-5-Results/tex-outputs/ROC_R1.pdf Graphic file (type pdf)
 <use Chapter-5-Results/tex-outputs/ROC_R1.pdf>
 Package pdftex.def Info: Chapter-5-Results/tex-outputs/ROC_R1.pdf  used on inpu
-t line 462.
+t line 503.
 (pdftex.def)             Requested size: 433.62pt x 315.75136pt.
 <Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf, id=299, 344.9989pt x 213.
 22661pt>
@@ -1162,7 +1162,7 @@ File: Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf Graphic file (type pd
 f)
 <use Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf>
 Package pdftex.def Info: Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf  u
-sed on input line 468.
+sed on input line 509.
 (pdftex.def)             Requested size: 433.62pt x 268.01947pt.
 [73
 
@@ -1171,50 +1171,37 @@ sed on input line 468.
 utputs/SoundSpeedFromIntegration_R1.pdf>] [76 <./Chapter-5-Results/tex-outputs/
 L2_R1.pdf>] [77 <./Chapter-5-Results/tex-outputs/ROC_R1.pdf>] [78 <./Chapter-5-
 Results/tex-outputs/SourceTermData_R1.pdf>]
-(./Chapter-5-Results/Ch-5-results-and-discussion.tex
-<Chapter-5-Results/tex-outputs/gam.acc.scatter.Table4.3.pdf, id=468, 300.60306p
-t x 189.91954pt>
-File: Chapter-5-Results/tex-outputs/gam.acc.scatter.Table4.3.pdf Graphic file (
-type pdf)
-<use Chapter-5-Results/tex-outputs/gam.acc.scatter.Table4.3.pdf>
-Package pdftex.def Info: Chapter-5-Results/tex-outputs/gam.acc.scatter.Table4.3
-.pdf  used on input line 56.
-(pdftex.def)             Requested size: 433.62pt x 273.96497pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[79]) (./Thesis.bbl [80 <./Chapter-5-Results/tex-outputs/gam.acc.scatter.Table4
-.3.pdf>] [81]) [82
+(./Chapter-5-Results/Ch-5-results-and-discussion.tex) (./Thesis.bbl [79])
+[80
 
 ]
 Appendix A.
-[83
+[81
 
 ]
 Appendix B.
-[84
+[82
 
 ]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux'
 .
 
  (./Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.tex
-[85
+[83
 
-] [86]
+] [84]
 Overfull \hbox (33.22014pt too wide) detected at line 112
 [] \OT1/cmr/m/n/12 + [] [] + [] = [] + [] [] + []
  []
 
-[87]) [88]
+[85]) [86]
 \openout2 = `Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.aux'.
 
  (./Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.tex
-[89
+[87
 
 
-]) [90] (./Thesis.aux
+]) [88] (./Thesis.aux
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux)
 (./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux)
@@ -1231,11 +1218,11 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 26210 strings out of 481239
- 672158 string characters out of 5920378
- 1049644 words of memory out of 5000000
- 40880 multiletter control sequences out of 15000+600000
- 541801 words of font info for 57 fonts, out of 8000000 for 9000
+ 26197 strings out of 481239
+ 671695 string characters out of 5920378
+ 1049643 words of memory out of 5000000
+ 40869 multiletter control sequences out of 15000+600000
+ 540492 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,20n,136p,939b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
@@ -1254,12 +1241,11 @@ mr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (104 pages, 461984 bytes).
+dist/fonts/type1/public/amsfonts/latxfont/line10.pfb>
+Output written on Thesis.pdf (102 pages, 437102 bytes).
 PDF statistics:
- 577 PDF objects out of 1000 (max. 8388607)
- 398 compressed objects within 4 object streams
+ 549 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
