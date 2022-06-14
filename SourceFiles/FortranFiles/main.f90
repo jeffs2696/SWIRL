@@ -34,7 +34,7 @@ PROGRAM MAIN
     !! Code parameters for double precision and number of iterations
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 8
+        numberOfIterations = 6
 
     INTEGER  :: &
     !! Integers for flags and loop indicies
@@ -176,10 +176,6 @@ PROGRAM MAIN
             drArray(fac) = dr
             IF (facCount .gt. 1) THEN
                 gridSpacingRatio =drArray(fac)/drArray(fac-1) 
-                WRITE(0,*) &
-                    numberOfGridPointsArray(fac-1), &
-                    numberOfGridPointsArray(fac)  , &
-                    gridSpacingRatio
             END IF
 
             ALLOCATE(&

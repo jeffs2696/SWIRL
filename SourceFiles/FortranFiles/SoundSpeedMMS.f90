@@ -24,12 +24,9 @@
     
     DO i = 1,numberOfGridPoints
     
-            SoundSpeedExpected(i) = 0.125d0*tanh(0.033333333333333333d0*r(i) - 0.033333333333333333d0) + 1
-        thetaMachData(i)      = 1.58113883008419d0*sqrt(r(i)*(0.00833333333333333d0 - 0.00833333333333333d0 &
-      *tanh(0.033333333333333333d0*r(i) - 0.033333333333333333d0)**2)*1d0/ &
-      (0.125d0*tanh(0.033333333333333333d0*r(i) - 0.033333333333333333d0) &
-      + 1))
-        axialMachData(i)      = 0.025d0*tanh(0.033333333333333333d0*r(i) - 0.033333333333333333d0) + 0.2d0
+            SoundSpeedExpected(i) = 1.0
+        thetaMachData(i)      = 0
+        axialMachData(i)      = 0.5
 
     
     END DO

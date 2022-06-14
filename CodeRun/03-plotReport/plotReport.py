@@ -55,13 +55,8 @@ directories = [
         '../02-method-of-manufactured-solutions/',
         '../04-EVanalysis/']
 # create a grid convergence study object based on a representative grid size
-gcs = GCS(dimension=1, simulation_order=2, grid_size=[0.5], cells=[18000, 8000, 4500], solution=[6.063, 5.972, 5.863])
-# output information to Markdown-formated table
-gcs_tble = gcs.print_table(output_type='latex', output_path='.')
-print(gcs_tble)
 
 
-sys.exit()
 # Files to plot from SWIRL
 
 # [I] Manufactured Solutions 
