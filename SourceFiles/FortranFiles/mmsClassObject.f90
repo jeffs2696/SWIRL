@@ -48,6 +48,10 @@ MODULE mmsClassObject
         REAL(KIND=rDef),DIMENSION(:,:) , ALLOCATABLE :: &
             TwoDdataSet1 , &
             TwoDdataSet2
+
+        COMPLEX(KIND=rDef),DIMENSION(:,:) , ALLOCATABLE :: &
+            TwoDdataSet1_complex , &
+            TwoDdataSet2_complex
         COMPLEX(KIND=rDef), DIMENSION(:) , ALLOCATABLE :: &
             RateOfConvergence_complex , &
             L2Array_complex
@@ -319,13 +323,13 @@ CONTAINS
         REAL(KIND=rDef), DIMENSION(numPoints,numPoints) :: dataError,&
             dataErrorSquared
 
-        ! object%TwoDdataSet1 = dataSet1
-        ! object%TwoDdataSet2 = dataSet2
+        object%TwoDdataSet1_complex = dataSet1
+        object%TwoDdataSet2_complex = dataSet2
 
         dataSum = 0.0_rDef
         DO i = 1,numPoints
             DO j =1,numPoints
-                dataError(i,j) = ABS(dataSet1(i,j) - dataSet2(i,j))
+                dataError(i,j) = ABS(object%TwoDdataSet1_complex(i,j) - object%TwoDdataSet2_complex(i,j))
                 dataErrorSquared(i,j) = dataError(i,j)**2
                 dataSum = dataSum + dataErrorSquared(i,j)
             ENDDO
@@ -407,10 +411,14 @@ END SUBROUTINE getROC
 SUBROUTINE getROC_Complex(&
     object           ,&
     RateOfConvergence,&
-    L2Array          )
+    L2Array          ,&
+    gridSpacingRatio)
 
     TYPE(mmsClassType) , INTENT(INOUT) :: &
         object
+
+    REAL(KIND = rDef) , INTENT(IN) :: &
+        gridSpacingRatio
 
     COMPLEX(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
         RateOfConvergence
@@ -427,7 +435,8 @@ SUBROUTINE getROC_Complex(&
         object%RateOfConvergence_complex = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            IF (REAL(L2Array(i),KIND=rDef) < tolerance) THEN
+            IF ((AIMAG(object%L2Array_complex(i)) < tolerance) .or. &
+                (REAL(object%L2Array_complex(i),KIND=rDef) < tolerance)) THEN
                 WRITE(0,*) 'The numerical solution is converged, the L2 norm has reached machine precision on the ',i, 'iteration'
                 
             ELSE
@@ -439,7 +448,7 @@ SUBROUTINE getROC_Complex(&
                 LOG((object%L2Array_complex(i  )))&
                 )&
                 /&
-                LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+                LOG(gridSpacingRatio) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
          ENDDO
          RateOfConvergence = object%RateOfConvergence_complex
 

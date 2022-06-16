@@ -82,6 +82,9 @@ directories = [
 
 # Files to plot from SWIRL
 
+string = 'ethod1.dat'
+print(string.isdigit())
+sys.exit()
 # [I] Manufactured Solutions 
 # 1. Mean Flow Profile 
 M_int = 3

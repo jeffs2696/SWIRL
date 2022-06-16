@@ -230,7 +230,7 @@ all:  $(OBJECTS)
 			exit $$RESULT
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
-	@(spd-say done);
+	@(spd-say 'great-job' );
 	# @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:

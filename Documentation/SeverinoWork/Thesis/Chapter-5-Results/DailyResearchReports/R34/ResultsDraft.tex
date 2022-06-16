@@ -1,0 +1,102 @@
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+\section{Research Performed}
+
+\subsection{Results}
+
+Hypothesis 1: 
+
+By using a composite trapezoidal rule numerical integration technique, the speed
+of sound is approximated using the tangential mach number. A second order 
+convergence for the approximated speed of sound is expected (Refer to analysis). 
+
+Why is this my hypothesis?:
+As the grid spacing gets smaller from one iteration to the next, the computed order of accuracy is
+expected to approach a known value, which is the leading error term of the 
+truncated term in the Taylor series used to derive the scheme , which in this
+case is the composite trapezoidal rule. By using the MMS, a computed order
+of accuracy was found. 
+
+Hypothesis 2:
+
+
+What happened:
+In the Methods chapter, the MMS test case methodology was presented.
+
+
+
+\begin{align}
+     \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/manufactured_solutions.tex}
+\end{align}
+
+
+
+
+The $L2_{norm}$ error of the two grids 
+$\epsilon_{grid_i}$ and $\epsilon_{grid_i+1}$
+
+
+
+
+
+
+\section{Issues and Concerns}
+
+\section{Planned Research}
+
+\end{document}
+
+

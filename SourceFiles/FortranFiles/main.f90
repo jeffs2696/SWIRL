@@ -32,10 +32,10 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
     !! Code parameters for double precision and number of iterations
-        M_int = 3 , & 
+        M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 8
+        numberOfIterations = 9
 
     INTEGER  :: &
     !! Integers for flags and loop indicies
@@ -55,6 +55,7 @@ PROGRAM MAIN
         gridSpacingArray
 
     REAL(KIND = REAL64) ::  &
+        M_int_new                          , &
         gam                                , &
         SoundSpeedErrorL2                  , &
         ExpectedRateOfConvergenceSoundSpeed, &
@@ -135,7 +136,7 @@ PROGRAM MAIN
     FORMAT_L2_HEADER           = "(A10,A20)"
     FORMAT_ERROR               = "(F20.12,F20.12,F20.12,F20.12)"
     FORMAT_ERROR_HEADER        = "(A20, A20, A20,A20)"
-    FORMAT_ROC                 = "(I10,F20.12)"
+    FORMAT_ROC                 = "(F20.12,F20.12)"
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
     finiteDiffFlag            = FDfac ! from FDfac loop
@@ -152,10 +153,11 @@ PROGRAM MAIN
         SoundSpeedL2Array(numberOfIterations) , &
         drArray(numberOfIterations)                               , &
         numberOfGridPointsArray(numberOfIterations))
+    
+    M_int_new = M_int
 
     DO FDfac = 1, numberOfFiniteDifferenceSchemes
         DO fac = 1, numberOfIterations
-            WRITE(0,*) fac 
 
             finiteDiffFlag            = FDfac ! from FDfac loop
 
@@ -172,12 +174,40 @@ PROGRAM MAIN
             ENDIF
 
             facCount                     = facCount + 1
-            numberOfGridPoints           = 1+(2**fac)*M_int
+
+!             IF (fac .lt. 7) THEN
+!                 M_int_new = REAL(M_int_new,KIND=rDef)+0.2_rDef
+
+
+!                 numberOfGridPoints           = CEILING(1+(2**fac)*M_int_new)
+
+!             ELSEIF ((fac .gt. 6) .or. (fac .lt. 9)) THEN
+!                 M_int_new = REAL(M_int_new,KIND=rDef)-0.2_rDef
+!                 numberOfGridPoints           = CEILING(1+(2**fac)*M_int_new)
+
+!             ELSEIF (fac .eq. numberOfIterations) THEN
+!                 numberOfGridPoints           = CEILING(1+(2**fac)*M_int_new)
+!             ELSE 
+!                 numberOfGridPoints           = (1+(2**fac)*M_int)
+!             ENDIF
+
+            IF (fac.gt.4) THEN
+                numberOfGridPoints           = (1+(2**fac)*M_int)
+            ELSE
+                numberOfGridPoints           = (1+(2**fac)*M_int)
+            ENDIF
+
             numberOfGridPointsArray(fac) = numberOfGridPoints
             dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
             drArray(fac) = dr
+
+
             IF (facCount .gt. 1) THEN
-                gridSpacingRatio =drArray(fac)/drArray(fac-1) 
+                gridSpacingRatio = drArray(fac)/drArray(fac-1) 
+                WRITE(0,*) fac, M_int_new
+                WRITE(0,*)  'grid 2:              ', numberOfGridPointsArray(fac)   , drArray(fac)
+                WRITE(0,*)  'grid 1:              ', numberOfGridPointsArray(fac-1) , drArray(fac-1)
+                WRITE(0,*)  'grid refinement ratio:' ,gridSpacingRatio, fac
             END IF
 
             ALLOCATE(&
@@ -328,13 +358,14 @@ PROGRAM MAIN
 
             ENDDO
 
+            ! INTERFACE - L2N
             CALL getL2Norm(&
                 object   = SoundSpeedMMS_ClassObj , &
                 L2       = SoundSpeedErrorL2 , &
                 dataSet1 = speedOfSoundMMS , &
                 dataSet2 = SoundSpeedOut)
 
-            
+            ! INTERFACE - L2N_2D 
             CALL getL2Norm(&
                 object      = SourceTermMMS_ClassObj , &
                 L2          = S_L2 , &
@@ -382,7 +413,8 @@ PROGRAM MAIN
      CALL getRateOfConvergence(&
          object            = SourceTermMMS_ClassObj, &
          RateOfConvergence = RateOfConvergence2 , &
-         L2Array           = S_L2Array)
+         L2Array           = S_L2Array          , &
+         gridSpacingRatio  = gridSpacingRatio)
 
     include 'main-scripts/swirl-data-export-MMS.f90'
 
