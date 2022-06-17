@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  15 JUN 2022 18:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  16 JUN 2022 12:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -895,7 +895,17 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count327
 \l__pdf_internal_box=\box67
 )
-(./ResultsDraft.aux)
+(./ResultsDraft.aux
+
+LaTeX Warning: Label `fig:3' multiply defined.
+
+
+LaTeX Warning: Label `fig:3' multiply defined.
+
+
+LaTeX Warning: Label `fig:2' multiply defined.
+
+)
 \openout1 = `ResultsDraft.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
@@ -914,8 +924,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
 LaTeX Font Info:    ... okay on input line 40.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count328
 \scratchdimen=\dimen318
@@ -965,46 +974,230 @@ LaTeX Info: Redefining \nameref on input line 40.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/manufactured_solut
-ions.tex)
-(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/manufactured_solut
-ions.tex)pdfTeX warning (ext4): destination with the same identifier (name{page
-.1}) has been already used, duplicate ignored
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_speedsound.tex
+)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_speedsound.tex
+) (/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_M_x.tex)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_M_x.tex)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_M_t.tex)
+(/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_M_t.tex)
+Overfull \hbox (3758.81639pt too wide) detected at line 91
+[]
+ []
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 98.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_mean_flow.pdf,
+ id=35, 296.20338pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_mean_flow
+.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_mean_flow.
+pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/MMS_mean_flow.pdf  used on input line 100.
+(pdftex.def)             Requested size: 296.20265pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 105.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbation_v
+ars.pdf, id=36, 296.20338pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbat
+ion_vars.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbati
+on_vars.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/MMS_perturbation_vars.pdf  used on input line 107.
+(pdftex.def)             Requested size: 296.20265pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 112.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundCompar
+ison1.pdf, id=37, 300.45346pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundC
+omparison1.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundCo
+mparison1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/SpeedOfSoundComparison1.pdf  used on input line 114.
+(pdftex.def)             Requested size: 300.45271pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 121.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermActual.p
+df, id=38, 311.31471pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermAct
+ual.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermActu
+al.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/SourceTermActual.pdf  used on input line 123.
+(pdftex.def)             Requested size: 311.31393pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 129.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermExpected
+.pdf, id=39, 311.31471pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermExp
+ected.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermExpe
+cted.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/SourceTermExpected.pdf  used on input line 131.
+(pdftex.def)             Requested size: 311.31393pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 137.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermError.pd
+f, id=40, 300.45346pt x 189.25897pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermErr
+or.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermErro
+r.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/SourceTermError.pdf  used on input line 139.
+(pdftex.def)             Requested size: 300.45271pt x 189.2585pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 145.
+
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundC
+omparison1.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundCo
+mparison1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/SpeedOfSoundComparison1.pdf  used on input line 147.
+(pdftex.def)             Requested size: 300.45271pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 153.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_L2.pdf, id=41,
+ 303.28658pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_L2.pdf Gr
+aphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_L2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/SND_L2.pdf  used on input line 155.
+(pdftex.def)             Requested size: 303.28583pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 161.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_ROC.pdf, id=42
+, 322.90884pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_ROC.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_ROC.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/SND_ROC.pdf  used on input line 163.
+(pdftex.def)             Requested size: 322.90805pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 169.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_L2.pdf, id=43,
+ 306.9532pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_L2.pdf Gr
+aphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_L2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/LEE_L2.pdf  used on input line 171.
+(pdftex.def)             Requested size: 306.95244pt x 210.58061pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 177.
+
+</home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_ROC.pdf, id=44
+, 312.04758pt x 210.58115pt>
+File: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_ROC.pdf G
+raphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_ROC.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-ou
+tputs/LEE_ROC.pdf  used on input line 179.
+(pdftex.def)             Requested size: 312.04681pt x 210.58061pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.100 \end{document}
-                     [1]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 100.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 100.
+l.193 \end{document}
+                     [1] [2 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/te
+x-outputs/MMS_mean_flow.pdf> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/t
+ex-outputs/MMS_perturbation_vars.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/03-plotReport/
+tex-outputs/MMS_perturbation_vars.pdf): PDF inclusion: multiple pdfs with page 
+group included in a single page
+>] [3 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSound
+Comparison1.pdf> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/S
+ourceTermActual.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/03-plotReport/
+tex-outputs/SourceTermActual.pdf): PDF inclusion: multiple pdfs with page group
+ included in a single page
+>] [4 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermEx
+pected.pdf> </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/Source
+TermError.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/03-plotReport/
+tex-outputs/SourceTermError.pdf): PDF inclusion: multiple pdfs with page group 
+included in a single page
+>] [5 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_L2.pdf>]
+[6 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_ROC.pdf> </
+home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_L2.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/03-plotReport/
+tex-outputs/LEE_L2.pdf): PDF inclusion: multiple pdfs with page group included 
+in a single page
+>] [7 </home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_ROC.pdf>
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 193.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 193.
  (./ResultsDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 100.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 100.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 193.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 193.
 Package rerunfilecheck Info: File `ResultsDraft.out' has not changed.
 (rerunfilecheck)             Checksum: 1473C636D8B72071DE5C2EF5BF0415FD;275.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 100.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 193.
  ) 
 Here is how much of TeX's memory you used:
- 29819 strings out of 481239
- 722129 string characters out of 5920378
- 1066595 words of memory out of 5000000
- 44501 multiletter control sequences out of 15000+600000
+ 29920 strings out of 481239
+ 727500 string characters out of 5920378
+ 1073965 words of memory out of 5000000
+ 44563 multiletter control sequences out of 15000+600000
  537413 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,11n,136p,730b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,12n,136p,1465b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb>
-Output written on ResultsDraft.pdf (2 pages, 103341 bytes).
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on ResultsDraft.pdf (8 pages, 386351 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 305 PDF objects out of 1000 (max. 8388607)
+ 258 compressed objects within 3 object streams
+ 27 named destinations out of 1000 (max. 500000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 

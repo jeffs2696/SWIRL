@@ -59,11 +59,12 @@ F90FLAGS  =	\
 			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
-			-Wconversion \
 			-Wsurprising -Warray-temporaries \
 			-Wextra -Werror \
 			-Wno-error=unused-function \
+			-Wno-error=unused-parameter \
 			-Wno-error=conversion-extra \
+			-Wno-error=conversion \
 			-Wno-error=compare-reals \
 			-Wno-error=character-truncation \
 			-Wno-error=unused-dummy-argument \

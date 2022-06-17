@@ -71,8 +71,9 @@ eta_min = float(f_help.GetInputVariables(eta_min_string)[0])
 eta_max = float(f_help.GetInputVariables(eta_max_string)[0])
 ak      = float(f_help.GetInputVariables(ak_string)     [0])
 m       = float(f_help.GetInputVariables(m_string)     [0])
-gamma   = ak*r_max
 ci      = (-1.0)**0.5
+gamma   = ak*r_max
+
     
 sigma  = r_min
 
@@ -80,10 +81,10 @@ sigma  = r_min
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
 print('eta_min' ,eta_min, r_min,r_max)
-A_analytic        = msg.TanhMethod(3,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
+A_analytic        = msg.TanhMethod(5,0.3,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = sp.Symbol('0.5') #(math.pi/6*r)#0.2*msg.TanhMethod(1 ,0.03,r_min,r_max )
+M_x_analytic      = 0.2*msg.TanhMethod(2 ,10,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -96,7 +97,7 @@ M_t_analytic = flow_1.get_tangential_mach()
 
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
 
-f     = sp.Symbol('0.0')#msg.TanhMethod(1,0.03,r_min,r_max)
+f     = msg.TanhMethod(3,2,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -117,8 +118,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = 0.0#sp.cos(math.pi/6*r)#msg.TanhMethod(1,0.03,r_min,r_max)
-v_x_analytic = 0.0#sp.cos(math.pi/6*r)#msg.TanhMethod(1,0.03,r_min,r_max)
+v_t_analytic = msg.TanhMethod(4,0.03,r_min,r_max)
+v_x_analytic = msg.TanhMethod(3,0.3,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -127,7 +128,7 @@ dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
 
-f      = 1.0*r#msg.TanhMethod(1,0.03,r_min,r_max)
+f      = msg.TanhMethod(5,3,r_min,r_max)
 df     = f.diff(r)
 r_hat  = (r - r_min)/(r_max - r_min)
 f_min  = f.subs(r,r_min)
@@ -468,19 +469,19 @@ str = A_analytic_tex
 
 A_analytic_tex = A_analytic_str.format(latex_expr = A_analytic_tex)
 
-print(A_analytic_tex)
-M_x_tex = "M_x = {latex_expr}"
-M_x_tex = M_x_tex.format(latex_expr = sp.latex(M_x_analytic))
-#
-#M_t_tex = "  M_{{\\theta}} = {latex_expr} "
-#M_t_tex = M_t_tex.format(latex_expr = sp.latex(M_t_analytic))
-#
-out_file = open("../../../CodeRun/03-plotReport/tex-outputs/manufactured_solutions.tex","w")
-
-out_file.write(
-        A_analytic_tex)
-#
-#+ "\n"
-#        + M_x_tex + "\n"
-#        + M_t_tex + "\n")
-out_file.close()
+#print(A_analytic_tex)
+#M_x_tex = "M_x = {latex_expr}"
+#M_x_tex = M_x_tex.format(latex_expr = sp.latex(sp.ratsimp(rationalize_coeffs(M_x_analytic))))
+##
+## M_t_tex = "  M_{{\\theta}} = {latex_expr}"
+#M_t_tex = latex_expr = sp.latex(sp.ratsimp(rationalize_coeffs(sp.simplify(M_t_analytic))))
+##
+#out_file = open("../../../CodeRun/03-plotReport/tex-outputs/MMS_speedsound.tex","w")
+#out_file.write( A_analytic_tex )
+#out_file.close()
+#out_file = open("../../../CodeRun/03-plotReport/tex-outputs/MMS_M_x.tex","w")
+#out_file.write( M_x_tex )
+#out_file.close()
+#out_file = open("../../../CodeRun/03-plotReport/tex-outputs/MMS_M_t.tex","w")
+#out_file.write( M_t_tex )
+#out_file.close()

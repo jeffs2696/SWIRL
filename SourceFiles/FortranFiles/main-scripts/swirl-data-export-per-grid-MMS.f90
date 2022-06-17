@@ -3,6 +3,7 @@
 ! 01-mean-flow-data
 WRITE(file_id, '(i0.4)') numberOfGridPoints
 WRITE(FDfac_id, '(i0)') FDfac
+WRITE(numIter, '(i0)') numberOfIterations
 
 dir_name  = '01-mean-flow/'
 

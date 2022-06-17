@@ -2,7 +2,9 @@
 # coding: utf-8
 
 # In[1]:
+from cycler import cycler
 import time
+import math
 import re
 import sys
 # import tikzplotlib
@@ -11,10 +13,11 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib as mpl
-# mpl.use('pgf')
+# mpl.use('pdf')
 import matplotlib.ticker as mticker
 import plotReportLib
 from matplotlib import pyplot as plt
+from scipy.optimize import curve_fit
 from pyGCS import GCS
 import matplotlib as mpl
 from plotReportLib import myfunctions as fcn
@@ -23,6 +26,7 @@ from texttable import Texttable
 import latextable
 from my_plot import set_size
 start = time.time()
+
 def tryint(s):
     """
     Return an int if possible, or `s` unchanged.
@@ -31,6 +35,26 @@ def tryint(s):
         return int(s)
     except ValueError:
         return s
+
+def powlaw(x, a, b) :
+    return a * np.power(x, b)
+def linlaw(x, a, b) :
+    return a + x * b
+
+def curve_fit_log(xdata, ydata) :
+    """Fit data to a power law with weights according to a log scale"""
+    # Weights according to a log scale
+    # Apply fscalex
+    xdata_log = np.log10(xdata)
+    # Apply fscaley
+    ydata_log = np.log10(ydata)
+    # Fit linear
+    popt_log, pcov_log = curve_fit(linlaw, xdata_log, ydata_log)
+    #print(popt_log, pcov_log)
+    # Apply fscaley^-1 to fitted data
+    ydatafit_log = np.power(10, linlaw(xdata_log, *popt_log))
+    # There is no need to apply fscalex^-1 as original data is already available
+    return (popt_log, pcov_log, ydatafit_log) 
 
 def alphanum_key(s):
     """
@@ -53,8 +77,12 @@ def savefig(*args, **kwargs):
 def extract_number(f):
     s = re.findall("\d+$",f)
     return (int(s[0]) if s else -1,f)
+# plot parameters
+# Create cycler object. Use any styling from above you please
+monochrome = (cycler('color', ['k']) * cycler('linestyle', ['-', '--', ':', '-.']) * cycler('marker', ['^',',', '.']))
 
-plt.style.use('seaborn-whitegrid')
+
+markers = ['o-', '+-', '--', '-', 'o-', '.', 'x', 'X', 'D', '|']
 width = 345
 
 tex_fonts = {
@@ -70,8 +98,15 @@ tex_fonts = {
         "ytick.labelsize": 8
         }
 
-mpl.rcParams.update(tex_fonts) 
-
+# plt.style.use('seaborn-whitegrid')
+# plt.rcParams['figure.constrained_layout.use'] = True
+plt.rcParams.update(tex_fonts) 
+plt.rcParams['axes.grid'] = True
+plt.rcParams['axes.prop_cycle'] = monochrome
+plt.rcParams['axes.spines.top'] = False
+plt.rcParams['axes.spines.right'] = False
+plt.rcParams['axes.spines.bottom'] = False
+plt.rcParams['axes.spines.left'] = False
 # input
 directories = [
         '../01-mean-flow/', 
@@ -82,68 +117,163 @@ directories = [
 
 # Files to plot from SWIRL
 
-string = 'ethod1.dat'
-print(string.isdigit())
-sys.exit()
 # [I] Manufactured Solutions 
 # 1. Mean Flow Profile 
 M_int = 3
 
-MeanFlowData1 = fcn.importPlotData(directories[0] + 'mean-flow0005_FDmethod1.dat')
-MeanFlowData1 = fcn.importPlotData(directories[0] + 'mean-flow0005_FDmethod2.dat')
+MeanFlowData1_1 = fcn.importPlotData(directories[0] + 'mean-flow0257_FDmethod1.dat')
+MeanFlowData1_2 = fcn.importPlotData(directories[0] + 'mean-flow0257_FDmethod2.dat')
 
 
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=set_size(width),
-        )
-fig.suptitle('MMS Mean Flow Profile')
-ax.plot(
-        MeanFlowData1['radius'],
-        MeanFlowData1['M_x'])
+MeanFlowData2_1 = fcn.importPlotData(directories[0] + 'mean-flow0513_FDmethod1.dat')
+MeanFlowData2_2 = fcn.importPlotData(directories[0] + 'mean-flow0513_FDmethod2.dat')
 
-ax.plot(
-        MeanFlowData1['radius'],
-        MeanFlowData1['M_theta'])
+MeanFlowData3_1 = fcn.importPlotData(directories[0] + 'mean-flow1025_FDmethod1.dat')
+MeanFlowData3_2 = fcn.importPlotData(directories[0] + 'mean-flow1025_FDmethod2.dat')
 
-plt.show()
-sys.exit()
-MeanFlowData2 = fcn.importPlotData(directories[0] + 'mean-flow0013.dat')
-MeanFlowData3 = fcn.importPlotData(directories[0] + 'mean-flow0021.dat')
-# 3. Perturbation Variables
+# 2. Speed of Sound Error
+SpeedOfSoundData1 = fcn.importPlotData(directories[1] + 'sound-speed-error0257.dat')
+SpeedOfSoundData2 = fcn.importPlotData(directories[1] + 'sound-speed-error0513.dat')
+SpeedOfSoundData3 = fcn.importPlotData(directories[1] + 'sound-speed-error1025.dat')
+
+# 3. Perturbation Variables are in the mean-flow files (already imported)
 
 # [II] Source Terms  - Created symbolically with SciPy, computed with F90
 
 # 4a. 1
-SourceTermData1_1 = fcn.importPlotData(directories[1] + 'SourceTermData1_0007.dat')
-SourceTermData1_2 = fcn.importPlotData(directories[1] + 'SourceTermData1_0013.dat')
-SourceTermData1_3 = fcn.importPlotData(directories[1] + 'SourceTermData1_0021.dat')
+SourceTermData1_1 = fcn.importPlotData(directories[1] + 'SourceTermData1_0257_FDmethod1.dat')
+SourceTermData1_2 = fcn.importPlotData(directories[1] + 'SourceTermData1_0513_FDmethod1.dat')
+SourceTermData1_3 = fcn.importPlotData(directories[1] + 'SourceTermData1_1025_FDmethod1.dat')
 
 # 4b. 2
-SourceTermData2_1 = fcn.importPlotData(directories[1] + 'SourceTermData2_0007.dat')
-SourceTermData2_2 = fcn.importPlotData(directories[1] + 'SourceTermData2_0013.dat')
-SourceTermData2_3 = fcn.importPlotData(directories[1] + 'SourceTermData2_0021.dat')
+SourceTermData2_1 = fcn.importPlotData(directories[1] + 'SourceTermData2_0257_FDmethod1.dat')
+SourceTermData2_2 = fcn.importPlotData(directories[1] + 'SourceTermData2_0513_FDmethod1.dat')
+SourceTermData2_3 = fcn.importPlotData(directories[1] + 'SourceTermData2_1025_FDmethod1.dat')
 
 # 4c. 3
-SourceTermData3_1 = fcn.importPlotData(directories[1] + 'SourceTermData3_0007.dat')
-SourceTermData3_2 = fcn.importPlotData(directories[1] + 'SourceTermData3_0013.dat')
-SourceTermData3_3 = fcn.importPlotData(directories[1] + 'SourceTermData3_0021.dat')
+SourceTermData3_1 = fcn.importPlotData(directories[1] + 'SourceTermData3_0257_FDmethod1.dat')
+SourceTermData3_2 = fcn.importPlotData(directories[1] + 'SourceTermData3_0513_FDmethod1.dat')
+SourceTermData3_3 = fcn.importPlotData(directories[1] + 'SourceTermData3_1025_FDmethod1.dat')
 
 # 4d. 4
-SourceTermData4_1 = fcn.importPlotData(directories[1] + 'SourceTermData4_0007.dat')
-SourceTermData4_2 = fcn.importPlotData(directories[1] + 'SourceTermData4_0013.dat')
-SourceTermData4_3 = fcn.importPlotData(directories[1] + 'SourceTermData4_0021.dat')
+SourceTermData4_1 = fcn.importPlotData(directories[1] + 'SourceTermData4_0257_FDmethod1.dat')
+SourceTermData4_2 = fcn.importPlotData(directories[1] + 'SourceTermData4_0513_FDmethod1.dat')
+SourceTermData4_3 = fcn.importPlotData(directories[1] + 'SourceTermData4_1025_FDmethod1.dat')
 
 # [III] Grid Convergence Study
 
 # Rates of convergence for each source term 
-LEE_L2_data = fcn.importPlotData(directories[1] + 'L2-LEE.dat')
-LEE_ROC_data = fcn.importPlotData(directories[1] + 'ROC-LEE.dat')
-SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed-.dat')
+LEE_L2_data1 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations9_FDmethod1.dat')
+LEE_L2_data2 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations9_FDmethod2.dat')
+LEE_ROC_data1 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations9_FDmethod1.dat')
+LEE_ROC_data2 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations9_FDmethod2.dat')
+SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed_numberOfIterations9.dat')
 SND_ROC_data = fcn.importPlotData(directories[1] + 'ROC-sound_speed.dat')
 
+
+# Plot Data
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width), 
+        )
+
+fig.suptitle('MMS Mean Flow Profile - '+ str(len(MeanFlowData1_1['radius'] )) + 'points')
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['M_x'], 
+        label = (r'$M_x$ ' ),
+        markevery = 20 
+        )
+
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['M_theta'],
+        label = r"$M_{\theta}$", 
+        )
+
+ax.plot(
+        MeanFlowData1_1['radius'],
+        (MeanFlowData1_1['M_x']**2 + MeanFlowData1_1['M_theta']**2)**0.5,
+        label = r"$M_{total}$", 
+        markevery = 20
+        )
+ax.set_xlabel(r'$\bar{r}$')
+ax.set_ylabel(r'$M$')
+ax.legend()
+
+
+
+fig.savefig('tex-outputs/MMS_mean_flow_profile.pdf',
+        format = 'pdf')#, bbox_inches='tight')
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width), 
+        )
+fig.suptitle('Manufactured Pertubation Functions - '+ str(len(MeanFlowData1_1['radius'] )) + 'points')
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['vR'], 
+        label = (r'$\bar{v}_r$ ' ),
+        markevery = 25)
+
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['vTh'], 
+        label = (r'$\bar{v}_{\theta}$ ' ),
+        markevery = 25)
+
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['vX'], 
+        label = (r'$\bar{v}_x$ ' ),
+        markevery = 25)
+
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['Pr'], 
+        label = (r'$\bar{v}_x$ ' ),
+        markevery = 25)
+
+ax.legend()
+
+fig.savefig('tex-outputs/MMS_perturbation_variables.pdf',
+        format = 'pdf')#, bbox_inches='tight')
+
+# Figure 3:
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle('Speed Of Sound Computation at 7 grid points')
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['A_expected'], 
+        markevery = 55 ,
+        label ='Expected'            )
+
+ax.plot(
+        MeanFlowData1_1['radius'],
+        MeanFlowData1_1['A_actual'],
+        marker = '.' ,
+        markevery = 25 ,
+        label = 'Actual')
+
+plt.legend()
+
+plt.savefig('tex-outputs/SpeedOfSoundComparison1.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+
+# Figure 4
 
 fig, ax = plt.subplots(
         nrows=1,
@@ -151,15 +281,73 @@ fig, ax = plt.subplots(
         sharex=True,
         figsize=set_size(width),
         )
-fig.suptitle('L2 of Speed of Sound Integration')
-ax.loglog(
-        SND_L2_data['GridPoints'],
-        SND_L2_data['L2'])
+fig.suptitle('Speed Of Sound Error at Multiple Grids')
+ax.plot(
+        SpeedOfSoundData1['radius'],
+        abs(SpeedOfSoundData1['SpeedofSoundError']), 
+        markevery = 25,
+        label =str(len(SpeedOfSoundData1['radius'] )))
 
-plt.savefig('tex-outputs/SND_L2.pdf',
+ax.plot(
+        SpeedOfSoundData2['radius'],
+        abs(SpeedOfSoundData2['SpeedofSoundError']),
+        markevery = 25,
+        label =str(len(SpeedOfSoundData2['radius'] ))) 
+
+
+ax.plot(
+        SpeedOfSoundData3['radius'],
+        abs(SpeedOfSoundData3['SpeedofSoundError']),
+        markevery = 25,
+        label =str(len(SpeedOfSoundData3['radius'] ))) 
+
+plt.legend()
+
+plt.savefig('tex-outputs/SpeedOfSoundComparison2.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+fig.suptitle(r' Log-log plot of the $L2_{norm}$ from the Speed of Sound Integration')
+
+ax.loglog(
+        SND_L2_data['GridPoints'],
+        SND_L2_data['L2'], 
+        label = 'approximated' )
+popt, pconv, ydatfit = curve_fit_log( SND_L2_data['GridPoints'], SND_L2_data['L2'])
+
+k = -2 
+# k = popt[1] 
+
+# b = SND_L2_data['L2'].iloc[0] 
+b = math.log(-popt[0],10)#SND_L2_data['L2'].iloc[0] 
+
+vaakaplot = range(SND_L2_data['GridPoints'][0], SND_L2_data['GridPoints'].iloc[-1] )
+
+pystyplot = [b*10**(k*(math.log(n, 10)))  for n in SND_L2_data['GridPoints']]
+
+ax.loglog(
+        SND_L2_data['GridPoints'],
+        b*SND_L2_data['GridPoints']**popt[1],
+        label='power law curve fit: a=%5.3f, b=%5.3f' % tuple((b, popt[1])))
+
+ax.loglog(
+        SND_L2_data['GridPoints'],
+        pystyplot, 
+        label = '2nd Order Slope',
+                )
+plt.legend()
+
+ax.set_ylabel("$ ln (\hat{\epsilon})  $")
+ax.set_xlabel("$ ln (N)  $")
+plt.savefig('tex-outputs/SND_L2.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -167,14 +355,22 @@ fig, ax = plt.subplots(
         figsize=set_size(width),
         )
 fig.suptitle('Rate of Convergence of Speed of Sound Integration')
-ax.loglog(
+ax.semilogy(
         SND_ROC_data['Delta_r'],
-        SND_ROC_data['ROC'])
+        SND_ROC_data['ROC']    ,
+        marker = '1')
 
+ax.semilogx(
+        SND_ROC_data['Delta_r'],
+        2.0*np.ones(len(SND_ROC_data['Delta_r']))    ,
+        marker = '1')
 plt.savefig('tex-outputs/SND_ROC.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
+
+plt.show()
+sys.exit()
 
 fig, ax = plt.subplots(
         nrows=1,
@@ -184,13 +380,18 @@ fig, ax = plt.subplots(
         )
 fig.suptitle('L2 of LEE Matrix')
 ax.loglog(
-        LEE_L2_data['GridPoints'],
-        LEE_L2_data['L2'])
+        LEE_L2_data1['GridPoints'],
+        LEE_L2_data1['L2'], 
+        label = '2nd Order')
+
+ax.loglog(
+        LEE_L2_data2['GridPoints'],
+        LEE_L2_data2['L2'],
+        label = '4th Order')
 
 plt.savefig('tex-outputs/LEE_L2.pdf',
         format = 'pdf', 
         bbox_inches='tight')
-
 
 fig, ax = plt.subplots(
         nrows=1,
@@ -200,8 +401,14 @@ fig, ax = plt.subplots(
         )
 fig.suptitle('Rate of Convergence of LEE Matrix')
 ax.loglog(
-        LEE_ROC_data['Delta_r'],
-        LEE_ROC_data['ROC'])
+        LEE_ROC_data1['Delta_r'],
+        LEE_ROC_data1['ROC'],
+        label = '2th' )
+
+ax.loglog(
+        LEE_ROC_data2['Delta_r'],
+        LEE_ROC_data2['ROC'],
+        label = '4th' )
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -213,82 +420,7 @@ plt.savefig('tex-outputs/LEE_ROC.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
-fig.suptitle('MMS Mean Flow Profile')
-ax.plot(
-        MeanFlowData1['radius'],
-        MeanFlowData1['M_x'])
 
-ax.plot(
-        MeanFlowData2['radius'],
-        MeanFlowData2['M_x'])
-ax.plot(
-        MeanFlowData3['radius'],
-        MeanFlowData3['M_theta'])
-plt.legend()
-
-
-plt.savefig('tex-outputs/MMS_meanFlow.pdf',
-        format = 'pdf', 
-        bbox_inches='tight')
-
-
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=set_size(width),
-        )
-fig.suptitle('Speed Of Sound Computation at 7 grid points')
-ax.plot(
-        SpeedOfSoundData1['radius'],
-        SpeedOfSoundData1['Expected'], 
-        label ='Expected')
-
-ax.plot(
-        SpeedOfSoundData2['radius'],
-        SpeedOfSoundData2['Actual'],
-        marker = '.' ,
-        label = 'Actual')
-
-plt.legend()
-
-plt.savefig('tex-outputs/SpeedOfSoundComparison1.pdf',
-        format = 'pdf', 
-        bbox_inches='tight')
-
-
-
-
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=set_size(width),
-        )
-fig.suptitle('Speed Of Sound Error at Multiple Grids')
-ax.plot(
-        SpeedOfSoundData1['radius'],
-        SpeedOfSoundData1['SpeedofSoundError'], 
-        label ='7')
-
-ax.plot(
-        SpeedOfSoundData2['radius'],
-        SpeedOfSoundData2['SpeedofSoundError'],
-        marker = '.' ,
-        label = '13')
-
-
-ax.plot(
-        SpeedOfSoundData3['radius'],
-        SpeedOfSoundData3['SpeedofSoundError'],
-        marker = '.' ,
-        label = '21')
-
-plt.legend()
-
-plt.savefig('tex-outputs/SpeedOfSoundComparison2.pdf',
-        format = 'pdf', 
-        bbox_inches='tight')
 
 fig, axs = plt.subplots(
         nrows=2,
@@ -459,1588 +591,3 @@ plt.savefig('tex-outputs/SourceTermError.pdf',
 
 plt.show()
 sys.exit()
-#ax.legend()
-#directory_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/32pts/'
-#directory_4th_32  ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/32pts/'
-#directory_64  ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/64pts/'
-#directory_4th_64  ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/64pts/'
-#directory_128 ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/128pts/'
-#directory_4th_128 ='../04-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/128pts/'
-#directory_256 ='../04-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/256pts/'
-#
-## 2. Plot Axial Wavenumbers/Eigenvalues
-#gam_data = fcn.importPlotData()
-#gam_non_acc_data32 = fcn.importPlotData(directory_32+'gam.nonconv.0032')
-#gam_non_acc_data_4th_32 = fcn.importPlotData(directory_4th_32+'gam.nonconv.0032')
-#gam_non_acc_data64 = fcn.importPlotData(directory_64+'gam.nonconv.0064')
-#gam_non_acc_data_4th_64 = fcn.importPlotData(directory_4th_64+'gam.nonconv.0064')
-#gam_non_acc_data128 = fcn.importPlotData(directory_128+'gam.nonconv.0128')
-#gam_non_acc_data_4th_128 = fcn.importPlotData(directory_4th_128+'gam.nonconv.0128')
-#gam_non_acc_data256 = fcn.importPlotData(directory_256+'gam.nonconv.0256')
-#
-#fig, ax = plt.subplots(
-#        nrows=1,
-#        ncols=1,
-#        sharex=True,
-#        figsize=set_size(width),
-#        )
-#plt.scatter(
-#        gam_non_acc_data32['Re{gam/ak}'],
-#        gam_non_acc_data32['Im{gam/ak}'],
-#        marker = '.',
-#        label = '32',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data64['Re{gam/ak}'],
-#        gam_non_acc_data64['Im{gam/ak}'],
-#        marker = '.',
-#        label = '64',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data128['Re{gam/ak}'],
-#        gam_non_acc_data128['Im{gam/ak}'],
-#        marker = '.',
-#        label = '128',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data256['Re{gam/ak}'],
-#        gam_non_acc_data256['Im{gam/ak}'],
-#        marker = '.',
-#        label = '256',
-#        s = 2)
-#
-#ax.legend()
-#plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_order_comp.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#fig, ax = plt.subplots(
-#        nrows=1,
-#        ncols=1,
-#        sharex=True,
-#        figsize=set_size(width),
-#        )
-#plt.scatter(
-#        gam_non_acc_data_4th_32['Re{gam/ak}'],
-#        gam_non_acc_data_4th_32['Im{gam/ak}'],
-#        marker = '.',
-#        label = '32',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data_4th_64['Re{gam/ak}'],
-#        gam_non_acc_data_4th_64['Im{gam/ak}'],
-#        marker = '.',
-#        label = '64',
-#        s = 2)
-#plt.scatter(
-#        gam_non_acc_data_4th_128['Re{gam/ak}'],
-#        gam_non_acc_data_4th_128['Im{gam/ak}'],
-#        marker = '.',
-#        label = '128',
-#        s = 2)
-#ax.legend()
-#plt.savefig('tex-outputs/gam.nonconv.scatter_4th_order_comp.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-## indices that correspond to the wavenumbers reported in Table 4.3, used visual
-## inspection 
-#propagation_index_32 = ['0034', '0033', '0031', '0029', '0027', '0025', '0023', 
-#                        '0064', '0062', '0060', '0058', '0056', '0054', '0052']
-#
-#propagation_index_64 = ['0068', '0067', '0065', '0063', '0061', '0059', '0055', '0053', '0051',
-#                        '0128', '0126', '0124', '0122', '0120', '0118', '0116', '0114', '0113']
-#
-#propagation_index_128 = ['0234', '0233', '0231', '0229', '0227', '0223', '0213', '0119','0117' ,
-#                         '0256', '0254', '0252', '0250', '0248', '0246', '0244', '0242','0240' ]
-#
-#propagation_index_256 = ['0494', '0493', '0491', '0489', '0487', '0485', '0481', '0477', '0473', '0451',
-#                         '0512', '0510', '0508', '0506', '0504', '0502', '0500', '0498', '0496', '0467']
-#
-#egvfile_32  = [(directory_32  + 'egv.'+  propagation_index_32[i])  for i,j in (enumerate(propagation_index_32)) ]
-#egvfile_64  = [(directory_64  + 'egv.'+  propagation_index_64[i])  for i,j in (enumerate(propagation_index_64)) ]
-#egvfile_128 = [(directory_128 + 'egv.'+  propagation_index_128[i]) for i,j in (enumerate(propagation_index_128))]
-#egvfile_256 = [(directory_256 + 'egv.'+  propagation_index_256[i]) for i,j in (enumerate(propagation_index_256))]
-#
-#mode_data_32   = [(fcn.importPlotData(str(egvfile_32[i])))  for i,j in (enumerate(propagation_index_32))]
-#mode_data_64   = [(fcn.importPlotData(str(egvfile_64[i])))  for i,j in (enumerate(propagation_index_64))]
-#mode_data_128  = [(fcn.importPlotData(str(egvfile_128[i]))) for i,j in (enumerate(propagation_index_128))]
-#mode_data_256  = [(fcn.importPlotData(str(egvfile_256[i]))) for i,j in (enumerate(propagation_index_256))]
-#
-#markers = ['o-', '+-', '--', '-', 'o-', '.', 'x', 'X', 'D', '|']
-#y_str = ['p_no_phase[Re]', 'p_no_phase[Im]']
-#
-## 2. Plot Pressure Mode Shapes/Eigenvectors
-#Tot = 10
-#Cols = 2
-#
-#Rows = Tot // Cols
-#Rows += Tot % Cols
-#Position = range(1,Tot + 1)
-#
-#fig = plt.figure(constrained_layout=False, figsize=set_size(2*width))
-#fig.suptitle('Propagating Modes [Real]')
-#s = fig.add_gridspec(Rows, Cols,hspace=0 )
-#
-#for k in range(Tot):
-#    if k <= 6:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_32[k]['Rad'],
-#                mode_data_32[k][y_str[0]] , 
-#                markers[0%10],
-#                markersize = 2 ,
-#                label = '32')
-#        ax.plot( 
-#                mode_data_64[k]['Rad'],
-#                mode_data_64[k][y_str[0]] , 
-#                markers[1%10],
-#                markersize = 2 ,
-#                label = '64',)
-#        ax.plot( 
-#                mode_data_128[k]['Rad'],
-#                mode_data_128[k][y_str[0]] , 
-#                markers[2%10],
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k]['Rad'],
-#                mode_data_256[k][y_str[0]], 
-#                markers[3%10],
-#                label = '256')
-#        ax.set_ylabel('Mode ' + str(k))
-#        ax.legend()
-#    elif k <= 8:
-#        ax = fig.add_subplot(s[k],sharex=ax)
-#        ax.plot( 
-#                mode_data_64[k]['Rad'],
-#                mode_data_64[k][y_str[0]] , 
-#                markers[0%10],
-#                markersize = 2 ,
-#                label = '64')
-#        ax.plot( 
-#                mode_data_128[k]['Rad'],
-#                mode_data_128[k][y_str[0]] , 
-#                markers[1%10],
-#                markersize = 2 ,
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k]['Rad'],
-#                mode_data_256[k][y_str[0]], 
-#                markers[2%10],
-#                markersize = 2 ,
-#                label = '256')
-#        ax.set_ylabel('Mode ' + str(k))
-#        ax.legend()
-#    elif k<=9:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_256[k]['Rad'],
-#                mode_data_256[k][y_str[0]], 
-#                markers[0%10],
-#                markersize = 2 ,
-#                label = '256')
-#        ax.set_ylabel('Mode ' + str(k))
-#        ax.legend()
-#
-#plt.savefig('tex-outputs/egv_prop_re.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#Rows = Tot // Cols
-#Rows += Tot % Cols
-#Position = range(1,Tot + 1)
-#fig = plt.figure(constrained_layout=False, figsize=set_size(2*width))
-#fig.suptitle('Decaying Modes [Real]')
-#
-#s = fig.add_gridspec(Rows, Cols,hspace=0)
-#
-#for k in range(Tot):
-#    if k <= 6:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_32[k+7]['Rad'],
-#                mode_data_32[k+7][y_str[0]] , 
-#                markers[0%10],
-#                markersize = 2, 
-#                label = '32')
-#        ax.plot( 
-#                mode_data_64[k+9]['Rad'],
-#                mode_data_64[k+9][y_str[0]] , 
-#                markers[1%10],
-#                markersize = 2, 
-#                label = '64',)
-#        ax.plot( 
-#                mode_data_128[k+9]['Rad'],
-#                mode_data_128[k+9][y_str[0]] , 
-#                markers[2%10],
-#                markersize = 2, 
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k+10]['Rad'],
-#                mode_data_256[k+10][y_str[0]], 
-#                markers[3%10],
-#                markersize = 2, 
-#                label = '256')
-#        ax.set_ylabel('Mode -' + str(k))
-#        ax.legend()
-#    elif k <= 8:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_64[k+9]['Rad'],
-#                mode_data_64[k+9][y_str[0]] , 
-#                markers[0%10],
-#                markersize = 2, 
-#                label = '64',)
-#        ax.plot( 
-#                mode_data_128[k+9]['Rad'],
-#                mode_data_128[k+9][y_str[0]] , 
-#                markers[1%10],
-#                markersize = 2, 
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k+10]['Rad'],
-#                mode_data_256[k+10][y_str[0]], 
-#                markers[2%10],
-#                markersize = 2, 
-#                label = '256')
-#        ax.set_ylabel('Mode -' + str(k))
-#        ax.legend()
-#    elif k<=9:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_256[k+10]['Rad'],
-#                mode_data_256[k+10][y_str[0]], 
-#                markers[0%10],
-#                markersize = 2, 
-#                label = '256')
-#        ax.set_ylabel('Mode -' + str(k))
-#        ax.legend()
-#
-#plt.savefig('tex-outputs/egv_decay_re.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-#fig = plt.figure(constrained_layout=False, figsize=set_size(2*width))
-#fig.suptitle('Propagating Modes [Imaginary]')
-#s = fig.add_gridspec(Rows, Cols,hspace=0 )
-#
-#for k in range(Tot):
-#    if k <= 6:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_32[k]['Rad'],
-#                mode_data_32[k][y_str[1]] , 
-#                markers[0%10],
-#                markersize = 2 ,
-#                label = '32')
-#        ax.plot( 
-#                mode_data_64[k]['Rad'],
-#                mode_data_64[k][y_str[1]] , 
-#                markers[1%10],
-#                markersize = 2 ,
-#                label = '64',)
-#        ax.plot( 
-#                mode_data_128[k]['Rad'],
-#                mode_data_128[k][y_str[1]] , 
-#                markers[2%10],
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k]['Rad'],
-#                mode_data_256[k][y_str[1]], 
-#                markers[3%10],
-#                label = '256')
-#        ax.set_ylabel('Mode ' + str(k))
-#        ax.legend()
-#    elif k <= 8:
-#        ax = fig.add_subplot(s[k],sharex=ax)
-#        ax.plot( 
-#                mode_data_64[k]['Rad'],
-#                mode_data_64[k][y_str[1]] , 
-#                markers[0%10],
-#                markersize = 2 ,
-#                label = '64')
-#        ax.plot( 
-#                mode_data_128[k]['Rad'],
-#                mode_data_128[k][y_str[1]] , 
-#                markers[1%10],
-#                markersize = 2 ,
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k]['Rad'],
-#                mode_data_256[k][y_str[1]], 
-#                markers[2%10],
-#                markersize = 2 ,
-#                label = '256')
-#        ax.set_ylabel('Mode ' + str(k))
-#        ax.legend()
-#    elif k<=9:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_256[k]['Rad'],
-#                mode_data_256[k][y_str[1]], 
-#                markers[0%10],
-#                markersize = 2 ,
-#                label = '256')
-#        ax.set_ylabel('Mode ' + str(k))
-#        ax.legend()
-#
-#plt.savefig('tex-outputs/egv_prop_im.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-#Rows = Tot // Cols
-#Rows += Tot % Cols
-#Position = range(1,Tot + 1)
-#fig = plt.figure(constrained_layout=False, figsize=set_size(2*width))
-#fig.suptitle('Decaying Modes [Imaginary]')
-#
-#s = fig.add_gridspec(Rows, Cols,hspace=0)
-#
-#for k in range(Tot):
-#    if k <= 6:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_32[k+7]['Rad'],
-#                mode_data_32[k+7][y_str[1]] , 
-#                markers[0%10],
-#                markersize = 2, 
-#                label = '32')
-#        ax.plot( 
-#                mode_data_64[k+9]['Rad'],
-#                mode_data_64[k+9][y_str[1]] , 
-#                markers[1%10],
-#                markersize = 2, 
-#                label = '64',)
-#        ax.plot( 
-#                mode_data_128[k+9]['Rad'],
-#                mode_data_128[k+9][y_str[1]] , 
-#                markers[2%10],
-#                markersize = 2, 
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k+10]['Rad'],
-#                mode_data_256[k+10][y_str[1]], 
-#                markers[3%10],
-#                markersize = 2, 
-#                label = '256')
-#        ax.set_ylabel('Mode -' + str(k))
-#        ax.legend()
-#    elif k <= 8:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_64[k+9]['Rad'],
-#                mode_data_64[k+9][y_str[1]] , 
-#                markers[0%10],
-#                markersize = 2, 
-#                label = '64',)
-#        ax.plot( 
-#                mode_data_128[k+9]['Rad'],
-#                mode_data_128[k+9][y_str[1]] , 
-#                markers[1%10],
-#                markersize = 2, 
-#                label = '128')
-#        ax.plot( 
-#                mode_data_256[k+10]['Rad'],
-#                mode_data_256[k+10][y_str[1]], 
-#                markers[2%10],
-#                markersize = 2, 
-#                label = '256')
-#        ax.set_ylabel('Mode -' + str(k))
-#        ax.legend()
-#    elif k<=9:
-#        ax = fig.add_subplot(s[k])
-#        ax.plot( 
-#                mode_data_256[k+10]['Rad'],
-#                mode_data_256[k+10][y_str[1]], 
-#                markers[0%10],
-#                markersize = 2, 
-#                label = '256')
-#        ax.set_ylabel('Mode -' + str(k))
-#        ax.legend()
-#
-#plt.savefig('tex-outputs/egv_decay_im.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-## plt.show()
-#end = time.time()
-#print(end-start)
-#
-#sys.exit()
-#Tot = 7
-#Cols = 2
-#
-#Rows = Tot // Cols
-#Rows += Tot % Cols
-#Position = range(1,Tot + 1)
-#fig = plt.figure(constrained_layout=False, figsize=set_size(width))
-## fig = plt.figure(constrained_layout=False, figsize=set_size(2*width, 400))
-#fig.suptitle('Decaying Modes [Real]')
-#s = fig.add_gridspec(Rows, Cols)#, width_ratios = [1, 1, 1], height_ratios = [1, 1, 1])
-#for k in range(Tot):
-#    ax = fig.add_subplot(Rows,Cols,Position[k])
-#    ax.plot( 
-#             mode_data_32[k+7]['Rad'],
-#             mode_data_32[k+7][y_str[0]] , 
-#             markers[1%10],
-#             label = '32')
-#    ax.plot( 
-#            mode_data_64[k+9]['Rad'],
-#            mode_data_64[k+9][y_str[0]] , 
-#            markers[2%10],
-#            label = '64',)
-#    ax.plot( 
-#            mode_data_128[k+9]['Rad'],
-#            mode_data_128[k+9][y_str[0]] , 
-#            markers[3%10],
-#            label = '128')
-#    ax.plot( 
-#            mode_data_256[k+10]['Rad'],
-#            mode_data_256[k+10][y_str[0]], 
-#            markers[4%10],
-#            label = '256')
-#    ax.set_ylabel('Mode -' + str(k))
-#    ax.legend()
-#
-#Rows = Tot // Cols
-#Rows += Tot % Cols
-#Position = range(1,Tot + 1)
-#
-#
-#fig = plt.figure(constrained_layout=False, figsize=set_size(width))
-## fig = plt.figure(constrained_layout=False, figsize=set_size(2*width,400))
-#fig.suptitle('Propagating Modes [Imaginary]')
-#s = fig.add_gridspec(Rows, Cols)#, width_ratios = [1, 1, 1], height_ratios = [1, 1, 1])
-## fig = plt.figure(figsize=set_size(2*width))
-#for k in range(Tot):
-#    ax = fig.add_subplot(Rows,Cols,Position[k])
-#    ax.plot( 
-#            mode_data_32[k]['Rad'],
-#            mode_data_32[k][y_str[1]] , 
-#            markers[1%10],
-#            label = '32')
-#    ax.plot( 
-#            mode_data_64[k]['Rad'],
-#            mode_data_64[k][y_str[1]] , 
-#            markers[2%10],
-#            label = '64',)
-#    ax.plot( 
-#            mode_data_128[k]['Rad'],
-#            mode_data_128[k][y_str[1]] , 
-#            markers[3%10],
-#            label = '128')
-#    ax.plot( 
-#            mode_data_256[k]['Rad'],
-#            mode_data_256[k][y_str[1]], 
-#            markers[4%10],
-#            label = '256')
-#    ax.set_label('Mode -' + str(k))
-#    ax.legend()
-#
-#plt.savefig('tex-outputs/egv_prop_im.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#fig = plt.figure(constrained_layout=False, figsize=set_size(width))
-## fig = plt.figure(constrained_layout=False, figsize=set_size(2*width,400))
-#fig.suptitle('Decaying Modes [Imaginary]')
-#s = fig.add_gridspec(Rows, Cols)#, width_ratios = [1, 1, 1], height_ratios = [1, 1, 1])
-## fig = plt.figure(figsize=set_size(2*width))
-#for k in range(Tot):
-#    ax = fig.add_subplot(Rows,Cols,Position[k])
-#    ax.plot( 
-#            mode_data_32[k+7]['Rad'],
-#            mode_data_32[k+7][y_str[1]] , 
-#            markers[1%10],
-#            label = '32')
-#    ax.plot( 
-#            mode_data_64[k+9]['Rad'],
-#            mode_data_64[k+9][y_str[1]] , 
-#            markers[2%10],
-#            label = '64',)
-#    ax.plot( 
-#            mode_data_128[k+9]['Rad'],
-#            mode_data_128[k+9][y_str[1]] , 
-#            markers[3%10],
-#            label = '128')
-#    ax.plot( 
-#            mode_data_256[k+10]['Rad'],
-#            mode_data_256[k+10][y_str[1]], 
-#            markers[4%10],
-#            label = '256')
-#    ax.set_title('Mode -' + str(k))
-#    ax.legend()
-#
-#plt.savefig('tex-outputs/egv_decay_im.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-# Tot = 9 
-# Cols = 2
-
-# Rows = Tot // Cols
-# Rows += Tot % Cols
-# Position = range(1,Tot + 1)
-
-# fig = plt.figure(constrained_layout=False, figsize=set_size(2*width,400))
-# fig.suptitle('First 7 Propagating Modes [Imaginary]')
-# s = fig.add_gridspec(Rows, Cols)#, width_ratios = [1, 1, 1], height_ratios = [1, 1, 1])
-
-# for k in range(Tot):
-#     ax = fig.add_subplot(Rows,Cols,Position[k])
-#     ax.plot( 
-#             mode_data_64[k]['Rad'],
-#             mode_data_64[k][y_str[0]] , 
-#             markers[2%10],
-#             label = '64',)
-#     ax.plot( 
-#             mode_data_128[k]['Rad'],
-#             mode_data_128[k][y_str[0]] , 
-#             markers[3%10],
-#             label = '128')
-#     ax.plot( 
-#             mode_data_256[k]['Rad'],
-#             mode_data_256[k][y_str[0]], 
-#             markers[4%10],
-#             label = '256')
-#     ax.set_title('Mode ' + str(k))
-#     ax.legend()
-#
-#Tot = 3 
-#Cols = 2
-#
-#Rows = Tot // Cols
-#Rows += Tot % Cols
-#Position = range(1,Tot + 1)
-#
-#fig = plt.figure(constrained_layout=False, figsize=set_size(2*width,400))
-#fig.suptitle('Last Propagating Modes [Re]')
-#s = fig.add_gridspec(Rows, Cols)#, width_ratios = [1, 1, 1], height_ratios = [1, 1, 1])
-#
-#for k in range(Tot):
-#    ax = fig.add_subplot(Rows,Cols,Position[k])
-#    ax.plot( 
-#            mode_data_64[k+9]['Rad'],
-#            mode_data_64[k+9][y_str[1]] , 
-#            markers[2%10],
-#            label = '64',)
-#    ax.plot( 
-#            mode_data_128[k+9]['Rad'],
-#            mode_data_128[k+9][y_str[1]] , 
-#            markers[3%10],
-#            label = '128')
-#    ax.plot( 
-#            mode_data_256[k+9]['Rad'],
-#            mode_data_256[k+9][y_str[1]], 
-#            markers[4%10],
-#            label = '256')
-#    ax.set_title('Mode ' + str(k+9))
-#    ax.legend()
-#
-# Tot = 11 
-# Cols = 2
-
-# Rows = Tot // Cols
-# Rows += Tot % Cols
-# Position = range(1,Tot + 1)
-
-# fig = plt.figure(constrained_layout=False, figsize=set_size(2*width,400))
-# fig.suptitle('First 9 Decaying Modes')
-# s = fig.add_gridspec(Rows, Cols)#, width_ratios = [1, 1, 1], height_ratios = [1, 1, 1])
-# # fig = plt.figure(figsize=set_size(2*width))
-# for k in range(Tot):
-#     ax = fig.add_subplot(Rows,Cols,Position[k])
-#     ax.plot( 
-#             mode_data_64[k]['Rad'],
-#             mode_data_64[k][y_str[1]] , 
-#             markers[2%10],
-#             label = '64',)
-#     ax.plot( 
-#             mode_data_128[k]['Rad'],
-#             mode_data_128[k][y_str[1]] , 
-#             markers[3%10],
-#             label = '128')
-#     ax.plot( 
-#             mode_data_256[k]['Rad'],
-#             mode_data_256[k][y_str[1]], 
-#             markers[4%10],
-#             label = '256')
-
-# plt.show()
-#
-# Tot = 9  
-# Cols = 2
-
-# Rows = Tot // Cols
-# Rows += Tot % Cols
-# Position = range(1,Tot + 1)
-
-# fig = plt.figure(constrained_layout=False, figsize=set_size(2*width,400))
-# s = fig.add_gridspec(Rows, Cols)#, width_ratios = [1, 1, 1], height_ratios = [1, 1, 1])
-# # fig = plt.figure(figsize=set_size(2*width))
-# for k in range(Tot):
-#     ax = fig.add_subplot(Rows,Cols,Position[k])
-#     ax.plot( 
-#             mode_data_128[k]['Rad'],
-#             mode_data_128[k][y_str[0]] , 
-#             markers[3%10],
-#             label = '128')
-#     ax.plot( 
-#             mode_data_256[k]['Rad'],
-#             mode_data_256[k][y_str[0]], 
-#             markers[4%10],
-#             label = '256')
-# plt.show()
-#for row in range(3):
-#    for col in range(3):
-#        ax = fig.add_subplot(s[row, col])
-#
-#
-#fig = plt.figure( figsize=set_size(width) )
-#gs  = fig.add_gridspec(2, hspace=0)
-#axs = gs.subplots(sharex=True, sharey=False)
-#m   = 1
-#
-#axs[0].plot( 
-#        mode_data_32[m]['Rad'],
-#        mode_data_32[m][y_str[0]] , 
-#        markers[1%10],
-#        label = '32')
-#
-#axs[0].plot( 
-#        mode_data_64[m]['Rad'],
-#        mode_data_64[m][y_str[0]] , 
-#        markers[2%10],
-#        label = '64',)
-#axs[0].plot( 
-#        mode_data_128[m]['Rad'],
-#        mode_data_128[m][y_str[0]] , 
-#        markers[3%10],
-#        label = '128')
-#axs[0].plot( 
-#        mode_data_256[m]['Rad'],
-#        mode_data_256[m][y_str[0]], 
-#        markers[4%10],
-#        label = '256')
-#axs[1].plot( 
-#        mode_data_32[m]['Rad'],
-#        mode_data_32[m][y_str[1]] , 
-#        markers[1%10],
-#        label = '32')
-#
-#axs[1].plot( 
-#        mode_data_64[m]['Rad'],
-#        mode_data_64[m][y_str[1]] , 
-#        markers[2%10],
-#        label = '64',)
-#axs[1].plot( 
-#        mode_data_128[m]['Rad'],
-#        mode_data_128[m][y_str[1]] , 
-#        markers[3%10],
-#        label = '128')
-#axs[1].plot( 
-#        mode_data_256[m]['Rad'],
-#        mode_data_256[m][y_str[1]], 
-#        markers[4%10],
-#        label = '256')
-#plt.show()
-#sys.exit()
-#ax1.plot(
-#        mode_data_re1_64['Rad'],
-#        mode_data_re1_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re1_128['Rad'],
-#        mode_data_re1_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re1_256['Rad'],
-#        mode_data_re1_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im1_32['Rad'],
-#        mode_data_im1_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im1_64['Rad'],
-#        mode_data_im1_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im1_128['Rad'],
-#        mode_data_im1_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im1_256['Rad'],
-#        mode_data_im1_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv1.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-## gamma +1
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re2_32['Rad'],
-#        mode_data_re2_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot( 
-#        mode_data_re2_64['Rad'],
-#        mode_data_re2_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re2_128['Rad'],
-#        mode_data_re2_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot( 
-#        mode_data_re2_256['Rad'],
-#        mode_data_re2_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im2_32['Rad'],
-#        mode_data_im2_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        # label = '32'        ,
-#        mode_data_im2_64['Rad'],
-#        mode_data_im2_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        #label = '64'        ,
-#        mode_data_im2_128['Rad'],
-#        mode_data_im2_128['p_no_phase']  , 
-#        markers[3%10],
-#        #label = '128'        ,
-#        mode_data_im2_256['Rad'],
-#        mode_data_im2_256['p_no_phase']  , 
-#        markers[4%10]          )
-#
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend()
-#        
-#plt.savefig('tex-outputs/egv2.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-## gamma +2
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re3_32['Rad'],
-#        mode_data_re3_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot( 
-#        mode_data_re3_64['Rad'],
-#        mode_data_re3_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re3_128['Rad'],
-#        mode_data_re3_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot( 
-#        mode_data_re3_256['Rad'],
-#        mode_data_re3_256['p_no_phase'] , 
-#        markers[4%10],
-#        label = '256')
-#
-#ax2.plot( 
-#        mode_data_im3_32['Rad'],
-#        mode_data_im3_32['p_no_phase'] ,
-#        # label = '32'        ,
-#        markers[1%10]       ,
-#        mode_data_im3_64['Rad'],
-#        mode_data_im3_64['p_no_phase'] ,
-#        # label = '64'        ,
-#        markers[2%10]       ,
-#        mode_data_im3_128['Rad'],
-#        mode_data_im3_128['p_no_phase']  , 
-#        # label = '128'        ,
-#        markers[3%10],
-#        mode_data_im3_256['Rad'],
-#        mode_data_im3_256['p_no_phase']  , 
-#        # label = '256'        ,
-#        markers[4%10])
-#        
-#
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper left") 
-#
-#plt.savefig(
-#        'tex-outputs/egv3.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma +3
-#fig, (ax1, ax2) = plt.subplots(
-#        2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re4_32['Rad'],
-#        mode_data_re4_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#ax1.plot(
-#        mode_data_re4_64['Rad'],
-#        mode_data_re4_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#ax1.plot(
-#        mode_data_re4_128['Rad'],
-#        mode_data_re4_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#ax1.plot(
-#        mode_data_re4_256['Rad'],
-#        mode_data_re4_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im4_32['Rad'],
-#        mode_data_im4_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        # label = '32'        ,
-#        mode_data_im4_64['Rad'],
-#        mode_data_im4_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        #label = '64'        ,
-#        mode_data_im4_128['Rad'],
-#        mode_data_im4_128['p_no_phase']  , 
-#        markers[3%10],
-#        #label = '128'        ,
-#        mode_data_im4_256['Rad'],
-#        mode_data_im4_256['p_no_phase']  , 
-#        markers[4%10]                  )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv4.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-##----
-#
-## gamma +4
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#
-#ax1.plot( 
-#        mode_data_re5_32['Rad'],
-#        mode_data_re5_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re5_64['Rad'],
-#        mode_data_re5_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#ax1.plot(
-#        mode_data_re5_128['Rad'],
-#        mode_data_re5_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#ax1.plot(
-#        mode_data_re5_256['Rad'],
-#        mode_data_re5_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#ax2.plot( 
-#        mode_data_im5_32['Rad'],
-#        mode_data_im5_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im5_64['Rad'],
-#        mode_data_im5_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im5_128['Rad'],
-#        mode_data_im5_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im5_256['Rad'],
-#        mode_data_im5_256['p_no_phase']  , 
-#        markers[4%10]          )
-#
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv5.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-## gamma +5
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#ax1.plot( 
-#        mode_data_re6_32['Rad'],
-#        mode_data_re6_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re6_64['Rad'],
-#        mode_data_re6_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#ax1.plot(
-#        mode_data_re6_128['Rad'],
-#        mode_data_re6_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#ax1.plot(
-#        mode_data_re6_256['Rad'],
-#        mode_data_re6_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#ax2.plot( 
-#        mode_data_im6_32['Rad'],
-#        mode_data_im6_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im6_64['Rad'],
-#        mode_data_im6_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im6_128['Rad'],
-#        mode_data_im6_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im6_256['Rad'],
-#        mode_data_im6_256['p_no_phase']  , 
-#        markers[4%10]         ) 
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv6.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-## gamma +6
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#ax1.plot( 
-#        mode_data_re7_32['Rad'],
-#        mode_data_re7_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re7_64['Rad'],
-#        mode_data_re7_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#ax1.plot(
-#        mode_data_re7_128['Rad'],
-#        mode_data_re7_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#ax1.plot(
-#        mode_data_re7_256['Rad'],
-#        mode_data_re7_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#ax2.plot( 
-#        mode_data_im7_32['Rad'],
-#        mode_data_im7_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im7_64['Rad'],
-#        mode_data_im7_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im7_128['Rad'],
-#        mode_data_im7_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im7_256['Rad'],
-#        mode_data_im7_256['p_no_phase']  , 
-#        markers[4%10]         )
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv7.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-## gamma +7
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#ax1.plot(
-#        mode_data_re8_64['Rad'],
-#        mode_data_re8_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#ax1.plot(
-#        mode_data_re8_128['Rad'],
-#        mode_data_re8_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#ax1.plot(
-#        mode_data_re8_256['Rad'],
-#        mode_data_re8_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#ax2.plot( 
-#        mode_data_im8_64['Rad'],
-#        mode_data_im8_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im8_128['Rad'],
-#        mode_data_im8_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im8_256['Rad'],
-#        mode_data_im8_256['p_no_phase']  , 
-#        markers[4%10]          )
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv8.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-## gamma +8
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#ax1.plot(
-#        mode_data_re9_64['Rad'],
-#        mode_data_re9_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#ax1.plot(
-#        mode_data_re9_128['Rad'],
-#        mode_data_re9_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#ax1.plot(
-#        mode_data_re9_256['Rad'],
-#        mode_data_re9_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#
-#ax2.plot( 
-#        mode_data_im9_64['Rad'],
-#        mode_data_im9_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im9_128['Rad'],
-#        mode_data_im9_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im9_256['Rad'],
-#        mode_data_im9_256['p_no_phase']  , 
-#        markers[4%10]          )
-#
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv9.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -0
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re_up1_32['Rad'],
-#        mode_data_re_up1_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re_up1_64['Rad'],
-#        mode_data_re_up1_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up1_128['Rad'],
-#        mode_data_re_up1_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up1_256['Rad'],
-#        mode_data_re_up1_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up1_32['Rad'],
-#        mode_data_im_up1_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im_up1_64['Rad'],
-#        mode_data_im_up1_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up1_128['Rad'],
-#        mode_data_im_up1_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up1_256['Rad'],
-#        mode_data_im_up1_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m1.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -1
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re_up2_32['Rad'],
-#        mode_data_re_up2_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re_up2_64['Rad'],
-#        mode_data_re_up2_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up2_128['Rad'],
-#        mode_data_re_up2_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up2_256['Rad'],
-#        mode_data_re_up2_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up2_32['Rad'],
-#        mode_data_im_up2_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im_up2_64['Rad'],
-#        mode_data_im_up2_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up2_128['Rad'],
-#        mode_data_im_up2_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up2_256['Rad'],
-#        mode_data_im_up2_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m2.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -2
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re_up3_32['Rad'],
-#        mode_data_re_up3_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re_up3_64['Rad'],
-#        mode_data_re_up3_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up3_128['Rad'],
-#        mode_data_re_up3_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up3_256['Rad'],
-#        mode_data_re_up3_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up3_32['Rad'],
-#        mode_data_im_up3_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im_up3_64['Rad'],
-#        mode_data_im_up3_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up3_128['Rad'],
-#        mode_data_im_up3_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up3_256['Rad'],
-#        mode_data_im_up3_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m3.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -3
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re_up4_32['Rad'],
-#        mode_data_re_up4_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re_up4_64['Rad'],
-#        mode_data_re_up4_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up4_128['Rad'],
-#        mode_data_re_up4_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up4_256['Rad'],
-#        mode_data_re_up4_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up4_32['Rad'],
-#        mode_data_im_up4_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im_up4_64['Rad'],
-#        mode_data_im_up4_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up4_128['Rad'],
-#        mode_data_im_up4_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up4_256['Rad'],
-#        mode_data_im_up4_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m4.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -4
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re_up5_32['Rad'],
-#        mode_data_re_up5_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re_up5_64['Rad'],
-#        mode_data_re_up5_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up5_128['Rad'],
-#        mode_data_re_up5_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up5_256['Rad'],
-#        mode_data_re_up5_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up5_32['Rad'],
-#        mode_data_im_up5_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im_up5_64['Rad'],
-#        mode_data_im_up5_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up5_128['Rad'],
-#        mode_data_im_up5_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up5_256['Rad'],
-#        mode_data_im_up5_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m5.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -5
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re_up6_32['Rad'],
-#        mode_data_re_up6_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re_up6_64['Rad'],
-#        mode_data_re_up6_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up6_128['Rad'],
-#        mode_data_re_up6_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up6_256['Rad'],
-#        mode_data_re_up6_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up6_32['Rad'],
-#        mode_data_im_up6_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im_up6_64['Rad'],
-#        mode_data_im_up6_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up6_128['Rad'],
-#        mode_data_im_up6_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up6_256['Rad'],
-#        mode_data_im_up6_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m6.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -6
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-#
-#ax1.plot( 
-#        mode_data_re_up7_32['Rad'],
-#        mode_data_re_up7_32['p_no_phase'] , 
-#        markers[1%10],
-#        label = '32')
-#
-#ax1.plot(
-#        mode_data_re_up7_64['Rad'],
-#        mode_data_re_up7_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up7_128['Rad'],
-#        mode_data_re_up7_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up7_256['Rad'],
-#        mode_data_re_up7_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up7_32['Rad'],
-#        mode_data_im_up7_32['p_no_phase'] ,
-#        markers[1%10]       ,
-#        mode_data_im_up7_64['Rad'],
-#        mode_data_im_up7_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up7_128['Rad'],
-#        mode_data_im_up7_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up7_256['Rad'],
-#        mode_data_im_up7_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m7.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -7
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-##
-##ax1.plot( 
-##        mode_data_re_up8_32['Rad'],
-##        mode_data_re_up8_32['p_no_phase'] , 
-##        markers[1%10],
-##        label = '32')
-##
-#ax1.plot(
-#        mode_data_re_up8_64['Rad'],
-#        mode_data_re_up8_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up8_128['Rad'],
-#        mode_data_re_up8_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up8_256['Rad'],
-#        mode_data_re_up8_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#        mode_data_im_up8_64['Rad'],
-#        mode_data_im_up8_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up8_128['Rad'],
-#        mode_data_im_up8_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up8_256['Rad'],
-#        mode_data_im_up8_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m8.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#
-## gamma -8
-#fig, (ax1, ax2) = plt.subplots(2, 1, figsize=set_size(width))
-##
-##ax1.plot( 
-##        mode_data_re_up9_32['Rad'],
-##        mode_data_re_up9_32['p_no_phase'] , 
-##        markers[1%10],
-##        label = '32')
-##
-#ax1.plot(
-#        mode_data_re_up9_64['Rad'],
-#        mode_data_re_up9_64['p_no_phase'] ,
-#        markers[2%10]         , 
-#        label = '64'       )
-#
-#ax1.plot(
-#        mode_data_re_up9_128['Rad'],
-#        mode_data_re_up9_128['p_no_phase']  , 
-#        markers[3%10],
-#        label = '128')
-#
-#ax1.plot(
-#        mode_data_re_up9_256['Rad'],
-#        mode_data_re_up9_256['p_no_phase']  , 
-#        markers[4%10],
-#        label = '256'       )
-#        
-#ax2.plot( 
-#       # mode_data_im_up9_32['Rad'],
-#        # mode_data_im_up9_32['p_no_phase'] ,
-#        # markers[1%10]       ,
-#        mode_data_im_up9_64['Rad'],
-#        mode_data_im_up9_64['p_no_phase'] ,
-#        markers[2%10]       ,
-#        mode_data_im_up9_128['Rad'],
-#        mode_data_im_up9_128['p_no_phase']  , 
-#        markers[3%10],
-#        mode_data_im_up9_256['Rad'],
-#        mode_data_im_up9_256['p_no_phase']  , 
-#        markers[4%10]          )
-#        
-#ax1.set_ylabel('[Real]')
-#ax2.set_ylabel('[Imaginary]')
-#ax2.set_xlabel('Radius')
-#ax1.legend(loc="upper right") 
-#plt.savefig('tex-outputs/egv_m9.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#
-#fig, ax = plt.subplots(
-#        nrows=1,
-#        ncols=1,
-#        sharex=True,
-#        figsize=set_size(width),
-#        )
-#
-#plt.scatter(
-#        gam_non_acc_data64['Re{gam/ak}'],
-#        gam_non_acc_data64['Im{gam/ak}'],
-#        marker = '.',
-#        s = 1)
-#plt.savefig('tex-outputs/gam.nonconv.scatter64.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#fig, ax = plt.subplots(
-#        nrows=1,
-#        ncols=1,
-#        sharex=True,
-#        figsize=set_size(width),
-#        )
-#plt.scatter(
-#        gam_non_acc_data128['Re{gam/ak}'],
-#        gam_non_acc_data128['Im{gam/ak}'],
-#        marker = '.',
-#        s = 1)
-#plt.savefig('tex-outputs/gam.nonconv.scatter128.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#fig, ax = plt.subplots(
-#        nrows=1,
-#        ncols=1,
-#        sharex=True,
-#        figsize=set_size(width),
-#        )
-#plt.scatter(
-#        gam_non_acc_data256['Re{gam/ak}'],
-#        gam_non_acc_data256['Im{gam/ak}'],
-#        marker = '.',
-#        s = 1)
-#plt.savefig('tex-outputs/gam.nonconv.scatter256.pdf', 
-#        format = 'pdf', 
-#        bbox_inches='tight')
-#

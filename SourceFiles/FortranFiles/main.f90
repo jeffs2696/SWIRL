@@ -13,6 +13,7 @@ PROGRAM MAIN
         dir_name,&
         file_id , &
         FDfac_id, &
+        numIter, &
         FORMAT_MEAN_FLOW         , &
         FORMAT_PERTURB_VARS      , &
         FORMAT_PERTURB_HEADER    , &
@@ -35,7 +36,7 @@ PROGRAM MAIN
         M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 9
+        numberOfIterations = 12
 
     INTEGER  :: &
     !! Integers for flags and loop indicies
@@ -156,7 +157,7 @@ PROGRAM MAIN
     
     M_int_new = M_int
 
-    DO FDfac = 1, numberOfFiniteDifferenceSchemes
+    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes
         DO fac = 1, numberOfIterations
 
             finiteDiffFlag            = FDfac ! from FDfac loop
@@ -175,26 +176,14 @@ PROGRAM MAIN
 
             facCount                     = facCount + 1
 
-!             IF (fac .lt. 7) THEN
-!                 M_int_new = REAL(M_int_new,KIND=rDef)+0.2_rDef
-
-
-!                 numberOfGridPoints           = CEILING(1+(2**fac)*M_int_new)
-
-!             ELSEIF ((fac .gt. 6) .or. (fac .lt. 9)) THEN
-!                 M_int_new = REAL(M_int_new,KIND=rDef)-0.2_rDef
-!                 numberOfGridPoints           = CEILING(1+(2**fac)*M_int_new)
-
-!             ELSEIF (fac .eq. numberOfIterations) THEN
-!                 numberOfGridPoints           = CEILING(1+(2**fac)*M_int_new)
-!             ELSE 
-!                 numberOfGridPoints           = (1+(2**fac)*M_int)
-!             ENDIF
-
-            IF (fac.gt.4) THEN
-                numberOfGridPoints           = (1+(2**fac)*M_int)
+            IF (fac .lt. 8) THEN
+                
+                numberOfGridPoints           = (1+(2**fac))
+            
+            ELSEIF (fac .eq. numberOfIterations) THEN 
+                numberOfGridPoints           = (1+(2**fac))
             ELSE
-                numberOfGridPoints           = (1+(2**fac)*M_int)
+                numberOfGridPoints           = (1+(2**fac))
             ENDIF
 
             numberOfGridPointsArray(fac) = numberOfGridPoints

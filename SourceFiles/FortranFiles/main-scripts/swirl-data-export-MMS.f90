@@ -8,7 +8,7 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'L2-sound_speed'        // &
     '_numberOfIterations'        // &
-    CHAR(numberOfIterations)  // &
+    TRIM(ADJUSTL(numIter))  // &
     '.dat')
 
 WRITE(UNIT,FORMAT_L2_HEADER) 'GridPoints ' , 'L2'
@@ -46,7 +46,7 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'L2-LEE'      // &
     '_numberOfIterations'        // &
-    CHAR(numberOfIterations)  // &
+    TRIM(ADJUSTL(numIter))  // &
     '_FDmethod'  // &
     TRIM(ADJUSTL(FDfac_id))// &
     '.dat')
@@ -68,7 +68,7 @@ OPEN(&
     TRIM(ADJUSTL(dir_name))  // &
     'ROC-LEE'      // &
     '_numberOfIterations'        // &
-    CHAR(numberOfIterations)  // &
+    TRIM(ADJUSTL(numIter))  // &
     '_FDmethod'  // &
     TRIM(ADJUSTL(FDfac_id))// &
     '.dat')

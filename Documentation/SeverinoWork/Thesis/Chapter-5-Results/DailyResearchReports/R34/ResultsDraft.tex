@@ -62,6 +62,9 @@ Hypothesis 1:
 By using a composite trapezoidal rule numerical integration technique, the speed
 of sound is approximated using the tangential mach number. A second order 
 convergence for the approximated speed of sound is expected (Refer to analysis). 
+To obtain the radial derivatives, second and fourth order central differencing 
+schemes were used and the order of accuracy will also be computed using the 
+four system of equations for the LEE. 
 
 Why is this my hypothesis?:
 As the grid spacing gets smaller from one iteration to the next, the computed order of accuracy is
@@ -70,16 +73,21 @@ truncated term in the Taylor series used to derive the scheme , which in this
 case is the composite trapezoidal rule. By using the MMS, a computed order
 of accuracy was found. 
 
-Hypothesis 2:
 
 
-What happened:
-In the Methods chapter, the MMS test case methodology was presented.
+\begin{align}
+     \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_speedsound.tex}
+\end{align}
+
+
+\begin{align}
+     \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_M_x.tex}
+\end{align}
 
 
 
 \begin{align}
-     \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/manufactured_solutions.tex}
+     \input{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_M_t.tex}
 \end{align}
 
 
@@ -87,16 +95,101 @@ In the Methods chapter, the MMS test case methodology was presented.
 
 The $L2_{norm}$ error of the two grids 
 $\epsilon_{grid_i}$ and $\epsilon_{grid_i+1}$
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_mean_flow.pdf}
+    \caption{The manufactured mean flow test case using a summation of Tangents for $A$ and $M_x$}
+    \label{fig:1}
+\end{figure}
 
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbation_vars.pdf}
+    \caption{The manufactured perturbation functions ,$v_r$, $v_x$, $v_{\theta}$, $p$}
+    \label{fig:1a}
+\end{figure}
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundComparison1.pdf}
+    \caption{}
+    \label{fig:2}
+\end{figure}
+
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermActual.pdf}
+    \caption{}
+    \label{fig:3}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermExpected.pdf}
+    \caption{}
+    \label{fig:3}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermError.pdf}
+    \caption{}
+    \label{fig:3}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundComparison1.pdf}
+    \caption{}
+    \label{fig:2}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_L2.pdf}
+    \caption{}
+    \label{fig:4}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_ROC.pdf}
+    \caption{}
+    \label{fig:5}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_L2.pdf}
+    \caption{}
+    \label{fig:6}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+        \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_ROC.pdf}
+        \caption{}
+        \label{fig:7}
+\end{figure}
 
 
 
 
 
 \section{Issues and Concerns}
-
+I attempted at varying the grid aspect ratio but did not get better results.
+I want to report the source term expressions.
 \section{Planned Research}
-
+Write results and discussion for these graphs.
 \end{document}
 
 

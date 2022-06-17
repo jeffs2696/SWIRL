@@ -141,15 +141,15 @@ modulE swirlClassObject
 
     LOGICAL :: debug = .FALSE. ! turns on/off printing to console
 
-    CHARACTER :: &
-        jobvl = 'N' ,& ! needed for zggev
-        jobvr = 'V'    !
+    ! CHARACTER :: &
+    !     jobvl = 'N' ,& ! needed for zggev
+    !     jobvr = 'V'    !
 
-! additional variables, implicitly defined in the original code
+! ! additional variables, implicitly defined in the original code
 
-    INTEGER ::&
-        ir      = 2,  & ! axial mach number "knob" to switch between analytical solutions
-        is      = 5     ! tangential mach number
+    ! INTEGER ::&
+    !     ir      = 2,  & ! axial mach number "knob" to switch between analytical solutions
+    !     is      = 5     ! tangential mach number
 
 CONTAINS
 
@@ -416,30 +416,30 @@ CONTAINS
             ELSE
             ENDIF
 
-            CALL analysis(&
-                np    = object%numberOfRadialPoints,    &
-                np4   = object%numberOfRadialPoints*4,   &
-                ak    = object%frequency,    &
-                rr    = object%r,     &
-                snd   = object%snd,   &
-                rmx   = object%rmx,   &
-                rmt   = object%rmt,   &
-                aa    = object%aa,    &
-                bb    = object%bb,    &
-                alpha = object%alpha, &
-                beta  = object%beta,  &
-                vl    = object%vl,    &
-                vr    = object%vr,    &
-                work  = object%work,  &
-                rwork = object%rwork, &
-                gam   = object%wvn,   &
-                jobvl = jobvl, &
-                jobvr = jobvr, &
-                mm    = object%azimuthalMode,    &
-                ir    = ir,    &
-                is    = is,    &
-                vphi  = object%vph,   &
-                akap  = object%akap)
+            ! CALL analysis(&
+            !     np    = object%numberOfRadialPoints,    &
+            !     np4   = object%numberOfRadialPoints*4,   &
+            !     ak    = object%frequency,    &
+            !     rr    = object%r,     &
+            !     snd   = object%snd,   &
+            !     rmx   = object%rmx,   &
+            !     rmt   = object%rmt,   &
+            !     aa    = object%aa,    &
+            !     bb    = object%bb,    &
+            !     alpha = object%alpha, &
+            !     beta  = object%beta,  &
+            !     vl    = object%vl,    &
+            !     vr    = object%vr,    &
+            !     work  = object%work,  &
+            !     rwork = object%rwork, &
+            !     gam   = object%wvn,   &
+            !     jobvl = jobvl, &
+            !     jobvr = jobvr, &
+            !     mm    = object%azimuthalMode,    &
+            !     ir    = ir,    &
+            !     is    = is,    &
+            !     vphi  = object%vph,   &
+            !     akap  = object%akap)
 
            IF (debug) THEN
                WRITE(0,*) 'Leaving analysis CALL'
