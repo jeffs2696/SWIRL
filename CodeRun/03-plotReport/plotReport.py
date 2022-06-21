@@ -324,8 +324,8 @@ popt, pconv, ydatfit = curve_fit_log( SND_L2_data['GridPoints'], SND_L2_data['L2
 k = -2 
 # k = popt[1] 
 
-# b = SND_L2_data['L2'].iloc[0] 
-b = math.log(-popt[0],10)#SND_L2_data['L2'].iloc[0] 
+b = SND_L2_data['L2'].iloc[0] 
+# b = math.log(-popt[0],10)#SND_L2_data['L2'].iloc[0] 
 
 vaakaplot = range(SND_L2_data['GridPoints'][0], SND_L2_data['GridPoints'].iloc[-1] )
 
@@ -334,7 +334,7 @@ pystyplot = [b*10**(k*(math.log(n, 10)))  for n in SND_L2_data['GridPoints']]
 ax.loglog(
         SND_L2_data['GridPoints'],
         b*SND_L2_data['GridPoints']**popt[1],
-        label='power law curve fit: a=%5.3f, b=%5.3f' % tuple((b, popt[1])))
+        label='power law curve fit: a=%5.3e, b=%5.3f' % tuple((b, popt[1])))
 
 ax.loglog(
         SND_L2_data['GridPoints'],
@@ -364,11 +364,12 @@ ax.semilogx(
         SND_ROC_data['Delta_r'],
         2.0*np.ones(len(SND_ROC_data['Delta_r']))    ,
         marker = '1')
+ax.set_xlabel(r'$\Delta r$')
+ax.set_ylabel(r'$\alpha $')
+
 plt.savefig('tex-outputs/SND_ROC.pdf',
         format = 'pdf', 
         bbox_inches='tight')
-
-
 plt.show()
 sys.exit()
 

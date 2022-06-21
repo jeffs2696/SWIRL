@@ -5,6 +5,7 @@ import sys
 import sympy as sp
 import math
 
+import tikzplotlib
 # custom libraries
 from packages.manufactured_solution_modifiers import modifiers as msm
 from packages.manufactured_solution_generators import generators as msg
@@ -202,15 +203,17 @@ p_analytic = p_analytic.subs(
             }
         )
 dp_dr_analytic   = p_analytic.diff(r)
+TSM = msg.TanhMethod(3,10,r_min,r_max)
+print(rationalize_coeffs(TSM))
 
-#sp_help.plotSymbolicEquation('Speed Of Sound', \
-#                     r               , \
-#                     'radius'        , \
-#                     A_analytic      , \
-#                     'Speed Of Sound', \
-#                     r_min           , \
-#                     r_max)
-#
+sp_help.plotSymbolicEquation('Tanh Summation Example', \
+                     r               , \
+                     'x'        , \
+                     TSM      , \
+                     'y', \
+                     r_min           , \
+                     r_max)
+tikzplotlib.save("TSM.tex")
 #sp_help.plotSymbolicEquation('M_t'       , \
 #                     r           , \
 #                     'radius'    , \
