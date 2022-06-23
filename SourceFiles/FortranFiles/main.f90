@@ -36,7 +36,7 @@ PROGRAM MAIN
         M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations =10 
+        numberOfIterations =9 
 
     INTEGER  :: &
     !! Integers for flags and loop indicies
@@ -143,7 +143,7 @@ PROGRAM MAIN
     finiteDiffFlag            = FDfac ! from FDfac loop
     !!include statements with inputs needed for SwirlClassType
 
-    eigenValueMMS = CMPLX(0,0,KIND=rDef)!frequency*r_max
+    eigenValueMMS = CMPLX(0,-1,KIND=rDef)*frequency*r_max
 
     facCount = 0 ! initializer for far count
 

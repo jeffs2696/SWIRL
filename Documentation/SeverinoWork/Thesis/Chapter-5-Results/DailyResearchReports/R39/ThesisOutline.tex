@@ -1,0 +1,215 @@
+%        File: ThesisOutline.tex
+%     Created: Tue Jun 21 01:00 AM 2022 E
+% Last Change: Tue Jun 21 01:00 AM 2022 E
+%
+\documentclass[a4paper]{report}
+\usepackage{outlines}
+\usepackage{mathtools}
+\begin{document}
+\begin{titlepage}
+    \title{Thesis Outline}
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\begin{abstract}
+   Over the last 20 years, there has been an increase in computational fluid dynamic
+   codes that have made numerical analysis more and more readily available, allowing
+   turbomachine designers to create more novel designs. However, as airport noise limi-
+   tations become more restrictive over time, reducing aircraft takeoff and landing noise
+   remains a prominent issue in the aviation community. One popular method to re-
+   duce aircraft noise is using acoustic liners placed on the walls of the engine inlet and
+   exhaust ducts. These liners are designed to reduce the amplitude of acoustic modes
+   emanating from the bypass fan as they propagate through the engine. The SWIRL
+   code is a frequency-domain linearized Euler equation solver that is designed to predict
+   the effect of acoustic liners on acoustic modes propagating in realistic sheared and
+   swirling mean flows, guiding the design of more efficient liner configurations. The pur-
+   pose of this study is to validate SWIRL using the Method Of Manufactured Solutions
+   (MMS). This study also investigated the effect of the integration and spatial differenc-
+   ing methods on the convergence for a given Manufactured Solution. In addition, the
+   effect of boundary condition implementation was tested. The improved MMS con-
+   vergence rates shown for these tests suggest that the revised SWIRL code provides
+   more accurate solutions with less computational effort than the original formulation.
+\end{abstract}
+\begin{outline}[enumerate]
+    \1 Introduction : What is the reason for me to write this thesis? What has prompted me to 
+    select this topic?
+    \2 Basic Explaination of the topic and the main problem (What?)
+    During the 1960s, the increased demand for commercialized aircraft transport in-
+    troduced jet engines to support large cargo and passengers. Consequently, this rise in
+    innovation resulted in high volume engine noise.
+    \2 Statement of the research questions (Why?)
+    \2 The goal and significance of the investigation; (How?)
+    \2 Definitions of the terms (if needed);
+    \2 Organization of the research (Structure)
+    \1 Literature Review:
+    \1[a]] The problem to be addressed and its significance
+    \1[b]] The theoretical foundation or conceptual framework
+    \1[c]] The research questions, hypotheses, foreshadowed problems, or conjectures
+    \1[d]] The research paradigm and the methodology
+
+    \2 Intro - Topics, Purposes, and Methods of the Literature Review.
+    \3 Following the discovery of the acoustic impact of swirling flow in 
+    1977, there has been a concerted effort to model sound propagation under
+    such conditions (Cooper, A.J. and Peake N., Kousen, Posson ). 
+    \2 Description and Critique of Scholarly Literature
+
+    \3 Sound propagation in ducted flows can be modeled with the Linearized
+    Euler Equations (LEE] though an initial value problem and normal mode analysis.
+    The two normal mode analysis' have been studied by Golubev and Kousen where
+    the flow is assumed to be isentropic, however Tam \& Auriault used a 
+    non isentropic mean flow with constant density. For isentropic flows,
+    the normal mode analysis requires the perturbation variables 
+    to take the form of a linear equation. The components of the perturbation variables
+    has been split into its mean and fluctuating parts in Kousen's study while
+    Golubev , and Atassi splits the pertubation into a vortical and 
+    potential part. This study will use Kousen's definition for the perturbation variables
+
+    \4 While validation is apart of existing literature, there is currently
+    no literature where the code verification technique of the method of 
+    manufactured solutions (MMS) is used for the problem of sound propagation
+    is a ducted flow. Although various code verification
+    methods exist, the MMS is considered to be a gold-standard by experts 
+    in computational modeling and simulation 
+    (Oberkampf, W. L., and Roy, C. J., 2010. Verification and validation in scientific computing.)
+    (Roache, P. J., 2009. Fundamentals of verification and validation). 
+    The MMS provides a mathematical technique to verify that the LEE simulation 
+    solves the equations correctly and that the spatial grid refinement 
+    reduces the numerical error at an expected rate based on the numerical scheme used 
+    (Roache, P. J., 2002. “Code verification by the method of manufactured solutions”. ) 
+
+    \2 Inferences for Forthcoming study
+    \3 The problem to be addressed in your research and its significance
+    \4 The code verification presented in Maldando's work will be 
+    improved by providing an observed order of accuracy
+    \4 One key question that remains, is how well do unsteady linearized equations cap-
+    ture the mechanisms of noise generation within realistic 
+    turbomachinery flow? The numerical simulations for more complex 
+    (axial shear + swirl) flows do not have analytical solutions and contain 
+    different categories for the axial wavenumbers.  
+    \3 possible research questions, hypotheses, foreshadowed problems, or 
+    conjectures
+    \4 What combination of spatial grid resolution and numerical scheme aid 
+    the final result? The use of dissipation is apparent in literature, but the
+    amount is not reported. 
+    \4 Can the use of a desired damping rate help aid the sorting of axial wavenumbers
+    \3 possible theoretical or conceptual framework to be used and
+     possible research paradigms and methodologies used
+    \4 MMS study 
+    \4[-] Additional MMS framework will be explored (tanhSummation) and utilized
+    to find MS' that meet the guidelines in Roaches work 
+    \4[-] The use of MMS to test matrix construction for eigenvalue problem 
+    \4 MES study
+    \4[-] the analytical solution is known for uniform flow and is used for
+    MES
+   \4 Literature test case studies (some are shared with Maldonado)
+
+    \begin{itemize}
+        \item Kousen's Test Cases
+            \subitem Cylinder, Uniform Flow with Liner (Table 4.3)
+            \begin{align*}
+                m &= 2 \\
+                k &= \frac{\omega r_T}{A_T} = -1 \\
+                M_x &= 0.5 \\
+                \eta_T &= 0.72 + 0.42i\\
+                \text{Confirm if 32 grid points is enough}
+            \end{align*} 
+            \subitem Cylinder, Shear Flow without Liner (Table 4.4)
+            \begin{align*}
+                m &= 0 \\
+                kb &= \left(\frac{\omega r_T}{A_T}\right)b = 20 \\
+                b &= r_{max} - r_{min} \\
+                \tilde{r} = \frac{r}{b} \\
+                M_x &= 0.3(1-\tilde{r})^{\frac{1}{7}} \\
+                \eta_T &= 0\\
+                \text{Confirm if 32 grid points is enough}
+            \end{align*}
+            \subitem Annulus, Shear Flow without Liner (Table 4.5)
+            \begin{align*}
+                m &= 0 \\
+                kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
+                b &= r_{max} - r_{min}  = \frac{1}{7}\\
+                k &= 70 \\
+                \tilde{r} = \frac{r}{b} = 6.0 \\
+                M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
+                \eta_T &= 0\\
+                \text{Confirm if 32 grid points is enough}
+            \end{align*}
+            \subitem Annulus, Shear Flow with Liner (Table 4.6)
+            \begin{align*}
+                m &= 0 \\
+                kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
+                b &= r_{max} - r_{min}  = \frac{1}{3}\\
+                k &= 30 \\
+                \tilde{r} = \frac{r}{b} = 2.0 \\
+                M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
+                \eta_T &= 0.3 + 0.1i\\
+                \text{Confirm if 32 grid points is enough}
+            \end{align*}
+    \end{itemize}
+
+    \4[-] Kousen's test cases which were compared to P.N. Shankar's work and 
+    then expanded for cases where data is needed . Maldonado has compared the same
+    tests
+
+    \2 Theoretical/Conceptual Framework for Forthcoming Study (May appear in 
+    methods chapter)
+
+    \1 Research Methodology
+    \2 Conjectures, or Exploratory Questions:
+    \2[-] What is the observed order of accuracy for SWIRL's second order and 
+    fourth order solutions (MMS/MES)? How many grid points are needed for each scheme
+    \2 Research Procedures - Describe in detail how the inquiry was undertaken.
+    \3 Introduce the epistemology that will guide the inquiry/
+    Indicate the methodology used and why it was selected.
+    \4 The steady and unsteady aerodynamic models are presented here.
+    \4 The MMS and tanh summation method will be used to define a sufficient test 
+    case for the second/fourth order differencing schemes for the radial derivatives
+    and for the approximated speed of sound obtained through numerical integration. To account 
+    for acoustic liners as boundary conditons, fairing functions were used
+    to impose boundary values for the radial velocity perturbation and for the 
+    radial derivative of pressure.
+    \3 Explain the theoretical perspective that will drive the research, and why it was selected. 
+    \4 The need for a code verification study prompted the use of MMS and MES to
+    investigate if SWIRL was coded correctly. In addition, the findings from these 
+    studies inform the user how the numerical scheme is effecting the final solution which
+    will offer insight for the more complicated flows.
+    \3 Indicate the specific methods used and the justification for them. How were sites, cases, and
+    informants selected? Why? What access did you unsuccessfully seek? Which people perhaps tried to
+    minimize contact with you and which repeatedly sought it out? How did you collect your data? Why?
+    \3 Indicate how you managed your qualitative data. Did you take notes or make audio/video
+    recordings? Was any data not analyzed? Why?
+    \3 Indicate how you analyzed and interpreted your data, making sure the analysis was consistent with
+    the selected methodology. If you inferred themes, explain how. If you coded the transcripts, explain
+    the coding system and checks for coding reliability and validity. How did you analyze the data from
+    the coding? How did you triangulate or otherwise verify findings? How did you interpret the full set
+    of data?
+
+    \1 Results of the Study
+    \2 statement of the received results and their analysis
+    \3 Results for MMS/MES/set of test cases will be presented. The MMS and MES
+    will have errors and convergence rates associated with the schemes that are
+    available in SWIRL.
+    \2 Comparison of the obtained results and the initial goals/questions
+    \1 Summmary
+    \2 Discussion of the research results;
+    \3 Discuss the convergence rates and make the case for fourth order schemes.
+    \3 Discuss the effect on axial wavenumber categorization. 
+    \2 Comparison of the obtained results with the findings of prior researchers
+    \3 Discuss the appearance of nearly convected wavenumbers as the tests get more complex.
+    \2 Suggestions regarding the use of the obtained findings for the further
+    development of the topic and future investigation 
+    \3 The use of GCI could give a grid which is closer to convergence
+    \3 Limitations of the eigensolver
+    \3 The use of a desired damping rate can be correlated to the length of a 
+    Nacelle
+    \3 Comparison against experimental data
+    \1 Appendices
+\end{outline}
+\end{document}
+

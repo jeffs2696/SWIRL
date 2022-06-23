@@ -81,11 +81,12 @@ def extract_number(f):
 # Create cycler object. Use any styling from above you please
 monochrome = (
         cycler(
-            'color', ['royalblue','orangered','goldenrod','black']
-            ) + cycler( 'linestyle', ['-', '--', ':', '-.']
+            'color', 
+            ['royalblue','orangered','goldenrod','black']
+            ) +
+        cycler( 'linestyle', ['-', '--', ':', '-.']
                 ) #+ cycler( 'marker', ['.','^',',', '.']) + cycler( 'markevery',[125,150,175,100])
             )
-
 
 markers = ['o-', '+-', '--', '-', 'o-', '.', 'x', 'X', 'D', '|']
 width = 345
@@ -103,7 +104,6 @@ tex_fonts = {
         "ytick.labelsize": 8
         }
 
-# plt.style.use('seaborn-whitegrid')
 # plt.rcParams['figure.constrained_layout.use'] = True
 plt.rcParams.update(tex_fonts) 
 plt.rcParams['axes.grid'] = True
@@ -112,6 +112,7 @@ plt.rcParams['axes.spines.top'] = False
 plt.rcParams['axes.spines.right'] = False
 plt.rcParams['axes.spines.bottom'] = False
 plt.rcParams['axes.spines.left'] = False
+
 # input
 directories = [
         '../01-mean-flow/', 
