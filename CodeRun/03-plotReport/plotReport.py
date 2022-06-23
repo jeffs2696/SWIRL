@@ -79,7 +79,12 @@ def extract_number(f):
     return (int(s[0]) if s else -1,f)
 # plot parameters
 # Create cycler object. Use any styling from above you please
-monochrome = (cycler('color', ['k']) * cycler('linestyle', ['-', '--', ':', '-.']) * cycler('marker', ['^',',', '.']))
+monochrome = (
+        cycler(
+            'color', ['royalblue','orangered','goldenrod','black']
+            ) + cycler( 'linestyle', ['-', '--', ':', '-.']
+                ) #+ cycler( 'marker', ['.','^',',', '.']) + cycler( 'markevery',[125,150,175,100])
+            )
 
 
 markers = ['o-', '+-', '--', '-', 'o-', '.', 'x', 'X', 'D', '|']
@@ -163,16 +168,17 @@ SourceTermData4_3 = fcn.importPlotData(directories[1] + 'SourceTermData4_1025_FD
 # [III] Grid Convergence Study
 
 # Rates of convergence for each source term 
-LEE_L2_data1 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations9_FDmethod1.dat')
-LEE_L2_data2 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations9_FDmethod2.dat')
-LEE_ROC_data1 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations9_FDmethod1.dat')
-LEE_ROC_data2 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations9_FDmethod2.dat')
-SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed_numberOfIterations9.dat')
+LEE_L2_data1 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations10_FDmethod1.dat')
+LEE_L2_data2 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations10_FDmethod2.dat')
+LEE_ROC_data1 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations10_FDmethod1.dat')
+LEE_ROC_data2 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations10_FDmethod2.dat')
+SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed_numberOfIterations10.dat')
 SND_ROC_data = fcn.importPlotData(directories[1] + 'ROC-sound_speed.dat')
 
 
 # Plot Data
 
+# Fig. 1
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -180,25 +186,23 @@ fig, ax = plt.subplots(
         figsize=set_size(width), 
         )
 
-fig.suptitle('MMS Mean Flow Profile - '+ str(len(MeanFlowData1_1['radius'] )) + 'points')
+fig.suptitle('MMS Mean Flow Profile')# - '+ str(len(MeanFlowData1_1['radius'] )) + 'points')
 ax.plot(
-        MeanFlowData1_1['radius'],
-        MeanFlowData1_1['M_x'], 
+        MeanFlowData3_1['radius'],
+        MeanFlowData3_1['M_x'], 
         label = (r'$M_x$ ' ),
-        markevery = 20 
         )
 
 ax.plot(
-        MeanFlowData1_1['radius'],
-        MeanFlowData1_1['M_theta'],
+        MeanFlowData3_1['radius'],
+        MeanFlowData3_1['M_theta'],
         label = r"$M_{\theta}$", 
         )
 
 ax.plot(
-        MeanFlowData1_1['radius'],
-        (MeanFlowData1_1['M_x']**2 + MeanFlowData1_1['M_theta']**2)**0.5,
+        MeanFlowData3_1['radius'],
+        (MeanFlowData3_1['M_x']**2 + MeanFlowData3_1['M_theta']**2)**0.5,
         label = r"$M_{total}$", 
-        markevery = 20
         )
 ax.set_xlabel(r'$\bar{r}$')
 ax.set_ylabel(r'$M$')
@@ -209,43 +213,82 @@ ax.legend()
 fig.savefig('tex-outputs/MMS_mean_flow_profile.pdf',
         format = 'pdf')#, bbox_inches='tight')
 
+# Fig. 2
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
         sharex=True,
         figsize=set_size(width), 
         )
-fig.suptitle('Manufactured Pertubation Functions - '+ str(len(MeanFlowData1_1['radius'] )) + 'points')
+fig.suptitle('Manufactured Pertubation Functions')#+ str(len(MeanFlowData1_1['radius'] )) + 'points')
 ax.plot(
-        MeanFlowData1_1['radius'],
-        MeanFlowData1_1['vR'], 
+        MeanFlowData3_1['radius'],
+        MeanFlowData3_1['vR'], 
         label = (r'$\bar{v}_r$ ' ),
         markevery = 25)
 
+ax.legend()
+fig.savefig('tex-outputs/MMS_perturbation_variables_vR.pdf',
+        format = 'pdf')#, bbox_inches='tight')
+
+# Fig. 3
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width), 
+        )
+fig.suptitle('Manufactured Pertubation Functions')#+ str(len(MeanFlowData1_1['radius'] )) + 'points')
 ax.plot(
         MeanFlowData1_1['radius'],
         MeanFlowData1_1['vTh'], 
         label = (r'$\bar{v}_{\theta}$ ' ),
         markevery = 25)
 
-ax.plot(
-        MeanFlowData1_1['radius'],
-        MeanFlowData1_1['vX'], 
-        label = (r'$\bar{v}_x$ ' ),
-        markevery = 25)
+ax.legend()
+fig.savefig('tex-outputs/MMS_perturbation_variables_vTh.pdf',
+        format = 'pdf')#, bbox_inches='tight')
 
+
+# Fig. 4
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width), 
+        )
+fig.suptitle('Manufactured Pertubation Functions')#+ str(len(MeanFlowData1_1['radius'] )) + 'points')
 ax.plot(
-        MeanFlowData1_1['radius'],
-        MeanFlowData1_1['Pr'], 
+        MeanFlowData3_1['radius'],
+        MeanFlowData3_1['vX'], 
         label = (r'$\bar{v}_x$ ' ),
         markevery = 25)
 
 ax.legend()
 
-fig.savefig('tex-outputs/MMS_perturbation_variables.pdf',
+fig.savefig('tex-outputs/MMS_perturbation_variables_vX.pdf',
         format = 'pdf')#, bbox_inches='tight')
 
-# Figure 3:
+# Fig. 5
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width), 
+        )
+fig.suptitle('Manufactured Pertubation Functions')#+ str(len(MeanFlowData1_1['radius'] )) + 'points')
+ax.plot(
+        MeanFlowData3_1['radius'],
+        MeanFlowData3_1['Pr'], 
+        label = (r'$\bar{P}$ ' ),
+        markevery = 25)
+
+ax.legend()
+
+fig.savefig('tex-outputs/MMS_perturbation_variables_Pr.pdf',
+        format = 'pdf')#, bbox_inches='tight')
+
+# Fig. 6:
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -273,8 +316,7 @@ plt.savefig('tex-outputs/SpeedOfSoundComparison1.pdf',
         bbox_inches='tight')
 
 
-# Figure 4
-
+# Fig. 7: 
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -302,11 +344,13 @@ ax.plot(
         label =str(len(SpeedOfSoundData3['radius'] ))) 
 
 plt.legend()
-
+ax.set_ylabel(r'$\epsilon$')
+ax.set_xlabel('Radius')
 plt.savefig('tex-outputs/SpeedOfSoundComparison2.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
+# Fig. 8: 
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -331,10 +375,10 @@ vaakaplot = range(SND_L2_data['GridPoints'][0], SND_L2_data['GridPoints'].iloc[-
 
 pystyplot = [b*10**(k*(math.log(n, 10)))  for n in SND_L2_data['GridPoints']]
 
-ax.loglog(
-        SND_L2_data['GridPoints'],
-        b*SND_L2_data['GridPoints']**popt[1],
-        label='power law curve fit: a=%5.3e, b=%5.3f' % tuple((b, popt[1])))
+# ax.loglog(
+#         SND_L2_data['GridPoints'],
+#         b*SND_L2_data['GridPoints']**popt[1],
+#         label='power law curve fit: a=%5.3e, b=%5.3f' % tuple((b, popt[1])))
 
 ax.loglog(
         SND_L2_data['GridPoints'],
@@ -348,6 +392,7 @@ ax.set_xlabel("$ ln (N)  $")
 plt.savefig('tex-outputs/SND_L2.pdf',
         format = 'pdf', 
         bbox_inches='tight')
+# Fig. 9: 
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -355,7 +400,7 @@ fig, ax = plt.subplots(
         figsize=set_size(width),
         )
 fig.suptitle('Rate of Convergence of Speed of Sound Integration')
-ax.semilogy(
+ax.semilogx(
         SND_ROC_data['Delta_r'],
         SND_ROC_data['ROC']    ,
         marker = '1')
@@ -370,9 +415,10 @@ ax.set_ylabel(r'$\alpha $')
 plt.savefig('tex-outputs/SND_ROC.pdf',
         format = 'pdf', 
         bbox_inches='tight')
-plt.show()
-sys.exit()
+# plt.show()
+# sys.exit()
 
+# Fig. 10: 
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -389,11 +435,17 @@ ax.loglog(
         LEE_L2_data2['GridPoints'],
         LEE_L2_data2['L2'],
         label = '4th Order')
+ax.legend()
+ax.set_ylabel(r'$\epsilon$')
 
+
+
+ax.set_xlabel('Number of Grid Points')
 plt.savefig('tex-outputs/LEE_L2.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
+# Fig. 11: 
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -401,28 +453,24 @@ fig, ax = plt.subplots(
         figsize=set_size(width),
         )
 fig.suptitle('Rate of Convergence of LEE Matrix')
-ax.loglog(
+ax.semilogx(
         LEE_ROC_data1['Delta_r'],
         LEE_ROC_data1['ROC'],
         label = '2th' )
 
-ax.loglog(
+ax.semilogx(
         LEE_ROC_data2['Delta_r'],
         LEE_ROC_data2['ROC'],
         label = '4th' )
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=set_size(width),
-        )
 
+# Fig. 12: 
 plt.savefig('tex-outputs/LEE_ROC.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
 
 
+# Fig. 13: 
 fig, axs = plt.subplots(
         nrows=2,
         ncols=2,
@@ -430,165 +478,186 @@ fig, axs = plt.subplots(
         figsize=set_size(width),
         )
 
-fig.suptitle('Actual LEE Source Terms')
+fig.suptitle('LEE Source Term Comparison')
+
 axs[0,0].plot(
         SourceTermData1_1['radius'],
-        SourceTermData1_1['S_actual'])
+        SourceTermData1_1['S_actual'],
+        label = '$Numerical$')
 axs[0,0].plot(
-        SourceTermData1_2['radius'],
-        SourceTermData1_2['S_actual'])
-axs[0,0].plot(
-        SourceTermData1_3['radius'],
-        SourceTermData1_3['S_actual'])
+        SourceTermData1_1['radius'],
+        SourceTermData1_1['S_expected'],
+        label = '$Theoretical$')
 axs[0,0].set(title='$S_1$')
+
 axs[0,1].plot(
         SourceTermData2_1['radius'],
         SourceTermData2_1['S_actual'])
 axs[0,1].plot(
-        SourceTermData2_2['radius'],
-        SourceTermData2_2['S_actual'])
-axs[0,1].plot(
-        SourceTermData2_3['radius'],
-        SourceTermData2_3['S_actual'])
-
+        SourceTermData2_1['radius'],
+        SourceTermData2_1['S_expected'])
 axs[0,1].set(title='$S_2$')
+
 axs[1,0].plot(
         SourceTermData3_1['radius'],
         SourceTermData3_1['S_actual'])
 axs[1,0].plot(
-        SourceTermData3_2['radius'],
-        SourceTermData3_2['S_actual'])
-axs[1,0].plot(
-        SourceTermData3_3['radius'],
-        SourceTermData3_3['S_actual'],
-        )
-
+        SourceTermData3_1['radius'],
+        SourceTermData3_1['S_expected'])
 axs[1,0].set(title='$S_3$')
+
 axs[1,1].plot(
         SourceTermData4_1['radius'],
         SourceTermData4_1['S_actual'])
 axs[1,1].plot(
-        SourceTermData4_2['radius'],
-        SourceTermData4_2['S_actual'])
-axs[1,1].plot(
-        SourceTermData4_3['radius'],
-        SourceTermData4_3['S_actual'],
+        SourceTermData4_1['radius'],
+        SourceTermData4_1['S_expected'],
         )
-
 axs[1,1].set(title='$S_4$')
 
-plt.savefig('tex-outputs/SourceTermActual.pdf',
+axs[0,0].legend()
+plt.savefig('tex-outputs/SourceTermComparison.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
+# --------
+# Fig. 15: 
 fig, axs = plt.subplots(
-        nrows=2,
-        ncols=2,
+        nrows=1,
+        ncols=1,
         sharex=True,
         figsize=set_size(width),
         )
+axs.plot(
+   SourceTermData1_1['radius'],
+   abs(SourceTermData1_1['S_actual']-SourceTermData1_1['S_expected']))
 
-fig.suptitle('Expected LEE Source Terms')
-axs[0,0].plot(
-        SourceTermData1_1['radius'],
-        SourceTermData1_1['S_expected'])
-axs[0,0].plot(
-        SourceTermData1_2['radius'],
-        SourceTermData1_2['S_expected'])
-axs[0,0].plot(
+axs.plot(
+   SourceTermData1_2['radius'],
+   abs(SourceTermData1_2['S_actual']-SourceTermData1_2['S_expected']))
+
+axs.plot(
         SourceTermData1_3['radius'],
-        SourceTermData1_3['S_expected'])
-
-axs[0,1].plot(
-        SourceTermData2_1['radius'],
-        SourceTermData2_1['S_expected'])
-axs[0,1].plot(
-        SourceTermData2_2['radius'],
-        SourceTermData2_2['S_expected'])
-axs[0,1].plot(
-        SourceTermData2_3['radius'],
-        SourceTermData2_3['S_expected'])
-
-axs[1,0].plot(
-        SourceTermData3_1['radius'],
-        SourceTermData3_1['S_expected'])
-axs[1,0].plot(
-        SourceTermData3_2['radius'],
-        SourceTermData3_2['S_expected'])
-axs[1,0].plot(
-        SourceTermData3_3['radius'],
-        SourceTermData3_3['S_expected'],
-        )
-
-axs[1,1].plot(
-        SourceTermData4_1['radius'],
-        SourceTermData4_1['S_expected'])
-axs[1,1].plot(
-        SourceTermData4_2['radius'],
-        SourceTermData4_2['S_expected'])
-axs[1,1].plot(
-        SourceTermData4_3['radius'],
-        SourceTermData4_3['S_expected'],
-        )
+        abs(SourceTermData1_3['S_actual']-SourceTermData1_3['S_expected']))
 
 
-plt.savefig('tex-outputs/SourceTermExpected.pdf',
+fig.suptitle('Source Term 1 Error at Multiple Grids')
+plt.savefig('tex-outputs/SourceTermError1.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
+# Fig. 16: 
 fig, axs = plt.subplots(
-        nrows=2,
-        ncols=2,
+        nrows=1,
+        ncols=1,
         sharex=True,
         figsize=set_size(width),
         )
-axs[0,0].plot(
-        SourceTermData1_1['radius'],
-        SourceTermData1_1['Error'])
-axs[0,0].plot(
-        SourceTermData1_2['radius'],
-        SourceTermData1_2['Error'])
-axs[0,0].plot(
-        SourceTermData1_3['radius'],
-        SourceTermData1_3['Error'],
-        )
+axs.plot(
+   SourceTermData2_1['radius'],
+   abs(SourceTermData2_1['S_actual']-SourceTermData2_1['S_expected']))
 
-axs[0,1].plot(
-        SourceTermData2_1['radius'],
-        SourceTermData2_1['Error'])
-axs[0,1].plot(
-        SourceTermData2_2['radius'],
-        SourceTermData2_2['Error'])
-axs[0,1].plot(
+axs.plot(
+   SourceTermData2_2['radius'],
+   abs(SourceTermData2_2['S_actual']-SourceTermData2_2['S_expected']))
+
+axs.plot(
         SourceTermData2_3['radius'],
-        SourceTermData2_3['Error'])
+        abs(SourceTermData2_3['S_actual']-SourceTermData2_3['S_expected']))
 
-axs[1,0].plot(
-        SourceTermData3_1['radius'],
-        SourceTermData3_1['Error'])
-axs[1,0].plot(
-        SourceTermData3_2['radius'],
-        SourceTermData3_2['Error'])
-axs[1,0].plot(
-        SourceTermData3_3['radius'],
-        SourceTermData3_3['Error'],
-        )
 
-axs[1,1].plot(
-        SourceTermData4_1['radius'],
-        SourceTermData4_1['Error'])
-axs[1,1].plot(
-        SourceTermData4_2['radius'],
-        SourceTermData4_2['Error'])
-axs[1,1].plot(
-        SourceTermData4_3['radius'],
-        SourceTermData4_3['Error'],
-        )
-
-plt.savefig('tex-outputs/SourceTermError.pdf',
+fig.suptitle('Source Term 2 Error at Multiple Grids')
+plt.savefig('tex-outputs/SourceTermError2.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
+
+# Fig. 17: 
+fig, axs = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+axs.plot(
+   SourceTermData3_1['radius'],
+   abs(SourceTermData3_1['S_actual']-SourceTermData3_1['S_expected']))
+
+axs.plot(
+   SourceTermData3_2['radius'],
+   abs(SourceTermData3_2['S_actual']-SourceTermData3_2['S_expected']))
+
+axs.plot(
+        SourceTermData3_3['radius'],
+        abs(SourceTermData3_3['S_actual']-SourceTermData3_3['S_expected']))
+
+
+fig.suptitle('Source Term 3 Error at Multiple Grids')
+plt.savefig('tex-outputs/SourceTermError3.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
+
+
+# Fig. 18: 
+fig, axs = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+axs.plot(
+   SourceTermData4_1['radius'],
+   abs(SourceTermData4_1['S_actual']-SourceTermData4_1['S_expected']))
+
+axs.plot(
+   SourceTermData4_2['radius'],
+   abs(SourceTermData4_2['S_actual']-SourceTermData4_2['S_expected']))
+
+axs.plot(
+        SourceTermData4_3['radius'],
+        abs(SourceTermData4_3['S_actual']-SourceTermData4_3['S_expected']))
+
+
+fig.suptitle('Source Term 4 Error at Multiple Grids')
+plt.savefig('tex-outputs/SourceTermError4.pdf',
+        format = 'pdf', 
+        bbox_inches='tight')
 
 plt.show()
 sys.exit()
+
+
+# axs[0,1].plot(
+#         SourceTermData2_1['radius'],
+#         SourceTermData2_1['Error'])
+# axs[0,1].plot(
+#         SourceTermData2_2['radius'],
+#         SourceTermData2_2['Error'])
+# axs[0,1].plot(
+#         SourceTermData2_3['radius'],
+#         SourceTermData2_3['Error'])
+
+# axs[1,0].plot(
+#         SourceTermData3_1['radius'],
+#         SourceTermData3_1['Error'])
+# axs[1,0].plot(
+#         SourceTermData3_2['radius'],
+#         SourceTermData3_2['Error'])
+# axs[1,0].plot(
+#         SourceTermData3_3['radius'],
+#         SourceTermData3_3['Error'],
+#         )
+
+# axs[1,1].plot(
+#         SourceTermData4_1['radius'],
+#         SourceTermData4_1['Error'])
+# axs[1,1].plot(
+#         SourceTermData4_2['radius'],
+#         SourceTermData4_2['Error'])
+# axs[1,1].plot(
+#         SourceTermData4_3['radius'],
+#         SourceTermData4_3['Error'],
+#         )
+
+
+# 

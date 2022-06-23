@@ -60,7 +60,8 @@ F90FLAGS  =	\
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wsurprising -Warray-temporaries \
-			-Wextra -Werror \
+			-Wextra #\
+			-Werror \
 			-Wno-error=unused-function \
 			-Wno-error=unused-parameter \
 			-Wno-error=conversion-extra \
@@ -85,7 +86,8 @@ F77FLAGS  = \
 			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
-			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
+			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra #\
+			# -Werror \
 			-Wno-error=compare-reals \
 			-Wno-error=array-temporaries \
 			-Wno-error=unused-dummy-argument \

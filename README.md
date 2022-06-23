@@ -1,5 +1,7 @@
 # SWIRL
 
+A frequency domain , linearized Euler equation code for Turbomachinery  
+
 SWIRL analyzes axial flows with mean shear and swirl in lined and unlined ducts.
 
 ### Table of Contents

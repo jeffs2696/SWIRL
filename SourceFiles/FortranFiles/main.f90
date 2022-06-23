@@ -36,7 +36,7 @@ PROGRAM MAIN
         M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 12
+        numberOfIterations =10 
 
     INTEGER  :: &
     !! Integers for flags and loop indicies
@@ -178,12 +178,12 @@ PROGRAM MAIN
 
             IF (fac .lt. 8) THEN
                 
-                numberOfGridPoints           = (1+(2**fac))
+                numberOfGridPoints           = (1+(2**fac)*2)
             
             ELSEIF (fac .eq. numberOfIterations) THEN 
-                numberOfGridPoints           = (1+(2**fac))
+                numberOfGridPoints           = (1+(2**fac)*2)
             ELSE
-                numberOfGridPoints           = (1+(2**fac))
+                numberOfGridPoints           = (1+(2**fac)*2)
             ENDIF
 
             numberOfGridPointsArray(fac) = numberOfGridPoints
@@ -406,6 +406,7 @@ PROGRAM MAIN
          gridSpacingRatio  = gridSpacingRatio)
 
     include 'main-scripts/swirl-data-export-MMS.f90'
+    ! include 'main-scripts/swirl-data-export-per-grid-MMS.f90'
 
     END DO
     DEALLOCATE(&

@@ -51,7 +51,7 @@ DO i = 1,numberOfGridPoints
 
     WRITE(UNIT,*) &
         rOut(i)                             , &
-        axialMachDataMMS(i)                 , &
+        axialMachDataMMSOut(i)                 , &
         thetaMachDataMMSOut(i)                 , &
         speedOfSoundMMS(i)               , &
         SoundSpeedOut(i)                    , &

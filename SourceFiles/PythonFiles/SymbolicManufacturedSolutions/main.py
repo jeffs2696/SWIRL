@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # general libraries
+import matplotlib.pyplot as plt
 import sys
 import sympy as sp
 import math
@@ -85,7 +86,7 @@ print('eta_min' ,eta_min, r_min,r_max)
 A_analytic        = msg.TanhMethod(5,0.3,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = 0.2*msg.TanhMethod(2 ,10,r_min,r_max )
+M_x_analytic      = 0.3*msg.TanhMethod(5 ,50,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -119,8 +120,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = msg.TanhMethod(4,0.03,r_min,r_max)
-v_x_analytic = msg.TanhMethod(3,0.3,r_min,r_max)
+v_t_analytic = msg.TanhMethod(4,50,r_min,r_max)
+v_x_analytic = msg.TanhMethod(3,30,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -129,7 +130,7 @@ dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
 
-f      = msg.TanhMethod(5,3,r_min,r_max)
+f      = msg.TanhMethod(5,30,r_min,r_max)
 df     = f.diff(r)
 r_hat  = (r - r_min)/(r_max - r_min)
 f_min  = f.subs(r,r_min)
@@ -214,27 +215,27 @@ sp_help.plotSymbolicEquation('Tanh Summation Example', \
                      r_min           , \
                      r_max)
 tikzplotlib.save("TSM.tex")
-#sp_help.plotSymbolicEquation('M_t'       , \
-#                     r           , \
-#                     'radius'    , \
-#                     M_t_analytic, \
-#                     'M_t'       , \
-#                     r_min       , \
-#                     r_max)
+sp_help.plotSymbolicEquation('M_t'       , \
+                    r           , \
+                    'radius'    , \
+                    M_t_analytic, \
+                    'M_t'       , \
+                    r_min       , \
+                    r_max)
 #
-#sp_help.plotSymbolicEquation('Mx'        , \
-#                     r           , \
-#                     'radius'    , \
-#                     M_x_analytic, \
-#                     'M_x'       , \
-#                     r_min       , \
-#                     r_max)
-#sp_help.plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('dvdr'  ,r,'radius',dv_r_dr_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('vt'  ,r,'radius',v_t_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('vx'  ,r,'radius',v_x_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('p'   ,r,'radius',p_analytic,'p',r_min,r_max)
-#sp_help.plotSymbolicEquation('dpdr',r,'radius',dp_dr_analytic,'dpdr',r_min,r_max)
+sp_help.plotSymbolicEquation('Mx'        , \
+                     r           , \
+                     'radius'    , \
+                     M_x_analytic, \
+                     'M_x'       , \
+                     r_min       , \
+                     r_max)
+sp_help.plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('dvdr'  ,r,'radius',dv_r_dr_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('vt'  ,r,'radius',v_t_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('vx'  ,r,'radius',v_x_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('p'   ,r,'radius',p_analytic,'p',r_min,r_max)
+sp_help.plotSymbolicEquation('dpdr',r,'radius',dp_dr_analytic,'dpdr',r_min,r_max)
 #
 S = list(range(4))
 S[0] = -i*( ak/A - (m/r)*M_t - gamma*M_x)*v_r \
@@ -471,7 +472,7 @@ str = A_analytic_tex
 #print(Sp.latex(chunks))
 
 A_analytic_tex = A_analytic_str.format(latex_expr = A_analytic_tex)
-
+plt.show()
 #print(A_analytic_tex)
 #M_x_tex = "M_x = {latex_expr}"
 #M_x_tex = M_x_tex.format(latex_expr = sp.latex(sp.ratsimp(rationalize_coeffs(M_x_analytic))))
