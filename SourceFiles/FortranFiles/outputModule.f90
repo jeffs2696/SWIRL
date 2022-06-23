@@ -230,7 +230,7 @@ CONTAINS
             indx  = indx)
 !
 ! Sort nonconvected modes into upstream and downstream.
-        eps  = 1.e-3_rDef
+        eps  = 1.e-4_rDef
 !     do j=1,np4
         do j=1,np4-1
             if (izeros(indx(j)).eq.izeros(indx(j+1))) then

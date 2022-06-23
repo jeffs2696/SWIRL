@@ -179,7 +179,7 @@ SND_ROC_data = fcn.importPlotData(directories[1] + 'ROC-sound_speed.dat')
 
 # Plot Data
 
-# Fig. 1
+# Fig. 1:
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -214,7 +214,7 @@ ax.legend()
 fig.savefig('tex-outputs/MMS_mean_flow_profile.pdf',
         format = 'pdf')#, bbox_inches='tight')
 
-# Fig. 2
+# Fig. 2:
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -232,7 +232,7 @@ ax.legend()
 fig.savefig('tex-outputs/MMS_perturbation_variables_vR.pdf',
         format = 'pdf')#, bbox_inches='tight')
 
-# Fig. 3
+# Fig. 3:
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -251,7 +251,7 @@ fig.savefig('tex-outputs/MMS_perturbation_variables_vTh.pdf',
         format = 'pdf')#, bbox_inches='tight')
 
 
-# Fig. 4
+# Fig. 4:
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -270,7 +270,7 @@ ax.legend()
 fig.savefig('tex-outputs/MMS_perturbation_variables_vX.pdf',
         format = 'pdf')#, bbox_inches='tight')
 
-# Fig. 5
+# Fig. 5:
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -626,39 +626,3 @@ plt.savefig('tex-outputs/SourceTermError4.pdf',
 
 plt.show()
 sys.exit()
-
-
-# axs[0,1].plot(
-#         SourceTermData2_1['radius'],
-#         SourceTermData2_1['Error'])
-# axs[0,1].plot(
-#         SourceTermData2_2['radius'],
-#         SourceTermData2_2['Error'])
-# axs[0,1].plot(
-#         SourceTermData2_3['radius'],
-#         SourceTermData2_3['Error'])
-
-# axs[1,0].plot(
-#         SourceTermData3_1['radius'],
-#         SourceTermData3_1['Error'])
-# axs[1,0].plot(
-#         SourceTermData3_2['radius'],
-#         SourceTermData3_2['Error'])
-# axs[1,0].plot(
-#         SourceTermData3_3['radius'],
-#         SourceTermData3_3['Error'],
-#         )
-
-# axs[1,1].plot(
-#         SourceTermData4_1['radius'],
-#         SourceTermData4_1['Error'])
-# axs[1,1].plot(
-#         SourceTermData4_2['radius'],
-#         SourceTermData4_2['Error'])
-# axs[1,1].plot(
-#         SourceTermData4_3['radius'],
-#         SourceTermData4_3['Error'],
-#         )
-
-
-# 

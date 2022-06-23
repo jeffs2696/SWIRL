@@ -317,12 +317,13 @@ CONTAINS
         ! WRITE(UNIT,55)
 
         do j=1,np4
-!            WRITE(0,*) alpha(j),beta(j)
-            if (beta(j).ne.c0) then
+            WRITE(0,*) 'before' ,j, alpha(j),beta(j)
+            if ((beta(j).ne.c0) .or. (REAL(beta(j)).gt.eps) .or.(AIMAG(beta(j)).gt.eps)) then
                 gam(j) = ci*alpha(j)/beta(j)
                 if (abs(AIMAG(gam(j))).lt.eps) then
                     gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
                 elseif (abs(REAL(gam(j))).lt.eps) then
+                    WRITE(0,*)
                     gam(j) =CMPLX(0.0_rDef,AIMAG(gam(j)),KIND=rDef)
                 endif
                 vphi(j)  = ak/gam(j)
@@ -330,7 +331,14 @@ CONTAINS
                 ! WRITE(UNIT ,12) j,gam(j),gam(j)/ak, vphi(j)
                 ! WRITE(UNIT2,10) j,gam(j),gam(j)/ak,vphi(j)
                 ! WRITE(UNIT3,*) REAL(gam(j)),AIMAG(gam(j))
+            elseif (beta(j).eq.c0) THEN
+                gam(j) = CMPLX(0.0_rDef,0.0_rDef, KIND=rDef) 
+            elseif ((REAL(beta(j)).lt.eps) .or. AIMAG(beta(j)).lt.eps) THEN
+                WRITE(0,*) 'beta is lt eps'
+                ! gam(j) = ci*CMPLX(0.0_rDef, AIMAG(alpha(j)), KIND=rDef)/beta(j)
             endif
+
+            WRITE(0,*) 'after' ,j, alpha(j),beta(j)
         enddo
 
         ! CLOSE(UNIT)

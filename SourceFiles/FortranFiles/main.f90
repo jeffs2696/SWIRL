@@ -157,9 +157,13 @@ PROGRAM MAIN
     
     M_int_new = M_int
 
-    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes
+    DO FDfac = 2,2! numberOfFiniteDifferenceSchemes
+
         DO fac = 1, numberOfIterations
 
+            IF (debug) THEN
+                WRITE(0,*) 'Iteration ', fac
+            ENDIF
             finiteDiffFlag            = FDfac ! from FDfac loop
 
             IF (numericalIntegrationFlag.eq.1) THEN
@@ -193,10 +197,9 @@ PROGRAM MAIN
 
             IF (facCount .gt. 1) THEN
                 gridSpacingRatio = drArray(fac)/drArray(fac-1) 
-                WRITE(0,*) fac, M_int_new
-                WRITE(0,*)  'grid 2:              ', numberOfGridPointsArray(fac)   , drArray(fac)
-                WRITE(0,*)  'grid 1:              ', numberOfGridPointsArray(fac-1) , drArray(fac-1)
-                WRITE(0,*)  'grid refinement ratio:' ,gridSpacingRatio, fac
+                WRITE(0,*)  'number of grid points 2: ', numberOfGridPointsArray(fac)   ,'delta r', drArray(fac)
+                WRITE(0,*)  'number of grid points 1: ', numberOfGridPointsArray(fac-1) , 'delta r' ,drArray(fac-1)
+                WRITE(0,*)  'grid refinement ratio:   ' ,gridSpacingRatio
             END IF
 
             ALLOCATE(&
