@@ -18,9 +18,16 @@ and swirl velocity components." (1999)." [Here is the paper](https://core.ac.uk/
 
 ### File Directory Structure
 * SourceFiles
-** PythonFiles
-** FortranFiles
+  * PythonFiles
+  * FortranFiles
 * CodeRun
+  * 01-mean-flow/
+    * MMS1 
+  * 02-method-of-manufactured-solutions/
+    * MMS1 
+  * 03-plotReport/
+  * 04-EVanalysis/
+    * MMS1
 * LibraryFiles
 * ModuleFiles
 * ObjectFiles

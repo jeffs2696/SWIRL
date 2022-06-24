@@ -115,9 +115,9 @@ plt.rcParams['axes.spines.left'] = False
 
 # input
 directories = [
-        '../01-mean-flow/', 
-        '../02-method-of-manufactured-solutions/',
-        '../04-EVanalysis/']
+        '../01-mean-flow/MMS1/', 
+        '../02-method-of-manufactured-solutions/MMS1/',
+        '../04-EVanalysis/MMS1/']
 # create a grid convergence study object based on a representative grid size
 
 
