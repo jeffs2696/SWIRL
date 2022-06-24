@@ -55,7 +55,6 @@ F90FLAGS  =	\
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
@@ -71,7 +70,7 @@ F90FLAGS  =	\
 			-Wno-error=unused-dummy-argument \
 			-Wno-error=unused-variable\
 			-Wno-error=array-temporaries \
-			-Wno-error=do-subscript
+			-Wno-error=do-subscript -ffpe-trap=denormal,invalid,zero,overflow,underflow \
 
 # -Wconversion-extra \
 			
@@ -82,7 +81,6 @@ F77FLAGS  = \
 			-O0\
 			-std=legacy \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
@@ -91,8 +89,7 @@ F77FLAGS  = \
 			-Wno-error=compare-reals \
 			-Wno-error=array-temporaries \
 			-Wno-error=unused-dummy-argument \
-			-Wno-error=do-subscript
-
+			-Wno-error=do-subscript -ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			# -Wno-error=conversion \
 			-Wno-error=conversion-extra \
 

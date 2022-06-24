@@ -8,8 +8,8 @@
     numericalIntegrationFlag  =  1
 !    DO FDfac = 1,2
 
-    secondOrderSmoother       =  100.0_rDef
-    fourthOrderSmoother       =  110.0_rDef
+    secondOrderSmoother       =  0.0_rDef!100.0_rDef
+    fourthOrderSmoother       =  0.0_rDef!110.0_rDef
         ductAdmittance            = CMPLX(0.1,0.0,rDef)
         hubAdmittance             = CMPLX(0.1,0.0,rDef)
         frequency                 = CMPLX(-1.0,0,rDef)

@@ -169,11 +169,11 @@ SourceTermData4_3 = fcn.importPlotData(directories[1] + 'SourceTermData4_1025_FD
 # [III] Grid Convergence Study
 
 # Rates of convergence for each source term 
-LEE_L2_data1 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations10_FDmethod1.dat')
-LEE_L2_data2 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations10_FDmethod2.dat')
-LEE_ROC_data1 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations10_FDmethod1.dat')
-LEE_ROC_data2 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations10_FDmethod2.dat')
-SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed_numberOfIterations10.dat')
+LEE_L2_data1 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations9_FDmethod1.dat')
+LEE_L2_data2 = fcn.importPlotData(directories[1] + 'L2-LEE_numberOfIterations9_FDmethod2.dat')
+LEE_ROC_data1 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations9_FDmethod1.dat')
+LEE_ROC_data2 = fcn.importPlotData(directories[1] + 'ROC-LEE_numberOfIterations9_FDmethod2.dat')
+SND_L2_data = fcn.importPlotData(directories[1] +  'L2-sound_speed_numberOfIterations9.dat')
 SND_ROC_data = fcn.importPlotData(directories[1] + 'ROC-sound_speed.dat')
 
 

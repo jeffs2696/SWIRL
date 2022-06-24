@@ -157,7 +157,7 @@ PROGRAM MAIN
     
     M_int_new = M_int
 
-    DO FDfac = 2,2! numberOfFiniteDifferenceSchemes
+    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes
 
         DO fac = 1, numberOfIterations
 

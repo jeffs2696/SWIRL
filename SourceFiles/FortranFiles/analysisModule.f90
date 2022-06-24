@@ -110,7 +110,7 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .FALSE.
+        LOGICAL :: debug = .TRUE.
 !
 !        INTEGER  :: &
 !            UNIT , &
@@ -134,11 +134,6 @@ CONTAINS
             rs = rmt(j) !and tangential mach numbers +  ...
             as = snd(j) ! the speed of sound.
             r  = rr(j)  ! Don't forget, we need this data at each radial point!
-
-            IF (debug.eqv..TRUE.) THEN
-                WRITE(0,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
-            ELSE
-            ENDIF
 ! Check Convective wave number calculation
 ! what is 'as' is zero??? - JS
             IF ( (rm.ne.0.0_rDef) .and.(r.gt.0.0_rDef) ) THEN
@@ -267,11 +262,13 @@ CONTAINS
             VR    = VR,      & ! VR
             LDVR  = NMAX4,   & ! LDVR
             WORK  = WORK,    & ! WORK
-            LWORK = 2*NMAX4, & ! LWORK
+            LWORK = 2*NMAX4, & !2*NMAX4, & ! LWORK
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
 
         IF ((INFO .EQ. 0).and.(debug.eqv..TRUE.)) THEN
+            WRITE(0,*) 'WORK = ' ,WORK(1)
+            WRITE(0,*) 'LWORK = ' ,2*NMAX4
             WRITE(0,*) 'INFO = ' ,INFO
             WRITE(0,*) 'EIGENSOLVER PASSED'
         ELSEIF ((INFO .EQ. 1 .or. INFO .LT. np4).and.(debug.eqv..TRUE.)) THEN
@@ -317,7 +314,7 @@ CONTAINS
         ! WRITE(UNIT,55)
 
         do j=1,np4
-            WRITE(0,*) 'before' ,j, alpha(j),beta(j)
+            ! WRITE(0,*) 'before' ,j, alpha(j),beta(j)
             if ((beta(j).ne.c0) .or. (REAL(beta(j)).gt.eps) .or.(AIMAG(beta(j)).gt.eps)) then
                 gam(j) = ci*alpha(j)/beta(j)
                 if (abs(AIMAG(gam(j))).lt.eps) then
