@@ -1,0 +1,120 @@
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Thesis Introduction}
+
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Thesis introduction}
+During the 1960s, the increased demand for commercialized aircraft transport
+introduced jet engines to support large cargo and passengers. Consequently,
+this rise in innovation resulted in high volume engine noise. After 1975, 
+efforts to reduce aircraft noise eliminated the noise pollution for 90\% of
+the population \cite{FAAPolicy}. However, since the early 2000s,
+the advancement in noise reduction technologies has been moderately increasing,
+leaving a requirement for drastic improvement in aeroacoustic modeling and treatment
+strategies to compete with the demand for quiet subsonic flight.  
+A turbomachine's general flow condition includes a series of axial, tangential,
+and radial velocity components that vary depending on the location of concern.
+The swirling flow between fan stages has been an area of interest due to the
+potential for acoustic treatment in a location previously avoided for its flow complexity, among 
+other reasons.
+
+In general, jet engine designers can model flow within a turbomachine with 
+the Navier Stokes Equations, a set 
+of partial differential equations that describe the mass, momentum and energy
+of a given viscous fluid. It is common in practice to utilize the Euler equations,
+a closely related set of PDEs that model inviscid fluid, as they provide an 
+approximation for higher Reynold number flows where viscosity 
+does not play a critical role. A popular approach to modeling sound propagation 
+within a flow is to ``linearize'' the Euler equations, which decomposes the 
+flow solution into a mean and fluctuating component (insert refs). Another method
+decomposes the flow into vortical and potential parts [\cite{golubev1996sound}] 
+In either case, this presents an initial value problem and for certain flows and
+domains, can obtain analytical solutions.  The LEE provides a system of linear 
+equations where the solution is a family of wavenumbers and radial mode shapes 
+that arise from unsteady disturbances.  For uniform flows in a hard wall duct , 
+the waves are categorized as vortical and entropical waves that soley convect 
+with the mean flow, where as the acoustic wave can propagate without damping or 
+decay exponentially.  However, for swiriling flows, the waves are partially coupled
+and are not easily categorized due to an additonal category of ``nearly convecting'' 
+modes (Kerrebrock) and do not form a complete basis system for all wave types.
+Therefore, the families of waves must be found numerically \cite{Envia2004}
+making the ducted acoustic propagtion in swirling flow a problem without
+an analytical solution but has a framework for a numerical solution.
+
+Swirling flow has been a difficult problem to investigate in comparison to 
+flows parallel to the wall domain of a duct \cite{COOPER2001} because of the 
+lack of an analytical solution and thus cannot be described from a single convective 
+wave equation. Various methods of code validation have been
+conducted, however, a gold standard method of code verification offers a measure
+of ``goodness'' that would strengthen the results of a numerical solution by 
+providing a ``psudo-analytical'' solution which is can then be compared to the 
+numerical solution.   
+
+The proposed research aims to determine the impact of the numerical schemes used
+in the swirling flow problem and how it effects the family of waves that are
+produced from the problem formulation so a better understanding of the 
+acoustic phenomena as the flow under goes a compressible rotational flow. The use
+of the method of manufactured solutions is used as a means of ensuring the code is
+approximating the right equations and will check the effect of the numerical schemes
+on the axial wavenumbers produced 
+\section{Issues and Concerns}
+Is the research gap truly stated in the introduction?
+
+\section{Planned Research} 
+
+Ensure that the research problem is clearly stated and that the need for this
+work is explained.
+\bibliography{references}
+\bibliographystyle{unsrt}
+\end{document}
+
+

@@ -36,7 +36,8 @@ CONTAINS
         ir, &
         is, &
         vphi, &
-        akap)
+        akap, &
+        debug)
 
         INTEGER, INTENT(IN) :: &
             np, &
@@ -77,6 +78,8 @@ CONTAINS
             jobvl, &
             jobvr
 
+        LOGICAL , INTENT(IN)  :: &
+           debug 
 ! define local variables
 
         LOGICAL :: &
@@ -110,7 +113,6 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .TRUE.
 !
 !        INTEGER  :: &
 !            UNIT , &
@@ -331,11 +333,15 @@ CONTAINS
             elseif (beta(j).eq.c0) THEN
                 gam(j) = CMPLX(0.0_rDef,0.0_rDef, KIND=rDef) 
             elseif ((REAL(beta(j)).lt.eps) .or. AIMAG(beta(j)).lt.eps) THEN
-                WRITE(0,*) 'beta is lt eps'
+                IF (debug) THEN
+                    WRITE(0,*) 'beta is lt eps'
+                ENDIF
                 ! gam(j) = ci*CMPLX(0.0_rDef, AIMAG(alpha(j)), KIND=rDef)/beta(j)
             endif
 
-            WRITE(0,*) 'after' ,j, alpha(j),beta(j)
+            if (debug) THEN
+                WRITE(0,*) 'after' ,j, alpha(j),beta(j)
+            ENDIF
         enddo
 
         ! CLOSE(UNIT)

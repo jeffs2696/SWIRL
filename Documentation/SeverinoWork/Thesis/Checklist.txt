@@ -1,0 +1,58 @@
+Some quick notes:
+
+p. 1: The aircraft is NOT slowing down at takeoff.  This is the second
+time I've pointed this out.
+- Removed
+
+p. 1:  Please consider introducing the distinction between tone noise
+and broadband noise -- SWIRL is focused on tone noise propagation, and
+liners are designed to attenuate known tones.
+
+- This is needed
+
+p. 1: The word 'nacelle', or 'duct', is MISSING STILL.  This is the 
+second time I've pointed this out.
+
+- Added 
+
+Figure 1-1 came from somewhere -- make sure to reference both in the
+text and the caption. SECOND TIME.
+
+- Referenced
+
+
+'need ... is going to be needed':  consider a different phrasing. SECOND TIME.
+- removed first need 
+
+(insert refs): please do. SECOND TIME.
+
+linearized Euler equations:  this is because the sound waves are low
+amplitude compared to the mean flow, and their presence does not
+appreciably change the mean flow field. SECOND TIME.
+-Added
+LEE: make sure to introduce 'linearized Euler equations (LEE)' prior to
+using the acronym. SECOND TIME.
+-Included acroynm in the first appearance of LEE
+'...where the solution is': for this particular configuration -- not in
+general. SECOND TIME.
+-Addressed
+'Swirling flow has been a difficult problem...': Is there an analtyical
+solution for axially sheared flow (which is parallel to the walls of
+the duct)? SECOND TIME.
+
+- Goldstein described the complete solution to sheared flows, I have include 
+citations and additional mentioned to free vortex swirl and solid body swirl.
+
+'Various methods of code validation...':  you're jumping to code verification,
+which is a different question.  A code for plug flow cases will also need
+to be verified... SECOND TIME.
+
+- I removed the jump and tied it to maldanados work. I should be more specific
+on the rotating rake
+
+'approximating the right equations':  how about 'correctly approximating
+the governing equations'? SECOND TIME.
+-fixed
+
+
+

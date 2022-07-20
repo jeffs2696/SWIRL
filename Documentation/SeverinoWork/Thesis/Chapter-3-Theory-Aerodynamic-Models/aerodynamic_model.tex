@@ -1,6 +1,6 @@
 \subsection{Setting up SWIRL's Aerodynamic Model}
 The Euler Equations in Cylindrical Form are,
-\begin{align*}
+\begin{align}
 \frac{\partial \rho}{\partial t} + %Conservation of mass
 v_r \frac{\partial \rho}{\partial r} +
 \frac{v_{\theta}   }{r}
@@ -47,9 +47,10 @@ v_x \frac{\partial p}{\partial \theta} +
 \frac{1}{r}\frac{v_{\theta}}{\partial \theta} +
 \frac{\partial v_x}{\partial x}
 \right) &= 0
-\end{align*}
+\end{align}
 
-SWIRL utilizes the following assumptions to simplify the aerodynamic model
+The following assumptions to simplify the aerodynamic model for thesteady mean
+flow case,
 
 \begin{itemize}
     \item No flow in the radial direction. Consequentially, the flow is 
@@ -60,12 +61,15 @@ SWIRL utilizes the following assumptions to simplify the aerodynamic model
 
 For steady flow, the continuity, momentum and entropy equations are
 
-\[\nabla (\vec{V} \bar{\rho}) = 0\]
-\[(\vec{V}\cdot \nabla) \vec{V}\]
-\[\nabla S = 0\]
+\begin{align}
+    \nabla (\vec{V} \bar{\rho}) &=  0 \\
+(\vec{V}\cdot \nabla) \vec{V} &=  0\\
+\nabla S = 0
+\end{align}
+\[\]
 
-If we neglect radial velocity, the velocity vector in cylindrical coordinates are
-
+If the radial velocity is neglected, the velocity vector in cylindrical coordinates 
+become,
 \[\vec{V}(r,\theta,x) = V_x(r) \hat{e}_x + V_{\theta} (r) \hat{e}_{\theta} \]
 %Starting with the radial momentum equation, 
 %\begin{align*}
@@ -77,3 +81,4 @@ If we neglect radial velocity, the velocity vector in cylindrical coordinates ar
 %&= -\frac{1}{\rho} \frac{\partial p}{\partial r} 
 %\end{align*}
 %See Appendix for speed of sound derivation
+

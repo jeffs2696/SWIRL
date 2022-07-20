@@ -1,16 +1,21 @@
 \section{Introduction}
-\subsection{Define your topic and provide an appropriate context for reviewing the literature}
+% Demonstrate knowledge Justify gap conceptual framework inform the methodology
+\subsection{The problem to be addressed and its significance}
+The impact of swirling flow has been , there has
+been a concerted effort to model sound propagation under such conditions. 
+This has lead to a number of publications that attempt to discern the acoustic
+signature of swirling flow through a cylindrical domain \cite{Kerrebrock2012} ,
+\cite{KERREBROCK1974},  \cite{kousen1996pressure}, 
+\cite{kousen1995eigenmode}, \cite{golubev1996sound} ,\cite{Golubev1998},\cite{Golubev1997},
+\cite{Tam1998}, \cite{Nijboer2001}, \cite{Guan2009}, \cite{COOPER2001}, 
+\cite{Cooper2006}, \cite{Posson2013}, \cite{Heaton2006}. 
 
-    Following the discovery of the acoustic impact of swirling flow, there has
-    been a concerted effort to model sound propagation under such conditions. 
-    This has lead to a number of publications that attempt to discern the acoustic
-    signature of swirling flow through a cylindrical domain. 
-
+\
 \subsection{Establish reasoning - i.e. point - of - view for reviewing the literature}
 
 
 A large amount of aircraft noise was reduced from 1975-2000, 
-effectively eliminating the noise pollution for 90\% of the population \cite{Administration}. 
+effectively eliminating the noise pollution for 90\% of the population \cite{FAAPolicy}. 
 Since the early 2000's, the advancement in noise reduction technologies has been gradual, 
 leaving a requirement for drastic improvement in aeroacoustic treatment 
 strategies to compete with the demand of quiet subsonic  flight. 
@@ -25,13 +30,60 @@ accuracy computational aeroacoustics (CAA) code which has been used to study
 non linear provides mean an extensive study of non linear phenomena in 
 turbomachinery flow, and in particular, mechanisms of noise generation that are 
 produced from unsteady disturbances. This code allows for a wide variety of 
-finite differencing and time marching schemes as well as artificial dissipation methods. This effective computational tool allows for an in-depth modeling of realistic velocity profiles that would be representative of flow produced from a rotor blade row. In recent work, a new method of implementing realistic, three-dimensional rotor wakes free from acoustics was validated  \cite{Hixon2011}. This provides a means of studying acoustic responses non linear swirling flows within pragmatic geometric configurations, while simultaneously allow for the modeling of sources generation produced from the incident turbulence. 
+finite differencing and time marching schemes as well as artificial dissipation methods. This effective computational tool allows for an in-depth modeling of realistic velocity profiles that would be representative of flow produced from a rotor blade row. In recent work, a new method of implementing realistic, three-dimensional rotor wakes free from acoustics was validated  \cite{Hixon2010}. 
+This provides a means of studying acoustic responses non linear swirling flows within pragmatic geometric configurations, while simultaneously allow for the modeling of sources generation produced from the incident turbulence. 
+
+Over the last 40 years, several studies have investigated the impact of 
+swirling flow on the sound propagation with the use of the 3D linearized Euler
+equations, directly solving the unsteady equations as opposed to approximating 
+the solutions to both steady and unsteady flow problems. Another NASA code, 
+LINFLUX predict acoustic disturbances from blade movements in subsonic flows. 
+While LINFLUX demostrates capabillities to model three dimensional steady and 
+unsteady flows, the computational time is larger compared to lower fidelity codes
+that only compute the unsteady portion of the problem. The benefit of such a 
+code is beneficial to engine and liner designers who are interested in 
+a wide range of configurations, requiring a parametric study. SWIRL \cite{kousen1995eigenmode}, 
+is a code that coducts an eigenmode analysis by assuming a constant radius annular or 
+cylindrical duct with acoustically lined walls using the linearized unsteady Euler
+equations. Such a code is needed to identify the modal content and can be 
+used as a boundary condition with LINFLUX by using a mode matching technique. 
+The goal of this theoretical review is to see the current state of low-fidelity
+frequency domain LEE codes and where the foundational model differs depending
+on the problem formulation. 
 
 \subsection{Explain the order/sequence of the review}
-This review will compare studies that have considered the applicability of unsteady linearized Euler equations on cylindrical and annular ducts. First the work of Kousen will breifly summarized \cite{Kousen1996,Kousen1999}. Secondly, the alternate approached shown by Golubev and Atassi used in \cite{Golubev1996,Golubev1998} were also compared. These works have utilized a standard normal mode approach to determine the modal response of inviscid, compressible, swirling flow within a cylindrical and annular ducts. Results and findings have revealed three categories of associated wave - modes, acoustic, nearly convected, and nearly sonic. Detailed examination of the literature indicate that the hierarchical system was not initially apparent. A qualitative description of the numerical methods used to evaluate the eigensystem of solutions will be described.
+This review will compare studies that have considered the applicability of 
+unsteady linearized Euler equations on cylindrical and annular ducts. First the
+work of Kousen will breifly summarized \cite{kousen1995eigenmode,kousen1996pressure}. Secondly, 
+the alternate approached shown by Golubev and Atassi used in \cite{Golubev1998,Golubev1997} 
+were also compared. These works have utilized a standard normal mode approach 
+to determine the modal response of inviscid, compressible, swirling flow 
+within a cylindrical and annular ducts. Results and findings have revealed 
+three categories of associated wave - modes, acoustic, nearly convected, 
+and nearly sonic. Detailed examination of the literature indicate that the 
+hierarchical system was not initially apparent. A qualitative description of 
+the numerical methods used to evaluate the eigensystem of solutions will be
+described.
+The use of the Method of Manufactured Solutions will also be described. While 
+it's use is widespead in the verification and validation community, very little
+aeroacoustic codes utlize the MMS to apply code verification. This review will
+discuss the procedures and guidelines associated with the MMS, and some specific
+measures that were taken to ensure that the guidelines were met and that the 
+suggestions used in literature were expanded upon. 
 
-One key question that remains, is how well do unsteady linearized equations capture the mechanisms of noise generation within realistic turbomachinery flow? There exists a copious amount of published work describing the use of wave equations to describe the governing behavior of ducted sound propagation(See \cite{Michel2008} for extensive preliminary review). However, turbomachines inherently rely on high velocities, high temperatures to maximize efficiencies. Such mechanisms need a more thorough formulation so that a complete acoustic description of the flow can be provided. Large contributions were first made by Kousen and Atassi and as a result they will be used for comparison.
+\subsection{The theoretical foundation of conceptual framework}
+
+
+
+
+
+% One key question that remains, is how well do unsteady linearized equations capture 
+% the mechanisms of noise generation within realistic turbomachinery flow? 
+% There exists a copious amount of published work describing the use of wave 
+% equations to describe the governing behavior of ducted sound propagation( See \cite{Michel2008} for extensive preliminary review). 
+% However, turbomachines inherently rely on high velocities, high temperatures 
+% to maximize efficiencies. Such mechanisms need a more thorough formulation so 
+% that a complete acoustic description of the flow can be provided. 
+
 
 %To begin exploring various geometries, we must first ask: what are the central theories that have been used `````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````112\sqrt{`312` explain the acoustic behavior of unsteady swirling flows? Do the linearized Euler equations provide an adequate means of capturing the mechanisms of noise generation within realistic turbomachinery flow? This paper will explore prior theories used to explain this and their methodologies. Large contributions were first made by Koussen and Atassi and as a result they will be used for comparison. Tam proposed a theoretical framework where the modes of a flow are characterized by an initial boundary value problem, allowing for the appearance of ''continuum modes`` \cite{Tarn1998}
-\subsection{State the scope (what is included and what is not)}
-This review will be a qualitative report of the findings, but a quantitative comparison ''meta-analysis`` should be done for potentially ideal test cases.

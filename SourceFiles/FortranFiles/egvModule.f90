@@ -38,8 +38,8 @@ CONTAINS
 !
 !!            WRITE(0,*) nfile(n), mfile(n)
 !! redefining file name for each eigenvalue
-!            basen    = '04-EVanalysis/egvre.'
-!            basem    = '04-EVanalysis/egvim.'
+!            basen    = '03-EVanalysis/egvre.'
+!            basem    = '03-EVanalysis/egvim.'
 !            open(newunit=nfile(n),file=basen//ff,status='unknown')
 !            open(unit=mfile(n),file=basem//ff,status='unknown')
 !!            rewind nfile(n)

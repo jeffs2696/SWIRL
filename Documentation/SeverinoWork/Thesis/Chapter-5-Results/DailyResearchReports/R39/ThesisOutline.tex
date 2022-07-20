@@ -1,4 +1,5 @@
 %        File: ThesisOutline.tex
+
 %     Created: Tue Jun 21 01:00 AM 2022 E
 % Last Change: Tue Jun 21 01:00 AM 2022 E
 %
@@ -20,33 +21,101 @@
 \begin{abstract}
    Over the last 20 years, there has been an increase in computational fluid dynamic
    codes that have made numerical analysis more and more readily available, allowing
-   turbomachine designers to create more novel designs. However, as airport noise limi-
-   tations become more restrictive over time, reducing aircraft takeoff and landing noise
-   remains a prominent issue in the aviation community. One popular method to re-
-   duce aircraft noise is using acoustic liners placed on the walls of the engine inlet and
+   turbomachine designers to create more novel designs. However, as airport noise 
+   limitations become more restrictive over time, reducing aircraft takeoff and landing noise
+   remains a prominent issue in the aviation community. One popular method to reduce
+   aircraft noise is using acoustic liners placed on the walls of the engine inlet and
    exhaust ducts. These liners are designed to reduce the amplitude of acoustic modes
    emanating from the bypass fan as they propagate through the engine. The SWIRL
    code is a frequency-domain linearized Euler equation solver that is designed to predict
    the effect of acoustic liners on acoustic modes propagating in realistic sheared and
-   swirling mean flows, guiding the design of more efficient liner configurations. The pur-
-   pose of this study is to validate SWIRL using the Method Of Manufactured Solutions
-   (MMS). This study also investigated the effect of the integration and spatial differenc-
-   ing methods on the convergence for a given Manufactured Solution. In addition, the
-   effect of boundary condition implementation was tested. The improved MMS con-
-   vergence rates shown for these tests suggest that the revised SWIRL code provides
+   swirling mean flows, guiding the design of more efficient liner configurations. 
+   The purpose of this study is to validate SWIRL using the Method Of Manufactured Solutions
+   (MMS). This study also investigated the effect of the integration and spatial 
+   differencing methods on the convergence for a given Manufactured Solution. In addition, the
+   effect of boundary condition implementation was tested. The improved MMS convergence 
+   rates shown for these tests suggest that the revised SWIRL code provides
    more accurate solutions with less computational effort than the original formulation.
 \end{abstract}
 \begin{outline}[enumerate]
-    \1 Introduction : What is the reason for me to write this thesis? What has prompted me to 
-    select this topic?
-    \2 Basic Explaination of the topic and the main problem (What?)
-    During the 1960s, the increased demand for commercialized aircraft transport in-
-    troduced jet engines to support large cargo and passengers. Consequently, this rise in
-    innovation resulted in high volume engine noise.
-    \2 Statement of the research questions (Why?)
-    \2 The goal and significance of the investigation; (How?)
-    \2 Definitions of the terms (if needed);
-    \2 Organization of the research (Structure)
+    \1 Introduction:
+    \1[1-A.] Overview: Briefly explain why the study in being undertaken and what 
+    main questions of foreshadowed problems will be addressed. Do this in a 
+    general manner, because it will be done more specifically in the 
+    following sections.
+    This study is being conducted to make progress towards further understanding
+    the numerical results for test cases that we do not have analytical solutions
+    for.
+    \1[1-B.] Statement of the Problem: Discuss the problem to be addressed in the
+    research - the gaps, perplexities, or inadequacies in existing theory, 
+    empirical knowledge, practice, or policy that prompted the study. The problem may be
+    a theory that appears inadequate to explain known phenomena, the lack of 
+    empirical data on a potentially interesting relationship between X and Y,
+    or a common practice that appears ineffective. First state the problem
+    generally, and then state the specifics that your research will address. In 
+    quantitative research, the specifics will include the constructs studied.
+
+    What is the research gap?
+
+    The problem that researchers would want to see addressed in the researach:
+    - ``What is missing'' or ``What is NOT ADDRESSED''
+    - The question or problem that has not been answered in an area of specialization 
+    - establishes the need or importance
+    
+    A turbomachine’s general flow condition includes a series of axial, tangential, and radial
+    velocity components that vary depending on the location of concern. The swirling
+    flow between fan stages has been an area of interest due to the potential for 
+    acoustic treatment in a location previously avoided for its flow complexity, among other
+    reasons. It is common in CAA codes to assume a uniform flow with superimposed
+    wakes as a means of ``exciting'' certain acoustic modes within a duct. 
+    This is different than SWIRL the user can provide an axial and tangential
+    component as a function of radius which does not need to be uniform in either
+    direction. 
+    \1[1-C.] 
+    The purpose of research is to acquire knowledge to address the problem or 
+    certain aspects of it. Quantitative research tries to fulfill that purpose 
+    by answering questions and/or testing hypotheses. Qualitative research 
+    tries to fulfill that purpose by starting with foreshadowed problems,
+    conjectures, or exploratory questions. Mixed-methods research may use both 
+    approaches.
+    The purpose of this study is to verify and validate SWIRL using the Method
+    Of Manufactured solutions. The study will investigate the effect of the 
+    integration and spatial differencing methods on the convergence for a series
+    of Manufactured Solutions. Guidelines for setting unique \textit{auxillary} 
+    conditions will be provided and its impact will be discussed. The use
+    of fairing functions to set specific values at the boundaries will also be 
+    provided. 
+    \1[1-D.1] Research Questions or Hypotheses 
+    Research questions address problems of the study. Each research question 
+    seeks answers to a specific problem situation described in your study. 
+    The type of the data and its availability determine the research quesitons.
+    \textit{ For instance, research questions should relate to the conceptual 
+    framework.} Each question should address and target a separate problem situation.
+
+    A good hypothesis clearly states the expected relationship ( or difference) 
+    between two variables and defines those variables in operational, measurable 
+    terms. The hypothesis (or hypotheses) logically follows the review of related 
+    literature and is based on the implications of previous research. A 
+    well-developed hypothesis is testable, that is, can be confirmed or 
+    dis-confirmed. 
+    \1[1-D.2] Significance of the Study: Discuss the potential significance of
+    the research. Significance comes from the uses that might be made of your
+    results-how they might be of benefit to theory, knowledge, practice, policy,
+    and future research. The potential significance should be based upon your
+    literature revieW in Chapter 2. 
+The significance of this study is that it will offer guidance when verifying a frequency
+domain CAA code which has little liturature on. The goal is to couple code
+verification and validation to the sound propagation in a duct problem and highlight
+the issues that arise when using couple numerical techniques. The impact of 
+the numerical scheme and number of grid points will be discussed/
+
+    \1[1-E.] Conceptual Framework: Briefly summarize the theoreotical foundation 
+    or conceptual framework(s) 
+    \2 Research Questions:
+
+
+
+
     \1 Literature Review:
     \1[a]] The problem to be addressed and its significance
     \1[b]] The theoretical foundation or conceptual framework
@@ -163,11 +232,15 @@
     \1 Research Methodology
     \2 Conjectures, or Exploratory Questions:
     \2[-] What is the observed order of accuracy for SWIRL's second order and 
-    fourth order solutions (MMS/MES)? How many grid points are needed for each scheme
+    fourth order solutions (MMS/MES)? How does the number of grid points 
+    and manufactured solution effect the solution accuracy.  
     \2 Research Procedures - Describe in detail how the inquiry was undertaken.
+    Generally the description should be thorough enough that other skilled
+    researchers could approximately replicate your study from the description.
     \3 Introduce the epistemology that will guide the inquiry/
     Indicate the methodology used and why it was selected.
-    \4 The steady and unsteady aerodynamic models are presented here.
+    \4 Aerodynamic Theoretical Background:
+    The steady and unsteady aerodynamic models are presented here.
     \4 The MMS and tanh summation method will be used to define a sufficient test 
     case for the second/fourth order differencing schemes for the radial derivatives
     and for the approximated speed of sound obtained through numerical integration. To account 
@@ -182,14 +255,16 @@
     \3 Indicate the specific methods used and the justification for them. How were sites, cases, and
     informants selected? Why? What access did you unsuccessfully seek? Which people perhaps tried to
     minimize contact with you and which repeatedly sought it out? How did you collect your data? Why?
-    \3 Indicate how you managed your qualitative data. Did you take notes or make audio/video
-    recordings? Was any data not analyzed? Why?
+    The manufactured solutions were chosen such in a way that allows testing 
+    for each term in SWIRL. Setting up the manufactured solutions this way 
+    ensures that there is no variable unused.   
     \3 Indicate how you analyzed and interpreted your data, making sure the analysis was consistent with
     the selected methodology. If you inferred themes, explain how. If you coded the transcripts, explain
     the coding system and checks for coding reliability and validity. How did you analyze the data from
     the coding? How did you triangulate or otherwise verify findings? How did you interpret the full set
     of data?
 
+    The 
     \1 Results of the Study
     \2 statement of the received results and their analysis
     \3 Results for MMS/MES/set of test cases will be presented. The MMS and MES

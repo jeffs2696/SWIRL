@@ -159,7 +159,7 @@ if r_min > 0:
             + 1/r
             )*v_t_analytic
 elif r_min == 0:
-    psi_1 = 2*dM_t_dr_analytic*v_t_analytic - (2.0*(kappa - 1) *M_t_analytic*dM_t_dr_analytic*f) - df
+    psi_1 = 2*dM_t_dr_analytic*v_t_analytic #- (2.0*(kappa - 1) *M_t_analytic*dM_t_dr_analytic*f) - df
     psi_2 = dv_r_dr_analytic + ci*gamma*v_x_analytic +(
             (
                 (kappa + 1))*M_t_analytic*dM_t_dr_analytic
@@ -171,6 +171,22 @@ del_dp_BC    = psi_1 + L*psi_2
 
 
 print('del_dp_BC =',del_dp_BC)
+psi_1_min = psi_1.subs(
+        {
+            'r'    :r_min  ,
+            'ak'   :ak     ,
+            'eta'  :eta_min,
+            'kappa':kappa  ,
+            'ci'   : ci                                      }
+        )
+psi_2_min = psi_2.subs(
+        {
+            'r'    :r_min  ,
+            'ak'   :ak     ,
+            'eta'  :eta_min,
+            'kappa':kappa  ,
+            'ci'   : ci                                      }
+        )
 del_dp_minBC = del_dp_BC.subs(
         {
             'r'    :r_min  ,
@@ -189,7 +205,9 @@ del_dp_maxBC = del_dp_BC.subs(
 
 
 
-print(del_dp_minBC)
+print('psi_1_min',psi_1_min)
+print('psi_2_min',psi_2_min)
+print('del_dp_minBC',del_dp_minBC)
 
 p_analytic = msm.diffModifiedManufacturedSolution(f           ,
         del_dp_minBC,
@@ -205,7 +223,7 @@ p_analytic = p_analytic.subs(
         )
 dp_dr_analytic   = p_analytic.diff(r)
 TSM = msg.TanhMethod(3,10,r_min,r_max)
-print(rationalize_coeffs(TSM))
+# print(rationalize_coeffs(TSM))
 
 sp_help.plotSymbolicEquation('Tanh Summation Example', \
                      r               , \

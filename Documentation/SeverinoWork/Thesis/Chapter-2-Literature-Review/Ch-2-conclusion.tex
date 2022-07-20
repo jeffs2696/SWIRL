@@ -1,3 +1,62 @@
+
+\section{Review of the assessment of the numerical techniques} 
+Kousen assesed the accuracy of the numerical discretication technique for 
+a series of test cases using three sources \cite{Shankar1972} \cite{Vo1978} and 
+\cite{Astley1979} ([10] [15] and [45] in Kousen's work \cite{kousen1996pressure}
+respectively).  The results were assesed by using various
+literature comparisons. The methodology was presented of uniform mean axial flows,
+but results for hard wall cases were presented by computing the order of accuracy for
+the first four radial modes (See Figures 4.1-4.4), . (Explain why this is MES and offer MMS as a source
+of verification and explain that MES is validation \cite{Roy2005} \cite{Salari2000} ). For a uniform axial flow, 
+the axial wavenumbers can be computed from an analytical solution, where 
+one of the key input parameters are the zero crossings of the derivative
+of the Bessel Function of the first kind . The values are presented 
+\cite{Kerrebrock1992} and are often refered to as separation constants 
+for a circumfirential and radial mode pair ; which are needed to compute the solution 
+of the convective wave equation.  
+
+The axial wavenumber is found by using second-order differential convective 
+wave equation for pressure using a fourth order accurate 
+Runge-Kutta(RK) method \cite{kousen1995eigenmode} which was done to check 
+against the results in \cite{Agarwal1989} (Table 4.1 and 4.2 in \cite{kousen1995eigenmode}). 
+The output parameter was $\gamma/k$.  Each axial wave number can then be used 
+to compute the analytical radial mode using the 
+exponential assumption.  
+Axial wavenumbers from annular and cylindrical ducts with lined walls were 
+compared to findings from Astley and Eversman \cite{Astley1979} for uniform and 
+sheared axial flow with liner (Table 4.3).  The results taken were from a ``high-order'' RK 
+scheme used. Axial wavenumbers from cylindrical ducts with hard walls were 
+compared to findings from Shankar \cite{Shankar1972} in Table 4.4 of \cite{kousen1995eigenmode}. 
+
+In recent years  Maldonado et. al, \cite{Maldonado2016} has made significant 
+contributions in solution verification given the recent improvements in 
+experimental measurement techniques. The work has presented test cases for 
+lined ducts that have been compared to Kousen \cite{kousen1995eigenmode}, Nijboer
+\cite{Nijboer2001} and Peake \cite{Posson2013} and show excellent comparison. 
+The goal of this work is to contribute these efforts by conducting the method
+of manufactured solutions to offer clarity in using techniques often used in other
+verification and validation (V\&V) studies. 
+\subsection{The research questions, hypotheses, foreshadowed problems, or 
+    conjectures}
+While these results confirm the findings of SWIRL and other LEE codes, this does not check if the 
+equations that were programmed were entered correctly. While an emphasis on 
+solution verification is vital, it should be coupled with code verification to
+determine the robustness and consistency of the algorithm.  The method of manufactured
+solutions combined with order of accuracy verification is often used as a 
+gold standard of code verification \cite{Roy2005} and has been shown to provide
+an estimate of discretization error that can be computed before the final answer
+is obtained. Since the mid 2000's, code verification literature has grown popular
+in the field of computational mathematics and physics due to its ability to
+conduct tests for numerical approximations of partial and ordinary differential 
+equations. The MMS offers a means of ``manufacturing'' an arbitrary solution by
+define functions for each term in the governing equation.  Common practices 
+and guidelines are offered in \cite{Salari2000} to choose the fuunctions, but
+are phrased such that MMS can be widely applied. Since various numerical problems
+are unique in their treatment of spatial discretization, and boundary condtions ,
+this work will describe the use of these guidelines and the nuances that have
+been taken to check the boundary conditon and radial derivatives used in SWIRL.
+
+Knupp in Code Verification by the MMS \cite{Salari2000} provides guidelines for creating
 \section{Conclusion}
 \begin{itemize}
     \item The conclusion summarizes 
@@ -7,8 +66,27 @@
         and how improvements in the modal analysis capture more families of mechanisms of noise generation within non-uniform 
         swirling flow turbomachinery flow. 
     \item This section is the reviewer’s opportunity to justify a research 
-        proposal. Therefore, the idea should be clearly re-stated and supported according to the findings of 
-        the review.
-        \subitem This literature review should be expanded to describe specific details in the methodologies and validation techniques reported by \cite{Kousen1996,Kousen1999,Golubev1996,Golubev1998}. 
+        proposal. Therefore, the idea should be clearly re-stated and supported 
+        according to the findings of the review.
+        \subitem While the literature presented offers a measure of verification 
+        and validation through the use of the Method of Exact Solutions, the Method 
+        of Manufactured Solutions offers a level of code verification which allows
+        for error checking by computing the approximate order of accuracy for 
+        a given numerical scheme, which is independent of the final answer, which
+        in this case is the axial wavenumber. The next chapter will outline the methodology
+        and techniques used when applying MMS to SWIRL. The methods consist
+        of unique treatment of boundary conditions using fairing functions as
+        well as an example of using a summation to generate arbitrary functions 
+        as manufactured solutions which has the dual benefit of giving a large
+        number of derivatives but allows for high gradients in specific locations
+        along the domain of the MS. The use of open-source widely available functions
+        in Python were used to symbolically create the MS and then 
+        used to generate FORTRAN code that will compute the MS for code comparison. 
+        
+        
+        
+        \subitem (Note: This literature review should be expanded to describe 
+        specific details in the methodologies and validation techniques reported 
+        by \cite{kousen1995eigenmode,kousen1996pressure,Golubev1997,Golubev1998}. 
 \end{itemize}
 

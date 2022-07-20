@@ -1,12 +1,22 @@
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1-1}{\ignorespaces The evolution of the directivity and the relative levels of sources as a function of engine architecture (a)low bypass-ratio (b) high bypass ratio \cite {smith1989aircraft}}}{3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5-1}{\ignorespaces Mach distribution for method of manufactured solution case}}{74}%
-\contentsline {figure}{\numberline {5-2}{\ignorespaces Speed of Sound from Integrating the Tangential Mach Number}}{75}%
-\contentsline {figure}{\numberline {5-3}{\ignorespaces L2 Norm of the Error for the MMS as a function of Grid Points}}{76}%
-\contentsline {figure}{\numberline {5-4}{\ignorespaces Rate of Convergence for the Speed of Sound Integration}}{77}%
-\contentsline {figure}{\numberline {5-5}{\ignorespaces Source Term Error}}{78}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5-1}{\ignorespaces The manufactured mean flow test case using a summation of Tangents for $A$ and $M_x$}}{63}%
+\contentsline {figure}{\numberline {5-2}{\ignorespaces The manufactured perturbation functions ,$v_r$}}{63}%
+\contentsline {figure}{\numberline {5-3}{\ignorespaces The manufactured perturbation functions ,$v_x$}}{64}%
+\contentsline {figure}{\numberline {5-4}{\ignorespaces The manufactured perturbation functions ,$v_{\theta }$}}{64}%
+\contentsline {figure}{\numberline {5-5}{\ignorespaces The manufactured perturbation functions ,$P$}}{65}%
+\contentsline {figure}{\numberline {5-6}{\ignorespaces A comparison of the speed of sound, expected vs actual at the lowest grid to show similarities in solution}}{65}%
+\contentsline {figure}{\numberline {5-7}{\ignorespaces A comparison of the speed of sound error at three grid}}{66}%
+\contentsline {figure}{\numberline {5-8}{\ignorespaces A comparison of the speed of sound error at three grid}}{66}%
+\contentsline {figure}{\numberline {5-9}{\ignorespaces LEE Source Terms}}{67}%
+\contentsline {figure}{\numberline {5-10}{\ignorespaces LEE Source Term Error}}{67}%
+\contentsline {figure}{\numberline {5-11}{\ignorespaces LEE Source Term Error}}{68}%
+\contentsline {figure}{\numberline {5-12}{\ignorespaces LEE Source Term Error}}{68}%
+\contentsline {figure}{\numberline {5-13}{\ignorespaces LEE Source Term Error}}{69}%
+\contentsline {figure}{\numberline {5-14}{\ignorespaces L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}}{69}%
+\contentsline {figure}{\numberline {5-15}{\ignorespaces ROC for the speed of sound integration for the compound trapezoidal rule}}{70}%
+\contentsline {figure}{\numberline {5-16}{\ignorespaces ROC for the LEE using second and fourth order central differencing for the radial derivative}}{70}%

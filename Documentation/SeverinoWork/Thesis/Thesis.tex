@@ -103,7 +103,7 @@
 %        |  year your degree will be *conferred* by the university. |
 %        +----------------------------------------------------------+
 
-\conferraldate{May}{2022}
+\conferraldate{-}{2022}
 
 %--------+----------------------------------------------------------+
 %        |  \advisor{}                                  (REQUIRED)  |
@@ -165,7 +165,7 @@
 %        +----------------------------------------------------------+
 
   \secondmember{Dr.~Chinhua Sheng}
-%   \thirdmember{Dr.~Chris P.~Bacon}
+  \thirdmember{Dr.~Soric Cioc}
 %  \fourthmember{Dr.~Adam Baum}
 %   \fifthmember{Dr.~Corey O.~Graff}
 %   \sixthmember{Dr.~Hugh Jass}
@@ -242,7 +242,7 @@ when I did not believe it myself.
 
 \begin{acknowledgments}
 \noindent This work is supported by the NASa Advanced Air Transport Technologies
-(AATT) Project. I would like to thank Edmane Envia(?) of the NASA Glenn Research Center, who
+(AATT) Project. I would like to thank Edmane Envia of the NASA Glenn Research Center, who
 is the technical monitor of this work. 
 A very special thanks goes to Dr. Ray Hixon who supervised and guided me through
 out my course work and Master's Thesis. His rigor and tenacity in his profession has 
@@ -251,11 +251,9 @@ I would like to also thank all of my committee members, Dr. Chunhua Sheng and
 Dr. Sorin Cioc. Their contributions have been instrumental. Thanks to Dr. Clifford
 Brown for his programatic insights. 
 
-I would also like to thank my focus group peers, Zaid Sabri, and Matthew Gibbons 
-for their patience and support over the years. I wish them the best in all of 
+I would also like to thank my focus group peers, Zaid Sabri, Matthew Gibbons ,
+and Gabriel Gutierrez for their patience and support over the years. I wish them the best in all of 
 their endevours.
-I would also like to thank Copper Moon Coffee Shop for the endless supply of caffine 
-and conversations.
 
 
 \end{acknowledgments}
@@ -285,7 +283,54 @@ and conversations.
     \emblem{$D/Dt$     }{material derivative, $\partial/\partial t + V \cdot \nabla $}
     \emblem{$D_N$      }{derivative matrix using $N$ points}
     \emblem{$\textbf{e}_x$,$\textbf{e}_{\theta}$ }{s}
+    \emblem{$k_x$      }{perturbation axial wavenumber}
+    \emblem{$k$       }{reduced frequency, $\omega r_{max}/A_{T}$}
+    \emblem{$m$       }{number of nodal diameters, i.e. azimuthal mode number}
+    \emblem{$M_x$     }{axial Mach number}
+    \emblem{$M_{\theta}$  }{tangential Mach number}
+    \emblem{$P$       }{mean pressure}
+    \emblem{$p'$       }{perturbation pressure}
+    \emblem{$r$       }{radial coordinate}
+    \emblem{$r_{min}$       }{hub radius, i.e. minimum radius}
+    \emblem{$r_{max}$       }{hub radius, i.e. maximum radius}
+    \emblem{$\bar{r}$      }{dimensionless radial coordinate, $r/r_{max}$}
+    \emblem{$S$}{mean entropy}
+    \emblem{$s'$}{perturbation entropy}
+    \emblem{$t$}{time}
+    \emblem{$\vec{V}$}{mean flow velocity vector}
+    \emblem{$V$}{mean flow velocity}
+    \emblem{$v'$}{perturbation flow velocity}
+    \emblem{$V_x$}{axial component of mean flow velocity}
+    \emblem{$V_{\theta}$}{tangential component of mean flow velocity}
+    \emblem{$v_r'$}{axial component of perturbation velocity}
+    \emblem{$v_x'$}{axial component of perturbation velocity}
+    \emblem{$v_{\theta}'$}{tangential component of perturbation flow velocity}
+    \emblem{$v_{\phi}$}{phase velocity,$k/\bar{\gamma}$}
+    \emblem{$v_{g}$}{group velocity,$dk/d\bar{\gamma}$}
+    \emblem{$x$}{axial coordinate} 
+
+    \newpage
+    \emblemskip
+    \textit{Greek Symbols}
+    \emblem{$\bar{\gamma}$}{dimensionless axial wavenumber, $k_x r_{max}$}
+    \emblem{$\Gamma$}{free vortex strength}
+    \emblem{$\bar{\Gamma}$}{$\Gamma/(r_T A_T)$}
+    \emblem{$\delta$}{Kronecker delta}
+    \emblem{$\eta_{H}$}{hub acoustic liner admittance (at $r_{min}$) }
+    \emblem{$\eta_{T}$}{tip acoustic liner admittance (at $r_{max}$) }
+    \emblem{$\Theta$}{circumferential/azimuthal coordinate}
+    \emblem{$\kappa$}{ratio of specific heats}
+    \emblem{$\kappa_{m\mu}$}{modal separation constant}
+    \emblem{$\lambda$}{eigenvalue, $-i \bar{\gamma}$}
+    \emblem{$\mu$}{radial mode index}
+    \emblem{$\bar{\rho}$}{mean density}
+    \emblem{$\rho'$}{perturbation density}
+    \emblem{$\sigma$}{hub-to-tip radius ratio, $r_{min}/r_{max}$}
+    \emblem{$\Omega$}{angular frequency for solid body swirl}
+    \emblem{$\bar{\Omega}$}{$\Omega r_T/A_T$}
+    \emblem{$\omega$}{perturbation angular frequency}
 \end{listofsymbols}
+
 %--------+----------------------------------------------------------+
 %        |  \captionformat{}                            (REQUIRED)  |
 %        |                                                          |
@@ -325,12 +370,12 @@ and conversations.
 
 \begin{listofabbreviations}
 
+    \abbreviation{CAA}{Computational Aeroacoustics}
     \abbreviation{CFD}{Computational Fluid Dynamics}
-    \abbreviation{GLE}{Gauss' law for electricity: $\nabla\cdot E
-                       = \displaystyle\frac{\rho}{\varepsilon_0}
-                       = 4\pi k \rho$}
-    \abbreviation{HHS}{Department of Health and Human Services}
-    \abbreviation{IaR}{I am root}
+    \abbreviation{MMS}{Method of Manufactured Solutions}
+    \abbreviation{TSM}{Tanh Summation Method}
+    \abbreviation{NS}{Navier-Stokes}
+    \abbreviation{RK}{Runge-Kutta}
 
 \end{listofabbreviations}
 
@@ -403,26 +448,28 @@ and conversations.
 %        |  Leslie Lamport's "LaTeX: A Document Preparation         |
 %        |  System." Addison Wesley: Reading Massachusetts, 1985.   |
 %        +----------------------------------------------------------+
-\chapter{Background}
-\section{Introduction}
+\chapter{Introduction}
 \input{Chapter-1-Introduction/Ch-1-Intro}
 \chapter{Chapter 2: Literature Review}
 \input{Chapter-2-Literature-Review/Ch-2-intro}
 \input{Chapter-2-Literature-Review/Ch-2-main-body}
 \input{Chapter-2-Literature-Review/Ch-2-golubev-atassi-work}
 \input{Chapter-2-Literature-Review/Ch-2-conclusion}
-\chapter{Chapter 3: Theory}
-\input{Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes}
+\chapter{Chapter 3: Methods}
+\section{Aerodynamic Models}
+\subsection{Steady Models}
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model}
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
-\include{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations}
+\subsection{Unsteady Models}
+% \input{Chapter-2-Theory-Aerodynamic-Models/linearized_euler_equations}
+\input{Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes}
 \chapter{Chapter 4: Numerical Models}
 \section{Numerical Integration}
 \input{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction}
 \include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods}
 \include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory}
-%\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure}
-\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy}
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure}
+%\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy}
 \section{Fairing Functions}
 \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/intro}
 \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/setting-bc-values-using-a-fairing-function}
@@ -432,175 +479,177 @@ and conversations.
 \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-polynomial-derivative}
 \chapter{Results and Discusssion}
 \section{Verification}
-\subsection{Method of Manufactured Solution Results}
+\input{Chapter-5-Results/Ch-5-results-and-discussion}
+    -
+%\subsection{Method of Manufactured Solution Results}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/MachDistribution_R1.pdf}
-    \caption{Mach distribution for method of manufactured solution case}
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/MachDistribution_R1.pdf}
+%    \caption{Mach distribution for method of manufactured solution case}
+%\end{figure}
 
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/PerturbationVariables_R1.pdf}
- \end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/PerturbationVariables_R1.pdf}
+% \end{figure}
 
- \begin{figure}
-     \centering
-         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf}
-     \caption{Speed of Sound from Integrating the Tangential Mach Number}
- \end{figure}
+% \begin{figure}
+%     \centering
+%         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.pdf}
+%     \caption{Speed of Sound from Integrating the Tangential Mach Number}
+% \end{figure}
 
- \begin{figure}
-     \centering
-         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/L2_R1.pdf}
-     \caption{L2 Norm of the Error for the MMS as a function of Grid Points}
- \end{figure}
+% \begin{figure}
+%     \centering
+%         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/L2_R1.pdf}
+%     \caption{L2 Norm of the Error for the MMS as a function of Grid Points}
+% \end{figure}
 
- \begin{figure}
-     \centering
-         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/ROC_R1.pdf}
-     \caption{Rate of Convergence for the Speed of Sound Integration}
- \end{figure}
+% \begin{figure}
+%     \centering
+%         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/ROC_R1.pdf}
+%     \caption{Rate of Convergence for the Speed of Sound Integration}
+% \end{figure}
 
- \begin{figure}
-     \centering
-         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf}
-     \caption{Source Term Error}
- \end{figure}
-%
-%%the thesis class is messing up figures. Cant put in figure statement
-%    \input{Chapter-5-Results/tex-outputs/MachDistribution_R1.tex}
-%    \newpage
-%    \input{Chapter-5-Results/tex-outputs/PerturbationVariables_R1.tex}
-%    \newpage
-%    \input{Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.tex}
-%    \newpage
-%    \input{Chapter-5-Results/tex-outputs/SourceTermData_R1.tex}
-%    \newpage
-%    \input{Chapter-5-Results/tex-outputs/L2_R1.tex}
-%    \newpage
-%    \input{Chapter-5-Results/tex-outputs/ROC_R1.tex} 
-%    \newpage
-%    \input{Chapter-5-Results/tex-outputs/L2_R2.tex}
-%    \newpage
-%    \input{Chapter-5-Results/tex-outputs/ROC_R2.tex} 
-%
+% \begin{figure}
+%     \centering
+%         \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/SourceTermData_R1.pdf}
+%     \caption{Source Term Error}
+% \end{figure}
+%%
+%%%the thesis class is messing up figures. Cant put in figure statement
+%%    \input{Chapter-5-Results/tex-outputs/MachDistribution_R1.tex}
+%%    \newpage
+%%    \input{Chapter-5-Results/tex-outputs/PerturbationVariables_R1.tex}
+%%    \newpage
+%%    \input{Chapter-5-Results/tex-outputs/SoundSpeedFromIntegration_R1.tex}
+%%    \newpage
+%%    \input{Chapter-5-Results/tex-outputs/SourceTermData_R1.tex}
+%%    \newpage
+%%    \input{Chapter-5-Results/tex-outputs/L2_R1.tex}
+%%    \newpage
+%%    \input{Chapter-5-Results/tex-outputs/ROC_R1.tex} 
+%%    \newpage
+%%    \input{Chapter-5-Results/tex-outputs/L2_R2.tex}
+%%    \newpage
+%%    \input{Chapter-5-Results/tex-outputs/ROC_R2.tex} 
+%%
 
-    The method of manufactured solutions was used to determine the rate of convergence 
-    for SWIRL's numerical integration and finite difference methods while 
-    making sure all of the variables are set to a value to ensure all terms in 
-    the aerodynamic and aeroacoustic model were tested. This established a 
-    metric for determining whether SWIRL is working as intended. Figure [1] 
-    shows the ``manufactured'' velocity profile used to conduct the MMS. A series of 
-    hyperbolic tangents were summed together using the formulation described in 
-    Chapter 4. This method was used to create slope changes in the velocity profile
-    at various points along the radius in order to create a substantial amount of
-    error when a small number of grid points are used. Since SWIRL is a subsonic
-    code, the velocity profile was restricted such that the total mach number 
-    did not exceed one. The results from applying the trapezoidal rule to 
-    numerically integrate the tangential mach number to obtain the speed of sound
-    is reported in Figure [3]. The expected speed of sound was obtained by using 
-    the methods outlined in Chapter 4 and the actual speed of sound is the result 
-    obtained from SWIRL's output.
+%    The method of manufactured solutions was used to determine the rate of convergence 
+%    for SWIRL's numerical integration and finite difference methods while 
+%    making sure all of the variables are set to a value to ensure all terms in 
+%    the aerodynamic and aeroacoustic model were tested. This established a 
+%    metric for determining whether SWIRL is working as intended. Figure [1] 
+%    shows the ``manufactured'' velocity profile used to conduct the MMS. A series of 
+%    hyperbolic tangents were summed together using the formulation described in 
+%    Chapter 4. This method was used to create slope changes in the velocity profile
+%    at various points along the radius in order to create a substantial amount of
+%    error when a small number of grid points are used. Since SWIRL is a subsonic
+%    code, the velocity profile was restricted such that the total mach number 
+%    did not exceed one. The results from applying the trapezoidal rule to 
+%    numerically integrate the tangential mach number to obtain the speed of sound
+%    is reported in Figure [3]. The expected speed of sound was obtained by using 
+%    the methods outlined in Chapter 4 and the actual speed of sound is the result 
+%    obtained from SWIRL's output.
 
-    Figure [2] reports the manufactured functions used for the
-    perturbation variables. These functions were used to calculate the source terms
-    for the linearized euler equations which is reported in Figure [4]. The boundary
-    conditions implemented in SWIRL have also been applied to the 
-    manufactured radial velocity and pressure perturbations by implementing the 
-    fairing function method outlined in Chapter 4. After the source terms have 
-    been computed,     The L2Norm of the difference between the actual and expected speed of sound 
-    and source terms are shown in Figure [5]. An asymptotic rate of convergence 
-    was calculated for 10 iterations by recomputing the L2 norm of the error at 
-    progressively denser grids. For this study, the  grid spacing was halved 
-    each iteration.The results for a trapezoidal rule and a second-order central
-    finite difference scheme reported in Figure [6].  For the speed of sound, the
-    L2norm reached $10e-11$ (machine precision) in 8 iterations while the LEE 
-    is nearly converged but not yet at machine precison after 10 iterations. 
+%    Figure [2] reports the manufactured functions used for the
+%    perturbation variables. These functions were used to calculate the source terms
+%    for the linearized euler equations which is reported in Figure [4]. The boundary
+%    conditions implemented in SWIRL have also been applied to the 
+%    manufactured radial velocity and pressure perturbations by implementing the 
+%    fairing function method outlined in Chapter 4. After the source terms have 
+%    been computed,     The L2Norm of the difference between the actual and expected speed of sound 
+%    and source terms are shown in Figure [5]. An asymptotic rate of convergence 
+%    was calculated for 10 iterations by recomputing the L2 norm of the error at 
+%    progressively denser grids. For this study, the  grid spacing was halved 
+%    each iteration.The results for a trapezoidal rule and a second-order central
+%    finite difference scheme reported in Figure [6].  For the speed of sound, the
+%    L2norm reached $10e-11$ (machine precision) in 8 iterations while the LEE 
+%    is nearly converged but not yet at machine precison after 10 iterations. 
 
-    Figure [8] show the L2 norm for the speed of sound integration used to
-
-
-    %\begin{figure}
-    %\end{figure}
-    %\begin{figure}
-    %\end{figure}
-    %\begin{figure}
-    %    %\end{figure}
-    %\begin{figure}
-    %    %\end{figure}
-    %\begin{figure}
-    %\end{figure}
-    %
-    \section{Validation}
-    \subsection{Comparison to Kousen}
+%    Figure [8] show the L2 norm for the speed of sound integration used to
 
 
-There are four key test cases to run and make sure that the data is post processed 
-for.
-\begin{itemize}
-    \item Kousen's Test Cases
-        \subitem Cylinder, Uniform Flow with Liner (Table 4.3)
-        \begin{align*}
-            m &= 2 \\
-            k &= \frac{\omega r_T}{A_T} = -1 \\
-            M_x &= 0.5 \\
-            \eta_T &= 0.72 + 0.42i\\
-            \text{Confirm if 32 grid points is enough}
-        \end{align*} 
-        \subitem Cylinder, Shear Flow without Liner (Table 4.4)
-        \begin{align*}
-            m &= 0 \\
-            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 20 \\
-            b &= r_{max} - r_{min} \\
-            \tilde{r} = \frac{r}{b} \\
-            M_x &= 0.3(1-\tilde{r})^{\frac{1}{7}} \\
-            \eta_T &= 0\\
-            \text{Confirm if 32 grid points is enough}
-        \end{align*}
-        \subitem Annulus, Shear Flow without Liner (Table 4.5)
-        \begin{align*}
-            m &= 0 \\
-            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
-            b &= r_{max} - r_{min}  = \frac{1}{7}\\
-            k &= 70 \\
-            \tilde{r} = \frac{r}{b} = 6.0 \\
-            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
-            \eta_T &= 0\\
-            \text{Confirm if 32 grid points is enough}
-        \end{align*}
-        \subitem Annulus, Shear Flow with Liner (Table 4.6)
-        \begin{align*}
-            m &= 0 \\
-            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
-            b &= r_{max} - r_{min}  = \frac{1}{3}\\
-            k &= 30 \\
-            \tilde{r} = \frac{r}{b} = 2.0 \\
-            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
-            \eta_T &= 0.3 + 0.1i\\
-            \text{Confirm if 32 grid points is enough}
-        \end{align*}
-\end{itemize}
-\subsubsection{Test Case 1}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/gam.acc.scatter.pdf}
-    \caption{i}
-\end{figure}
-\begin{tiny}
- \begin{figure}
-     \centering
-     \input{Chapter-5-Results/tex-outputs/gam.acc.table.tex}
- \end{figure}
-\end{tiny}
+%    %\begin{figure}
+%    %\end{figure}
+%    %\begin{figure}
+%    %\end{figure}
+%    %\begin{figure}
+%    %    %\end{figure}
+%    %\begin{figure}
+%    %    %\end{figure}
+%    %\begin{figure}
+%    %\end{figure}
+%    %
+%    \section{Validation}
+%    \subsection{Comparison to Kousen}
+
+
+%There are four key test cases to run and make sure that the data is post processed 
+%for.
+%\begin{itemize}
+%    \item Kousen's Test Cases
+%        \subitem Cylinder, Uniform Flow with Liner (Table 4.3)
+%        \begin{align*}
+%            m &= 2 \\
+%            k &= \frac{\omega r_T}{A_T} = -1 \\
+%            M_x &= 0.5 \\
+%            \eta_T &= 0.72 + 0.42i\\
+%            \text{Confirm if 32 grid points is enough}
+%        \end{align*} 
+%        \subitem Cylinder, Shear Flow without Liner (Table 4.4)
+%        \begin{align*}
+%            m &= 0 \\
+%            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 20 \\
+%            b &= r_{max} - r_{min} \\
+%            \tilde{r} = \frac{r}{b} \\
+%            M_x &= 0.3(1-\tilde{r})^{\frac{1}{7}} \\
+%            \eta_T &= 0\\
+%            \text{Confirm if 32 grid points is enough}
+%        \end{align*}
+%        \subitem Annulus, Shear Flow without Liner (Table 4.5)
+%        \begin{align*}
+%            m &= 0 \\
+%            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
+%            b &= r_{max} - r_{min}  = \frac{1}{7}\\
+%            k &= 70 \\
+%            \tilde{r} = \frac{r}{b} = 6.0 \\
+%            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
+%            \eta_T &= 0\\
+%            \text{Confirm if 32 grid points is enough}
+%        \end{align*}
+%        \subitem Annulus, Shear Flow with Liner (Table 4.6)
+%        \begin{align*}
+%            m &= 0 \\
+%            kb &= \left(\frac{\omega r_T}{A_T}\right)b = 10 \\
+%            b &= r_{max} - r_{min}  = \frac{1}{3}\\
+%            k &= 30 \\
+%            \tilde{r} = \frac{r}{b} = 2.0 \\
+%            M_x &= 0.3\left(1 - 2 \left| \frac{r_{max}-r}{b} + 0.5 \right|  \right)^{\frac{1}{7}} \\
+%            \eta_T &= 0.3 + 0.1i\\
+%            \text{Confirm if 32 grid points is enough}
+%        \end{align*}
+%\end{itemize}
+%\subsubsection{Test Case 1}
+%\begin{figure}[h!]
+%    \centering
+%    \includegraphics[width=\textwidth]{Chapter-5-Results/tex-outputs/gam.acc.scatter.pdf}
+%    \caption{i}
+%\end{figure}
+%\begin{tiny}
+% \begin{figure}
+%     \centering
+%     \input{Chapter-5-Results/tex-outputs/gam.acc.table.tex}
+% \end{figure}
+%\end{tiny}
 
 
 
 
 
 
-\subsection{Comparison to Maldanado}
+%\subsection{Comparison to Maldanado}
 
 %--------+----------------------------------------------------------+
 %        |  \appendix                                  (IF NEEDED)  |
@@ -618,13 +667,13 @@ for.
 %        +----------------------------------------------------------+
 \bibliography{references}
 \bibliographystyle{unsrt}
-\appendix
-\chapter{Theory Appendix}
+% \appendix
+% \chapter{Theory Appendix}
 
-\chapter{Chapter 3 Appendix}
+% \chapter{Chapter 3 Appendix}
 %\include{Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical}
-\include{Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation}
-\include{Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships}
+% \include{Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation}
+% \include{Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships}
 
 
 %--------+----------------------------------------------------------+

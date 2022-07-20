@@ -3,72 +3,73 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux
 A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux
-A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.aux
 A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux
 A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux
-A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
 The style file: unsrt.bst
-A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux
-A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.aux
 Database file #1: references.bib
 Warning--entry type for "FAAPolicy" isn't style-file defined
 --line 1 of file references.bib
-Warning--I didn't find a database entry for "Administration"
-Warning--I didn't find a database entry for "Envia2004"
-Warning--I didn't find a database entry for "Hixon2011"
-Warning--I didn't find a database entry for "Kousen1996"
-Warning--I didn't find a database entry for "Kousen1999"
-Warning--I didn't find a database entry for "Golubev1996"
-Warning--I didn't find a database entry for "Golubev1998"
-Warning--I didn't find a database entry for "Michel2008"
-Warning--I didn't find a database entry for "Kerrebrock1977"
-Warning--I didn't find a database entry for "Yousefian1975"
-Warning--I didn't find a database entry for "Yurkovich498"
-Warning--I didn't find a database entry for "ME1978"
-Warning--I didn't find a database entry for "Wundrow2019"
-Warning--I didn't find a database entry for "Tyler1962"
-Warning--I didn't find a database entry for "Case1960"
+Warning--entry type for "Envia2004" isn't style-file defined
+--line 62 of file references.bib
+Warning--entry type for "pandemicReport" isn't style-file defined
+--line 137 of file references.bib
+Warning--entry type for "GTFinfo" isn't style-file defined
+--line 147 of file references.bib
+Warning--entry type for "Wundrow2019" isn't style-file defined
+--line 335 of file references.bib
+Warning--entry type for "Salari2000" isn't style-file defined
+--line 354 of file references.bib
+Warning--entry type for "Shankar1972" isn't style-file defined
+--line 409 of file references.bib
 Warning--I didn't find a database entry for "wolphram:bessel"
 Warning--I didn't find a database entry for "Amr2001"
-You've used 2 entries,
+Warning--empty journal in Basner2017
+Warning--empty author and editor in icao2020
+Warning--empty publisher in icao2020
+Warning--empty journal in KERREBROCK1974
+Warning--empty journal in KAPUR1973
+Warning--empty booktitle in Maldonado2016
+Warning--empty booktitle in Hixon2010
+You've used 38 entries,
             1791 wiz_defined-function locations,
-            501 strings with 4759 characters,
-and the built_in function-call counts, 365 in all, are:
-= -- 29
-> -- 12
-< -- 0
-+ -- 5
-- -- 3
-* -- 20
-:= -- 62
-add.period$ -- 5
-call.type$ -- 2
-change.case$ -- 2
+            701 strings with 9608 characters,
+and the built_in function-call counts, 7551 in all, are:
+= -- 665
+> -- 245
+< -- 7
++ -- 101
+- -- 63
+* -- 417
+:= -- 1135
+add.period$ -- 104
+call.type$ -- 38
+change.case$ -- 36
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 14
-empty$ -- 42
-format.name$ -- 3
-if$ -- 80
+cite$ -- 45
+duplicate$ -- 375
+empty$ -- 821
+format.name$ -- 63
+if$ -- 1752
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 1
-newline$ -- 12
-num.names$ -- 2
-pop$ -- 8
+int.to.str$ -- 38
+missing$ -- 32
+newline$ -- 182
+num.names$ -- 34
+pop$ -- 139
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 8
+skip$ -- 212
 stack$ -- 0
-substring$ -- 21
-swap$ -- 2
-text.length$ -- 0
+substring$ -- 459
+swap$ -- 92
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 3
-width$ -- 3
-write$ -- 21
-(There were 18 warnings)
+warning$ -- 7
+while$ -- 63
+width$ -- 40
+write$ -- 378
+(There were 16 warnings)

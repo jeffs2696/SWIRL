@@ -1,10 +1,10 @@
 OUTPUT_FILES = \
 			   01-mean-flow/*.dat \
 			   02-method-of-manufactured-solutions/*.dat \
-			   03-plotReport/tex-outputs/*.tex \
-			   04-EVanalysis/*.dat \
-			   04-EVanalysis/egv* \
-			   04-EVanalysis/gam* \
+			   04-plotReport/tex-outputs/*.tex \
+			   03-EVanalysis/*.dat \
+			   03-EVanalysis/egv* \
+			   03-EVanalysis/gam* \
 			   fort.*
 
 EXE = swirlF2020
@@ -30,14 +30,14 @@ NUMBERS =
 	# echo $(PLOT_EXE)
 
 plot:
-	@cd 03-plotReport; ./plotReport.py;
+	@cd 04-plotReport; ./plotReport.py;
 
 run SWIRL:
 	./$(EXE)
 clean:
 	(rm $(OUTPUT_FILES));
 report: all
-	@cd 03-plotReport; ./plotReport.py; \
+	@cd 04-plotReport; ./plotReport.py; \
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
 		xdg-open plotReport.pdf;
 
