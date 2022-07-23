@@ -19,24 +19,24 @@ For the conservation of mass,
 \frac{\partial \bar{\rho}v_x}{\partial x}
 \right) = \frac{\partial \bar{\rho}v_x}{\partial x}\] 
 
-The conservation of momentum in the radial direction becomes:
-\[(\vec{V}\cdot \nabla) \vec{V} =
-\cancel{v_r \frac{\partial v_r}{\partial r}} +
-\cancel{\frac{v_{\theta}  }{r}
-	\frac{\partial v_r}{\partial \theta}}- \frac{v_{\theta}^2}{r}+ 
-\cancel{v_x \frac{\partial v_r}{\partial x} }
-= -\frac{1}{\rho} \frac{\partial P}{\partial r}
-\]
-\[
-\frac{v_{\theta}^2}{r}
-= \frac{1}{\rho} \frac{\partial P}{\partial r}
-\] 
+The conservation of momentum in the radial direction becomes,
+% \[(\vec{V}\cdot \nabla) \vec{V} =
+% \cancel{v_r \frac{\partial v_r}{\partial r}} +
+% \cancel{\frac{v_{\theta}  }{r}
+% 	\frac{\partial v_r}{\partial \theta}}- \frac{v_{\theta}^2}{r}+ 
+% \cancel{v_x \frac{\partial v_r}{\partial x} }
+% = -\frac{1}{\rho} \frac{\partial P}{\partial r}
+% \]
+% \[
+% \frac{v_{\theta}^2}{r}
+% = \frac{1}{\rho} \frac{\partial P}{\partial r}
+% \] 
 
 \[
 \frac{{\rho} v_{\theta}^2}{r} 
 =\frac{\partial P}{\partial r}
 \]
-For the $\theta$ direction,
+For the tangential direction,
 \[(\vec{V}\cdot \nabla) \vec{V} = \cancel{v_r \frac{\partial v_{\theta}}{\partial r} +
 	\frac{v_{\theta}}{r}
 	\frac{\partial v_{\theta}}{\partial \theta} +
@@ -46,10 +46,12 @@ v_x \frac{\partial v_{\theta}}{\partial x}
 Dividing $v_x$ to the other side,
 \[ \frac{\partial v_{\theta}}{\partial x}  = 0\]
 
-Similarly for the $x$ direction,
+Similarly for the axial direction,
 
 \[ \frac{\partial v_x}{\partial x} = 0 \]
-In regards to the entropy equation, having an isentropic flow, $\nabla S = 0$ implies $A^2= \frac{\nabla \bar{P}}{ \nabla \bar{\rho}}$ 
+Since the flow is isentropic , $\nabla S = 0$ the relation, $A^2= \frac{\nabla \bar{P}}{ \nabla \bar{\rho}}$ can be
+used to account for the change in speed of sound with radius as the mean
+flow contains a tangential (swirling) component.
 
 
 \section{Accounting for solid body swirl}
@@ -65,63 +67,71 @@ Equation (2.5) in \cite{kousen1995eigenmode} is
 
 where $\tilde{r}$ is the radius dimensional radius normalized by the tip diameter $r_t = r_{max}$
 
-The dimensional form is,
-\[
-\frac{\bar{\rho} v_{\theta}^2}{r} 
-=\frac{\partial P}{\partial r}
-\]
+% The dimensional form is,
+% \[
+% \frac{\bar{\rho} v_{\theta}^2}{r} 
+% =\frac{\partial P}{\partial r}
+% \]
 By appplying separation of variables, the expression for $P$ can be found,
-\[
-\int_{r}^{r_{max}} \frac{\bar{\rho} v_{\theta}^2}{r}\partial r 
-=-\int_{P(r)}^{P(r_{max})}\partial P
-\]
+% \[
+% \int_{r}^{r_{max}} \frac{\bar{\rho} v_{\theta}^2}{r}\partial r 
+% =-\int_{P(r)}^{P(r_{max})}\partial P
+% \]
 
-Since $\tilde{r} = r/r_{max}$ then,
-\[r = \tilde{r}r_{max}\]
-by taking total derivatives and applying chain rule,
+% Since $\tilde{r} = r/r_{max}$ then,
+% \[r = \tilde{r}r_{max}\]
+% by taking total derivatives and applying chain rule,
 
-\[dr = d(\tilde{r}r_{max}) = d(\tilde{r})r_{max}\]
-Substituting these terms back in and evaluating the right hand side,
-\[
-\int_{\tilde{r}}^{1} \frac{\bar{\rho} v_{\theta}^2}{\tilde{r}}\partial \tilde{r} 
-=P(1)-P(\tilde{r})
-\]
-For reference the minimum value of $\tilde{r}$ is
+% \[dr = d(\tilde{r}r_{max}) = d(\tilde{r})r_{max}\]
+% Substituting these terms back in and evaluating the right hand side,
+% \[
+% \int_{\tilde{r}}^{1} \frac{\bar{\rho} v_{\theta}^2}{\tilde{r}}\partial \tilde{r} 
+% =P(1)-P(\tilde{r})
+% \]
+% For reference the minimum value of $\tilde{r}$ is
 
-\[\sigma = \frac{r_{max}}{r_{min}}\]
+% \[\sigma = \frac{r_{max}}{r_{min}}\]
 
 The radial derivative of the speed of sound squared is then used to find the 
 speed of sound in the cases where there is mean tangetial component regardless
 of there being axial flow,
 
-\[\frac{\partial A^2}{\partial r } = \frac{\partial}{\partial r} \left( \frac{\gamma P}{\rho} \right)\]
-Using the quotient rule, the definition of the speed of sound is found to be ,
-\begin{align*}
-&= \frac{\partial P}{\partial r} \frac{\gamma \bar{\rho}}{\bar{\rho}^2} - \left( \frac{\gamma P}{\bar{\rho}^2} \right) \frac{\partial \bar{\rho}}{\partial r}\\
-&=  \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} - \left( \frac{A^2}{\bar{\rho}} \right) \frac{\partial \bar{\rho} }{\partial r}\\ \text{Using } \partial P/A^2 = \partial \rho \rightarrow &= \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} - \left( \frac{1}{\bar{\rho}} \right) \frac{\partial \bar{ P} }{\partial r}\\
-\frac{\partial A^2}{\partial r} &= \frac{\partial P}{\partial r} \frac{\gamma - 1}{\bar{\rho}}  \\ \text{or..}
-\frac{\bar{\rho}}{\gamma -1}\frac{\partial A^2}{\partial r} &= \frac{\partial P}{\partial r} 
-\end{align*}
+% \[\frac{\partial A^2}{\partial r } = \frac{\partial}{\partial r} \left( \frac{\gamma P}{\rho} \right)\]
+% Using the quotient rule, we can extract the definition of the speed of sound.
+% \begin{align*}
+% &= \frac{\partial P}{\partial r} \frac{\gamma \bar{\rho}}{\bar{\rho}^2} - \left( \frac{\gamma P}{\bar{\rho}^2} \right) \frac{\partial \bar{\rho}}{\partial r}\\
+% &=  \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} - \left( \frac{A^2}{\bar{\rho}} \right) \frac{\partial \bar{\rho} }{\partial r}\\ \text{Using } \partial P/A^2 = \partial \rho \rightarrow &= \frac{\partial P}{\partial r} \frac{\gamma }{\bar{\rho}} - \left( \frac{1}{\bar{\rho}} \right) \frac{\partial \bar{ P} }{\partial r}\\
+% \frac{\partial A^2}{\partial r} &= \frac{\partial P}{\partial r} \frac{\gamma - 1}{\bar{\rho}}  \\ \text{or..}
+% \frac{\bar{\rho}}{\gamma -1}\frac{\partial A^2}{\partial r} &= \frac{\partial P}{\partial r} 
+% \end{align*}
 
 
-Going back to the radial momentum equation , and rearranging the 
-\begin{align*}
-\frac{\bar{\rho} v_{\theta}^2}{r} 
-&=\frac{\partial P}{\partial r}\\
-\frac{\cancel{\bar{\rho}} v_{\theta}^2}{r} 
-&=\frac{\cancel{\bar{\rho}}}{\gamma -1}\frac{\partial A^2}{\partial r}\\
-\frac{v_{\theta}^2}{r}\left(\gamma -1\right) &= \frac{\partial A^2}{\partial r}\\ \text{Dividing both sides by } A^2 \rightarrow \frac{M_{\theta}}{r}\left(\gamma - 1\right) &= \frac{\partial A^2}{\partial r} \frac{1}{A^2}
-\end{align*}
-\begin{align*}
-\text{Integrating both sides } \int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=\int_{A^2(r)}^{A^2(r_{max})}\frac{1}{A^2}  {\partial A^2}\\
-\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln(A^2(r_{max})) - ln(A^2(r)) \\
-\int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{A^2(r_{max})}{A^2(r)}\right) 
-\end{align*}
+% \begin{align*}
+% \frac{\bar{\rho} v_{\theta}^2}{r} 
+% &=\frac{\partial P}{\partial r}\\
+% \frac{\cancel{\bar{\rho}} v_{\theta}^2}{r} 
+% &=\frac{\cancel{\bar{\rho}}}{\gamma -1}\frac{\partial A^2}{\partial r}\\
+% \frac{v_{\theta}^2}{r}\left(\gamma -1\right) &= \frac{\partial A^2}{\partial r}\\ \text{Dividing both sides by } A^2 \rightarrow \frac{M_{\theta}}{r}\left(\gamma - 1\right) &= \frac{\partial A^2}{\partial r} \frac{1}{A^2}
+% \end{align*}
+% \begin{align*}
+% \text{Integrating both sides } \int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=\int_{A^2(r)}^{A^2(r_{max})}\frac{1}{A^2}  {\partial A^2}\\
+% \int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln(A^2(r_{max})) - ln(A^2(r)) \\
+% \int_{r}^{r_{max}}\frac{M^2_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{A^2(r_{max})}{A^2(r)}\right) 
+% \end{align*}
 
-Defining non dimensional speed of sound $\tilde{A} = \frac{A(r)}{A(r_{max})}$
+% Defining non dimensional speed of sound $\tilde{A} = \frac{A(r)}{A(r_{max})}$
+% \begin{align*}
+% \int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{1}{\tilde{A}^2}\right) \\
+% &= -2ln(\tilde{A})\\
+% \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
+% \end{align*}
+(See appendix for full derivation)
 \begin{align*}
-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\left(\gamma - 1\right){\partial r}  &=ln\left(\frac{1}{\tilde{A}^2}\right) \\
-&= -2ln(\tilde{A})\\
-\tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
 \tilde{A}(\tilde{r}) &= exp\left[\left(\frac{1 - \gamma}{2}\right)\int_{\tilde{r}}^{1}\frac{M_{\theta}}{\tilde{r}}{\partial \tilde{r}}\right]	
 \end{align*}
+
+For special cases of swirling flow, the relation to between the speed 
+of sound and the tangential velocity can be found. Expressions can be derived 
+for free vortex , and/or solid body swirl. 
+
+

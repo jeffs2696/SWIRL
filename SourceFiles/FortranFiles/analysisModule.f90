@@ -202,7 +202,7 @@ CONTAINS
             IF (col(j)) THEN
 
 
-                WRITE(0,*) j
+                ! WRITE(0,*) j
                 !WRITE(0,20) j
 
                 badcol = .true.
@@ -234,7 +234,7 @@ CONTAINS
             if (row(k)) then
 
                 ! WRITE(0,25) k
-                WRITE(0,*) k
+                ! WRITE(0,*) k
                 badrow = .true.
             endif
 

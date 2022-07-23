@@ -85,6 +85,7 @@ CONTAINS
         CHARACTER(1000) :: &
             formatHeader, &
             formatData, &
+            file_id, &
             basen     
 
 
@@ -107,8 +108,11 @@ CONTAINS
             ! assign a value to the character variable ff, to be appended to the file names
             WRITE(ff,'(i0.4)') n
 
+            WRITE(file_id, '(i0.4)') np
 ! redefining file name for each eigenvalue
-            basen    = '04-EVanalysis/egv.'
+            basen    = &
+                TRIM(ADJUSTL('03-EVanalysis/egv_np_'))//&
+                TRIM(ADJUSTL(file_id)) // 'radialmode_'
 
             open(newunit=myunit1,file=TRIM(ADJUSTL(basen))//TRIM(ADJUSTL(ff)))!,status='old')
 

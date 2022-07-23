@@ -1,0 +1,33 @@
+Clea (as in up the derivation section -- the reader does not need to see every
+manipulation that occurs during the process.  Strip it down to the high points,
+leaving the necessary 'breadcrumbs' for them to follow.  Currently, this section
+looks like a homework submission, not a thesis.  To be clear:  there's way 
+too many slightly-different equations here.  Please keep in mind that there 
+needs to be a reason that you're showing each equation to the reader .
+
+- Working on this, the similar literature has more concise format. Most work is needed 
+to clean up analytical solution. however It can be simplified to one equation
+
+The eigenvalue index number is irrelevant, since there's not a standard order in 
+which eigenvalues and eigenvectors are calculated.  To be clear:  LAPACK is 
+giving you the list of eigenvalues and eigenvectors for the matrix, and it's up 
+to you to determine which ones you need.  To be clearer: there are enough 
+numerical issues involved in calculating eigenvalues and eigenvectors that it 
+wouldn't surprise me if the index numbers changed from run to run for the same matrix.  
+Again:  the index numbers are irrelevant -- please don't bother reporting them (even if Kousen did).
+
+Will mention this in discussion but not in initial results, 
+
+For the last test case shown:  isn't there an analytical solution?  
+If so, where is it?  Second:  why don't you plot the change in eigenvalue 
+as a function of grid spacing -- how much are they changing?
+
+There is one in literature and the analytical solution depends on a separation constant 
+which changes from the boundary condition.  I can present this as well. 
+It is the I will include the plots for the change in
+eigenvalue as a function of grid spacing.  They can also be compared to Kousens 
+I'll get that in.
+
+Finally:  I'd suggest that you remove the SWIRL output file names -- is there a reason that the reader needs to know what the output format of SWIRL is?
+
+Will remove

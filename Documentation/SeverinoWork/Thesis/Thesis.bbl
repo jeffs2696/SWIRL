@@ -83,6 +83,16 @@ A.~L.P. Maldonado, R.~J. Astley, J.~Coupland, G.~Gabard, and D.~Sutliff.
 \newblock Sound propagation in lined annular ducts with mean swirling flow.
 \newblock American Institute of Aeronautics and Astronautics Inc, AIAA, 2016.
 
+\bibitem{Ingraham2015}
+Daniel Ingraham and Ray Hixon.
+\newblock Verification of a viscous computational aeroacoustics code using
+  external verification analysis aiaa paper 2015-2225 motivation.
+
+\bibitem{Ingraham2010}
+Daniel Ingraham.
+\newblock Verification of a computational aeroacoustics code using external
+  verification analysis (eva), 2010.
+
 \bibitem{kousen1996pressure}
 Kenneth Kousen.
 \newblock Pressure modes in ducted flows with swirl.
@@ -94,6 +104,10 @@ Kenneth~A Kousen.
   swirl components.
 \newblock In {\em CEAS/AIAA Joint Aeroacoustics Conference, 1 st, Munich,
   Germany}, pages 1085--1094, 1995.
+
+\bibitem{MESref}
+Chapter 3 exact methods of solution.
+\newblock {\em Mathematics in Science and Engineering}, 18:71--122, 1 1965.
 
 \bibitem{Golubev1998}
 V.~V. Golubev and H.~M. Atassi.
@@ -154,15 +168,6 @@ R.~YURKOVICH.
 J.~M. Tyler and T.~G. Sofrin.
 \newblock Axial flow compressor noise studies.
 \newblock {\em SAE Technical Papers}, 1 1962.
-
-\bibitem{Wundrow2019}
-Small-amplitude disturbances in turbomachine flows with swirl - david w.
-  wundrow - google books.
-
-\bibitem{Case2004}
-K.~M. Case.
-\newblock Stability of inviscid plane couette flow.
-\newblock {\em The Physics of Fluids}, 3:143, 11 2004.
 
 \bibitem{Shankar1972}
 P~N Shankar.

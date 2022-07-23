@@ -1,11 +1,11 @@
 \contentsline {chapter}{Abstract}{iii}%
-\contentsline {chapter}{Acknowledgments}{v}%
-\contentsline {chapter}{Contents}{vi}%
-\contentsline {chapter}{List of Tables}{x}%
-\contentsline {chapter}{List of Figures}{xi}%
-\contentsline {chapter}{List of Symbols}{xiii}%
-\contentsline {chapter}{List of Abbreviations}{xv}%
-\contentsline {chapter}{Preface}{xvi}%
+\contentsline {chapter}{Acknowledgments}{iv}%
+\contentsline {chapter}{Contents}{v}%
+\contentsline {chapter}{List of Tables}{vii}%
+\contentsline {chapter}{List of Figures}{viii}%
+\contentsline {chapter}{List of Symbols}{ix}%
+\contentsline {chapter}{List of Abbreviations}{xi}%
+\contentsline {chapter}{Preface}{xii}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}%
 \contentsline {section}{\numberline {1.1}Overview}{1}%
 \contentsline {subsection}{\numberline {1.1.1}Introduction of overall field and basic explaination of this topic (What)}{1}%
@@ -14,56 +14,16 @@
 \contentsline {subsection}{\numberline {1.2.2}What is missing?/Why is it a problem?}{4}%
 \contentsline {subsection}{\numberline {1.2.3}The goal and significance of the investigation}{5}%
 \contentsline {section}{\numberline {1.3}Definition of the terms (if needed)}{5}%
-\contentsline {section}{\numberline {1.4}Organization of research (Structure)}{5}%
-\contentsline {section}{\numberline {1.5}Research Questions and Hypothesis}{6}%
-\contentsline {chapter}{\numberline {2}Chapter 2: Literature Review}{7}%
-\contentsline {section}{\numberline {2.1}Introduction}{7}%
-\contentsline {subsection}{\numberline {2.1.1}The problem to be addressed and its significance}{7}%
-\contentsline {subsection}{\numberline {2.1.2}Establish reasoning - i.e. point - of - view for reviewing the literature}{7}%
-\contentsline {subsection}{\numberline {2.1.3}Explain the order/sequence of the review}{9}%
-\contentsline {subsection}{\numberline {2.1.4}The theoretical foundation of conceptual framework}{10}%
-\contentsline {subsection}{\numberline {2.1.5}Work by Kousen}{10}%
-\contentsline {section}{\numberline {2.2}Golubev and Atassi's work}{11}%
-\contentsline {section}{\numberline {2.3}Review of the assessment of the numerical techniques}{12}%
-\contentsline {subsection}{\numberline {2.3.1}The research questions, hypotheses, foreshadowed problems, or conjectures}{13}%
-\contentsline {section}{\numberline {2.4}Conclusion}{14}%
-\contentsline {chapter}{\numberline {3}Chapter 3: Methods}{16}%
-\contentsline {section}{\numberline {3.1}Aerodynamic Models}{16}%
-\contentsline {subsection}{\numberline {3.1.1}Steady Models}{16}%
-\contentsline {subsection}{\numberline {3.1.2}Setting up SWIRL's Aerodynamic Model}{17}%
-\contentsline {section}{\numberline {3.2}Applying model to various flows}{19}%
-\contentsline {subsection}{\numberline {3.2.1}Axial Shear Flow}{19}%
-\contentsline {section}{\numberline {3.3}Accounting for solid body swirl}{20}%
-\contentsline {subsection}{\numberline {3.3.1}Unsteady Models}{23}%
-\contentsline {section}{\numberline {3.4}No Flow}{23}%
-\contentsline {subsubsection}{\numberline {3.4.0.1}Temporal Derivatives}{25}%
-\contentsline {subsubsection}{\numberline {3.4.0.2}Radial Derivatives}{26}%
-\contentsline {subsubsection}{\numberline {3.4.0.3}Tangential Derivatives}{27}%
-\contentsline {subsubsection}{\numberline {3.4.0.4}Axial Derivatives}{28}%
-\contentsline {subsubsection}{\numberline {3.4.0.5}Hard Wall boundary condition}{34}%
-\contentsline {section}{\numberline {3.5}Uniform Flow}{35}%
-\contentsline {section}{\numberline {3.6}Annular Duct Axial Wavenumber solution}{38}%
-\contentsline {chapter}{\numberline {4}Chapter 4: Numerical Models}{39}%
-\contentsline {section}{\numberline {4.1}Numerical Integration}{39}%
-\contentsline {section}{\numberline {4.2}Introduction}{39}%
-\contentsline {section}{\numberline {4.3}Methods}{41}%
-\contentsline {subsection}{\numberline {4.3.1}Theory}{42}%
-\contentsline {subsection}{\numberline {4.3.2}Procedure}{46}%
-\contentsline {subsection}{\numberline {4.3.3}Tanh Summaion Formulation}{47}%
-\contentsline {section}{\numberline {4.4}Fairing Functions}{51}%
-\contentsline {section}{\numberline {4.5}Setting Boundary Condition Values Using a Fairing Function}{51}%
-\contentsline {subsection}{\numberline {4.5.1}Using $\beta $ as a scaling parameter}{51}%
-\contentsline {subsection}{\numberline {4.5.2}Minimum Boundary Fairing Function}{53}%
-\contentsline {subsection}{\numberline {4.5.3}Max boundary polynomial}{55}%
-\contentsline {subsection}{\numberline {4.5.4}Corrected function}{55}%
-\contentsline {subsection}{\numberline {4.5.5}Symbolic Sanity Checks}{56}%
-\contentsline {subsection}{\numberline {4.5.6}Min boundary derivative polynomial}{57}%
-\contentsline {subsection}{\numberline {4.5.7}Polynomial function, max boundary derivative}{58}%
-\contentsline {subsection}{\numberline {4.5.8}Putting it together}{60}%
-\contentsline {chapter}{\numberline {5}Results and Discusssion}{61}%
-\contentsline {section}{\numberline {5.1}Verification}{61}%
-\contentsline {section}{\numberline {5.2}Introduction}{61}%
-\contentsline {subsection}{\numberline {5.2.1}Statement of the received results and their analysis}{61}%
-\contentsline {section}{\numberline {5.3}Code Verificaton using the Method of Manufactured Solutions}{61}%
-\contentsline {subsubsection}{\numberline {5.3.0.1}Test Case 1}{71}%
-\contentsline {chapter}{References}{76}%
+\contentsline {section}{\numberline {1.4}Organization of research (Structure)}{6}%
+\contentsline {section}{\numberline {1.5}Research Questions and Hypothesis}{7}%
+\contentsline {chapter}{\numberline {2}Chapter 2: Literature Review}{8}%
+\contentsline {section}{\numberline {2.1}Introduction}{8}%
+\contentsline {subsection}{\numberline {2.1.1}The problem to be addressed and its significance}{8}%
+\contentsline {subsection}{\numberline {2.1.2}Establish reasoning - i.e. point - of - view for reviewing the literature}{8}%
+\contentsline {subsection}{\numberline {2.1.3}Explain the order/sequence of the review}{10}%
+\contentsline {subsection}{\numberline {2.1.4}The theoretical foundation of conceptual framework}{11}%
+\contentsline {section}{\numberline {2.2}Review of the assessment of the numerical techniques}{12}%
+\contentsline {subsection}{\numberline {2.2.1}The research questions, hypotheses, foreshadowed problems, or conjectures}{13}%
+\contentsline {subsection}{\numberline {2.2.2}Calculation of Observed Order-of-Accuracy}{15}%
+\contentsline {section}{\numberline {2.3}Conclusion}{18}%
+\contentsline {chapter}{References}{19}%

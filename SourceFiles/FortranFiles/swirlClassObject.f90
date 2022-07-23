@@ -167,6 +167,8 @@ CONTAINS
         etah                , &
         etad                , &
         ifdff               , &
+        secondOrderSmoother , &
+        fourthOrderSmoother , &
         debugFlag        )
 
         TYPE(SwirlClassType), INTENT(INOUT) ::&
@@ -177,8 +179,12 @@ CONTAINS
             azimuthalMode, &
             np
 
-        REAL(KIND = REAL64), INTENT(INOUT) :: &
+        REAL(KIND = REAL64), INTENT(IN) :: &
             sig
+
+        REAL(KIND = REAL64), INTENT(IN) :: &
+            secondOrderSmoother , &
+            fourthOrderSmoother
 
         REAL(KIND = REAL64), DIMENSION(:), INTENT(INOUT) :: &
             axialMachData, &
@@ -200,9 +206,13 @@ CONTAINS
 
         object%isInitialized = .TRUE.
 
+        IF (debugFlag) THEN 
+            WRITE(0,*) 'swirlClassObject isInitialized:', object%isInitialized
+        ENDIF
+
         ! Set user input to the object 'properties';
-        ed2 = 0.0_rDef
-        ed4 = 0.0_rDef
+        ed2                         = secondOrderSmoother
+        ed4                         = fourthOrderSmoother
         object%azimuthalMode        = azimuthalMode
         object%numberOfRadialPoints = np
         object%hubTipRatio          = sig

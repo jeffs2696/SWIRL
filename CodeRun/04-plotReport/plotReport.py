@@ -358,7 +358,8 @@ plt.savefig('tex-outputs/SpeedOfSoundComparison2.pdf',
         format = 'pdf', 
         bbox_inches='tight')
 
-# Fig. 8: 
+
+# Fig. 8: L2 Norm of Speed of Sound Integration
 fig, ax = plt.subplots(
         nrows=1,
         ncols=1,
@@ -370,66 +371,37 @@ fig.suptitle(r' Log-log plot of the $L2_{norm}$ from the Speed of Sound Integrat
 ax.loglog(
         SND_L2_data['GridPoints'],
         SND_L2_data['L2'], 
-        label = 'approximated' )
-popt, pconv, ydatfit = curve_fit_log( SND_L2_data['GridPoints'], SND_L2_data['L2'])
+        label = 'Calculated L2 Norm' )
 
-k = -2 
-# k = popt[1] 
+x = SND_L2_data['GridPoints'].to_numpy()
+y = SND_L2_data['L2'].to_numpy()
 
-b = SND_L2_data['L2'].iloc[-1] 
-# b = math.log(-popt[0],10)#SND_L2_data['L2'].iloc[0] 
+b = SND_L2_data['L2'].iloc[0] 
 
-vaakaplot = range(SND_L2_data['GridPoints'][0], SND_L2_data['GridPoints'].iloc[-1] )
+# print(y)
+# y0, y1 = np.log([y.min(), y.max()])
+# # mid_x, mid_y = np.log([x[x.size // 2],  y[y.size // 2]])
+# mid_x, mid_y = (np.log(x.min()) , (y0 + y1) / 2
+# slope = -2
+# x0 = mid_x + slope * (y0 )#- mid_y)
+# x1 = mid_x + slope * (y1 )#- mid_y)
+# ax.plot(np.exp([x0, x1]), np.exp([y0, y1]), color='crimson')
 
-pystyplot = [-10**math.log10(b) +10**(k*(math.log10(n)))  for n in SND_L2_data['GridPoints']]
 
-# ax.loglog(
-#         SND_L2_data['GridPoints'],
-#         b*SND_L2_data['GridPoints']**popt[1],
-#         label='power law curve fit: a=%5.3e, b=%5.3f' % tuple((b, popt[1])))
-
-# ax.loglog(
-#         SND_L2_data['GridPoints'],
-#         pystyplot, 
-#         marker = '1',
-#         label = '2nd Order Slope',
-#                 )
+# plt.xscale("log")
+# plt.yscale("log")
+# plt.grid()
+k =2 
+# plt.plot(x, k * x, ":", color="r")
+y_expected = 10**(-np.log10(x**2) + np.log10(x[0]**2 * b))
+plt.plot(x, y_expected , color="b")
 
 plt.legend()
 
 ax.set_ylabel("$ ln (\hat{\epsilon})  $")
 ax.set_xlabel("$ ln (N)  $")
-plt.savefig('tex-outputs/SND_L2.pdf',
-        format = 'pdf', 
-        bbox_inches='tight')
-# Fig. 9: 
-fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        sharex=True,
-        figsize=set_size(width),
-        )
-fig.suptitle('Rate of Convergence of Speed of Sound Integration')
-ax.semilogx(
-        SND_ROC_data['Delta_r'],
-        SND_ROC_data['ROC']    ,
-        label = 'Approximated',
-        marker = '1')
-
-ax.semilogx(
-        SND_ROC_data['Delta_r'],
-        2.0*np.ones(len(SND_ROC_data['Delta_r']))    ,
-        label = 'Expected',
-        marker = '1')
-ax.set_xlabel(r'$\Delta r$')
-ax.set_ylabel(r'$\alpha $')
-ax.legend()
-plt.savefig('tex-outputs/SND_ROC.pdf',
-        format = 'pdf', 
-        bbox_inches='tight')
-# plt.show()
-# sys.exit()
-
+plt.show()
+sys.exit()
 # Fig. 10: 
 fig, ax = plt.subplots(
         nrows=1,

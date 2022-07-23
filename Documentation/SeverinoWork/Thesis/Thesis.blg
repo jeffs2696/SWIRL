@@ -1,11 +1,6 @@
 This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
-A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux
-A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux
-A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux
-A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux
-A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
 The style file: unsrt.bst
 Database file #1: references.bib
 Warning--entry type for "FAAPolicy" isn't style-file defined
@@ -16,60 +11,61 @@ Warning--entry type for "pandemicReport" isn't style-file defined
 --line 137 of file references.bib
 Warning--entry type for "GTFinfo" isn't style-file defined
 --line 147 of file references.bib
-Warning--entry type for "Wundrow2019" isn't style-file defined
---line 335 of file references.bib
 Warning--entry type for "Salari2000" isn't style-file defined
 --line 354 of file references.bib
 Warning--entry type for "Shankar1972" isn't style-file defined
 --line 409 of file references.bib
-Warning--I didn't find a database entry for "wolphram:bessel"
-Warning--I didn't find a database entry for "Amr2001"
+Warning--entry type for "Ingraham2015" isn't style-file defined
+--line 433 of file references.bib
+Warning--entry type for "Ingraham2010" isn't style-file defined
+--line 437 of file references.bib
 Warning--empty journal in Basner2017
 Warning--empty author and editor in icao2020
 Warning--empty publisher in icao2020
 Warning--empty journal in KERREBROCK1974
 Warning--empty journal in KAPUR1973
 Warning--empty booktitle in Maldonado2016
+Warning--empty author in MESref
 Warning--empty booktitle in Hixon2010
-You've used 38 entries,
+You've used 39 entries,
             1791 wiz_defined-function locations,
-            701 strings with 9608 characters,
-and the built_in function-call counts, 7551 in all, are:
-= -- 665
-> -- 245
+            696 strings with 9394 characters,
+and the built_in function-call counts, 7722 in all, are:
+= -- 678
+> -- 253
 < -- 7
-+ -- 101
-- -- 63
-* -- 417
-:= -- 1135
-add.period$ -- 104
-call.type$ -- 38
-change.case$ -- 36
++ -- 104
+- -- 65
+* -- 426
+:= -- 1158
+add.period$ -- 106
+call.type$ -- 39
+change.case$ -- 37
 chr.to.int$ -- 0
-cite$ -- 45
-duplicate$ -- 375
-empty$ -- 821
-format.name$ -- 63
-if$ -- 1752
+cite$ -- 47
+duplicate$ -- 380
+empty$ -- 842
+format.name$ -- 65
+if$ -- 1792
 int.to.chr$ -- 0
-int.to.str$ -- 38
+int.to.str$ -- 39
 missing$ -- 32
-newline$ -- 182
-num.names$ -- 34
-pop$ -- 139
+newline$ -- 186
+num.names$ -- 35
+pop$ -- 146
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 212
+skip$ -- 217
 stack$ -- 0
-substring$ -- 459
-swap$ -- 92
+substring$ -- 468
+swap$ -- 93
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 7
-while$ -- 63
-width$ -- 40
-write$ -- 378
+warning$ -- 8
+while$ -- 64
+width$ -- 41
+write$ -- 386
 (There were 16 warnings)

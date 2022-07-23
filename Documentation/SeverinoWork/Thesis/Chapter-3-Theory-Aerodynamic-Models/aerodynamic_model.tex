@@ -1,5 +1,32 @@
-\subsection{Setting up SWIRL's Aerodynamic Model}
-The Euler Equations in Cylindrical Form are,
+\section{Introduction}
+
+This chapter will outline the steady and unsteady aerodynamic
+models used for this study. The MMS procedure as it is used in this study will 
+be described. The summation method used to generate symbolic expression will 
+be breifly described. This chapter will also present the use of fairing functions 
+to impose the equivallent boundary conditions used in the numerical approximation.
+The procedure for calculating the approximated rate of convergence for a system
+of equations is also presented.
+
+\section{Modal Propagation Theroetical Background}
+\subsection{Aerodynamic Model}
+
+The governing equations for an isentropic ideal gas are the conservation of 
+mass, momentum and energy respectively along with the the constitutive relation 
+for the speed of sound. For a cylindrical duct, the coordiate system consists
+of a radial, tangential and axial components.  
+
+% The following assumptions are utlized to simplify the model 
+
+% \begin{itemize}
+%     \item Steady flow does not fluctuate in time $\partial / \partial t = 0$
+% \end{itemize}
+
+% \begin{equation}
+%     \vec{V} \bar{\rho} = 0
+%     \label{eqn:consOfMass}
+% \end{equation}
+
 \begin{align}
 \frac{\partial \rho}{\partial t} + %Conservation of mass
 v_r \frac{\partial \rho}{\partial r} +
@@ -48,8 +75,7 @@ v_x \frac{\partial p}{\partial \theta} +
 \frac{\partial v_x}{\partial x}
 \right) &= 0
 \end{align}
-
-The following assumptions to simplify the aerodynamic model for thesteady mean
+The following assumptions to simplify the aerodynamic model for the steady mean
 flow case,
 
 \begin{itemize}
@@ -59,6 +85,7 @@ flow case,
     \item Isentropic conditions 
 \end{itemize}
 
+\subsubsection{Steady Flow}
 For steady flow, the continuity, momentum and entropy equations are
 
 \begin{align}
@@ -70,7 +97,12 @@ For steady flow, the continuity, momentum and entropy equations are
 
 If the radial velocity is neglected, the velocity vector in cylindrical coordinates 
 become,
-\[\vec{V}(r,\theta,x) = V_x(r) \hat{e}_x + V_{\theta} (r) \hat{e}_{\theta} \]
+\[\vec{V}(r,\theta,x) = V_x(r) \hat{e}_x + V_{\theta} (r) \hat{e}_{\theta} \] 
+where $\hat{e}_x$ and $\hat{e}_{\theta}$ are unit vectors for the axial and 
+tangential directions. The next section will present general mean flows that 
+follow the form of the velocity vector shown. 
+
+ 
 %Starting with the radial momentum equation, 
 %\begin{align*}
 %\frac{\partial v_r}{\partial t} + 

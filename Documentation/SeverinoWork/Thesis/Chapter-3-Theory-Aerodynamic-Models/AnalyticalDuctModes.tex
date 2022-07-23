@@ -26,74 +26,74 @@ lets look at the no flow case. In the case of sheared flow, $dV_x/dx = 0$ the ri
 
 
 
-\begin{align*}
-    \frac{1}{A^2}\left(
-        \frac{\partial^2 \tilde{p}}{\partial t^2} + 
-        \vec{V}\cdot \vec {\nabla} (\tilde{p}) 
-    \right) -
-    \nabla^2
-    \tilde{p} &=
-    0 \\
-\end{align*}
+% \begin{align*}
+%     \frac{1}{A^2}\left(
+%         \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+%         \vec{V}\cdot \vec {\nabla} (\tilde{p}) 
+%     \right) -
+%     \nabla^2
+%     \tilde{p} &=
+%     0 \\
+% \end{align*}
 
-Substituting the definitions for $\nabla$ and $\nabla^2$ in cylindrical 
-coordinates gives,
+% Substituting the definitions for $\nabla$ and $\nabla^2$ in cylindrical 
+% coordinates gives,
 
-\begin{align*} 
-    \frac{1}{A^2}\left(
-        \frac{\partial^2 \tilde{p}}{\partial t^2}
-    + 
-        \vec{V}\cdot \left(
-            \frac{\partial\tilde{p}}{\partial t} + 
-            \frac{1}{\tilde{r}}\frac{\partial \tilde{p} }{\partial \tilde{r}} +
-            \frac{\partial \tilde{p}}{\partial \theta} +
-            \frac{\partial \tilde{p}}{\partial x}  
-        \right)  \right)-
-        \left(
-            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
-            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial r} +
-            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
-            \frac{\partial^2 \tilde{p}}{\partial x^2} 
-        \right) &= 0  
-\end{align*} 
-Setting $\vec{V} = 0$,
+% \begin{align*} 
+%     \frac{1}{A^2}\left(
+%         \frac{\partial^2 \tilde{p}}{\partial t^2}
+%     + 
+%         \vec{V}\cdot \left(
+%             \frac{\partial\tilde{p}}{\partial t} + 
+%             \frac{1}{\tilde{r}}\frac{\partial \tilde{p} }{\partial \tilde{r}} +
+%             \frac{\partial \tilde{p}}{\partial \theta} +
+%             \frac{\partial \tilde{p}}{\partial x}  
+%         \right)  \right)-
+%         \left(
+%             \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+%             \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial r} +
+%             \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
+%             \frac{\partial^2 \tilde{p}}{\partial x^2} 
+%         \right) &= 0  
+% \end{align*} 
+% Setting $\vec{V} = 0$,
 
-\begin{align*} 
-    \frac{1}{A^2}\left(
-        \frac{\partial^2 \tilde{p}}{\partial t^2}
-    \right) - 
-        \left(
-            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
-            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial  r}  +
-            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
-            \frac{\partial^2 \tilde{p}}{\partial x^2} 
-        \right) &= 0  
-\end{align*} 
-Recall, $\tilde{p} = p/\bar{\rho} A^2$. To dimensionalize the equation, this is
-substituted and both sides are multiplied by $\bar{\rho}A^2$,
+% \begin{align*} 
+%     \frac{1}{A^2}\left(
+%         \frac{\partial^2 \tilde{p}}{\partial t^2}
+%     \right) - 
+%         \left(
+%             \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+%             \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial  r}  +
+%             \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
+%             \frac{\partial^2 \tilde{p}}{\partial x^2} 
+%         \right) &= 0  
+% \end{align*} 
+% Recall, $\tilde{p} = p/\bar{\rho} A^2$. To dimensionalize the equation, this is
+% substituted and both sides are multiplied by $\bar{\rho}A^2$,
 
 
-\begin{align*} 
-    \frac{1}{A^2}\left(
-        \frac{\partial^2 {p}}{\partial t^2}
-    \right) - 
-        \left(
-            \frac{\partial^2 {p}}{\partial t^2} + 
-            \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
-            \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
-            \frac{\partial^2 p}{\partial x^2} 
-        \right) &= 0  
-\end{align*} 
+% \begin{align*} 
+%     \frac{1}{A^2}\left(
+%         \frac{\partial^2 {p}}{\partial t^2}
+%     \right) - 
+%         \left(
+%             \frac{\partial^2 {p}}{\partial t^2} + 
+%             \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
+%             \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
+%             \frac{\partial^2 p}{\partial x^2} 
+%         \right) &= 0  
+% \end{align*} 
 
-The process of separation of variables(seperation indeterminatarum)
-was first written and formalized by John Bernoulli in a letter to Leibniz. The method
-of separation of variables requires an assumed solution as well as initial and boundary 
-conditions. For a partial differential equation, the assumed solution can be a 
-linear combination of solutions to a system of ordinary differential equations that
-comprises the partial differential equation. Since $p$ is a function of four
-variables, the solution is assumed to be a linear combination of four solutions.
-Each solution is assumed to be Euler's identity, a common ansant for linear partial 
-differential equations and boundary conditions.
+% The process of separation of variables(seperation indeterminatarum)
+% was first written and formalized by John Bernoulli in a letter to Leibniz. The method
+% of separation of variables requires an assumed solution as well as initial and boundary 
+% conditions. For a partial differential equation, the assumed solution can be a 
+% linear combination of solutions to a system of ordinary differential equations that
+% comprises the partial differential equation. Since $p$ is a function of four
+% variables, the solution is assumed to be a linear combination of four solutions.
+% Each solution is assumed to be Euler's identity, a common ansant for linear partial 
+% differential equations and boundary conditions.
 
 Defining,
 
@@ -121,237 +121,237 @@ Before the substitution, the derivatives of the assumed solutions need to be
 evaluated.
 
 
-\subsubsection{Temporal Derivatives}
+% \subsubsection{Temporal Derivatives}
 
-\begin{align*}
-    \frac{\partial p}{\partial t} 
-    &=
-    \frac{\partial }{\partial t}  \left( XR\Theta T \right) \\
-    &=
-    XR\Theta\frac{\partial T}{\partial t}  
-\end{align*}
-
-
-\begin{align*}
-    \frac{1}{p}\frac{\partial p}{\partial t} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial T}{\partial t} \right) \\
-    &=\frac{ 1}{ T}\frac{\partial T}{\partial t}  
-\end{align*}
-
-\begin{align*}
-    \frac{\partial^2 p}{\partial t^2} 
-    &=
-    \frac{\partial^2 }{\partial t^2}  \left( XR\Theta T \right) \\
-    &=
-    XR\Theta\frac{\partial^2 T}{\partial t^2}  
-\end{align*}
+% \begin{align*}
+%     \frac{\partial p}{\partial t} 
+%     &=
+%     \frac{\partial }{\partial t}  \left( XR\Theta T \right) \\
+%     &=
+%     XR\Theta\frac{\partial T}{\partial t}  
+% \end{align*}
 
 
-\begin{align*}
-    \frac{1}{p}\frac{\partial^2 p}{\partial t^2} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial^2 T}{\partial t^2} \right) \\
-    &=\frac{ 1}{ T}\frac{\partial^2 T}{\partial t^2}  
-\end{align*}
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial p}{\partial t} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial T}{\partial t} \right) \\
+%     &=\frac{ 1}{ T}\frac{\partial T}{\partial t}  
+% \end{align*}
 
-\begin{align*}
-    \frac{\partial T}{\partial t} &=
-    \frac{\partial}{\partial t}
-        \left( 
-        A_3 e^{i \omega t} + B_3 e^{-i \omega t}
-    \right)  \\
-    &=
-    \frac{\partial}{\partial t} \left(A_3 e^{i \omega t}  \right) +
-    \frac{\partial}{\partial t} \left(B_3 e^{-i \omega t}  \right)\\ 
-    &= i \omega A_3 e^{i \omega t} - i \omega B_3 e^{i \omega t} 
-\end{align*}
-
-\begin{align*}
-    \frac{\partial^2 T}{\partial t^2} &=
-    \frac{\partial^2}{\partial t^2}
-        \left( 
-        i \omega A_3 e^{i \omega t} + i \omega B_3 e^{-i \omega t}
-    \right)  \\
-    &=
-    \frac{\partial^2}{\partial t^2} \left(i \omega A_3 e^{i \omega t}  \right) +
-    \frac{\partial^2}{\partial t^2} \left(- i \omega B_3 e^{-i \omega t}  \right)\\ 
-    &= (i \omega)^2 A_3 e^{i \omega t} - (i \omega)^2 B_3 e^{i \omega t} 
-\end{align*}
-
-\begin{align*}
-    \frac{1}{T}\frac{\partial^2 T}{\partial t^2} 
-    &=
-    (i\omega)^2 \\
-    &= -\omega^2
-\end{align*}
+% \begin{align*}
+%     \frac{\partial^2 p}{\partial t^2} 
+%     &=
+%     \frac{\partial^2 }{\partial t^2}  \left( XR\Theta T \right) \\
+%     &=
+%     XR\Theta\frac{\partial^2 T}{\partial t^2}  
+% \end{align*}
 
 
-\subsubsection{Radial Derivatives}
-\begin{align*}
-    \frac{\partial p}{\partial r} 
-    &=
-    \frac{\partial }{\partial r}  \left( XR\Theta T \right) \\
-    &=
-    X\Theta T\frac{\partial R}{\partial r}  
-\end{align*}
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial^2 p}{\partial t^2} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial^2 T}{\partial t^2} \right) \\
+%     &=\frac{ 1}{ T}\frac{\partial^2 T}{\partial t^2}  
+% \end{align*}
+
+% \begin{align*}
+%     \frac{\partial T}{\partial t} &=
+%     \frac{\partial}{\partial t}
+%         \left( 
+%         A_3 e^{i \omega t} + B_3 e^{-i \omega t}
+%     \right)  \\
+%     &=
+%     \frac{\partial}{\partial t} \left(A_3 e^{i \omega t}  \right) +
+%     \frac{\partial}{\partial t} \left(B_3 e^{-i \omega t}  \right)\\ 
+%     &= i \omega A_3 e^{i \omega t} - i \omega B_3 e^{i \omega t} 
+% \end{align*}
+
+% \begin{align*}
+%     \frac{\partial^2 T}{\partial t^2} &=
+%     \frac{\partial^2}{\partial t^2}
+%         \left( 
+%         i \omega A_3 e^{i \omega t} + i \omega B_3 e^{-i \omega t}
+%     \right)  \\
+%     &=
+%     \frac{\partial^2}{\partial t^2} \left(i \omega A_3 e^{i \omega t}  \right) +
+%     \frac{\partial^2}{\partial t^2} \left(- i \omega B_3 e^{-i \omega t}  \right)\\ 
+%     &= (i \omega)^2 A_3 e^{i \omega t} - (i \omega)^2 B_3 e^{i \omega t} 
+% \end{align*}
+
+% \begin{align*}
+%     \frac{1}{T}\frac{\partial^2 T}{\partial t^2} 
+%     &=
+%     (i\omega)^2 \\
+%     &= -\omega^2
+% \end{align*}
 
 
-\begin{align*}
-    \frac{1}{p}\frac{\partial p}{\partial r} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( X\Theta T\frac{\partial R}{\partial r} \right) \\
-    &=\frac{ 1}{ R}\frac{\partial R}{\partial r}  
-\end{align*}
-
-\begin{align*}
-    \frac{\partial^2 p}{\partial r^2} 
-    &=
-    \frac{\partial^2 }{\partial r^2}  \left( XR\Theta T \right) \\
-    &=
-    X\Theta T\frac{\partial^2 R}{\partial r^2}  
-\end{align*}
+% \subsubsection{Radial Derivatives}
+% \begin{align*}
+%     \frac{\partial p}{\partial r} 
+%     &=
+%     \frac{\partial }{\partial r}  \left( XR\Theta T \right) \\
+%     &=
+%     X\Theta T\frac{\partial R}{\partial r}  
+% \end{align*}
 
 
-\begin{align*}
-    \frac{1}{p}\frac{\partial^2 p}{\partial r^2} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( X\Theta T \frac{\partial^2 R}{\partial r^2} \right) \\
-    &=\frac{ 1}{ R}\frac{\partial^2 R}{\partial r^2}  
-\end{align*}
-The radial derivatives will be revisited once the remaining derivatives are evaluated,
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial p}{\partial r} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( X\Theta T\frac{\partial R}{\partial r} \right) \\
+%     &=\frac{ 1}{ R}\frac{\partial R}{\partial r}  
+% \end{align*}
 
-\subsubsection{Tangential Derivatives}
-
-\begin{align*}
-    \frac{\partial p}{\partial \theta } 
-    &=
-    \frac{\partial }{\partial t}  \left( XR\Theta T \right) \\
-    &=
-    XRT\frac{\partial \Theta}{\partial \theta}  
-\end{align*}
+% \begin{align*}
+%     \frac{\partial^2 p}{\partial r^2} 
+%     &=
+%     \frac{\partial^2 }{\partial r^2}  \left( XR\Theta T \right) \\
+%     &=
+%     X\Theta T\frac{\partial^2 R}{\partial r^2}  
+% \end{align*}
 
 
-\begin{align*}
-    \frac{1}{p}\frac{\partial p}{\partial \theta} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial T}{\partial \theta} \right) \\
-    &=\frac{ 1}{ \Theta}\frac{\partial \Theta}{\partial \theta}  
-\end{align*}
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial^2 p}{\partial r^2} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( X\Theta T \frac{\partial^2 R}{\partial r^2} \right) \\
+%     &=\frac{ 1}{ R}\frac{\partial^2 R}{\partial r^2}  
+% \end{align*}
+% The radial derivatives will be revisited once the remaining derivatives are evaluated,
 
-\begin{align*}
-    \frac{\partial^2 p}{\partial \theta^2} 
-    &=
-    \frac{\partial^2 }{\partial \theta^2}  \left( XR\Theta T \right) \\
-    &=
-    XRT\frac{\partial^2 \Theta }{\partial \theta^2}  
-\end{align*}
+% \subsubsection{Tangential Derivatives}
 
-
-\begin{align*}
-    \frac{1}{p}\frac{\partial^2 p}{\partial \theta^2} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( XRT\frac{\partial^2 \Theta}{\partial \theta^2} \right) \\
-    &=\frac{ 1}{ \Theta}\frac{\partial^2 \Theta}{\partial \theta^2}  
-\end{align*}
-
-\begin{align*}
-    \frac{\partial \Theta}{\partial \theta} &=
-    \frac{\partial}{\partial \theta}
-        \left( 
-            A_2 e^{i k_{\theta} \theta} + B_2 e^{-i k_{\theta} \theta}
-        \right)  \\
-    &=
-    \frac{\partial}{\partial \theta} \left(A_2 e^{i k_{\theta} \theta}  \right) +
-    \frac{\partial}{\partial \theta} \left(B_2 e^{-i k_{\theta} \theta}  \right)\\ 
-    &= i k_{\theta} A_2 e^{i k_{\theta} \theta} - i k_{\theta} B_2 e^{i k_{\theta} \theta} 
-\end{align*}
-
-\begin{align*}
-    \frac{\partial^2 \Theta }{\partial \theta^2} &=
-    \frac{\partial^2}{\partial \theta^2}
-        \left( 
-        i k_{\theta} A_2 e^{i k_{\theta} \theta} - i k_{\theta} B_2 e^{i k_{\theta} \theta} 
-    \right)  \\
-    &=
-    \frac{\partial^2}{\partial \theta^2} \left(i k_{\theta} A_2 e^{i k_{\theta} \theta}  \right) +
-    \frac{\partial^2}{\partial \theta^2} \left(- i k_{\theta} B_2 e^{-i k_{\theta} \theta}  \right)\\ 
-    &= (i k_{\theta})^2 A_2 e^{i k_{\theta} \theta } - (i k_{\theta})^2 B_2 e^{i k_{\theta} \theta} 
-\end{align*}
-
-\begin{align*}
-    \frac{1}{\Theta}\frac{\partial^2 \Theta}{\partial \theta^2} 
-    &=
-    (ik_{\theta})^2 \\
-    &= -k_{\theta}^2
-\end{align*}
-
-\subsubsection{Axial Derivatives}
-
-\begin{align*}
-    \frac{\partial p}{\partial x} 
-    &=
-    \frac{\partial }{\partial x}  \left( XR\Theta T \right) \\
-    &=
-    R\Theta T \frac{\partial X}{\partial x}  
-\end{align*}
+% \begin{align*}
+%     \frac{\partial p}{\partial \theta } 
+%     &=
+%     \frac{\partial }{\partial t}  \left( XR\Theta T \right) \\
+%     &=
+%     XRT\frac{\partial \Theta}{\partial \theta}  
+% \end{align*}
 
 
-\begin{align*}
-    \frac{1}{p}\frac{\partial p}{\partial x} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( R\Theta\frac{\partial X}{\partial x} \right) \\
-    &=\frac{ 1}{ X}\frac{\partial X}{\partial x}  
-\end{align*}
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial p}{\partial \theta} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( XR\Theta\frac{\partial T}{\partial \theta} \right) \\
+%     &=\frac{ 1}{ \Theta}\frac{\partial \Theta}{\partial \theta}  
+% \end{align*}
 
-\begin{align*}
-    \frac{\partial^2 p}{\partial x^2} 
-    &=
-    \frac{\partial^2 }{\partial x^2}  \left( XR\Theta T \right) \\
-    &=
-    R\Theta T \frac{\partial^2 X}{\partial x^2}  
-\end{align*}
+% \begin{align*}
+%     \frac{\partial^2 p}{\partial \theta^2} 
+%     &=
+%     \frac{\partial^2 }{\partial \theta^2}  \left( XR\Theta T \right) \\
+%     &=
+%     XRT\frac{\partial^2 \Theta }{\partial \theta^2}  
+% \end{align*}
 
 
-\begin{align*}
-    \frac{1}{p}\frac{\partial^2 p}{\partial x^2} 
-    &=
-    \frac{ 1}{X R \Theta T}  \left( R\Theta T \frac{\partial^2 X}{\partial x^2} \right) \\
-    &=\frac{ 1}{ X}\frac{\partial^2 X}{\partial x^2}  
-\end{align*}
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial^2 p}{\partial \theta^2} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( XRT\frac{\partial^2 \Theta}{\partial \theta^2} \right) \\
+%     &=\frac{ 1}{ \Theta}\frac{\partial^2 \Theta}{\partial \theta^2}  
+% \end{align*}
 
-\begin{align*}
-    \frac{\partial X}{\partial x} &=
-    \frac{\partial}{\partial t}
-        \left( 
-        A_3 e^{i k_x t} + B_3 e^{-i \omega t}
-    \right)  \\
-    &=
-    \frac{\partial}{\partial t} \left(A_1 e^{i k_x x}  \right) +
-    \frac{\partial}{\partial t} \left(B_1 e^{-i k_x x }  \right)\\ 
-    &= i k_x A_1 e^{i k_x x } - i k_x B_1 e^{i k_x x} 
-\end{align*}
+% \begin{align*}
+%     \frac{\partial \Theta}{\partial \theta} &=
+%     \frac{\partial}{\partial \theta}
+%         \left( 
+%             A_2 e^{i k_{\theta} \theta} + B_2 e^{-i k_{\theta} \theta}
+%         \right)  \\
+%     &=
+%     \frac{\partial}{\partial \theta} \left(A_2 e^{i k_{\theta} \theta}  \right) +
+%     \frac{\partial}{\partial \theta} \left(B_2 e^{-i k_{\theta} \theta}  \right)\\ 
+%     &= i k_{\theta} A_2 e^{i k_{\theta} \theta} - i k_{\theta} B_2 e^{i k_{\theta} \theta} 
+% \end{align*}
 
-\begin{align*}
-    \frac{\partial^2 X}{\partial x^2} &=
-    \frac{\partial^2}{\partial x^2}
-        \left( 
-        i k_x A_1 e^{i k_x x} + i k_x B_1 e^{-i k_x x}
-    \right)  \\
-    &=
-    \frac{\partial^2}{\partial x^2} \left(i k_x A_1 e^{i k_x x}  \right) +
-    \frac{\partial^2}{\partial x^2} \left(- i k_x B_1 e^{-i k_x x}  \right)\\ 
-    &= (i k_x)^2 A_1 e^{i k_x x} - (i k_x)^2 B_1 e^{i k_x x} 
-\end{align*}
+% \begin{align*}
+%     \frac{\partial^2 \Theta }{\partial \theta^2} &=
+%     \frac{\partial^2}{\partial \theta^2}
+%         \left( 
+%         i k_{\theta} A_2 e^{i k_{\theta} \theta} - i k_{\theta} B_2 e^{i k_{\theta} \theta} 
+%     \right)  \\
+%     &=
+%     \frac{\partial^2}{\partial \theta^2} \left(i k_{\theta} A_2 e^{i k_{\theta} \theta}  \right) +
+%     \frac{\partial^2}{\partial \theta^2} \left(- i k_{\theta} B_2 e^{-i k_{\theta} \theta}  \right)\\ 
+%     &= (i k_{\theta})^2 A_2 e^{i k_{\theta} \theta } - (i k_{\theta})^2 B_2 e^{i k_{\theta} \theta} 
+% \end{align*}
 
-\begin{align*}
-    \frac{1}{X}\frac{\partial^2 X}{\partial x^2} 
-    &=
-    (i k_x)^2 \\
-    &= -k_x^2
-\end{align*}
+% \begin{align*}
+%     \frac{1}{\Theta}\frac{\partial^2 \Theta}{\partial \theta^2} 
+%     &=
+%     (ik_{\theta})^2 \\
+%     &= -k_{\theta}^2
+% \end{align*}
 
-Substituting this back into the wave equation yields ,
+% \subsubsection{Axial Derivatives}
+
+% \begin{align*}
+%     \frac{\partial p}{\partial x} 
+%     &=
+%     \frac{\partial }{\partial x}  \left( XR\Theta T \right) \\
+%     &=
+%     R\Theta T \frac{\partial X}{\partial x}  
+% \end{align*}
+
+
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial p}{\partial x} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( R\Theta\frac{\partial X}{\partial x} \right) \\
+%     &=\frac{ 1}{ X}\frac{\partial X}{\partial x}  
+% \end{align*}
+
+% \begin{align*}
+%     \frac{\partial^2 p}{\partial x^2} 
+%     &=
+%     \frac{\partial^2 }{\partial x^2}  \left( XR\Theta T \right) \\
+%     &=
+%     R\Theta T \frac{\partial^2 X}{\partial x^2}  
+% \end{align*}
+
+
+% \begin{align*}
+%     \frac{1}{p}\frac{\partial^2 p}{\partial x^2} 
+%     &=
+%     \frac{ 1}{X R \Theta T}  \left( R\Theta T \frac{\partial^2 X}{\partial x^2} \right) \\
+%     &=\frac{ 1}{ X}\frac{\partial^2 X}{\partial x^2}  
+% \end{align*}
+
+% \begin{align*}
+%     \frac{\partial X}{\partial x} &=
+%     \frac{\partial}{\partial t}
+%         \left( 
+%         A_3 e^{i k_x t} + B_3 e^{-i \omega t}
+%     \right)  \\
+%     &=
+%     \frac{\partial}{\partial t} \left(A_1 e^{i k_x x}  \right) +
+%     \frac{\partial}{\partial t} \left(B_1 e^{-i k_x x }  \right)\\ 
+%     &= i k_x A_1 e^{i k_x x } - i k_x B_1 e^{i k_x x} 
+% \end{align*}
+
+% \begin{align*}
+%     \frac{\partial^2 X}{\partial x^2} &=
+%     \frac{\partial^2}{\partial x^2}
+%         \left( 
+%         i k_x A_1 e^{i k_x x} + i k_x B_1 e^{-i k_x x}
+%     \right)  \\
+%     &=
+%     \frac{\partial^2}{\partial x^2} \left(i k_x A_1 e^{i k_x x}  \right) +
+%     \frac{\partial^2}{\partial x^2} \left(- i k_x B_1 e^{-i k_x x}  \right)\\ 
+%     &= (i k_x)^2 A_1 e^{i k_x x} - (i k_x)^2 B_1 e^{i k_x x} 
+% \end{align*}
+
+% \begin{align*}
+%     \frac{1}{X}\frac{\partial^2 X}{\partial x^2} 
+%     &=
+%     (i k_x)^2 \\
+%     &= -k_x^2
+% \end{align*}
+
+% Substituting this back into the wave equation yields ,
 
 
 
@@ -579,7 +579,7 @@ from Equation (\ref{eqn:wavenumber_without_kr}).
 \end{equation}
 
 
-Solving for the axial wavenumber gives,
+% Solving for the axial wavenumber gives,
 \section{Uniform Flow}
 
 To get the same equation but for uniform flow, the same procedure can be followed.

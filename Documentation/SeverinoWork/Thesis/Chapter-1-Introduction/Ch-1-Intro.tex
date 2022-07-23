@@ -66,7 +66,7 @@ depending on the location of concern, the swirling flow between fan stages has
 been an area of interest due to the potential for acoustic treatment in a 
 location previously avoided for its flow complexity. This work will explore how 
 sound propagation is modeled and how the current state of code verification and 
-validation currently stands. This introduction will describe how fluid mechanics
+validation (V\&V) currently stands. This introduction will describe how fluid mechanics
 is utlized to establish an aeroacoustic model for various ducted flows. It will 
 also discuss how code verification is used in the computational and numerical fields
 but will show the need for the use of these code verification techniques for 
@@ -133,25 +133,53 @@ lack of an analytical solution and thus cannot be described from a single convec
 wave equation. However, the solution for sheared mean flows was first presented
 by Goldstein \cite{Goldstein1978},\cite{Goldstein1979}. Various special cases of
 swirling flow (free vortex and solid body swirl) was examined in \cite{KAPUR1973}
-\cite{Kerrebrock2012}, \cite{KERREBROCK1974}. In recent years verification and
-validation has been done given the rise in technologies capabale of experimentally
+\cite{Kerrebrock2012}, \cite{KERREBROCK1974}. In recent years V \& V has been 
+done given the rise in technologies capabale of experimentally
 measuring the acoustic modes within a turbomachine \cite{Maldonado2016}. This
-work aims offer additional insight to the verification and validation process 
+work aims offer additional insight to the V \& V process 
 by expanding on techniques used in this field.  
+
+Computational codes are widely used in the field of aeroacoustics and concerted
+effort has recently been made to improve V \& V techniques 
+by Ingraham and Hixon \cite{Ingraham2015,Ingraham2010}. The question of getting 
+the correct answer was a large focus of this work. 
+
+This thesis aims to continue this effort by conducting code verification and validation on a frequncy domain 
+Linearized Euler equation approximation on previous work done by Pratt \& Whitney
+and NASA Glenn Research Center though techical contract \cite{kousen1996pressure,kousen1995eigenmode}.  
+
 \section{Definition of the terms (if needed)}
+% define verification and validationr
+
+The algorithms presented in this thesis have been written using FORTRAN 77 and 
+has been updated to FORTRAN 90, and implemented into a code named SWIRL. The 
+foundational work has been started by Pratt and Whitney by Kenneth Kousen 
+\cite{kousen1996pressure} and continuted by Dr. Ray Hixon. SWIRL analyzes 
+axial flows with mean shear and swirl in hard wall and acoustically lines ducts.
+The Method of Manufactured Solutions (MMS) is a process for generating an 
+analytical solution for a code that provides the numerical solution for a 
+given domain. The goal of MMS is to establish a manufactured solution that can 
+be used to establish the accuracy of the code within question. For this study, 
+SWIRL, a code used to calculate the radial modes within an infinitely long duct
+is being validated through code verification. SWIRL accepts a given mean flow and 
+uses numerical integration to obtain the speed of sound. The integration technique
+is found to be the composite trapezoidal rule through asymptotic error analysis.
+
+Prior work has largly depended on conducting code validation through exact solutions
+to the partial differential equation (PDE) , the convective wave equation . Such a
+procedure formally known as the method of exact solutions (MES) \cite{MESref}. 
+MES has the advantage in that the output of SWIRL can be directly compared 
+to the solution of the PDE, however available solutions are limited for sound
+propagation in ducted flows.
+
+
+    
 \section{Organization of research (Structure)}
 % IV) Research aims, objectives, and research question
 % V) State benefit/significance
 % - speed improvement 
 % VI)
 % VII)
-
-
-This research aims to investigave the theoretical framework that is used to
-model ducted sound propagation within various flow fields and apply the 
-``gold-standard'' of code verification , the method of manufactured solutions 
-(MMS) and method of exact solutions (MES) for the limited subset 
-of equations where a solution is known, such as uniform mean flow. 
 
 
 The literature review in the next chapter will discuss the governing equations that are
@@ -167,24 +195,24 @@ on the axial wavenumbers produced.
  
 \section{Research Questions and Hypothesis}
 
+The use of numerical approximations are powerful for cases where 
+there is no analytical solution, thus leaving multiple ways of arriving at a
+numerical solution. The use of MMS allows the user to obtain various metrics
+such as the approximated asymptotic rate of convergence, or the grid convergence index,
+to identify if the code is performing as intended , i.e. using the right equations.
 
-- the problem that we're addressing
 
--- being able to conduct component level code verification tests for the problem
-of characterizing the duct acoustics for flow using a LEE model.
+The goal of this research is to conduct component level code verification tests 
+for the problem of characterizing the duct acoustics for flow using a LEE model 
+by looking at the two numerical components for SWIRL.
 
-why is it a problem? there is multiple ways of arriving at the same solution. 
-This can be used to give a metric to either method for the various computational
-methods that may be needed to arrive at the final answer.
 
-In the mid 90's,an aeroacoustics model for swirling flow had been proposed and 
-has bypassed using a single PDE and has instead used an eigenvalue approach on the 
-four governing flow equations. (Why Is this better? does this capturE the problem
-differently? why not use the PDE alone instead\ldots)
+The goal o
+The proposed component verification from Kleb and Wood will 
+be presented to addreess the characterization of 
+modes and the presence of numerical ones. 
 
-The proposed component verification from Kleb and Wood will be presented to addreess the characterization of 
-modes and the presence of numerical ones. Using higher accuracy methods should 
-further improve The result. another thing is to determine how many grid points are needed
-for each method
+Hypothesis.
+further improve the result. 
 
 

@@ -317,9 +317,9 @@ CONTAINS
 !
         WRITE(file_id, '(i0.4)') np
         open(unit=14,             &
-            file='04-EVanalysis/gam.nonconv.'// TRIM(ADJUSTL(file_id)) )
+            file='03-EVanalysis/gam.nonconv.'// TRIM(ADJUSTL(file_id)) )
         open(unit=16,             &
-            file='04-EVanalysis/gam.nonconv_acc.'// TRIM(ADJUSTL(file_id))  )
+            file='03-EVanalysis/gam.nonconv_acc.'// TRIM(ADJUSTL(file_id))  )
         rewind 14
         rewind 16
         write(14,40)

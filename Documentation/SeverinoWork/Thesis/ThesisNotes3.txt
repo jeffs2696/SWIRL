@@ -1,0 +1,17 @@
+
+You still have a lot of work to do in the literature review.  You're giving Golubev and Atassi a lot of writeup here -- is there a clear reason to go so deep?
+
+
+Figure 5-8:  you really need to change the label 'Expected' to something else -- if you use 'expected', you'll end up having to explain why you're not getting the 'expected' answer every time.  Perhaps something like 'asymptotic'?
+
+p. 66:  After Figure 5-16, all figures appear to be unlabeled.
+
+Eigenvalue plot on p. 67:  you may need to put arrows on the plot to show what you're talking about in the discussion section.  Due to the sheer number of data points on the plot, it's hard to see what you're trying to get across.
+
+I know I should just quit asking, but I'm going to try again:  
+On figure 5-15 (and the other log-log plots), could you put dotted lines with second and fourth order slopes?
+
+Table 4.3 and discussion:  please PLEASE remove the discussion of eigenvalue index numbers.  This is irrelevant, and you'll end up having to explain this to the committee.  Why on earth does the index number matter?
+No conclusions?
+
+

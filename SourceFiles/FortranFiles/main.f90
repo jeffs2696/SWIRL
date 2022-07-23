@@ -1,5 +1,5 @@
 PROGRAM MAIN
-!! The main SWIRL code that generates the executable
+    !! The main SWIRL code that generates the executable
     USE, INTRINSIC  :: ISO_FORTRAN_ENV
     USE swirlClassObject               ! Runs SWIRL for a given set of parameters
     USE mmsClassObject                 ! Calculates L2Norm, L2Max, and Rate Of Convergence
@@ -27,14 +27,13 @@ PROGRAM MAIN
         FORMAT_ROC               , &
         FORMAT_ROC_HEADER
 
+    !! Logical "flag" for debugging, set to .TRUE. to print WRITE statements in the directory
+    !! MMS flag to get approximated order of accuracy
+
     LOGICAL :: &
-    !! Logical "flag" for debugging, 
-    !! set to .TRUE. to print WRITE statements in the directory
-    !! set to .FALSE. to turn off 
-        ! debug = .TRUE. , & 
         debug = .FALSE. , &
-            !! MMS flag to get approximated order of accuracy
         MMSflag = .TRUE.
+
     INTEGER, PARAMETER :: &
     !! Code parameters for double precision and number of iterations
         M_int = 2 , & 
@@ -118,7 +117,7 @@ PROGRAM MAIN
         eigenVectorMMS
 
     TYPE(SwirlClassType) , DIMENSION(numberOfIterations) :: &
-    ! swirlClassObj, &
+    swirlClassObj, &
         swirlClassObjMMS
 
     TYPE(mmsClassType) :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
@@ -129,9 +128,10 @@ PROGRAM MAIN
 
     CONTINUE
 
-    include 'InputVariables.f90'
+
 
     CALL CPU_TIME(start_time)
+
     FORMAT_MEAN_FLOW           = "(F15.12,F15.12,F15.12,F15.12,F15.12)"
     FORMAT_MEAN_FLOW_HEADER    = "(A15,A15,A15,A15,A15)"
     FORMAT_PERTURB_VARS        = "(F16.12,F16.12,F16.12,F16.12,F16.12)"
@@ -144,6 +144,9 @@ PROGRAM MAIN
     FORMAT_ERROR_HEADER        = "(A20, A20, A20,A20)"
     FORMAT_ROC                 = "(F20.12,F20.12)"
     FORMAT_ROC_HEADER          = ("(A10,A20)")
+
+    include 'InputVariables.f90'
+    hubToTipRatio              =  r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
     !!include statements with inputs needed for SwirlClassType
@@ -232,46 +235,37 @@ numberOfGridPoints = 16
                 S_MMS(numberOfGridPoints*4) , &
                 S_error(numberOfGridPoints*4) , &
                 S_actual(numberOfGridPoints*4) , &
-                eigenVectorMMS(numberOfGridPoints*4),&
-                thetaMachData(numberOfGridPoints)                                , &
-                axialMachData(numberOfGridPoints)                                , &
-                totalMachData(numberOfGridPoints))
-! Code Body
+                eigenVectorMMS(numberOfGridPoints*4))
+            ! Code Body
 
-            DO i = 1, numberOfGridPoints
+            ! Allocatables for include files
 
-                r(i)             = (r_min+REAL(i-1, rDef)*dr)/r_max
 
-                ! Plug flow for T4.1
-                axialMachData(i) = 0.3_rDef
+            include 'InputMeanFlow.f90'
 
-                thetaMachData(i) = 0.0_rDef
-
-                ! T.4.5 profile (sheared flow
-!                axialMachData(i) = 0.3_rDef*(1.0_rDef - 2.0_rDef*ABS(&
-!                    (r_min - r(i))/(1.0_rDef/7.0_rDef) + 0.5_rDef))**(1.0_rDef/7.0_rDef)
-!                thetaMachData(i) = 0.0_rDef
-
-            END DO
-!
             !Create a swirl Class Obj for a given flow
-            ! CALL CreateObject(&
-            !     object        = swirlClassObj(fac)  ,&
-            !     azimuthalMode = azimuthalModeNumber  ,&
-            !     np            = numberOfGridPoints   ,&
-            !     sig           = hubToTipRatio        ,&
-            !     axialMachData = axialMachData        ,&
-            !     tangentialMachData = thetaMachData        ,&
-            !     ak            = frequency            ,&
-            !     etah          = hubAdmittance        ,&
-            !     etad          = ductAdmittance       ,&
-            !     ifdff         = finiteDiffFlag       )
+            CALL CreateObject(&
+                object        = swirlClassObj(fac)  ,&
+                azimuthalMode = azimuthalModeNumber  ,&
+                np            = numberOfGridPoints   ,&
+                sig           = hubToTipRatio        ,&
+                axialMachData = axialMachData        ,&
+                tangentialMachData = thetaMachData        ,&
+                ak            = frequency            ,&
+                etah          = hubAdmittance        ,&
+                etad          = ductAdmittance       ,&
+                ifdff         = finiteDiffFlag       ,&
+                secondOrderSmoother = 0.0_rDef       ,&
+                fourthOrderSmoother = 0.0_rDef       ,& 
+                debugFlag     = debug)
 
-            ! CALL runSwirlClassMethods(&
-            !     object = swirlClassObj(fac))
+            CALL runSwirlClassMethods(&
+                object = swirlClassObj(fac), &
+                debugFlag = debug)
 
+            CALL DestroyObject(object = swirlClassObj(fac))
             ! MMS 
-            if (MMSflag) THEN
+            IF (MMSflag) THEN
 
                 CALL getSoundSpeed(&
                     r                  = r                  , &
@@ -323,6 +317,8 @@ numberOfGridPoints = 16
                     etah          = hubAdmittance        ,&
                     etad          = ductAdmittance       ,&
                     ifdff         = finiteDiffFlag       ,&
+                    secondOrderSmoother = 0.0_rDef       ,&
+                    fourthOrderSmoother = 0.0_rDef       ,& 
                     debugFlag     = debug)
 
 
@@ -387,7 +383,7 @@ numberOfGridPoints = 16
 
             ELSE 
             ENDIF
-            ! CALL DestroyObject(object = swirlClassObj(fac))
+
             DEALLOCATE(&
                 axialMachDataMMSOut, &
                 thetaMachDataMMSOut, &
