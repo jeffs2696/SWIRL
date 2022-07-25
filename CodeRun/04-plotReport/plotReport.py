@@ -230,7 +230,6 @@ fig, ax = plt.subplots(
     figsize=set_size(width),
 )
 
-# - '+ str(len(MeanFlowData1_1['radius'] )) + 'points')
 fig.suptitle('MMS Mean Flow Profile')
 ax.plot(
     MeanFlowData3_1['radius'],
@@ -249,7 +248,8 @@ ax.plot(
     (MeanFlowData3_1['M_x']**2 + MeanFlowData3_1['M_theta']**2)**0.5,
     label=r"$M_{total}$",
 )
-ax.set_xlabel(r'$\bar{r}$')
+
+ax.set_xlabel(r'Dimensionless Radius $\bar{r}$')
 ax.set_ylabel(r'$M$')
 ax.legend()
 
@@ -341,7 +341,7 @@ ax.legend()
 fig.savefig('tex-outputs/MMS_perturbation_variables_Pr.pdf',
             format='pdf')  # , bbox_inches='tight')
 
-# Fig. 6:
+# Fig. 6: Speed Of Sound - MMS Grid Comparison
 fig, ax = plt.subplots(
     nrows=1,
     ncols=1,
@@ -371,7 +371,7 @@ plt.savefig('tex-outputs/SpeedOfSoundComparison1.pdf',
             bbox_inches='tight')
 
 
-# Fig. 7:
+# Fig. 7: Speed Of Sound - MMS error
 fig, ax = plt.subplots(
     nrows=1,
     ncols=1,
@@ -406,7 +406,7 @@ plt.savefig('tex-outputs/SpeedOfSoundComparison2.pdf',
             bbox_inches='tight')
 
 
-# Fig. 8: L2 Norm of Speed of Sound Integration
+# Fig. 8: Speed of Sound - L2 Norm from Numerical Integration
 fig, ax = plt.subplots(
     nrows=1,
     ncols=1,
@@ -436,36 +436,96 @@ plt.plot(
 plt.legend()
 
 ax.set_ylabel("$ ln (\\hat{\\epsilon})  $")
+plt.savefig('tex-outputs/LEE_ROC.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
 ax.set_xlabel("$ ln (N)  $")
-plt.show()
-sys.exit()
-# Fig. 10:
+# plt.show()
+# sys.exit()
+
+plt.savefig('tex-outputs/SpeedOfSoundComparisonL2.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+# Fig. 9: Speed Of Sound - Rate Of Convergence
 fig, ax = plt.subplots(
     nrows=1,
     ncols=1,
     sharex=True,
     figsize=set_size(width),
 )
+
+ax.semilogx(
+    SND_ROC_data['Delta_r'],
+    SND_ROC_data['ROC'],
+    label='Approximated with Second Order Central')
+
+ax.semilogx(
+    SND_ROC_data['Delta_r'],
+    2.0*np.ones(len(LEE_ROC_data1['Delta_r'])),
+    label='Second Order Convergence')
+
+ax.set_ylabel(r' Rate of Convergence, $\alpha$')
+ax.set_xlabel('Number of Grid Points')
+
+plt.savefig('tex-outputs/SpeedOfSoundComparisonROC.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+# Fig. 10: LEE - L2 Norm from manufactured solution
+fig, ax = plt.subplots(
+    nrows=1,
+    ncols=1,
+    sharex=True,
+    figsize=set_size(width),
+)
+
 fig.suptitle('L2 of LEE Matrix')
 ax.loglog(
     LEE_L2_data1['GridPoints'],
     LEE_L2_data1['L2'],
-    label='2nd Order')
+    label='Approximated with 2nd Order Central')
 
 ax.loglog(
     LEE_L2_data2['GridPoints'],
     LEE_L2_data2['L2'],
-    label='4th Order')
+    label='Approximated with 4th Order Central')
+
+
+x = LEE_L2_data1['GridPoints'].to_numpy()
+y = LEE_L2_data1['L2'].to_numpy()
+
+b = LEE_L2_data1['L2'].iloc[0]  # y intercept
+k = 2  # expected slope
+y_expected = 10**(-np.log10(x**k) + np.log10(x[0]**k * b))
+plt.plot(
+    x,
+    y_expected,
+    label='Second Order Convergence'
+)
+
+
+x = LEE_L2_data2['GridPoints'].to_numpy()
+y = LEE_L2_data2['L2'].to_numpy()
+
+b = LEE_L2_data2['L2'].iloc[0]  # y intercept
+k = 4  # expected slope
+y_expected = 10**(-np.log10(x**k) + np.log10(x[0]**k * b))
+plt.plot(
+    x,
+    y_expected,
+    label='Fourth Order Convergence'
+)
+
 ax.legend()
-ax.set_ylabel(r'$\epsilon$')
-
-
+ax.set_ylabel(r' Rate of Convergence, $\alpha$')
 ax.set_xlabel('Number of Grid Points')
 plt.savefig('tex-outputs/LEE_L2.pdf',
             format='pdf',
             bbox_inches='tight')
 
-# Fig. 11:
+# Fig. 11: LEE - Rate Of Convergence 
 fig, ax = plt.subplots(
     nrows=1,
     ncols=1,
@@ -476,83 +536,151 @@ fig.suptitle('Rate of Convergence of LEE Matrix')
 ax.semilogx(
     LEE_ROC_data1['Delta_r'],
     LEE_ROC_data1['ROC'],
-    label='2th')
+    label='Approximated with Second Order Central')
+
+ax.semilogx(
+    LEE_ROC_data1['Delta_r'],
+    2.0*np.ones(len(LEE_ROC_data1['Delta_r'])),
+    label='Second Order Convergence')
+
+
+ax.semilogx(
+    LEE_ROC_data1['Delta_r'],
+    4.0*np.ones(len(LEE_ROC_data1['Delta_r'])),
+    label='Fourth Order Convergence')
 
 ax.semilogx(
     LEE_ROC_data2['Delta_r'],
     LEE_ROC_data2['ROC'],
-    label='4th')
+    label='Approximated with Fourth Order Central')
 ax.legend()
 ax.set_xlabel('$$\\Delta r$$')
 ax.set_ylabel('Rate Of Convergence')
-# Fig. 12:
 plt.savefig('tex-outputs/LEE_ROC.pdf',
             format='pdf',
             bbox_inches='tight')
 
 
-# Fig. 13:
-fig, axs = plt.subplots(
-    nrows=2,
-    ncols=2,
-    sharex=True,
-    figsize=set_size(width),
-)
+# Fig. 12: MMS LEE Source Term 1
 
-fig.suptitle('LEE Source Term Comparison')
-
-axs[0, 0].plot(
-    SourceTermData1_1['radius'],
-    SourceTermData1_1['S_actual'],
-    label='$Numerical$')
-axs[0, 0].plot(
-    SourceTermData1_1['radius'],
-    SourceTermData1_1['S_expected'],
-    label='$Theoretical$')
-axs[0, 0].set(ylabel='$S_1$')
-axs[0, 0].set(xlabel='$r [-]$')
-
-axs[0, 1].plot(
-    SourceTermData2_1['radius'],
-    SourceTermData2_1['S_actual'])
-axs[0, 1].plot(
-    SourceTermData2_1['radius'],
-    SourceTermData2_1['S_expected'])
-axs[0, 1].set(ylabel='$S_2$')
-axs[0, 0].set(xlabel='$r [-]$')
-
-axs[1, 0].plot(
-    SourceTermData3_1['radius'],
-    SourceTermData3_1['S_actual'])
-axs[1, 0].plot(
-    SourceTermData3_1['radius'],
-    SourceTermData3_1['S_expected'])
-axs[1, 0].set(ylabel='$S_3$')
-axs[0, 0].set(xlabel='$r [-]$')
-
-axs[1, 1].plot(
-    SourceTermData4_1['radius'],
-    SourceTermData4_1['S_actual'])
-axs[1, 1].plot(
-    SourceTermData4_1['radius'],
-    SourceTermData4_1['S_expected'],
-)
-axs[1, 1].set(ylabel='$S_4$')
-axs[0, 0].set(xlabel='$r [-]$')
-
-axs[0, 0].legend()
-plt.savefig('tex-outputs/SourceTermComparison.pdf',
-            format='pdf',
-            bbox_inches='tight')
-
-# 0 --------
-# Fig. 15:
 fig, axs = plt.subplots(
     nrows=1,
     ncols=1,
     sharex=True,
     figsize=set_size(width),
 )
+
+fig.suptitle('LEE First Source Term Comparison')
+
+axs.plot(
+    SourceTermData1_1['radius'],
+    SourceTermData1_1['S_actual'],
+    label='Numerical Approximation')
+axs.plot(
+    SourceTermData1_1['radius'],
+    SourceTermData1_1['S_expected'],
+    label='$Theoretical$')
+axs.set(ylabel='$S_1$')
+axs.set(xlabel='$r [-]$')
+
+
+axs.legend()
+plt.savefig('tex-outputs/SourceTermComparison1.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+
+fig, axs = plt.subplots(
+    nrows=1,
+    ncols=1,
+    sharex=True,
+    figsize=set_size(width),
+)
+
+fig.suptitle('LEE Second Source Term Comparison')
+
+axs.plot(
+    SourceTermData2_1['radius'],
+    SourceTermData2_1['S_actual'],
+    label='Numerical Approximation')
+axs.plot(
+    SourceTermData2_1['radius'],
+    SourceTermData2_1['S_expected'],
+    label='$Theoretical$')
+axs.set(ylabel='$S_2$')
+axs.set(xlabel='$r [-]$')
+
+
+axs.legend()
+plt.savefig('tex-outputs/SourceTermComparison2.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+
+fig, axs = plt.subplots(
+    nrows=1,
+    ncols=1,
+    sharex=True,
+    figsize=set_size(width),
+)
+
+fig.suptitle('LEE Third Source Term Comparison')
+
+axs.plot(
+    SourceTermData3_1['radius'],
+    SourceTermData3_1['S_actual'],
+    label='Numerical Approximation')
+axs.plot(
+    SourceTermData3_1['radius'],
+    SourceTermData3_1['S_expected'],
+    label='$Theoretical$')
+axs.set(ylabel='$S_3$')
+axs.set(xlabel='$r [-]$')
+
+
+axs.legend()
+plt.savefig('tex-outputs/SourceTermComparison3.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+
+fig, axs = plt.subplots(
+    nrows=1,
+    ncols=1,
+    sharex=True,
+    figsize=set_size(width),
+)
+
+fig.suptitle('LEE Fourth Source Term Comparison')
+
+axs.plot(
+    SourceTermData4_1['radius'],
+    SourceTermData4_1['S_actual'],
+    label='Numerical Approximation')
+axs.plot(
+    SourceTermData4_1['radius'],
+    SourceTermData4_1['S_expected'],
+    label='$Theoretical$')
+axs.set(ylabel='$S_4$')
+axs.set(xlabel='$r [-]$')
+
+
+axs.legend()
+plt.savefig('tex-outputs/SourceTermComparison4.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+# Fig. 13:
+
+fig, axs = plt.subplots(
+    nrows=1,
+    ncols=1,
+    sharex=True,
+    figsize=set_size(width),
+)
+
+fig.suptitle('Source Term 1 Error at Multiple Grids')
+
 axs.semilogy(
     SourceTermData1_1['radius'],
     abs(SourceTermData1_1['S_actual'] - SourceTermData1_1['S_expected']))
@@ -565,16 +693,13 @@ axs.semilogy(
     SourceTermData1_3['radius'],
     abs(SourceTermData1_3['S_actual'] - SourceTermData1_3['S_expected']))
 
-
-fig.suptitle('Source Term 1 Error at Multiple Grids')
-
 axs.set_ylabel('$$\\epsilon$$')
 axs.set_xlabel('$$ r$$')
 plt.savefig('tex-outputs/SourceTermError1.pdf',
             format='pdf',
             bbox_inches='tight')
 
-# Fig. 16:
+# Fig. 14:
 fig, axs = plt.subplots(
     nrows=1,
     ncols=1,
@@ -603,7 +728,7 @@ plt.savefig('tex-outputs/SourceTermError2.pdf',
             bbox_inches='tight')
 
 
-# Fig. 17:
+# Fig. 15:
 fig, axs = plt.subplots(
     nrows=1,
     ncols=1,
@@ -634,7 +759,7 @@ plt.savefig('tex-outputs/SourceTermError3.pdf',
             bbox_inches='tight')
 
 
-# Fig. 18:
+# Fig. 16:
 fig, axs = plt.subplots(
     nrows=1,
     ncols=1,
@@ -660,5 +785,5 @@ plt.savefig('tex-outputs/SourceTermError4.pdf',
             format='pdf',
             bbox_inches='tight')
 
-plt.show()
-sys.exit()
+# plt.show()
+# sys.exit()
