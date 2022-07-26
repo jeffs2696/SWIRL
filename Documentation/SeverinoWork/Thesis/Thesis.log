@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  26 JUL 2022 03:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  26 JUL 2022 06:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1155,108 +1155,115 @@ undComparison2.pdf>
 Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
 tputs/MMS1_SpeedOfSoundComparison2.pdf  used on input line 142.
 (pdftex.def)             Requested size: 355.24452pt x 256.57045pt.
-[63 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
-undComparison1.pdf>]
-
-LaTeX Warning: Reference `fig:10' on page 64 undefined on input line 163.
-
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 165.
+               Default added (so using `!tbp') on input line 156.
 
 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundC
-omparisonROC.pdf, id=389, 359.49548pt x 231.84973pt>
-File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfS
-oundComparisonROC.pdf Graphic file (type pdf)
-<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
-undComparisonROC.pdf>
-Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_SpeedOfSoundComparisonROC.pdf  used on input line 167.
-(pdftex.def)             Requested size: 359.4946pt x 231.84915pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 174.
-
-</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermCom
-parison1.pdf, id=390, 366.10666pt x 257.68217pt>
-File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
-rmComparison1.pdf Graphic file (type pdf)
-<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
-mComparison1.pdf>
-Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_SourceTermComparison1.pdf  used on input line 176.
-(pdftex.def)             Requested size: 366.10576pt x 257.68153pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 182.
-
-</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
-or1.pdf, id=391, 362.3286pt x 256.57108pt>
-File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
-rmError1.pdf Graphic file (type pdf)
-<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
-mError1.pdf>
-Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_SourceTermError1.pdf  used on input line 184.
-(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 190.
-
-</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
-or2.pdf, id=392, 365.9952pt x 256.57108pt>
-File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
-rmError2.pdf Graphic file (type pdf)
-<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
-mError2.pdf>
-Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_SourceTermError2.pdf  used on input line 192.
-(pdftex.def)             Requested size: 365.9943pt x 256.57045pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 198.
-
-</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
-or3.pdf, id=393, 362.3286pt x 256.57108pt>
-File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
-rmError3.pdf Graphic file (type pdf)
-<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
-mError3.pdf>
-Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_SourceTermError3.pdf  used on input line 200.
-(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 206.
-
-</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
-or4.pdf, id=394, 362.3286pt x 256.57108pt>
-File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
-rmError4.pdf Graphic file (type pdf)
-<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
-mError4.pdf>
-Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_SourceTermError4.pdf  used on input line 208.
-(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 213.
-
-</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundC
-omparisonL2.pdf, id=395, 367.02531pt x 257.68217pt>
+omparisonL2.pdf, id=371, 367.02531pt x 257.68217pt>
 File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfS
 oundComparisonL2.pdf Graphic file (type pdf)
 <use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
 undComparisonL2.pdf>
 Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_SpeedOfSoundComparisonL2.pdf  used on input line 215.
+tputs/MMS1_SpeedOfSoundComparisonL2.pdf  used on input line 158.
 (pdftex.def)             Requested size: 367.0244pt x 257.68153pt.
+[63 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
+undComparison1.pdf>] [64 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-o
+utputs/MMS1_SpeedOfSoundComparison2.pdf> </home/jeff-severino/SWIRL/CodeRun/04-
+plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf): PDF inclusion: multiple pdfs wi
+th page group included in a single page
+>]
+
+LaTeX Warning: Reference `fig:10' on page 65 undefined on input line 171.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 173.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundC
+omparisonROC.pdf, id=451, 359.49548pt x 231.84973pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfS
+oundComparisonROC.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
+undComparisonROC.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SpeedOfSoundComparisonROC.pdf  used on input line 175.
+(pdftex.def)             Requested size: 359.4946pt x 231.84915pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 182.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermCom
+parison1.pdf, id=452, 366.10666pt x 257.68217pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmComparison1.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mComparison1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermComparison1.pdf  used on input line 184.
+(pdftex.def)             Requested size: 366.10576pt x 257.68153pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 190.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or1.pdf, id=453, 362.3286pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError1.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError1.pdf  used on input line 192.
+(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 198.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or2.pdf, id=454, 365.9952pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError2.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError2.pdf  used on input line 200.
+(pdftex.def)             Requested size: 365.9943pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 206.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or3.pdf, id=455, 362.3286pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError3.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError3.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError3.pdf  used on input line 208.
+(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 214.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or4.pdf, id=456, 362.3286pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError4.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError4.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError4.pdf  used on input line 216.
+(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `!tbp') on input line 222.
 
 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf, i
-d=396, 362.3286pt x 256.57108pt>
+d=457, 362.3286pt x 256.57108pt>
 File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.p
 df Graphic file (type pdf)
 <use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pd
@@ -1264,31 +1271,24 @@ f>
 Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
 tputs/MMS1_LEE_L2.pdf  used on input line 224.
 (pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
-[64 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
-undComparison2.pdf>] [65 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-o
-utputs/MMS1_SpeedOfSoundComparisonROC.pdf> </home/jeff-severino/SWIRL/CodeRun/0
-4-plotReport/tex-outputs/MMS1_SourceTermComparison1.pdf
+[65 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
+undComparisonROC.pdf>] [66 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex
+-outputs/MMS1_SourceTermComparison1.pdf> </home/jeff-severino/SWIRL/CodeRun/04-
+plotReport/tex-outputs/MMS1_SourceTermError1.pdf
 
 pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
-tex-outputs/MMS1_SourceTermComparison1.pdf): PDF inclusion: multiple pdfs with 
-page group included in a single page
->] [66 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_Source
-TermError1.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MM
-S1_SourceTermError2.pdf
-
-pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
-tex-outputs/MMS1_SourceTermError2.pdf): PDF inclusion: multiple pdfs with page 
+tex-outputs/MMS1_SourceTermError1.pdf): PDF inclusion: multiple pdfs with page 
 group included in a single page
 >] [67 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_Source
-TermError3.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MM
-S1_SourceTermError4.pdf
+TermError2.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MM
+S1_SourceTermError3.pdf
 
 pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
-tex-outputs/MMS1_SourceTermError4.pdf): PDF inclusion: multiple pdfs with page 
+tex-outputs/MMS1_SourceTermError3.pdf): PDF inclusion: multiple pdfs with page 
 group included in a single page
->] [68 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedO
-fSoundComparisonL2.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
-tputs/MMS1_LEE_L2.pdf
+>] [68 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_Source
+TermError4.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MM
+S1_LEE_L2.pdf
 
 pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
 tex-outputs/MMS1_LEE_L2.pdf): PDF inclusion: multiple pdfs with page group incl
@@ -1440,7 +1440,7 @@ ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (93 pages, 829141 bytes).
+Output written on Thesis.pdf (93 pages, 829222 bytes).
 PDF statistics:
  855 PDF objects out of 1000 (max. 8388607)
  667 compressed objects within 7 object streams

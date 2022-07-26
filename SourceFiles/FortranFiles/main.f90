@@ -154,9 +154,9 @@ PROGRAM MAIN
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
     ! include 'InputVariables_MMS1.f90'
-    include 'InputVariables_KousenTable4_3.f90'
+    ! include 'InputVariables_KousenTable4_3.f90'
     ! include 'InputVariables_KousenTable4_4.f90'
-    ! include 'InputVariables_KousenTable4_5.f90'
+    include 'InputVariables_KousenTable4_5.f90'
     ! include 'InputVariables_KousenTable4_6.f90'
 
     hubToTipRatio              =  r_min/r_max
@@ -258,7 +258,7 @@ PROGRAM MAIN
     ! Allocatables for include files
 
 
-    include 'InputMeanFlow.f90'
+    include 'InputVariables_KousenTable4_5.f90'
 
     !Create a swirl Class Obj for a given flow
     CALL CreateObject(&

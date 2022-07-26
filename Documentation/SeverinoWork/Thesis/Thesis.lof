@@ -11,11 +11,11 @@
 \contentsline {figure}{\numberline {5-5}{\ignorespaces The manufactured perturbation functions ,$P$}}{62}%
 \contentsline {figure}{\numberline {5-6}{\ignorespaces A comparison of the speed of sound, expected vs actual at the lowest grid to show similarities in solution}}{63}%
 \contentsline {figure}{\numberline {5-7}{\ignorespaces A comparison of the speed of sound error at three grid}}{64}%
-\contentsline {figure}{\numberline {5-8}{\ignorespaces Speed of Sound Rate Of Convergence}}{65}%
-\contentsline {figure}{\numberline {5-9}{\ignorespaces LEE Source Terms}}{65}%
-\contentsline {figure}{\numberline {5-10}{\ignorespaces LEE Source Term Error}}{66}%
+\contentsline {figure}{\numberline {5-8}{\ignorespaces L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}}{64}%
+\contentsline {figure}{\numberline {5-9}{\ignorespaces Speed of Sound Rate Of Convergence}}{65}%
+\contentsline {figure}{\numberline {5-10}{\ignorespaces LEE Source Terms}}{66}%
 \contentsline {figure}{\numberline {5-11}{\ignorespaces LEE Source Term Error}}{66}%
 \contentsline {figure}{\numberline {5-12}{\ignorespaces LEE Source Term Error}}{67}%
 \contentsline {figure}{\numberline {5-13}{\ignorespaces LEE Source Term Error}}{67}%
-\contentsline {figure}{\numberline {5-14}{\ignorespaces L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}}{68}%
+\contentsline {figure}{\numberline {5-14}{\ignorespaces LEE Source Term Error}}{68}%
 \contentsline {figure}{\numberline {5-15}{\ignorespaces ROC for the speed of sound integration for the compound trapezoidal rule}}{68}%

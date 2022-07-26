@@ -150,8 +150,16 @@ integration scheme used. Since the composite trapezoidal rule has an order of ac
 it is expected that the approximated order of accuracy will approach two as
 the error approaches zero. This behavior is shown in Figure \ref{fig:8} where the approximated
 line is the $L2_{norm}$ of the speed of sound error 
- The slope ( i.e. the asymptotic rate of convergence )approached two for 
+ The slope (i.e. the asymptotic rate of convergence) approached two for 
  numerical integration as the grid spacing decreases (See Figure \ref{fig:9}) .
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf}
+    \caption{L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}
+    \label{fig:8}
+\end{figure}
+
 
 
 For the LEE, a second and fourth order central differencing scheme is used
@@ -209,14 +217,6 @@ two diffferencing schemes in  \ref{fig:9} and \ref{fig:10}. (How should is dicus
     \caption{LEE Source Term Error}
     \label{fig:7}
 \end{figure}
-
-\begin{figure}[!]
-    \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf}
-    \caption{L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}
-    \label{fig:8}
-\end{figure}
-
 
 
 \begin{figure}[!]
