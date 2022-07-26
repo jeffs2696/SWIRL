@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  24 JUL 2022 15:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  25 JUL 2022 17:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -792,7 +792,33 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count325
 \l__pdf_internal_box=\box67
 )
-(./Thesis.aux)
+(./Thesis.aux (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux)
+(./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
+)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
+racy.aux)
+
+LaTeX Warning: Label `eqn:MMS_M_x' multiply defined.
+
+
+LaTeX Warning: Label `eqn:MMS_M_x' multiply defined.
+
+
+LaTeX Warning: Label `eqn:MMS_M_x' multiply defined.
+
+
+LaTeX Warning: Label `fig:7' multiply defined.
+
+
+LaTeX Warning: Label `fig:7' multiply defined.
+
+
+LaTeX Warning: Label `fig:7' multiply defined.
+
+)
 \openout1 = `Thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
@@ -809,8 +835,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
 LaTeX Font Info:    ... okay on input line 30.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count326
 \scratchdimen=\dimen314
@@ -850,28 +875,27 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 ] (./Thesis.toc [5
 
 
-])
+] [6] [7])
 \tf@toc=\write4
 \openout4 = `Thesis.toc'.
 
- [6] (./Thesis.lot)
+ [8] (./Thesis.lot)
 \tf@lot=\write5
 \openout5 = `Thesis.lot'.
 
-
-[7
+[9
 
 ] (./Thesis.lof)
 \tf@lof=\write6
 \openout6 = `Thesis.lof'.
 
- [8
+ [10
 
-] [9
+] [11
 
-] [10] [11
+] [12] [13
 
-] [12
+] [14
 
 ]
 Chapter 1.
@@ -880,7 +904,7 @@ Chapter 1.
 
 
 ] [2]
-<Chapter-1-Introduction/Figures/lowVhighBPRdirectivitySMITH2004.png, id=58, 593
+<Chapter-1-Introduction/Figures/lowVhighBPRdirectivitySMITH2004.png, id=64, 593
 .21625pt x 210.7875pt>
 File: Chapter-1-Introduction/Figures/lowVhighBPRdirectivitySMITH2004.png Graphi
 c file (type png)
@@ -906,33 +930,540 @@ Overfull \hbox (5.15623pt too wide) in paragraph at lines 40--40
 b-
  []
 
-[13] [14] [15] [16] [17]) (./Thesis.bbl [18] [19
+[13] [14] [15] [16] [17]) [18]
+Chapter 3.
+[19
 
-] [20] [21] [22]) [23]
-(./Thesis.aux) ) 
+]
+\openout2 = `Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux'.
+
+ (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.tex [20
+
+])
+[21] (./Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes.tex [22
+
+]
+[23]
+
+LaTeX Warning: Citation `wolphram:bessel' on page 24 undefined on input line 41
+8.
+
+
+LaTeX Warning: Reference `eqn:besselODE' on page 24 undefined on input line 428
+.
+
+[24] [25]) [26]
+\openout2 = `Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_case
+s.aux'.
+
+
+(./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.tex
+[27
+
+]) [28]
+(./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.tex [29
+
+]
+[30]
+
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 938.
+
+) [31]
+Chapter 4.
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.
+tex) [32
+
+] [33]
+\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/met
+hods.aux'.
+
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.tex)
+[34
+
+]
+\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/the
+ory.aux'.
+
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.tex
+[35
+
+
+] [36] [37]) [38]
+\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/pro
+cedure.aux'.
+
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.tex
+[39
+
+
+] [40]
+Overfull \hbox (51.23843pt too wide) detected at line 81
+[]
+ []
+
+[41]
+Overfull \hbox (37.03601pt too wide) detected at line 121
+[]
+ []
+
+[42]) [43]
+\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/ord
+er-of-accuracy.aux'.
+
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
+racy.tex [44
+
+
+] [45] [46]) [47]
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/intro.tex)
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/setting-bc-values
+-using-a-fairing-function.tex [48
+
+] [49])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-poly
+nomial.tex [50] [51])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/max-boundary-poly
+nomial.tex [52])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/symbolic-sanity-c
+hecks.tex
+Overfull \hbox (18.29695pt too wide) in paragraph at lines 2--8
+[]\OT1/cmr/m/n/12 We want to en-sure that $\OML/cmm/m/it/12 f[]$ \OT1/cmr/m/n/1
+2 has the de-sired bound-ary con-di-tions, $\OML/cmm/m/it/12 f[]$
+ []
+
+
+Overfull \hbox (110.35847pt too wide) detected at line 35
+[]
+ []
+
+
+Overfull \hbox (105.42238pt too wide) detected at line 52
+[]
+ []
+
+[53])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-poly
+nomial-derivative.tex [54] [55] [56]) [57]
+Chapter 5.
+(./Chapter-5-Results/Ch-5-results-and-discussion.tex [58
+
+] [59]
+
+LaTeX Warning: Reference `fig:10' on page 60 undefined on input line 88.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 91.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_pro
+file.pdf, id=257, 400.00002pt x 247.2136pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_mean_flo
+w_profile.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow
+_profile.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_mean_flow_profile.pdf  used on input line 93.
+(pdftex.def)             Requested size: 399.99902pt x 247.21298pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 99.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_
+variables_vR.pdf, id=258, 400.00002pt x 247.2136pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturba
+tion_variables_vR.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbat
+ion_variables_vR.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_perturbation_variables_vR.pdf  used on input line 101.
+(pdftex.def)             Requested size: 399.99902pt x 247.21298pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 107.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_
+variables_vX.pdf, id=259, 400.00002pt x 247.2136pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturba
+tion_variables_vX.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbat
+ion_variables_vX.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_perturbation_variables_vX.pdf  used on input line 109.
+(pdftex.def)             Requested size: 399.99902pt x 247.21298pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 115.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_
+variables_vTh.pdf, id=260, 400.00002pt x 247.2136pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturba
+tion_variables_vTh.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbat
+ion_variables_vTh.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_perturbation_variables_vTh.pdf  used on input line 117.
+(pdftex.def)             Requested size: 399.99902pt x 247.21298pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 123.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_
+variables_Pr.pdf, id=261, 400.00002pt x 247.2136pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturba
+tion_variables_Pr.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbat
+ion_variables_Pr.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_perturbation_variables_Pr.pdf  used on input line 125.
+(pdftex.def)             Requested size: 399.99902pt x 247.21298pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 130.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundC
+omparison1.pdf, id=262, 360.6066pt x 257.68217pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfS
+oundComparison1.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
+undComparison1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SpeedOfSoundComparison1.pdf  used on input line 132.
+(pdftex.def)             Requested size: 360.60571pt x 257.68153pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 138.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundC
+omparison2.pdf, id=263, 355.2454pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfS
+oundComparison2.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
+undComparison2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SpeedOfSoundComparison2.pdf  used on input line 140.
+(pdftex.def)             Requested size: 355.24452pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 146.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundC
+omparisonROC.pdf, id=264, 359.49548pt x 231.84973pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfS
+oundComparisonROC.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
+undComparisonROC.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SpeedOfSoundComparisonROC.pdf  used on input line 148.
+(pdftex.def)             Requested size: 359.4946pt x 231.84915pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 155.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermCom
+parison1.pdf, id=265, 366.10666pt x 257.68217pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmComparison1.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mComparison1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermComparison1.pdf  used on input line 157.
+(pdftex.def)             Requested size: 366.10576pt x 257.68153pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 163.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or1.pdf, id=266, 362.3286pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError1.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError1.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError1.pdf  used on input line 165.
+(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 171.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or2.pdf, id=267, 365.9952pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError2.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError2.pdf  used on input line 173.
+(pdftex.def)             Requested size: 365.9943pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 179.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or3.pdf, id=268, 362.3286pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError3.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError3.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError3.pdf  used on input line 181.
+(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 187.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermErr
+or4.pdf, id=269, 362.3286pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
+rmError4.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTer
+mError4.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SourceTermError4.pdf  used on input line 189.
+(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 194.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundC
+omparisonL2.pdf, id=270, 367.02531pt x 257.68217pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfS
+oundComparisonL2.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSo
+undComparisonL2.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_SpeedOfSoundComparisonL2.pdf  used on input line 196.
+(pdftex.def)             Requested size: 367.0244pt x 257.68153pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 203.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf, i
+d=271, 362.3286pt x 256.57108pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.p
+df Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pd
+f>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/MMS1_LEE_L2.pdf  used on input line 205.
+(pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
+[60] [61 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_mean
+_flow_profile.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs
+/MMS1_perturbation_variables_vR.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_perturbation_variables_vR.pdf): PDF inclusion: multiple pdfs w
+ith page group included in a single page
+>] [62 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_pertur
+bation_variables_vX.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-o
+utputs/MMS1_perturbation_variables_vTh.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_perturbation_variables_vTh.pdf): PDF inclusion: multiple pdfs 
+with page group included in a single page
+>] [63 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_pertur
+bation_variables_Pr.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-o
+utputs/MMS1_SpeedOfSoundComparison1.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_SpeedOfSoundComparison1.pdf): PDF inclusion: multiple pdfs wit
+h page group included in a single page
+>] [64 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedO
+fSoundComparison2.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-out
+puts/MMS1_SpeedOfSoundComparisonROC.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_SpeedOfSoundComparisonROC.pdf): PDF inclusion: multiple pdfs w
+ith page group included in a single page
+>] [65 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_Source
+TermComparison1.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outpu
+ts/MMS1_SourceTermError1.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_SourceTermError1.pdf): PDF inclusion: multiple pdfs with page 
+group included in a single page
+>] [66 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_Source
+TermError2.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MM
+S1_SourceTermError3.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_SourceTermError3.pdf): PDF inclusion: multiple pdfs with page 
+group included in a single page
+>] [67 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_Source
+TermError4.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MM
+S1_SpeedOfSoundComparisonL2.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf): PDF inclusion: multiple pdfs wi
+th page group included in a single page
+>]
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.scatte
+r_2nd_ord_32pts.pdf, id=595, 300.45346pt x 189.25897pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.s
+catter_2nd_ord_32pts.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.sc
+atter_2nd_ord_32pts.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/gam.nonconv.scatter_2nd_ord_32pts.pdf  used on input line 280.
+(pdftex.def)             Requested size: 433.62pt x 273.15358pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.scatte
+r_2nd_ord_64pts.pdf, id=596, 304.70352pt x 189.25897pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.s
+catter_2nd_ord_64pts.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.sc
+atter_2nd_ord_64pts.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/gam.nonconv.scatter_2nd_ord_64pts.pdf  used on input line 285.
+(pdftex.def)             Requested size: 433.62pt x 269.3445pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.scatte
+r_2nd_ord_128pts.pdf, id=597, 304.70352pt x 189.25897pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.s
+catter_2nd_ord_128pts.pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.sc
+atter_2nd_ord_128pts.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/gam.nonconv.scatter_2nd_ord_128pts.pdf  used on input line 291.
+(pdftex.def)             Requested size: 433.62pt x 269.3445pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_prop_re.pdf, i
+d=598, 583.09348pt x 396.08405pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_prop_re.p
+df Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_prop_re.pd
+f>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/egv_prop_re.pdf  used on input line 296.
+(pdftex.def)             Requested size: 433.62pt x 294.56018pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_prop_im.pdf, i
+d=599, 591.59361pt x 396.08405pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_prop_im.p
+df Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_prop_im.pd
+f>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/egv_prop_im.pdf  used on input line 302.
+(pdftex.def)             Requested size: 433.62pt x 290.32956pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_decay_re.pdf, 
+id=600, 587.34354pt x 396.08405pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_decay_re.
+pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_decay_re.p
+df>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/egv_decay_re.pdf  used on input line 308.
+(pdftex.def)             Requested size: 433.62pt x 292.43279pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_decay_im.pdf, 
+id=601, 584.98242pt x 396.08405pt>
+File: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_decay_im.
+pdf Graphic file (type pdf)
+<use /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/egv_decay_im.p
+df>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-ou
+tputs/egv_decay_im.pdf  used on input line 314.
+(pdftex.def)             Requested size: 433.62pt x 293.59923pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[68 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pd
+f>] [69 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.noncon
+v.scatter_2nd_ord_32pts.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/t
+ex-outputs/gam.nonconv.scatter_2nd_ord_64pts.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/gam.nonconv.scatter_2nd_ord_64pts.pdf): PDF inclusion: multiple pdf
+s with page group included in a single page
+>]
+
+LaTeX Warning: Text page 70 contains only floats.
+
+[70 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/gam.nonconv.sc
+atter_2nd_ord_128pts.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-
+outputs/egv_prop_re.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/egv_prop_re.pdf): PDF inclusion: multiple pdfs with page group incl
+uded in a single page
+>]) (./Thesis.bbl [71 </home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outp
+uts/egv_prop_im.pdf>] [72] [73 </home/jeff-severino/SWIRL/CodeRun/04-plotReport
+/tex-outputs/egv_decay_re.pdf> </home/jeff-severino/SWIRL/CodeRun/04-plotReport
+/tex-outputs/egv_decay_im.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/CodeRun/04-plotReport/
+tex-outputs/egv_decay_im.pdf): PDF inclusion: multiple pdfs with page group inc
+luded in a single page
+>] [74
+
+] [75] [76] [77]) [78] (./Thesis.aux
+(./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux)
+(./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
+)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
+racy.aux))
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 26052 strings out of 481239
- 661911 string characters out of 5920378
- 1030644 words of memory out of 5000000
- 40819 multiletter control sequences out of 15000+600000
- 538840 words of font info for 46 fonts, out of 8000000 for 9000
+ 26335 strings out of 481239
+ 680923 string characters out of 5920378
+ 1040644 words of memory out of 5000000
+ 41002 multiletter control sequences out of 15000+600000
+ 541442 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 78i,11n,136p,723b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmti12.pfb>
-Output written on Thesis.pdf (35 pages, 233178 bytes).
+ 78i,19n,136p,723b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/latxfont/line10.pfb>
+Output written on Thesis.pdf (92 pages, 828183 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
+ 850 PDF objects out of 1000 (max. 8388607)
+ 663 compressed objects within 7 object streams
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 128 words of extra memory for PDF output out of 10000 (max. 10000000)
 

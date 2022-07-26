@@ -70,35 +70,22 @@ fig, ax = plt.subplots(
         sharex=True,
         figsize=set_size(width),
         )
+
 plt.scatter(
         gam_non_acc_data32['Re{gam/ak}'],
         gam_non_acc_data32['Im{gam/ak}'],
         marker = 4, 
         label = '32',
         s = 7)
-plt.scatter(
-        gam_non_acc_data64['Re{gam/ak}'],
-        gam_non_acc_data64['Im{gam/ak}'],
-        marker = 5,
-        label = '64',
-        s = 7)
 
 plt.scatter(
-        gam_non_acc_data128['Re{gam/ak}'],
-        gam_non_acc_data128['Im{gam/ak}'],
-        marker = 6,
-        label = '128',
-        s = 7)
+        gam_non_acc_data_4th_32['Re{gam/ak}'],
+        gam_non_acc_data_4th_32['Im{gam/ak}'],
+        marker = '.',
+        label = '32',
+        s = 2)
 
-plt.scatter(
-        gam_non_acc_data256['Re{gam/ak}'],
-        gam_non_acc_data256['Im{gam/ak}'],
-        marker = 7,
-        label = '256',
-        s = 7)
-
-ax.legend()
-plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_ord_comp.pdf', 
+plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_ord_32pts.pdf', 
         format = 'pdf', 
         bbox_inches='tight')
 
@@ -108,34 +95,91 @@ fig, ax = plt.subplots(
         sharex=True,
         figsize=set_size(width),
         )
+
 plt.scatter(
-        gam_non_acc_data_4th_32['Re{gam/ak}'],
-        gam_non_acc_data_4th_32['Im{gam/ak}'],
-        marker = '.',
-        label = '32',
-        s = 2)
+        gam_non_acc_data64['Re{gam/ak}'],
+        gam_non_acc_data64['Im{gam/ak}'],
+        marker = 5,
+        label = '64',
+        s = 7)
+
 plt.scatter(
         gam_non_acc_data_4th_64['Re{gam/ak}'],
         gam_non_acc_data_4th_64['Im{gam/ak}'],
         marker = '.',
         label = '64',
         s = 2)
+plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_ord_64pts.pdf', 
+        format = 'pdf', 
+        bbox_inches='tight')
+
+
+plt.scatter(
+        gam_non_acc_data128['Re{gam/ak}'],
+        gam_non_acc_data128['Im{gam/ak}'],
+        marker = 6,
+        label = '128',
+        s = 7)
+
 plt.scatter(
         gam_non_acc_data_4th_128['Re{gam/ak}'],
         gam_non_acc_data_4th_128['Im{gam/ak}'],
         marker = '.',
         label = '128',
         s = 2)
-ax.legend()
-plt.savefig('tex-outputs/gam.nonconv.scatter_4th_order_comp.pdf', 
+
+plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_ord_128pts.pdf', 
         format = 'pdf', 
         bbox_inches='tight')
+plt.scatter(
+        gam_non_acc_data256['Re{gam/ak}'],
+        gam_non_acc_data256['Im{gam/ak}'],
+        marker = 7,
+        label = '256',
+        s = 7)
+
+
+# plt.scatter(
+#         gam_non_acc_data_4th_256['Re{gam/ak}'],
+#         gam_non_acc_data_4th_256['Im{gam/ak}'],
+#         marker = 7,
+#         label = '256',
+#         s = 7)
+
+ax.legend()
+
+plt.savefig('tex-outputs/gam.nonconv.scatter_2nd_ord_256pts.pdf', 
+        format = 'pdf', 
+        bbox_inches='tight')
+# fig, ax = plt.subplots(
+#         nrows=1,
+#         ncols=1,
+#         sharex=True,
+#         figsize=set_size(width),
+#         )
+# fig, ax = plt.subplots(
+#         nrows=1,
+#         ncols=1,
+#         sharex=True,
+#         figsize=set_size(width),
+#         )
+# fig, ax = plt.subplots(
+#         nrows=1,
+#         ncols=1,
+#         sharex=True,
+#         figsize=set_size(width),
+#         )
+# ax.legend()
+# plt.savefig('tex-outputs/gam.nonconv.scatter_4th_order_comp.pdf', 
+#         format = 'pdf', 
+#         bbox_inches='tight')
 
 # indices that correspond to the wavenumbers reported in Table 4.3, used visual
 # inspection 
 propagation_index_32 = ['0034', '0033', '0031', '0029', '0027', '0025', '0023', 
                         '0064', '0062', '0060', '0058', '0056', '0054', '0052']
-
+print(gam_non_acc_data32['#'].iloc[2]) 
+print(gam_non_acc_data32['Re{gam}'].iloc[2]) 
 propagation_index_64 = ['0068', '0067', '0065', '0063', '0061', '0059', '0055', '0053', '0051',
                         '0128', '0126', '0124', '0122', '0120', '0118', '0116', '0114', '0113']
 
@@ -155,11 +199,12 @@ mode_data_64   = [(fcn.importPlotData(str(egvfile_64[i])))  for i,j in (enumerat
 mode_data_128  = [(fcn.importPlotData(str(egvfile_128[i]))) for i,j in (enumerate(propagation_index_128))]
 mode_data_256  = [(fcn.importPlotData(str(egvfile_256[i]))) for i,j in (enumerate(propagation_index_256))]
 
+
 markers = ['o-', '+-', '--', '-', 'o-', '.', 'x', 'X', 'D', '|']
 y_str = ['p_no_phase[Re]', 'p_no_phase[Im]']
 
 # 2. Plot Pressure Mode Shapes/Eigenvectors
-Tot = 10
+Tot = 4
 Cols = 2
 
 Rows = Tot // Cols

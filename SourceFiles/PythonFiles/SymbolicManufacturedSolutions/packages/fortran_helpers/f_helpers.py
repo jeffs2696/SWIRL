@@ -5,7 +5,7 @@ def GetInputVariables(string):
     '''opening the file that has the inputs to the FORTRAN Code
     '''
     debug = False
-    InputFile = open("../../FortranFiles/InputVariables.f90", "r")#-scripts/main-variables.f90", "r")
+    InputFile = open("../../FortranFiles/InputVariables_MMS1.f90", "r")#-scripts/main-variables.f90", "r")
 
     flag = 0
     index = 0 

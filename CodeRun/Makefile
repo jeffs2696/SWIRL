@@ -40,7 +40,8 @@ report: all
 	@cd 04-plotReport; ./plotReport.py; \
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
 		xdg-open plotReport.pdf;
-
+Kousen:
+	@cd 04-plotReport; ./KousensTestCasePlots.py;
 .PHONY: all
 # 	@cd $(PLOT_SHELL_SCRIPT_DIR); \
 # 	$(foreach var,$(PLOT_EXE),./$(var);)

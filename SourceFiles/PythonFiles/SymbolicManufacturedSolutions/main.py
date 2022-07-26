@@ -205,9 +205,9 @@ del_dp_maxBC = del_dp_BC.subs(
 
 
 
-print('psi_1_min',psi_1_min)
-print('psi_2_min',psi_2_min)
-print('del_dp_minBC',del_dp_minBC)
+# print('psi_1_min',psi_1_min)
+# print('psi_2_min',psi_2_min)
+# print('del_dp_minBC',del_dp_minBC)
 
 p_analytic = msm.diffModifiedManufacturedSolution(f           ,
         del_dp_minBC,

@@ -6,13 +6,13 @@
 %\usepackage{mathtools}
 %\begin{document}
 %
-\section{No Flow}
+% \section{No Flow}
+\section{Analytical Solution to Sound Propagation in ducted flows}
 
-
-
-Starting with equation 2.28 (Wave Equation) in Kousen's paper,
-
-
+Goldstein demonstrated the linearized momentum and continuity PDE  can be 
+combined to derive the convective wave equation by taking the divergence of
+the momentum equation and taking the difference of the substantial derivative
+of the conservation of mass equation to yield,
 
 \begin{equation}
     \frac{1}{A^2}\frac{D^2\tilde{p}}{Dt^2} -
@@ -22,22 +22,22 @@ Starting with equation 2.28 (Wave Equation) in Kousen's paper,
 \end{equation}
 
 
-lets look at the no flow case. In the case of sheared flow, $dV_x/dx = 0$ the right hand side will be zero 
+In the case of sheared flow, $dV_x/dx = 0$ the right hand side will be zero 
 
 
 
-% \begin{align*}
-%     \frac{1}{A^2}\left(
-%         \frac{\partial^2 \tilde{p}}{\partial t^2} + 
-%         \vec{V}\cdot \vec {\nabla} (\tilde{p}) 
-%     \right) -
-%     \nabla^2
-%     \tilde{p} &=
-%     0 \\
-% \end{align*}
+\begin{align*}
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+        \vec{V}\cdot \vec {\nabla} (\tilde{p}) 
+    \right) -
+    \nabla^2
+    \tilde{p} &=
+    0 \\
+\end{align*}
 
-% Substituting the definitions for $\nabla$ and $\nabla^2$ in cylindrical 
-% coordinates gives,
+Substituting the definitions for $\nabla$ and $\nabla^2$ and setting $\vec{V} =0$
+in cylindrical coordinates gives,
 
 % \begin{align*} 
 %     \frac{1}{A^2}\left(
@@ -58,44 +58,40 @@ lets look at the no flow case. In the case of sheared flow, $dV_x/dx = 0$ the ri
 % \end{align*} 
 % Setting $\vec{V} = 0$,
 
-% \begin{align*} 
-%     \frac{1}{A^2}\left(
-%         \frac{\partial^2 \tilde{p}}{\partial t^2}
-%     \right) - 
-%         \left(
-%             \frac{\partial^2 \tilde{p}}{\partial t^2} + 
-%             \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial  r}  +
-%             \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
-%             \frac{\partial^2 \tilde{p}}{\partial x^2} 
-%         \right) &= 0  
-% \end{align*} 
-% Recall, $\tilde{p} = p/\bar{\rho} A^2$. To dimensionalize the equation, this is
-% substituted and both sides are multiplied by $\bar{\rho}A^2$,
+\begin{align*} 
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 \tilde{p}}{\partial t^2}
+    \right) - 
+        \left(
+            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial  r}  +
+            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
+            \frac{\partial^2 \tilde{p}}{\partial x^2} 
+        \right) &= 0  
+\end{align*} 
+Utilizing the relation, $\tilde{p} = p/\bar{\rho} A^2$,
 
+\begin{align*} 
+    \frac{1}{A^2}\left(
+        \frac{\partial^2 {p}}{\partial t^2}
+    \right) - 
+        \left(
+            \frac{\partial^2 {p}}{\partial t^2} + 
+            \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
+            \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
+            \frac{\partial^2 p}{\partial x^2} 
+        \right) &= 0  
+\end{align*} 
 
-% \begin{align*} 
-%     \frac{1}{A^2}\left(
-%         \frac{\partial^2 {p}}{\partial t^2}
-%     \right) - 
-%         \left(
-%             \frac{\partial^2 {p}}{\partial t^2} + 
-%             \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
-%             \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
-%             \frac{\partial^2 p}{\partial x^2} 
-%         \right) &= 0  
-% \end{align*} 
+ The method of separation of variables requires an assumed solution as well as initial and boundary 
+conditions. For a partial differential equation, the assumed solution can be a 
+linear combination of solutions to a system of ordinary differential equations that
+comprises the partial differential equation. Since $p$ is a function of four
+variables, the solution is assumed to be a linear combination of four solutions.
+Each solution is assumed to be Euler's identity, a common ansant for linear partial 
+differential equations and boundary conditions.
 
-% The process of separation of variables(seperation indeterminatarum)
-% was first written and formalized by John Bernoulli in a letter to Leibniz. The method
-% of separation of variables requires an assumed solution as well as initial and boundary 
-% conditions. For a partial differential equation, the assumed solution can be a 
-% linear combination of solutions to a system of ordinary differential equations that
-% comprises the partial differential equation. Since $p$ is a function of four
-% variables, the solution is assumed to be a linear combination of four solutions.
-% Each solution is assumed to be Euler's identity, a common ansant for linear partial 
-% differential equations and boundary conditions.
-
-Defining,
+ Defining,
 
 \begin{equation}
     p(x,r,\theta,t) = X(x) R(r) \Theta(\theta) T(t)
@@ -117,8 +113,8 @@ where,
 
 The next step is to rewrite the wave equation in terms of $X$, $R$, $\Theta$,
 and $T$. To further simplify the result, each term is divided by $p$.
-Before the substitution, the derivatives of the assumed solutions need to be
-evaluated.
+% Before the substitution, the derivatives of the assumed solutions need to be
+% evaluated.
 
 
 % \subsubsection{Temporal Derivatives}
@@ -355,17 +351,17 @@ evaluated.
 
 
 
-\begin{align*} 
-    \frac{1}{A^2}\left(
-        \frac{\partial^2 {p}}{\partial t^2}
-    \right) &= 
-        \left(
-            \frac{\partial^2 {p}}{\partial t^2} + 
-            \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
-            \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
-            \frac{\partial^2 p}{\partial x^2} 
-        \right) 
-\end{align*} 
+% \begin{align*} 
+%     \frac{1}{A^2}\left(
+%         \frac{\partial^2 {p}}{\partial t^2}
+%     \right) &= 
+%         \left(
+%             \frac{\partial^2 {p}}{\partial t^2} + 
+%             \frac{1}{\tilde{r}}\frac{\partial p}{\partial r} +
+%             \frac{1}{\tilde{r}^2} \frac{\partial^2 p}{\partial \theta^2} + 
+%             \frac{\partial^2 p}{\partial x^2} 
+%         \right) 
+% \end{align*} 
 
 \begin{equation}
     \frac{1}{A^2} \frac{1}{T}\frac{\partial^2 T}{\partial t^2} = 
@@ -386,18 +382,18 @@ that allow the PDE to be split into four separate ODE's. Substituting the separa
 into Equation (\ref{eqn:waveode}) gives, 
 
 
-\begin{equation}
-    -\frac{\omega^2}{A^2}  = 
-    \frac{1}{R}
-    \left(      
-    \frac{\partial^2 R}{\partial r^2 } +
-    \frac{1}{r}\frac{\partial R}{\partial r}  
-\right) -
-    \frac{k_{\theta}^2}{r^2}-  
-    k_x^2
-    \label{eqn:waveode2}
-\end{equation}
-Note that the dispersion relation states $\omega = k A$
+% \begin{equation}
+%     -\frac{\omega^2}{A^2}  = 
+%     \frac{1}{R}
+%     \left(      
+%     \frac{\partial^2 R}{\partial r^2 } +
+%     \frac{1}{r}\frac{\partial R}{\partial r}  
+% \right) -
+%     \frac{k_{\theta}^2}{r^2}-  
+%     k_x^2
+%     \label{eqn:waveode2}
+% \end{equation}
+% where$\omega = k A$, i.e. the  dispersion relation , 
 
 \begin{equation}
     \frac{1}{R}
@@ -412,19 +408,21 @@ Note that the dispersion relation states $\omega = k A$
 The remaining terms are manipulated to follow the same form as \textit{Bessel's Differntial 
 Equation} ,
 
-\begin{equation}
-    x^2 \frac{d^2 y}{dx^2} + x \frac{dy }{dx } + (x^2 - n^2) y = 0
-    \label{eqn:besselODE}
-\end{equation}
+% \begin{equation}
+%     x^2 \frac{d^2 y}{dx^2} + x \frac{dy }{dx } + (x^2 - n^2) y = 0
+%     \label{eqn:besselODE}
+% \end{equation}
 
 The general solution to Bessel's differential equation is a linear combination of
-the Bessel functions of the first kind, $J_n(x)$ and of the second kind, $Y_n(x)$ 
+the Bessel functions of the first kind, $J_n(k_r r)$ and of the second kind, $Y_n(k_r r)$ 
 \cite{wolphram:bessel}. The subscript $n$ refers to the order of Bessel's equation.
 
 \begin{equation}
-    y(x) = AJ_n(x) + BY_n(x)
+    R(r) = (AJ_n(k_r r) + BY_n(k_r r)) 
     \label{eqn:besselsolution}
 \end{equation}
+where the coefficients $A$ and $B$ are found after applying radial
+boundary conditions. %and there is an exponential dependence. 
 
 By rearranging Equation (\ref{eqn:waveode3}), a comparison can be made to Equation
 (\ref{eqn:besselODE}) to show that the two equations are of the same form. 
@@ -444,106 +442,97 @@ be set equal to a separation constant, $-k_r^2$.
     \label{eqn:wavenumber_without_kr}
 \end{align}
 
-The reader may be curious as to why the tangential separation constant $k_{\theta}$ is 
-included within the definition of the radial separation constant. 
+% The reader may be curious as to why the tangential separation constant $k_{\theta}$ is 
+% included within the definition of the radial separation constant. 
 
-Recall the ODE for the tangential direction, 
+% Recall the ODE for the tangential direction, 
 
-\begin{align*}
-    \frac{\partial \Theta}{\partial \theta} \frac{1}{\Theta} = - k_{\theta}^2\\
-    \frac{\partial \Theta}{\partial \theta} \frac{1}{\Theta} + \Theta k_{\theta}^2 = 0 
-\end{align*}
+% \begin{align*}
+%     \frac{\partial \Theta}{\partial \theta} \frac{1}{\Theta} = - k_{\theta}^2\\
+%     \frac{\partial \Theta}{\partial \theta} \frac{1}{\Theta} + \Theta k_{\theta}^2 = 0 
+% \end{align*}
 
-where the solution is more or less,
+% where the solution is more or less,
 
-\begin{align*}
-    \Theta(\theta) = e^{i k_{\theta} \theta}
-\end{align*}
+% \begin{align*}
+%     \Theta(\theta) = e^{i k_{\theta} \theta}
+% \end{align*}
 
-In order to have non trivial, sensible solutions, the value of $\Theta(0)$ and
-$\Theta(2\pi)$ need to be the same, and this needs to be true for any multiple 
-of $2\pi$ for a fixed r. Taking $\Theta$ to be one, a unit circle, it can be shown that the domain
-is only going to be an integer multiple. Therefore, there is an implied periodic
-azimuthal boundary condition, i.e. $0<\theta\leq 2 \pi$ and $k_{\theta}=m$. 
+% In order to have non trivial, sensible solutions, the value of $\Theta(0)$ and
+% $\Theta(2\pi)$ need to be the same, and this needs to be true for any multiple 
+% of $2\pi$ for a fixed r. Taking $\Theta$ to be one, a unit circle, it can be shown that the domain
+% is only going to be an integer multiple. Therefore, there is an implied periodic
+% azimuthal boundary condition, i.e. $0<\theta\leq 2 \pi$ and $k_{\theta}=m$. 
 
-Continuing with the radial derivatives\ldots
-
-
-\begin{align*}
-    -k_r^2 =\frac{1}{R}
-    \left(      
-    \frac{\partial^2 R}{\partial r^2 } +
-    \frac{1}{r}\frac{\partial R}{\partial r}  
-\right) -
-    \frac{m^2}{r^2} 
-\end{align*}
-To further simplify, the chain rule is used to do a change of variables, $x = k_r r$
-\begin{align*}
-    \frac{\partial R}{\partial r} &= \frac{dR}{dx}\frac{dx}{dr}\\
-    &=
-    \frac{dR}{dx}\frac{d}{dr}\left( k_r r \right) \\
-    &=
-    \frac{dR}{dx} k_r 
-\end{align*} 
+% There is a unique treatment for the radial derivatives.
 
 
-\begin{align*}
-    \frac{\partial^2 R}{\partial r^2} &= \frac{d^2R}{dx^2}\left(\frac{dx}{dr}\right)^2 + 
-    \frac{dR}{dr}\frac{d^2x}{dr^2}\\
-    &=
-    \frac{d^2R}{dx^2}\frac{d}{dr} k_r^2 + k_r \frac{d^2r}{dr^2}\\
-    &=
-    \frac{d^2R}{dx^2}\frac{d}{dr} k_r^2
-\end{align*} 
-
-Substituting this into Equation (\ref{eqn:waveode3}),
-\begin{equation}
-    \left(\frac{d^2R}{dx^2}k_r^2 +
-    \frac{1}{r}\frac{d^2R}{dx^2}k_r\right) +
-    \left(k_r^2 - \frac{m^2}{r^2}\right)R
-    \label{eqn:waveode4}
-\end{equation}
-Dividing Equation \ref{eqn:waveode4} by $k_r^2$,
-
-\begin{equation}
-    \left(\frac{d^2R}{dx^2} +
-    \frac{1}{k_r r}\frac{d^2R}{dx^2}\right) +
-    \left(1  - \frac{m^2}{k_r^2 r^2}\right)R
-    \label{eqn:waveode5}
-\end{equation}
-
-\begin{equation}
-    \left(\frac{d^2R}{dx^2} +
-    \frac{1}{x^2}\frac{d^2R}{dx^2}\right) +
-    \left(1  - \frac{m^2}{x^2}\right)R
-    \label{eqn:waveode6}
-\end{equation}
-
-Multiplying Equation (\ref{eqn:waveode6}) by $x^2$ gives,
-
-\begin{equation}
-    \frac{d^2R}{dr^2}x^2 + 
-    \frac{dR}{dr}x + 
-    \left( x^2 - m^2 \right)R
-    \label{eqn:finalradialode}
-\end{equation}
-which matches the form of Bessel's equation
-
-Therefore, the solution goes from this,
-\begin{equation}
-    y(x) = AJ_n(x) + BY_n(x)
-    \label{eqn:besselsolution}
-\end{equation}
-to this,
+% \begin{align*}
+%     -k_r^2 =\frac{1}{R}
+%     \left(      
+%     \frac{\partial^2 R}{\partial r^2 } +
+%     \frac{1}{r}\frac{\partial R}{\partial r}  
+% \right) -
+%     \frac{m^2}{r^2} 
+% \end{align*}
+% To further simplify, the chain rule is used to do a change of variables, $x = k_r r$
+% \begin{align*}
+%     \frac{\partial R}{\partial r} &= \frac{dR}{dx}\frac{dx}{dr}\\
+%     &=
+%     \frac{dR}{dx}\frac{d}{dr}\left( k_r r \right) \\
+%     &=
+%     \frac{dR}{dx} k_r 
+% \end{align*} 
 
 
-\begin{equation}
-    R(r) = (AJ_n(k_r r) + BY_n(k_r r)) 
-    \label{eqn:besselsolution}
-\end{equation}
-where the coefficients $A$ and $B$ are found after applying radial
-boundary conditions. %and there is an exponential dependence. 
+% \begin{align*}
+%     \frac{\partial^2 R}{\partial r^2} &= \frac{d^2R}{dx^2}\left(\frac{dx}{dr}\right)^2 + 
+%     \frac{dR}{dr}\frac{d^2x}{dr^2}\\
+%     &=
+%     \frac{d^2R}{dx^2}\frac{d}{dr} k_r^2 + k_r \frac{d^2r}{dr^2}\\
+%     &=
+%     \frac{d^2R}{dx^2}\frac{d}{dr} k_r^2
+% \end{align*} 
 
+% Substituting this into Equation (\ref{eqn:waveode3}),
+% \begin{equation}
+%     \left(\frac{d^2R}{dx^2}k_r^2 +
+%     \frac{1}{r}\frac{d^2R}{dx^2}k_r\right) +
+%     \left(k_r^2 - \frac{m^2}{r^2}\right)R
+%     \label{eqn:waveode4}
+% \end{equation}
+% Dividing Equation \ref{eqn:waveode4} by $k_r^2$,
+
+% \begin{equation}
+%     \left(\frac{d^2R}{dx^2} +
+%     \frac{1}{k_r r}\frac{d^2R}{dx^2}\right) +
+%     \left(1  - \frac{m^2}{k_r^2 r^2}\right)R
+%     \label{eqn:waveode5}
+% \end{equation}
+
+% \begin{equation}
+%     \left(\frac{d^2R}{dx^2} +
+%     \frac{1}{x^2}\frac{d^2R}{dx^2}\right) +
+%     \left(1  - \frac{m^2}{x^2}\right)R
+%     \label{eqn:waveode6}
+% \end{equation}
+
+% Multiplying Equation (\ref{eqn:waveode6}) by $x^2$ gives,
+
+% \begin{equation}
+%     \frac{d^2R}{dr^2}x^2 + 
+%     \frac{dR}{dr}x + 
+%     \left( x^2 - m^2 \right)R
+%     \label{eqn:finalradialode}
+% \end{equation}
+% which matches the form of Bessel's equation
+
+% Therefore, the solution goes from this,
+% \begin{equation}
+%     y(x) = AJ_n(x) + BY_n(x)
+%     \label{eqn:besselsolution}
+% \end{equation}
+% to this,
 
 
 
@@ -580,189 +569,189 @@ from Equation (\ref{eqn:wavenumber_without_kr}).
 
 
 % Solving for the axial wavenumber gives,
-\section{Uniform Flow}
+% \section{Uniform Flow}
+Following the same procedure, the axial wavenumber is,
+% To get the same equation but for uniform flow, the same procedure can be followed.
 
-To get the same equation but for uniform flow, the same procedure can be followed.
+% Starting with Equation 2.27 redimensionalized, 
 
-Starting with Equation 2.27 redimensionalized, 
+% \begin{align*}
+%     \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
+%     \frac{1}{\tilde{r}} 
+%     \frac{d \tilde{p}}{d \tilde{r}} + 
+%     \frac{2 \bar{\gamma} \left( \frac{d m_x}{d \tilde{r}} \right)}
+%     {\left( k - \bar{\gamma} m_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
+%     \left[ \left( k - \bar{\gamma} m_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
+%     \bar{\gamma}^2 \right] \tilde{p}
+% \end{align*}
 
-\begin{align*}
-    \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
-    \frac{1}{\tilde{r}} 
-    \frac{d \tilde{p}}{d \tilde{r}} + 
-    \frac{2 \bar{\gamma} \left( \frac{d m_x}{d \tilde{r}} \right)}
-    {\left( k - \bar{\gamma} m_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
-    \left[ \left( k - \bar{\gamma} m_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
-    \bar{\gamma}^2 \right] \tilde{p}
-\end{align*}
+% Let's separate the new terms from the old ones, 
 
-Let's separate the new terms from the old ones, 
-
-\begin{align*}
-    \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
-    \frac{1}{\tilde{r}} 
-    \frac{d \tilde{p}}{d \tilde{r}} + 
-    \frac{2 \bar{\gamma} \left( \frac{d m_x}{d \tilde{r}} \right)}
-    {\left( k - \bar{\gamma} m_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
-    \left[ \left( k - \bar{\gamma} m_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
-    \bar{\gamma} \right] \tilde{p}
-\end{align*}
-
-
-Recalling the non-dimensional definitions,
-\begin{align*}
-    \tilde{p} &= \frac{p}{\bar{\rho} A^2} \\
-    \tilde{r} &= \frac{r}{r_T} \\
-    \frac{\partial \tilde{p}}{\partial \tilde{r}} &= 
-    \frac{ \partial \tilde{p}}{\partial r} \frac{\partial r}{ \partial \tilde{r}}  \\ 
-    &= \frac{ \partial \tilde{p}}{\partial r} \frac{\partial }{ \partial \tilde{r}} \left( \tilde{r} r_T \right) \\
-    &= 
-    \frac{ \partial \tilde{p}}{\partial r}  r_T \\
-    \frac{\partial^2 \tilde{p}}{\partial \tilde{r}^2} &= 
-    \frac{ \partial^2 \tilde{p}}{\partial r^2}  (r_T)^2+ 
-    \frac{ \partial \tilde{p}}{\partial r} \frac{\partial^2 r}{ \partial \tilde{r}^2} \\
-    &= \frac{ \partial^2 \tilde{p}}{\partial r^2}  (r_T)^2 
-\end{align*}
-
-\begin{align*}
-    \frac{\partial}{\partial r} \left( \frac{p}{\bar{\rho} A^2} \right) 
-    &=
-    \frac{\left(\frac{\partial}{\partial r} \left(  p\right) \bar{\rho} A^2 - 
-    \underbrace{\frac{\partial \bar{\rho}A^2}{\partial r}}_0 p \right)}{\left( \bar{\rho} A^2 \right)^2}\\ 
-    &= \frac{1}{\bar{\rho}A^2} \frac{\partial p}{\partial r}
-\end{align*}
-
-\begin{align*}
-    \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
-    \frac{1}{\tilde{r}} 
-    \frac{d \tilde{p}}{d \tilde{r}}- 
-    \frac{m^2}{\tilde{r}^2}\tilde{p}- 
-    \bar{\gamma}^2  \tilde{p}
- + 
-    \frac{2 \bar{\gamma} \left( \frac{d M_x}{d \tilde{r}} \right)}
-    {\left( k - \bar{\gamma} M_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
-    \left( k - \bar{\gamma} M_x \right)^2\tilde{p} 
-\end{align*}
-
-If there is only uniform flow, then $dM_x/dr = 0$,
-
-\begin{align*}
-    \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
-    \frac{1}{\tilde{r}} 
-    \frac{d \tilde{p}}{d \tilde{r}}- 
-    \frac{m^2}{\tilde{r}^2}\tilde{p}- 
-    \bar{\gamma}^2  \tilde{p}
- + 
-    \left( k - \bar{\gamma} M_x \right)^2\tilde{p} 
-\end{align*}
-
-Re-dimensionalizing,
-
-\begin{align*}
-    \frac{1}{\bar{\rho} A^2}\left[
-    \frac{ d^2 p}{d r} r_T^2+
-    \frac{r_T}{r} 
-    \frac{d p}{d r} r_T - 
-    \frac{m^2}{r^2}r_T^2 p - k_x^2r_T^2  p\right]
-    + \left( \frac{\omega }{A}r_T - k_x r_T M_x \right)^2p 
-\end{align*}
-
-Expanding the last term and substituting $\omega/A = k$
-
-\begin{align*}
-    \frac{1}{\bar{\rho} A^2}\left[
-    \frac{ d^2 p}{d r} r_T^2+
-    \frac{r_T}{r} 
-    \frac{d p}{d r} r_T - 
-    \frac{m^2}{r^2}r_T^2 p - k_x^2r_T^2  p\right]
-    +\left( r_T^2\left(
-        k^2 - 2 k k_x M_x + k_x^2 M_x^2 \right)
-    \right)p 
-\end{align*}
-Canceling out $r_T/\bar{\rho}A$ in every term
+% \begin{align*}
+%     \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
+%     \frac{1}{\tilde{r}} 
+%     \frac{d \tilde{p}}{d \tilde{r}} + 
+%     \frac{2 \bar{\gamma} \left( \frac{d m_x}{d \tilde{r}} \right)}
+%     {\left( k - \bar{\gamma} m_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
+%     \left[ \left( k - \bar{\gamma} m_x \right)^2 - \frac{m^2}{\tilde{r}^2}- 
+%     \bar{\gamma} \right] \tilde{p}
+% \end{align*}
 
 
-\begin{align*}
-    \frac{ d^2 p}{d r} +
-    \frac{1}{r} 
-    \frac{d p}{d r} + \left[ 
-    k^2 - 2 k k_x M_x + k_x^2 M_x^2- \frac{m^2}{r^2}  - k_x^2\right]p 
-\end{align*}
+% Recalling the non-dimensional definitions,
+% \begin{align*}
+%     \tilde{p} &= \frac{p}{\bar{\rho} A^2} \\
+%     \tilde{r} &= \frac{r}{r_T} \\
+%     \frac{\partial \tilde{p}}{\partial \tilde{r}} &= 
+%     \frac{ \partial \tilde{p}}{\partial r} \frac{\partial r}{ \partial \tilde{r}}  \\ 
+%     &= \frac{ \partial \tilde{p}}{\partial r} \frac{\partial }{ \partial \tilde{r}} \left( \tilde{r} r_T \right) \\
+%     &= 
+%     \frac{ \partial \tilde{p}}{\partial r}  r_T \\
+%     \frac{\partial^2 \tilde{p}}{\partial \tilde{r}^2} &= 
+%     \frac{ \partial^2 \tilde{p}}{\partial r^2}  (r_T)^2+ 
+%     \frac{ \partial \tilde{p}}{\partial r} \frac{\partial^2 r}{ \partial \tilde{r}^2} \\
+%     &= \frac{ \partial^2 \tilde{p}}{\partial r^2}  (r_T)^2 
+% \end{align*}
 
-Continue here,
+% \begin{align*}
+%     \frac{\partial}{\partial r} \left( \frac{p}{\bar{\rho} A^2} \right) 
+%     &=
+%     \frac{\left(\frac{\partial}{\partial r} \left(  p\right) \bar{\rho} A^2 - 
+%     \underbrace{\frac{\partial \bar{\rho}A^2}{\partial r}}_0 p \right)}{\left( \bar{\rho} A^2 \right)^2}\\ 
+%     &= \frac{1}{\bar{\rho}A^2} \frac{\partial p}{\partial r}
+% \end{align*}
+
+% \begin{align*}
+%     \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
+%     \frac{1}{\tilde{r}} 
+%     \frac{d \tilde{p}}{d \tilde{r}}- 
+%     \frac{m^2}{\tilde{r}^2}\tilde{p}- 
+%     \bar{\gamma}^2  \tilde{p}
+%  + 
+%     \frac{2 \bar{\gamma} \left( \frac{d M_x}{d \tilde{r}} \right)}
+%     {\left( k - \bar{\gamma} M_x \right)}\frac{d \tilde{p}}{d \tilde{r}}+
+%     \left( k - \bar{\gamma} M_x \right)^2\tilde{p} 
+% \end{align*}
+
+% If there is only uniform flow, then $dM_x/dr = 0$,
+
+% \begin{align*}
+%     \frac{ d^2 \tilde{p}}{d \tilde{r}^2} +
+%     \frac{1}{\tilde{r}} 
+%     \frac{d \tilde{p}}{d \tilde{r}}- 
+%     \frac{m^2}{\tilde{r}^2}\tilde{p}- 
+%     \bar{\gamma}^2  \tilde{p}
+%  + 
+%     \left( k - \bar{\gamma} M_x \right)^2\tilde{p} 
+% \end{align*}
+
+% Re-dimensionalizing,
+
+% \begin{align*}
+%     \frac{1}{\bar{\rho} A^2}\left[
+%     \frac{ d^2 p}{d r} r_T^2+
+%     \frac{r_T}{r} 
+%     \frac{d p}{d r} r_T - 
+%     \frac{m^2}{r^2}r_T^2 p - k_x^2r_T^2  p\right]
+%     + \left( \frac{\omega }{A}r_T - k_x r_T M_x \right)^2p 
+% \end{align*}
+
+% Expanding the last term and substituting $\omega/A = k$
+
+% \begin{align*}
+%     \frac{1}{\bar{\rho} A^2}\left[
+%     \frac{ d^2 p}{d r} r_T^2+
+%     \frac{r_T}{r} 
+%     \frac{d p}{d r} r_T - 
+%     \frac{m^2}{r^2}r_T^2 p - k_x^2r_T^2  p\right]
+%     +\left( r_T^2\left(
+%         k^2 - 2 k k_x M_x + k_x^2 M_x^2 \right)
+%     \right)p 
+% \end{align*}
+% Canceling out $r_T/\bar{\rho}A$ in every term
 
 
-Defining 
+% \begin{align*}
+%     \frac{ d^2 p}{d r} +
+%     \frac{1}{r} 
+%     \frac{d p}{d r} + \left[ 
+%     k^2 - 2 k k_x M_x + k_x^2 M_x^2- \frac{m^2}{r^2}  - k_x^2\right]p 
+% \end{align*}
 
-$$- N^2 = k_x^2 M_x^2 - 2 k k_x M_x - k_x^2 $$
-$$-N^2 = -(1 -  M_x^2)k_x^2 - 2 k k_x M_x  $$
-$$-N^2 =  -\beta^2 k_x^2 - 2 k k_x M_x  $$
-
-
-\begin{align*}
-    \frac{ d^2 p}{d r} +
-    \frac{1}{r} 
-    \frac{d p}{d r} + \left[ 
-    k^2 - N^2 - \frac{m^2}{r^2}  \right]p 
-\end{align*}
-
-Let $k_r^2 = k^2 - N^2$
+% Continue here,
 
 
-\begin{align*}
-    \frac{ d^2 p}{d r} +
-    \frac{1}{r} 
-    \frac{d p}{d r} + \left[ 
-    k_r^2  - \frac{m^2}{r^2}  \right]p 
-\end{align*}
+% Defining 
 
-Looking at the radial wavenumber,
-
-\begin{align*}
-    k_r^2 &= k^2 - N^2 \\
-          &= k^2-\beta^2 k_x^2 - 2 k k_x M_x \\
-    0 &=  -\beta ^2 k_x ^2 -  \left( 2M_x k \right)k_x +(k^2 - k_r^2)
-\end{align*}
-
-Where the roots to this equation are the axial wavenumber,
+% $$- N^2 = k_x^2 M_x^2 - 2 k k_x M_x - k_x^2 $$
+% $$-N^2 = -(1 -  M_x^2)k_x^2 - 2 k k_x M_x  $$
+% $$-N^2 =  -\beta^2 k_x^2 - 2 k k_x M_x  $$
 
 
-Applying the quadratic formula and taking 
+% \begin{align*}
+%     \frac{ d^2 p}{d r} +
+%     \frac{1}{r} 
+%     \frac{d p}{d r} + \left[ 
+%     k^2 - N^2 - \frac{m^2}{r^2}  \right]p 
+% \end{align*}
 
-\begin{align*}
-    A &= - \beta^2 \\
-    B &= - 2M_x k\\
-    C &= k^2 - k_2^2
-\end{align*} 
+% Let $k_r^2 = k^2 - N^2$
 
-Note B is negative when $M_x$ is positive,
 
-(I feel like N should change based on $M_x's$ sign)
+% \begin{align*}
+%     \frac{ d^2 p}{d r} +
+%     \frac{1}{r} 
+%     \frac{d p}{d r} + \left[ 
+%     k_r^2  - \frac{m^2}{r^2}  \right]p 
+% \end{align*}
+
+% Looking at the radial wavenumber,
+
+% \begin{align*}
+%     k_r^2 &= k^2 - N^2 \\
+%           &= k^2-\beta^2 k_x^2 - 2 k k_x M_x \\
+%     0 &=  -\beta ^2 k_x ^2 -  \left( 2M_x k \right)k_x +(k^2 - k_r^2)
+% \end{align*}
+
+% Where the roots to this equation are the axial wavenumber,
+
+
+% Applying the quadratic formula and taking 
+
+% \begin{align*}
+%     A &= - \beta^2 \\
+%     B &= - 2M_x k\\
+%     C &= k^2 - k_2^2
+% \end{align*} 
+
+% Note B is negative when $M_x$ is positive,
+
+% (I feel like N should change based on $M_x's$ sign)
 
 \begin{align*}
     k_x &= \frac{2M_x k \pm \sqrt{4 M_x^2 k^2 + 4 \beta^2 \left( k^2 - k_r^2 \right)}}{-2\beta^2}\\
         &= \frac{-M_x k \pm \sqrt{k^2 - k_r^2}}{\beta^2}
 \end{align*}
 
-\section{Annular Duct Axial Wavenumber solution}
+%\section{Annular Duct Axial Wavenumber solution}
 
 
 
-This needs to be proven,
+%This needs to be proven,
 
 
-In \cite{Amr2001}, the axial wavenumber for annular ducts is reported,
+%In \cite{Amr2001}, the axial wavenumber for annular ducts is reported,
 
-\begin{equation*}
-    \frac{-(\omega - m M_{\theta})M_x \pm \sqrt{\left( \omega - m M_{\theta}^2 \right) - \beta\left( m^2 + \Gamma_{m,n} ^2 \right)}}{beta^2}
-\end{equation*}
+%\begin{equation*}
+%    \frac{-(\omega - m M_{\theta})M_x \pm \sqrt{\left( \omega - m M_{\theta}^2 \right) - \beta\left( m^2 + \Gamma_{m,n} ^2 \right)}}{beta^2}
+%\end{equation*}
 
-where 
+%where 
 
-$\Gamma_{m,n}= \frac{n^2 \pi^2}{\left( r_{max} - r_{min} \right)^2}$
+%$\Gamma_{m,n}= \frac{n^2 \pi^2}{\left( r_{max} - r_{min} \right)^2}$
 
-%$\bibliographystyle{plain}
-%\bibliography{references}
-%\end{document}
+%%$\bibliographystyle{plain}
+%%\bibliography{references}
+%%\end{document}
 
 

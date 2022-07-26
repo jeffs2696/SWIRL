@@ -101,7 +101,7 @@ monochrome = (
 )
 
 markers = ['o-', '+-', '--', '-', 'o-', '.', 'x', 'X', 'D', '|']
-width = 345
+width = 400 
 
 tex_fonts = {
     # Use LaTeX to write all text
@@ -254,7 +254,7 @@ ax.set_ylabel(r'$M$')
 ax.legend()
 
 
-fig.savefig('tex-outputs/MMS_mean_flow_profile.pdf',
+fig.savefig('tex-outputs/MMS1_mean_flow_profile.pdf',
             format='pdf')  # , bbox_inches='tight')
 
 # Fig. 2:
@@ -274,7 +274,7 @@ ax.plot(
 ax.set_xlabel('Radius [-]')
 ax.set_ylabel('Perturbation Velocity [-]')
 ax.legend()
-fig.savefig('tex-outputs/MMS_perturbation_variables_vR.pdf',
+fig.savefig('tex-outputs/MMS1_perturbation_variables_vR.pdf',
             format='pdf')  # , bbox_inches='tight')
 
 # Fig. 3:
@@ -293,7 +293,7 @@ ax.plot(
     markevery=25)
 
 ax.legend()
-fig.savefig('tex-outputs/MMS_perturbation_variables_vTh.pdf',
+fig.savefig('tex-outputs/MMS1_perturbation_variables_vTh.pdf',
             format='pdf')  # , bbox_inches='tight')
 
 
@@ -316,7 +316,7 @@ ax.set_xlabel('Radius [-]')
 ax.set_ylabel('Perturbation Velocity [-]')
 ax.legend()
 
-fig.savefig('tex-outputs/MMS_perturbation_variables_vX.pdf',
+fig.savefig('tex-outputs/MMS1_perturbation_variables_vX.pdf',
             format='pdf')  # , bbox_inches='tight')
 
 # Fig. 5:
@@ -338,7 +338,7 @@ ax.set_xlabel('Radius [-]')
 ax.set_ylabel('Perturbation Velocity [-]')
 ax.legend()
 
-fig.savefig('tex-outputs/MMS_perturbation_variables_Pr.pdf',
+fig.savefig('tex-outputs/MMS1_perturbation_variables_Pr.pdf',
             format='pdf')  # , bbox_inches='tight')
 
 # Fig. 6: Speed Of Sound - MMS Grid Comparison
@@ -366,7 +366,7 @@ ax.set_xlabel('Radius [-]')
 ax.set_ylabel('Speed Of Sound [-]')
 plt.legend()
 
-plt.savefig('tex-outputs/SpeedOfSoundComparison1.pdf',
+plt.savefig('tex-outputs/MMS1_SpeedOfSoundComparison1.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -401,7 +401,7 @@ ax.plot(
 plt.legend()
 ax.set_ylabel(r'$\epsilon$')
 ax.set_xlabel('Radius')
-plt.savefig('tex-outputs/SpeedOfSoundComparison2.pdf',
+plt.savefig('tex-outputs/MMS1_SpeedOfSoundComparison2.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -436,7 +436,7 @@ plt.plot(
 plt.legend()
 
 ax.set_ylabel("$ ln (\\hat{\\epsilon})  $")
-plt.savefig('tex-outputs/LEE_ROC.pdf',
+plt.savefig('tex-outputs/MMS1_LEE_ROC.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -444,7 +444,7 @@ ax.set_xlabel("$ ln (N)  $")
 # plt.show()
 # sys.exit()
 
-plt.savefig('tex-outputs/SpeedOfSoundComparisonL2.pdf',
+plt.savefig('tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -469,7 +469,7 @@ ax.semilogx(
 ax.set_ylabel(r' Rate of Convergence, $\alpha$')
 ax.set_xlabel('Number of Grid Points')
 
-plt.savefig('tex-outputs/SpeedOfSoundComparisonROC.pdf',
+plt.savefig('tex-outputs/MMS1_SpeedOfSoundComparisonROC.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -521,7 +521,7 @@ plt.plot(
 ax.legend()
 ax.set_ylabel(r' Rate of Convergence, $\alpha$')
 ax.set_xlabel('Number of Grid Points')
-plt.savefig('tex-outputs/LEE_L2.pdf',
+plt.savefig('tex-outputs/MMS1_LEE_L2.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -556,7 +556,7 @@ ax.semilogx(
 ax.legend()
 ax.set_xlabel('$$\\Delta r$$')
 ax.set_ylabel('Rate Of Convergence')
-plt.savefig('tex-outputs/LEE_ROC.pdf',
+plt.savefig('tex-outputs/MMS1_LEE_ROC.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -585,7 +585,7 @@ axs.set(xlabel='$r [-]$')
 
 
 axs.legend()
-plt.savefig('tex-outputs/SourceTermComparison1.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermComparison1.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -612,7 +612,7 @@ axs.set(xlabel='$r [-]$')
 
 
 axs.legend()
-plt.savefig('tex-outputs/SourceTermComparison2.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermComparison2.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -639,7 +639,7 @@ axs.set(xlabel='$r [-]$')
 
 
 axs.legend()
-plt.savefig('tex-outputs/SourceTermComparison3.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermComparison3.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -666,7 +666,7 @@ axs.set(xlabel='$r [-]$')
 
 
 axs.legend()
-plt.savefig('tex-outputs/SourceTermComparison4.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermComparison4.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -695,7 +695,7 @@ axs.semilogy(
 
 axs.set_ylabel('$$\\epsilon$$')
 axs.set_xlabel('$$ r$$')
-plt.savefig('tex-outputs/SourceTermError1.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermError1.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -723,7 +723,7 @@ fig.suptitle('Source Term 2 Error at Multiple Grids')
 
 axs.set_ylabel('$$\\epsilon$$')
 axs.set_xlabel('$$ r$$')
-plt.savefig('tex-outputs/SourceTermError2.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermError2.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -754,7 +754,7 @@ fig.suptitle('Source Term 3 Error at Multiple Grids')
 
 axs.set_ylabel('$$\\epsilon$$')
 axs.set_xlabel('$$ r$$')
-plt.savefig('tex-outputs/SourceTermError3.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermError3.pdf',
             format='pdf',
             bbox_inches='tight')
 
@@ -781,7 +781,7 @@ axs.semilogy(
 axs.set_ylabel('$$\\epsilon$$')
 axs.set_xlabel('$$ r$$')
 fig.suptitle('Source Term 4 Error at Multiple Grids')
-plt.savefig('tex-outputs/SourceTermError4.pdf',
+plt.savefig('tex-outputs/MMS1_SourceTermError4.pdf',
             format='pdf',
             bbox_inches='tight')
 

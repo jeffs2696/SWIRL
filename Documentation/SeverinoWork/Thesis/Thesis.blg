@@ -1,6 +1,12 @@
 This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Thesis.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
+A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy.aux
 The style file: unsrt.bst
 Database file #1: references.bib
 Warning--entry type for "FAAPolicy" isn't style-file defined
@@ -19,6 +25,7 @@ Warning--entry type for "Ingraham2015" isn't style-file defined
 --line 433 of file references.bib
 Warning--entry type for "Ingraham2010" isn't style-file defined
 --line 437 of file references.bib
+Warning--I didn't find a database entry for "wolphram:bessel"
 Warning--empty journal in Basner2017
 Warning--empty author and editor in icao2020
 Warning--empty publisher in icao2020
@@ -29,7 +36,7 @@ Warning--empty author in MESref
 Warning--empty booktitle in Hixon2010
 You've used 39 entries,
             1791 wiz_defined-function locations,
-            696 strings with 9394 characters,
+            703 strings with 9844 characters,
 and the built_in function-call counts, 7722 in all, are:
 = -- 678
 > -- 253
@@ -68,4 +75,4 @@ warning$ -- 8
 while$ -- 64
 width$ -- 41
 write$ -- 386
-(There were 16 warnings)
+(There were 17 warnings)

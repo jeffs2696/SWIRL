@@ -1,11 +1,11 @@
 \contentsline {chapter}{Abstract}{iii}%
 \contentsline {chapter}{Acknowledgments}{iv}%
 \contentsline {chapter}{Contents}{v}%
-\contentsline {chapter}{List of Tables}{vii}%
-\contentsline {chapter}{List of Figures}{viii}%
-\contentsline {chapter}{List of Symbols}{ix}%
-\contentsline {chapter}{List of Abbreviations}{xi}%
-\contentsline {chapter}{Preface}{xii}%
+\contentsline {chapter}{List of Tables}{ix}%
+\contentsline {chapter}{List of Figures}{x}%
+\contentsline {chapter}{List of Symbols}{xi}%
+\contentsline {chapter}{List of Abbreviations}{xiii}%
+\contentsline {chapter}{Preface}{xiv}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}%
 \contentsline {section}{\numberline {1.1}Overview}{1}%
 \contentsline {subsection}{\numberline {1.1.1}Introduction of overall field and basic explaination of this topic (What)}{1}%
@@ -26,4 +26,45 @@
 \contentsline {subsection}{\numberline {2.2.1}The research questions, hypotheses, foreshadowed problems, or conjectures}{13}%
 \contentsline {subsection}{\numberline {2.2.2}Calculation of Observed Order-of-Accuracy}{15}%
 \contentsline {section}{\numberline {2.3}Conclusion}{18}%
-\contentsline {chapter}{References}{19}%
+\contentsline {chapter}{\numberline {3}Chapter 3: Methods}{19}%
+\contentsline {section}{\numberline {3.1}Aerodynamic Models}{19}%
+\contentsline {subsection}{\numberline {3.1.1}Steady Models}{19}%
+\contentsline {section}{\numberline {3.2}Introduction}{20}%
+\contentsline {section}{\numberline {3.3}Modal Propagation Theroetical Background}{20}%
+\contentsline {subsection}{\numberline {3.3.1}Aerodynamic Model}{20}%
+\contentsline {subsubsection}{\numberline {3.3.1.1}Steady Flow}{21}%
+\contentsline {section}{\numberline {3.4}Analytical Solution to Sound Propagation in ducted flows}{22}%
+\contentsline {subsubsection}{\numberline {3.4.0.1}Hard Wall boundary condition}{25}%
+\contentsline {section}{\numberline {3.5}Applying model to various flows}{27}%
+\contentsline {subsection}{\numberline {3.5.1}Axial Shear Flow}{27}%
+\contentsline {section}{\numberline {3.6}Accounting for solid body swirl}{28}%
+\contentsline {subsection}{\numberline {3.6.1}Unsteady Models}{29}%
+\contentsline {subsection}{\numberline {3.6.2}Linearizing the governing equations}{29}%
+\contentsline {subsubsection}{\numberline {3.6.2.1}Linearizing Conservation of Mass}{29}%
+\contentsline {section}{\numberline {3.7}Substituting Pertubation Variables}{30}%
+\contentsline {chapter}{\numberline {4}Chapter 4: Numerical Models}{32}%
+\contentsline {section}{\numberline {4.1}Numerical Integration}{32}%
+\contentsline {section}{\numberline {4.2}Introduction}{32}%
+\contentsline {section}{\numberline {4.3}Methods}{34}%
+\contentsline {subsection}{\numberline {4.3.1}Theory}{35}%
+\contentsline {subsection}{\numberline {4.3.2}Procedure}{39}%
+\contentsline {subsection}{\numberline {4.3.3}Tanh Summaion Formulation}{40}%
+\contentsline {subsection}{\numberline {4.3.4}Calculation of Observed Order-of-Accuracy}{44}%
+\contentsline {section}{\numberline {4.4}Fairing Functions}{48}%
+\contentsline {section}{\numberline {4.5}Setting Boundary Condition Values Using a Fairing Function}{48}%
+\contentsline {subsection}{\numberline {4.5.1}Using $\beta $ as a scaling parameter}{48}%
+\contentsline {subsection}{\numberline {4.5.2}Minimum Boundary Fairing Function}{50}%
+\contentsline {subsection}{\numberline {4.5.3}Max boundary polynomial}{52}%
+\contentsline {subsection}{\numberline {4.5.4}Corrected function}{52}%
+\contentsline {subsection}{\numberline {4.5.5}Symbolic Sanity Checks}{53}%
+\contentsline {subsection}{\numberline {4.5.6}Min boundary derivative polynomial}{54}%
+\contentsline {subsection}{\numberline {4.5.7}Polynomial function, max boundary derivative}{55}%
+\contentsline {subsection}{\numberline {4.5.8}Putting it together}{57}%
+\contentsline {chapter}{\numberline {5}Results and Discusssion}{58}%
+\contentsline {section}{\numberline {5.1}Verification}{58}%
+\contentsline {section}{\numberline {5.2}Introduction}{58}%
+\contentsline {subsection}{\numberline {5.2.1}Statement of the received results and their analysis}{58}%
+\contentsline {section}{\numberline {5.3}Code Verificaton using the Method of Manufactured Solutions}{59}%
+\contentsline {subsection}{\numberline {5.3.1}MMS 1}{59}%
+\contentsline {subsubsection}{\numberline {5.3.1.1}Test Case 1}{60}%
+\contentsline {chapter}{References}{74}%

@@ -24,8 +24,9 @@ DO i = 1,numberOfGridPoints
 
     WRITE(UNIT,*) &
         r(i)                             , &
-        axialMachDataMMSOut(i)                 , &
-        thetaMachDataMMSOut(i)                 
+        axialMachData(i)                 , &
+        thetaMachData(i)                 , &
+        SoundSpeedOut(i)
 
 ENDDO
 

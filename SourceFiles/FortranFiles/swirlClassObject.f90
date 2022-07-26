@@ -437,31 +437,31 @@ CONTAINS
             ELSE
             ENDIF
 
-            CALL analysis(&
-                np    = object%numberOfRadialPoints,    &
-                np4   = object%numberOfRadialPoints*4,   &
-                ak    = object%frequency,    &
-                rr    = object%r,     &
-                snd   = object%snd,   &
-                rmx   = object%rmx,   &
-                rmt   = object%rmt,   &
-                aa    = object%aa,    &
-                bb    = object%bb,    &
-                alpha = object%alpha, &
-                beta  = object%beta,  &
-                vl    = object%vl,    &
-                vr    = object%vr,    &
-                work  = object%work,  &
-                rwork = object%rwork, &
-                gam   = object%wvn,   &
-                jobvl = jobvl, &
-                jobvr = jobvr, &
-                mm    = object%azimuthalMode,    &
-                ir    = ir,    &
-                is    = is,    &
-                vphi  = object%vph,   &
-                akap  = object%akap , &
-                debug = debugFlag)
+            ! CALL analysis(&
+            !     np    = object%numberOfRadialPoints,    &
+            !     np4   = object%numberOfRadialPoints*4,   &
+            !     ak    = object%frequency,    &
+            !     rr    = object%r,     &
+            !     snd   = object%snd,   &
+            !     rmx   = object%rmx,   &
+            !     rmt   = object%rmt,   &
+            !     aa    = object%aa,    &
+            !     bb    = object%bb,    &
+            !     alpha = object%alpha, &
+            !     beta  = object%beta,  &
+            !     vl    = object%vl,    &
+            !     vr    = object%vr,    &
+            !     work  = object%work,  &
+            !     rwork = object%rwork, &
+            !     gam   = object%wvn,   &
+            !     jobvl = jobvl, &
+            !     jobvr = jobvr, &
+            !     mm    = object%azimuthalMode,    &
+            !     ir    = ir,    &
+            !     is    = is,    &
+            !     vphi  = object%vph,   &
+            !     akap  = object%akap , &
+            !     debug = debugFlag)
 
 
            IF (debugFlag) THEN
