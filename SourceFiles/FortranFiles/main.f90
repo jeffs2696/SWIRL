@@ -32,14 +32,14 @@ PROGRAM MAIN
 
     LOGICAL :: &
         debug = .TRUE. , &
-        MMSflag = .TRUE.
+        MMSflag = .FALSE.
 
     INTEGER, PARAMETER :: &
         !! Code parameters for double precision and number of iterations
     M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 6 
+        numberOfIterations = 1 
 
     INTEGER  :: &
         !! Integers for flags and loop indicies
@@ -100,6 +100,10 @@ PROGRAM MAIN
 
     COMPLEX(KIND=rDef) :: &
         S_L2            ,&
+        S1_L2            ,&
+        S2_L2            ,&
+        S3_L2            ,&
+        S4_L2            ,&
         eigenValueMMS   ,&
         hubAdmittance   ,&
         ductAdmittance  ,&
@@ -113,6 +117,10 @@ PROGRAM MAIN
         S_MMS , &
         S_actual, &
         S_L2Array , &
+        S1_L2Array , &
+        S2_L2Array , &
+        S3_L2Array , &
+        S4_L2Array , &
         RateOfConvergence2  , &
         eigenVectorMMS
 
@@ -145,8 +153,12 @@ PROGRAM MAIN
     FORMAT_ROC                 = "(F20.12,F20.12)"
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
-    include 'InputVariables_MMS1.f90'
-    ! include 'InputVariables_.f90'
+    ! include 'InputVariables_MMS1.f90'
+    include 'InputVariables_KousenTable4_3.f90'
+    ! include 'InputVariables_KousenTable4_4.f90'
+    ! include 'InputVariables_KousenTable4_5.f90'
+    ! include 'InputVariables_KousenTable4_6.f90'
+
     hubToTipRatio              =  r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
@@ -160,12 +172,16 @@ PROGRAM MAIN
         RateOfConvergence1(numberOfIterations - 1) , &
         RateOfConvergence2(numberOfIterations - 1) , &
         S_L2Array(numberOfIterations)         , &
+        S1_L2Array(numberOfIterations)         , &
+        S2_L2Array(numberOfIterations)         , &
+        S3_L2Array(numberOfIterations)         , &
+        S4_L2Array(numberOfIterations)         , &
         SoundSpeedL2Array(numberOfIterations) , &
         drArray(numberOfIterations)                               , &
         numberOfGridPointsArray(numberOfIterations))
 
     M_int_new = M_int
-    ! numberOfGridPoints = 16
+    numberOfGridPoints = 1000 
     DO FDfac = 1,1! numberOfFiniteDifferenceSchemes
 
     DO fac = 1, numberOfIterations
@@ -198,7 +214,7 @@ PROGRAM MAIN
     ! ELSE
     !     numberOfGridPoints           = (1+(2**fac)*2)
     ! ENDIF
-    numberOfGridPoints = (1+(2**fac)*2)
+    ! numberOfGridPoints = (1+(2**fac)*2)
     ! numberOfGridPoints = (numberOfGridPoints + numberOfGridPoints)
     numberOfGridPointsArray(fac) = numberOfGridPoints
     dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
@@ -367,6 +383,7 @@ PROGRAM MAIN
             dataSet1 = speedOfSoundMMS , &
             dataSet2 = SoundSpeedOut)
 
+        SoundSpeedL2Array(fac) = SoundSpeedErrorL2
         ! INTERFACE - L2N_2D 
         CALL getL2Norm(&
             object      = SourceTermMMS_ClassObj , &
@@ -375,7 +392,31 @@ PROGRAM MAIN
             dataSet2    = S_actual)
 
         S_L2Array(fac) = REAL(S_L2, KIND = rDef)
-        SoundSpeedL2Array(fac) = SoundSpeedErrorL2
+
+        CALL getL2Norm(&
+            object      = SourceTermMMS_ClassObj , &
+            L2          = S1_L2 , &
+            dataSet1    = S_MMS(1:numberOfGridPoints), &
+            dataSet2    = S_actual(1:numberOfGridPoints))
+
+        S1_L2Array(fac) = REAL(S1_L2, KIND = rDef)
+
+        CALL getL2Norm(&
+            object      = SourceTermMMS_ClassObj , &
+            L2          = S3_L2 , &
+            dataSet1    = S_MMS((1 + 2*numberOfGridPoints):numberOfGridPoints*3), &
+            dataSet2    = S_actual((1+2*numberOfGridPoints):numberOfGridPoints*3))
+
+        S3_L2Array(fac) = REAL(S3_L2, KIND = rDef)
+
+
+        CALL getL2Norm(&
+            object      = SourceTermMMS_ClassObj , &
+            L2          = S4_L2 , &
+            dataSet1    = S_MMS((1 + 3*numberOfGridPoints):numberOfGridPoints*3), &
+            dataSet2    = S_actual((1+3*numberOfGridPoints):numberOfGridPoints*3))
+
+        S4_L2Array(fac) = REAL(S4_L2, KIND = rDef)
 
         include 'main-scripts/swirl-data-export-per-grid-MMS.f90'
 
@@ -408,7 +449,7 @@ PROGRAM MAIN
             totalMachData , &
             S_MMS,S_actual, S_error, S_1, S_2, S_3, S_4)
         END DO
-
+        IF (MMSflag) THEN 
         CALL getRateOfConvergence(&
             object            = SoundSpeedMMS_ClassObj , &
             ExpectedRateOfConvergence = ExpectedRateOfConvergenceSoundSpeed   , &
@@ -425,12 +466,17 @@ PROGRAM MAIN
         include 'main-scripts/swirl-data-export-MMS.f90'
         ! include 'main-scripts/swirl-data-export-per-grid-MMS.f90'
 
+    ELSE
+    ENDIF
         END DO
         DEALLOCATE(&
             RateOfConvergence1 , &
             RateOfConvergence2 , &
+            S1_L2Array         , &
+            S2_L2Array         , &
+            S3_L2Array         , &
+            S4_L2Array         , &
             S_L2Array)
-
     CALL CPU_TIME(end_time)
     if ((end_time-start_time) .lt. 60.0_rDef) THEN
         WRITE(0,*) 'SWIRL''s run time:', (end_time-start_time), 'seconds'!/60.0_rDef

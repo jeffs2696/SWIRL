@@ -92,13 +92,19 @@ DO i = 1,numberOfIterations
     WRITE(0,*) 5+2**i , SoundSpeedL2Array(i)
 END DO
 
-WRITE(0,FORMAT_L2_HEADER) 'Gridpoints' , 'L2-Source'
+WRITE(0,FORMAT_L2_HEADER) 'Gridpoints' , 'L2-Source'!, 'L2-S1','L2-S2','L2-S3','L2-S4'
 
 DO i = 1,numberOfIterations
-    WRITE(0,*) 5+2**i , S_L2Array(i)
+    WRITE(0,"(I10, &
+        F20.12,F20.12 , &
+        F20.12,F20.12 , &
+        F20.12,F20.12 , &
+        F20.12,F20.12 , &
+        F20.12,F20.12  &
+        )") 5+2**i , S_L2Array(i), S1_L2Array(i),S2_L2Array(i),S3_L2Array(i),S4_L2Array(i) 
 END DO
 
-WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC'
+WRITE(0,FORMAT_ROC_HEADER) 'Delta_r' , 'ROC_Total'
 DO i = 1,numberOfIterations - 1
     WRITE(0,FORMAT_ROC) &
         drArray(i), &

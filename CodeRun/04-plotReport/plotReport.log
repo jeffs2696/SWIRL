@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  24 JUL 2022 21:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  26 JUL 2022 01:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -693,16 +693,16 @@ File: tex-outputs/SourceTermError4.pdf Graphic file (type pdf)
 Package pdftex.def Info: tex-outputs/SourceTermError4.pdf  used on input line 1
 10.
 (pdftex.def)             Requested size: 345.0pt x 244.97076pt.
-<tex-outputs/LEE_L2.pdf, id=21, 319.7036pt x 226.99815pt>
-File: tex-outputs/LEE_L2.pdf Graphic file (type pdf)
-<use tex-outputs/LEE_L2.pdf>
-Package pdftex.def Info: tex-outputs/LEE_L2.pdf  used on input line 115.
-(pdftex.def)             Requested size: 345.0pt x 244.97076pt.
-<tex-outputs/LEE_ROC.pdf, id=22, 312.6204pt x 226.99815pt>
-File: tex-outputs/LEE_ROC.pdf Graphic file (type pdf)
-<use tex-outputs/LEE_ROC.pdf>
-Package pdftex.def Info: tex-outputs/LEE_ROC.pdf  used on input line 120.
-(pdftex.def)             Requested size: 345.0pt x 250.53001pt.
+<tex-outputs/MMS1_LEE_L2.pdf, id=21, 362.3286pt x 256.57108pt>
+File: tex-outputs/MMS1_LEE_L2.pdf Graphic file (type pdf)
+<use tex-outputs/MMS1_LEE_L2.pdf>
+Package pdftex.def Info: tex-outputs/MMS1_LEE_L2.pdf  used on input line 115.
+(pdftex.def)             Requested size: 345.0pt x 244.3088pt.
+<tex-outputs/MMS1_LEE_ROC.pdf, id=22, 355.2454pt x 256.57108pt>
+File: tex-outputs/MMS1_LEE_ROC.pdf Graphic file (type pdf)
+<use tex-outputs/MMS1_LEE_ROC.pdf>
+Package pdftex.def Info: tex-outputs/MMS1_LEE_ROC.pdf  used on input line 120.
+(pdftex.def)             Requested size: 345.0pt x 249.18684pt.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./tex-outputs/MMS_mean_f
 low_profile.pdf> <./tex-outputs/MMS_perturbation_variables_vR.pdf
 
@@ -743,32 +743,32 @@ clusion: multiple pdfs with page group included in a single page
 
 pdfTeX warning: pdflatex (file ./tex-outputs/SourceTermComparison4.pdf): PDF in
 clusion: multiple pdfs with page group included in a single page
->] [9 <./tex-outputs/SourceTermError4.pdf> <./tex-outputs/LEE_L2.pdf
+>] [9 <./tex-outputs/SourceTermError4.pdf> <./tex-outputs/MMS1_LEE_L2.pdf
 
-pdfTeX warning: pdflatex (file ./tex-outputs/LEE_L2.pdf): PDF inclusion: multip
-le pdfs with page group included in a single page
->] [10 <./tex-outputs/LEE_ROC.pdf>] (./plotReport.aux) ) 
+pdfTeX warning: pdflatex (file ./tex-outputs/MMS1_LEE_L2.pdf): PDF inclusion: m
+ultiple pdfs with page group included in a single page
+>] [10 <./tex-outputs/MMS1_LEE_ROC.pdf>] (./plotReport.aux) ) 
 Here is how much of TeX's memory you used:
  22213 strings out of 481239
- 596095 string characters out of 5920378
- 943953 words of memory out of 5000000
+ 596155 string characters out of 5920378
+ 943952 words of memory out of 5000000
  37115 multiletter control sequences out of 15000+600000
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,6n,136p,741b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on plotReport.pdf (10 pages, 456112 bytes).
+</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on plotReport.pdf (10 pages, 456151 bytes).
 PDF statistics:
  491 PDF objects out of 1000 (max. 8388607)
  442 compressed objects within 5 object streams

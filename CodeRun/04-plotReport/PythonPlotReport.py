@@ -53,8 +53,7 @@ directory_64  ='../03-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/64pt
 directory_4th_64  ='../03-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/64pts/'
 directory_128 ='../03-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/128pts/'
 directory_4th_128 ='../03-EVanalysis/SWIRLVerification/Table4_3/FourthOrderDiff/128pts/'
-directory_256 ='../03-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/256pts/'
-
+directory_256 ='../03-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/256pts/' 
 # 2. Plot Axial Wavenumbers/Eigenvalues
 gam_non_acc_data32 = fcn.importPlotData(directory_32+'gam.nonconv.0032')
 gam_non_acc_data_4th_32 = fcn.importPlotData(directory_4th_32+'gam.nonconv.0032')
