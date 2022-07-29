@@ -36,14 +36,14 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         !! Code parameters for double precision and number of iterations
-    M_int = 2 , & 
+        M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
         numberOfIterations = 1 
 
     INTEGER  :: &
         !! Integers for flags and loop indicies
-    UNIT , & ! for NEWUNIT
+        UNIT , & ! for NEWUNIT
         finiteDiffFlag           ,& ! finite difference flag
         numericalIntegrationFlag ,& !  numerical integration flag
         numberOfGridPoints       ,& ! number of points
@@ -55,7 +55,7 @@ PROGRAM MAIN
 
     INTEGER, DIMENSION(:), ALLOCATABLE :: &
         !! Integer arrays to store the number of grid points
-    numberOfGridPointsArray, &
+        numberOfGridPointsArray, &
         gridSpacingArray
 
     REAL(KIND = REAL64) ::  &
@@ -76,7 +76,7 @@ PROGRAM MAIN
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         !! real values arrays
-    drArray             , &
+        drArray             , &
         r                   , & !radial grid locations
         rOut                , &
         vR, vX, vTh, Pr     , &
@@ -216,6 +216,7 @@ PROGRAM MAIN
     ! ENDIF
     ! numberOfGridPoints = (1+(2**fac)*2)
     ! numberOfGridPoints = (numberOfGridPoints + numberOfGridPoints)
+
     numberOfGridPointsArray(fac) = numberOfGridPoints
     dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
     drArray(fac) = dr
@@ -483,4 +484,4 @@ PROGRAM MAIN
     ELSE
         WRITE(0,*) 'SWIRL''s run time:', (end_time-start_time)/60.0_rDef, 'minutes'
     endif
-END PROGRAM MAIN
+END POGRAM MAIN

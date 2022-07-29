@@ -269,7 +269,7 @@ ax.plot(
     label=r"$M_{total}$",
 )
 
-ax.set_xlabel(r'Dimensionless Radius $\bar{r}$')
+ax.set_xlabel(r'$\bar{r}$')
 ax.set_ylabel(r'$M$')
 ax.legend()
 
@@ -291,7 +291,6 @@ ax.plot(
     MeanFlowData3_1['vR'],
     label=(r'$\bar{v}_r$ '),
     markevery=25)
-ax.set_xlabel('Radius [-]')
 ax.set_ylabel('Perturbation Velocity [-]')
 ax.legend()
 fig.savefig('tex-outputs/MMS1_perturbation_variables_vR.pdf',
@@ -332,7 +331,7 @@ ax.plot(
     label=(r'$\bar{v}_x$ '),
     markevery=25)
 
-ax.set_xlabel('Radius [-]')
+ax.set_xlabel(r'$\bar{r}$')
 ax.set_ylabel('Perturbation Velocity [-]')
 ax.legend()
 
@@ -354,7 +353,7 @@ ax.plot(
     label=(r'$\bar{P}$ '),
     markevery=25)
 
-ax.set_xlabel('Radius [-]')
+ax.set_xlabel(r'$\bar{r}$')
 ax.set_ylabel('Perturbation Velocity [-]')
 ax.legend()
 
@@ -373,17 +372,17 @@ ax.plot(
     MeanFlowData1_1['radius'],
     MeanFlowData1_1['A_expected'],
     markevery=55,
-    label='Expected')
+    label=r'$\bar{A}_{MMS}$')
 
 ax.plot(
     MeanFlowData1_1['radius'],
     MeanFlowData1_1['A_actual'],
     marker='.',
     markevery=25,
-    label='Actual')
+    label=r'$\bar{A}_{approx}$')
 
-ax.set_xlabel('Radius [-]')
-ax.set_ylabel('Speed Of Sound [-]')
+ax.set_xlabel(r'$\bar{r}$')
+ax.set_ylabel(r'{$\bar{A}$')
 plt.legend()
 
 plt.savefig('tex-outputs/MMS1_SpeedOfSoundComparison1.pdf',
@@ -420,7 +419,7 @@ ax.plot(
 
 plt.legend()
 ax.set_ylabel(r'$\epsilon$')
-ax.set_xlabel('Radius')
+ax.set_xlabel(r'$\bar{r}$')
 plt.savefig('tex-outputs/MMS1_SpeedOfSoundComparison2.pdf',
             format='pdf',
             bbox_inches='tight')
@@ -444,9 +443,9 @@ ax.loglog(
 x = SND_L2_data['GridPoints'].to_numpy()
 y = SND_L2_data['L2'].to_numpy()
 
-b = SND_L2_data['L2'].iloc[0]  # y intercept
+b = SND_L2_data['L2'].iloc[-1]  # y intercept
 k = 2  # expected slope
-y_expected = 10**(-np.log10(x**k) + np.log10(x[0]**k * b))
+y_expected = 10**(-np.log10(x**k) + np.log10(x[-1]**k * b))
 plt.plot(
     x,
     y_expected,
@@ -516,9 +515,9 @@ ax.loglog(
 x = LEE_L2_data1['GridPoints'].to_numpy()
 y = LEE_L2_data1['L2'].to_numpy()
 
-b = LEE_L2_data1['L2'].iloc[0]  # y intercept
+b = LEE_L2_data1['L2'].iloc[-1]  # y intercept
 k = 2  # expected slope
-y_expected = 10**(-np.log10(x**k) + np.log10(x[0]**k * b))
+y_expected = 10**(-np.log10(x**k) + np.log10(x[-1]**k * b))
 plt.plot(
     x,
     y_expected,
@@ -529,9 +528,9 @@ plt.plot(
 x = LEE_L2_data2['GridPoints'].to_numpy()
 y = LEE_L2_data2['L2'].to_numpy()
 
-b = LEE_L2_data2['L2'].iloc[0]  # y intercept
+b = LEE_L2_data2['L2'].iloc[-1]  # y intercept
 k = 4  # expected slope
-y_expected = 10**(-np.log10(x**k) + np.log10(x[0]**k * b))
+y_expected = 10**(-np.log10(x**k) + np.log10(x[-1]**k * b))
 plt.plot(
     x,
     y_expected,
@@ -601,7 +600,7 @@ axs.plot(
     SourceTermData1_1['S_expected'],
     label='$Theoretical$')
 axs.set(ylabel='$S_1$')
-axs.set(xlabel='$r [-]$')
+axs.set(xlabel=r'$\bar{r}$')
 
 
 axs.legend()
@@ -628,7 +627,7 @@ axs.plot(
     SourceTermData2_1['S_expected'],
     label='$Theoretical$')
 axs.set(ylabel='$S_2$')
-axs.set(xlabel='$r [-]$')
+axs.set(xlabel=r'$\bar{r}$')
 
 
 axs.legend()
@@ -655,7 +654,7 @@ axs.plot(
     SourceTermData3_1['S_expected'],
     label='$Theoretical$')
 axs.set(ylabel='$S_3$')
-axs.set(xlabel='$r [-]$')
+axs.set(xlabel=r'$\bar{r}$')
 
 
 axs.legend()
@@ -682,7 +681,7 @@ axs.plot(
     SourceTermData4_1['S_expected'],
     label='$Theoretical$')
 axs.set(ylabel='$S_4$')
-axs.set(xlabel='$r [-]$')
+axs.set(xlabel=r'$\bar{r}$')
 
 
 axs.legend()
@@ -714,7 +713,7 @@ axs.semilogy(
     abs(SourceTermData1_3['S_actual'] - SourceTermData1_3['S_expected']))
 
 axs.set_ylabel('$$\\epsilon$$')
-axs.set_xlabel('$$ r$$')
+ax.set_xlabel(r'$\bar{r}$')
 plt.savefig('tex-outputs/MMS1_SourceTermError1.pdf',
             format='pdf',
             bbox_inches='tight')
@@ -742,6 +741,7 @@ axs.semilogy(
 fig.suptitle('Source Term 2 Error at Multiple Grids')
 
 axs.set_ylabel('$$\\epsilon$$')
+ax.set_xlabel(r'$\bar{r}$')
 axs.set_xlabel('$$ r$$')
 plt.savefig('tex-outputs/MMS1_SourceTermError2.pdf',
             format='pdf',
@@ -769,11 +769,11 @@ axs.semilogy(
 
 
 axs.set_ylabel('$$\\epsilon$$')
-axs.set_xlabel('$$ r$$')
+ax.set_xlabel(r'$\bar{r}$')
 fig.suptitle('Source Term 3 Error at Multiple Grids')
 
 axs.set_ylabel('$$\\epsilon$$')
-axs.set_xlabel('$$ r$$')
+ax.set_xlabel(r'$\bar{r}$')
 plt.savefig('tex-outputs/MMS1_SourceTermError3.pdf',
             format='pdf',
             bbox_inches='tight')
@@ -799,7 +799,7 @@ axs.semilogy(
     abs(SourceTermData4_3['S_actual'] - SourceTermData4_3['S_expected']))
 
 axs.set_ylabel('$$\\epsilon$$')
-axs.set_xlabel('$$ r$$')
+ax.set_xlabel(r'$\bar{r}$')
 fig.suptitle('Source Term 4 Error at Multiple Grids')
 plt.savefig('tex-outputs/MMS1_SourceTermError4.pdf',
             format='pdf',
@@ -832,9 +832,14 @@ ax.plot(
     label=r"$M_{total}$",
 )
 
-ax.set_xlabel(r'Dimensionless Radius $\bar{r}$')
+ax.set_xlabel(r'$\bar{r}$')
 ax.set_ylabel(r'$M$')
 ax.legend()
+
+
+plt.savefig('tex-outputs/KousenT1_mean_flow_profile.pdf',
+            format='pdf',
+            bbox_inches='tight')
 
 fig, ax = plt.subplots(
         nrows=1,
@@ -874,5 +879,9 @@ plt.scatter(
 ax.set_ylabel('Real Axis')
 ax.set_ylabel('Imaginary Axis')
 fig.suptitle(r'Axial Wavenumer $\gamma$')
+plt.savefig('tex-outputs/KousenT1_gam_nonconv_scatter_2ndOrderApprox.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
 plt.show()
 # sys.exit()

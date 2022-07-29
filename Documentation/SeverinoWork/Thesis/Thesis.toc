@@ -63,8 +63,7 @@
 \contentsline {chapter}{\numberline {5}Results and Discusssion}{58}%
 \contentsline {section}{\numberline {5.1}Verification}{58}%
 \contentsline {section}{\numberline {5.2}Introduction}{58}%
-\contentsline {subsection}{\numberline {5.2.1}Statement of the received results and their analysis}{58}%
-\contentsline {section}{\numberline {5.3}Code Verificaton using the Method of Manufactured Solutions}{59}%
-\contentsline {subsection}{\numberline {5.3.1}MMS 1}{59}%
-\contentsline {subsubsection}{\numberline {5.3.1.1}Test Case 1}{65}%
+\contentsline {subsection}{\numberline {5.2.1}Statement of the received results and their analysis}{59}%
+\contentsline {subsection}{\numberline {5.2.2}MMS 1}{59}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}Test Case 1}{63}%
 \contentsline {chapter}{References}{75}%
