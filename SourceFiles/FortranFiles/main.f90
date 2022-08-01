@@ -36,14 +36,14 @@ PROGRAM MAIN
 
     INTEGER, PARAMETER :: &
         !! Code parameters for double precision and number of iterations
-        M_int = 2 , & 
+    M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
         numberOfIterations = 1 
 
     INTEGER  :: &
         !! Integers for flags and loop indicies
-        UNIT , & ! for NEWUNIT
+    UNIT , & ! for NEWUNIT
         finiteDiffFlag           ,& ! finite difference flag
         numericalIntegrationFlag ,& !  numerical integration flag
         numberOfGridPoints       ,& ! number of points
@@ -55,10 +55,11 @@ PROGRAM MAIN
 
     INTEGER, DIMENSION(:), ALLOCATABLE :: &
         !! Integer arrays to store the number of grid points
-        numberOfGridPointsArray, &
+    numberOfGridPointsArray, &
         gridSpacingArray
 
     REAL(KIND = REAL64) ::  &
+        power_law                          , &
         M_int_new                          , &
         gam                                , &
         SoundSpeedErrorL2                  , &
@@ -66,17 +67,22 @@ PROGRAM MAIN
         ExpectedRateOfConvergenceSourceTerm, &
         r_min                              , &!radial grid locations
         r_max                              , &!radial grid locations
+        max_axial_mach_number              , &
         secondOrderSmoother                , &!2nd order smoothing coefficient
         fourthOrderSmoother                , &!4th order smoothing coefficient
         dr                                 , &!radial grid spacing 
         gridSpacingRatio              ,& ! the difference between two grid spacing
         start_time                         , &
         end_time                           , &
+        r_shankar                          , &
+        r_max_shankar                      , & 
+        plsmns                             , &
+        sgn                                , &
         hubToTipRatio
 
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
         !! real values arrays
-        drArray             , &
+    drArray             , &
         r                   , & !radial grid locations
         rOut                , &
         vR, vX, vTh, Pr     , &
@@ -96,6 +102,8 @@ PROGRAM MAIN
         thetaMachDataMMSOut , & !M_th
         axialMach_drMMSOut  , &
         thetaMach_drMMSOut  , &
+        axialVelocity       , &
+        diff_axialVelocity  , &
         S_error
 
     COMPLEX(KIND=rDef) :: &
@@ -158,7 +166,6 @@ PROGRAM MAIN
     ! include 'InputVariables_KousenTable4_4.f90'
     include 'InputVariables_KousenTable4_5.f90'
     ! include 'InputVariables_KousenTable4_6.f90'
-
     hubToTipRatio              =  r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
@@ -259,8 +266,9 @@ PROGRAM MAIN
     ! Allocatables for include files
 
 
-    include 'InputVariables_KousenTable4_5.f90'
+    include 'InputMeanFlow_KousenTable4_5.f90'
 
+    ! WRITE(0,*) axialMachData
     !Create a swirl Class Obj for a given flow
     CALL CreateObject(&
         object        = swirlClassObj(fac)  ,&
@@ -429,28 +437,29 @@ PROGRAM MAIN
     ENDIF
 
     ! for test cases 
-        ! include 'main-scripts/swirl-data-export-per-grid.f90'
-        DEALLOCATE(&
-            axialMachDataMMSOut, &
-            thetaMachDataMMSOut, &
-            r                     ,&
-            rOut,&
-            thetaMachData         ,&
-            axialMachData         ,&
-            thetaMachDataMMS         ,&
-            axialMach_drMMSOut         ,&
-            thetaMach_drMMSOut         ,&
-            SoundSpeedOut         ,&
-            SoundSpeedError   , &
-            speedOfSoundMMS , &
-            SoundSpeed_drOut         ,&
-            axialMachDataMMS         ,&
-            vR,vTh,vX,Pr, &
-            eigenVectorMMS, &
-            totalMachData , &
-            S_MMS,S_actual, S_error, S_1, S_2, S_3, S_4)
-        END DO
-        IF (MMSflag) THEN 
+    ! include 'main-scripts/swirl-data-export-per-grid.f90'
+    DEALLOCATE(&
+        axialMachDataMMSOut, &
+        thetaMachDataMMSOut, &
+        r                     ,&
+        rOut,&
+        thetaMachData         ,&
+        axialMachData         ,&
+        thetaMachDataMMS         ,&
+        axialMach_drMMSOut         ,&
+        thetaMach_drMMSOut         ,&
+        SoundSpeedOut         ,&
+        SoundSpeedError   , &
+        speedOfSoundMMS , &
+        SoundSpeed_drOut         ,&
+        axialMachDataMMS         ,&
+        vR,vTh,vX,Pr, &
+        eigenVectorMMS, &
+        totalMachData , &
+        S_MMS,S_actual, S_error, S_1, S_2, S_3, S_4)
+
+    ENDDO
+    IF (MMSflag) THEN 
         CALL getRateOfConvergence(&
             object            = SoundSpeedMMS_ClassObj , &
             ExpectedRateOfConvergence = ExpectedRateOfConvergenceSoundSpeed   , &
@@ -464,24 +473,25 @@ PROGRAM MAIN
             L2Array           = S_L2Array          , &
             gridSpacingRatio  = gridSpacingRatio)
 
-        include 'main-scripts/swirl-data-export-MMS.f90'
+        ! include 'main-scripts/swirl-data-export-MMS.f90'
         ! include 'main-scripts/swirl-data-export-per-grid-MMS.f90'
 
     ELSE
     ENDIF
-        END DO
-        DEALLOCATE(&
-            RateOfConvergence1 , &
-            RateOfConvergence2 , &
-            S1_L2Array         , &
-            S2_L2Array         , &
-            S3_L2Array         , &
-            S4_L2Array         , &
-            S_L2Array)
+
+    ENDDO
+    DEALLOCATE(&
+        RateOfConvergence1 , &
+        RateOfConvergence2 , &
+        S1_L2Array         , &
+        S2_L2Array         , &
+        S3_L2Array         , &
+        S4_L2Array         , &
+        S_L2Array)
     CALL CPU_TIME(end_time)
     if ((end_time-start_time) .lt. 60.0_rDef) THEN
         WRITE(0,*) 'SWIRL''s run time:', (end_time-start_time), 'seconds'!/60.0_rDef
     ELSE
         WRITE(0,*) 'SWIRL''s run time:', (end_time-start_time)/60.0_rDef, 'minutes'
     endif
-END POGRAM MAIN
+END PROGRAM MAIN
