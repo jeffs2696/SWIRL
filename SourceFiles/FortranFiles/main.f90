@@ -31,7 +31,7 @@ PROGRAM MAIN
     !! MMS flag to get approximated order of accuracy
 
     LOGICAL :: &
-        debug = .TRUE. , &
+        debug   = .FALSE. , &
         MMSflag = .FALSE.
 
     INTEGER, PARAMETER :: &
@@ -164,8 +164,8 @@ PROGRAM MAIN
     ! include 'InputVariables_MMS1.f90'
     ! include 'InputVariables_KousenTable4_3.f90'
     ! include 'InputVariables_KousenTable4_4.f90'
-    include 'InputVariables_KousenTable4_5.f90'
-    ! include 'InputVariables_KousenTable4_6.f90'
+    ! include 'InputVariables_KousenTable4_5.f90'
+    include 'InputVariables_KousenTable4_6.f90'
     hubToTipRatio              =  r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
@@ -188,8 +188,8 @@ PROGRAM MAIN
         numberOfGridPointsArray(numberOfIterations))
 
     M_int_new = M_int
-    numberOfGridPoints = 1000 
-    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes
+    numberOfGridPoints = 1025 
+    DO FDfac = 2,2! numberOfFiniteDifferenceSchemes
 
     DO fac = 1, numberOfIterations
 
@@ -266,7 +266,10 @@ PROGRAM MAIN
     ! Allocatables for include files
 
 
-    include 'InputMeanFlow_KousenTable4_5.f90'
+    ! include 'InputMeanFlow_KousenTable4_3.f90'
+    ! include 'InputMeanFlow_KousenTable4_4.f90'
+    ! include 'InputMeanFlow_KousenTable4_5.f90'
+    include 'InputMeanFlow_KousenTable4_6.f90'
 
     ! WRITE(0,*) axialMachData
     !Create a swirl Class Obj for a given flow
@@ -437,7 +440,7 @@ PROGRAM MAIN
     ENDIF
 
     ! for test cases 
-    ! include 'main-scripts/swirl-data-export-per-grid.f90'
+    include 'main-scripts/swirl-data-export-per-grid.f90'
     DEALLOCATE(&
         axialMachDataMMSOut, &
         thetaMachDataMMSOut, &

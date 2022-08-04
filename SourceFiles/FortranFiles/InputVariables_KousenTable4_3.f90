@@ -1,12 +1,12 @@
 
-r_min                     = 0.600_rDef
-r_max                     = 0.700_rDef
+r_min                     = 0.00_rDef
+r_max                     = 1.00_rDef
 
 azimuthalModeNumber       =  0
 numericalIntegrationFlag  =  1
 
-frequency                 = CMPLX(70.0,0,rDef)
-ductAdmittance            = CMPLX(0.0,0.0,rDef)
+frequency                 = CMPLX(-1.0,0,rDef)
+ductAdmittance            = CMPLX(0.720,0.420,rDef)
 hubAdmittance             = CMPLX(0.0,0.0,rDef)
 
 secondOrderSmoother       =  0.0_rDef!100.0_rDef
