@@ -165,7 +165,8 @@ PROGRAM MAIN
     ! include 'InputVariables_KousenTable4_3.f90'
     ! include 'InputVariables_KousenTable4_4.f90'
     ! include 'InputVariables_KousenTable4_5.f90'
-    include 'InputVariables_KousenTable4_6.f90'
+    ! include 'InputVariables_KousenTable4_6.f90'
+    include 'InputVariables_KousenFigure4_5.f90'
     hubToTipRatio              =  r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
@@ -269,8 +270,10 @@ PROGRAM MAIN
     ! include 'InputMeanFlow_KousenTable4_3.f90'
     ! include 'InputMeanFlow_KousenTable4_4.f90'
     ! include 'InputMeanFlow_KousenTable4_5.f90'
-    include 'InputMeanFlow_KousenTable4_6.f90'
+    ! include 'InputMeanFlow_KousenTable4_6.f90'
 
+    ! include 'InputMeanFlow_KousenFigure4_5_NoSwirl.f90'
+    include 'InputMeanFlow_KousenFigure4_5_Swirl.f90'
     ! WRITE(0,*) axialMachData
     !Create a swirl Class Obj for a given flow
     CALL CreateObject(&
