@@ -31,7 +31,7 @@ PROGRAM MAIN
     !! MMS flag to get approximated order of accuracy
 
     LOGICAL :: &
-        debug   = .FALSE. , &
+        debug   = .TRUE. , &
         MMSflag = .FALSE.
 
     INTEGER, PARAMETER :: &
@@ -39,7 +39,7 @@ PROGRAM MAIN
     M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 1 
+        numberOfIterations = 6 
 
     INTEGER  :: &
         !! Integers for flags and loop indicies
@@ -162,11 +162,12 @@ PROGRAM MAIN
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
     ! include 'InputVariables_MMS1.f90'
+    include 'InputVariables_AnalyticalSolution_1.f90'
     ! include 'InputVariables_KousenTable4_3.f90'
     ! include 'InputVariables_KousenTable4_4.f90'
     ! include 'InputVariables_KousenTable4_5.f90'
     ! include 'InputVariables_KousenTable4_6.f90'
-    include 'InputVariables_KousenFigure4_5.f90'
+    ! include 'InputVariables_KousenFigure4_5.f90'
     hubToTipRatio              =  r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
@@ -189,7 +190,7 @@ PROGRAM MAIN
         numberOfGridPointsArray(numberOfIterations))
 
     M_int_new = M_int
-    numberOfGridPoints = 1025 
+    numberOfGridPoints = 32 
     DO FDfac = 2,2! numberOfFiniteDifferenceSchemes
 
     DO fac = 1, numberOfIterations
@@ -223,7 +224,12 @@ PROGRAM MAIN
     !     numberOfGridPoints           = (1+(2**fac)*2)
     ! ENDIF
     ! numberOfGridPoints = (1+(2**fac)*2)
-    ! numberOfGridPoints = (numberOfGridPoints + numberOfGridPoints)
+    ! to double the number of grid points each iteration...
+    IF (fac.gt.1) THEN
+        numberOfGridPoints = (numberOfGridPoints + numberOfGridPoints)
+    ELSE
+    ENDIF
+
 
     numberOfGridPointsArray(fac) = numberOfGridPoints
     dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
@@ -273,7 +279,8 @@ PROGRAM MAIN
     ! include 'InputMeanFlow_KousenTable4_6.f90'
 
     ! include 'InputMeanFlow_KousenFigure4_5_NoSwirl.f90'
-    include 'InputMeanFlow_KousenFigure4_5_Swirl.f90'
+    ! include 'InputMeanFlow_KousenFigure4_5_Swirl.f90'
+    include 'InputMeanFlow_AnalyticalSolution_1.f90'
     ! WRITE(0,*) axialMachData
     !Create a swirl Class Obj for a given flow
     CALL CreateObject(&

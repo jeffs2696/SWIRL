@@ -1,6 +1,6 @@
 
 
-\subsection{MMS 1}
+\subsection{MMS, Solutions} 
 
 (insert table instead of equations, check comments in tex file for parameters)
 \begin{table}[h!]
@@ -73,9 +73,12 @@ and does not have physical significance. The “kinks” in the solution will al
 \end{figure}
 The results from the numerical integration are presented in Figure \ref{fig:5}. Although
 the slope of the line appears linear, the TSM was still used to generate the MS for
-the speed of sound. Denser grids were used to compute the error by iterating as grid spacing approaches zero. The difference
-between the expected speed of sound to the actual speed of sound is shown in Figure
-\ref{fig:5a} as a function of radius. Note that the error reaches machine precision early in the iterations and approaches zero as more grid points are used.
+the speed of sound. Denser grids were used to compute the error by iterating as 
+grid spacing approaches zero. The difference between the expected speed of sound
+to the actual speed of sound is shown in Figure \ref{fig:5a} as a function of 
+radius. Note that the error reaches machine precision early in the 
+iterations and approaches zero as more grid points are used.
+
 \begin{figure}[h!]
     \centering
     \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.pdf}
@@ -150,7 +153,10 @@ the manufactured solution.
 
 
 
-A second and fourth-order central differencing scheme for the LEE is used for the approximated radial derivatives and compared to the source terms generated for the MMS in Figure 5-10.The L2 norm and the asymptotic rate of convergence is shown for the two diffferencing schemes in 5-15 and ??. 
+A second and fourth-order central differencing scheme for the LEE is used for 
+the approximated radial derivatives and compared to the source terms generated 
+for the MMS in Figure 5-10.The L2 norm and the asymptotic rate of convergence 
+is shown for the two diffferencing schemes in 5-15 . 
 
 The grid points were doubled, starting at 7 grid points and ending after 9 iterations with 1025 grid points. Both schemes do not have the order of accuracy down to machine precision but get down to $10^-6$
 For the LEE, a second and fourth order central differencing scheme is used

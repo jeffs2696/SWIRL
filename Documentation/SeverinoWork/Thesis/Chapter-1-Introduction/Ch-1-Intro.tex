@@ -1,22 +1,22 @@
 \section{Overview}
-\subsection{Introduction of overall field and basic explaination of this topic (What)}
+% \subsection{Introduction of overall field and basic explaination of this topic (What)}
 % I) Opening Section
 %   1) Introduce the overall field 
-Aircraft noise is one of the most environmentally detrimental consequences of
-commercial flight. Studies suggest that exposure to aircraft noise leads
-to dimished academic performance in youth, and could increase the risk of 
-cardiovascular disease for populations close to airports \cite{Basner2017}. 
-Although the COVID-19 pandemic reduced air panssenger trafic by 96\% between 2019 
-and 2020, \cite{pandemicReport} the global aviation commmunity has proven 
-to be resilliant during times of economic shock. The International Air Transport
-Association (IATA) has studied the resilience of the global air passenger markets after four notable shocks to the aviation economy; 
-The impact of four notable events, (1979 oil shock, 2000-2001 dot-com bust, 9/11, and the 2008 financial crisis) 
-was studied by a statistical analysis of the estimated 'passenger gap' from 1950-2014. 
-Data shows that approximately 72\% of the impact of the initial shock persists 
-one year after the event and diminishes to just under one-fifth of the initial impact. 
-Given these trends in air transportation, the need for  aviation noise  
-regulation persists and will continue to be a concern so long as the aviation
-continues this rate of growth.
+% Aircraft noise is one of the most environmentally detrimental consequences of
+% commercial flight. Studies suggest that exposure to aircraft noise leads
+% to dimished academic performance in youth, and could increase the risk of 
+% cardiovascular disease for populations close to airports \cite{Basner2017}. 
+% Although the COVID-19 pandemic reduced air panssenger trafic by 96\% between 2019 
+% and 2020, \cite{pandemicReport} the global aviation commmunity has proven 
+% to be resilliant during times of economic shock. The International Air Transport
+% Association (IATA) has studied the resilience of the global air passenger markets after four notable shocks to the aviation economy; 
+% The impact of four notable events, (1979 oil shock, 2000-2001 dot-com bust, 9/11, and the 2008 financial crisis) 
+% was studied by a statistical analysis of the estimated 'passenger gap' from 1950-2014. 
+% Data shows that approximately 72\% of the impact of the initial shock persists 
+% one year after the event and diminishes to just under one-fifth of the initial impact. 
+% Given these trends in air transportation, the need for  aviation noise  
+% regulation persists and will continue to be a concern so long as the aviation
+% continues this rate of growth.
 
 % II) Background and overview
 %      What is the current situation with aircraft noise
@@ -39,20 +39,20 @@ in aeroacoustic modeling techniques and treatment strategies to compete with
 the demand for quiet subsonic flight \cite{icao2020}.  
 %   2) Introduce the research problem
 % The 
-Between the 1950s and 1960's aero gas turbine designs shifted to higher by pass 
+Between the 1950s and 1960's jet engine designs shifted to higher by pass 
 ratios with two or three shafts. The high by pass ratio (HBP) fan utilized multiple
 stages of fans and  air streams \cite{smith1989aircraft}. The efficiency of these
 engines rose with the availablility of materials that are able to cool flows
 passing over the turbofan, thus slowing the overall jet velocity but maintaining the 
-efficiency of the engine. One of the most popular configurations is the geared 
-turbofan (GTF), the largest contributor to the noise on modern aircraft 
-has been the fan upon take-off and landing.  Although the use of the GTF has
-reduced the noise emissions by 75\% \cite{GTFinfo}, further noise reduction
-technologies to mitigate the noise associated to the turbofans geometric
-configuration and operation speeds. One of the most common techiques to reduce 
-fan noise  is to include the use of acoustic treatment along the walls of the
-turbomachine's nacelle. 
-
+efficiency of the engine. 
+% One of the most popular configurations is the geared 
+% turbofan (GTF), the largest contributor to the noise on modern aircraft 
+% has been the fan upon take-off and landing.  Although the use of the GTF has
+% reduced the noise emissions by 75\% \cite{GTFinfo}, further noise reduction
+% technologies to mitigate the noise associated to the turbofans geometric
+% configuration and operation speeds. One of the most common techiques to reduce 
+% fan noise  is to include the use of acoustic treatment along the walls of the
+% turbomachine's nacelle. 
 Due to the increase in high-bypass-ratio of turbomachines, the newest models of 
 engines have a significantly larger diameter and a shorter nacelle, leaving less
 room to place acoustic treatments in regions where it will be effective \cite{Kozaczuk2017}.
@@ -86,8 +86,8 @@ a frequency domain CAA code.
     \label{fig:intro}
 \end{figure}
 
-\section{Statement of the of the research questions}
-\subsection{What is already known?}
+% \section{Statement of the of the research questions}
+% \subsection{What is already known?}
 % III) Research Problem
 
 %   1) What's already known?
@@ -97,26 +97,32 @@ In general, jet engine designers can model flow within a turbomachine with
 the Navier Stokes (N-S) Equations, a set of partial differential equations that
 describe the mass, momentum and energy of a given viscous fluid, however 
 these equations can be computationally expensive as they are used in the most
-general cases. For aeroacousticians, the N-S equations can be too complicated
+general cases. 
+
+For aeroacousticians, the N-S equations can be  
 to identify sound generation and propagation because acoustic waves are low 
 amplitude (~ only a fraction of atmospheric pressure) and are not strongly
-influenced by viscosity.   As a result, it is common in practice to 
+influenced by viscosity.   
+
+As a result, it is common in practice to 
 utilize the Linearized Euler equations (LEE),
 a closely related set of PDEs that model inviscid fluid, as they provide an 
 approximation for higher Reynold number flows where viscosity 
-does not play a critical role. A popular approach to modeling sound propagation 
+does not play a critical role. ach to modeling sound propagation 
 within a flow is to ``linearize'' the Euler equations, which decomposes the 
 flow solution into a mean and fluctuating component . The decomposition is done 
 in a linear fashion because the sound propagation amplitude is small with respect
 to the mean flow, and their presence does not appreciable change the mean flow 
-field. The LEE provides a system of linear equations where for uniform flow, 
-the solution is a family of wavenumbers and radial mode shapes that arise from 
+field. The flow solution\'s decomposition gives rise to linear and nonlinear terms 
+in the Euler equations where the non-linear fluctuating components are neglected. 
+
+The LEE provides a system of linear equations where the solution is a family of wavenumbers and radial mode shapes that arise from 
 unsteady disturbances for flows within a cylindrical duct.  Another method 
 decomposes the flow into vortical and potential parts \cite{golubev1996sound}.
 In either case, this presents an initial value problem which 
 in limited cases can obtain analytical solutions for simplified mean flow. Once a mean flow 
 is contains a tangential component, the LEE equations must be solved numerically.  
-\subsection{What is missing?/Why is it a problem?}
+% \subsection{What is missing?/Why is it a problem?}
 For uniform flows in a hard wall duct , the waves are categorized as vortical 
 ,entropical, and acoustic waves. The vortical and entropic waves soley convect with 
 the mean flow, where as the acoustic wave can propagate without damping or decay 
@@ -126,7 +132,7 @@ modes \cite{Kerrebrock2012},\cite{KERREBROCK1974} .
 Therefore, the families of waves must be found numerically \cite{Envia2004}
 making the ducted acoustic propagtion in swirling flow a problem without
 an analytical solution but has a framework for a numerical solution.
-\subsection{The goal and significance of the investigation}
+% \subsection{The goal and significance of the investigation}
 Swirling flow has been a difficult problem to investigate in comparison to 
 flows parallel to the wall domain of a duct \cite{COOPER2001} because of the 
 lack of an analytical solution and thus cannot be described from a single convective 
@@ -148,7 +154,7 @@ This thesis aims to continue this effort by conducting code verification and val
 Linearized Euler equation approximation on previous work done by Pratt \& Whitney
 and NASA Glenn Research Center though techical contract \cite{kousen1996pressure,kousen1995eigenmode}.  
 
-\section{Definition of the terms (if needed)}
+% \section{Definition of the terms (if needed)}
 % define verification and validationr
 
 The algorithms presented in this thesis have been written using FORTRAN 77 and 
@@ -174,7 +180,7 @@ propagation in ducted flows.
 
 
     
-\section{Organization of research (Structure)}
+% \section{Organization of research (Structure)}
 % IV) Research aims, objectives, and research question
 % V) State benefit/significance
 % - speed improvement 
@@ -193,7 +199,7 @@ of the method of manufactured solutions is used as a means of ensuring the code 
 correctly approximating the goverining equations and will check the effect of the numerical schemes
 on the axial wavenumbers produced.
  
-\section{Research Questions and Hypothesis}
+% \section{Research Questions and Hypothesis}
 
 The use of numerical approximations are powerful for cases where 
 there is no analytical solution, thus leaving multiple ways of arriving at a

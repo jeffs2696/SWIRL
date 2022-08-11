@@ -1,5 +1,6 @@
 MODULE smachAndSndspdModule
     USE, INTRINSIC :: ISO_FORTRAN_ENV
+    USE trapezoidalRuleModule
     ! USE Akima1D
     IMPLICIT NONE
     PRIVATE
@@ -29,7 +30,7 @@ CONTAINS
             rmswp, &
             dsn
 
-        REAL(KIND=rDef), DIMENSION(:), INTENT(INOUT) ::&
+        REAL(KIND=rDef), DIMENSION(:), INTENT(OUT) ::&
             snd
 
 ! local variables

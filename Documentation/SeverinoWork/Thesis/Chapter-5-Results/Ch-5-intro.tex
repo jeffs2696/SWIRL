@@ -1,11 +1,11 @@
-\section{Introduction}
+\subsection{Introduction}
 The frequency domain, linearized Euler equation computer code, SWIRL, was 
-sufficiently verified through the Methods of Manufactured and Exact solutions. 
-However, while MES can verify SWIRL, there is a limitation on the number of 
-exact solutions available based on the flow and domain. Slight changes in a 
-flow configuration (uniform axial flow vs. sheared axial flow, without any tangential 
-component) require a recalculation of the analytical solution. Code verification 
-through MES is often complicated for the case of uniform flow in a cylindrical 
+verified through the Methods of Manufactured and Exact solutions. 
+However, while the Method of Exact Solutions (MES) can be used to validate the
+ouput of SWIRL, there is a limitation on the number of exact solutions available 
+based on the flow and domain.  Any changes in a flow configuration (uniform axial flow vs. sheared axial flow, without any tangential 
+component) require a recalculation of the analytical solution. Code validation 
+through MES is for the case of uniform flow in a cylindrical 
 duct since the exact solution requires implementing special Bessel functions
 . In addition, the exact solution needs to be recomputed for changes in radii 
 and the use of acoustic liner (i.e., boundary conditions). For this reason, 
@@ -18,7 +18,8 @@ of two main numerical approximations for flows with axial and tangential
 components. First, the numerical integration technique required for radial 
 change in sound speed was verified. Then, the four governing equations that make
 up the matrices required for the eigenvalue problem were tested. Note that the 
-output of the eigenvalue problem is not tested with MMS. It is the input to the 
-eigenvalue problem that is being verified. The calculated $L_{2,norm}$ (i.e.
-error and the order of accuracy for both numerical methods are discussed below.
-
+output of the eigenvalue problem was tested with MMS by recomputing the expression
+$[A] {x} - \lambda [B] {x} = 0$ with a given eigenvalue/vector pair. 
+The calculated $L_{2,norm}$ (i.e. error and the order of accuracy for both numerical methods are discussed below.
+The MMS was then used to compare against validation cases in literature to outline 
+the methodolody for test cases for which there is no solution.

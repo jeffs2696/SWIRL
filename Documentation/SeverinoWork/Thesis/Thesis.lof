@@ -1,26 +1,23 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1-1}{\ignorespaces The evolution of the directivity and the relative levels of sources as a function of engine architecture (a)low bypass-ratio (b) high bypass ratio \cite {smith1989aircraft}}}{3}%
+\contentsline {figure}{\numberline {1-1}{\ignorespaces The evolution of the directivity and the relative levels of sources as a function of engine architecture (a)low bypass-ratio (b) high bypass ratio \cite {smith1989aircraft}}}{2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5-1}{\ignorespaces The manufactured mean flow test case using a summation of Tangents for $A$ and $M_x$}}{60}%
-\contentsline {figure}{\numberline {5-2}{\ignorespaces A comparison of the speed of sound, expected vs actual at the lowest grid to show similarities in solution}}{60}%
-\contentsline {figure}{\numberline {5-3}{\ignorespaces A comparison of the speed of sound error at three grid}}{61}%
-\contentsline {figure}{\numberline {5-4}{\ignorespaces L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}}{62}%
+\contentsline {figure}{\numberline {5-1}{\ignorespaces The manufactured mean flow test case using a summation of Tangents for $A$ and $M_x$}}{59}%
+\contentsline {figure}{\numberline {5-2}{\ignorespaces A comparison of the speed of sound, expected vs actual at the lowest grid to show similarities in solution}}{59}%
+\contentsline {figure}{\numberline {5-3}{\ignorespaces A comparison of the speed of sound error at three grid}}{60}%
+\contentsline {figure}{\numberline {5-4}{\ignorespaces L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}}{61}%
 \contentsline {figure}{\numberline {5-5}{\ignorespaces The manufactured perturbation functions ,$v_r$}}{62}%
-\contentsline {figure}{\numberline {5-6}{\ignorespaces The manufactured perturbation functions ,$v_x$}}{63}%
+\contentsline {figure}{\numberline {5-6}{\ignorespaces The manufactured perturbation functions ,$v_x$}}{62}%
 \contentsline {figure}{\numberline {5-7}{\ignorespaces The manufactured perturbation functions ,$v_{\theta }$}}{63}%
-\contentsline {figure}{\numberline {5-8}{\ignorespaces The manufactured perturbation functions ,$P$}}{64}%
-\contentsline {figure}{\numberline {5-9}{\ignorespaces Speed of Sound Rate Of Convergence}}{65}%
-\contentsline {figure}{\numberline {5-10}{\ignorespaces LEE Source Terms}}{65}%
-\contentsline {figure}{\numberline {5-11}{\ignorespaces LEE Source Term Error}}{66}%
-\contentsline {figure}{\numberline {5-12}{\ignorespaces LEE Source Term Error}}{66}%
-\contentsline {figure}{\numberline {5-13}{\ignorespaces LEE Source Term Error}}{67}%
-\contentsline {figure}{\numberline {5-14}{\ignorespaces LEE Source Term Error}}{67}%
-\contentsline {figure}{\numberline {5-15}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{69}%
-\contentsline {figure}{\numberline {5-16}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{74}%
+\contentsline {figure}{\numberline {5-8}{\ignorespaces The manufactured perturbation functions ,$P$}}{63}%
+\contentsline {figure}{\numberline {5-9}{\ignorespaces Speed of Sound Rate Of Convergence}}{64}%
+\contentsline {figure}{\numberline {5-10}{\ignorespaces LEE Source Terms}}{64}%
+\contentsline {figure}{\numberline {5-11}{\ignorespaces LEE Source Term Error}}{65}%
+\contentsline {figure}{\numberline {5-12}{\ignorespaces LEE Source Term Error}}{65}%
+\contentsline {figure}{\numberline {5-13}{\ignorespaces LEE Source Term Error}}{66}%
+\contentsline {figure}{\numberline {5-14}{\ignorespaces LEE Source Term Error}}{66}%
+\contentsline {figure}{\numberline {5-15}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{71}%
+\contentsline {figure}{\numberline {5-16}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{73}%
 \contentsline {figure}{\numberline {5-17}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{75}%
-\contentsline {figure}{\numberline {5-18}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{76}%
-\contentsline {figure}{\numberline {5-19}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{77}%
-\contentsline {figure}{\numberline {5-20}{\ignorespaces Mean mach number profile for the uniform flow in a lined cylinder}}{83}%

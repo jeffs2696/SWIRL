@@ -307,3 +307,22 @@ ax.legend()
 fig.savefig('tex-outputs/KousenT4_mean_flow_profile.pdf',
             format='pdf',
             bbox_inches='tight')
+
+fig = plt.figure(
+    constrained_layout=False,
+#    figsize=set_size(width)
+)
+# plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=1)
+plt.scatter(AxialWavenumberData_T46['Re{gam}'],AxialWavenumberData_T46['Im{gam}'],marker='.')#label='Upstream',)
+
+
+# plt.scatter(k_x_real_down,k_x_imag_down,label='Downstream',marker='.')
+# plt.scatter(k_x_convection,0,marker='.',label='$$k_{x,cv}$$')
+plt.legend()
+plt.xlabel(r'\textit{Real}$(k_x)$')
+plt.ylabel(r'\textit{Imaginary}$(k_x)$')
+
+fig.savefig('tex-outputs/KousenT4_gam_nonconv_scatter_4thOrderApprox.pdf',
+            format='pdf',
+            bbox_inches='tight')
+

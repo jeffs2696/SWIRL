@@ -141,6 +141,12 @@ test_directories = [
     '../03-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/128pts/',
     '../03-EVanalysis/SWIRLVerification/Table4_3/SecondOrderDiff/256pts/',
 ]
+dirs = [
+    '../03-EVanalysis/SWIRLVerification/Table4_4/FourthOrderDiff/1025pts/',
+    '../03-EVanalysis/SWIRLVerification/Table4_5/FourthOrderDiff/1025pts/',
+    '../03-EVanalysis/SWIRLVerification/Table4_6/FourthOrderDiff/1025pts/',
+    '../03-EVanalysis/SWIRLVerification/Figure4_5/FourthOrderDiff/1025pts/',
+        ]
 
 # 2. Plot Axial Wavenumbers/Eigenvalues
 gam_non_acc_data32 = fcn.importPlotData(test_directories[1] +'gam.nonconv.0032')
@@ -148,6 +154,10 @@ gam_non_acc_data64 = fcn.importPlotData(test_directories[2] +'gam.nonconv.0064')
 gam_non_acc_data128= fcn.importPlotData(test_directories[3] +'gam.nonconv.0128')
 gam_non_acc_data256= fcn.importPlotData(test_directories[4] +'gam.nonconv.0256')
 # Files to plot from SWIRL
+
+gam_non_acc_data_T44= fcn.importPlotData(dirs[0] +'gam.nonconv_acc.1025')
+gam_non_acc_data_T45= fcn.importPlotData(dirs[1] +'gam.nonconv_acc.1025')
+gam_non_acc_data_T46= fcn.importPlotData(dirs[2] +'gam.nonconv_acc.1025')
 
 # [I] Manufactured Solutions
 # 1. Mean Flow Profile
@@ -557,16 +567,16 @@ ax.semilogx(
     LEE_ROC_data1['ROC'],
     label='Approximated with Second Order Central')
 
-ax.semilogx(
-    LEE_ROC_data1['Delta_r'],
-    2.0*np.ones(len(LEE_ROC_data1['Delta_r'])),
-    label='Second Order Convergence')
+# ax.semilogx(
+#     LEE_ROC_data1['Delta_r'],
+#     2.0*np.ones(len(LEE_ROC_data1['Delta_r'])),
+#     label='Second Order Convergence')
 
 
-ax.semilogx(
-    LEE_ROC_data1['Delta_r'],
-    4.0*np.ones(len(LEE_ROC_data1['Delta_r'])),
-    label='Fourth Order Convergence')
+# ax.semilogx(
+#     LEE_ROC_data1['Delta_r'],
+#     4.0*np.ones(len(LEE_ROC_data1['Delta_r'])),
+#     label='Fourth Order Convergence')
 
 ax.semilogx(
     LEE_ROC_data2['Delta_r'],
@@ -876,12 +886,73 @@ plt.scatter(
     marker = 7, 
     label = '256',
     )
-ax.set_ylabel('Real Axis')
+ax.legend()
+ax.set_xlabel('Real Axis')
 ax.set_ylabel('Imaginary Axis')
 fig.suptitle(r'Axial Wavenumer $\gamma$')
 plt.savefig('tex-outputs/KousenT1_gam_nonconv_scatter_2ndOrderApprox.pdf',
             format='pdf',
             bbox_inches='tight')
+
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+plt.scatter(
+    gam_non_acc_data_T44['Re{gam/ak}'].iloc[1:700],
+    gam_non_acc_data_T44['Im{gam/ak}'].iloc[1:700],
+    marker = 7, 
+    label = '256',
+    )
+ax.set_ylabel('Real Axis')
+ax.set_ylabel('Imaginary Axis')
+fig.suptitle(r'Axial Wavenumer $\gamma$')
+plt.savefig('tex-outputs/KousenT2_gam_nonconv_scatter_4thOrderApprox.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+plt.scatter(
+    gam_non_acc_data_T45['Re{gam/ak}'].iloc[1:700],
+    gam_non_acc_data_T45['Im{gam/ak}'].iloc[1:700],
+    marker = 7, 
+    )
+ax.set_xlabel('Real Axis')
+ax.set_ylabel('Imaginary Axis')
+fig.suptitle(r'Axial Wavenumer $\gamma$')
+plt.savefig('tex-outputs/KousenT3_gam_nonconv_scatter_4thOrderApprox.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+
+fig, ax = plt.subplots(
+        nrows=1,
+        ncols=1,
+        sharex=True,
+        figsize=set_size(width),
+        )
+plt.scatter(
+    gam_non_acc_data_T46['Re{gam/ak}'].iloc[1:700],
+    gam_non_acc_data_T46['Im{gam/ak}'].iloc[1:700],
+    marker = 7, 
+    )
+ax.set_xlabel('Real Axis')
+ax.set_ylabel('Imaginary Axis')
+fig.suptitle(r'Axial Wavenumer $\gamma$')
+plt.savefig('tex-outputs/KousenT3_gam_nonconv_scatter_4thOrderApprox.pdf',
+            format='pdf',
+            bbox_inches='tight')
+
+
 
 plt.show()
 # sys.exit()

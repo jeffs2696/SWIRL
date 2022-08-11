@@ -121,6 +121,7 @@ OBJECTS  =                     \
 	kapsubModule.o			   \
 	rmachModule.o 			   \
 	smachAndSndspdModule.o     \
+	trapezoidalRuleModule.o    \
     machoutModule.o 		   \
 	fdgridModule.o 			   \
 	outputModule.o 			   \
@@ -260,6 +261,7 @@ main.o: FortranFiles/main.f90        \
 	FortranFiles/machoutModule.o  \
 	FortranFiles/rmachModule.o    \
 	FortranFiles/smachAndSndspdModule.o \
+	FortranFiles/trapezoidalRuleModule.o \
 	FortranFiles/FindResidualVectorModule.o \
 	FortranFiles/SourceTermModule.o  \
 	FortranFiles/L2NormModule.o         \
@@ -309,7 +311,11 @@ FortranFiles/rmachModule.o:  FortranFiles/rmachModule.f90
 FortranFiles/smachModule.o:  FortranFiles/smachModule.f90 
 	@$(F90) $(F90FLAGS) FortranFiles/smachModule.f90
 
-FortranFiles/smachAndSndspdModule.o:  FortranFiles/smachAndSndspdModule.f90 
+FortranFiles/trapezoidalRuleModule.o: FortranFiles/trapezoidalRuleModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/trapezoidalRuleModule.f90
+
+FortranFiles/smachAndSndspdModule.o:  FortranFiles/smachAndSndspdModule.f90 \
+	FortranFiles/trapezoidalRuleModule.o
 	@$(F90) $(F90FLAGS) FortranFiles/smachAndSndspdModule.f90
 
 FortranFiles/sndspdModule.o:  FortranFiles/sndspdModule.f90
