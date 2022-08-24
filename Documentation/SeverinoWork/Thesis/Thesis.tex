@@ -27,6 +27,20 @@
 \usepgfplotslibrary{groupplots,dateplot}
 \usetikzlibrary{patterns,shapes.arrows}
 \pgfplotsset{compat=newest}
+\usepackage[]{hyperref}
+% \hypersetup{
+%     pdftitle={V_and_V_Method_for_Acs_Mode_Prediction_Code_MS_Thesis.pdf},
+%     pdfauthor={Jeffrey Severino},
+%     pdfsubject={Turbomachinery Noise},
+%     pdfkeywords={Aeroacoustics, Acoustics, Aerodynamics},
+%     bookmarksnumbered=true,     
+%     bookmarksopen=true,         
+%     bookmarksopenlevel=1,       
+%     colorlinks=true,            
+%     pdfstartview=Fit,           
+%     pdfpagemode=UseOutlines,    % this is the option you were lookin for
+%     pdfpagelayout=TwoPageRight
+% }
 \begin{document} %---> %---> %---> %---> DO NOT ALTER THIS COMMAND
 
 %--------+----------------------------------------------------------+
@@ -296,10 +310,10 @@ their endevours.
     \emblem{$s'$}{perturbation entropy}
     \emblem{$t$}{time}
     \emblem{$\vec{V}$}{mean flow velocity vector}
-    \emblem{$V$}{mean flow velocity}
+    \emblem{$v$}{mean flow velocity}
     \emblem{$v'$}{perturbation flow velocity}
-    \emblem{$V_x$}{axial component of mean flow velocity}
-    \emblem{$V_{\theta}$}{tangential component of mean flow velocity}
+    \emblem{$v_x$}{axial component of mean flow velocity}
+    \emblem{$v_{\theta}$}{tangential component of mean flow velocity}
     \emblem{$v_r'$}{axial component of perturbation velocity}
     \emblem{$v_x'$}{axial component of perturbation velocity}
     \emblem{$v_{\theta}'$}{tangential component of perturbation flow velocity}
@@ -455,15 +469,29 @@ their endevours.
 \input{Chapter-2-Literature-Review/Ch-2-main-body}
 % \input{Chapter-2-Literature-Review/Ch-2-golubev-atassi-work}
 \input{Chapter-2-Literature-Review/Ch-2-conclusion}
-\chapter{Chapter 3: Methods}
+\chapter{Chapter 3: Theoretical Framework and Methods}
 
-\section{Aerodynamic Models}
-\subsection{Steady Models}
+\section{Introduction}
+This chapter will outline the steady and unsteady aerodynamic
+models used for this study. The MMS procedure as it is used in this study will 
+be described. The summation method used to generate symbolic expression will 
+be breifly described. This chapter will also present the use of fairing functions 
+to impose the equivallent boundary conditions used in the numerical approximation.
+The procedure for calculating the approximated rate of convergence for a system
+of equations is also presented.
+
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model}
-\input{Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes}
 \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
-\subsection{Unsteady Models}
-\input{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations}
+
+
+\section{Unsteady Flow: Aerodynamic Model}
+\section{Non-dimensionalization}
+
+% \input{Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes}
+% \include{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
+
+% \subsection{Unsteady Models}
+% \input{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations}
 \chapter{Chapter 4: Numerical Models}
 \section{Numerical Integration}
 \input{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction}
@@ -648,14 +676,14 @@ Annulus, Shear Flow without Liner (Table 4.5)
 %        +----------------------------------------------------------+
 \bibliography{references}
 \bibliographystyle{unsrt}
-% \appendix
-% \chapter{Theory Appendix}
+\appendix
+\chapter{Theory Appendix}
 
-%  \chapter{Chapter 3 Appendix}
-% \include{Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical}
-%  \include{Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation}
-%  \include{Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships}
-%  \include{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations_appendix}
+ \chapter{Chapter 3 Appendix}
+\include{Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical}
+ \include{Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation}
+ \include{Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships}
+ \include{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations_appendix}
 
 %--------+----------------------------------------------------------+
 %        |  \end{document}                              (REQUIRED)  |

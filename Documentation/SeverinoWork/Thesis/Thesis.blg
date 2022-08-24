@@ -8,6 +8,10 @@ A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Int
 A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
 A level-1 auxiliary file: Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy.aux
 The style file: unsrt.bst
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/divergence-in-cylindrical.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/speed_of_sound_derivation.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/isentropic_relationships.aux
+A level-1 auxiliary file: Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations_appendix.aux
 Database file #1: references.bib
 Warning--entry type for "FAAPolicy" isn't style-file defined
 --line 1 of file references.bib
@@ -21,7 +25,6 @@ Warning--entry type for "Ingraham2015" isn't style-file defined
 --line 433 of file references.bib
 Warning--entry type for "Ingraham2010" isn't style-file defined
 --line 437 of file references.bib
-Warning--I didn't find a database entry for "wolphram:bessel"
 Warning--empty author and editor in icao2020
 Warning--empty publisher in icao2020
 Warning--empty journal in KERREBROCK1974
@@ -31,7 +34,7 @@ Warning--empty author in MESref
 Warning--empty booktitle in Hixon2010
 You've used 36 entries,
             1791 wiz_defined-function locations,
-            690 strings with 9395 characters,
+            693 strings with 9649 characters,
 and the built_in function-call counts, 7189 in all, are:
 = -- 639
 > -- 228
@@ -70,4 +73,4 @@ warning$ -- 7
 while$ -- 61
 width$ -- 38
 write$ -- 364
-(There were 14 warnings)
+(There were 13 warnings)

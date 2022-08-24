@@ -1,0 +1,73 @@
+\BOOKMARK [0][-]{Doc-Start}{Abstract}{}% 1
+\BOOKMARK [0][-]{chapter*.1}{Acknowledgments}{}% 2
+\BOOKMARK [0][-]{chapter*.2}{Contents}{}% 3
+\BOOKMARK [0][-]{chapter*.3}{List of Tables}{}% 4
+\BOOKMARK [0][-]{chapter*.4}{List of Figures}{}% 5
+\BOOKMARK [0][-]{chapter*.5}{List of Symbols}{}% 6
+\BOOKMARK [0][-]{chapter*.6}{List of Abbreviations}{}% 7
+\BOOKMARK [0][-]{chapter*.7}{Preface}{}% 8
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 9
+\BOOKMARK [1][-]{section.1.1}{Overview}{chapter.1}% 10
+\BOOKMARK [0][-]{chapter.2}{Chapter 2: Literature Review}{}% 11
+\BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.1.1}{The problem to be addressed and its significance}{section.2.1}% 13
+\BOOKMARK [2][-]{subsection.2.1.2}{Establish reasoning - i.e. point - of - view for reviewing the literature}{section.2.1}% 14
+\BOOKMARK [2][-]{subsection.2.1.3}{Explain the order/sequence of the review}{section.2.1}% 15
+\BOOKMARK [2][-]{subsection.2.1.4}{The theoretical foundation of conceptual framework}{section.2.1}% 16
+\BOOKMARK [1][-]{section.2.2}{Review of the assessment of the numerical techniques}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.2.1}{The research questions, hypotheses, foreshadowed problems, or conjectures}{section.2.2}% 18
+\BOOKMARK [2][-]{subsection.2.2.2}{Calculation of Observed Order-of-Accuracy}{section.2.2}% 19
+\BOOKMARK [1][-]{section.2.3}{Conclusion}{chapter.2}% 20
+\BOOKMARK [0][-]{chapter.3}{Chapter 3: Theoretical Framework and Methods}{}% 21
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.2}{Steady Flow Aerodynamic Model}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.2.1}{Compressible Euler Equations}{section.3.2}% 24
+\BOOKMARK [2][-]{subsection.3.2.2}{Nonuniformities from swirling mean flow}{section.3.2}% 25
+\BOOKMARK [1][-]{section.3.3}{Unsteady Flow: Aerodynamic Model}{chapter.3}% 26
+\BOOKMARK [1][-]{section.3.4}{Non-dimensionalization}{chapter.3}% 27
+\BOOKMARK [0][-]{chapter.4}{Chapter 4: Numerical Models}{}% 28
+\BOOKMARK [1][-]{section.4.1}{Numerical Integration}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.2}{Introduction}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.3}{Methods}{chapter.4}% 31
+\BOOKMARK [2][-]{subsection.4.3.1}{Theory}{section.4.3}% 32
+\BOOKMARK [2][-]{subsection.4.3.2}{Procedure}{section.4.3}% 33
+\BOOKMARK [2][-]{subsection.4.3.3}{Tanh Summaion Formulation}{section.4.3}% 34
+\BOOKMARK [2][-]{subsection.4.3.4}{Calculation of Observed Order-of-Accuracy}{section.4.3}% 35
+\BOOKMARK [1][-]{section.4.4}{Fairing Functions}{chapter.4}% 36
+\BOOKMARK [1][-]{section.4.5}{Setting Boundary Condition Values Using a Fairing Function}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.5.1}{Using \040as a scaling parameter}{section.4.5}% 38
+\BOOKMARK [2][-]{subsection.4.5.2}{Minimum Boundary Fairing Function}{section.4.5}% 39
+\BOOKMARK [2][-]{subsection.4.5.3}{Max boundary polynomial}{section.4.5}% 40
+\BOOKMARK [2][-]{subsection.4.5.4}{Corrected function}{section.4.5}% 41
+\BOOKMARK [2][-]{subsection.4.5.5}{Symbolic Sanity Checks}{section.4.5}% 42
+\BOOKMARK [2][-]{subsection.4.5.6}{Min boundary derivative polynomial}{section.4.5}% 43
+\BOOKMARK [2][-]{subsection.4.5.7}{Polynomial function, max boundary derivative}{section.4.5}% 44
+\BOOKMARK [2][-]{subsection.4.5.8}{Putting it together}{section.4.5}% 45
+\BOOKMARK [0][-]{chapter.5}{Results and Discusssion}{}% 46
+\BOOKMARK [1][-]{section.5.1}{Verification}{chapter.5}% 47
+\BOOKMARK [2][-]{subsection.5.1.1}{Introduction}{section.5.1}% 48
+\BOOKMARK [2][-]{subsection.5.1.2}{MMS, Solutions}{section.5.1}% 49
+\BOOKMARK [3][-]{subsubsection.5.1.2.1}{Test Case 1}{subsection.5.1.2}% 50
+\BOOKMARK [1][-]{section.5.2}{Sheared Flow Results}{chapter.5}% 51
+\BOOKMARK [1][-]{section.5.3}{Sheared Flow Results}{chapter.5}% 52
+\BOOKMARK [1][-]{section.5.4}{Sheared Flow Results}{chapter.5}% 53
+\BOOKMARK [1][-]{section.5.5}{Validation}{chapter.5}% 54
+\BOOKMARK [2][-]{subsection.5.5.1}{Comparison to Kousen}{section.5.5}% 55
+\BOOKMARK [3][-]{subsubsection.5.5.1.1}{Test Case 1 ,Cylinder, Uniform Flow with Liner}{subsection.5.5.1}% 56
+\BOOKMARK [3][-]{subsubsection.5.5.1.2}{Test Case 2}{subsection.5.5.1}% 57
+\BOOKMARK [3][-]{subsubsection.5.5.1.3}{Test Case 3}{subsection.5.5.1}% 58
+\BOOKMARK [3][-]{subsubsection.5.5.1.4}{Test Case 4}{subsection.5.5.1}% 59
+\BOOKMARK [0][-]{chapter*.9}{References}{}% 60
+\BOOKMARK [0][-]{appendix.A}{Theory Appendix}{}% 61
+\BOOKMARK [0][-]{appendix.B}{Chapter 3 Appendix}{}% 62
+\BOOKMARK [1][-]{section.B.1}{Divergence operations in new coordinate systems}{appendix.B}% 63
+\BOOKMARK [1][-]{section.B.2}{Appendix A: Speed of Sound}{appendix.B}% 64
+\BOOKMARK [1][-]{section.B.3}{Appendix B: Isentropic Waves}{appendix.B}% 65
+\BOOKMARK [2][-]{subsection.B.3.1}{Linearizing the governing equations}{section.B.3}% 66
+\BOOKMARK [3][-]{subsubsection.B.3.1.1}{Linearizing Conservation of Mass}{subsection.B.3.1}% 67
+\BOOKMARK [3][-]{subsubsection.B.3.1.2}{Linearizing the Conservation of Momentum in the r direction}{subsection.B.3.1}% 68
+\BOOKMARK [3][-]{subsubsection.B.3.1.3}{Linearizing the Conservation of Momentum in the \040direction}{subsection.B.3.1}% 69
+\BOOKMARK [3][-]{subsubsection.B.3.1.4}{Linearizing the Conservation of Momentum in the x direction}{subsection.B.3.1}% 70
+\BOOKMARK [3][-]{subsubsection.B.3.1.5}{Linearizing the Energy Equation}{subsection.B.3.1}% 71
+\BOOKMARK [1][-]{section.B.4}{Substituting Pertubation Variables}{appendix.B}% 72
+\BOOKMARK [1][-]{section.B.5}{Non-Dimensionalization}{appendix.B}% 73

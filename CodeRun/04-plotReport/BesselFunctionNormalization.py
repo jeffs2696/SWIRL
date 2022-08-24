@@ -127,15 +127,16 @@ tex_fonts = {
 mpl.rcParams.update(tex_fonts)
 
 # Input Variables for test case in CodeRun directory
-M_x     = 0.3
-k       = 10
+M_x     = 0
+k       = 5 
 
 # Compute zeros of integer-order Bessel function derivatives Jn'.
 m_order = 2 #azimuthal mode
 rad_order = 2 # subtracted by one later to keep indicies inline
 
-k_x_convection = k / M_x
-k_x_cutoff = (k*M_x)/(M_x**2-1)
+if M_x > 0:
+    k_x_convection = k / M_x
+    k_x_cutoff = (k*M_x)/(M_x**2-1)
 
 
 num_of_zeros = 10 # each zero corresponds to radial modes
@@ -149,7 +150,7 @@ x       = np.linspace(x_min,x_max,x_steps)
 
 # Bessel Function Calculation
 Jv_p_zero = scip.special.jnp_zeros(n  = m_order, nt = num_of_zeros)
-Jv        = scip.special.jv( m_order, x)
+Jv        = scip.special.jv( m_order, Jv_p_zero[rad_order]*x)
 Jv_at_Jv_p_zero        = scip.special.jv( m_order, Jv_p_zero)
 # print(Jv_p_zero)
 # print(Jv_at_Jv_p_zero)
@@ -167,6 +168,33 @@ plt.plot(Jv_p_zero[1],0,marker='.')
 plt.ylabel('$$ J_{modeorder:.0f}(k_r r)$$'.format(modeorder = m_order))
 plt.xlabel('$$ k_r r$$')
 plt.title('Bessel function of the first kind of order ' + str(m_order))
+
+plt.annotate(
+        '$J_{m,\mu}\'(k_r r_{min})$',
+        xy=(Jv_p_zero[0],0),
+        xycoords='data',
+        xytext=(Jv_p_zero[0]+1 ,max(Jv)/1.2),
+        textcoords='data',
+        arrowprops=dict(
+            arrowstyle="->",
+            facecolor = 'black',
+            )
+        )
+
+plt.annotate(
+        '$J_{m,\mu}\'(k_r r_{max})$',
+        xy=(Jv_p_zero[1],0), xycoords='data',
+        xytext=(Jv_p_zero[1] ,0.3), textcoords='data',
+        arrowprops=dict(
+            arrowstyle="->",
+            facecolor = 'black',
+            )
+        )
+
+plt.savefig(
+    fname      ='tex-outputs/bessel_analytical_test_case.pdf',
+    format     ='pdf',
+    bbox_inches='tight')
 
 k_x = []
 k_x_down = []
@@ -204,7 +232,7 @@ for i,j in enumerate(Jv_p_zero):
     k_x_real_minus = k_x[1][i].real
     k_x_imag_plus = k_x[1][i].imag
     k_x_imag_minus = k_x[0][i].imag
-    plt.scatter(k_x_real_plus,k_x_imag_plus, marker ='.' , c='red')
+    plt.scatter(k_x_real_plus,k_x_imag_plus, marker ='.' , c='black')
     plt.scatter(k_x_real_minus,k_x_imag_minus, marker ='.' , c='black')
     # print(k_x_imag_plus)
     if k_x_imag_plus > 0 or k_x_imag_plus < 0:
@@ -212,8 +240,22 @@ for i,j in enumerate(Jv_p_zero):
                 xy=(k_x_real_plus-k_x_real_plus/4,k_x_imag_plus+k_x_imag_plus/7),
                 xycoords='data',
                 fontsize='8')
+        ax.annotate(r'$k^-_{{{M},{N}}}$'.format(M = m_order,N = i+1),
+                xy=(k_x_real_minus-k_x_real_minus/4,k_x_imag_minus+k_x_imag_minus/7),
+                xycoords='data',
+                fontsize='8')
+    else:
+        ax.annotate(r'$k^+_{{{M},{N}}}$'.format(M = m_order,N = i+1),
+                xy=(k_x_real_plus,k_x_imag_plus+k_x_imag_plus/4),
+                xycoords='data',
+                fontsize='8')
+        ax.annotate(r'$k^-_{{{M},{N}}}$'.format(M = m_order,N = i+1),
+                xy=(k_x_real_minus,k_x_imag_minus+k_x_imag_minus/4),
+                xycoords='data',
+                fontsize='8')
 
-plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=1)
+if M_x > 0:        
+    plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=1)
 # plt.show()
 # sys.exit()
 # plt.scatter(k_x[0][:].real,k_x[0][:].imag,label='Upstream',marker='.')
@@ -223,17 +265,24 @@ plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=1)
 plt.legend()
 plt.xlabel(r'\textit{Real}$(k_x)$')
 plt.ylabel(r'\textit{Imaginary}$(k_x)$')
-plt.show()
+# plt.show()
+plt.savefig(
+    fname      ='tex-outputs/axial_wavenumber_analytical_test_case.pdf',
+    format     ='pdf',
+    bbox_inches='tight')
+
 # print(Jv)
 # print(x)
-# x = np.linspace(0.25,1,100)
+x = np.linspace(0,1,100)
 # print(k_x_up)
 
 print(k_x[0][rad_order-1])
 axial_mode =np.exp(-1j*k_x[0][rad_order-1]*x) 
 
-radial_mode = (Jv_at_Jv_p_zero[rad_order]*x)*axial_mode 
-# print(Jv_at_Jv_p_zero)
+radial_mode = (scip.special.jv( m_order, Jv_p_zero[rad_order]*x))*axial_mode 
+
+print(Jv_p_zero)
+print(Jv_at_Jv_p_zero)
 fig = plt.figure()
 plt.plot(x,radial_mode,label='Unnormalized')
 plt.title(r'$$p_{{{M},{N}}} = J_{{{M}}}(\alpha_{{{M},{N}}}r) e^{{i k_{{x{M},{N}}}r}}$$'.format(M = m_order,N = rad_order))
@@ -248,15 +297,21 @@ print('Numerical Integral',np.trapz(np.conj(radial_mode_normalized)*radial_mode_
 
 
 
-N_mn = np.sqrt(2)/(Jv_at_Jv_p_zero[rad_order]*np.sqrt(1 - m_order**2/Jv_p_zero[rad_order]**2))
+N_mn = np.sqrt(2)/(Jv_at_Jv_p_zero[rad_order-1]*np.sqrt(1 - m_order**2/Jv_p_zero[rad_order-1]**2))
 # N_mn = np.sqrt(2)
-U_mn = N_mn*(Jv_at_Jv_p_zero[rad_order]*x)*axial_mode
+U_mn = N_mn*(Jv_at_Jv_p_zero[rad_order-2]*x)*axial_mode
 plt.plot(x,U_mn,label='Normalized - Analytic')
 
-# print(np.trapz(np.conj(N_mn)*N_mn*(Jv_at_Jv_p_zero[rad_order-1]*x)**2*x,x))
-print('Analytic Integral' ,np.trapz(N_mn**2*(Jv_at_Jv_p_zero[rad_order]*x)**2*x,x))
-
+plt.ylabel(r'Pressure')
 plt.legend()
+plt.savefig(
+    fname      ='tex-outputs/Normalized_Mode_test_case.pdf',
+    format     ='pdf',
+    bbox_inches='tight')
+
+# print(np.trapz(np.conj(N_mn)*N_mn*(Jv_at_Jv_p_zero[rad_order-1]*x)**2*x,x))
+print('Analytic Integral' ,np.trapz(np.conj(N_mn)*(Jv_at_Jv_p_zero[rad_order]*x)**2*x,x))
+
 plt.show()
 #x_sym = sympy.Symbol('x')
 

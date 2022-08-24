@@ -1,78 +1,95 @@
-\section{Applying model to various flows}
-The LEE for flows ith axial sheared flow, solid body and free vortex swirl
-were reviewed by \cite{kousen1995eigenmode}, and most recently studied by \cite{Maldonado2016}.
-\subsection{Axial Shear Flow}
-In \cite{kousen1995eigenmode}, axial sheared flows through a constant area duct was 
-investigated.The only effect on the velocity gradient occurs along the x axis. 
-All other primitive variables (pressure and density which is $\propto$ speed of
-sound) are constant. As a result, the only changes that occur are in the x
-direction. This implies that $\partial / \partial \theta = 0$. 
-For the conservation of mass,
+% \section{Applying model to various flows}
+% The LEE for flows ith axial sheared flow, solid body and free vortex swirl
+% were reviewed by \cite{kousen1995eigenmode}, and most recently studied by \cite{Maldonado2016}.
+\subsection{Nonuniformities from swirling mean flow}
 
-\[ \nabla (\vec{V}\bar{\rho}) =  \left( 
-\underbrace{
-	\cancel{
-		\frac{\partial (\bar{\rho}v_r)	}{\partial r}
-	}
-}_{v_r = 0} +
-\underbrace{\cancel{\frac{1}{r}	\frac{\partial \bar{\rho}v_{\theta}}{\partial \theta}}}_{\frac{\partial }{\partial \theta}} +
-\frac{\partial \bar{\rho}v_x}{\partial x}
-\right) = \frac{\partial \bar{\rho}v_x}{\partial x}\] 
+% \[P = \int_{\}^{1} \frac{\bar{\rho} V_{\theta}^2}{\tilde{r}} d\tilde{r}\] 
+% % \subsection{Axial Shear Flow}
+% % In \cite{kousen1995eigenmode}, axial sheared flows through a constant area duct was 
+% % investigated.
+% Axially sheared flows are different than axial uniform flow in that a velocity gradient is
+% present along the x axis. 
+% All other primitive variables (pressure and density which is $\propto$ speed of
+% sound) are constant. As a result, the only changes that occur are in the x
+% direction. This implies that $\partial / \partial \theta = 0$. 
+% For the conservation of mass,
 
-The conservation of momentum in the radial direction becomes,
-% \[(\vec{V}\cdot \nabla) \vec{V} =
-% \cancel{v_r \frac{\partial v_r}{\partial r}} +
-% \cancel{\frac{v_{\theta}  }{r}
-% 	\frac{\partial v_r}{\partial \theta}}- \frac{v_{\theta}^2}{r}+ 
-% \cancel{v_x \frac{\partial v_r}{\partial x} }
-% = -\frac{1}{\rho} \frac{\partial P}{\partial r}
-% \]
+% \[ \nabla (\vec{V}\bar{\rho}) =  \left( 
+% \underbrace{
+% 	\cancel{
+% 		\frac{\partial (\bar{\rho}v_r)	}{\partial r}
+% 	}
+% }_{v_r = 0} +
+% \underbrace{\cancel{\frac{1}{r}	\frac{\partial \bar{\rho}v_{\theta}}{\partial \theta}}}_{\frac{\partial }{\partial \theta}} +
+% \frac{\partial \bar{\rho}v_x}{\partial x}
+% \right) = \frac{\partial \bar{\rho}v_x}{\partial x}\] 
+
+% The conservation of momentum in the radial direction becomes,
+% % \[(\vec{V}\cdot \nabla) \vec{V} =
+% % \cancel{v_r \frac{\partial v_r}{\partial r}} +
+% % \cancel{\frac{v_{\theta}  }{r}
+% % 	\frac{\partial v_r}{\partial \theta}}- \frac{v_{\theta}^2}{r}+ 
+% % \cancel{v_x \frac{\partial v_r}{\partial x} }
+% % = -\frac{1}{\rho} \frac{\partial P}{\partial r}
+% % \]
+% % \[
+% % \frac{v_{\theta}^2}{r}
+% % = \frac{1}{\rho} \frac{\partial P}{\partial r}
+% % \] 
+
 % \[
-% \frac{v_{\theta}^2}{r}
-% = \frac{1}{\rho} \frac{\partial P}{\partial r}
-% \] 
+% \frac{{\rho} v_{\theta}^2}{r} 
+% =\frac{\partial P}{\partial r}
+% \]
+% For the tangential direction,
+% \[(\vec{V}\cdot \nabla) \vec{V} = \cancel{v_r \frac{\partial v_{\theta}}{\partial r} +
+% 	\frac{v_{\theta}}{r}
+% 	\frac{\partial v_{\theta}}{\partial \theta} +
+% 	\frac{v_r v_{\theta}}{r}}+ 
+% v_x \frac{\partial v_{\theta}}{\partial x} 
+% = \cancel{-\frac{1}{\rho r} \frac{\partial P}{\partial \theta}}\]
+% Dividing $v_x$ to the other side,
+% \[ \frac{\partial v_{\theta}}{\partial x}  = 0\]
 
-\[
-\frac{{\rho} v_{\theta}^2}{r} 
-=\frac{\partial P}{\partial r}
-\]
-For the tangential direction,
-\[(\vec{V}\cdot \nabla) \vec{V} = \cancel{v_r \frac{\partial v_{\theta}}{\partial r} +
-	\frac{v_{\theta}}{r}
-	\frac{\partial v_{\theta}}{\partial \theta} +
-	\frac{v_r v_{\theta}}{r}}+ 
-v_x \frac{\partial v_{\theta}}{\partial x} 
-= \cancel{-\frac{1}{\rho r} \frac{\partial P}{\partial \theta}}\]
-Dividing $v_x$ to the other side,
-\[ \frac{\partial v_{\theta}}{\partial x}  = 0\]
+% Similarly for the axial direction,
 
-Similarly for the axial direction,
-
-\[ \frac{\partial v_x}{\partial x} = 0 \]
-Since the flow is isentropic , $\nabla S = 0$ the relation, $A^2= \frac{\nabla \bar{P}}{ \nabla \bar{\rho}}$ can be
-used to account for the change in speed of sound with radius as the mean
-flow contains a tangential (swirling) component.
+% \[ \frac{\partial v_x}{\partial x} = 0 \]
+% Since the flow is isentropic , $\nabla S = 0$ the relation, $A^2= \frac{\nabla \bar{P}}{ \nabla \bar{\rho}}$ can be
+% used to account for the change in speed of sound with radius as the mean
+% flow contains a tangential (swirling) component.
 
 
-\section{Accounting for solid body swirl}
+% \section{Accounting for solid body swirl}
 
-If the flow contains a swirling component, then the primitive variables are 
-nonuniform through the flow, and mean flow assumptions are not valid. 
-To account to this, we integrate the momentum equation in the radial direction 
-with respect to the radius. 
+If the mean flow contains a swirling component, i.e. a velocity vector in the 
+tangential direction, the mean quantities, pressure , density are non-uniform, 
+thus also changing the speed of sound. By integrating the radial momentum
+equation, an expression for the speed of sound was established to account for 
+the resulting nonuniformities due to rotations in the flow. 
 
-Equation (2.5) in \cite{kousen1995eigenmode} is 
 
-\[P = \int_{\tilde{r}}^{1} \frac{\bar{\rho} V_{\theta}^2}{\tilde{r}} d\tilde{r}\] 
+% If the flow contains a swirling component, then the primitive variables are 
+% nonuniform through the flow, and mean flow assumptions are not valid. 
+% To account to this, we integrate the momentum equation in the radial direction 
+% with respect to the radius. 
 
-where $\tilde{r}$ is the radius dimensional radius normalized by the tip diameter $r_t = r_{max}$
+
+\begin{equation}
+    p = \int_{r_{min}}^{r_{max}} \frac{\rho v_{\theta}^2}{r} dr 
+    \label{eqn:radialmomentum_integrated}
+\end{equation}
+
+where $r_{min}$ and $r_{max}$ are the bounds of the radius. Since the flow
+is isentropic, the pressure is related to the speed of sound through $\nabla p =
+A^2 \nabla \rho$; which is used to compute $\rho$. With the relationship 
+$A^2 = \kappa p/\rho$, the speed of sound is found to be,
 
 % The dimensional form is,
 % \[
 % \frac{\bar{\rho} v_{\theta}^2}{r} 
 % =\frac{\partial P}{\partial r}
 % \]
-By appplying separation of variables, the expression for $P$ can be found,
+% By appplying separation of variables, the expression for $P$ can be found,
 % \[
 % \int_{r}^{r_{max}} \frac{\bar{\rho} v_{\theta}^2}{r}\partial r 
 % =-\int_{P(r)}^{P(r_{max})}\partial P
@@ -92,9 +109,9 @@ By appplying separation of variables, the expression for $P$ can be found,
 
 % \[\sigma = \frac{r_{max}}{r_{min}}\]
 
-The radial derivative of the speed of sound squared is then used to find the 
-speed of sound in the cases where there is mean tangetial component regardless
-of there being axial flow,
+% The radial derivative of the speed of sound squared is then used to find the 
+% speed of sound in the cases where there is mean tangetial component regardless
+% of there being axial flow,
 
 % \[\frac{\partial A^2}{\partial r } = \frac{\partial}{\partial r} \left( \frac{\gamma P}{\rho} \right)\]
 % Using the quotient rule, we can extract the definition of the speed of sound.
@@ -125,7 +142,7 @@ of there being axial flow,
 % &= -2ln(\tilde{A})\\
 % \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
 % \end{align*}
-(See appendix for full derivation)
+% (See appendix for full derivation)
 \begin{align*}
 \tilde{A}(\tilde{r}) &= exp\left[\left(\frac{1 - \gamma}{2}\right)\int_{\tilde{r}}^{1}\frac{M_{\theta}}{\tilde{r}}{\partial \tilde{r}}\right]	
 \end{align*}

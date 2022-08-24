@@ -1,31 +1,52 @@
-\section{Introduction}
 
-This chapter will outline the steady and unsteady aerodynamic
-models used for this study. The MMS procedure as it is used in this study will 
-be described. The summation method used to generate symbolic expression will 
-be breifly described. This chapter will also present the use of fairing functions 
-to impose the equivallent boundary conditions used in the numerical approximation.
-The procedure for calculating the approximated rate of convergence for a system
-of equations is also presented.
+\section{Steady Flow Aerodynamic Model}
+% \section{Modal Propagation Theroetical Background}
+\subsection{Compressible Euler Equations}
 
-\section{Modal Propagation Theroetical Background}
-\subsection{Aerodynamic Model}
+For an ideal polytropic gas with density, $\rho$, velocity, $\vec{V}$, and 
+pressure, $p$ , the Euler equations are,
+\begin{align}
+    \frac{D\rho}{Dt} = - \rho \nabla \cdot \vec{V} 
+    \label{eqn:CompressibleConservationOfMass} \\
+    \frac{D\vec{V}}{Dt} = - \frac{\nabla p}{\rho} + \vec{g} 
+    \label{eqn:CompressibleConservationOfMomentum} \\
+    \frac{Dp}{Dt} = - \gamma p \nabla \cdot \vec{V} 
+    \label{eqn:CompressibleConservationOfEnergy} \\
+\end{align}
+where Equations (\ref{eqn:CompressibleConservationOfMass},
+\ref{eqn:CompressibleConservationOfMomentum},
+\ref{eqn:CompressibleConservationOfEnergy}) are the conservation of mass, 
+momentum, and energy equations respectively. 
 
-The governing equations for an isentropic ideal gas are the conservation of 
-mass, momentum and energy respectively along with the the constitutive relation 
-for the speed of sound. For a cylindrical duct, the coordiate system consists
-of a radial, tangential and axial components.  
 
-% The following assumptions are utlized to simplify the model 
+If the flow is assumed to be asymmetric, then the radial velocity component is 
+zero. With this considered, the velocity vector ,$\vec{V}$ in cylindrical coordinates 
+become,
+\begin{align}
+    \vec{V}(r,\theta,x) &= v_x(r) \hat{e}_x + v_{\theta} (r) \hat{e}_{\theta} 
+    \label{eqn:VelocityVector}
+\end{align}
+  
+where $\hat{e}_x$ and $\hat{e}_{\theta}$ are unit vectors for the axial and 
+tangential directions.The gradient operator ,$\nabla$ in cylindrical
+coordinates, is 
 
-% \begin{itemize}
-%     \item Steady flow does not fluctuate in time $\partial / \partial t = 0$
-% \end{itemize}
+\begin{align}
+	\vec{\nabla} 
+	&= \hat{e}_r \frac{\partial} {\partial r} + 
+	\frac{1}{r} \hat{e}_{\theta}   
+	\frac{\partial} {\partial \theta} + 
+	\frac{\partial }{\partial z} \hat{e}_z = 0
+    \label{eqn:NablaInCylindrical}
+\end{align}
 
-% \begin{equation}
-%     \vec{V} \bar{\rho} = 0
-%     \label{eqn:consOfMass}
-% \end{equation}
+
+Expanding Equations
+(
+\ref{eqn:CompressibleConservationOfMass},
+\ref{eqn:CompressibleConservationOfMomentum},
+\ref{eqn:CompressibleConservationOfEnergy}
+) with the corresponding cylindrical expressions become, 
 
 \begin{align}
 \frac{\partial \rho}{\partial t} + %Conservation of mass
@@ -75,42 +96,65 @@ v_x \frac{\partial p}{\partial \theta} +
 \frac{\partial v_x}{\partial x}
 \right) &= 0
 \end{align}
-The following assumptions to simplify the aerodynamic model for the steady mean
-flow case,
 
-\begin{itemize}
-    \item No flow in the radial direction. Consequentially, the flow is 
-        axisymmetric along the downstream direction.
-    \item No surface or body forces
-    \item Isentropic conditions 
-\end{itemize}
-
-\subsubsection{Steady Flow}
-For steady flow, the continuity, momentum and entropy equations are
+For a steady flow, ($\partial/\partial t = 0$) , the compressible flow equations
+can be further reduced to,
 
 \begin{align}
-    \nabla (\vec{V} \bar{\rho}) &=  0 \\
-(\vec{V}\cdot \nabla) \vec{V} &=  0\\
-\nabla S = 0
+    \nabla (\vec{V} \rho) &=  0 \\
+    (\vec{V}\cdot \nabla) \vec{V} &=  0\\
+    \nabla S &= 0
 \end{align}
-\[\]
 
-If the radial velocity is neglected, the velocity vector in cylindrical coordinates 
-become,
-\[\vec{V}(r,\theta,x) = V_x(r) \hat{e}_x + V_{\theta} (r) \hat{e}_{\theta} \] 
-where $\hat{e}_x$ and $\hat{e}_{\theta}$ are unit vectors for the axial and 
-tangential directions. The next section will present general mean flows that 
-follow the form of the velocity vector shown. 
+where $S$ represents the entropy in the mean flow.
 
+%\[\]
+% Neglecting gravity and expanding and how is e reLated to p\ldotW
+
+%The governing equations for an isentropic ideal gas are the conservation of 
+%mass, momentum and energy respectively along with the the constitutive relation 
+%for the speed of sound. For a cylindrical duct, the coordiate system consists
+%of a radial, tangential and axial components.  
+
+%% The following assumptions are utlized to simplify the model 
+
+%% \begin{itemize}
+%%     \item Steady flow does not fluctuate in time $\partial / \partial t = 0$
+%% \end{itemize}
+
+%% \begin{equation}
+%%     \vec{V} \bar{\rho} = 0
+%%     \label{eqn:consOfMass}
+%% \end{equation}
+
+%The following assumptions to simplify the aerodynamic model for the steady mean
+%flow case,
+
+%\begin{itemize}
+%    \item No flow in the radial direction. Consequentially, the flow is 
+%        axisymmetric along the downstream direction.
+%    \item No surface or body forces
+%    \item Isentropic conditions 
+%\end{itemize}
+
+%\subsubsection{Steady Flow}
+%For steady flow, the continuity, momentum and entropy equations are
+
+%\begin{align}
+%    \nabla (\vec{V} \bar{\rho}) &=  0 \\
+%(\vec{V}\cdot \nabla) \vec{V} &=  0\\
+%\nabla S = 0
+%\end{align}
+%\[\]
  
-%Starting with the radial momentum equation, 
-%\begin{align*}
-%\frac{\partial v_r}{\partial t} + 
-%v_r \frac{\partial v_r}{\partial r} +
-%\frac{v_{\theta}  }{r}
-%\frac{\partial v_r}{\partial \theta}- \frac{v_{\theta}^2}{r}+ 
-%v_x \frac{\partial v_r}{\partial x} 
-%&= -\frac{1}{\rho} \frac{\partial p}{\partial r} 
-%\end{align*}
-%See Appendix for speed of sound derivation
+%%Starting with the radial momentum equation, 
+%%\begin{align*}
+%%\frac{\partial v_r}{\partial t} + 
+%%v_r \frac{\partial v_r}{\partial r} +
+%%\frac{v_{\theta}  }{r}
+%%\frac{\partial v_r}{\partial \theta}- \frac{v_{\theta}^2}{r}+ 
+%%v_x \frac{\partial v_r}{\partial x} 
+%%&= -\frac{1}{\rho} \frac{\partial p}{\partial r} 
+%%\end{align*}
+%%See Appendix for speed of sound derivation
 
