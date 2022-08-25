@@ -218,7 +218,7 @@ ax.set(
         # xlim=(-40, 40), ylim=(-40, 40), zlim=(-100, 100),
         xlabel='X', ylabel='Y', zlabel='P')
 
-plt.show()
+# plt.show()
 
 # rotate the axes and update
 # for angle in range(0, 360):
@@ -226,25 +226,48 @@ plt.show()
 #     plt.draw()
 #     plt.pause(.01)
 # plt.show()
-# n = 1000
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
+points = 1000
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
 
-# Plot a helix along the x-axis
-# theta_max = 8 * np.pi
-# theta = np.linspace(0, theta_max, n)
-# x = theta*m_order+k_x_plus[0].real
+
+angle_min = 0 
+angle_max = 360*2 
+dangle = angle_max - angle_min
+n = dangle/720
+r = 1
+# pitch -distance from curve to curve
+c = 2*np.pi*m_order/abs(k_x_plus[0].real)
+# c =1# 2*np.pi*m_order/abs(k_x_plus[0].real)
+# print('n',n)
+u = np.linspace(0, r, endpoint=True, num=int(points * n))
+v = np.linspace(-np.deg2rad(angle_min), np.deg2rad(angle_max), endpoint=True, num=int(2 * points * n))
+u, v = np.meshgrid(u, v)
+
+x = u * np.cos(v)   # r*cos(theta)
+y = u * np.sin(v)   # r*cos(theta)
+z = c * v + u*np.arctan(m_order*v + k_x_plus[0].real*u) #pitch*theta + r*arctan(phase)
+# phase = m*theta + Re(k_x)*x
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+ax.plot_surface(z, x, y)#, alpha=1, edgecolors='w', zorder=0, color='black')
+ax.quiver(-6, 0, 0, 24, 0, 0, length=1, arrow_length_ratio=0.03, color='black', zorder=1)
+ax.text(19, -2, -2, "$\mathbf{z}$", fontsize=40, color='black', zorder=1)
+# ax._axis3don = False
+plt.show()
 # z =  np.sin(theta)
 # y =  np.cos(theta)
 # ax.plot(x, y, z, 'b', lw=2)
 
-# # An line through the centre of the helix
+# An line through the centre of the helix
 # ax.plot((-theta_max*0.2, theta_max * 1.2), (0,0), (0,0), color='k', lw=2)
-# # sin/cos components of the helix (e.g. electric and magnetic field
-# # components of a circularly-polarized electromagnetic wave
-# # ax.plot(x, y, 0, color='r', lw=1, alpha=0.5)
-# # ax.plot(x, [0]*n, z, color='m', lw=1, alpha=0.5)
+# sin/cos components of the helix (e.g. electric and magnetic field
+# components of a circularly-polarized electromagnetic wave
+# ax.plot(x, y, 0, color='r', lw=1, alpha=0.5)
+# ax.plot(x, [0]*n, z, color='m', lw=1, alpha=0.5)
 
-# # Remove axis planes, ticks and labels
+# Remove axis planes, ticks and labels
 # ax.set_axis_off()
 # plt.show()
