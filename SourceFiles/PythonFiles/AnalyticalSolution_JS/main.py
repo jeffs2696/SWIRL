@@ -155,6 +155,12 @@ plt.xlabel(r'\begin{center}\textit{Radius,}$(r)$\\*\textit{\small{' + txt + r'}}
 plt.legend()
 fig.set_size_inches(10, 8, forward=True)
 
+
+plt.savefig(
+    fname      ='figures/Radial_mode_analytical_test_case.pdf',
+    format     ='pdf',
+    bbox_inches='tight')
+
 # plt.show()
 # angle = 0
 # exponential_coefficient =np.exp(1j*k*t-1j*m_order*angle-1j*k_x_plus[rad_order-1]*x) 
@@ -200,6 +206,12 @@ X, Y = R*np.cos(P), R*np.sin(P)
 ax.plot_surface(X, Y, Z, cmap=plt.cm.YlGnBu_r)
 ax.view_init(30,90)
 
+
+plt.savefig(
+    fname      ='figures/Radial_mode_analytical_test_case_3d1.pdf',
+    format     ='pdf',
+    bbox_inches='tight')
+
 ax = plt.figure().add_subplot(projection='3d')
 # X, Y, Z = Axes3d.get_test_data(0.05)
 
@@ -217,6 +229,11 @@ ax.contourf(X, Y, Z, zdir='z', offset=(max(Z[0])+max(Z[0])/2),cmap =plt.cm.YlGnB
 ax.set(
         # xlim=(-40, 40), ylim=(-40, 40), zlim=(-100, 100),
         xlabel='X', ylabel='Y', zlabel='P')
+
+plt.savefig(
+    fname      ='figures/Radial_mode_analytical_test_case_3d2.pdf',
+    format     ='pdf',
+    bbox_inches='tight')
 
 # plt.show()
 
@@ -256,7 +273,12 @@ ax.plot_surface(z, x, y)#, alpha=1, edgecolors='w', zorder=0, color='black')
 ax.quiver(-6, 0, 0, 24, 0, 0, length=1, arrow_length_ratio=0.03, color='black', zorder=1)
 ax.text(19, -2, -2, "$\mathbf{z}$", fontsize=40, color='black', zorder=1)
 # ax._axis3don = False
-plt.show()
+plt.savefig(
+    fname      ='figures/helicoid_test_case_3d2.pdf',
+    format     ='pdf',
+    bbox_inches='tight')
+
+# plt.show()
 # z =  np.sin(theta)
 # y =  np.cos(theta)
 # ax.plot(x, y, z, 'b', lw=2)
