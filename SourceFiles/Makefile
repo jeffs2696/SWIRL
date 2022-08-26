@@ -55,21 +55,23 @@ F90FLAGS  =	\
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wsurprising -Warray-temporaries \
-			-Wextra #\
+			-Wextra \
+			-Wno-compare-reals \
+			-Wno-unused-parameter \
+			-Wno-unused-dummy-argument \
+			-Wno-unused-variable\
+			-Wno-array-temporaries \
+			-Wno-unused-function #\
+			-fdump-fortran-global \
 			-Werror \
-			-Wno-error=unused-function \
 			-Wno-error=unused-parameter \
 			-Wno-error=conversion-extra \
 			-Wno-error=conversion \
 			-Wno-error=compare-reals \
 			-Wno-error=character-truncation \
-			-Wno-error=unused-dummy-argument \
-			-Wno-error=unused-variable\
-			-Wno-error=array-temporaries \
 			-Wno-error=do-subscript -ffpe-trap=denormal,invalid,zero,overflow,underflow \
 
 # -Wconversion-extra \
@@ -229,10 +231,13 @@ all:  $(OBJECTS)
 			cat $@.log; \
 			rm -f $@.log; \
 			exit $$RESULT
-	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
+	@(mv $(EXE) $(EXECUTABLE_LOCATION)); 
+	@(mv $(OBJECTS) $(OBJ_FILES)); 
+	@(mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
-	@(spd-say 'great-job' );
-	# @(cd $(EXECUTABLE_LOCATION); (make plot ))
+	
+# @(spd-say 'great-job' ); 
+# @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:
 	cd PythonFiles/SymbolicManufacturedSolutions && make
@@ -272,7 +277,7 @@ main.o: FortranFiles/main.f90        \
 FortranFiles/analysisModule.o:  FortranFiles/analysisModule.f90 \
 	$(LAPACK_LOCATION)/zggev.o\
 	$(LAPACK_LOCATION)/f90_zggev.o 
-	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/analysisModule.f90
+	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/analysisModule.f90
 
 FortranFiles/boundaryModule.o:  FortranFiles/boundaryModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/boundaryModule.f90
@@ -293,7 +298,7 @@ FortranFiles/fdrivsModule.o:  FortranFiles/fdrivsModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/fdrivsModule.f90
 
 FortranFiles/egvModule.o: FortranFiles/egvModule.f90
-		$(F90) $(F90FLAGS)  FortranFiles/egvModule.f90
+		@$(F90) $(F90FLAGS)  FortranFiles/egvModule.f90
 
 FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
 							$(LAPACK_LOCATION)/zggev.o
@@ -346,7 +351,7 @@ FortranFiles/swirlClassObject.o: FortranFiles/swirlClassObject.f90
 
 $(BLAS_LOCATION)/dgemv.o: \
    $(BLAS_LOCATION)/dgemv.f
-	 (cd $(BLAS_LOCATION); \
+	 @(cd $(BLAS_LOCATION); \
          make dgemv.o "F77=$(F77)" "LINK=$(LINK)" "FFLAGS=$(F77FLAGS)" )
 
 #----------------------------------LAPACK------------------------------------------

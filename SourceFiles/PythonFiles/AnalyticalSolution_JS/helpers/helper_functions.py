@@ -1,6 +1,27 @@
 import numpy as np
 import cmath
 import scipy as scp
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+def set_plot_parameters():
+    plt.style.use('fivethirtyeight')
+    width = 345
+    tex_fonts = {
+            # Use LaTeX to write all text
+            "text.usetex": True,
+            "font.family": "serif",
+            # Use 10pt font in plots, to match 10pt font in document
+            "axes.labelsize": 10,
+            "font.size": 10,
+            # Make the legend/label fonts a little smaller
+            "legend.fontsize": 8,
+            "xtick.labelsize": 8,
+            "ytick.labelsize": 8
+            } 
+    mpl.rcParams.update(tex_fonts) 
+
+    return
 
 def axial_wavenumber_quadratic(k,M_x,Jv_p_zero):
     pm = np.array([1,-1])
@@ -18,8 +39,9 @@ def normalize_psi(psi, x):
 
     int_psi_square = np.trapz(abs(psi)*abs(np.conj(psi))*x, x)
 
-    A = np.sqrt(1/int_psi_square)
-    return A
+    normalization_constant = np.sqrt(1/int_psi_square)
+
+    return normalization_constant
 
 def set_size(width, fraction=2):
     """Set figure dimensions to avoid scaling in LaTeX.  

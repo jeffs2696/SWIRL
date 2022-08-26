@@ -369,6 +369,7 @@ CONTAINS
                 drm   = object%drm,   &
                 dd    = object%dl1    &
                 )
+
             IF (debugFlag) THEN
                 WRITE(0,*) 'Leaving rmach CALL'
             ELSE
@@ -457,8 +458,8 @@ CONTAINS
                 jobvl = jobvl, &
                 jobvr = jobvr, &
                 mm    = object%azimuthalMode,    &
-                ir    = ir,    &
-                is    = is,    &
+                ! ir    = ir,    &
+                ! is    = is,    &
                 vphi  = object%vph,   &
                 akap  = object%akap , &
                 debug = debugFlag)

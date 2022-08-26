@@ -215,7 +215,7 @@ CONTAINS
                     vold = val
                 enddo
 
-                elseif (akx.eq.0.0_rDef) then
+                elseif (akx.lt.10e-12_rDef) then
                     izeros(i) = 100
                 else
                     izeros(i) = 200
@@ -237,7 +237,7 @@ CONTAINS
             if (izeros(indx(j)).eq.izeros(indx(j+1))) then
                 gam1a = real(wvn(indx(j)))
                 gam2a = real(wvn(indx(j+1)))
-                if (gam2a .eq. 0.0_rDef) then
+                if (gam2a .lt. 10e-12_rDef) then
                     goto 1000
                 endif
                 if (abs(gam1a/gam2a -1.0_rDef).lt.eps) then
@@ -249,7 +249,7 @@ CONTAINS
                         indx(j+1) = jtmp
                     endif
                 else
-                    if (gam1a .eq. 0.0_rDef .or. gam2a .eq. 0.0_rDef) then
+                    if (gam1a .lt. 10e-12_rDef .or. gam2a .lt. 10e-12_rDef) then
                         !print*, 'gam1a = ',gam1a,'  gam2a = ',gam2a
                         IF (gam1a == 0.0_rDef) THEN
                             alm1 = 0.0_rDef

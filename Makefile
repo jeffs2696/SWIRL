@@ -1,5 +1,5 @@
 all:
-	(cd SourceFiles; make)
+	@cd SourceFiles;  make --no-print-directory;
 clean:
 	(cd SourceFiles; make clean)
 plot:

@@ -1,11 +1,13 @@
 OUTPUT_FILES = \
 			   01-mean-flow/*.dat \
-			   02-method-of-manufactured-solutions/*.dat \
-			   04-plotReport/tex-outputs/*.tex \
-			   03-EVanalysis/*.dat \
 			   03-EVanalysis/egv* \
-			   03-EVanalysis/gam* \
-			   fort.*
+			   03-EVanalysis/gam*
+
+PLOT_REPORT_FILES = \
+			   04-plotReport/tex-outputs/*.tex
+
+MMS_OUTPUT_FILES = \
+				   02-method-of-manufactured-solutions/*.dat
 
 EXE = swirlF2020
 SHELL_EXT = sh
@@ -24,16 +26,18 @@ PLOT_NAMES = plotMachDistribution 	\
 
 PLOT_EXE = $(PLOT_NAMES:=.$(SHELL_EXT))
 
-NUMBERS =  
+# NUMBERS =  
 
 # all: 
 	# echo $(PLOT_EXE)
 
+run: 
+	(./$(EXE));
+
 plot:
 	@cd 04-plotReport; ./plotReport.py;
 
-run SWIRL:
-	./$(EXE)
+
 clean:
 	(rm $(OUTPUT_FILES));
 report: all

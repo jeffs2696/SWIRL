@@ -39,10 +39,15 @@ and swirl velocity components." (1999)." [Here is the paper](https://core.ac.uk/
 The main Makefile is in the SourceFiles folder. The Makefile compiles SWIRL,
 runs the executable. There is an option that allows the user to display a latex
 report with the results plotted
+
 ```
 make all
 ```
-#### Installation
+## Installation
+* clone this project 
+* type ```make```
+
+
 ### Fortran Prerequisites 
 gfortran
 
@@ -51,7 +56,8 @@ gfortran
 Numpy
 Sympy
 Scipy
-
+### Known Issues
+nonconvecting modes are sorted in outputModule and needs to be moved
 
 [Back To The Top](#SWIRL)
 ## Contributors

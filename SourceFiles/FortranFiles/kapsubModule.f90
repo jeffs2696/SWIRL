@@ -339,7 +339,7 @@ CONTAINS
 !
 ! Print the gammas to the display.
       do j=1,np4
-       if (beta(j).ne.c0) then
+       if (REAL(beta(j)).gt.10e-12 .or. AIMAG(beta(j)).gt.10e-12) then
         gam(j) = ci*alpha(j)/beta(j)
         if (abs(aimag(gam(j))).lt.eps) then
          gam(j) = cmplx(real(gam(j)),0.0_rDef,rDef)
@@ -404,7 +404,7 @@ CONTAINS
        aa(np,4*np) = -ci*ak*etad
        bb(np,np)   = c0
        bb(np,4*np) = etad*CMPLX(rmd,KIND=rDef)
-       if (sig.ne.0.0_rDef) then
+       if (sig.gt.0.0_rDef) then
         aa(1,1)    = -ci*ak
         aa(1,np+1) = c0
         do j=1,np
@@ -415,7 +415,7 @@ CONTAINS
         bb(1,3*np+1) = etah*CMPLX(rmh,KIND=rDef)
        endif
       else
-       if (sig.ne.0.0_rDef) then
+       if (sig.gt.0.0_rDef) then
         do j = 1,np
          aa(1,  np+j) = c0
          aa(1,3*np+j) = c0
@@ -570,7 +570,7 @@ CONTAINS
          aa(3*np+k,3*np+j) = -ci*om
          aa(  np+k,     j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
          aa(2*np+k,     j) = CMPLX(0.0_rDef,0.0_rDef,rDef)
-         if (r.ne.0.0_rDef) then
+         if (r.gt.0.0_rDef) then
           aa(  np+k,3*np+j) = ci*CMPLX(mode,KIND=rDef)/CMPLX(r,KIND=rDef)
           aa(3*np+k,  np+j) = ci*CMPLX(mode,KIND=rDef)/CMPLX(r,KIND=rDef)
           aa(3*np+k,     j) = aa(3*np+k,j) +CMPLX(1.0_rDef,KIND=rDef)/CMPLX(r,KIND=rDef)

@@ -31,7 +31,7 @@ PROGRAM MAIN
     !! MMS flag to get approximated order of accuracy
 
     LOGICAL :: &
-        debug   = .TRUE. , &
+        debug   = .FALSE. , &
         MMSflag = .FALSE.
 
     INTEGER, PARAMETER :: &
@@ -39,7 +39,7 @@ PROGRAM MAIN
     M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 6 
+        numberOfIterations = 1 
 
     INTEGER  :: &
         !! Integers for flags and loop indicies
@@ -303,7 +303,8 @@ PROGRAM MAIN
         debugFlag = debug)
 
     CALL DestroyObject(object = swirlClassObj(fac))
-    ! MMS 
+
+    !!----------------------- MMS ----------------------------------------------
     IF (MMSflag) THEN
 
         CALL getSoundSpeed(&
