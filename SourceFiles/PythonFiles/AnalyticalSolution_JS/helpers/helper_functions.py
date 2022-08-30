@@ -1,8 +1,12 @@
+#!/usr/bin/python3
 import numpy as np
 import cmath
 import scipy as scp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import math
+import pandas
+from math import radians, cos, sin, asin, sqrt
 
 def set_plot_parameters():
     plt.style.use('fivethirtyeight')

@@ -1,4 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+import pprint
+import pandas
 import sys 
 import math
 import cmath
@@ -10,19 +12,59 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D # needed for 3d plots
 from matplotlib import cm
+def count_keys(dict_, counter=0):
+    for each_key in dict_:
+        if isinstance(dict_[each_key], dict):
+            # Recursive call
+            counter = count_keys(dict_[each_key], counter + 1)
+        else:
+            counter += 1
+    return counter
 
-# plot parameters
+def append_value(dict_obj, key, value):
+    # Check if key exist in dict or not
+    if key in dict_obj:
+        # Key exist in dict.
+        # Check if type of value of key is list or not
+        if not isinstance(dict_obj[key], list):
+
+            # If type is not list then make it list
+            dict_obj[key] = [dict_obj[key]]
+            # Append the value in list
+        dict_obj[key].append(value)
+    else:
+        # As key is not in dict,
+        # so, add key-value pair
+        dict_obj[key] = valueparameters
+
 fcn.set_plot_parameters()
+
+
+directories = [
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/32pts/']#, '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/64pts/', '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/128pts/', '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/256pts/', '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/512pts/']
+filename = 'gam.nonconv_acc.0032'
+NumericalAxialWavenumberData = \
+            pandas.read_csv(  directories[0] + filename, delim_whitespace = True )
+# NumericalAxialWavenumberData1 = fcn.importPlotData(
+#         directories[1] + 'gam.nonconv_acc.0064')
+
+
+# NumericalAxialWavenumberData2 = fcn.importPlotData(
+#         directories[2] + 'gam.nonconv_acc.0128')
+
+# NumericalAxialWavenumberData3 = fcn.importPlotData(
+#         directories[3] + 'gam.nonconv_acc.0256')
+
 # test case parameters
 
 # no flow
-wavenumber = 5
-azimuthal_mode_number = 3 
-radial_mode_number = 3
-axial_mach_number = 0
+wavenumber = 10 
+azimuthal_mode_number = 2 
+radial_mode_number = 0
+axial_mach_number = 0.3
 
 angle = np.linspace(0,2*math.pi,100)
-r_min = 0
+r_min = 0.25
 r_max = 1
 r_steps = 100
 r = np.linspace(r_min,r_max,r_steps)
@@ -47,7 +89,7 @@ if azimuthal_mode_number < 1:
 
 radial_mode = scp.special.jv(
         azimuthal_mode_number,
-        Jv_p_zero[radial_mode_number-1]*r)
+        Jv_p_zero[radial_mode_number]*r)
 
 normalization_constant = fcn.normalize_psi((radial_mode),r)
 normalized_radial_mode = normalization_constant*radial_mode
@@ -55,7 +97,7 @@ normalized_radial_mode = normalization_constant*radial_mode
 if azimuthal_mode_number == 0 and radial_mode_number == 1:
     analytical_normalization_constant = np.sqrt(2) #from Fund. Of Duct Acs - Rienstra
 else: 
-    analytical_normalization_constant = np.sqrt(2)/(abs(scp.special.jv(azimuthal_mode_number, Jv_p_zero[radial_mode_number-1]))*np.sqrt(1 - azimuthal_mode_number**2/Jv_p_zero[radial_mode_number-1]**2))
+    analytical_normalization_constant = np.sqrt(2)/(abs(scp.special.jv(azimuthal_mode_number, Jv_p_zero[radial_mode_number]))*np.sqrt(1 - azimuthal_mode_number**2/Jv_p_zero[radial_mode_number]**2))
 
 analytical_normalized_radial_mode = analytical_normalization_constant*(radial_mode)
 
@@ -92,6 +134,7 @@ for i,j in enumerate(Jv_p_zero):
                 fontsize='8')
 
 if axial_mach_number > 0:        
+    k_x_cutoff = axial_mach_number*wavenumber/(axial_mach_number**2-1)
     plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=1) 
     plt.legend()
 
@@ -99,7 +142,113 @@ txt = "Complex axial wavenumbers for $m = 0$, $k = 5$, $M_x = 0$ $\eta = 0$"
 
 plt.xlabel(r'\begin{center}\textit{Real}$(k_x)$\\*\textit{\small{' + txt + r'}}\end{center}')
 plt.ylabel(r'\textit{Imaginary}$(k_x)$')
+if axial_mach_number > 0:
+    k_x_convective = wavenumber/axial_mach_number
+    max_real_part = 33 #k_x_convective
+    max_imag_part = 14
+    min_imag_part = -14
+else: 
+    max_real_part = 33
+    max_imag_part = 14
+    min_imag_part = -14
 
+index_for_mode_import = []
+key_list_for_mode_dictionary =[ "radial_mode", "index"] 
+
+mode_dictionary = {
+        'k_x' : None,
+        'radial_mode': None, 
+        'radial_mode_index': None 
+        }
+
+for i,row in NumericalAxialWavenumberData.iterrows(): 
+    # print(NumericalAxialWavenumberData['Re{gam}'][i])
+    if NumericalAxialWavenumberData['Re{gam}'][i] < max_real_part and NumericalAxialWavenumberData['Im{gam}'][i] < max_imag_part and NumericalAxialWavenumberData['Im{gam}'][i] > min_imag_part:
+        plt.scatter(
+                NumericalAxialWavenumberData['Re{gam}'][i],
+                NumericalAxialWavenumberData['Im{gam}'][i], marker = 'd',
+                facecolor = 'none', edgecolors ='b',
+                ) 
+        index_for_mode_import.append(NumericalAxialWavenumberData['#'][i]) 
+        # mode_dictionary["index"] =NumericalAxialWavenumberData['#'][i] 
+        if mode_dictionary['radial_mode_index'] == None:
+            mode_dictionary.update({
+                'k_x': (NumericalAxialWavenumberData['Re{gam}'][i],NumericalAxialWavenumberData['Im{gam}'][i]),
+                'radial_mode': NumericalAxialWavenumberData['nz'][i],
+                'radial_mode_index': NumericalAxialWavenumberData['#'][i],
+                }) 
+        else:
+            append_value(mode_dictionary, 'k_x', (NumericalAxialWavenumberData['Re{gam}'][i], NumericalAxialWavenumberData['Im{gam}'][i]))
+            append_value(mode_dictionary, 'radial_mode', NumericalAxialWavenumberData['nz'][i])
+            append_value(mode_dictionary, 'radial_mode_index', NumericalAxialWavenumberData['#'][i])
+
+        # print(mode_dictionary['radial_mode_index'])
+        # print(
+        #         NumericalAxialWavenumberData['Re{gam}'][i],
+        #         NumericalAxialWavenumberData['Im{gam}'][i],
+        #         'index',NumericalAxialWavenumberData['#'][i],
+        #         'radial_mode',NumericalAxialWavenumberData['nz'][i])
+
+        # ax.annotate(r'$t^_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = int(NumericalAxialWavenumberData['nz'][i])),
+        #         xy=(NumericalAxialWavenumberData['Re{gam}'],
+        #             NumericalAxialWavenumberData['Im{gam}']),
+        #         xycoords='data',
+        #         fontsize='8')
+
+len_indicies = len(mode_dictionary['radial_mode_index'])
+pprint.pprint(mode_dictionary)
+print(mode_dictionary['radial_mode_index'][0])
+radial_mode_data_sets = {
+        'k_x': None,
+        'radial_mode_dataframe': None,
+        } 
+radial_mode_filenames = []
+for i in range(len(mode_dictionary['radial_mode_index'])):
+
+    if mode_dictionary['radial_mode_index'][i] < 100:
+        radial_mode_filenames.append('egv_np_0032radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+    else:
+        radial_mode_filenames.append('egv_np_0032radialmode_0' + str(mode_dictionary['radial_mode_index'][i])) 
+
+radial_mode_dataframe_dictionary = {}
+
+for i in range(len(mode_dictionary['radial_mode_index'])):
+    radial_mode_data = \
+            pandas.read_csv(  directories[0] + radial_mode_filenames[i], delim_whitespace = True )
+    
+    radial_mode_dataframe_dictionary[i] = radial_mode_data
+
+
+dict_index = 0#len_indicies 
+# dict_indicies = [
+#         dict_index,
+#         dict_index+1,
+#         dict_index+2,
+#         dict_index+3]
+
+
+# for i in 1:
+fig,ax = plt.subplots(
+       constrained_layout=False)
+plt.plot(
+       radial_mode_dataframe_dictionary[dict_index]['Rad'],
+       radial_mode_dataframe_dictionary[dict_index]['p[Re]'],
+       label = 'Re')
+plt.plot(
+       radial_mode_dataframe_dictionary[dict_index]['Rad'],
+       radial_mode_dataframe_dictionary[dict_index]['p[Im]'],
+       label = 'Im')
+
+plt.title('Radial mode '+ str(mode_dictionary['radial_mode'][dict_index]))
+plt.suptitle(str(mode_dictionary['k_x'][dict_index]))
+
+plt.plot(r,normalized_radial_mode, label='normalized mode - analytic,re')
+plt.plot(r,normalized_radial_mode.imag, label='normalized mode - analytic,im')
+plt.legend()
+plt.xlabel('Radius')
+plt.ylabel('Pressure Fluctuation')
+plt.show()
+sys.exit()
 # resize the figure to match the aspect ratio of the Axes    
 fig.set_size_inches(10, 8, forward=True)
 plt.savefig(
@@ -170,7 +319,7 @@ R, P = np.meshgrid(r, p)
 
 radial_mode = scp.special.jv(
         azimuthal_mode_number,
-        Jv_p_zero[radial_mode_number-1]*R)
+        Jv_p_zero[radial_mode_number]*R)
 
 Z = radial_mode*np.exp(-1j*azimuthal_mode_number*P).real
 
@@ -244,7 +393,6 @@ ax = fig.add_subplot(111, projection='3d')
 
 ax.plot_surface(z, x, y)#, alpha=1, edgecolors='w', zorder=0, color='black')
 # ax.quiver(-6, 0, 0, 24, 0, 0, length=1, arrow_length_ratio=0.03, color='black', zorder=1)
-
 # ax.text(19, -2, -2, "$\mathbf{z}$", fontsize=40, color='black', zorder=1)
 
 plt.savefig(

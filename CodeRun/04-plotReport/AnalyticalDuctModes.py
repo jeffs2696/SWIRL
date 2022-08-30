@@ -98,8 +98,8 @@ NumericalAxialWavenumberData2 = fcn.importPlotData(
 NumericalAxialWavenumberData3 = fcn.importPlotData(
         directories[3] + 'gam.nonconv_acc.0256')
 
-NumericalAxialWavenumberData4 = fcn.importPlotData(
-        directories[3] + 'gam.nonconv_acc.0512')
+# NumericalAxialWavenumberData4 = fcn.importPlotData(
+#         directories[3] + 'gam.nonconv_acc.0512')
 
 # Input Variables for test case in CodeRun directory
 M_x     = 0.3
@@ -272,6 +272,7 @@ if wvnSum >= 10e-12:
     print("real L2 {:0.12f}".format(wvn_L2))
 else:
     print('L2 is below machine precision')
+
 wvnSum = 0
 for ii in range(len(matched_wavenumber_imag)):
     print(matched_wavenumber_imag[ii])
@@ -292,7 +293,14 @@ else:
 
    
     
-plt.scatter(matched_wavenumber_real_swirl,matched_wavenumber_imag_swirl,facecolor = 'none', edgecolors ='b', marker = 'd')
+plt.scatter(
+        NumericalAxialWavenumberData['Re{gam}'][0:23],
+        NumericalAxialWavenumberData['Im{gam}'][0:23],
+        facecolor = 'none', edgecolors ='b', marker = 'd')
+# plt.scatter(
+#         matched_wavenumber_real_swirl,
+#         matched_wavenumber_imag_swirl,
+#         facecolor = 'none', edgecolors ='b', marker = 'd')
 plt.savefig(
     fname      ='tex-outputs/analytical_solution_test_case_1_comparison.pdf',
     format     ='pdf',
