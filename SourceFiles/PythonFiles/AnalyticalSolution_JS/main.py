@@ -59,26 +59,31 @@ NumericalAxialWavenumberData = \
 
 # no flow
 wavenumber = 10 
+
 azimuthal_mode_number = 2 
+
 radial_mode_number = 0
+
 axial_mach_number = 0.3
+hub_to_tip_ratio = 0.25
 
 angle = np.linspace(0,2*math.pi,100)
+
 r_min = 0.25
 r_max = 1
 r_steps = 100
 r = np.linspace(r_min,r_max,r_steps)
 
-x_min = 0
+x_min = 0.25
 x_max = 1
 x_steps = 100
-x = np.linspace(x_min,x_max,x_steps)
+# x = np.linspace(x_min,x_max,x_steps)
 t = 0
 
 num_of_zeros = 5 # each zero corresponds to radial modes
 
 Jv_p_zero = scp.special.jnp_zeros(n  = azimuthal_mode_number, nt = num_of_zeros)
-Jv_p_zero_01 =scp.special.jnp_zeros(n  = 0, nt = 1)
+Jv_p_zero_01 = scp.special.jnp_zeros(n  = 0, nt = 1)
 
 k_x_plus,k_x_minus = fcn.axial_wavenumber_quadratic(wavenumber,axial_mach_number,Jv_p_zero)
 
@@ -115,20 +120,29 @@ for i,j in enumerate(Jv_p_zero):
     plt.scatter(k_x_minus[i].real,k_x_minus[i].imag, marker ='.' , c='black')
     # print(k_x_imag_plus)
     if k_x_plus[i].imag > 0 or k_x_plus[i].imag < 0:
-        ax.annotate(r'$k^+_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i+1),
-                xy=(k_x_plus[i].real,k_x_plus[i].imag),
+        ax.annotate(r'$k^+_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i),
+                xy=(
+                    k_x_plus[i].real - k_x_plus[i].real/5,
+                    k_x_plus[i].imag
+                    ),
                 xycoords='data',
                 fontsize='8')
-        ax.annotate(r'$k^-_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i+1),
-                xy=(k_x_minus[i].real,k_x_minus[i].imag),
+        ax.annotate(r'$k^-_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i),
+                xy=(
+                    k_x_minus[i].real - k_x_minus[i].real/5,
+                    k_x_minus[i].imag
+                    ),
                 xycoords='data',
                 fontsize='8')
     else:
-        ax.annotate(r'$k^+_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i+1),
-                xy=(k_x_plus[i].real,k_x_plus[i].imag),
+        ax.annotate(r'$k^+_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i),
+                xy=(
+                    k_x_plus[i].real ,
+                    k_x_plus[i].imag- k_x_plus[i].imag/5
+                    ),
                 xycoords='data',
                 fontsize='8')
-        ax.annotate(r'$k^-_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i+1),
+        ax.annotate(r'$k^-_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = i),
                 xy=(k_x_minus[i].real,k_x_minus[i].imag),
                 xycoords='data',
                 fontsize='8')
@@ -166,9 +180,28 @@ for i,row in NumericalAxialWavenumberData.iterrows():
     if NumericalAxialWavenumberData['Re{gam}'][i] < max_real_part and NumericalAxialWavenumberData['Im{gam}'][i] < max_imag_part and NumericalAxialWavenumberData['Im{gam}'][i] > min_imag_part:
         plt.scatter(
                 NumericalAxialWavenumberData['Re{gam}'][i],
-                NumericalAxialWavenumberData['Im{gam}'][i], marker = 'd',
+                NumericalAxialWavenumberData['Im{gam}'][i], 
+                marker = 'd',
                 facecolor = 'none', edgecolors ='b',
                 ) 
+
+        if NumericalAxialWavenumberData['Im{gam}'][i] > 0 or NumericalAxialWavenumberData['Im{gam}'][i] < 0:
+            ax.annotate(r'$t^-_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = NumericalAxialWavenumberData['nz'][i]),
+                    xy=(
+                        NumericalAxialWavenumberData['Re{gam}'][i]+NumericalAxialWavenumberData['Re{gam}'][i]/3,
+                        NumericalAxialWavenumberData['Im{gam}'][i]
+                        ),
+                    xycoords='data',
+                    fontsize='8')
+        else:
+            ax.annotate(r'$t^-_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = NumericalAxialWavenumberData['nz'][i]),
+            xy=(
+                    NumericalAxialWavenumberData['Re{gam}'][i]+NumericalAxialWavenumberData['Re{gam}'][i]/3,
+                    NumericalAxialWavenumberData['Im{gam}'][i]
+                    ),
+                    xycoords='data',
+                    fontsize='8')
+
         index_for_mode_import.append(NumericalAxialWavenumberData['#'][i]) 
         # mode_dictionary["index"] =NumericalAxialWavenumberData['#'][i] 
         if mode_dictionary['radial_mode_index'] == None:
@@ -196,8 +229,9 @@ for i,row in NumericalAxialWavenumberData.iterrows():
         #         fontsize='8')
 
 len_indicies = len(mode_dictionary['radial_mode_index'])
-pprint.pprint(mode_dictionary)
-print(mode_dictionary['radial_mode_index'][0])
+# pprint.pprint(mode_dictionary)
+print('Identified Radial Mode Orders: ', mode_dictionary['radial_mode'])
+
 radial_mode_data_sets = {
         'k_x': None,
         'radial_mode_dataframe': None,
@@ -218,8 +252,20 @@ for i in range(len(mode_dictionary['radial_mode_index'])):
     
     radial_mode_dataframe_dictionary[i] = radial_mode_data
 
-
+# pprint.pprint(radial_mode_dataframe_dictionary[0])
 dict_index = 0#len_indicies 
+numerical_r = radial_mode_dataframe_dictionary[dict_index]['Rad']
+
+numerical_radial_mode_real = radial_mode_dataframe_dictionary[dict_index]['p_no_phase[Re]']
+numerical_radial_mode_imag = radial_mode_dataframe_dictionary[dict_index]['p_no_phase[Im]']
+
+numerical_radial_mode = numerical_radial_mode_real.to_numpy() + numerical_radial_mode_imag.to_numpy()*1j 
+
+normalization_constant_numerical = fcn.normalize_psi((numerical_radial_mode),numerical_r) 
+normalized_radial_mode_data = normalization_constant_numerical*numerical_radial_mode
+
+
+# print(type(normalized_radial_mode_data))
 # dict_indicies = [
 #         dict_index,
 #         dict_index+1,
@@ -231,19 +277,19 @@ dict_index = 0#len_indicies
 fig,ax = plt.subplots(
        constrained_layout=False)
 plt.plot(
-       radial_mode_dataframe_dictionary[dict_index]['Rad'],
-       radial_mode_dataframe_dictionary[dict_index]['p[Re]'],
-       label = 'Re')
+       numerical_r,
+       normalized_radial_mode_data.real,
+       label = 'numerical,real')
 plt.plot(
-       radial_mode_dataframe_dictionary[dict_index]['Rad'],
-       radial_mode_dataframe_dictionary[dict_index]['p[Im]'],
-       label = 'Im')
+       numerical_r,
+       normalized_radial_mode_data.imag,
+       label = 'numerical,imag')
 
 plt.title('Radial mode '+ str(mode_dictionary['radial_mode'][dict_index]))
 plt.suptitle(str(mode_dictionary['k_x'][dict_index]))
 
-plt.plot(r,normalized_radial_mode, label='normalized mode - analytic,re')
-plt.plot(r,normalized_radial_mode.imag, label='normalized mode - analytic,im')
+plt.plot(r,normalized_radial_mode.real, label='analytic,real',linestyle='dotted')
+plt.plot(r,normalized_radial_mode.imag, label='analytic,imag',linestyle='dotted')
 plt.legend()
 plt.xlabel('Radius')
 plt.ylabel('Pressure Fluctuation')
