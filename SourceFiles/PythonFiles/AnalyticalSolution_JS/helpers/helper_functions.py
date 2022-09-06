@@ -8,6 +8,22 @@ import math
 import pandas
 from math import radians, cos, sin, asin, sqrt
 
+def append_value(dict_obj, key, value):
+    # Check if key exist in dict or not
+    if key in dict_obj:
+        # Key exist in dict.
+        # Check if type of value of key is list or not
+        if not isinstance(dict_obj[key], list):
+
+            # If type is not list then make it list
+            dict_obj[key] = [dict_obj[key]]
+            # Append the value in list
+        dict_obj[key].append(value)
+    else:
+        # As key is not in dict,
+        # so, add key-value pair
+        dict_obj[key] = valueparameters
+
 def set_plot_parameters():
     plt.style.use('fivethirtyeight')
     width = 345
@@ -26,26 +42,6 @@ def set_plot_parameters():
     mpl.rcParams.update(tex_fonts) 
 
     return
-
-def axial_wavenumber_quadratic(k,M_x,Jv_p_zero):
-    pm = np.array([1,-1])
-    k_x_plus = np.array((Jv_p_zero),dtype=object) 
-    k_x_minus = np.array((Jv_p_zero),dtype=object) 
-    for i,j in enumerate(Jv_p_zero): 
-
-
-        k_x_plus[i] = (((-M_x*k +  pm*cmath.sqrt(k**2 - (1-M_x**2)*Jv_p_zero[i]**2))/(1-M_x**2))) [0]
-        k_x_minus[i] = (((-M_x*k +  pm*cmath.sqrt(k**2 - (1-M_x**2)*Jv_p_zero[i]**2))/(1-M_x**2))) [1]
-
-    return k_x_plus,k_x_minus
-
-def normalize_psi(psi, x):
-
-    int_psi_square = np.trapz(abs(psi)*abs(np.conj(psi))*x, x)
-
-    normalization_constant = np.sqrt(1/int_psi_square)
-
-    return normalization_constant
 
 def set_size(width, fraction=2):
     """Set figure dimensions to avoid scaling in LaTeX.  

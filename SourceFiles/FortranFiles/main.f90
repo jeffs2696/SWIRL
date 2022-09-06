@@ -162,7 +162,7 @@ PROGRAM MAIN
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
     ! include 'InputVariables_MMS1.f90'
-    include 'InputVariables_AnalyticalSolution_1.f90'
+    include 'InputVariables_AnalyticalSolution_2.f90'
     ! include 'InputVariables_KousenTable4_3.f90'
     ! include 'InputVariables_KousenTable4_4.f90'
     ! include 'InputVariables_KousenTable4_5.f90'
