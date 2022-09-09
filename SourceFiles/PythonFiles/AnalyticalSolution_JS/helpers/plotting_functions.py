@@ -64,10 +64,15 @@ def plot_axial_wavenumbers(
                     ),
                 xycoords='data', 
                 textcoords='offset points',
-                xytext = (10,20),
+                xytext = (15,20),
                 horizontalalignment='center',
                 verticalalignment ='top',
-                fontsize='8') 
+                fontsize='10',
+                        arrowprops=dict(arrowstyle= '-',
+                            color='black',
+                            lw=1,
+                            ls='--')
+                ) 
     else:
         # if the imaginary part is zero then 
         ax.annotate(
@@ -78,10 +83,15 @@ def plot_axial_wavenumbers(
                     ),
                 xycoords='data',
                 textcoords='offset points',
-                xytext = (0,20),
+                xytext = (10,20),
                 horizontalalignment='center',
-                verticalalignment ='top',
-                fontsize='8')
+                verticalalignment ='center',
+                fontsize='10',
+                        arrowprops=dict(arrowstyle= '-',
+                            color='black',
+                            lw=1,
+                            ls='--')
+                )
 
     # if axial_mach_number > 0:        
     #         k_x_cutoff = axial_mach_number*wavenumber/(axial_mach_number**2-1)

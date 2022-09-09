@@ -30,27 +30,46 @@ fcn.set_plot_parameters()
 # cylinder
 
 # [1] importing results from SWIRL
-directories = [
-        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/32pts/',
-        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/64pts/',
-        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/128pts/',
-        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/256pts/']#, '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/512pts/']
+list_of_grid_points = ['32','64','128','256']
+second_order_directories = [
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[0]),
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[1]),
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[2]),
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[3])]#, '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/SecondOrderDiff/512pts/']
 
-filename = 'gam.nonconv_acc.0032'
+fourth_order_directories = [
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[0]),
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[1]),
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[2]),
+        '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
+            n=list_of_grid_points[3])]#, '../../../CodeRun/03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/512pts/']
+
+
 filename_list = [
-        'gam.nonconv_acc.0032',
-        'gam.nonconv_acc.0064',
-        'gam.nonconv_acc.0128',
-        'gam.nonconv_acc.0256' ]
+        'gam.nonconv_acc.00{n}'.format(
+            n=list_of_grid_points[0]),
+        'gam.nonconv_acc.00{n}'.format(
+            n=list_of_grid_points[1]),
+        'gam.nonconv_acc.0{n}'.format(
+            n=list_of_grid_points[2]),
+        'gam.nonconv_acc.0{n}'.format(
+            n=list_of_grid_points[3]) ]
 
 
 NumericalAxialWavenumberData = \
-            pandas.read_csv(  directories[1] + filename_list[1], delim_whitespace = True )
+            pandas.read_csv(  fourth_order_directories[1] + filename_list[1], delim_whitespace = True )
 
 NumericalAxialWavenumberData_list = []
-for i in range(len(directories)):
+for i in range(len(fourth_order_directories)):
     NumericalAxialWavenumberData = \
-            pandas.read_csv(  directories[i] + filename_list[i], delim_whitespace = True )
+            pandas.read_csv(  fourth_order_directories[i] + filename_list[i], delim_whitespace = True )
     NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData)
 
 NumericalAxialWavenumberData = NumericalAxialWavenumberData_list[0]
@@ -59,14 +78,14 @@ NumericalAxialWavenumberData = NumericalAxialWavenumberData_list[0]
 
 # sys.exit()
 # NumericalAxialWavenumberData1 = fcn.importPlotData(
-#         directories[1] + 'gam.nonconv_acc.0064')
+#         fourth_order_directories[1] + 'gam.nonconv_acc.0064')
 
 
 # NumericalAxialWavenumberData2 = fcn.importPlotData(
-#         directories[2] + 'gam.nonconv_acc.0128')
+#         fourth_order_directories[2] + 'gam.nonconv_acc.0128')
 
 # NumericalAxialWavenumberData3 = fcn.importPlotData(
-#         directories[3] + 'gam.nonconv_acc.0256')
+#         fourth_order_directories[3] + 'gam.nonconv_acc.0256')
 
 # test case parameters
 
@@ -75,7 +94,7 @@ wavenumber = 10
 
 azimuthal_mode_number = 2 
 
-radial_mode_number =2
+radial_mode_number =4
 
 axial_mach_number = 0.3
 hub_to_tip_ratio = 0.25
@@ -154,9 +173,7 @@ for i,j in enumerate(radial_mode_list):
 width = 500 # to match page width in TeX doc
 
 fig,ax = plt.subplots(
-        constrained_layout=False,
-        figsize=fcn.set_size(width)
-)
+        constrained_layout=True)#, figsize=fcn.set_size(width))
 scatter_parameters = {
         'marker':'.' ,
         'c':'black'}
@@ -191,7 +208,7 @@ if axial_mach_number > 0:
     plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=0.5,ls='dotted') 
 
 #------------------------------------------------------------------------------
-# 
+# Desired Decay Rate 
 if axial_mach_number > 0:
     k_x_convective = wavenumber/axial_mach_number
     max_real_part = 33 #k_x_convective
@@ -206,6 +223,7 @@ index_for_mode_import = []
 key_list_for_mode_dictionary =[ "radial_mode", "index"] 
 
 # Import modes from SWIRL, (psuedocode for FORTRAN
+
 mode_dictionary = {
         'k_x' : None,
         'radial_mode_number': None, 
@@ -214,18 +232,31 @@ mode_dictionary = {
 
 mode_nested_dictionary = {}
 
-for i in range(len(directories)):
-    mode_nested_dictionary[i] = {i: mode_dictionary}
+for i in range(len(fourth_order_directories)):
+    mode_nested_dictionary[i] = {i: mode_dictionary} 
+
+
+# TODO: make the loop through different grids work..
+# Issue: Radial modes that correspond to the axial wavenumbers are not appearing 
+# due to some issue in the normalization (?) 
+for ii in range(len(fourth_order_directories)): # this loops through different grids
+    # Needed to reset the current looP
+    mode_dictionary = {
+            'k_x' : None,
+            'radial_mode_number': None, 
+            'radial_mode_index': None 
+            }
     
-
-# pprint.pprint((mode_nested_dictionary[1][1]['radial_mode_index']))
-for ii in range(0,1): 
-
+    mode_nested_dictionary[ii][ii] = mode_dictionary
     # mode_dictionary = mode_nested_dictionary[ii][ii]
+
+    #this loops through each row for the file
 
     for i,row in NumericalAxialWavenumberData_list[ii].iterrows(): 
         # print(NumericalAxialWavenumberData['Re{gam}'][i]r
+
         # TODO: improve plot_axial_wavenumbers to handle numerical cases
+
         # ax = pfcn.plot_axial_wavenumbers(
         #         real_part = NumericalAxialWavenumberData['Re{gam}'][i],
         #         imag_part = NumericalAxialWavenumberData['Im{gam}'][i],
@@ -235,24 +266,37 @@ for ii in range(0,1):
         #         axial_mach_number = axial_mach_number,
         #         scatter_kwargs = scatter_parameters_numerical
         #         )
-        
+
         # plt.show()
         # sys.exit()
-        
-        # print('directory',ii)
-        
-        if NumericalAxialWavenumberData_list[ii]['Re{gam}'][i] == 0.0 and NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] == 0.0:
-            print('k_x = 0 , 0j, trivial')
-        elif NumericalAxialWavenumberData_list[ii]['Re{gam}'][i] < max_real_part and NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] < max_imag_part and NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] > min_imag_part:
+
+        # print('directory',ii) 
+        # i want to initialize the filtered wavenumbers 
+        # filtered_wavenumber_real = NumericalAxialWavenumberData_list[ii]['Re{gam}'][i]
+        # filtered_wavenumber_imag = NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]
+
+        if NumericalAxialWavenumberData_list[ii]['Re{gam}'][i] == 0.0 and \
+                NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] == 0.0:
+                    print('k_x = 0 , 0j, trivial, omitted')
+        elif NumericalAxialWavenumberData_list[ii]['Re{gam}'][i] < max_real_part and \
+                NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] < max_imag_part and \
+                NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] > min_imag_part and \
+                NumericalAxialWavenumberData_list[ii]['nz'][i] < num_of_zeros:
+
+            filtered_wavenumber_real = NumericalAxialWavenumberData_list[ii]['Re{gam}'][i]
+            filtered_wavenumber_imag = NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]
+
             plt.scatter(
-                    NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],
-                    NumericalAxialWavenumberData_list[ii]['Im{gam}'][i], 
+                    filtered_wavenumber_real,
+                    filtered_wavenumber_imag,
                     marker = 'd',# changes triangle direction
                     # label = ii,
                     facecolor ='none', edgecolors ='b',
                     )
-            
-            if NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] > 0 or NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] < 0: 
+
+            if NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] > 0 or \
+                    NumericalAxialWavenumberData_list[ii]['Im{gam}'][i] < 0: 
+
                 ax.annotate(r'$K_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = NumericalAxialWavenumberData_list[ii]['nz'][i]),
                         xy=(
                             NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],#+NumericalAxialWavenumberData['Re{gam}'][i]/3,
@@ -260,7 +304,7 @@ for ii in range(0,1):
                             ),
                         xycoords='data',
                         textcoords='offset points',
-                        xytext = (-10,-20),
+                        xytext = (-20,-20),
                         horizontalalignment='center',
                         verticalalignment='bottom',
                         fontsize='10',
@@ -269,6 +313,7 @@ for ii in range(0,1):
                             lw=1,
                             ls='--')
                         )
+
             else:
                 ax.annotate(r'$K_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = NumericalAxialWavenumberData_list[ii]['nz'][i]),
                         xy=(
@@ -277,8 +322,8 @@ for ii in range(0,1):
                         xycoords='data',
                         textcoords='offset points',
                         xytext = (0,-20),
-                        horizontalalignment='right',
-                        verticalalignment='bottom',
+                        horizontalalignment='center',
+                        verticalalignment='center',
                         fontsize='10',
                         arrowprops=dict(arrowstyle= '-',
                             color='blue',
@@ -287,153 +332,186 @@ for ii in range(0,1):
                         )
                 
                 index_for_mode_import.append(NumericalAxialWavenumberData_list[ii]['#'][i]) 
-                print(ii)
-                if mode_dictionary['radial_mode_index'] == None:
-                    # if there isn't a value for the radial mode index..  
-                    mode_dictionary.update({
-                        'k_x': (
-                            NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],
-                            NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]),
-                        'radial_mode_number': NumericalAxialWavenumberData_list[ii]['nz'][i],
-                        'radial_mode_index': NumericalAxialWavenumberData_list[ii]['#'][i],
-                        }) 
-                else:
-                    fcn.append_value(mode_dictionary, 'k_x', (NumericalAxialWavenumberData_list[ii]['Re{gam}'][i], NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]))
-                    fcn.append_value(mode_dictionary, 'radial_mode_number', NumericalAxialWavenumberData_list[ii]['nz'][i])
-                    fcn.append_value(mode_dictionary, 'radial_mode_index',  NumericalAxialWavenumberData_list[ii]['#'][i])
-                    
+                # print(ii)
 
-#                 if mode_nested_dictionary[ii][ii]['radial_mode_index'] == None:
-#                     # if there isn't a value for the radial mode index..  
-#                     mode_nested_dictionary[ii][ii].update({
-#                         'k_x': (
-#                             NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],
-#                             NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]),
-#                         'radial_mode_number': NumericalAxialWavenumberData_list[ii]['nz'][i],
-#                         'radial_mode_index': NumericalAxialWavenumberData_list[ii]['#'][i],
-#                         }) 
-#                 else:
-#                     fcn.append_value(mode_nested_dictionary[ii][ii], 'k_x', (NumericalAxialWavenumberData_list[ii]['Re{gam}'][i], NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]))
-#                     fcn.append_value(mode_nested_dictionary[ii][ii], 'radial_mode_number', NumericalAxialWavenumberData_list[ii]['nz'][i])
-#                     fcn.append_value(mode_nested_dictionary[ii][ii], 'radial_mode_index',  NumericalAxialWavenumberData_list[ii]['#'][i])
-                    
+            if mode_dictionary['radial_mode_index'] == None:
+                # if there isn't a value for the radial mode index..  
+                mode_dictionary.update({
+                    'k_x': (
+                        NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],
+                        NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]),
+                    'radial_mode_number': NumericalAxialWavenumberData_list[ii]['nz'][i],
+                    'radial_mode_index': NumericalAxialWavenumberData_list[ii]['#'][i],
+                    }) 
 
-                    
-
-# sys.exit()
-plt.savefig(
-    fname      ='figures/axial_wavenumber_analytical_test_case_comparison.pdf',
-    format     ='pdf',
-    bbox_inches='tight')
-
-        # print(mode_dictionary['radial_mode_index'])
-        # print(
-        #         NumericalAxialWavenumberData['Re{gam}'][i],
-        #         NumericalAxialWavenumberData['Im{gam}'][i],
-        #         'index',NumericalAxialWavenumberData['#'][i],
-        #         'radial_mode',NumericalAxialWavenumberData['nz'][i])
-
-        # ax.annotate(r'$t^_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = int(NumericalAxialWavenumberData['nz'][i])),
-        #         xy=(NumericalAxialWavenumberData['Re{gam}'],
-        #             NumericalAxialWavenumberData['Im{gam}']),
-        #         xycoords='data',
-        #         fontsize='8')
-#------------------------------------------------------------------------------
-# identify modes from SWIRL that correspond to the computed radial wavenumber
-
-plt.legend()
-# plt.show()
-# pprint.pprint(mode_nested_dictionary)
-
-len_indicies = len(mode_dictionary['radial_mode_index'])
-# pprint.pprint(mode_dictionary)
-print('Identified Radial Mode Orders: ', mode_dictionary['radial_mode_number'])
-
-radial_mode_data_sets = {
-        'k_x': None,
-        'radial_mode_dataframe': None,
-        } 
-radial_mode_filenames_per_grid = []
-radial_mode_filenames = []
-
-for i in range(len(mode_dictionary['radial_mode_index'])):
-
-    if mode_dictionary['radial_mode_index'][i] < 100:
-        # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
-        radial_mode_filenames.append('egv_np_0032radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
-    else:
-        radial_mode_filenames.append('egv_np_0032radialmode_0' + str(mode_dictionary['radial_mode_index'][i])) 
-
-radial_mode_dataframe_dictionary = {}
-
-for i in range(len(mode_dictionary['radial_mode_index'])):
-    radial_mode_data = \
-            pandas.read_csv(  directories[0] + radial_mode_filenames[i], delim_whitespace = True )
+            else:
+                fcn.append_value(mode_dictionary, 'k_x', (NumericalAxialWavenumberData_list[ii]['Re{gam}'][i], NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]))
+                fcn.append_value(mode_dictionary, 'radial_mode_number', NumericalAxialWavenumberData_list[ii]['nz'][i])
+                fcn.append_value(mode_dictionary, 'radial_mode_index',  NumericalAxialWavenumberData_list[ii]['#'][i])
+    # pprint.pprint((mode_nested_dictionary[ii][ii]))
+    # pprint.pprint((mode_nested_dictionary))
     
-    radial_mode_dataframe_dictionary[i] = radial_mode_data
+    # I was trying to get the mode_dictionaries in one spot to pull from. Is this a
+    # good idea?
+    #                 if mode_nested_dictionary[ii][ii]['radial_mode_index'] == None:
+    #                     # if there isn't a value for the radial mode index..  
+    #                     mode_nested_dictionary[ii][ii].update({
+    #                         'k_x': (
+    #                             NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],
+    #                             NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]),
+    #                         'radial_mode_number': NumericalAxialWavenumberData_list[ii]['nz'][i],
+    #                         'radial_mode_index': NumericalAxialWavenumberData_list[ii]['#'][i],
+    #                         }) 
+    #                 else:
+    #                     fcn.append_value(mode_nested_dictionary[ii][ii], 'k_x', (NumericalAxialWavenumberData_list[ii]['Re{gam}'][i], NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]))
+    #                     fcn.append_value(mode_nested_dictionary[ii][ii], 'radial_mode_number', NumericalAxialWavenumberData_list[ii]['nz'][i])
+    #                     fcn.append_value(mode_nested_dictionary[ii][ii], 'radial_mode_index',  NumericalAxialWavenumberData_list[ii]['#'][i])
+    
+    # sys.exit()
+    # plt.savefig(
+    #     fname      ='figures/axial_wavenumber_analytical_test_case_comparison32gridpoints_fourth_order.pdf'.format(),
+    #     format     ='pdf')#, bbox_inches='tight')
+    
+            # print(mode_dictionary['radial_mode_index'])
+            # print(
+            #         NumericalAxialWavenumberData['Re{gam}'][i],
+            #         NumericalAxialWavenumberData['Im{gam}'][i],
+            #         'index',NumericalAxialWavenumberData['#'][i],
+            #         'radial_mode',NumericalAxialWavenumberData['nz'][i])
+    
+            # ax.annotate(r'$t^_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = int(NumericalAxialWavenumberData['nz'][i])),
+            #         xy=(NumericalAxialWavenumberData['Re{gam}'],
+            #             NumericalAxialWavenumberData['Im{gam}']),
+            #         xycoords='data',
+            #         fontsize='8')
+    #------------------------------------------------------------------------------
+    # identify modes from SWIRL that correspond to the computed radial wavenumber
+    print('identify modes from SWIRL that correspond to the computed radial wavenumber')
+    
+    # plt.legend()
+    plt.close()
+    # plt.show()
+    # pprint.pprint(mode_nested_dictionary)
+    
+    len_indicies = len(mode_dictionary['radial_mode_index'])
+    # pprint.pprint(mode_dictionary)
+    print('Identified Radial Mode Orders: ', mode_dictionary['radial_mode_number'])
+    
+    radial_mode_data_sets = {
+            'k_x': None,
+            'radial_mode_dataframe': None,
+            } 
+    radial_mode_filenames_per_grid = []
+    radial_mode_filenames = []
+    
+    for i in range(len(mode_dictionary['radial_mode_index'])):
 
-# pprint.pprint(radial_mode_dataframe_dictionary[1])
+        if ii == 0:
+            if mode_dictionary['radial_mode_index'][i] < 100:
+                # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+                radial_mode_filenames.append('egv_np_0032radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+            else:
+                radial_mode_filenames.append('egv_np_0032radialmode_0' + str(mode_dictionary['radial_mode_index'][i])) 
 
-dict_indicies = []
-for i,j in enumerate(mode_dictionary['radial_mode_number']):
-    # print(radial_mode_number)
-    # print(i,j)
-    if j == radial_mode_number:
-        print('match!',j,'at',i)
-        dict_indicies.append(i)
+        if ii == 1:
+            if mode_dictionary['radial_mode_index'][i] < 100:
+                # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+                radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+            else:
+                radial_mode_filenames.append('egv_np_0064radialmode_0' + str(mode_dictionary['radial_mode_index'][i])) 
 
-# test = [t for t,x in enumerate(mode_dictionary['radial_mode_index'][t]) if x == radial_mode_number]# in mode_dictionary['radial_mode_index']:
-# print('test',test)
+        if ii == 2:
+            if mode_dictionary['radial_mode_index'][i] < 100:
+                # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+                radial_mode_filenames.append('egv_np_0128radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+            else:
+                radial_mode_filenames.append('egv_np_0128radialmode_0' + str(mode_dictionary['radial_mode_index'][i])) 
 
-for i in range(len(dict_indicies)):
-    dict_index = dict_indicies[i]
-    numerical_r = radial_mode_dataframe_dictionary[dict_index]['Rad'] 
-    numerical_radial_mode_real = radial_mode_dataframe_dictionary[dict_index]['p_no_phase[Re]']
-    numerical_radial_mode_imag = radial_mode_dataframe_dictionary[dict_index]['p_no_phase[Im]']
-    numerical_radial_mode = numerical_radial_mode_real.to_numpy() + numerical_radial_mode_imag.to_numpy()*1j 
-    normalization_constant_numerical = afcn.normalize_psi((numerical_radial_mode),numerical_r) 
-    normalized_radial_mode_data = normalization_constant_numerical*numerical_radial_mode
-
-
-# print(type(normalized_radial_mode_data))
-# dict_indicies = [
-#         dict_index,
-#         dict_index+1,
-#         dict_index+2,
-#         dict_index+3]
+        if ii == 3:
+            if mode_dictionary['radial_mode_index'][i] < 100:
+                # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+                radial_mode_filenames.append('egv_np_0256radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+            else:
+                radial_mode_filenames.append('egv_np_0256radialmode_0' + str(mode_dictionary['radial_mode_index'][i])) 
+    
+    radial_mode_dataframe_dictionary = {}
+    
+    for i in range(len(mode_dictionary['radial_mode_index'])):
+        radial_mode_data = \
+                pandas.read_csv(  fourth_order_directories[ii] + radial_mode_filenames[i], delim_whitespace = True )
+        
+        radial_mode_dataframe_dictionary[i] = radial_mode_data
+    
+    # pprint.pprint(radial_mode_dataframe_dictionary[1])
+    
+    dict_indicies = []
+    
+    for i,j in enumerate(mode_dictionary['radial_mode_number']):
+        # print(radial_mode_number)
+        # print(i,j)
+        if j == radial_mode_number:
+            print('match!',j,'at',i)
+            dict_indicies.append(i)
+    
+    # test = [t for t,x in enumerate(mode_dictionary['radial_mode_index'][t]) if x == radial_mode_number]# in mode_dictionary['radial_mode_index']:
+    # print('test',test)
+    
+    for i in range(len(dict_indicies)):
+        dict_index = dict_indicies[i]
+        numerical_r = radial_mode_dataframe_dictionary[dict_index]['Rad'] 
+        numerical_radial_mode_real = radial_mode_dataframe_dictionary[dict_index]['p_no_phase[Re]']
+        numerical_radial_mode_imag = radial_mode_dataframe_dictionary[dict_index]['p_no_phase[Im]']
+        
+        numerical_radial_mode = numerical_radial_mode_real.to_numpy() + numerical_radial_mode_imag.to_numpy()*1j 
+        # print(numerical_radial_mode)
+    
+        normalization_constant_numerical = afcn.normalize_psi((numerical_radial_mode),numerical_r) 
+        # print(i,normalization_constant_numerical)
+        normalized_radial_mode_data = normalization_constant_numerical*numerical_radial_mode
     
     
-    # for i in 1:
-    fig,ax = plt.subplots(
-           constrained_layout=False,
-           figsize=fcn.set_size(345)
-           )
-    plt.plot(
-           numerical_r,
-           normalized_radial_mode_data.real,
-           label = 'numerical,real')
-    plt.plot(
-           numerical_r,
-           normalized_radial_mode_data.imag,
-           label = 'numerical,imag')
+    # print(type(normalized_radial_mode_data))
+    # dict_indicies = [
+    #         dict_index,
+    #         dict_index+1,
+    #         dict_index+2,
+    #         dict_index+3]
+        # for i in 1:
     
-    plt.title('Radial mode '+ str(mode_dictionary['radial_mode_number'][dict_index]))
-    plt.suptitle(str(mode_dictionary['k_x'][dict_index]))
+        fig,ax = plt.subplots(
+               constrained_layout=False,
+               figsize=fcn.set_size(345)
+               )
     
-    plt.plot(r,normalized_radial_mode_list[radial_mode_number].real, label='analytic,real',linestyle='dotted')
-    plt.plot(r,normalized_radial_mode_list[radial_mode_number].imag, label='analytic,imag',linestyle='dotted')
-    plt.legend()
-    plt.xlabel('Radius')
-    plt.ylabel('Pressure Fluctuation')
-    #---------------------------
-    plt.show()
+        plt.plot(
+               numerical_r,
+               normalized_radial_mode_data.real,
+               label = 'numerical,real')
+    
+        plt.plot(
+               numerical_r,
+               normalized_radial_mode_data.imag,
+               label = 'numerical,imag')
+    
+        plt.title('Radial mode '+ str(mode_dictionary['radial_mode_number'][dict_index]))
+        plt.suptitle(str(mode_dictionary['k_x'][dict_index]))
+    
+        plt.plot(r,normalized_radial_mode_list[radial_mode_number].real, label='analytic,real',linestyle='dotted')
+        plt.plot(r,normalized_radial_mode_list[radial_mode_number].imag, label='analytic,imag',linestyle='dotted')
+        plt.legend()
+        plt.xlabel('Radius')
+        plt.ylabel('Pressure Fluctuation')
+        plt.savefig(
+                fname      ='figures/radial_mode_{N}_test_case_number_{index}.pdf'.format(
+                    N = radial_mode_number,
+                    index = i),
+                format     ='pdf')
+    
+        plt.show()
+
 sys.exit()
 # resize the figure to match the aspect ratio of the Axes    
-fig.set_size_inches(10, 8, forward=True)
-plt.savefig(
-    fname      ='figures/radial_mode_0_test_case.pdf',
-    format     ='pdf',
-    bbox_inches='tight')
+# fig.set_size_inches(10, 8, forward=True)
 
 fig = plt.figure()
 

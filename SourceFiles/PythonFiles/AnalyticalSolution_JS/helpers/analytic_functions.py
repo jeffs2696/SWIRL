@@ -20,7 +20,7 @@ def get_radial_modes(
     for i in range(len(Jv_p_zero)): 
         radial_mode = scp.special.jv(
                 azimuthal_mode_number,
-                Jv_p_zero[i]*r)
+                abs(Jv_p_zero[i])*r)
         radial_mode_list.append(radial_mode)
 
     return radial_mode_list

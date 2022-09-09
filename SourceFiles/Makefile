@@ -33,9 +33,6 @@
 ###################################################################
 
 # Defining colored output for ANSI escape sequences 
-#
-
-
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
 OK_COLOR    = \033[0;32m
@@ -50,6 +47,7 @@ COM_STRING = "Compiling..."
 
 F90      = gfortran
 #-O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
+# Compiler flags 
 F90FLAGS  =	\
 			-g -c \
 			-O0 \
@@ -234,9 +232,9 @@ all:  $(OBJECTS)
 	@(mv $(EXE) $(EXECUTABLE_LOCATION)); 
 	@(mv $(OBJECTS) $(OBJ_FILES)); 
 	@(mv *.mod $(MOD_FILES));
-	@(cd $(EXECUTABLE_LOCATION); ./$(EXE));
-	
-# @(spd-say 'great-job' ); 
+	@(cd $(EXECUTABLE_LOCATION); ./$(EXE)); 
+	@(spd-say 'stay-hard' ); 
+
 # @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:
@@ -254,6 +252,7 @@ cleanAll:
        (cd $(LAPACK_LOCATION); rm -f *.o *.c *.a *.mod); \
        (cd $(BLAS_LOCATION); rm -f *.o *.c *.a *.mod)
                                                                
+#
 main.o: FortranFiles/main.f90        \
 	FortranFiles/analysisModule.o \
 	FortranFiles/boundaryModule.o \

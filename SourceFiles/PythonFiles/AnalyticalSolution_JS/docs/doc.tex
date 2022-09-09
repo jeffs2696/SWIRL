@@ -5,6 +5,7 @@
 \documentclass[a4paper]{report}
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{pgffor}
 \usepackage{booktabs}
 \begin{document}
 \section{Introduction - Turbomachinery Noise}
@@ -88,29 +89,29 @@ and then the axial location at which this occurred, $x_{desired}$ which
 can be compared against a desired length for a nacelle.  
 Since SWIRL assumes an infinitely long duct, there is nothing limiting the 
 modes propagation with respect to nacelle length. For example, if the 
-desired amplitude is one percent, then $x_{desired}$,
+desired amplitude is one percent, then $x_{desired}$ is $0.46$, 
 
-\begin{align*}
-    0.01 &=  e^{-10 x_{desired}},\\
-    -\frac{ln|0.01|}{10} &=  x_{desired},\\
-    -\frac{ln|0.01|}{10} &= 0.4605170185988091 .
-\end{align*}
+% \begin{align*}
+%     0.01 &=  e^{-10 x_{desired}},\\
+%     -\frac{ln|0.01|}{10} &=  x_{desired},\\
+%     -\frac{ln|0.01|}{10} &= 0.4605170185988091 .
+% \end{align*}
 
 
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/desired_cut_off_location_1_percent_of_max.pdf}
-     \caption{Decaying mode with $k_x = 0 + 10j$ and unit amplitude. One percent
-     of the maximum amplitude is identified for nacelle length comparison}
-     \label{fig:decaying_mode_with_1_percent_amp}
- \end{figure}
+%  \begin{figure}
+%      \centering
+%      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/desired_cut_off_location_1_percent_of_max.pdf}
+%      \caption{Decaying mode with $k_x = 0 + 10j$ and unit amplitude. One percent
+%      of the maximum amplitude is identified for nacelle length comparison}
+%      \label{fig:decaying_mode_with_1_percent_amp}
+%  \end{figure}
  
  
-In general,
-\begin{align*}
-    y_{desired} &=  e^{-k_{x,imag} x_{desired} }\\
-    -\frac{ln|y_{desired}|}{k_{x,imag}} &=  x_{desired}
-\end{align*}
+% In general,
+% \begin{align*}
+%     y_{desired} &=  e^{-k_{x,imag} x_{desired} }\\
+%     -\frac{ln|y_{desired}|}{k_{x,imag}} &=  x_{desired}
+% \end{align*}
 \section{Analytical Test Case}
 \begin{table}[h!]
     \centering
@@ -124,14 +125,115 @@ In general,
     \caption{Validation test case parameters, Uniform Flow Annular Duct} 
 \end{table}
 
+\subsection{Axial Wavenumber}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/axial_wavenumber_analytical_test_case_comparison32gridpoints}
+    \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+    Flow in a hard-wall annular duct}
+    \label{fig:analytical_bessel_function}
+\end{figure}
 
- \begin{figure}
-     \centering
-     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/analytical_bessel_function.pdf}
-     \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
-     Flow in a hard-wall annular duct}
-     \label{fig:analytical_bessel_function}
- \end{figure}
+
+\subsection{Propagating Radial Modes}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_0_test_case_number_\i.pdf}
+        \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+        Flow in a hard-wall annular duct}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\foreach \i in {0,...,1}
+{
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_1_test_case_number_\i.pdf}
+        \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+        Flow in a hard-wall annular duct}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\foreach \i in {0,...,3}
+{
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_2_test_case_number_\i.pdf}
+        \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+        Flow in a hard-wall annular duct}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\foreach \i in {0,...,3}
+{
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_3_test_case_number_\i.pdf}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\foreach \i in {0,...,1}
+{
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_4_test_case_number_\i.pdf}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_0_test_case_number_\i.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \foreach \i\j in {0,...,4}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_\i_test_case_number_1.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \foreach \i\j in {2,...,3}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_\i_test_case_number_2.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \foreach \i\j in {4}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_\i_test_case_number_0.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+%  \begin{figure}
+%      \centering
+%      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/analytical_bessel_function.pdf}
+%      \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%      Flow in a hard-wall annular duct}
+%      \label{fig:analytical_bessel_function}
+%  \end{figure}
 
 
 \end{document}
