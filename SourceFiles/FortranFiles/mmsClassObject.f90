@@ -49,6 +49,12 @@ MODULE mmsClassObject
             TwoDdataSet1 , &
             TwoDdataSet2
 
+        COMPLEX(KIND=rDef),DIMENSION(:,:) , ALLOCATABLE :: &
+            TwoDdataSet1_complex , &
+            TwoDdataSet2_complex
+        COMPLEX(KIND=rDef), DIMENSION(:) , ALLOCATABLE :: &
+            RateOfConvergence_complex , &
+            L2Array_complex
     END TYPE mmsClassType
 CONTAINS 
 
@@ -183,9 +189,9 @@ CONTAINS
             dataErrorSquared
 
 
-        object%dataSet = dataSet
+        ! object%dataSet = dataSet
 
-        numPoints = SIZE(object%dataSet)
+        numPoints = SIZE(dataSet)
 
         ALLOCATE(&
             dataError(numPoints), &
@@ -200,8 +206,8 @@ CONTAINS
         ENDDO
 
 
-        object%L2 = SQRT(dataSum/CMPLX(numPoints,KIND=rDef))
-        L2 = object%L2 
+        L2 = SQRT(dataSum/CMPLX(numPoints,KIND=rDef))
+        ! L2 = object%L2 
 
         DEALLOCATE(dataError,dataErrorSquared)
 
@@ -218,36 +224,72 @@ CONTAINS
 
         INTEGER :: &
             numPoints
-        COMPLEX(KIND=rDef), INTENT(INOUT) :: L2
-        COMPLEX(KIND=rDef),DIMENSION(:), INTENT(IN)  :: dataSet1,&
+
+        COMPLEX(KIND=rDef), INTENT(INOUT) :: &
+            L2
+
+        COMPLEX(KIND=rDef),DIMENSION(:), INTENT(IN)  :: &
+            dataSet1,&
             dataSet2
 !Local variables within submodule only
 
-        COMPLEX(KIND=rDef) :: dataSum
-        COMPLEX(KIND=rDef), DIMENSION(:), ALLOCATABLE :: dataError,&
-            dataErrorSquared
+        REAL(KIND=rDef) :: &
+            dataSum_real , &
+            L2_real
 
-        object%dataSet1 = dataSet1
-        object%dataSet2 = dataSet2
+        COMPLEX(KIND=rDef) :: &
+            dataSum_complex , &
+            L2_complex
 
-        numPoints = SIZE(object%dataSet1)
+
+        REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: &
+            dataError_real,&
+            dataErrorSquared_real
+
+        COMPLEX(KIND=rDef), DIMENSION(:), ALLOCATABLE :: &
+            dataError_complex,&
+            dataErrorSquared_complex
+
+        ! object%dataSet1 = dataSet1
+        ! object%dataSet2 = dataSet2
+
+        numPoints = SIZE(dataSet1)
 
         ALLOCATE(&
-            dataError(numPoints) , &
-            dataErrorSquared(numPoints))
+            dataError_real(numPoints) , &
+            dataErrorSquared_real(numPoints), &
+            dataError_complex(numPoints) , &
+            dataErrorSquared_complex(numPoints))
 
-        dataSum = CMPLX(0.0,0.0,rDef)
+        dataSum_real = 0.0_rDef
+        dataSum_complex = CMPLX(0.0,0.0,rDef)
 
         DO i = 1,numPoints
-            dataError(i) = CMPLX(ABS(object%dataSet1(i) - object%dataSet2(i)),KIND=rDef)
-            dataErrorSquared(i) = dataError(i)**2
-            dataSum = dataSum + dataErrorSquared(i)
+            dataError_real(i) = (ABS(REAL(dataSet1(i),rDef) - REAL(dataSet2(i),rDef)))
+            dataErrorSquared_real(i) = dataError_real(i)**2
+            dataSum_real = dataSum_real + dataErrorSquared_real(i)
         ENDDO
 
-        L2 = SQRT(dataSum/CMPLX(numPoints,KIND=rDef))
+        L2_real = SQRT(dataSum_real/REAL(numPoints,KIND=rDef))
 
-        object%L2 =L2 
-        DEALLOCATE(dataError,dataErrorSquared)
+        DO i = 1,numPoints
+            dataError_complex(i) = (ABS(CMPLX(dataSet1(i),KIND = rDef) - CMPLX(dataSet2(i),KIND = rDef)))
+            dataErrorSquared_complex(i) = dataError_complex(i)**2
+            dataSum_complex = dataSum_complex + dataErrorSquared_complex(i)
+        ENDDO
+
+        L2_complex = SQRT(dataSum_complex/CMPLX(numPoints,KIND = rDef))
+
+        ! is this right?
+        ! WRITE(0,*) L2_complex
+
+        L2 = CMPLX(REAL(L2_real,KIND=rDef),REAL(L2_complex,KIND=rDef),KIND=rDef)
+        ! L2 = L2_real !CMPLX(REAL(L2_real,KIND=rDef),REAL(L2_complex,KIND=rDef),KIND=rDef)
+        DEALLOCATE(&
+            dataError_real , &
+            dataError_complex , &
+            dataErrorSquared_real , & 
+            dataErrorSquared_complex )
 
     END SUBROUTINE L2N_COMPLEX
 
@@ -281,20 +323,19 @@ CONTAINS
         REAL(KIND=rDef), DIMENSION(numPoints,numPoints) :: dataError,&
             dataErrorSquared
 
-        object%TwoDdataSet1 = dataSet1
-        object%TwoDdataSet2 = dataSet2
+        object%TwoDdataSet1_complex = dataSet1
+        object%TwoDdataSet2_complex = dataSet2
 
         dataSum = 0.0_rDef
         DO i = 1,numPoints
             DO j =1,numPoints
-                dataError(i,j) = ABS(object%TwoDdataSet1(i,j) - object%TwoDdataSet2(i,j))
+                dataError(i,j) = ABS(object%TwoDdataSet1_complex(i,j) - object%TwoDdataSet2_complex(i,j))
                 dataErrorSquared(i,j) = dataError(i,j)**2
                 dataSum = dataSum + dataErrorSquared(i,j)
             ENDDO
         ENDDO
         L2 = SQRT(CMPLX(dataSum,KIND=rDef) &
             /CMPLX(numPoints,KIND=rDef))
-        object%L2 = L2
 
         ! WRITE(6,*) L2
     END SUBROUTINE L2N_2D
@@ -318,13 +359,15 @@ CONTAINS
         object           ,&
         ExpectedRateOfConvergence ,&
         RateOfConvergence,&
-        L2Array          )
+        L2Array, &
+        gridSpacingRatio)
 
 
         TYPE(mmsClassType) , INTENT(INOUT) :: &
             object
 
         REAL(KIND = rDef),  INTENT(IN) :: &
+            gridSpacingRatio                 , &
             ExpectedRateOfConvergence 
 
         REAL(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
@@ -332,6 +375,7 @@ CONTAINS
 
         REAL(KIND = rDef), DIMENSION(:), INTENT(IN) :: &
             L2Array
+
 
         INTEGER ::  numberOfIterations, i
 
@@ -356,7 +400,7 @@ CONTAINS
                 LOG((object%L2Array(i  )))&
                 )&
                 /&
-                LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+                 LOG(gridSpacingRatio) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
 
             ENDIF
         ENDDO
@@ -367,12 +411,16 @@ END SUBROUTINE getROC
 SUBROUTINE getROC_Complex(&
     object           ,&
     RateOfConvergence,&
-    L2Array          )
+    L2Array          ,&
+    gridSpacingRatio)
 
     TYPE(mmsClassType) , INTENT(INOUT) :: &
         object
 
-    REAL(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
+    REAL(KIND = rDef) , INTENT(IN) :: &
+        gridSpacingRatio
+
+    COMPLEX(KIND = rDef), DIMENSION(:), INTENT(OUT) :: &
         RateOfConvergence
 
     COMPLEX(KIND = rDef), DIMENSION(:), INTENT(IN) :: &
@@ -383,25 +431,26 @@ SUBROUTINE getROC_Complex(&
         numberOfIterations = SIZE(RateOfConvergence)
 
 
-        object%L2Array = L2Array
-        object%RateOfConvergence = RateOfConvergence
+        object%L2Array_complex = L2Array
+        object%RateOfConvergence_complex = RateOfConvergence
 
         DO i = 1,numberOfIterations 
-            IF (REAL(L2Array(i),KIND=rDef) < tolerance) THEN
+            IF ((AIMAG(object%L2Array_complex(i)) < tolerance) .or. &
+                (REAL(object%L2Array_complex(i),KIND=rDef) < tolerance)) THEN
                 WRITE(0,*) 'The numerical solution is converged, the L2 norm has reached machine precision on the ',i, 'iteration'
                 
             ELSE
             ENDIF
 
-             object%RateOfConvergence(i) = &
+            object%RateOfConvergence_complex(i) = &
                 (&
-                 LOG((object%L2Array(i+1))) -&
-                 LOG((object%L2Array(i  )))&
+                LOG((object%L2Array_complex(i+1))) -&
+                LOG((object%L2Array_complex(i  )))&
                 )&
                 /&
-                LOG(0.50_rDef) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
+                LOG(gridSpacingRatio) ! change 0.5 so that way the grid spacing doesnt have to half as big between iterations JS
          ENDDO
-        RateOfConvergence = object%RateOfConvergence 
+         RateOfConvergence = object%RateOfConvergence_complex
 
     END SUBROUTINE getROC_Complex
 

@@ -33,9 +33,6 @@
 ###################################################################
 
 # Defining colored output for ANSI escape sequences 
-#
-
-
 COM_COLOR   = \033[0;34m
 OBJ_COLOR   = \033[0;36m
 OK_COLOR    = \033[0;32m
@@ -50,25 +47,30 @@ COM_STRING = "Compiling..."
 
 F90      = gfortran
 #-O -fbounds-check -fcheck-array-temporaries -Wconversion -Wsurprising -Wall
+# Compiler flags 
 F90FLAGS  =	\
 			-g -c \
 			-O0 \
 			-std=f2008 \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
-			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
-			-Wconversion -Wsurprising -Warray-temporaries \
-			-Wextra -Werror \
-			-Wno-error=unused-function \
-			-Wno-error=compare-reals \
-			-Wno-error=character-truncation \
+			-Wsurprising -Warray-temporaries \
+			-Wextra \
+			-Wno-compare-reals \
+			-Wno-unused-parameter \
+			-Wno-unused-dummy-argument \
+			-Wno-unused-variable\
+			-Wno-array-temporaries \
+			-Wno-unused-function #\
+			-fdump-fortran-global \
+			-Werror \
+			-Wno-error=unused-parameter \
 			-Wno-error=conversion-extra \
 			-Wno-error=conversion \
-			-Wno-error=unused-dummy-argument \
-			-Wno-error=array-temporaries \
-			-Wno-error=do-subscript
+			-Wno-error=compare-reals \
+			-Wno-error=character-truncation \
+			-Wno-error=do-subscript -ffpe-trap=denormal,invalid,zero,overflow,underflow \
 
 # -Wconversion-extra \
 			
@@ -76,23 +78,24 @@ F90FLAGS  =	\
 F77      = gfortran
 F77FLAGS  = \
 			-g -c \
-			-O0 \
+			-O0\
 			-std=legacy \
 			-fbacktrace -fcheck=all -fbounds-check -fcheck-array-temporaries \
-			-ffpe-trap=denormal,invalid,zero,overflow,underflow \
 			-fdump-fortran-global \
 			-fimplicit-none \
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
-			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra -Werror \
+			-Wconversion -Wsurprising -Warray-temporaries -Wconversion-extra -Wextra #\
+			# -Werror \
 			-Wno-error=compare-reals \
 			-Wno-error=array-temporaries \
 			-Wno-error=unused-dummy-argument \
-			-Wno-error=do-subscript
+			-Wno-error=do-subscript -ffpe-trap=denormal,invalid,zero,overflow,underflow \
+			# -Wno-error=conversion \
+			-Wno-error=conversion-extra \
 
 
 
-
-#-Wno-error=do-subscript \ -Wno-error=array-temporaries \ -Wno-error=conversion-extra 
+#-Wno-error=do-subscript \ -Wno-error=array-temporaries \  
 # -Wno-error=do-subscript
 			# -Wno-error=unused-dummy-argument\
 #F90FLAGS   = -c -g -C -qextchk -qflttrap -qhsflt -qxflag=dd24 \
@@ -118,6 +121,7 @@ OBJECTS  =                     \
 	kapsubModule.o			   \
 	rmachModule.o 			   \
 	smachAndSndspdModule.o     \
+	trapezoidalRuleModule.o    \
     machoutModule.o 		   \
 	fdgridModule.o 			   \
 	outputModule.o 			   \
@@ -225,9 +229,13 @@ all:  $(OBJECTS)
 			cat $@.log; \
 			rm -f $@.log; \
 			exit $$RESULT
-	@(mv $(EXE) $(EXECUTABLE_LOCATION)); (mv $(OBJECTS) $(OBJ_FILES)); (mv *.mod $(MOD_FILES));
-	@(cd $(EXECUTABLE_LOCATION); ./$(EXE))
-	# @(cd $(EXECUTABLE_LOCATION); (make plot ))
+	@(mv $(EXE) $(EXECUTABLE_LOCATION)); 
+	@(mv $(OBJECTS) $(OBJ_FILES)); 
+	@(mv *.mod $(MOD_FILES));
+	@(cd $(EXECUTABLE_LOCATION); ./$(EXE)); 
+	@(spd-say 'stay-hard' ); 
+
+# @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
 MMS:
 	cd PythonFiles/SymbolicManufacturedSolutions && make
@@ -244,6 +252,7 @@ cleanAll:
        (cd $(LAPACK_LOCATION); rm -f *.o *.c *.a *.mod); \
        (cd $(BLAS_LOCATION); rm -f *.o *.c *.a *.mod)
                                                                
+#
 main.o: FortranFiles/main.f90        \
 	FortranFiles/analysisModule.o \
 	FortranFiles/boundaryModule.o \
@@ -256,6 +265,7 @@ main.o: FortranFiles/main.f90        \
 	FortranFiles/machoutModule.o  \
 	FortranFiles/rmachModule.o    \
 	FortranFiles/smachAndSndspdModule.o \
+	FortranFiles/trapezoidalRuleModule.o \
 	FortranFiles/FindResidualVectorModule.o \
 	FortranFiles/SourceTermModule.o  \
 	FortranFiles/L2NormModule.o         \
@@ -266,7 +276,7 @@ main.o: FortranFiles/main.f90        \
 FortranFiles/analysisModule.o:  FortranFiles/analysisModule.f90 \
 	$(LAPACK_LOCATION)/zggev.o\
 	$(LAPACK_LOCATION)/f90_zggev.o 
-	$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/analysisModule.f90
+	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/analysisModule.f90
 
 FortranFiles/boundaryModule.o:  FortranFiles/boundaryModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/boundaryModule.f90
@@ -287,7 +297,7 @@ FortranFiles/fdrivsModule.o:  FortranFiles/fdrivsModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/fdrivsModule.f90
 
 FortranFiles/egvModule.o: FortranFiles/egvModule.f90
-		$(F90) $(F90FLAGS)  FortranFiles/egvModule.f90
+		@$(F90) $(F90FLAGS)  FortranFiles/egvModule.f90
 
 FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
 							$(LAPACK_LOCATION)/zggev.o
@@ -305,7 +315,11 @@ FortranFiles/rmachModule.o:  FortranFiles/rmachModule.f90
 FortranFiles/smachModule.o:  FortranFiles/smachModule.f90 
 	@$(F90) $(F90FLAGS) FortranFiles/smachModule.f90
 
-FortranFiles/smachAndSndspdModule.o:  FortranFiles/smachAndSndspdModule.f90 
+FortranFiles/trapezoidalRuleModule.o: FortranFiles/trapezoidalRuleModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/trapezoidalRuleModule.f90
+
+FortranFiles/smachAndSndspdModule.o:  FortranFiles/smachAndSndspdModule.f90 \
+	FortranFiles/trapezoidalRuleModule.o
 	@$(F90) $(F90FLAGS) FortranFiles/smachAndSndspdModule.f90
 
 FortranFiles/sndspdModule.o:  FortranFiles/sndspdModule.f90
@@ -336,7 +350,7 @@ FortranFiles/swirlClassObject.o: FortranFiles/swirlClassObject.f90
 
 $(BLAS_LOCATION)/dgemv.o: \
    $(BLAS_LOCATION)/dgemv.f
-	 (cd $(BLAS_LOCATION); \
+	 @(cd $(BLAS_LOCATION); \
          make dgemv.o "F77=$(F77)" "LINK=$(LINK)" "FFLAGS=$(F77FLAGS)" )
 
 #----------------------------------LAPACK------------------------------------------

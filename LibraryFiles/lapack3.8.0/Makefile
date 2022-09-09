@@ -234,7 +234,22 @@ zggbal.o:                   \
 	$(F77) $(FFLAGS) -I$(BLAS_LOCATION) zggbal.f
 
 f90_zggev.o:                    \
-	f90_zggev.f90           
+	f90_zggev.f90           \
+	zggev.f                   \
+	dlabad.o                  \
+	dlamch.o                  \
+	ilaenv.o                  \
+	xerbla.o                  \
+	zgeqrf.o                  \
+	zggbal.o                  \
+	zgghrd.o                  \
+	zhgeqz.o                  \
+	zlacpy.o                  \
+	zlange.o                  \
+	ztgevc.o                  \
+	zungqr.o                  \
+	zunmqr.o                  \
+	$(BLAS_LOCATION)/lsame.o
 	$(F77) $(FFLAGS) f90_zggev.f90
 
 zggev.o:                    \
@@ -419,7 +434,7 @@ $(BLAS_LOCATION)/ztrmv.o: \
          make ztrmv.o "F77=$(F77)" "LINK=$(LINK)" "FFLAGS=$(FFLAGS)" )
 
 clean: 
-	rm -f *.o *.a core
+	rm -f *.o *.a *.mod core
 
 cleanAll: 
 	rm -f *.o *.a core;   \

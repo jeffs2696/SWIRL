@@ -1,0 +1,10 @@
+
+the annotation for the numerical wavenumbers do not have a sign for a superscript 
+at the moment. However, t_{2,0} has a duplicate? There can only be one. By coincidence 
+I looked at the t_{2,0} mode that was closest to the analytic solution, but it
+is shown in the wavenumber plot there is two instead of just one, and, the duplicate
+is closest to the k_{2,2} mode.
+
+The other apparently wrong mode is the -+t_{2,8} pair. Looking at the modes
+, there are high wavenumber fluctuations in the solution around 0 that are
+an artifact of the numerical solution

@@ -1,7 +1,8 @@
 # How to run
 
-make MMS
-make all 
+1. make MMS
+2. make all 
+
 
 ## FORTRAN
 ### Naming Convention

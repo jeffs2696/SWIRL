@@ -1,0 +1,53 @@
+
+Some quick notes:
+
+'one of the most destructive': Considering contrails and exhaust emissions, that's a
+strong statement.
+    - I switched the word to detrimental, less extreme
+
+'Since the widespread use of Pratt...': fan noise has been an issue long
+before the GTF.  Also:  how widespread is the GTF engine's use?
+    - Reviewing The aircraft noise book showed me that it wasn't P&W's GTF
+    specifically, but the availability of turbine-cooling materials that allowed 
+    for more widespread use of HBR fans
+
+'high-bypass-ratio of turbomachines': your meaning isn't clear.
+    - Removed Pratt and Whitney and kept it general 
+
+'utilize the Linearized Euler equations':  it sounds like you mean
+the Euler equations (nonlinear) here.
+    - whY does it sound like I mean nonlinear?
+
+Note:  WHILE I'M ABSOLUTELY NOT GOING TO WRITE YOUR THESIS FOR YOU!!! you
+may wish to point out (in your own words) that the N-S equations predict
+the sound generation and propagation -- but are expensive to use for this.
+Since sound waves are low-amplitude and viscosity has a small effect on
+the waves, the LEE gives an efficient means to ...
+    - Gave background to transition into LEE 
+
+'whereas':  clean this up and make sure the reader understands that the
+propagating waves are entropic, vortical, and acoustic.  In uniform mean flow,
+these wave families are distinct; in nonuniform mean flow, they're coupled.
+    - specified families are for distinct for uniform flow. Forgot to mention 
+    three types of waves first, was missing acoustic waves.
+
+'do not form a complete basis system...': I've strongly suggested that you
+remove this statement, unless you wish to explain it.  If you wish to keep
+it, it's your thesis.
+    - I will remove this from the intro
+
+ARGH!!! THE INSTANT YOU HAVE AN ARBITRARY, USER-INPUT MEAN FLOW PROFILE, YOU
+MUST SOLVE THE EQUATIONS NUMERICALLY!!!!  If there's another way to solve
+the system given discrete mean flow data points from the user, present
+the reference here.
+    -  I hope I mentioned this in the right spot.
+
+Did Marv Goldstein present a general analytical solution for arbitrarily
+sheared mean flows in Refs 13 and 14?  If so, why are we not using these
+to test SWIRL?
+    - Haven't gotten around to it. This was ignored because it utilized 
+    a greens function which depends on an eulerian framework.
+
+'This chapter will provide an introduction...':  isn't this the last
+paragraph of the Introduction chapter?
+    - Changed first sentence, will revisit to transition better.

@@ -33,17 +33,17 @@ CONTAINS
         jobvl, &
         jobvr, &
         mm, &
-        ir, &
-        is, &
+        ! ir, &
+        ! is, &
         vphi, &
-        akap)
+        akap, &
+        debug)
 
         INTEGER, INTENT(IN) :: &
             np, &
             np4, &
-            mm, &
-            ir, &
-            is
+            mm!, &
+            ! ir, & is
 
         REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
             rr, &
@@ -77,6 +77,8 @@ CONTAINS
             jobvl, &
             jobvr
 
+        LOGICAL , INTENT(IN)  :: &
+           debug 
 ! define local variables
 
         LOGICAL :: &
@@ -110,7 +112,6 @@ CONTAINS
             r, &
             rm, &
             rs
-        LOGICAL :: debug = .FALSE.
 !
 !        INTEGER  :: &
 !            UNIT , &
@@ -124,7 +125,7 @@ CONTAINS
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 10.e-4 !JS: is this sufficient
+        eps     = 10.e-4_rDef !JS: is this sufficient
 
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
@@ -134,14 +135,9 @@ CONTAINS
             rs = rmt(j) !and tangential mach numbers +  ...
             as = snd(j) ! the speed of sound.
             r  = rr(j)  ! Don't forget, we need this data at each radial point!
-
-            IF (debug.eqv..TRUE.) THEN
-                WRITE(0,*) 'ak = ',ak,' Mt = ',as,' Mx = ',rm
-            ELSE
-            ENDIF
 ! Check Convective wave number calculation
 ! what is 'as' is zero??? - JS
-            IF ( (rm.ne.0.0_rDef) .and.(r.gt.0.0_rDef) ) THEN
+            IF ( (rm.gt.0.0_rDef) .and.(r.gt.0.0_rDef) ) THEN
 
                 cvct(j) = (&
                     ak/CMPLX(as,KIND=rDef) &
@@ -205,7 +201,7 @@ CONTAINS
             IF (col(j)) THEN
 
 
-                WRITE(0,*) j
+                ! WRITE(0,*) j
                 !WRITE(0,20) j
 
                 badcol = .true.
@@ -237,7 +233,7 @@ CONTAINS
             if (row(k)) then
 
                 ! WRITE(0,25) k
-                WRITE(0,*) k
+                ! WRITE(0,*) k
                 badrow = .true.
             endif
 
@@ -267,11 +263,13 @@ CONTAINS
             VR    = VR,      & ! VR
             LDVR  = NMAX4,   & ! LDVR
             WORK  = WORK,    & ! WORK
-            LWORK = 2*NMAX4, & ! LWORK
+            LWORK = 2*NMAX4, & !2*NMAX4, & ! LWORK
             RWORK = RWORK,   & ! RWORK
             INFO  = INFO )     ! INFO
 
         IF ((INFO .EQ. 0).and.(debug.eqv..TRUE.)) THEN
+            WRITE(0,*) 'WORK = ' ,WORK(1)
+            WRITE(0,*) 'LWORK = ' ,2*NMAX4
             WRITE(0,*) 'INFO = ' ,INFO
             WRITE(0,*) 'EIGENSOLVER PASSED'
         ELSEIF ((INFO .EQ. 1 .or. INFO .LT. np4).and.(debug.eqv..TRUE.)) THEN
@@ -317,12 +315,13 @@ CONTAINS
         ! WRITE(UNIT,55)
 
         do j=1,np4
-!            WRITE(0,*) alpha(j),beta(j)
-            if (beta(j).ne.c0) then
+            ! WRITE(0,*) 'before' ,j, alpha(j),beta(j)
+            if ((REAL(beta(j)).gt.eps) .or.(AIMAG(beta(j)).gt.eps)) then
                 gam(j) = ci*alpha(j)/beta(j)
                 if (abs(AIMAG(gam(j))).lt.eps) then
                     gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
                 elseif (abs(REAL(gam(j))).lt.eps) then
+                    WRITE(0,*)
                     gam(j) =CMPLX(0.0_rDef,AIMAG(gam(j)),KIND=rDef)
                 endif
                 vphi(j)  = ak/gam(j)
@@ -330,7 +329,19 @@ CONTAINS
                 ! WRITE(UNIT ,12) j,gam(j),gam(j)/ak, vphi(j)
                 ! WRITE(UNIT2,10) j,gam(j),gam(j)/ak,vphi(j)
                 ! WRITE(UNIT3,*) REAL(gam(j)),AIMAG(gam(j))
+            ! elseif (beta(j).lt.10e-12_rDef) THEN
+            elseif ((REAL(beta(j)).lt.eps) .or.(AIMAG(beta(j)).lt.eps)) then
+                gam(j) = CMPLX(0.0_rDef,0.0_rDef, KIND=rDef) 
+            ! elseif ((REAL(beta(j)).lt.eps) .or. AIMAG(beta(j)).lt.eps) THEN
+                IF (debug) THEN
+                    WRITE(0,*) 'beta is lt eps'
+                ENDIF
+                ! gam(j) = ci*CMPLX(0.0_rDef, AIMAG(alpha(j)), KIND=rDef)/beta(j)
             endif
+
+            if (debug) THEN
+                WRITE(0,*) 'after' ,j, alpha(j),beta(j)
+            ENDIF
         enddo
 
         ! CLOSE(UNIT)
@@ -408,7 +419,7 @@ CONTAINS
         DO i = 1,np4
 ! JS: if there is (linear shear) and (no slope) and (no swirl then) ...
 ! Note: this will never happen because we removed the swrl.input functionality
-            if ((rmx(1).gt.0.0_rDef) .and.  (rmt(1).eq.0.0_rDef)) then
+            if ((rmx(1).gt.0.0_rDef) .and.  (rmt(1).lt.10e-12_rDef)) then
                 !if ((ir.eq.1) .and.  (is.eq.0)) then
                 rm   = rmx(1)
 !       akap(i) = (rm*rm -1.)*gam(i)*gam(i) &

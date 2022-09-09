@@ -135,11 +135,14 @@ modulE swirlClassObject
             vl, &
             vr
 
+!         LOGICAL, :: &
+!             debugFlag
+
     END TYPE SwirlClassType
 
 ! Local Variable Declaration
 
-    LOGICAL :: debug = .FALSE. ! turns on/off printing to console
+    ! LOGICAL :: debug = .FALSE. ! turns on/off printing to console
 
     CHARACTER :: &
         jobvl = 'N' ,& ! needed for zggev
@@ -154,16 +157,19 @@ modulE swirlClassObject
 CONTAINS
 
     SUBROUTINE CreateSwirlClassObject(&
-        object          , &
-        azimuthalMode   , &
-        np              , &
-        sig             , &
-        axialMachData   , &
-        tangentialMachData   , &
-        ak              , &
-        etah            , &
-        etad            , &
-        ifdff           )
+        object              , &
+        azimuthalMode       , &
+        np                  , &
+        sig                 , &
+        axialMachData       , &
+        tangentialMachData  , &
+        ak                  , &
+        etah                , &
+        etad                , &
+        ifdff               , &
+        secondOrderSmoother , &
+        fourthOrderSmoother , &
+        debugFlag        )
 
         TYPE(SwirlClassType), INTENT(INOUT) ::&
             object
@@ -173,12 +179,19 @@ CONTAINS
             azimuthalMode, &
             np
 
-        REAL(KIND = REAL64), INTENT(INOUT) :: &
+        REAL(KIND = REAL64), INTENT(IN) :: &
             sig
+
+        REAL(KIND = REAL64), INTENT(IN) :: &
+            secondOrderSmoother , &
+            fourthOrderSmoother
 
         REAL(KIND = REAL64), DIMENSION(:), INTENT(INOUT) :: &
             axialMachData, &
             tangentialMachData
+
+        LOGICAL, INTENT(IN) :: &
+            debugFlag
 
 ! Local variables
         INTEGER ::&
@@ -193,9 +206,13 @@ CONTAINS
 
         object%isInitialized = .TRUE.
 
+        IF (debugFlag) THEN 
+            WRITE(0,*) 'swirlClassObject isInitialized:', object%isInitialized
+        ENDIF
+
         ! Set user input to the object 'properties';
-        ed2 = 0.0_rDef
-        ed4 = 0.0_rDef
+        ed2                         = secondOrderSmoother
+        ed4                         = fourthOrderSmoother
         object%azimuthalMode        = azimuthalMode
         object%numberOfRadialPoints = np
         object%hubTipRatio          = sig
@@ -255,10 +272,14 @@ CONTAINS
 
     END SUBROUTINE CreateSwirlClassObject
     SUBROUTINE runSWIRL(&
-        object)
+        object         ,&
+        debugFlag)
 
         TYPE(SwirlClassType) , INTENT(INOUT) :: &
             object
+
+        LOGICAL, INTENT(IN) :: &
+            debugFlag
 
         IF (object%isInitialized) THEN
             ! Set up Gauss-Lobatto grid and compute Chebyshev derivative matrix.
@@ -279,7 +300,7 @@ CONTAINS
                     ed4 = object%fourthOrderSmoother)
             else
 
-                IF (debug) THEN
+                IF (debugFlag) THEN
                     WRITE(0,*) 'Entering fdgrid CALL'
                 ELSE
                 ENDIF
@@ -292,12 +313,12 @@ CONTAINS
                     x   = object%y,   &
                     r   = object%r)
 
-                IF (debug) THEN
+                IF (debugFlag) THEN
                     WRITE(0,*) 'Leaving fdgrid CALL'
                 ELSE
                 ENDIF
 
-                IF (debug) THEN
+                IF (debugFlag) THEN
                     WRITE(0,*) 'Entering fdrivs CALL'
                 ELSE
                 ENDIF
@@ -310,7 +331,7 @@ CONTAINS
                     iorder = object%FiniteDifferenceFlag, &
                     ed2    = object%secondOrderSmoother,   &
                     ed4    = object%fourthOrderSmoother)
-                IF (debug) THEN
+                IF (debugFlag) THEN
                     WRITE(0,*) 'Leaving fdrivs CALL'
                 ELSE
                 ENDIF
@@ -318,7 +339,7 @@ CONTAINS
 
             ENDIF
 
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Entering smachAndSndspd CALL'
             ELSE
             ENDIF
@@ -332,12 +353,12 @@ CONTAINS
                 dsn   = object%dsn,   &
                 dd    = object%dl1   )
 
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Leaving smachAndSndspd CALL'
             ELSE
             ENDIF
 
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Entering rmach CALL'
             ELSE
             ENDIF
@@ -348,13 +369,14 @@ CONTAINS
                 drm   = object%drm,   &
                 dd    = object%dl1    &
                 )
-            IF (debug) THEN
+
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Leaving rmach CALL'
             ELSE
             ENDIF
 
             ! Set up global matrices.
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Entering globalM CALL'
             ELSE
             ENDIF
@@ -380,12 +402,12 @@ CONTAINS
                 col    = 4)
 
 
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Leaving globalM CALL'
             ELSE
             ENDIF
 
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Entering boundary CALL'
             ELSE
             ENDIF
@@ -402,7 +424,7 @@ CONTAINS
                 aa   = object%aa,   &
                 bb   = object%bb)
 
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Leaving boundary CALL'
             ELSE
             ENDIF
@@ -411,7 +433,7 @@ CONTAINS
             object%bb_before = object%bb
 
 
-            IF (debug) THEN
+            IF (debugFlag) THEN
                 WRITE(0,*) 'Entering analysis CALL'
             ELSE
             ENDIF
@@ -436,12 +458,14 @@ CONTAINS
                 jobvl = jobvl, &
                 jobvr = jobvr, &
                 mm    = object%azimuthalMode,    &
-                ir    = ir,    &
-                is    = is,    &
+                ! ir    = ir,    &
+                ! is    = is,    &
                 vphi  = object%vph,   &
-                akap  = object%akap)
+                akap  = object%akap , &
+                debug = debugFlag)
 
-           IF (debug) THEN
+
+           IF (debugFlag) THEN
                WRITE(0,*) 'Leaving analysis CALL'
            ELSE
            ENDIF
@@ -584,7 +608,8 @@ CONTAINS
         thetaMach_dr, &
         SoundSpeed  , &
         SoundSpeed_dr, &
-        radialData)
+        radialData  , &
+        debugFlag)
 
 ! The goal of this subroutine is to extract the mean flow data that we input plus the rest of the mean flow parameters
 ! that SWIRL generated
@@ -602,6 +627,10 @@ CONTAINS
             SoundSpeed  , &
             SoundSpeed_dr, &
             radialData
+
+        LOGICAL, INTENT(IN) :: &
+            debugFlag
+
 
         ! The data we originally sent in
         axialMach     = object%rmx

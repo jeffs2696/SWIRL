@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
 # general libraries
+import matplotlib.pyplot as plt
+import sys
 import sympy as sp
+import math
 
-
+import tikzplotlib
 # custom libraries
 from packages.manufactured_solution_modifiers import modifiers as msm
 from packages.manufactured_solution_generators import generators as msg
@@ -21,6 +24,12 @@ from packages.fortran_helpers.create_LEE_components_f_file import\
 from packages.symbolic_helpers import sympy_helpers as sp_help
 
 from classes.flow_classes import flow_class as fc 
+def rationalize_coeffs(expr):
+    for i in expr.atoms(sp.Float):
+        r = sp.Rational(str(i)).limit_denominator(1000)
+        expr = expr.subs(i, r)
+    return expr 
+
 # Defining symbolic variables needed for this code.
 # all units are dimensionless!
 
@@ -55,7 +64,7 @@ kappa_string    = 'gam'
 eta_max_string  = 'ductAdmittance'
 eta_min_string  = 'hubAdmittance'
 ak_string       = 'frequency'
-m_string        = 'azimuthalModeNumber ='
+m_string        = 'azimuthalModeNumber'
 
 r_max   = float(f_help.GetInputVariables(r_max_string)  [0])
 r_min   = float(f_help.GetInputVariables(r_min_string)  [0])
@@ -64,18 +73,20 @@ eta_min = float(f_help.GetInputVariables(eta_min_string)[0])
 eta_max = float(f_help.GetInputVariables(eta_max_string)[0])
 ak      = float(f_help.GetInputVariables(ak_string)     [0])
 m       = float(f_help.GetInputVariables(m_string)     [0])
-gamma   = ak*r_max
 ci      = (-1.0)**0.5
+gamma   = ak*r_max
+
     
 sigma  = r_min
 
 # In[6]:
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
-A_analytic        = msg.TanhMethod(7,0.03,r_min,r_max)# 0.0001*(r/5+4)**4#
+print('eta_min' ,eta_min, r_min,r_max)
+A_analytic        = msg.TanhMethod(5,0.3,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = 0.3*msg.TanhMethod(3 ,50,r_min,r_max )
+M_x_analytic      = 0.3*msg.TanhMethod(5 ,50,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -88,7 +99,7 @@ M_t_analytic = flow_1.get_tangential_mach()
 
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
 
-f     =msg.TanhMethod(1,1,r_min,r_max)
+f     = msg.TanhMethod(3,2,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -109,8 +120,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = msg.TanhMethod(5,20,r_min,r_max)
-v_x_analytic = msg.TanhMethod(5,20,r_min,r_max)
+v_t_analytic = msg.TanhMethod(4,50,r_min,r_max)
+v_x_analytic = msg.TanhMethod(3,30,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -119,7 +130,7 @@ dv_r_dr_analytic = v_r_analytic.diff(r)
 dM_x_dr_analytic = M_x_analytic.diff(r)
 dM_t_dr_analytic = M_t_analytic.diff(r)
 
-f      = msg.TanhMethod(1,10,r_min,r_max)
+f      = msg.TanhMethod(5,30,r_min,r_max)
 df     = f.diff(r)
 r_hat  = (r - r_min)/(r_max - r_min)
 f_min  = f.subs(r,r_min)
@@ -148,21 +159,37 @@ if r_min > 0:
             + 1/r
             )*v_t_analytic
 elif r_min == 0:
-    psi_1 = 2*dM_t_dr_analytic*v_t_analytic - (2.0*(kappa - 1) *M_t_analytic*dM_t_dr_analytic*f) - df
+    psi_1 = 2*dM_t_dr_analytic*v_t_analytic #- (2.0*(kappa - 1) *M_t_analytic*dM_t_dr_analytic*f) - df
     psi_2 = dv_r_dr_analytic + ci*gamma*v_x_analytic +(
             (
                 (kappa + 1))*M_t_analytic*dM_t_dr_analytic
             )*v_t_analytic
-    #print('r_min = 0')
+    print('r_min = 0')
 
 L = eta*((1-(gamma/ak))*M_total) 
 del_dp_BC    = psi_1 + L*psi_2
 
 
-#print(del_dp_BC)
-
+print('del_dp_BC =',del_dp_BC)
+psi_1_min = psi_1.subs(
+        {
+            'r'    :r_min  ,
+            'ak'   :ak     ,
+            'eta'  :eta_min,
+            'kappa':kappa  ,
+            'ci'   : ci                                      }
+        )
+psi_2_min = psi_2.subs(
+        {
+            'r'    :r_min  ,
+            'ak'   :ak     ,
+            'eta'  :eta_min,
+            'kappa':kappa  ,
+            'ci'   : ci                                      }
+        )
 del_dp_minBC = del_dp_BC.subs(
-        {'r'    :r_min  ,
+        {
+            'r'    :r_min  ,
             'ak'   :ak     ,
             'eta'  :eta_min,
             'kappa':kappa  ,
@@ -177,12 +204,16 @@ del_dp_maxBC = del_dp_BC.subs(
         )
 
 
+
+# print('psi_1_min',psi_1_min)
+# print('psi_2_min',psi_2_min)
+# print('del_dp_minBC',del_dp_minBC)
+
 p_analytic = msm.diffModifiedManufacturedSolution(f           ,
         del_dp_minBC,
         del_dp_maxBC,
         B_min       ,
         B_max)
-
 p_analytic = p_analytic.subs(
         {
             'ak':ak,
@@ -191,36 +222,38 @@ p_analytic = p_analytic.subs(
             }
         )
 dp_dr_analytic   = p_analytic.diff(r)
+TSM = msg.TanhMethod(3,10,r_min,r_max)
+# print(rationalize_coeffs(TSM))
 
-#sp_help.plotSymbolicEquation('Speed Of Sound', \
-#                     r               , \
-#                     'radius'        , \
-#                     A_analytic      , \
-#                     'Speed Of Sound', \
-#                     r_min           , \
-#                     r_max)
+sp_help.plotSymbolicEquation('Tanh Summation Example', \
+                     r               , \
+                     'x'        , \
+                     TSM      , \
+                     'y', \
+                     r_min           , \
+                     r_max)
+tikzplotlib.save("TSM.tex")
+sp_help.plotSymbolicEquation('M_t'       , \
+                    r           , \
+                    'radius'    , \
+                    M_t_analytic, \
+                    'M_t'       , \
+                    r_min       , \
+                    r_max)
 #
-#sp_help.plotSymbolicEquation('M_t'       , \
-#                     r           , \
-#                     'radius'    , \
-#                     M_t_analytic, \
-#                     'M_t'       , \
-#                     r_min       , \
-#                     r_max)
-#
-#sp_help.plotSymbolicEquation('Mx'        , \
-#                     r           , \
-#                     'radius'    , \
-#                     M_x_analytic, \
-#                     'M_x'       , \
-#                     r_min       , \
-#                     r_max)
-#sp_help.plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('dvdr'  ,r,'radius',dv_r_dr_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('vt'  ,r,'radius',v_t_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('vx'  ,r,'radius',v_x_analytic,'v',r_min,r_max)
-#sp_help.plotSymbolicEquation('p'   ,r,'radius',p_analytic,'p',r_min,r_max)
-#sp_help.plotSymbolicEquation('dpdr',r,'radius',dp_dr_analytic,'dpdr',r_min,r_max)
+sp_help.plotSymbolicEquation('Mx'        , \
+                     r           , \
+                     'radius'    , \
+                     M_x_analytic, \
+                     'M_x'       , \
+                     r_min       , \
+                     r_max)
+sp_help.plotSymbolicEquation('vr'  ,r,'radius',v_r_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('dvdr'  ,r,'radius',dv_r_dr_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('vt'  ,r,'radius',v_t_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('vx'  ,r,'radius',v_x_analytic,'v',r_min,r_max)
+sp_help.plotSymbolicEquation('p'   ,r,'radius',p_analytic,'p',r_min,r_max)
+sp_help.plotSymbolicEquation('dpdr',r,'radius',dp_dr_analytic,'dpdr',r_min,r_max)
 #
 S = list(range(4))
 S[0] = -i*( ak/A - (m/r)*M_t - gamma*M_x)*v_r \
@@ -355,11 +388,11 @@ for i,pr in enumerate(S):
 # multiplied by 1/v_r by d_v_dr and i v_x gamma terM by one
 
 # Checking if the matrix expressions equal the linear system of equations
-#print(S[0].equals(SS[0]))
-#print(S[1].equals(SS[1]))
-#print(S[2].equals(SS[2]))
-#print(S[3].equals(SS[3]))
-#
+print(S[0].equals(SS[0]))
+print(S[1].equals(SS[1]))
+print(S[2].equals(SS[2]))
+print(S[3].equals(SS[3]))
+
 for i,pr in enumerate(S):
     S[i] = S[i].subs(
             {
@@ -449,7 +482,7 @@ LEE_components_f_file(A_times_x,lambda_B_times_x)
 
 
 A_analytic_str = "  \\bar{{A}} = {latex_expr} "
-A_analytic_tex = sp.latex(A_analytic)
+A_analytic_tex = sp.latex(sp.ratsimp((rationalize_coeffs(A_analytic))))
 str = A_analytic_tex
 #n = 40
 #chunks = [str[i:i+n] for i in range(0,len(str),n)]
@@ -457,20 +490,20 @@ str = A_analytic_tex
 #print(Sp.latex(chunks))
 
 A_analytic_tex = A_analytic_str.format(latex_expr = A_analytic_tex)
-
-
+plt.show()
+#print(A_analytic_tex)
 #M_x_tex = "M_x = {latex_expr}"
-#M_x_tex = M_x_tex.format(latex_expr = sp.latex(M_x_analytic))
-#
-#M_t_tex = "  M_{{\\theta}} = {latex_expr} "
-#M_t_tex = M_t_tex.format(latex_expr = sp.latex(M_t_analytic))
-#
-out_file = open("../../../CodeRun/03-plotReport/manufactured_solutions.tex","w")
-
-out_file.write(
-        A_analytic_tex)
-#
-#+ "\n"
-#        + M_x_tex + "\n"
-#        + M_t_tex + "\n")
-out_file.close()
+#M_x_tex = M_x_tex.format(latex_expr = sp.latex(sp.ratsimp(rationalize_coeffs(M_x_analytic))))
+##
+## M_t_tex = "  M_{{\\theta}} = {latex_expr}"
+#M_t_tex = latex_expr = sp.latex(sp.ratsimp(rationalize_coeffs(sp.simplify(M_t_analytic))))
+##
+#out_file = open("../../../CodeRun/03-plotReport/tex-outputs/MMS_speedsound.tex","w")
+#out_file.write( A_analytic_tex )
+#out_file.close()
+#out_file = open("../../../CodeRun/03-plotReport/tex-outputs/MMS_M_x.tex","w")
+#out_file.write( M_x_tex )
+#out_file.close()
+#out_file = open("../../../CodeRun/03-plotReport/tex-outputs/MMS_M_t.tex","w")
+#out_file.write( M_t_tex )
+#out_file.close()

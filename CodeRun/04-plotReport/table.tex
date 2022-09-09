@@ -1,0 +1,18 @@
+% Generated using pyGCS (Grid Convergence Study)
+% - https://github.com/tomrobin-teschner/pyGCS
+% - https://pypi.org/project/pygcs/
+
+% You have to add the following packages to your preamble to make this table work in your document
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[tbp]
+\caption{Grid convergence study over 3 grids. $ \phi $ represents the \textbf{INSERT MEANING OF PHI HERE} and $ \phi_{extrapolated} $ its extrapolated value. $ N_{cells} $ is the number of grid elements, $ r $ the refinement ration between two successive grids. $ GCI $ is the grid convergence index in percent and its asymptotic value is provided by $ GCI_{asymptotic} $, where a value close to unity indicates a grid independent solution. The order achieved in the simulation is given by $ p $.}
+\label{tab:gci_study}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+& $ \phi $ & $ N_{cells} $ & $ r $ & $ GCI $ & $ GCI_{asymptotic} $ & $ p $ & $ \phi_{extrapolated} $ \\ \midrule
+Grid 1 & 6.063e+00 & 18000 & 1.5 & 2.17\%   & \multirow{3}{*}{ 1.015 } & \multirow{3}{*}{ 1.53 } & \multirow{3}{*}{ 6.17e+00 } \\ 
+Grid 2 & 5.97e+00 & 8000  & 1.3 & 4.11\% &                       &                      &                       \\ 
+Grid 3 & 5.86e+00 & 4500  & -   & -     &                       &                      &                       \\ \bottomrule 
+\end{tabular}
+\end{table}

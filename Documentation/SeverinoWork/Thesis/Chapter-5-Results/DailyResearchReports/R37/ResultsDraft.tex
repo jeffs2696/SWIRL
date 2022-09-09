@@ -1,0 +1,186 @@
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+\section{Research Performed}
+
+\subsection{Results}
+
+Hypothesis 1: 
+
+By using a composite trapezoidal rule numerical integration technique, the speed
+of sound is approximated using the tangential mach number. A second order 
+convergence for the approximated speed of sound is expected (Refer to analysis). 
+To obtain the radial derivatives, second and fourth order central differencing 
+schemes were used and the order of accuracy will also be computed using the 
+four system of equations for the LEE. 
+
+Why is this my hypothesis?:
+As the grid spacing gets smaller from one iteration to the next, the computed order of accuracy is
+expected to approach a known value, which is the leading error term of the 
+truncated term in the Taylor series used to derive the scheme , which in this
+case is the composite trapezoidal rule. By using the MMS, a computed order
+of accuracy was found. 
+
+
+
+
+
+The $L2_{norm}$ error of the two grids 
+$\epsilon_{grid_i}$ and $\epsilon_{grid_i+1}$
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_mean_flow_profile.pdf}
+    \caption{The manufactured mean flow test case using a summation of Tangents for $A$ and $M_x$}
+    \label{fig:1}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbation_variables_vR.pdf}
+\caption{The manufactured perturbation functions ,$v_r$}%, $v_x$, $v_{\theta}$, $p$}
+    \label{fig:1a}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbation_variables_vX.pdf}
+\caption{The manufactured perturbation functions ,$v_x$}%, $v_x$, $v_{\theta}$, $p$}
+    \label{fig:1a}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbation_variables_vTh.pdf}
+    \caption{The manufactured perturbation functions ,$v_{\theta}$}%, $v_x$, $v_{\theta}$, $p$}
+    \label{fig:1a}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/MMS_perturbation_variables_Pr.pdf}
+\caption{The manufactured perturbation functions ,$P$}%, $v_x$, $v_{\theta}$, $p$}
+    \label{fig:1a}
+\end{figure}
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SpeedOfSoundComparison1.pdf}
+    \caption{ A comparison of the speed of sound, expected vs actual at the lowest grid to show similarities in solution}
+    \label{fig:2}
+\end{figure}
+
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermActual.pdf}
+    \caption{LEE Source Terms}
+    \label{fig:3}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SourceTermError.pdf}
+    \caption{LEE Source Term Error}
+    \label{fig:3}
+\end{figure}
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/SND_L2.pdf}
+    \caption{L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}
+    \label{fig:4}
+\end{figure}
+
+
+
+\begin{figure}[!]
+    \centering
+    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_L2.pdf}
+    \caption{ROC  for the speed of sound integration for the compound trapezoidal rule}
+    \caption{}
+    \label{fig:6}
+\end{figure}
+
+
+\begin{figure}[!]
+    \centering
+        \includegraphics{/home/jeff-severino/SWIRL/CodeRun/03-plotReport/tex-outputs/LEE_ROC.pdf}
+        \caption{}
+       \caption{ROC  for the speed of sound integration for the compound trapezoidal rule}
+        \label{fig:7}
+\end{figure}
+
+
+
+
+
+\section{Issues and Concerns}
+There is an issue with the data I am data I am looking for the Source Terms. The 
+figure that I have for the source term error should have a magnitude of near zero .
+I will also double check the python output and the fortran output to make sure 
+that the perturbation variables without fairing functions $v_x$$v_theta$
+\section{Planned Research}
+Update Captions and labels 
+Discuss the ROC and the choice of scheme and number of grid points for the MMS.
+Discuss the L2 procedure in detail and make sure this data is what I think it is.
+\end{document}
+
+

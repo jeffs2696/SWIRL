@@ -3,87 +3,89 @@
 \subsubsection{Linearizing Conservation of Mass}
 To linearize the Euler equations, we substitute each flow variable with its equivalent mean and perturbation components. Note that the mean term is only a function of space whereas the perturbation component is a dependent on both space and time (functional dependence is not explicity written with each variable). Assuming that we can divide the variable into a known laminar flow solution to the Navier-Stokes equations and a small amplitude perturbation solution:
 
-\begin{align}
-v_r 		&= V_r(x) + v_r'\\
-v_{\theta} 	&= V_{\theta} + v_{\theta}'\\
-v_x 		&= V_x + v_x'\\
-p 			&= \bar{p} + p'\\
-\rho 		&= \bar{\rho} + \rho'
-\end{align}
-\newpage
-Starting with continuity,
-%\begin{flushleft}
-\begin{equation*} 
-\end{equation*}
-\begin{align*}
-\frac{\partial \rho}{\partial t} + 
-v_r \frac{\partial \rho}{\partial r} +
-\frac{v_{\theta}   }{r}
-\frac{\partial \rho}{\partial \theta} +
-v_x \frac{\partial \rho}{\partial \theta} + 
-\rho 
-\left(
-\frac{1}{r} \frac{\partial (rv_r)	}{\partial r} +
-\frac{1}{r}	\frac{\partial v_{\theta}}{\partial \theta} +
-\frac{\partial v_x}{\partial x}
-\right) 
-= 0\\
-\frac{\partial \bar{\rho} + \rho' }{\partial t} +
-(V_r + v_r') 
-\frac{\partial \bar{\rho} + \rho'}{\partial r} +
-\frac{V_{\theta} + v_{\theta}'}{r}
-\frac{\partial \bar{\rho} + \rho'}{\partial \theta} +
-(V_x + v_x') 
-\frac{\partial \bar{\rho} + \rho'}{\partial \theta} + \\ 
-(\bar{\rho} + \rho') 
-\left(
-\frac{1}{r}\frac{\partial (r(V_r +v_r'))}{\partial r} +
-\frac{1}{r}\frac{\partial V_{\theta}+v_{\theta}'}{\partial \theta} +
-\frac{\partial (V_x + v_x')}{\partial x}
-\right) = 0\\
-\frac{\partial \bar{\rho}}{\partial t} + 
-\frac{\partial \rho'     }{\partial t} +\\
-V_r \frac{\partial \bar{\rho}}{\partial r} +  
-v_r'\frac{\partial \bar{\rho}}{\partial r} + 
-V_r \frac{\partial \rho'}{\partial r} +
-v_r'\frac{\partial \rho'}{\partial r} + \\
-\frac{1}{r}
-\left(
-V_{\theta} \frac{\partial \bar{\rho}}{\partial \theta} +
-v_{\theta}'\frac{\partial \bar{\rho}}{\partial \theta} + 
-V_{\theta} \frac{\partial \rho'		}{\partial \theta} + 
-v_{\theta}'\frac{\partial \rho'		}{\partial \theta}
-\right) + \\ 
-V_x \frac{\partial \bar{\rho}}{\partial x} + 
-v_x'\frac{\partial \bar{\rho}}{\partial x} +
-V_x \frac{\partial \rho'	 }{\partial x} 	+
-v_x'\frac{\partial \rho'    }{\partial x}		+\\
-\bar{\rho} 
-\left(
-\frac{1}{r}
-\left(
-\frac{\partial (rV_r  )    }{\partial r} +
-\frac{\partial (r(v_r')    }{\partial r} +
-\frac{\partial V_{\theta}  }{\partial \theta} +
-\frac{\partial v_{\theta}' }{\partial \theta}
-\right) +
-\frac{\partial V_x }{\partial x} +
-\frac{\partial v_x'}{\partial x}
-\right) + \\
-\rho'
-\left(
-\frac{1}{r}
-\left(
-\frac{\partial (rV_r  )    }{\partial r} +
-\frac{\partial (r(v_r')    }{\partial r} +
-\frac{\partial V_{\theta}  }{\partial \theta} +
-\frac{\partial v_{\theta}' }{\partial \theta}
-\right) +
-\frac{\partial V_x }{\partial x} +
-\frac{\partial v_x'}{\partial x}
-\right)
-= 0	\\
-\end{align*}
+%\begin{align}
+%v_r 		&= V_r(x) + v_r'\\
+%v_{\theta} 	&= V_{\theta} + v_{\theta}'\\
+%v_x 		&= V_x + v_x'\\
+%p 			&= \bar{p} + p'\\
+%\rho 		&= \bar{\rho} + \rho'
+%\end{align}
+%% \newpage
+%% Starting with continuity,
+%Substituting these expressions into the governing equations will give the 
+%linearized perturbation equations for swirling flows in cylindrical coordinates,
+%%\begin{flushleft}
+%\begin{equation*} 
+%\end{equation*}
+%\begin{align*}
+%\frac{\partial \rho}{\partial t} + 
+%v_r \frac{\partial \rho}{\partial r} +
+%\frac{v_{\theta}   }{r}
+%\frac{\partial \rho}{\partial \theta} +
+%v_x \frac{\partial \rho}{\partial \theta} + 
+%\rho 
+%\left(
+%\frac{1}{r} \frac{\partial (rv_r)	}{\partial r} +
+%\frac{1}{r}	\frac{\partial v_{\theta}}{\partial \theta} +
+%\frac{\partial v_x}{\partial x}
+%\right) 
+%= 0\\
+%\frac{\partial \bar{\rho} + \rho' }{\partial t} +
+%(V_r + v_r') 
+%\frac{\partial \bar{\rho} + \rho'}{\partial r} +
+%\frac{V_{\theta} + v_{\theta}'}{r}
+%\frac{\partial \bar{\rho} + \rho'}{\partial \theta} +
+%(V_x + v_x') 
+%\frac{\partial \bar{\rho} + \rho'}{\partial \theta} + \\ 
+%(\bar{\rho} + \rho') 
+%\left(
+%\frac{1}{r}\frac{\partial (r(V_r +v_r'))}{\partial r} +
+%\frac{1}{r}\frac{\partial V_{\theta}+v_{\theta}'}{\partial \theta} +
+%\frac{\partial (V_x + v_x')}{\partial x}
+%\right) = 0\\
+%\frac{\partial \bar{\rho}}{\partial t} + 
+%\frac{\partial \rho'     }{\partial t} +\\
+%V_r \frac{\partial \bar{\rho}}{\partial r} +  
+%v_r'\frac{\partial \bar{\rho}}{\partial r} + 
+%V_r \frac{\partial \rho'}{\partial r} +
+%v_r'\frac{\partial \rho'}{\partial r} + \\
+%\frac{1}{r}
+%\left(
+%V_{\theta} \frac{\partial \bar{\rho}}{\partial \theta} +
+%v_{\theta}'\frac{\partial \bar{\rho}}{\partial \theta} + 
+%V_{\theta} \frac{\partial \rho'		}{\partial \theta} + 
+%v_{\theta}'\frac{\partial \rho'		}{\partial \theta}
+%\right) + \\ 
+%V_x \frac{\partial \bar{\rho}}{\partial x} + 
+%v_x'\frac{\partial \bar{\rho}}{\partial x} +
+%V_x \frac{\partial \rho'	 }{\partial x} 	+
+%v_x'\frac{\partial \rho'    }{\partial x}		+\\
+%\bar{\rho} 
+%\left(
+%\frac{1}{r}
+%\left(
+%\frac{\partial (rV_r  )    }{\partial r} +
+%\frac{\partial (r(v_r')    }{\partial r} +
+%\frac{\partial V_{\theta}  }{\partial \theta} +
+%\frac{\partial v_{\theta}' }{\partial \theta}
+%\right) +
+%\frac{\partial V_x }{\partial x} +
+%\frac{\partial v_x'}{\partial x}
+%\right) + \\
+%\rho'
+%\left(
+%\frac{1}{r}
+%\left(
+%\frac{\partial (rV_r  )    }{\partial r} +
+%\frac{\partial (r(v_r')    }{\partial r} +
+%\frac{\partial V_{\theta}  }{\partial \theta} +
+%\frac{\partial v_{\theta}' }{\partial \theta}
+%\right) +
+%\frac{\partial V_x }{\partial x} +
+%\frac{\partial v_x'}{\partial x}
+%\right)
+%= 0	\\
+%\end{align*}
 %\end{flushleft}
 Important things to note
 \begin{itemize}
@@ -91,450 +93,451 @@ Important things to note
 	\item Neglect second order terms.
 	\item The continuity equation is comprised of mean velocity components. This is subtracted off in each of the governing equations
 \end{itemize}
-Blue will be used for terms that are removed after subtracting in the original continuity equation, green will be used to cancel higher(2nd) order terms.Red will be used if we take the radial velocity to be zero.
 
-\begin{align*}
-=
-\Ccancel[blue]
-{\frac{\partial \bar{\rho}}{\partial t}} + 
-\frac{\partial \rho'     }{\partial t} + \\
-\Ccancel[blue]  {V_r \frac{\partial \bar{\rho}}{\partial r}} +  
-\Ccancel[blue] {v_r'\frac{\partial \bar{\rho}}{\partial r}} + 
-\Ccancel[red]{V_r \frac{\partial \rho'}{\partial r}} +
-\Ccancel[green]{v_r'\frac{\partial \rho'}{\partial r}} + \\
-\frac{1}{r}
-\left(
-\Ccancel[blue]{V_{\theta} \frac{\partial \bar{\rho}}{\partial \theta}} +
-\Ccancel[blue]{v_{\theta}'\frac{\partial \bar{\rho}}{\partial \theta}} + 
-V_{\theta} \frac{\partial \rho'		}{\partial \theta} + 
-\Ccancel[green]{v_{\theta}'\frac{\partial \rho'		}{\partial \theta}}
-\right) + \\ 
-\Ccancel[blue]{V_x \frac{\partial \bar{\rho}}{\partial x}} + 
-\Ccancel[blue]{v_x'\frac{\partial \bar{\rho}}{\partial x}} +
-V_x \frac{\partial \rho'	 }{\partial \theta} 	+
-\Ccancel[green]{v_x'\frac{\partial \rho'    }{\partial x}}		+\\
-\bar{\rho} 
-\left(
-\frac{1}{r}
-\left(
-\Ccancel[blue]{\frac{\partial (rV_r  )    }{\partial r}} +
-\frac{\partial (r(v_r')    }{\partial r} +
-\Ccancel[blue]{\frac{\partial V_{\theta}  }{\partial \theta}} +
-\frac{\partial v_{\theta}' }{\partial \theta}
-\right) +
-\Ccancel[green]{\frac{\partial V_x }{\partial x}} +
-\frac{\partial v_x'}{\partial x}
-\right) + \\
-\rho'
-\left(
-\frac{1}{r}
-\left(
-\Ccancel[blue]{\frac{\partial (rV_r  )    }{\partial r}} +
-\Ccancel[green]{\frac{\partial (r(v_r')    }{\partial r} }+
-\Ccancel[blue]{\frac{\partial V_{\theta}  }{\partial \theta} }+
-\Ccancel[green]{\frac{\partial v_{\theta}' }{\partial \theta}}
-\right) +
-\Ccancel[blue]{\frac{\partial V_x }{\partial x}} +
-\Ccancel[green]{\frac{\partial v_x'}{\partial x}} = 0
-\right)
-\end{align*}
+% Blue will be used for terms that are removed after subtracting in the original continuity equation, green will be used to cancel higher(2nd) order terms.Red will be used if we take the radial velocity to be zero.
 
-\begin{align*}
-\boxed{
-	\frac{\partial \rho'}{\partial t} +
-	\frac{V_{\theta}}{r}
-	\frac{\partial \rho'}{\partial \theta} + 
-	V_x
-	\frac{\partial \rho'}{\partial x} +
-	\bar{\rho}
-	\left(
-	\frac{1}{r}
-	\left(
-	\frac{\partial r v_r'}{\partial r} + \frac{\partial v_{\theta}'}{\partial \theta}		 
-	\right) +
-	\frac{\partial v_x'}{\partial x}
-	\right)= 0} 
-\end{align*}
-\newpage
-\subsubsection{Linearizing the Conservation of Momentum\\ in the \textit{r} direction}
-Starting with the mean momentum equation 
-\begin{align*}
-\frac{\partial v_r}{\partial t} + 
-v_r \frac{\partial v_r}{\partial r} +
-\frac{v_{\theta}  }{r}
-\frac{\partial v_r}{\partial \theta}- \frac{v_{\theta}^2}{r}+ 
-v_x \frac{\partial v_r}{\partial x} 
-&= -\frac{1}{\rho} 
-\frac{\partial p}{\partial r}
-\end{align*}
-Looking at the left hand side first
-\begin{align*} 
-\frac{\partial (V_r + v_r') }{\partial t} + 
-( V_r + v_r' ) 
-\frac{\partial( V_r + v_r')}{\partial r} +
-\frac{V_{\theta} + v_{\theta}'}{r}
-\frac{\partial(V_r + v_r')}{\partial \theta} -
-\frac{ (V_{\theta} + v_{\theta}')^2}{ r} + 
-(V_x + v_x') 
-\frac{\partial (V_r + v_r')}{\partial x} 	
-&= -\frac{1}{\rho} \frac{\partial p}{\partial r}\\
-\Ccancel[blue]  {\frac{\partial  V_r  }{\partial t}}	+
-\frac{\partial  v_r' }{\partial t} + \\
-\Ccancel[blue]  {V_r  \frac{\partial  V_r  }{\partial r}}  +
-\Ccancel[blue] {v_r' \frac{\partial  V_r  }{\partial r}} + 
-\Ccancel[red] {V_r  \frac{\partial  v_r' }{\partial r}} + 
-\Ccancel[green]{v_r' \frac{\partial  v_r' }{\partial r}} +\\
-\frac{1}{r}
-\left(
-\Ccancel[blue]  {V_{\theta} \frac{\partial V_r}{\partial \theta}} +
-\Ccancel[blue] {v_{\theta}'\frac{\partial V_r}{\partial \theta}} +
-V_{\theta} \frac{\partial v'_r}{\partial \theta} +
-\Ccancel[green]{v_{\theta}'\frac{\partial v'_r}{\partial \theta}}
-\right)- \\
-\frac{1}{r}\left(
-\Ccancel[blue]{V_{\theta}^2} + 
-2V_{\theta}v'_{\theta} + 	
-\Ccancel[green]{v^{'2}_{\theta}}\right)+\\
-\Ccancel[blue]{V_x \frac{\partial V_r }{\partial x}} +
-\Ccancel[blue]{v_x'\frac{\partial V_r }{\partial x}} +  
-V_x \frac{\partial v_r'}{\partial x} +
-\Ccancel[green]{v_x' \frac{\partial v_r'}{\partial x}} 
-&= -\frac{1}{\rho} 
-\frac{\partial p}{\partial r}\\
-\frac{\partial  v_r' }{\partial t} +
-V_r  \frac{\partial  v_r' }{\partial r} + 
-\frac{V_{\theta}}{r} \frac{\partial v'_r}{\partial \theta} -
-\frac{2V_{\theta}v'_{\theta}}{r} +
-V_x \frac{\partial v_r'}{\partial x} 
-&= -\frac{1}{\rho} 
-\frac{\partial p}{\partial r}
-\end{align*}
-\newpage
-Now looking at the right side,
-Expanding the $1/\rho $ using a Taylor series approximation
+% \begin{align*}
+% =
+% \Ccancel[blue]
+% {\frac{\partial \bar{\rho}}{\partial t}} + 
+% \frac{\partial \rho'     }{\partial t} + \\
+% \Ccancel[blue]  {V_r \frac{\partial \bar{\rho}}{\partial r}} +  
+% \Ccancel[blue] {v_r'\frac{\partial \bar{\rho}}{\partial r}} + 
+% \Ccancel[red]{V_r \frac{\partial \rho'}{\partial r}} +
+% \Ccancel[green]{v_r'\frac{\partial \rho'}{\partial r}} + \\
+% \frac{1}{r}
+% \left(
+% \Ccancel[blue]{V_{\theta} \frac{\partial \bar{\rho}}{\partial \theta}} +
+% \Ccancel[blue]{v_{\theta}'\frac{\partial \bar{\rho}}{\partial \theta}} + 
+% V_{\theta} \frac{\partial \rho'		}{\partial \theta} + 
+% \Ccancel[green]{v_{\theta}'\frac{\partial \rho'		}{\partial \theta}}
+% \right) + \\ 
+% \Ccancel[blue]{V_x \frac{\partial \bar{\rho}}{\partial x}} + 
+% \Ccancel[blue]{v_x'\frac{\partial \bar{\rho}}{\partial x}} +
+% V_x \frac{\partial \rho'	 }{\partial \theta} 	+
+% \Ccancel[green]{v_x'\frac{\partial \rho'    }{\partial x}}		+\\
+% \bar{\rho} 
+% \left(
+% \frac{1}{r}
+% \left(
+% \Ccancel[blue]{\frac{\partial (rV_r  )    }{\partial r}} +
+% \frac{\partial (r(v_r')    }{\partial r} +
+% \Ccancel[blue]{\frac{\partial V_{\theta}  }{\partial \theta}} +
+% \frac{\partial v_{\theta}' }{\partial \theta}
+% \right) +
+% \Ccancel[green]{\frac{\partial V_x }{\partial x}} +
+% \frac{\partial v_x'}{\partial x}
+% \right) + \\
+% \rho'
+% \left(
+% \frac{1}{r}
+% \left(
+% \Ccancel[blue]{\frac{\partial (rV_r  )    }{\partial r}} +
+% \Ccancel[green]{\frac{\partial (r(v_r')    }{\partial r} }+
+% \Ccancel[blue]{\frac{\partial V_{\theta}  }{\partial \theta} }+
+% \Ccancel[green]{\frac{\partial v_{\theta}' }{\partial \theta}}
+% \right) +
+% \Ccancel[blue]{\frac{\partial V_x }{\partial x}} +
+% \Ccancel[green]{\frac{\partial v_x'}{\partial x}} = 0
+% \right)
+% \end{align*}
 
-\begin{align*}
-\frac{1}{\bar{\rho} + \rho'} 
-&= \frac{1}{\bar{\rho}} 
-+ \left(
-\frac{1}{\bar{\rho} 
-	+ \rho'} 
-- \frac{1}{\rho}
-\right) \\
-&= \frac{1}{\bar{\rho}} 
-+ \left(
-\frac{\bar{\rho}}{\bar{\rho}(\bar{\rho} 
-	+ \rho')} 
-- \frac{1}{\rho} \frac{\bar{\rho} + \rho'}{\bar{\rho} + \rho'}
-\right) \\
-&= \frac{1}{\bar{\rho}} 
-- \left(
-\frac{\bar{\rho} - \bar{\rho} + \rho'}{\bar{\rho}(\bar{\rho} 
-	+ \rho')}
-\right)	\\
-&= \frac{1}{\bar{\rho}} 
-- \frac{\rho'}{\bar{\rho}}
-\underbrace{\left(
-	\frac{1}{\bar{\rho} + \rho}
-	\right)}_\text{This is what we're solving for!}	\\
-&= \frac{1}{\bar{\rho}} 
-- \frac{\rho'}{\bar{\rho}}
-\underbrace{
-	\left[\frac{1}{\bar{\rho}} 
-	+ \left(
-	\frac{1}{\bar{\rho} 
-		+ \rho'} 
-	- \frac{1}{\rho}
-	\right) \right] }_\text{This is from step 1}	\\
-&= \frac{1}{\bar{\rho}} 
-- \frac{\rho'}{\bar{\rho}^2} +
-\underbrace{
-	\left[ \left(\frac{\rho'}{\bar{\rho}}\right)^2
-	\frac{1}{\bar{\rho} 
-		+ \rho'} 
-	\right] }_\text{These are higher order terms that will go to $\infty$}	\\	
-\end{align*}
-\begin{align*} % \text{Plugging this back in to the right hand side, (don't forget the negative!)} \rightarrow
-\frac{1}{\rho}\frac{\partial p}{\partial r} = \left( -\frac{1    }{\bar{\rho}} +
-\frac{\rho'}{\bar{\rho}^2}\right) \left(\frac{\partial \bar{p} + p'}{\partial r}\right)\\
-\frac{1}{\rho}\frac{\partial p}{\partial r} =  -\Ccancel[blue]{\frac{1    }{\bar{\rho}}  \frac{\partial \bar{p}}{\partial r}} -  
-\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
-\frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r} +
-\Ccancel[green]{\frac{\rho'}{\bar{\rho}^2}\frac{\partial p'}{\partial r}}\\
-\frac{1}{\rho}\frac{\partial p}{\partial r} =  -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
-\frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r} 
-\end{align*}
+% \begin{align*}
+% \boxed{
+% 	\frac{\partial \rho'}{\partial t} +
+% 	\frac{V_{\theta}}{r}
+% 	\frac{\partial \rho'}{\partial \theta} + 
+% 	V_x
+% 	\frac{\partial \rho'}{\partial x} +
+% 	\bar{\rho}
+% 	\left(
+% 	\frac{1}{r}
+% 	\left(
+% 	\frac{\partial r v_r'}{\partial r} + \frac{\partial v_{\theta}'}{\partial \theta}		 
+% 	\right) +
+% 	\frac{\partial v_x'}{\partial x}
+% 	\right)= 0} 
+% \end{align*}
+% \newpage
+% \subsubsection{Linearizing the Conservation of Momentum\\ in the \textit{r} direction}
+% Starting with the mean momentum equation 
+% \begin{align*}
+% \frac{\partial v_r}{\partial t} + 
+% v_r \frac{\partial v_r}{\partial r} +
+% \frac{v_{\theta}  }{r}
+% \frac{\partial v_r}{\partial \theta}- \frac{v_{\theta}^2}{r}+ 
+% v_x \frac{\partial v_r}{\partial x} 
+% &= -\frac{1}{\rho} 
+% \frac{\partial p}{\partial r}
+% \end{align*}
+% Looking at the left hand side first
+% \begin{align*} 
+% \frac{\partial (V_r + v_r') }{\partial t} + 
+% ( V_r + v_r' ) 
+% \frac{\partial( V_r + v_r')}{\partial r} +
+% \frac{V_{\theta} + v_{\theta}'}{r}
+% \frac{\partial(V_r + v_r')}{\partial \theta} -
+% \frac{ (V_{\theta} + v_{\theta}')^2}{ r} + 
+% (V_x + v_x') 
+% \frac{\partial (V_r + v_r')}{\partial x} 	
+% &= -\frac{1}{\rho} \frac{\partial p}{\partial r}\\
+% \Ccancel[blue]  {\frac{\partial  V_r  }{\partial t}}	+
+% \frac{\partial  v_r' }{\partial t} + \\
+% \Ccancel[blue]  {V_r  \frac{\partial  V_r  }{\partial r}}  +
+% \Ccancel[blue] {v_r' \frac{\partial  V_r  }{\partial r}} + 
+% \Ccancel[red] {V_r  \frac{\partial  v_r' }{\partial r}} + 
+% \Ccancel[green]{v_r' \frac{\partial  v_r' }{\partial r}} +\\
+% \frac{1}{r}
+% \left(
+% \Ccancel[blue]  {V_{\theta} \frac{\partial V_r}{\partial \theta}} +
+% \Ccancel[blue] {v_{\theta}'\frac{\partial V_r}{\partial \theta}} +
+% V_{\theta} \frac{\partial v'_r}{\partial \theta} +
+% \Ccancel[green]{v_{\theta}'\frac{\partial v'_r}{\partial \theta}}
+% \right)- \\
+% \frac{1}{r}\left(
+% \Ccancel[blue]{V_{\theta}^2} + 
+% 2V_{\theta}v'_{\theta} + 	
+% \Ccancel[green]{v^{'2}_{\theta}}\right)+\\
+% \Ccancel[blue]{V_x \frac{\partial V_r }{\partial x}} +
+% \Ccancel[blue]{v_x'\frac{\partial V_r }{\partial x}} +  
+% V_x \frac{\partial v_r'}{\partial x} +
+% \Ccancel[green]{v_x' \frac{\partial v_r'}{\partial x}} 
+% &= -\frac{1}{\rho} 
+% \frac{\partial p}{\partial r}\\
+% \frac{\partial  v_r' }{\partial t} +
+% V_r  \frac{\partial  v_r' }{\partial r} + 
+% \frac{V_{\theta}}{r} \frac{\partial v'_r}{\partial \theta} -
+% \frac{2V_{\theta}v'_{\theta}}{r} +
+% V_x \frac{\partial v_r'}{\partial x} 
+% &= -\frac{1}{\rho} 
+% \frac{\partial p}{\partial r}
+% \end{align*}
+% \newpage
+% Now looking at the right side,
+% Expanding the $1/\rho $ using a Taylor series approximation
 
-\begin{align*}
-\boxed{
-	\frac{\partial  v_r' }{\partial t} +
-	\frac{V_{\theta}}{r} \frac{\partial v'_r}{\partial \theta} -
-	\frac{2V_{\theta}v'_{\theta}}{r} +
-	V_x \frac{\partial v_r'}{\partial x} =\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
-	\frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r} 
-}
-\end{align*}
-\newpage
-\subsubsection{Linearizing the Conservation of Momentum\\ in the \textit{$\theta$} direction}
-Starting with the mean momentum equation 
-\begin{align*}
-\frac{\partial v_{\theta}}{\partial t} + 
-v_r \frac{\partial v_{\theta}}{\partial r} +
-\frac{v_{\theta}  }{r}
-\frac{\partial v_{\theta}}{\partial \theta}+
-\frac{v_r v_{\theta}}{r}+ 
-v_x \frac{\partial v_{\theta}}{\partial x} 
-&= -\frac{1}{\rho r} 
-\frac{\partial p}{\partial \theta}
-\end{align*}
+% \begin{align*}
+% \frac{1}{\bar{\rho} + \rho'} 
+% &= \frac{1}{\bar{\rho}} 
+% + \left(
+% \frac{1}{\bar{\rho} 
+% 	+ \rho'} 
+% - \frac{1}{\rho}
+% \right) \\
+% &= \frac{1}{\bar{\rho}} 
+% + \left(
+% \frac{\bar{\rho}}{\bar{\rho}(\bar{\rho} 
+% 	+ \rho')} 
+% - \frac{1}{\rho} \frac{\bar{\rho} + \rho'}{\bar{\rho} + \rho'}
+% \right) \\
+% &= \frac{1}{\bar{\rho}} 
+% - \left(
+% \frac{\bar{\rho} - \bar{\rho} + \rho'}{\bar{\rho}(\bar{\rho} 
+% 	+ \rho')}
+% \right)	\\
+% &= \frac{1}{\bar{\rho}} 
+% - \frac{\rho'}{\bar{\rho}}
+% \underbrace{\left(
+% 	\frac{1}{\bar{\rho} + \rho}
+% 	\right)}_\text{This is what we're solving for!}	\\
+% &= \frac{1}{\bar{\rho}} 
+% - \frac{\rho'}{\bar{\rho}}
+% \underbrace{
+% 	\left[\frac{1}{\bar{\rho}} 
+% 	+ \left(
+% 	\frac{1}{\bar{\rho} 
+% 		+ \rho'} 
+% 	- \frac{1}{\rho}
+% 	\right) \right] }_\text{This is from step 1}	\\
+% &= \frac{1}{\bar{\rho}} 
+% - \frac{\rho'}{\bar{\rho}^2} +
+% \underbrace{
+% 	\left[ \left(\frac{\rho'}{\bar{\rho}}\right)^2
+% 	\frac{1}{\bar{\rho} 
+% 		+ \rho'} 
+% 	\right] }_\text{These are higher order terms that will go to $\infty$}	\\	
+% \end{align*}
+% \begin{align*} % \text{Plugging this back in to the right hand side, (don't forget the negative!)} \rightarrow
+% \frac{1}{\rho}\frac{\partial p}{\partial r} = \left( -\frac{1    }{\bar{\rho}} +
+% \frac{\rho'}{\bar{\rho}^2}\right) \left(\frac{\partial \bar{p} + p'}{\partial r}\right)\\
+% \frac{1}{\rho}\frac{\partial p}{\partial r} =  -\Ccancel[blue]{\frac{1    }{\bar{\rho}}  \frac{\partial \bar{p}}{\partial r}} -  
+% \frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
+% \frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r} +
+% \Ccancel[green]{\frac{\rho'}{\bar{\rho}^2}\frac{\partial p'}{\partial r}}\\
+% \frac{1}{\rho}\frac{\partial p}{\partial r} =  -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
+% \frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r} 
+% \end{align*}
 
-Looking at the left hand side first
-\begin{align*} 
-\frac{\partial (V_{\theta} + v_{\theta}') }{\partial t} + 
-( V_r + v_r' ) 
-\frac{\partial( V_{\theta} + v_{\theta}')}{\partial r} + \\
-\frac{V_{\theta} + v_{\theta}'}{r}
-\frac{\partial(V_{\theta} + v_{\theta}')}{\partial \theta} +
-\frac{ (V_r + v_r')(V_{\theta} + v_{\theta}')}{ r} + 
-(V_x + v_x') 
-\frac{\partial (V_{\theta} + v_{\theta}')}{\partial x} 	
-&= 
--\frac{1}{\rho r} \frac{\partial p}{\partial \theta}\\
-\Ccancel[blue]  {\frac{\partial  V_{\theta}  }{\partial t}}	+
-\frac{\partial  v_{\theta}' }{\partial t} + \\
-\Ccancel[blue]  {V_r  \frac{\partial  V_{\theta}  }{\partial r}}  +
-\underbrace{v_r' \frac{\partial  V_{\theta}  }{\partial r}}_{v_r'=0} + 
-\Ccancel[red]{V_r  \frac{\partial  v_{\theta}' }{\partial r}} + 
-\Ccancel[green]{v_r' \frac{\partial  v_{\theta}' }{\partial r}} +\\
-\frac{1}{r}
-\left(
-\Ccancel[blue]  {V_{\theta} \frac{\partial V_{\theta}}{\partial \theta}} +
-\Ccancel[blue] {v_{\theta}'\frac{\partial V_{\theta}}{\partial \theta}} +
-V_{\theta} \frac{\partial v'_{\theta}}{\partial \theta} +
-\Ccancel[green]{v_{\theta}'\frac{\partial v'_{\theta}}{\partial \theta}}
-\right)+ \\
-\frac{1}{r}\left(
-\Ccancel[blue]{V_r V_{\theta}} + 
-v_r'V_{\theta} +
-\Ccancel[red]{V_r v'_{\theta}}  + 	
-\Ccancel[green]{v_r'v_{\theta}'}\right)+\\
-\Ccancel[blue]{V_x \frac{\partial V_{\theta} }{\partial x}} +
-\Ccancel[blue]{v_x'\frac{\partial V_{\theta} }{\partial x}} +  
-V_x \frac{\partial v_{\theta}'}{\partial x} +
-\Ccancel[green]{v_x' \frac{\partial v_{\theta}'}{\partial x}} 
-&= -\frac{1}{\rho r} 
-\frac{\partial p}{\partial \theta}\\
-\frac{\partial  v_{\theta}' }{\partial t} +
-v_r' \frac{\partial  V_{\theta}  }{\partial r} +
-\frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
-\frac{v'_rV_{\theta}}{r} +
-V_x \frac{\partial v_r'}{\partial x} 
-&= -\frac{1}{\rho r} 
-\frac{\partial p}{\partial \theta}
-\end{align*}
-Now looking at the right side,
-Expanding the $1/\rho $ using a Taylor series approximation
+% \begin{align*}
+% \boxed{
+% 	\frac{\partial  v_r' }{\partial t} +
+% 	\frac{V_{\theta}}{r} \frac{\partial v'_r}{\partial \theta} -
+% 	\frac{2V_{\theta}v'_{\theta}}{r} +
+% 	V_x \frac{\partial v_r'}{\partial x} =\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
+% 	\frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r} 
+% }
+% \end{align*}
+% \newpage
+% \subsubsection{Linearizing the Conservation of Momentum\\ in the \textit{$\theta$} direction}
+% Starting with the mean momentum equation 
+% \begin{align*}
+% \frac{\partial v_{\theta}}{\partial t} + 
+% v_r \frac{\partial v_{\theta}}{\partial r} +
+% \frac{v_{\theta}  }{r}
+% \frac{\partial v_{\theta}}{\partial \theta}+
+% \frac{v_r v_{\theta}}{r}+ 
+% v_x \frac{\partial v_{\theta}}{\partial x} 
+% &= -\frac{1}{\rho r} 
+% \frac{\partial p}{\partial \theta}
+% \end{align*}
 
-\begin{align*}
-&
--\frac{1}{\rho r}\frac{\partial p}{\partial \theta} = \left( -\frac{1    }{\bar{\rho}} +
-\frac{\rho'}{\bar{\rho}^2}\right) \left(\frac{\partial \bar{p} + p'}{\partial \theta}\right)\\
-&\frac{1}{\rho r}\frac{\partial p}{\partial \theta} =  -\Ccancel[blue]{\frac{1    }{\bar{\rho}}  \frac{\partial \bar{p}}{\partial \theta}} -  
-\frac{1    }{\bar{\rho} r}  \frac{\partial p'}{\partial \theta} +
-\Ccancel[blue]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial \bar{p}}{\partial \theta}} +
-\Ccancel[green]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial p'}{\partial \theta}}\\
-&\frac{1}{\rho r}\frac{\partial p}{\partial \theta} =  -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial \theta} 
-\end{align*}
+% Looking at the left hand side first
+% \begin{align*} 
+% \frac{\partial (V_{\theta} + v_{\theta}') }{\partial t} + 
+% ( V_r + v_r' ) 
+% \frac{\partial( V_{\theta} + v_{\theta}')}{\partial r} + \\
+% \frac{V_{\theta} + v_{\theta}'}{r}
+% \frac{\partial(V_{\theta} + v_{\theta}')}{\partial \theta} +
+% \frac{ (V_r + v_r')(V_{\theta} + v_{\theta}')}{ r} + 
+% (V_x + v_x') 
+% \frac{\partial (V_{\theta} + v_{\theta}')}{\partial x} 	
+% &= 
+% -\frac{1}{\rho r} \frac{\partial p}{\partial \theta}\\
+% \Ccancel[blue]  {\frac{\partial  V_{\theta}  }{\partial t}}	+
+% \frac{\partial  v_{\theta}' }{\partial t} + \\
+% \Ccancel[blue]  {V_r  \frac{\partial  V_{\theta}  }{\partial r}}  +
+% \underbrace{v_r' \frac{\partial  V_{\theta}  }{\partial r}}_{v_r'=0} + 
+% \Ccancel[red]{V_r  \frac{\partial  v_{\theta}' }{\partial r}} + 
+% \Ccancel[green]{v_r' \frac{\partial  v_{\theta}' }{\partial r}} +\\
+% \frac{1}{r}
+% \left(
+% \Ccancel[blue]  {V_{\theta} \frac{\partial V_{\theta}}{\partial \theta}} +
+% \Ccancel[blue] {v_{\theta}'\frac{\partial V_{\theta}}{\partial \theta}} +
+% V_{\theta} \frac{\partial v'_{\theta}}{\partial \theta} +
+% \Ccancel[green]{v_{\theta}'\frac{\partial v'_{\theta}}{\partial \theta}}
+% \right)+ \\
+% \frac{1}{r}\left(
+% \Ccancel[blue]{V_r V_{\theta}} + 
+% v_r'V_{\theta} +
+% \Ccancel[red]{V_r v'_{\theta}}  + 	
+% \Ccancel[green]{v_r'v_{\theta}'}\right)+\\
+% \Ccancel[blue]{V_x \frac{\partial V_{\theta} }{\partial x}} +
+% \Ccancel[blue]{v_x'\frac{\partial V_{\theta} }{\partial x}} +  
+% V_x \frac{\partial v_{\theta}'}{\partial x} +
+% \Ccancel[green]{v_x' \frac{\partial v_{\theta}'}{\partial x}} 
+% &= -\frac{1}{\rho r} 
+% \frac{\partial p}{\partial \theta}\\
+% \frac{\partial  v_{\theta}' }{\partial t} +
+% v_r' \frac{\partial  V_{\theta}  }{\partial r} +
+% \frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
+% \frac{v'_rV_{\theta}}{r} +
+% V_x \frac{\partial v_r'}{\partial x} 
+% &= -\frac{1}{\rho r} 
+% \frac{\partial p}{\partial \theta}
+% \end{align*}
+% Now looking at the right side,
+% Expanding the $1/\rho $ using a Taylor series approximation
 
-\begin{align*}
-\boxed{
-	\frac{\partial  v_{\theta}' }{\partial t} +
-	v_r' \frac{\partial  V_{\theta}  }{\partial r} +
-	\frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
-	\frac{v'_rV_{\theta}}{r} +
-	V_x \frac{\partial v_r'}{\partial x} 
-	= -\frac{1}{\bar{\rho} r}	\frac{\partial p'}{\partial \theta}
-}
-\end{align*}
-\newpage
-\subsubsection{Linearizing the Conservation of Momentum\\ in the \textit{x} direction}
-Starting with the mean momentum equation 
-\begin{align*}
-\frac{\partial v_{x}}{\partial t} + 
-v_r 
-\frac{\partial v_x}{\partial r} +
-\frac{v_{\theta}}{r}
-\frac{\partial v_x}{\partial \theta}+ 
-v_x \frac{\partial v_x}{\partial x} 
-&= 
--\frac{1}{\rho } 
-\frac{\partial p}{\partial x}
-\end{align*}
+% \begin{align*}
+% &
+% -\frac{1}{\rho r}\frac{\partial p}{\partial \theta} = \left( -\frac{1    }{\bar{\rho}} +
+% \frac{\rho'}{\bar{\rho}^2}\right) \left(\frac{\partial \bar{p} + p'}{\partial \theta}\right)\\
+% &\frac{1}{\rho r}\frac{\partial p}{\partial \theta} =  -\Ccancel[blue]{\frac{1    }{\bar{\rho}}  \frac{\partial \bar{p}}{\partial \theta}} -  
+% \frac{1    }{\bar{\rho} r}  \frac{\partial p'}{\partial \theta} +
+% \Ccancel[blue]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial \bar{p}}{\partial \theta}} +
+% \Ccancel[green]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial p'}{\partial \theta}}\\
+% &\frac{1}{\rho r}\frac{\partial p}{\partial \theta} =  -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial \theta} 
+% \end{align*}
 
-\begin{align*} 
-\frac{\partial (V_x + v_x') }{\partial t} + 
-( V_r + v_r' ) 
-\frac{\partial( V_x + v_x')}{\partial r} +
-\frac{V_{\theta} + v_{\theta}'}{r}
-\frac{\partial(V_x + v_x')}{\partial \theta} + 
-(V_x + v_x') 
-\frac{\partial (V_x + v_x')}{\partial x} 	
-&= -\frac{1}{\rho } \frac{\partial p}{\partial x}\\
-\Ccancel[blue]  {\frac{\partial  V_x  }{\partial t}}	+
-\frac{\partial  v_x' }{\partial t} + \\
-\Ccancel[blue]  {V_r  \frac{\partial  V_x  }{\partial r}}  +
-v_r' \frac{\partial  V_x  }{\partial r} + 
-\Ccancel[red]{V_r  \frac{\partial  v_x' }{\partial r}} + 
-\Ccancel[green]{v_r' \frac{\partial  v_x' }{\partial r}} +\\
-\frac{1}{r}
-\left(
-\Ccancel[blue]  {V_{\theta} \frac{\partial V_x}{\partial \theta}} +
-\Ccancel[blue] {v_{\theta}'\frac{\partial V_x}{\partial \theta}} +
-V_{\theta} \frac{\partial v'_x}{\partial \theta} +
-\Ccancel[green]{v_{\theta}'\frac{\partial v'_x}{\partial \theta}}
-\right)+ \\
-\Ccancel[blue]{V_x \frac{\partial V_x }{\partial x}} +
-\Ccancel[blue]{v_x'\frac{\partial V_x }{\partial x}} +  
-V_x \frac{\partial v_x'}{\partial x} +
-\Ccancel[green]{v_x' \frac{\partial v_x'}{\partial x}} 
-&= -\frac{1}{\rho } 
-\frac{\partial p}{\partial x} \\
-\boxed{\frac{\partial  v_x' }{\partial t} +
-	v_r' \frac{\partial  V_x  }{\partial r} +
-	\frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
-	V_x \frac{\partial v_x'}{\partial x} 
-	= -\frac{1}{\rho } 
-	\frac{\partial p}{\partial x}}
-\end{align*}
-\[
-\]
-\newpage
-\begin{align*}
-\text{} \rightarrow&
--\frac{1}{\rho }\frac{\partial p}{\partial x} = \left( -\frac{1    }{\bar{\rho}} +
-\frac{\rho'}{\bar{\rho}^2}\right) \left(\frac{\partial \bar{p} + p'}{\partial x}\right)\\
-&\frac{1}{\rho }\frac{\partial p}{\partial x} =  -\Ccancel[blue]{\frac{1    }{\bar{\rho}}  \frac{\partial \bar{p}}{\partial x}} -  
-\frac{1    }{\bar{\rho} }  \frac{\partial p'}{\partial x} +
-\Ccancel[blue]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial \bar{p}}{\partial x}} +
-\Ccancel[green]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial p'}{\partial x}}\\
-&\frac{1}{\rho }\frac{\partial p}{\partial x} =  -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} 
-\end{align*}
+% \begin{align*}
+% \boxed{
+% 	\frac{\partial  v_{\theta}' }{\partial t} +
+% 	v_r' \frac{\partial  V_{\theta}  }{\partial r} +
+% 	\frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
+% 	\frac{v'_rV_{\theta}}{r} +
+% 	V_x \frac{\partial v_r'}{\partial x} 
+% 	= -\frac{1}{\bar{\rho} r}	\frac{\partial p'}{\partial \theta}
+% }
+% \end{align*}
+% \newpage
+% \subsubsection{Linearizing the Conservation of Momentum\\ in the \textit{x} direction}
+% Starting with the mean momentum equation 
+% \begin{align*}
+% \frac{\partial v_{x}}{\partial t} + 
+% v_r 
+% \frac{\partial v_x}{\partial r} +
+% \frac{v_{\theta}}{r}
+% \frac{\partial v_x}{\partial \theta}+ 
+% v_x \frac{\partial v_x}{\partial x} 
+% &= 
+% -\frac{1}{\rho } 
+% \frac{\partial p}{\partial x}
+% \end{align*}
 
-\begin{align*}
-\boxed{
-	\frac{\partial  v_x' }{\partial t} +
-	v_r' \frac{\partial  V_x  }{\partial r} +
-	\frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
-	V_x \frac{\partial v_x'}{\partial x} 
-	= -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} 
-}
-\end{align*}
+% \begin{align*} 
+% \frac{\partial (V_x + v_x') }{\partial t} + 
+% ( V_r + v_r' ) 
+% \frac{\partial( V_x + v_x')}{\partial r} +
+% \frac{V_{\theta} + v_{\theta}'}{r}
+% \frac{\partial(V_x + v_x')}{\partial \theta} + 
+% (V_x + v_x') 
+% \frac{\partial (V_x + v_x')}{\partial x} 	
+% &= -\frac{1}{\rho } \frac{\partial p}{\partial x}\\
+% \Ccancel[blue]  {\frac{\partial  V_x  }{\partial t}}	+
+% \frac{\partial  v_x' }{\partial t} + \\
+% \Ccancel[blue]  {V_r  \frac{\partial  V_x  }{\partial r}}  +
+% v_r' \frac{\partial  V_x  }{\partial r} + 
+% \Ccancel[red]{V_r  \frac{\partial  v_x' }{\partial r}} + 
+% \Ccancel[green]{v_r' \frac{\partial  v_x' }{\partial r}} +\\
+% \frac{1}{r}
+% \left(
+% \Ccancel[blue]  {V_{\theta} \frac{\partial V_x}{\partial \theta}} +
+% \Ccancel[blue] {v_{\theta}'\frac{\partial V_x}{\partial \theta}} +
+% V_{\theta} \frac{\partial v'_x}{\partial \theta} +
+% \Ccancel[green]{v_{\theta}'\frac{\partial v'_x}{\partial \theta}}
+% \right)+ \\
+% \Ccancel[blue]{V_x \frac{\partial V_x }{\partial x}} +
+% \Ccancel[blue]{v_x'\frac{\partial V_x }{\partial x}} +  
+% V_x \frac{\partial v_x'}{\partial x} +
+% \Ccancel[green]{v_x' \frac{\partial v_x'}{\partial x}} 
+% &= -\frac{1}{\rho } 
+% \frac{\partial p}{\partial x} \\
+% \boxed{\frac{\partial  v_x' }{\partial t} +
+% 	v_r' \frac{\partial  V_x  }{\partial r} +
+% 	\frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
+% 	V_x \frac{\partial v_x'}{\partial x} 
+% 	= -\frac{1}{\rho } 
+% 	\frac{\partial p}{\partial x}}
+% \end{align*}
+% \[
+% \]
+% \newpage
+% \begin{align*}
+% \text{} \rightarrow&
+% -\frac{1}{\rho }\frac{\partial p}{\partial x} = \left( -\frac{1    }{\bar{\rho}} +
+% \frac{\rho'}{\bar{\rho}^2}\right) \left(\frac{\partial \bar{p} + p'}{\partial x}\right)\\
+% &\frac{1}{\rho }\frac{\partial p}{\partial x} =  -\Ccancel[blue]{\frac{1    }{\bar{\rho}}  \frac{\partial \bar{p}}{\partial x}} -  
+% \frac{1    }{\bar{\rho} }  \frac{\partial p'}{\partial x} +
+% \Ccancel[blue]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial \bar{p}}{\partial x}} +
+% \Ccancel[green]{\frac{\rho'}{\bar{\rho}^2 r}\frac{\partial p'}{\partial x}}\\
+% &\frac{1}{\rho }\frac{\partial p}{\partial x} =  -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} 
+% \end{align*}
 
-\newpage
+% \begin{align*}
+% \boxed{
+% 	\frac{\partial  v_x' }{\partial t} +
+% 	v_r' \frac{\partial  V_x  }{\partial r} +
+% 	\frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
+% 	V_x \frac{\partial v_x'}{\partial x} 
+% 	= -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} 
+% }
+% \end{align*}
 
-\subsubsection{Linearizing the Energy Equation}
-\begin{align*}
-\frac{\partial p}{\partial t} + v_r \frac{\partial p}{\partial r} + \frac{v_{\theta}}{r}\frac{\partial p}{\partial x} + v_x \frac{\partial p}{\partial x} 
-+ \gamma p \left(\frac{1}{r} \frac{\partial r v_r}{\partial r} + \frac{1}{r} \frac{\partial v_{\theta}}{\partial \theta} + \frac{\partial v_x}{\partial x}\right) = 0
-\end{align*}
+% \newpage
 
-\begin{align*}
-\frac{\partial (\bar{P}+P')}{\partial t} + 
-(V_r + v_r')
-\frac{ \partial (\bar{P}+P')}{\partial r} + 
-\frac{  (V_{\theta} + v_{\theta}') }{r}\frac{\partial (\bar{ P} +p') }{\partial x} + 
-(V_x + v_x') 
-\frac{\partial  (\bar{P}+P')}{\partial x} + ...\\
-\gamma (\bar{P}+P') 
-\left(
-\frac{1}{r} \frac{\partial r (V_r + v_r')}{\partial r} + 
-\frac{1}{r} \frac{\partial   (V_{\theta} + v_{\theta}')}{\partial \theta} + 
-\frac{\partial (V_x + v_x')}{\partial x}
-\right) = 0  	\\
-\\
-\frac{\partial \bar{P} }{\partial t} +
-\frac{\partial      P' }{\partial t} +\\
-V_r  \frac{\partial \bar{P}}{\partial r} + 
-V_r  \frac{\partial    P'}{\partial r} + 
-V_r' \frac{\partial \bar{P}}{\partial r} + 
-V_r' \frac{\partial      P'}{\partial r} + \\     
-\frac{V_{\theta}}{r} \frac{\partial \bar{ P}}{\partial x} + 
-\frac{V_{\theta}}{r} \frac{\partial       P'}{\partial x} +
-\frac{v_{\theta}'}{r} \frac{\partial \bar{ P}}{\partial x} + 
-\frac{v_{\theta}'}{r} \frac{\partial       P'}{\partial x} + \\
-V_x  \frac{\partial \bar{P}}{\partial x} + 
-V_x  \frac{\partial    P'}{\partial x} + 
-v_x' \frac{\partial \bar{P}}{\partial x} + 
-v_x' \frac{\partial      P'}{\partial x} + \\ 
-\gamma \bar{ P}  \left(
-\frac{1}{r} \frac{\partial r V_r}{\partial r} + 
-\frac{1}{r} \frac{\partial r v_r'}{\partial r} +
-\frac{1}{r} \frac{\partial V_{\theta}}{\partial \theta} + 
-\frac{\partial v_{\theta}'}{\partial \theta}+ 
-\frac{\partial V_x}{\partial x} + 
-\frac{\partial v_x'}{\partial x} 
-\right) \\
-\gamma P' \left(
-\frac{1}{r} \frac{\partial r V_r}{\partial r} + 
-\frac{1}{r} \frac{\partial r v_r'}{\partial r} + 
-\frac{1}{r} \frac{\partial V_{\theta}}{\partial \theta} + 
-\frac{\partial v_{\theta}'}{\partial \theta}+ \frac{\partial V_x}{\partial x} +
-\frac{\partial v_x'}{\partial x}\right) 
-\end{align*}
+% \subsubsection{Linearizing the Energy Equation}
+% \begin{align*}
+% \frac{\partial p}{\partial t} + v_r \frac{\partial p}{\partial r} + \frac{v_{\theta}}{r}\frac{\partial p}{\partial x} + v_x \frac{\partial p}{\partial x} 
+% + \gamma p \left(\frac{1}{r} \frac{\partial r v_r}{\partial r} + \frac{1}{r} \frac{\partial v_{\theta}}{\partial \theta} + \frac{\partial v_x}{\partial x}\right) = 0
+% \end{align*}
 
-\begin{equation*}
-\boxed{\frac{\partial p '}{\partial t} + v_r'\frac{\partial P}{\partial r} + \frac{V_{\theta}}{r}\frac{\partial p'}{\partial \theta} + V_x\frac{\partial p'}{x} + \gamma P \left(\frac{1}{r}\frac{\partial (r v_r')}{\partial r} + \frac{1}{r} \frac{\partial v_{\theta}'}{\partial \theta} + \frac{\partial v_x'}{\partial x}\right) = 0}
-\end{equation*}
-\newpage
+% \begin{align*}
+% \frac{\partial (\bar{P}+P')}{\partial t} + 
+% (V_r + v_r')
+% \frac{ \partial (\bar{P}+P')}{\partial r} + 
+% \frac{  (V_{\theta} + v_{\theta}') }{r}\frac{\partial (\bar{ P} +p') }{\partial x} + 
+% (V_x + v_x') 
+% \frac{\partial  (\bar{P}+P')}{\partial x} + ...\\
+% \gamma (\bar{P}+P') 
+% \left(
+% \frac{1}{r} \frac{\partial r (V_r + v_r')}{\partial r} + 
+% \frac{1}{r} \frac{\partial   (V_{\theta} + v_{\theta}')}{\partial \theta} + 
+% \frac{\partial (V_x + v_x')}{\partial x}
+% \right) = 0  	\\
+% \\
+% \frac{\partial \bar{P} }{\partial t} +
+% \frac{\partial      P' }{\partial t} +\\
+% V_r  \frac{\partial \bar{P}}{\partial r} + 
+% V_r  \frac{\partial    P'}{\partial r} + 
+% V_r' \frac{\partial \bar{P}}{\partial r} + 
+% V_r' \frac{\partial      P'}{\partial r} + \\     
+% \frac{V_{\theta}}{r} \frac{\partial \bar{ P}}{\partial x} + 
+% \frac{V_{\theta}}{r} \frac{\partial       P'}{\partial x} +
+% \frac{v_{\theta}'}{r} \frac{\partial \bar{ P}}{\partial x} + 
+% \frac{v_{\theta}'}{r} \frac{\partial       P'}{\partial x} + \\
+% V_x  \frac{\partial \bar{P}}{\partial x} + 
+% V_x  \frac{\partial    P'}{\partial x} + 
+% v_x' \frac{\partial \bar{P}}{\partial x} + 
+% v_x' \frac{\partial      P'}{\partial x} + \\ 
+% \gamma \bar{ P}  \left(
+% \frac{1}{r} \frac{\partial r V_r}{\partial r} + 
+% \frac{1}{r} \frac{\partial r v_r'}{\partial r} +
+% \frac{1}{r} \frac{\partial V_{\theta}}{\partial \theta} + 
+% \frac{\partial v_{\theta}'}{\partial \theta}+ 
+% \frac{\partial V_x}{\partial x} + 
+% \frac{\partial v_x'}{\partial x} 
+% \right) \\
+% \gamma P' \left(
+% \frac{1}{r} \frac{\partial r V_r}{\partial r} + 
+% \frac{1}{r} \frac{\partial r v_r'}{\partial r} + 
+% \frac{1}{r} \frac{\partial V_{\theta}}{\partial \theta} + 
+% \frac{\partial v_{\theta}'}{\partial \theta}+ \frac{\partial V_x}{\partial x} +
+% \frac{\partial v_x'}{\partial x}\right) 
+% \end{align*}
+
+% \begin{equation*}
+% \boxed{\frac{\partial p '}{\partial t} + v_r'\frac{\partial P}{\partial r} + \frac{V_{\theta}}{r}\frac{\partial p'}{\partial \theta} + V_x\frac{\partial p'}{x} + \gamma P \left(\frac{1}{r}\frac{\partial (r v_r')}{\partial r} + \frac{1}{r} \frac{\partial v_{\theta}'}{\partial \theta} + \frac{\partial v_x'}{\partial x}\right) = 0}
+% \end{equation*}
+% \newpage
 
 The linearized Euler equations are,
 
-\begin{align*}
-\frac{\partial \rho'}{\partial t} +
-\frac{V_{\theta}}{r}
-\frac{\partial \rho'}{\partial \theta} + 
-V_x
-\frac{\partial \rho'}{\partial x} +
-\bar{\rho}
-\left(
-\frac{1}{r}
-\left(
-\frac{\partial r v_r'}{\partial r} + \frac{\partial v_{\theta}'}{\partial \theta}		 
-\right) +
-\frac{\partial v_x'}{\partial x}
-\right)= 0\\
-\frac{\partial  v_r' }{\partial t} +
-\frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} -
-\frac{2V_{\theta}v'_{\theta}}{r} +
-V_x \frac{\partial v_r'}{\partial x} = -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
-\frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r}\\
-\frac{\partial  v_{\theta}' }{\partial t} +
-v_r' \frac{\partial  V_{\theta}  }{\partial r} +
-\frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
-\frac{v'_rV_{\theta}}{r} +
-V_x \frac{\partial v_r'}{\partial x} 
-= -\frac{1}{\bar{\rho} r}	\frac{\partial p'}{\partial \theta}\\
-\frac{\partial  v_x' }{\partial t} +
-v_r' \frac{\partial  V_x  }{\partial r} +
-\frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
-V_x \frac{\partial v_x'}{\partial x} 
-= -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} \\
-\frac{\partial p '}{\partial t} +
-v_r'\frac{\partial P}{\partial r} + 
-\frac{V_{\theta}}{r}\frac{\partial p'}{\partial \theta} + 
-V_x\frac{\partial p'}{x} + 
-\gamma P \left(\frac{1}{r}\frac{\partial (r v_r')}{\partial r} + 
-\frac{1}{r} \frac{\partial v_{\theta}'}{\partial \theta} + \frac{\partial v_x'}{\partial x}\right) = 0
-\end{align*}
+% \begin{align*}
+% \frac{\partial \rho'}{\partial t} +
+% \frac{V_{\theta}}{r}
+% \frac{\partial \rho'}{\partial \theta} + 
+% V_x
+% \frac{\partial \rho'}{\partial x} +
+% \bar{\rho}
+% \left(
+% \frac{1}{r}
+% \left(
+% \frac{\partial r v_r'}{\partial r} + \frac{\partial v_{\theta}'}{\partial \theta}		 
+% \right) +
+% \frac{\partial v_x'}{\partial x}
+% \right)= 0\\
+% \frac{\partial  v_r' }{\partial t} +
+% \frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} -
+% \frac{2V_{\theta}v'_{\theta}}{r} +
+% V_x \frac{\partial v_r'}{\partial x} = -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial r} +
+% \frac{\rho'}{\bar{\rho}^2}\frac{\partial \bar{p}}{\partial r}\\
+% \frac{\partial  v_{\theta}' }{\partial t} +
+% v_r' \frac{\partial  V_{\theta}  }{\partial r} +
+% \frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
+% \frac{v'_rV_{\theta}}{r} +
+% V_x \frac{\partial v_r'}{\partial x} 
+% = -\frac{1}{\bar{\rho} r}	\frac{\partial p'}{\partial \theta}\\
+% \frac{\partial  v_x' }{\partial t} +
+% v_r' \frac{\partial  V_x  }{\partial r} +
+% \frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
+% V_x \frac{\partial v_x'}{\partial x} 
+% = -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} \\
+% \frac{\partial p '}{\partial t} +
+% v_r'\frac{\partial P}{\partial r} + 
+% \frac{V_{\theta}}{r}\frac{\partial p'}{\partial \theta} + 
+% V_x\frac{\partial p'}{x} + 
+% \gamma P \left(\frac{1}{r}\frac{\partial (r v_r')}{\partial r} + 
+% \frac{1}{r} \frac{\partial v_{\theta}'}{\partial \theta} + \frac{\partial v_x'}{\partial x}\right) = 0
+% \end{align*}
 
 
-Recalling:
+First, recall,
 
 \[\frac{\partial P}{\partial r} = \frac{\bar{\rho} V_{\theta}^2}{r} \]
 \[\gamma P  = \bar{\rho}A^2\]
 \[\rho' = \frac{1}{A^2} p'\]
 
-We can rearrange the equations to reflect Equations 2.33-2.36. Note that the momentum equation in the $\theta$ and $x$ directions remain unchanged. The term $ \frac{\partial(rv_r')}{\partial r}  = \frac{\partial (r)}{\partial r}v_r' + \frac{\partial v_r'}{\partial r} r$ in the Energy equation
+% We can rearrange the equations to reflect Equations 2.33-2.36. Note that the momentum equation in the $\theta$ and $x$ directions remain unchanged. The term $ \frac{\partial(rv_r')}{\partial r}  = \frac{\partial (r)}{\partial r}v_r' + \frac{\partial v_r'}{\partial r} r$ in the Energy equation
 \begin{align*}
 \frac{1}{\bar{\rho} A^2}\left(
 \frac{\partial p'}{\partial t} +
@@ -568,7 +571,7 @@ V_x \frac{\partial v_x'}{\partial x}
 &= -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} 	
 \end{align*}
 
-\newpage
+% \newpage
 \section{Substituting Pertubation Variables}
 One key assumption is that the perturbation quantites, $\tilde{p}$, 
 $\tilde{v}_r$,$\tilde{v}_{\theta}$, and $\tilde{v}_x$ , are all exponential 
@@ -582,316 +585,317 @@ and that they are solely a function of radius,
 \newpage
 
 Substituting the quantities into the linearized equations will give us the final 
-governing equations. Starting with the Conservation of Momentum in the r direction,
-\[
-\frac{\partial v_r'}{\partial t} +
-\frac{V_{\theta}}{r} \frac{\partial v_r'}{\partial \theta} -
-\frac{2V_{\theta}}{r}v_r' +
-V_x\frac{\partial v_r'}{\partial x} =
-\frac{\partial p'}{\partial r} +
-\frac{\rho'}{\bar{\rho}^2}\frac{\partial P}{\partial r} \]
+governing equations. 
+% Starting with the Conservation of Momentum in the r direction,
+% \[
+% \frac{\partial v_r'}{\partial t} +
+% \frac{V_{\theta}}{r} \frac{\partial v_r'}{\partial \theta} -
+% \frac{2V_{\theta}}{r}v_r' +
+% V_x\frac{\partial v_r'}{\partial x} =
+% \frac{\partial p'}{\partial r} +
+% \frac{\rho'}{\bar{\rho}^2}\frac{\partial P}{\partial r} \]
 
-Looking at the left hand side (LHS) of the equation, the derivatives are:
-\[
-    \frac{\partial v_r'}{\partial t} =
-    \underbrace{\frac{\partial v_r(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} +
-    v_r(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right) 
-\]
+% Looking at the left hand side (LHS) of the equation, the derivatives are:
+% \[
+%     \frac{\partial v_r'}{\partial t} =
+%     \underbrace{\frac{\partial v_r(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} +
+%     v_r(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right) 
+% \]
 
-\[
-    \frac{\partial v_r'}{\partial \theta} = 
-    \underbrace{\frac{\partial v_r(r)}{\partial \theta}}_{0} 
-    e^{i\left(k_x x + m \theta - \omega t \right)} +
-    v_r(r) 
-    \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) 
-\]
-\[\frac{\partial v_r'}{\partial x} =
-\underbrace{\frac{\partial v_r(r)}{\partial x}}_{0} 
-e^{i\left(k_x x + m \theta - \omega t \right)} +
-v_r(r) 
-\left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+% \[
+%     \frac{\partial v_r'}{\partial \theta} = 
+%     \underbrace{\frac{\partial v_r(r)}{\partial \theta}}_{0} 
+%     e^{i\left(k_x x + m \theta - \omega t \right)} +
+%     v_r(r) 
+%     \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) 
+% \]
+% \[\frac{\partial v_r'}{\partial x} =
+% \underbrace{\frac{\partial v_r(r)}{\partial x}}_{0} 
+% e^{i\left(k_x x + m \theta - \omega t \right)} +
+% v_r(r) 
+% \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
 
-Similarly for the right hand side (RHS),
-\[\frac{\partial p'}{\partial r} = \frac{\partial P(r)}{\partial r} e^{i\left(k_x x + m \theta - \omega t \right)} + P(r)\underbrace{\frac{\partial}{\partial  r} e^{i\left(k_x x + m \theta - \omega t \right)}}_0 \]
+% Similarly for the right hand side (RHS),
+% \[\frac{\partial p'}{\partial r} = \frac{\partial P(r)}{\partial r} e^{i\left(k_x x + m \theta - \omega t \right)} + P(r)\underbrace{\frac{\partial}{\partial  r} e^{i\left(k_x x + m \theta - \omega t \right)}}_0 \]
 
-Recalling $ p'/\rho' = A^2 \rightarrow \rho' = \frac{1}{A^2}p' $ $ \frac{\partial \bar{P}}{\partial r} = \frac{\bar{\rho} v_{\theta}^2}{r} $
+% Recalling $ p'/\rho' = A^2 \rightarrow \rho' = \frac{1}{A^2}p' $ $ \frac{\partial \bar{P}}{\partial r} = \frac{\bar{\rho} v_{\theta}^2}{r} $
 
-\[\frac{\rho ' }{\bar{\rho}^2} \frac{ \partial \bar{P}}{\partial r} = \frac{V_{\theta}^2}{A^2}\frac{1}{\bar{\rho} r}p'\]
-
-
-After substituting and canceling common terms,
-\begin{align*}
- v_r \left(-i\omega \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}}\right)+
-\frac{V_{\theta}}{r} v_r \left(im \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}}\right) -
-\frac{2V_{\theta}}{r}v_r  \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}} + V_x \left(v_r \left(ik_x \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}}\right)\right) \\
-=   \left(-\frac{1}{\bar{\rho}} \frac{\partial P(r)}{\partial r}\cancel{e^{i\left(k_x x + m \theta - \omega t \right)} } +  \frac{V_{\theta}^2}{A^2}\frac{1}{\bar{\rho} r} P(r)\cancel{e^{i\left(k_x x + m \theta - \omega t \right)} }\right) 
-\end{align*}
-
-\[\boxed{
-\left(-i\omega + \frac{i m V_{\theta}}{r} + i k_x V_x \right) v_r - \frac{2 V_{\theta}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p}\]
-
-Continuing with conservation of momentum in the $\theta$ direction,
-
-\[\frac{\partial  v_{\theta}' }{\partial t} +
-v_r' \frac{\partial  V_{\theta}  }{\partial r} +
-\frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
-\frac{v'_rV_{\theta}}{r} +
-V_x \frac{\partial v_{\theta}'}{\partial x} 
-= -\frac{1}{\bar{\rho} r}	\frac{\partial p'}{\partial \theta}\]
-
-\[\frac{\partial v'_{\theta}}{\partial t} = 
-\underbrace{\frac{\partial v_{\theta}(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
-v_{\theta}(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
-
-\[\frac{\partial v'_{\theta}}{\partial \theta} = \underbrace{\frac{\partial v'_{\theta}(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + v_{\theta}(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
-
-\[\frac{\partial v'_{\theta}}{\partial x} = \underbrace{\frac{\partial v_{\theta}(r)}{\partial x}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + v_{\theta}(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
-
-\[\frac{\partial p'}{\partial \theta} = \underbrace{\frac{\partial P(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + P(r)\underbrace{\frac{\partial}{\partial  \theta} e^{i\left(k_x x + m \theta - \omega t \right)}}_{m  e^{i\left(k_x x + m \theta - \omega t \right)}}\]
+% \[\frac{\rho ' }{\bar{\rho}^2} \frac{ \partial \bar{P}}{\partial r} = \frac{V_{\theta}^2}{A^2}\frac{1}{\bar{\rho} r}p'\]
 
 
+% After substituting and canceling common terms,
+% \begin{align*}
+%  v_r \left(-i\omega \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}}\right)+
+% \frac{V_{\theta}}{r} v_r \left(im \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}}\right) -
+% \frac{2V_{\theta}}{r}v_r  \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}} + V_x \left(v_r \left(ik_x \cancel{e^{i\left(k_x x + m \theta - \omega t \right)}}\right)\right) \\
+% =   \left(-\frac{1}{\bar{\rho}} \frac{\partial P(r)}{\partial r}\cancel{e^{i\left(k_x x + m \theta - \omega t \right)} } +  \frac{V_{\theta}^2}{A^2}\frac{1}{\bar{\rho} r} P(r)\cancel{e^{i\left(k_x x + m \theta - \omega t \right)} }\right) 
+% \end{align*}
 
-After substituting and canceling common terms 
+% \[\boxed{
+% \left(-i\omega + \frac{i m V_{\theta}}{r} + i k_x V_x \right) v_r - \frac{2 V_{\theta}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p}\]
 
-\[\boxed{ 
-    \left(-i\omega + \frac{i m V_{\theta}}{r} + i k_x V_x \right) v_{\theta} +
-\left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta=
--\frac{m}{\bar{\rho}r}p}\]
+% Continuing with conservation of momentum in the $\theta$ direction,
 
-Next, the conservation of momentum in the x direction,
-\[\frac{\partial  v_x' }{\partial t} +
-v_r' \frac{\partial  V_x  }{\partial r} +
-\frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
-V_x \frac{\partial v_x'}{\partial x} 
-= -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} \]
+% \[\frac{\partial  v_{\theta}' }{\partial t} +
+% v_r' \frac{\partial  V_{\theta}  }{\partial r} +
+% \frac{V_{\theta}}{r} \frac{\partial v'_{\theta}}{\partial \theta} +
+% \frac{v'_rV_{\theta}}{r} +
+% V_x \frac{\partial v_{\theta}'}{\partial x} 
+% = -\frac{1}{\bar{\rho} r}	\frac{\partial p'}{\partial \theta}\]
 
+% \[\frac{\partial v'_{\theta}}{\partial t} = 
+% \underbrace{\frac{\partial v_{\theta}(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
+% v_{\theta}(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
 
-\[\frac{\partial v_x'}{\partial t} = \underbrace{\frac{\partial v_x(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
-v_x(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
+% \[\frac{\partial v'_{\theta}}{\partial \theta} = \underbrace{\frac{\partial v'_{\theta}(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + v_{\theta}(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
 
-\[\frac{\partial v_x'}{\partial \theta} = \underbrace{\frac{\partial v_x(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
-v_x(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
+% \[\frac{\partial v'_{\theta}}{\partial x} = \underbrace{\frac{\partial v_{\theta}(r)}{\partial x}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + v_{\theta}(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
 
-
-\[\frac{\partial v_x'}{\partial x} = \frac{\partial v_x(r)}{\partial x} e^{i\left(k_x x + m \theta - \omega t \right)} + 
-v_x(r) \left(i k_x e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
-
-\[\frac{\partial p'}{\partial x} = 0 + ik_xpe^{i\left(k_x x + m \theta - \omega t \right)} \]
-
-\[\boxed{
-        \left(-i\omega + \frac{imV_{\theta}}{r} + i k_xV_x\right)v_x +
-    \frac{\partial V_x}{\partial r} v_r = - \frac{i k_x}{\bar{\rho}}p}\]
-
-Continuing with the Conservation of Energy,
-\begin{align*}
-\frac{1}{\bar{\rho} A^2}\left(
-\frac{\partial p'}{\partial t} +
-\frac{V_{\theta}}{r}
-\frac{\partial p'}{\partial \theta} + 
-V_x
-\frac{\partial p'}{\partial x}
-\right) +
-\frac{V_{\theta}^2}{A^2 r}v_r'+
-\frac{\partial v_r'}{\partial r} + 
-\frac{1}{r}
-\frac{\partial v_{\theta}'}{\partial \theta}		 
-+
-\frac{\partial v_x'}{\partial x}
-&= 0
-\end{align*}
+% \[\frac{\partial p'}{\partial \theta} = \underbrace{\frac{\partial P(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + P(r)\underbrace{\frac{\partial}{\partial  \theta} e^{i\left(k_x x + m \theta - \omega t \right)}}_{m  e^{i\left(k_x x + m \theta - \omega t \right)}}\]
 
 
-Left hand side (LHS) derivatives:
-\[\frac{\partial p'}{\partial t} =
-\underbrace{\frac{\partial p(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} +
-p(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
 
-\[\frac{\partial p'}{\partial \theta} = 
-\underbrace{\frac{\partial p(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
-p(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+% After substituting and canceling common terms 
 
-\[\frac{\partial p'}{\partial x} = \underbrace{\frac{\partial p(r)}{\partial x}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} +
-p(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+% \[\boxed{ 
+%     \left(-i\omega + \frac{i m V_{\theta}}{r} + i k_x V_x \right) v_{\theta} +
+% \left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta=
+% -\frac{m}{\bar{\rho}r}p}\]
 
-\[\frac{\partial v_r'}{\partial r} =
-\frac{\partial v_r(r)}{\partial r} e^{i\left(k_x x + m \theta - \omega t \right)} +
-v_r(r) \underbrace{\frac{\partial }{\partial r}\left( e^{i\left(k_x x + m \theta - \omega t \right)}\right)}_0 \]
-
-\[\frac{\partial v_{\theta}'}{\partial \theta} = 
-\frac{\partial v_{\theta}(r)}{\partial \theta} e^{i\left(k_x x + m \theta - \omega t \right)} + 
-v_{\theta}(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
-
-\[\frac{\partial v_x'}{\partial x} = \underbrace{\frac{\partial v_x(r)}{\partial x}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + v_x(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
-
-After substituting and canceling common terms,
-
-\begin{align*}
-\frac{1}{\bar{\rho} A^2}\left(
-p(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right) +
-\frac{V_{\theta}}{r}
-p(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) + 
-V_x
-p(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right)
-\right) + \\
-\frac{V_{\theta}^2}{A^2 r}v_r'+
-\frac{\partial v_r(r)}{\partial r} e^{i\left(k_x x + m \theta - \omega t \right)} + 
-\frac{1}{r}
-\left(v_{\theta}(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right)\right) 
-+
-v_x(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) 
-&= 0
-\end{align*}
-
-\[\boxed{\frac{1}{\bar{\rho} A^2} \left(-i\omega + \frac{imV_{\theta}}{r} + ik_xV_x  + \right)p(r) + 
-\frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
-\frac{\partial v_r(r)}{\partial r}+ 
-\frac{im}{r} v_{\theta}(r)
-+
-ik_xv_x(r) = 0} \]
-The Linearized Euler equations now become
-
-\begin{align*}
-r\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_r - \frac{2 \bar{v_{\theta}}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p\\
-\theta\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_{\theta} + \left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta = -\frac{m}{\bar{\rho}r}p \\ 
-x\text{-direction: }&i\left(-\omega + \frac{mV_{\theta}}{r} +  k_xVx\right)v_x + \frac{\partial V_x}{\partial r} v_r = - \frac{i
-	k_x}{\bar{\rho}}p\\ 
-\text{Energy: }&\frac{1}{\bar{\rho} A^2} \left(-i\omega + \frac{imV_{\theta}}{r} + ik_xV_x  +
-\right)p(r)  +
-\frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
-\frac{\partial v_r(r)}{\partial r}+ 
-\frac{im}{r} v_{\theta}(r)
-+
-ik_xv_x(r) 
-&= 0
-\end{align*}
-
-\newpage
-
-\section{Non-Dimensionalization}
-Defining 
-
-\[r_T = r_{max}\]
-\[A_T = A(r_{max})\]
-\[k = \frac{\omega r_T}{A_T}\]
-\[\bar{\gamma} = k_x r_T\]
-\[\tilde{r} = \frac{r}{r_T}\]
-\[\frac{\partial }{\partial r} = \frac{\partial \tilde{r}}{\partial r} \frac{\partial }{\partial \tilde{r}} = \frac{1}{r_T} \frac{\partial }{\partial \tilde{r}}\]
-\[V_{\theta} = M_{\theta} A\]
-\[V_{x} = M_{x} A\]
-\[\tilde{A} = \frac{A}{A_T}\]
-\[v_{x} =\tilde{v}_x A\]
-\[v_{r} =\tilde{v}_r A\]
-\[v_{\theta} =\tilde{v}_{\theta} A\]
-\[p = \tilde{p} \bar{\rho} A^2\]
-
-\begin{align*}
-r\text{-direction: }& i\left(-\omega + \frac{ m V_{\theta}}{r} +  k_x V_x \right) v_r - \frac{2 \bar{v}_{\theta}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p\\
-\theta\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_{\theta} + \left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta= -\frac{m}{\bar{\rho}r}p \\ 
-x\text{-direction: } &i\left(-\omega + \frac{mV_{\theta}}{r} +  k_xVx\right)v_x + \frac{\partial V_x}{\partial r} v_r = - \frac{i
-	k_x}{\bar{\rho}}p\\
-\text{Energy: }&\frac{1}{\bar{\rho} A^2} i\left(-\omega + \frac{mV_{\theta}}{r} + k_xV_x  
-\right)p(r)  +
-\frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
-\frac{\partial v_r(r)}{\partial r}+ 
-\frac{im}{r} v_{\theta}(r)
-+
-ik_xv_x(r) 
-= 0
-\end{align*}
-
-Substituting the non dimensional quantities, and noting $r_T$ and $A^2$ in each term, 
-the radial momentum equation becomes,
-
-\[ \boxed{i\left[ 
-- \frac{k}{\tilde{A}} + 
-\frac{m M_{\theta}}{\tilde{r}} + 
-\bar{\gamma} M_x \right] 
-\tilde{v}_r - 
-\frac{2 M_{\theta} \tilde{v}_{\theta}}{\tilde{r}} = 
--\frac{1}{\bar{\rho} A^2}\frac{\partial \tilde{p}\bar{\rho} A^2}{\partial \tilde{r}} + 
-M_{\theta}\frac{\tilde{p}}{\tilde{r}}}\]
-
-Similarly for the $\theta$and $x$ directions:
-
-\begin{align*}
-\boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_{\theta} + \left(\frac{ M_{\theta}}{\tilde{r}}  + \frac{1}{A} \frac{\partial M_{\theta}A}{\partial \tilde{r}}\right)\tilde{v}_r = \frac{i m}{\tilde{r}}\tilde{P}}\\
- \boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_x  + \frac{1}{A} \frac{\partial M_x A}{\partial \tilde{r}}\tilde{v}_r = -i \bar{\gamma}\tilde{P}}
-\end{align*}
-
-and for the Energy equation:
-\begin{align*}
-	 \boxed{i \left[ -\frac{k}{\tilde{A}} + 
-	 \frac{mM_{\theta}}{\tilde{r}} +
-	 \bar{\gamma}M_x \right] \tilde{p} + 
-	 \frac{M_{\theta}^2}{\tilde{r}}\tilde{v}_r + 
-	 \frac{1}{A}\frac{\partial ( \tilde{v}_r A)}{\partial \tilde{r}}+ 
- \frac{\tilde{v}_r  }{\tilde{r}} + \frac{im}{\tilde{r}}\tilde{v}_\theta + i \bar{\gamma} \tilde{v}_x = 0}
-\end{align*}
-
-Expanding mean derivatives (using product rule) $\frac{\partial \tilde{p}\bar{\rho} A^2}{\partial \tilde{r}} $
-
-\[ \boxed{i\left[ 
-- \frac{k}{\tilde{A}} + 
-\frac{m M_{\theta}}{\tilde{r}} + 
-\bar{\gamma} M_x 
-\right] \tilde{v}_r - 
-\frac{2 M_{\theta} \tilde{v}_{\theta}}{\tilde{r}} = -
-\left( \frac{\partial \tilde{p}}{\partial \tilde{r}} +\frac{\tilde{p}}{\bar{\rho} A^2}
-\frac{\partial \bar{\rho} A^2}{\partial \tilde{r}}  \right)+ 
-M_{\theta}\frac{\tilde{p}}{\tilde{r}}}\]
+% Next, the conservation of momentum in the x direction,
+% \[\frac{\partial  v_x' }{\partial t} +
+% v_r' \frac{\partial  V_x  }{\partial r} +
+% \frac{V_{\theta}}{r} \frac{\partial v'_x}{\partial \theta} +
+% V_x \frac{\partial v_x'}{\partial x} 
+% = -\frac{1    }{\bar{\rho}}  \frac{\partial p'}{\partial x} \]
 
 
-\[\boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_{\theta} + \left(\frac{ M_{\theta}}{\tilde{r}}  + \frac{1}{A} \frac{\partial M_{\theta}A}{\partial \tilde{r}}\right)\tilde{v}_r = \frac{i m}{\tilde{r}}\tilde{P}}\]         
-\[\boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_x  + \frac{1}{A} \frac{\partial M_x A}{\partial \tilde{r}}\tilde{v}_r = -i \bar{\gamma}\tilde{P}} \]
+% \[\frac{\partial v_x'}{\partial t} = \underbrace{\frac{\partial v_x(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
+% v_x(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
 
-\begin{align*}
-	 \boxed{i \left[ -\frac{k}{\tilde{A}} + 
-	 \frac{mM_{\theta}}{\tilde{r}} + 
-	 \bar{\gamma}M_x \right] \tilde{p} + 
-	 \frac{M_{\theta}^2}{\tilde{r}}\tilde{v}_r + 
-     \frac{\partial \tilde{v}_r}{\partial \tilde{r}} +
-	 \frac{1}{A}\frac{\partial A}{\partial \tilde{r}}{v}_r+ 
- \frac{\tilde{v}_r  }{\tilde{r}} + \frac{im}{\tilde{r}}\tilde{v}_\theta + i \bar{\gamma} \tilde{v}_x = 0}
-\end{align*}
-\[\]
-\newpage
-\begin{align*}
-    \frac{1}{A}\frac{\partial A}{\partial \tilde{r}}
-\end{align*}
-Recall, $\partial / \partial r = (1/r_T)(\partial/\partial \tilde{r}$,
-\begin{align*}
-    \frac{1}{A}\frac{\partial A}{\partial \tilde{r}} &=
-    r_T \left(\frac{1}{A}\frac{\partial A}{\partial r}  \right) \\
-    &=\frac{r_T}{A^2}  \left(A \frac{\partial A}{\partial r}  \right) 
-\end{align*}
-
-Using the trick, $\frac{\partial}{\partial r}\left( \frac{A^2}{2} \right)=A \frac{\partial A}{\partial r} $
-
-\begin{align*}
-    &=\frac{r_T}{A^2}  \left(\frac{\partial}{\partial r}\left( \frac{A^2}{2} \right)  \right) \\
-    &=\frac{r_T}{2A^2}  \frac{\partial A^2}{\partial r} 
-\end{align*}
-
-Using the definition derived earlier (Needs eqn reference) 
-$\frac{\partial A^2}{\partial r} = \frac{\gamma - 1}{2} \frac{v_{\theta}^2}{r} $
-
-\begin{align*}
-    &=\frac{r_T}{2A^2}\frac{\gamma - 1}{2} \frac{v_{\theta}^2}{r}  \\
-    &=\frac{\gamma - 1}{2} \frac{M_{\theta}^2}{\tilde{r}}
-\end{align*}
+% \[\frac{\partial v_x'}{\partial \theta} = \underbrace{\frac{\partial v_x(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
+% v_x(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
 
 
-\begin{align*}
-    \frac{\partial \rho A^2 }{\partial \tilde{r}} &= 
-    \gamma \frac{\partial p }{\partial \tilde{r}}\\ 
-    &= \gamma \frac{\rho v_{\theta}^2}{\tilde{r}} \\
-    &=r_T \gamma \frac{\rho v_{\theta}^2}{r} 
-\end{align*}
+% \[\frac{\partial v_x'}{\partial x} = \frac{\partial v_x(r)}{\partial x} e^{i\left(k_x x + m \theta - \omega t \right)} + 
+% v_x(r) \left(i k_x e^{i\left(k_x x + m \theta - \omega t \right)}\right)\]
+
+% \[\frac{\partial p'}{\partial x} = 0 + ik_xpe^{i\left(k_x x + m \theta - \omega t \right)} \]
+
+% \[\boxed{
+%         \left(-i\omega + \frac{imV_{\theta}}{r} + i k_xV_x\right)v_x +
+%     \frac{\partial V_x}{\partial r} v_r = - \frac{i k_x}{\bar{\rho}}p}\]
+
+% Continuing with the Conservation of Energy,
+% \begin{align*}
+% \frac{1}{\bar{\rho} A^2}\left(
+% \frac{\partial p'}{\partial t} +
+% \frac{V_{\theta}}{r}
+% \frac{\partial p'}{\partial \theta} + 
+% V_x
+% \frac{\partial p'}{\partial x}
+% \right) +
+% \frac{V_{\theta}^2}{A^2 r}v_r'+
+% \frac{\partial v_r'}{\partial r} + 
+% \frac{1}{r}
+% \frac{\partial v_{\theta}'}{\partial \theta}		 
+% +
+% \frac{\partial v_x'}{\partial x}
+% &= 0
+% \end{align*}
 
 
-\begin{align*}
-    \frac{1}{\rho A^2} \frac{\partial \rho A^2 }{\partial r} = \frac{\gamma M_{\theta}^2}{\tilde{r}}
-\end{align*}
+% Left hand side (LHS) derivatives:
+% \[\frac{\partial p'}{\partial t} =
+% \underbrace{\frac{\partial p(r)}{\partial t}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} +
+% p(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+
+% \[\frac{\partial p'}{\partial \theta} = 
+% \underbrace{\frac{\partial p(r)}{\partial \theta}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + 
+% p(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+
+% \[\frac{\partial p'}{\partial x} = \underbrace{\frac{\partial p(r)}{\partial x}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} +
+% p(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+
+% \[\frac{\partial v_r'}{\partial r} =
+% \frac{\partial v_r(r)}{\partial r} e^{i\left(k_x x + m \theta - \omega t \right)} +
+% v_r(r) \underbrace{\frac{\partial }{\partial r}\left( e^{i\left(k_x x + m \theta - \omega t \right)}\right)}_0 \]
+
+% \[\frac{\partial v_{\theta}'}{\partial \theta} = 
+% \frac{\partial v_{\theta}(r)}{\partial \theta} e^{i\left(k_x x + m \theta - \omega t \right)} + 
+% v_{\theta}(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+
+% \[\frac{\partial v_x'}{\partial x} = \underbrace{\frac{\partial v_x(r)}{\partial x}}_{0} e^{i\left(k_x x + m \theta - \omega t \right)} + v_x(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) \]
+
+% After substituting and canceling common terms,
+
+% \begin{align*}
+% \frac{1}{\bar{\rho} A^2}\left(
+% p(r) \left(-i\omega e^{i\left(k_x x + m \theta - \omega t \right)}\right) +
+% \frac{V_{\theta}}{r}
+% p(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right) + 
+% V_x
+% p(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right)
+% \right) + \\
+% \frac{V_{\theta}^2}{A^2 r}v_r'+
+% \frac{\partial v_r(r)}{\partial r} e^{i\left(k_x x + m \theta - \omega t \right)} + 
+% \frac{1}{r}
+% \left(v_{\theta}(r) \left(im e^{i\left(k_x x + m \theta - \omega t \right)}\right)\right) 
+% +
+% v_x(r) \left(ik_x e^{i\left(k_x x + m \theta - \omega t \right)}\right) 
+% &= 0
+% \end{align*}
+
+% \[\boxed{\frac{1}{\bar{\rho} A^2} \left(-i\omega + \frac{imV_{\theta}}{r} + ik_xV_x  + \right)p(r) + 
+% \frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
+% \frac{\partial v_r(r)}{\partial r}+ 
+% \frac{im}{r} v_{\theta}(r)
+% +
+% ik_xv_x(r) = 0} \]
+% The Linearized Euler equations now become
+
+% \begin{align*}
+% r\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_r - \frac{2 \bar{v_{\theta}}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p\\
+% \theta\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_{\theta} + \left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta = -\frac{m}{\bar{\rho}r}p \\ 
+% x\text{-direction: }&i\left(-\omega + \frac{mV_{\theta}}{r} +  k_xVx\right)v_x + \frac{\partial V_x}{\partial r} v_r = - \frac{i
+% 	k_x}{\bar{\rho}}p\\ 
+% \text{Energy: }&\frac{1}{\bar{\rho} A^2} \left(-i\omega + \frac{imV_{\theta}}{r} + ik_xV_x  +
+% \right)p(r)  +
+% \frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
+% \frac{\partial v_r(r)}{\partial r}+ 
+% \frac{im}{r} v_{\theta}(r)
+% +
+% ik_xv_x(r) 
+% &= 0
+% \end{align*}
+
+% \newpage
+
+% \section{Non-Dimensionalization}
+% Defining 
+
+% \[r_T = r_{max}\]
+% \[A_T = A(r_{max})\]
+% \[k = \frac{\omega r_T}{A_T}\]
+% \[\bar{\gamma} = k_x r_T\]
+% \[\tilde{r} = \frac{r}{r_T}\]
+% \[\frac{\partial }{\partial r} = \frac{\partial \tilde{r}}{\partial r} \frac{\partial }{\partial \tilde{r}} = \frac{1}{r_T} \frac{\partial }{\partial \tilde{r}}\]
+% \[V_{\theta} = M_{\theta} A\]
+% \[V_{x} = M_{x} A\]
+% \[\tilde{A} = \frac{A}{A_T}\]
+% \[v_{x} =\tilde{v}_x A\]
+% \[v_{r} =\tilde{v}_r A\]
+% \[v_{\theta} =\tilde{v}_{\theta} A\]
+% \[p = \tilde{p} \bar{\rho} A^2\]
+
+% \begin{align*}
+% r\text{-direction: }& i\left(-\omega + \frac{ m V_{\theta}}{r} +  k_x V_x \right) v_r - \frac{2 \bar{v}_{\theta}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p\\
+% \theta\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_{\theta} + \left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta= -\frac{m}{\bar{\rho}r}p \\ 
+% x\text{-direction: } &i\left(-\omega + \frac{mV_{\theta}}{r} +  k_xVx\right)v_x + \frac{\partial V_x}{\partial r} v_r = - \frac{i
+% 	k_x}{\bar{\rho}}p\\
+% \text{Energy: }&\frac{1}{\bar{\rho} A^2} i\left(-\omega + \frac{mV_{\theta}}{r} + k_xV_x  
+% \right)p(r)  +
+% \frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
+% \frac{\partial v_r(r)}{\partial r}+ 
+% \frac{im}{r} v_{\theta}(r)
+% +
+% ik_xv_x(r) 
+% = 0
+% \end{align*}
+
+% Substituting the non dimensional quantities, and noting $r_T$ and $A^2$ in each term, 
+% the radial momentum equation becomes,
+
+% \[ \boxed{i\left[ 
+% - \frac{k}{\tilde{A}} + 
+% \frac{m M_{\theta}}{\tilde{r}} + 
+% \bar{\gamma} M_x \right] 
+% \tilde{v}_r - 
+% \frac{2 M_{\theta} \tilde{v}_{\theta}}{\tilde{r}} = 
+% -\frac{1}{\bar{\rho} A^2}\frac{\partial \tilde{p}\bar{\rho} A^2}{\partial \tilde{r}} + 
+% M_{\theta}\frac{\tilde{p}}{\tilde{r}}}\]
+
+% Similarly for the $\theta$and $x$ directions:
+
+% \begin{align*}
+% \boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_{\theta} + \left(\frac{ M_{\theta}}{\tilde{r}}  + \frac{1}{A} \frac{\partial M_{\theta}A}{\partial \tilde{r}}\right)\tilde{v}_r = \frac{i m}{\tilde{r}}\tilde{P}}\\
+%  \boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_x  + \frac{1}{A} \frac{\partial M_x A}{\partial \tilde{r}}\tilde{v}_r = -i \bar{\gamma}\tilde{P}}
+% \end{align*}
+
+% and for the Energy equation:
+% \begin{align*}
+% 	 \boxed{i \left[ -\frac{k}{\tilde{A}} + 
+% 	 \frac{mM_{\theta}}{\tilde{r}} +
+% 	 \bar{\gamma}M_x \right] \tilde{p} + 
+% 	 \frac{M_{\theta}^2}{\tilde{r}}\tilde{v}_r + 
+% 	 \frac{1}{A}\frac{\partial ( \tilde{v}_r A)}{\partial \tilde{r}}+ 
+%  \frac{\tilde{v}_r  }{\tilde{r}} + \frac{im}{\tilde{r}}\tilde{v}_\theta + i \bar{\gamma} \tilde{v}_x = 0}
+% \end{align*}
+
+% Expanding mean derivatives (using product rule) $\frac{\partial \tilde{p}\bar{\rho} A^2}{\partial \tilde{r}} $
+
+% \[ \boxed{i\left[ 
+% - \frac{k}{\tilde{A}} + 
+% \frac{m M_{\theta}}{\tilde{r}} + 
+% \bar{\gamma} M_x 
+% \right] \tilde{v}_r - 
+% \frac{2 M_{\theta} \tilde{v}_{\theta}}{\tilde{r}} = -
+% \left( \frac{\partial \tilde{p}}{\partial \tilde{r}} +\frac{\tilde{p}}{\bar{\rho} A^2}
+% \frac{\partial \bar{\rho} A^2}{\partial \tilde{r}}  \right)+ 
+% M_{\theta}\frac{\tilde{p}}{\tilde{r}}}\]
+
+
+% \[\boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_{\theta} + \left(\frac{ M_{\theta}}{\tilde{r}}  + \frac{1}{A} \frac{\partial M_{\theta}A}{\partial \tilde{r}}\right)\tilde{v}_r = \frac{i m}{\tilde{r}}\tilde{P}}\]         
+% \[\boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_x  + \frac{1}{A} \frac{\partial M_x A}{\partial \tilde{r}}\tilde{v}_r = -i \bar{\gamma}\tilde{P}} \]
+
+% \begin{align*}
+% 	 \boxed{i \left[ -\frac{k}{\tilde{A}} + 
+% 	 \frac{mM_{\theta}}{\tilde{r}} + 
+% 	 \bar{\gamma}M_x \right] \tilde{p} + 
+% 	 \frac{M_{\theta}^2}{\tilde{r}}\tilde{v}_r + 
+%      \frac{\partial \tilde{v}_r}{\partial \tilde{r}} +
+% 	 \frac{1}{A}\frac{\partial A}{\partial \tilde{r}}{v}_r+ 
+%  \frac{\tilde{v}_r  }{\tilde{r}} + \frac{im}{\tilde{r}}\tilde{v}_\theta + i \bar{\gamma} \tilde{v}_x = 0}
+% \end{align*}
+% \[\]
+% \newpage
+% \begin{align*}
+%     \frac{1}{A}\frac{\partial A}{\partial \tilde{r}}
+% \end{align*}
+% Recall, $\partial / \partial r = (1/r_T)(\partial/\partial \tilde{r}$,
+% \begin{align*}
+%     \frac{1}{A}\frac{\partial A}{\partial \tilde{r}} &=
+%     r_T \left(\frac{1}{A}\frac{\partial A}{\partial r}  \right) \\
+%     &=\frac{r_T}{A^2}  \left(A \frac{\partial A}{\partial r}  \right) 
+% \end{align*}
+
+% Using the trick, $\frac{\partial}{\partial r}\left( \frac{A^2}{2} \right)=A \frac{\partial A}{\partial r} $
+
+% \begin{align*}
+%     &=\frac{r_T}{A^2}  \left(\frac{\partial}{\partial r}\left( \frac{A^2}{2} \right)  \right) \\
+%     &=\frac{r_T}{2A^2}  \frac{\partial A^2}{\partial r} 
+% \end{align*}
+
+% Using the definition derived earlier (Needs eqn reference) 
+% $\frac{\partial A^2}{\partial r} = \frac{\gamma - 1}{2} \frac{v_{\theta}^2}{r} $
+
+% \begin{align*}
+%     &=\frac{r_T}{2A^2}\frac{\gamma - 1}{2} \frac{v_{\theta}^2}{r}  \\
+%     &=\frac{\gamma - 1}{2} \frac{M_{\theta}^2}{\tilde{r}}
+% \end{align*}
+
+
+% \begin{align*}
+%     \frac{\partial \rho A^2 }{\partial \tilde{r}} &= 
+%     \gamma \frac{\partial p }{\partial \tilde{r}}\\ 
+%     &= \gamma \frac{\rho v_{\theta}^2}{\tilde{r}} \\
+%     &=r_T \gamma \frac{\rho v_{\theta}^2}{r} 
+% \end{align*}
+
+
+% \begin{align*}
+%     \frac{1}{\rho A^2} \frac{\partial \rho A^2 }{\partial r} = \frac{\gamma M_{\theta}^2}{\tilde{r}}
+% \end{align*}
 
 
 Substituting in yields ,%equations $2.38$ - $2.41$
@@ -931,6 +935,7 @@ and defining
 The governing equations can be written in the form of $[A]{x} - \lambda [B]{x}$
 
 \begin{equation*}
+    \tiny
     \begin{bmatrix}
         -i \left( \frac{k}{\bar{A}} - \frac{mM_{\theta}}{\tilde{r}} \right) - \lambda M_x &
         -\frac{2 M_{\theta}}{\tilde{r}} &

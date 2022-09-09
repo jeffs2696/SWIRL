@@ -1,11 +1,13 @@
 OUTPUT_FILES = \
 			   01-mean-flow/*.dat \
-			   02-method-of-manufactured-solutions/*.dat \
-			   03-plotReport/tex-outputs/*.tex \
-			   04-EVanalysis/*.dat \
-			   04-EVanalysis/egv* \
-			   04-EVanalysis/gam* \
-			   fort.*
+			   03-EVanalysis/egv* \
+			   03-EVanalysis/gam*
+
+PLOT_REPORT_FILES = \
+			   04-plotReport/tex-outputs/*.tex
+
+MMS_OUTPUT_FILES = \
+				   02-method-of-manufactured-solutions/*.dat
 
 EXE = swirlF2020
 SHELL_EXT = sh
@@ -24,23 +26,26 @@ PLOT_NAMES = plotMachDistribution 	\
 
 PLOT_EXE = $(PLOT_NAMES:=.$(SHELL_EXT))
 
-NUMBERS =  
+# NUMBERS =  
 
 # all: 
 	# echo $(PLOT_EXE)
 
-plot:
-	@cd 03-plotReport; ./PythonPlotReport.py;
+run: 
+	(./$(EXE));
 
-run SWIRL:
-	./$(EXE)
+plot:
+	@cd 04-plotReport; ./plotReport.py;
+
+
 clean:
 	(rm $(OUTPUT_FILES));
 report: all
-	@cd 03-plotReport; ./PythonPlotReport.py; \
+	@cd 04-plotReport; ./plotReport.py; \
 		pdflatex -halt-on-error plotReport.tex | grep -A3 '^!'; \
 		xdg-open plotReport.pdf;
-
+Kousen:
+	@cd 04-plotReport; ./KousensTestCasePlots.py;
 .PHONY: all
 # 	@cd $(PLOT_SHELL_SCRIPT_DIR); \
 # 	$(foreach var,$(PLOT_EXE),./$(var);)

@@ -24,6 +24,6 @@ def plotSymbolicEquation(
     mpl.xlabel(x_title)
     mpl.ylabel(y_title)
     mpl.plot(x_vals, y_vals)
-    mpl.show()
+    # mpl.show()
 
     return

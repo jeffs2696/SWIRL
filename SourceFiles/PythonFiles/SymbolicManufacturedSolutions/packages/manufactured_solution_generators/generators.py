@@ -50,5 +50,6 @@ def TanhMethod(n,B,r_min,r_max):
         LeftKink.append(  A[j]*sp.tanh(B*( rj[j]- rj[0] )) )   
     
     f = sum(LeftKink) + sum(RightKink) + S_vertical
+    print(A)
     return f
 

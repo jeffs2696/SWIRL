@@ -1,0 +1,2134 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  9 SEP 2022 10:39
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**doc.tex
+(./doc.tex
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14>
+(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+Document Class: report 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@chapter=\count168
+\c@section=\count169
+\c@subsection=\count170
+\c@subsubsection=\count171
+\c@paragraph=\count172
+\c@subparagraph=\count173
+\c@figure=\count174
+\c@table=\count175
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2020/01/17 v1.23 mathematical typesetting tools
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count176
+\calc@Bcount=\count177
+\calc@Adimen=\dimen135
+\calc@Bdimen=\dimen136
+\calc@Askip=\skip49
+\calc@Bskip=\skip50
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count178
+\calc@Cskip=\skip51
+)
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks15
+\ex@=\dimen137
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen138
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count179
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count180
+\leftroot@=\count181
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count182
+\DOTSCASE@=\count183
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box45
+\strutbox@=\box46
+\big@size=\dimen139
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count184
+\c@MaxMatrixCols=\count185
+\dotsspace@=\muskip16
+\c@parentequation=\count186
+\dspbrk@lvl=\count187
+\tag@help=\toks16
+\row@=\count188
+\column@=\count189
+\maxfields@=\count190
+\andhelp@=\toks17
+\eqnshift@=\dimen140
+\alignsep@=\dimen141
+\tagshift@=\dimen142
+\tagwidth@=\dimen143
+\totwidth@=\dimen144
+\lineht@=\dimen145
+\@envbody=\toks18
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks19
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count191
+\l_MT_multwidth_dim=\dimen146
+\origjot=\skip55
+\l_MT_shortvdotswithinadjustabove_dim=\dimen147
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen148
+\l_MT_above_intertext_sep=\dimen149
+\l_MT_below_intertext_sep=\dimen150
+\l_MT_above_shortintertext_sep=\dimen151
+\l_MT_below_shortintertext_sep=\dimen152
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks20
+\pgfutil@tempdima=\dimen153
+\pgfutil@tempdimb=\dimen154
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
+ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box47
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2020/01/08 v3.1.5b (3.1.5b)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks21
+\pgfkeys@temptoks=\toks22
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
+ex
+\pgfkeys@tmptoks=\toks23
+))) (/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex
+\pgf@x=\dimen155
+\pgf@xa=\dimen156
+\pgf@xb=\dimen157
+\pgf@xc=\dimen158
+\pgf@y=\dimen159
+\pgf@ya=\dimen160
+\pgf@yb=\dimen161
+\pgf@yc=\dimen162
+\c@pgf@counta=\count192
+\c@pgf@countb=\count193
+\c@pgf@countc=\count194
+\c@pgf@countd=\count195
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen163
+\pgfmath@count=\count196
+\pgfmath@box=\box48
+\pgfmath@toks=\toks24
+\pgfmath@stack@operand=\toks25
+\pgfmath@stack@operation=\toks26
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
+ric.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+e.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
+.code.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+.tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
+tex)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
+thmetics.code.tex)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count197
+)))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen164
+\pgffor@skip=\dimen165
+\pgffor@stack=\toks27
+\pgffor@toks=\toks28
+))
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen166
+\lightrulewidth=\dimen167
+\cmidrulewidth=\dimen168
+\belowrulesep=\dimen169
+\belowbottomsep=\dimen170
+\aboverulesep=\dimen171
+\abovetopsep=\dimen172
+\cmidrulesep=\dimen173
+\cmidrulekern=\dimen174
+\defaultaddspace=\dimen175
+\@cmidla=\count198
+\@cmidlb=\count199
+\@aboverulesep=\dimen176
+\@belowrulesep=\dimen177
+\@thisruleclass=\count266
+\@lastruleclass=\count267
+\@thisrulewidth=\dimen178
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count268
+\l__pdf_internal_box=\box49
+)
+(./doc.aux
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+
+LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
+
+)
+\openout1 = `doc.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count269
+\scratchdimen=\dimen179
+\scratchbox=\box50
+\nofMPsegments=\count270
+\nofMParguments=\count271
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count272
+\MPscratchDim=\dimen180
+\MPnumerator=\count273
+\makeMPintoPDFobject=\count274
+\everyMPtoPDFconversion=\toks30
+))) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\Gin@req@height=\dimen181
+\Gin@req@width=\dimen182
+)
+ABD: EveryShipout initializing macros [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/axial_wavenumber_analytical_test_case_comparison32gridpoints.pdf, id=20, 462.
+52798pt x 346.89601pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/axial_wavenumber_analytical_test_case_comparison32gridpoints.pdf Graphic
+ file (type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/axial_wavenumber_analytical_test_case_comparison32gridpoints.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/axial_wavenumber_analytical_test_case_comparison32gri
+dpoints.pdf  used on input line 133.
+(pdftex.def)             Requested size: 345.0pt x 258.76337pt.
+ [3 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/axial_wavenumber_analytical_test_case_comparison32gridpoints.pdf>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_0_grid_32.pdf, id=86, 690.00002pt
+ x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_0_grid_32
+.pdf  used on input line 152.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_1_grid_32.pdf, id=87, 690.00002pt
+ x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_grid_32
+.pdf  used on input line 152.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+ [4 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_0_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_0_grid_32.pdf, id=123, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_0_grid_32
+.pdf  used on input line 163.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_1_grid_32.pdf, id=124, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_grid_32
+.pdf  used on input line 163.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+ [5 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_1_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_0_grid_32.pdf, id=162, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_0_grid_32
+.pdf  used on input line 175.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_1_grid_32.pdf, id=163, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_grid_32
+.pdf  used on input line 175.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+ [6 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_2_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_0_grid_32.pdf, id=200, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_0_grid_32
+.pdf  used on input line 187.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_1_grid_32.pdf, id=201, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_grid_32
+.pdf  used on input line 187.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+ [7 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_3_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_0_grid_32.pdf, id=239, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_0_grid_32
+.pdf  used on input line 199.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_1_grid_32.pdf, id=240, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_grid_32
+.pdf  used on input line 199.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+ [8 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_4_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_0_grid_32.pdf, id=278, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_0_grid_32
+.pdf  used on input line 211.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_1_grid_32.pdf, id=279, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_grid_32
+.pdf  used on input line 211.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+ [9 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_0_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_0_grid_32.pdf, id=310, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_0_grid_32
+.pdf  used on input line 223.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_1_grid_32.pdf, id=311, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_grid_32
+.pdf  used on input line 223.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+ [10 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_0_grid_32.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_orde
+r_radial_mode_1_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_0_grid_32.pdf, id=348, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_0_grid_32
+.pdf  used on input line 235.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_1_grid_32.pdf, id=349, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_grid_32
+.pdf  used on input line 235.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_2_grid_32.pdf, id=350, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_2_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_2_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_2_grid_32
+.pdf  used on input line 235.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_3_grid_32.pdf, id=351, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_3_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_3_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_3_grid_32
+.pdf  used on input line 235.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[11 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_2_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_0_grid_32.pdf, id=389, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_0_grid_32
+.pdf  used on input line 247.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_1_grid_32.pdf, id=390, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_grid_32
+.pdf  used on input line 247.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_2_grid_32.pdf, id=391, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_2_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_2_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_2_grid_32
+.pdf  used on input line 247.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_3_grid_32.pdf, id=392, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_3_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_3_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_3_grid_32
+.pdf  used on input line 247.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_2_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_2_test_case_number_3_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_3_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_0_grid_32.pdf, id=429, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_0_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_0_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_0_grid_32
+.pdf  used on input line 259.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_1_grid_32.pdf, id=430, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_1_grid_32.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_1_grid_32.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_grid_32
+.pdf  used on input line 259.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_3_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_0_grid_64.pdf, id=468, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_0_grid_64
+.pdf  used on input line 272.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_1_grid_64.pdf, id=469, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_grid_64
+.pdf  used on input line 272.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_2_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_3_test_case_number_3_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_3_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_0_grid_64.pdf, id=507, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_0_grid_64
+.pdf  used on input line 283.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_1_grid_64.pdf, id=508, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_grid_64
+.pdf  used on input line 283.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[15 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_0_grid_32.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_4_test_case_number_1_grid_32.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_g
+rid_32.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_0_grid_64.pdf, id=545, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_0_grid_64
+.pdf  used on input line 295.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_1_grid_64.pdf, id=546, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_grid_64
+.pdf  used on input line 295.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[16 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_0_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_0_grid_64.pdf, id=577, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_0_grid_64
+.pdf  used on input line 307.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_1_grid_64.pdf, id=578, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_grid_64
+.pdf  used on input line 307.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[17 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_1_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_0_grid_64.pdf, id=616, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_0_grid_64
+.pdf  used on input line 319.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_1_grid_64.pdf, id=617, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_grid_64
+.pdf  used on input line 319.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[18 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_2_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_0_grid_64.pdf, id=654, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_0_grid_64
+.pdf  used on input line 331.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_1_grid_64.pdf, id=655, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_grid_64
+.pdf  used on input line 331.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[19 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_3_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_0_grid_64.pdf, id=693, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_0_grid_64
+.pdf  used on input line 343.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_1_grid_64.pdf, id=694, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_grid_64
+.pdf  used on input line 343.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[20 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order
+_radial_mode_4_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_0_grid_64.pdf, id=732, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_0_grid_64
+.pdf  used on input line 355.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_1_grid_64.pdf, id=733, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_grid_64
+.pdf  used on input line 355.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[21 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_0_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_0_grid_64.pdf, id=764, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_0_grid_64
+.pdf  used on input line 368.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_1_grid_64.pdf, id=765, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_grid_64
+.pdf  used on input line 368.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[22 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_1_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_0_grid_64.pdf, id=802, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_0_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_0_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_0_grid_64
+.pdf  used on input line 380.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_1_grid_64.pdf, id=803, 690.00002p
+t x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_1_grid_64.pdf Graphic file (
+type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_1_grid_64.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_grid_64
+.pdf  used on input line 380.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_0_grid_128.pdf, id=804, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_0_grid_12
+8.pdf  used on input line 392.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_1_grid_128.pdf, id=805, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_grid_12
+8.pdf  used on input line 392.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[23 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_2_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_0_grid_128.pdf, id=843, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_0_grid_12
+8.pdf  used on input line 403.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_1_grid_128.pdf, id=844, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_grid_12
+8.pdf  used on input line 403.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[24 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_3_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_0_grid_128.pdf, id=881, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_0_grid_12
+8.pdf  used on input line 415.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_1_grid_128.pdf, id=882, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_grid_12
+8.pdf  used on input line 415.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[25 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_0_grid_64.pdf> </home/jeff-se
+verino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order
+_radial_mode_4_test_case_number_1_grid_64.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_g
+rid_64.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_0_grid_128.pdf, id=920, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_0_grid_12
+8.pdf  used on input line 427.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_1_grid_128.pdf, id=921, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_grid_12
+8.pdf  used on input line 427.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[26 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_0_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_0_grid_128.pdf, id=953, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_0_grid_12
+8.pdf  used on input line 439.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_1_grid_128.pdf, id=954, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_grid_12
+8.pdf  used on input line 439.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[27 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_1_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_0_grid_128.pdf, id=991, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_0_grid_12
+8.pdf  used on input line 451.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_1_grid_128.pdf, id=992, 690.00002
+pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_grid_12
+8.pdf  used on input line 451.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[28 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_2_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_0_grid_128.pdf, id=1029, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_0_grid_12
+8.pdf  used on input line 463.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_1_grid_128.pdf, id=1030, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_grid_12
+8.pdf  used on input line 463.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[29 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_3_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_0_grid_128.pdf, id=1068, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_0_grid_12
+8.pdf  used on input line 475.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_1_grid_128.pdf, id=1069, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_grid_12
+8.pdf  used on input line 475.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[30 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_4_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_0_grid_128.pdf, id=1106, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_0_grid_12
+8.pdf  used on input line 488.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_1_grid_128.pdf, id=1107, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_grid_12
+8.pdf  used on input line 488.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[31 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_orde
+r_radial_mode_0_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_0_grid_128.pdf, id=1139, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_0_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_0_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_0_grid_12
+8.pdf  used on input line 500.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_1_grid_128.pdf, id=1140, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_1_grid_128.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_1_grid_128.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_grid_12
+8.pdf  used on input line 500.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_0_grid_256.pdf, id=1141, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_0_grid_25
+6.pdf  used on input line 512.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_0_test_case_number_1_grid_256.pdf, id=1142, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_0_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_grid_25
+6.pdf  used on input line 512.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[32 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_orde
+r_radial_mode_1_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_0_grid_256.pdf, id=1180, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_0_grid_25
+6.pdf  used on input line 523.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_1_test_case_number_1_grid_256.pdf, id=1181, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_1_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_grid_25
+6.pdf  used on input line 523.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[33 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_orde
+r_radial_mode_2_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_0_grid_256.pdf, id=1218, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_0_grid_25
+6.pdf  used on input line 535.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_2_test_case_number_1_grid_256.pdf, id=1219, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_2_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_grid_25
+6.pdf  used on input line 535.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[34 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_orde
+r_radial_mode_3_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_0_grid_256.pdf, id=1256, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_0_grid_25
+6.pdf  used on input line 547.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_3_test_case_number_1_grid_256.pdf, id=1257, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_3_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_grid_25
+6.pdf  used on input line 547.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[35 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_0_grid_128.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_orde
+r_radial_mode_4_test_case_number_1_grid_128.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_g
+rid_128.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_0_grid_256.pdf, id=1295, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_0_grid_25
+6.pdf  used on input line 559.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/second_order_radial_mode_4_test_case_number_1_grid_256.pdf, id=1296, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/second_order_radial_mode_4_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_grid_25
+6.pdf  used on input line 559.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[36 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_0_test_case_number_0_grid_256.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_0_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_0_grid_256.pdf, id=1327, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_0_grid_25
+6.pdf  used on input line 571.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_0_test_case_number_1_grid_256.pdf, id=1328, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_0_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_grid_25
+6.pdf  used on input line 571.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[37 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_1_test_case_number_0_grid_256.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_1_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_0_grid_256.pdf, id=1366, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_0_grid_25
+6.pdf  used on input line 583.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_1_test_case_number_1_grid_256.pdf, id=1367, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_1_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_1_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_grid_25
+6.pdf  used on input line 583.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[38 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_2_test_case_number_0_grid_256.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_2_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_0_grid_256.pdf, id=1405, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_0_grid_25
+6.pdf  used on input line 595.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_2_test_case_number_1_grid_256.pdf, id=1406, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_2_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_2_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_grid_25
+6.pdf  used on input line 595.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[39 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_3_test_case_number_0_grid_256.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_3_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_0_grid_256.pdf, id=1443, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_0_grid_25
+6.pdf  used on input line 608.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_3_test_case_number_1_grid_256.pdf, id=1444, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_3_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_3_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_grid_25
+6.pdf  used on input line 608.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[40 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/second_order_radial_mode_4_test_case_number_0_grid_256.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_orde
+r_radial_mode_4_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>]
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_0_grid_256.pdf, id=1481, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_0_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_0_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_0_grid_25
+6.pdf  used on input line 620.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+</home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figure
+s/fourth_order_radial_mode_4_test_case_number_1_grid_256.pdf, id=1482, 690.0000
+2pt x 426.44344pt>
+File: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/f
+igures/fourth_order_radial_mode_4_test_case_number_1_grid_256.pdf Graphic file 
+(type pdf)
+<use /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_4_test_case_number_1_grid_256.pdf>
+Package pdftex.def Info: /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/Anal
+yticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_grid_25
+6.pdf  used on input line 620.
+(pdftex.def)             Requested size: 345.0pt x 213.22769pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[41 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/fi
+gures/fourth_order_radial_mode_0_test_case_number_0_grid_256.pdf> </home/jeff-s
+everino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_orde
+r_radial_mode_0_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>] [42 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS
+/figures/fourth_order_radial_mode_1_test_case_number_0_grid_256.pdf> </home/jef
+f-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_o
+rder_radial_mode_1_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>] [43 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS
+/figures/fourth_order_radial_mode_2_test_case_number_0_grid_256.pdf> </home/jef
+f-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_o
+rder_radial_mode_2_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>] [44 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS
+/figures/fourth_order_radial_mode_3_test_case_number_0_grid_256.pdf> </home/jef
+f-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_o
+rder_radial_mode_3_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>] [45 </home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS
+/figures/fourth_order_radial_mode_4_test_case_number_0_grid_256.pdf> </home/jef
+f-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_o
+rder_radial_mode_4_test_case_number_1_grid_256.pdf
+
+pdfTeX warning: pdflatex (file /home/jeff-severino/SWIRL/SourceFiles/PythonFile
+s/AnalyticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_1_g
+rid_256.pdf): PDF inclusion: multiple pdfs with page group included in a single
+ page
+>] (./doc.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 8054 strings out of 481239
+ 208716 string characters out of 5920378
+ 355099 words of memory out of 5000000
+ 23154 multiletter control sequences out of 15000+600000
+ 535354 words of font info for 34 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 43i,16n,52p,378b,279s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti9.pfb>
+Output written on doc.pdf (45 pages, 983841 bytes).
+PDF statistics:
+ 1704 PDF objects out of 1728 (max. 8388607)
+ 1536 compressed objects within 16 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 426 words of extra memory for PDF output out of 10000 (max. 10000000)
+

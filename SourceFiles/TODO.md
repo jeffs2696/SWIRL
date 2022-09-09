@@ -4,7 +4,7 @@
  [ ]
 ### In Progress
 
-- [ ] fix symbolic solver when r = 0
+- [x] fix symbolic solver when r = 0
     - [ x] Include L'Hopital's Defintion
     - [  ] Change the way source terms are being calculated in Fortran by sending 
     the entire array of data instead of sending in array entries

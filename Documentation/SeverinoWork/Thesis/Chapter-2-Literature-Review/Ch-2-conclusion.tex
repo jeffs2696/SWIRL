@@ -1,14 +1,198 @@
+
+\section{Review of the assessment of the numerical techniques} 
+Kousen assesed the accuracy of the numerical discretication technique for 
+a series of test cases using three sources \cite{Shankar1972} \cite{Vo1978} and 
+\cite{Astley1979} ([10] [15] and [45] in Kousen's work \cite{kousen1996pressure}
+respectively).  The results were assesed by using various
+literature comparisons. The methodology was presented of uniform mean axial flows,
+but results for hard wall cases were presented by computing the order of accuracy for
+the first four radial modes (See Figures 4.1-4.4), . (Explain why this is MES and offer MMS as a source
+of verification and explain that MES is validation \cite{Roy2005} \cite{Salari2000} ). For a uniform axial flow, 
+the axial wavenumbers can be computed from an analytical solution, where 
+one of the key input parameters are the zero crossings of the derivative
+of the Bessel Function of the first kind . The values are presented 
+\cite{Kerrebrock1992} and are often refered to as separation constants 
+for a circumfirential and radial mode pair ; which are needed to compute the solution 
+of the convective wave equation.  
+
+The axial wavenumber is found by using second-order differential convective 
+wave equation for pressure using a fourth order accurate 
+Runge-Kutta(RK) method \cite{kousen1995eigenmode} which was done to check 
+against the results in \cite{Agarwal1989} (Table 4.1 and 4.2 in \cite{kousen1995eigenmode}). 
+The output parameter was $\gamma/k$.  Each axial wave number can then be used 
+to compute the analytical radial mode using the 
+exponential assumption.  
+Axial wavenumbers from annular and cylindrical ducts with lined walls were 
+compared to findings from Astley and Eversman \cite{Astley1979} for uniform and 
+sheared axial flow with liner (Table 4.3).  The results taken were from a ``high-order'' RK 
+scheme used. Axial wavenumbers from cylindrical ducts with hard walls were 
+compared to findings from Shankar \cite{Shankar1972} in Table 4.4 of \cite{kousen1995eigenmode}. 
+
+In recent years  Maldonado et. al, \cite{Maldonado2016} has made significant 
+contributions in solution verification given the recent improvements in 
+experimental measurement techniques. The work has presented test cases for 
+lined ducts that have been compared to Kousen \cite{kousen1995eigenmode}, Nijboer
+\cite{Nijboer2001} and Peake \cite{Posson2013} and show excellent comparison. 
+The goal of this work is to contribute these efforts by conducting the method
+of manufactured solutions to offer clarity in using techniques often used in other
+verification and validation (V\&V) studies. 
+\subsection{The research questions, hypotheses, foreshadowed problems, or 
+    conjectures}
+While these results confirm the findings of SWIRL and other LEE codes, this does not check if the 
+equations that were programmed were entered correctly. While an emphasis on 
+solution verification is vital, it should be coupled with code verification to
+determine the robustness and consistency of the algorithm.  The method of manufactured
+solutions combined with order of accuracy verification is often used as a 
+gold standard of code verification \cite{Roy2005} and has been shown to provide
+an estimate of discretization error that can be computed before the final answer
+is obtained. Since the mid 2000's, code verification literature has grown popular
+in the field of computational mathematics and physics due to its ability to
+conduct tests for numerical approximations of partial and ordinary differential 
+equations. The MMS offers a means of ``manufacturing'' an arbitrary solution by
+define functions for each term in the governing equation.  Common practices 
+and guidelines are offered in \cite{Salari2000} to choose the fuunctions, but
+are phrased such that MMS can be widely applied. Since various numerical problems
+are unique in their treatment of spatial discretization, and boundary condtions ,
+this work will describe the use of these guidelines and the nuances that have
+been taken to check the boundary conditon and radial derivatives used in SWIRL.
+
+Knupp in Code Verification by the MMS \cite{Salari2000} provides guidelines for creating
+manufactured soultions which states,
+\begin{enumerate}
+    \item  The manufactured solutions should be composed of smooth analytic 
+        functions 
+    \item The manufactured solutions should exercize every term in the governing
+        equation that is being tested,
+    \item The solution should have non trivial derivatives.  
+    \item The solution derivatives should be bounded by a small constant. In this case
+        this constant should prevent the function from becoming greater than 
+        one.
+    \item The solution should not prevent the code from running 
+    \item The solution should be defined on a connected subset of two- or three-
+        dimensional space to allow flexibility in chosing the domain of the PDE.
+    \item The solution should coincide with the differential operators of the PDE.
+        For example, the flux term in Fourier's law of conduction requires T to 
+        be differentiable.
+\end{enumerate}
+
+The goal is the to calculate an observed order of accuracy.
+\subsection{Calculation of Observed Order-of-Accuracy}
+
+To begin the method of manufactured solutions, the discretization error,
+$\epsilon$ is defined as a function of radial grid spacing, $\Delta r$
+
+\[ \epsilon = \epsilon(\Delta r) \]
+The discretization error in the solution should be proportional to 
+$\left( \Delta r \right)^{\alpha}$ where $\alpha > 0$ is the theoretical order
+for the computational method.  The error for each grid is expressed as 
+\[ \epsilon_{M_{\theta}}(\Delta r) = |M_{\theta,Analytic}-M_{\theta,calc}|\]
+where $M_{\theta,Analytic}$ is the tangential mach number that is defined from the
+speed of sound we also defined and the $M_{\theta,calc}$ is the result from 
+SWIRL. The $\Delta r$ is to indicate that this is a discretization error for a
+specific grid spacing. Applying the same concept to to the speed of sound,
+
+If we define this error on various grid sizes and compute $\epsilon$ for
+each grid, the observed order of accuracy can be estimated and compared to
+the theoretical order of accuracy. For instance, if the numerical soution
+is second-order accurate and the error is converging to a value, the L2 norm of
+the error will decrease by a factor of 4 for every halving of the grid cell 
+size. 
+Since the input variables should remain unchanged, the error for the axial and tangential mach 
+number should be zero. As for the speed of sound, since we are using an analytic
+expression for the tangential mach number, we know what the theoretical result
+would be from the numerical integration technique as shown above. 
+Similarly we define the discretization error for the speed of sound.
+
+\[ \epsilon_{A}(\Delta r) = |A_{Analytic}-A_{calc}|\]
+
+For a perfect answer, we expect $\epsilon$ to be zero. Since a Taylor series can 
+be used to derive the numerical schemes, we know that the truncation of higher
+order terms is what indicates the error we expect from using a scheme that 
+is constructed with such truncated Taylor series.
+
+%\text{H.O.T}
+The expectation is that the error at each grid point $j$ to satisfy the following,
+\begin{align*}
+    0 &= |A_{Analytic}(r_j) - A_{calc}(r_j)| \\
+    \widetilde{A}_{Analytic}(r_j) &= \widetilde{A}_{calc}(r_j) +
+    (\Delta r)^{\alpha} \beta(r_j)  + H.O.T
+\end{align*}
+
+where the value of $\beta(r_j)$ does not change with grid spacing, and 
+$\alpha$ is the asymptotic order of accuracy of the method. It is important to
+note that the numerical method recovers the original equations as the grid 
+spacing approached zero.
+
+Subtracting $A_{Analytic}$ from both sides gives
+
+\begin{align*}
+    A_{calc}(r_j) - A_{Analytic}(r_j) &= A_{Analytic}(r_j) - A_{Analytic}(r_j)
+    + \beta(r_j) (\Delta r)^{\alpha} \\
+    \epsilon_A(r_j)(\Delta r) &= \beta(r_j) (\Delta r)^{\alpha}
+\end{align*}
+
+To estimate the order of accuracy of the accuracy, the global errors 
+are calculated by taking the L2 Norm of the error which is denoted as $\hat{\epsilon}_A$ 
+\begin{align*}
+    \hat{\epsilon}_A = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \epsilon(r_j)^2  }
+\end{align*}
+
+\begin{align*}
+    \hat{\beta}_A(r_j) = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \beta(r_j)^2  }
+\end{align*}
+As the grid density increases, $\hat{\beta}$ should asymptote to a constant 
+value. Given two grid densities, $\Delta r$ and $\sigma\Delta r$, and assuming
+that the leading error term is much larger than any other error term,
+
+\begin{align*}
+    \hat{\epsilon}_{grid 1} &= \hat{\epsilon}(\Delta r) = \hat{\beta}(\Delta r)^{\alpha} \\
+    \hat{\epsilon}_{grid 2} &= \hat{\epsilon}(\sigma \Delta r) = \hat{\beta}(\sigma \Delta r)^{\alpha} \\
+                            &= \hat{\beta}(\Delta r)^{\alpha} \sigma^{\alpha}
+\end{align*}
+
+The ratio of two errors is given by,
+
+\begin{align*}
+    \frac{\hat{\epsilon}_{grid 2}}{\hat{\epsilon}_{grid 1}} &= 
+    \frac{\hat{\beta}(\Delta r )^{\alpha}}{\hat{\beta}(\Delta r )^{\alpha}} \sigma^{\alpha} \\ &= \sigma^{\alpha}
+\end{align*}
+
+Thus, $\alpha$,the asymptotic rate of convergence is computed as follows 
+
+\begin{align*}
+    \alpha = \frac{
+        \ln \frac{
+            \hat{\epsilon}_{grid 2}
+    }{\hat{\epsilon}_{grid 1} }}
+    {\ln\left( \sigma \right) }
+\end{align*}
+
+For example ,a doubling of grid points has $\sigma=1/2$,
+
+\begin{align*}
+    \alpha = \frac{\ln \left( \hat{\epsilon}\left( \frac{1}{2}\Delta  r\right)
+            \right) -\ln \left( \hat{\epsilon}\left( \Delta  r\right)
+        \right)}{\ln \left( \frac{1}{2} \right)}
+    \end{align*}
+
+
+
 \section{Conclusion}
-\begin{itemize}
-    \item The conclusion summarizes 
-        the key findings of the review in general terms. Notable commonalities between works, whether favorable or not
-        , may be included here.
-        \subitem This review discusses the development of the unsteady linearized equations, 
-        and how improvements in the modal analysis capture more families of mechanisms of noise generation within non-uniform 
-        swirling flow turbomachinery flow. 
-    \item This section is the reviewer’s opportunity to justify a research 
-        proposal. Therefore, the idea should be clearly re-stated and supported according to the findings of 
-        the review.
-        \subitem This literature review should be expanded to describe specific details in the methodologies and validation techniques reported by \cite{Kousen1996,Kousen1999,Golubev1996,Golubev1998}. 
-\end{itemize}
+This review discusses the development of the unsteady linearized equations, 
+and how improvements in the modal analysis capture more families of mechanisms of noise generation within non-uniform 
+swirling flow turbomachinery flow. 
+While the literature presented offers a measure of verification 
+and validation through the use of the Method of Exact Solutions, the Method 
+of Manufactured Solutions offers a level of code verification which allows
+for error checking by computing the approximate order of accuracy for 
+a given numerical scheme, which is independent of the final answer, which
+in this case is the axial wavenumber. The next chapter will outline the methodology
+and techniques used when applying MMS to SWIRL. The methods consist
+of unique treatment of boundary conditions using fairing functions as
+well as an example of using a summation to generate arbitrary functions 
+as manufactured solutions which has the dual benefit of giving a large
+number of derivatives but allows for high gradients in specific locations
+along the domain of the MS. The use of open-source widely available functions
+in Python were used to symbolically create the MS and then 
+used to generate FORTRAN code that will compute the MS for code comparison.  
 

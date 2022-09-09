@@ -1,0 +1,50 @@
+
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+The current goal is to put the MMS to a closing. My idea is to do a particular
+writeup for the MMS alone. I believe I have enough here for at least a first 
+draft conference paper. By limiting the scope of this document to MMS alone, 
+it will help me focus on getting a complete chapter for my thesis. 
+
+\section{Research Performed}
+I recently revisited my MMS and it was not so easy to dust off. I have 
+been reminding myself what I did so I can reuse it again. The basic work flow is 
+this:
+
+\begin{enumerate}
+    \item Using python, read the inputs that are in the main.f90 code. Variables 
+        like radius, liner information, and frequency of concern is read in here
+    \item Python symbolically defines the manufactured solutions for the 
+        speed of sound and for the linearized euler equations
+    \item Python generates FORTRAN code that defines the manufactured solution.
+       \item Optional: Plot output before sent to FORTRAN.
+\end{enumerate}
+
+\section{Issues and Concerns}
+I have very crude tests I made for my Python codes using pytest but never solidified 
+them. I would like to conduct a code review of my work at the end of this week 
+if possible.
+\section{Planned Research}
+Go back into my commit history right before I deviated from the MMS study.
+\end{document}
+
+

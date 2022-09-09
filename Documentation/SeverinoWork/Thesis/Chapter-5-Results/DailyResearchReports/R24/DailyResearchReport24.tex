@@ -1,0 +1,122 @@
+
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Daily Research Report}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+Write methods section of my the Method of Manufactured Solution for my thesis
+
+\section{Research Performed}
+Attended online lecture on scientific writing,
+
+Notes from lecture
+
+Importance of methods section:
+\begin{itemize}
+    \item Explains how the hypothesis is tested
+    \item how the data is collected and analyzed.
+    \item the methods section is important because it convinces the reader 
+        that the study and results are believable. If the reader doubts your 
+        findings they will look at the methods section. Methods will also help people
+        trying to replicate the work if they get different answers.  
+\end{itemize}
+
+Content of the method section. An example research paper about apples was used
+
+The question that is being asked is:
+
+How does the color of sliced apple change over time, after being dipped in different 
+chemicals?
+
+The independent variable : chemical used on the apple. dependent variable 
+change: color of apples.  other variables that could effect the results are discussed 
+in the method
+
+Organization:
+
+\begin{enumerate}
+    \item Object of Study 
+        \subitem Explain what you are studying . The object of the study is NOT
+        all the things used in your experiment/simulation 
+    \item Treatment for the object 
+        \subitem Explain what are you doing to your object/
+        This is the independent variable: what are you going to change in between
+        conditions.
+    \item Procedure to collect the data 
+        \subitem Explain what was measured and how it was measured 
+        This is the dependent variable. The experiment is testing how this 
+        changes based on the independent variable.
+    \item Procedure to analyze data
+        \subitem Transform the data.
+        \subitem Formula, software, statistical analysis.  
+\end{enumerate}
+
+Draft of methods 
+
+\begin{enumerate}
+    \item Object of Study
+        \subitem The method of manufactured solutions(MMS) is a code verification 
+        procedure that is used to provide an analytical solution for SWIRl, a
+        frequency domain, linearized euler equation code, for cases 
+        that do not have a known analytical solution. The MMS is used to 
+        obtain an order of accuracy for a given numerical approximation which 
+        gives a measure of ``goodness'' for a given number of grid points.  
+    \item Treatment for the object
+        \subitem The number of grid points used for a given domain is often not 
+        reported and is often different depending on the accuracy of the answer. In
+        addition, many numerical codes rely on various numerical techniques, not just one, which can
+        lead to a compounding of numerical error from an insufficient number 
+        of grid points for a given numerical techique. Since the order of 
+        accuracy is directly dependent on the numerical method 
+        and number of grid points used, this study aims to outline a procedure
+        for determining the minimum number of grid points need for a series of numerical techniques used 
+        to obtain integrals and derivative approximations. 
+    \item Procedure to collect the data 
+        \subitem SWIRL uses a series of numerical techniques in a given run. MMS will
+        be used to obtain a manufactured analytical solution and an order of accuracy for 
+        the numerical integration used to compute the speed of sound. The MMS will 
+        also be used for the radial derivatives within the linearized euler equations. A minimum
+        number of 7 gridpoints will be used as a starting grid and the number
+        of grid points will be doubled until the computed order of accuracy has reached 
+        the expected order of accuracy for the given numerical scheme.  
+    \item Procedure to analyze the data.
+    \subitem To obtain a manufactured analytical solution a test function is chosen
+        for each variable that is going to be approximated. Python's SciPy library
+        was used to evaluate the expressions needed for the manufactured solution.
+        A range of boundary conditions and auxillary conditons were used to make 
+        the manufactured solution sufficient for computing an order of accuracy.
+        The manufactured solutions were then converted to FORTRAN 90 to keep the 
+        computation uniform with SWIRL.  
+\end{enumerate}
+
+ 
+\section{Issues and Concerns}
+\begin{itemize}
+    \item 7 grid points is too small, and it was suggested at the SIAM conference
+        that I should play Around with the grid spacing because doubling the 
+        grid points would be considerably slow. Right now it is at 8 iterations 
+        for second order and the given test I chose.
+\end{itemize}
+\section{Planned Research}
+This outline sort of serves as an introduction.  The results and discussion will
+be after 
+
+\end{document}
+
+

@@ -166,10 +166,12 @@ CONTAINS
             rt =  rmt(i)
             as =  snd(i)
             if (r.lt. 10e-12_rDef ) then
-                cv = (omega/as - mode*rt)/rx 
+                cv = (&
+                    omega/CMPLX(as,KIND=rDef) -&
+                    CMPLX(mode,KIND=rDef)*CMPLX(rt,KIND=rDef))/CMPLX(rx , KIND = rDef)
             else 
             ! WRITE(0,*) rx, r
-                cv = (omega/as -mode/r*rt)/rx
+                cv = (omega/CMPLX(as,KIND=rDef) -CMPLX(mode,KIND=rDef)/CMPLX(r*rt,KIND=rDef))/CMPLX(rx,KIND=rDef)
             endif
 !            WRITE(0,*) cv 
             if (abs(cv).gt.cvcmax) cvcmax = abs(cv)
@@ -191,7 +193,8 @@ CONTAINS
 ! Compute number of zero crossings for nonconvected modes.
 
         do i = 1,np4
-            !WRITE(0,*) i, wvn(i)
+        
+            ! WRITE(0,*) i, wvn(i)
             gamma1 = wvn(i)
 
             akx   = real(gamma1)
@@ -202,17 +205,17 @@ CONTAINS
                 aim    = aimag(vrm(3*np+1,i))
                 are    =  real(vrm(3*np+1,i))
                 phi(i) = atan2(aim,are)
-                vold   = real(vrm(3*np+1,i)*exp(-ci*phi(i)))
+                vold   = real(vrm(3*np+1,i)*exp(-ci*CMPLX(phi(i),KIND=rDef)))
                
                 do j = 3*np+2,np4
-                    val = real(vrm(j,i)*exp(-ci*phi(i)))
+                    val = real(vrm(j,i)*exp(-ci*CMPLX(phi(i),KIND = rDef)))
                     if (val*vold.lt.0.0_rDef) then
                         izeros(i) = izeros(i) +1
                     endif 
                     vold = val
                 enddo
 
-                elseif (akx.eq.0.0_rDef) then
+                elseif (akx.lt.10e-12_rDef) then
                     izeros(i) = 100
                 else
                     izeros(i) = 200
@@ -228,13 +231,13 @@ CONTAINS
             indx  = indx)
 !
 ! Sort nonconvected modes into upstream and downstream.
-        eps  = 1.e-3_rDef
+        eps  = 1.e-4_rDef
 !     do j=1,np4
         do j=1,np4-1
             if (izeros(indx(j)).eq.izeros(indx(j+1))) then
                 gam1a = real(wvn(indx(j)))
                 gam2a = real(wvn(indx(j+1)))
-                if (gam2a .eq. 0.0_rDef) then
+                if (gam2a .lt. 10e-12_rDef) then
                     goto 1000
                 endif
                 if (abs(gam1a/gam2a -1.0_rDef).lt.eps) then
@@ -246,7 +249,7 @@ CONTAINS
                         indx(j+1) = jtmp
                     endif
                 else
-                    if (gam1a .eq. 0.0_rDef .or. gam2a .eq. 0.0_rDef) then
+                    if (gam1a .lt. 10e-12_rDef .or. gam2a .lt. 10e-12_rDef) then
                         !print*, 'gam1a = ',gam1a,'  gam2a = ',gam2a
                         IF (gam1a == 0.0_rDef) THEN
                             alm1 = 0.0_rDef
@@ -314,9 +317,9 @@ CONTAINS
 !
         WRITE(file_id, '(i0.4)') np
         open(unit=14,             &
-            file='04-EVanalysis/gam.nonconv.'// TRIM(ADJUSTL(file_id)) )
+            file='03-EVanalysis/gam.nonconv.'// TRIM(ADJUSTL(file_id)) )
         open(unit=16,             &
-            file='04-EVanalysis/gam.nonconv_acc.'// TRIM(ADJUSTL(file_id))  )
+            file='03-EVanalysis/gam.nonconv_acc.'// TRIM(ADJUSTL(file_id))  )
         rewind 14
         rewind 16
         write(14,40)
@@ -329,8 +332,8 @@ CONTAINS
             gamma1 = wvn(indx(j))
             fac   = (1.0_rDef +rho)/2.0_rDef
             if (izeros(indx(j)).lt.np-4) then
-                write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))
-                write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))
+                write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))-1!Changing zero order to match NASA convention for radial modes
+                write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))-1
             endif
         enddo
 10      format(1x,i4,4e13.5,i4)

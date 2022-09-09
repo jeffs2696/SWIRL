@@ -38,8 +38,8 @@ CONTAINS
 !
 !!            WRITE(0,*) nfile(n), mfile(n)
 !! redefining file name for each eigenvalue
-!            basen    = '04-EVanalysis/egvre.'
-!            basem    = '04-EVanalysis/egvim.'
+!            basen    = '03-EVanalysis/egvre.'
+!            basem    = '03-EVanalysis/egvim.'
 !            open(newunit=nfile(n),file=basen//ff,status='unknown')
 !            open(unit=mfile(n),file=basem//ff,status='unknown')
 !!            rewind nfile(n)
@@ -85,6 +85,7 @@ CONTAINS
         CHARACTER(1000) :: &
             formatHeader, &
             formatData, &
+            file_id, &
             basen     
 
 
@@ -107,8 +108,11 @@ CONTAINS
             ! assign a value to the character variable ff, to be appended to the file names
             WRITE(ff,'(i0.4)') n
 
+            WRITE(file_id, '(i0.4)') np
 ! redefining file name for each eigenvalue
-            basen    = '04-EVanalysis/egv.'
+            basen    = &
+                TRIM(ADJUSTL('03-EVanalysis/egv_np_'))//&
+                TRIM(ADJUSTL(file_id)) // 'radialmode_'
 
             open(newunit=myunit1,file=TRIM(ADJUSTL(basen))//TRIM(ADJUSTL(ff)))!,status='old')
 
@@ -116,6 +120,7 @@ CONTAINS
             'Rad','v_r[Re]','v_t[Re]','v_x[Re]','p[Re]  ','p_mg[Re]','p_no_phase[Re]', &
                   'v_r[Im]','v_t[Im]','v_x[Im]','p[Im]  ','p_mg[Im]','p_no_phase[Im]'
 
+            ! phi = atan2(aimag(vrm(np*3+1,n)),real(vrm(np*3+1,n)))
             phi = atan2(aimag(vrm(np4,n)),real(vrm(np4,n)))
             DO j = 1,np
                 write(myunit1,formatData) &
@@ -125,13 +130,13 @@ CONTAINS
                     real(vrm(j+2*np,n)), &
                     real(vrm(j+3*np,n)), &
                     SQRT(real(vrm(j+3,n))**2.0_rDef+aimag(vrm(j+3,n))**2.0_rDef) , &
-                    real(vrm(j+3*np,n)*exp(-ci*phi)), &
+                    real(vrm(j+3*np,n)*exp(-ci*CMPLX(phi,KIND=rDef))), &
                     aimag(vrm(j,n)), &
                     aimag(vrm(j+1*np,n)), &
                     aimag(vrm(j+2*np,n)), &
                     aimag(vrm(j+3*np,n)) ,&
                     SQRT(real(vrm(j+3,n))**2.0_rDef+aimag(vrm(j+3,n))**2.0_rDef),&
-                    aimag(vrm(j+3*np,n)*exp(-ci*phi))
+                    aimag(vrm(j+3*np,n)*exp(-ci*CMPLX(phi,KIND=rDef)))
             ENDDO
 
             close(myunit1)

@@ -1,6 +1,6 @@
 # SWIRL
 
-A frequency domain , linearized Euler equation code for Turbomachinery  
+## A frequency domain linearized Euler equation code for ducted sound propagation 
 
 SWIRL analyzes axial flows with mean shear and swirl in lined and unlined ducts.
 
@@ -18,9 +18,16 @@ and swirl velocity components." (1999)." [Here is the paper](https://core.ac.uk/
 
 ### File Directory Structure
 * SourceFiles
-** PythonFiles
-** FortranFiles
+  * PythonFiles
+  * FortranFiles
 * CodeRun
+  * 01-mean-flow/
+    * MMS1 
+  * 02-method-of-manufactured-solutions/
+    * MMS1 
+  * 03-EVanalysis/
+  * 04-plotReport/
+    * MMS1
 * LibraryFiles
 * ModuleFiles
 * ObjectFiles
@@ -30,18 +37,28 @@ and swirl velocity components." (1999)." [Here is the paper](https://core.ac.uk/
  
 ## How To Use
 The main Makefile is in the SourceFiles folder. The Makefile compiles SWIRL,
-runs the executable, and displays a latex report with the results plotted
+runs the executable. There is an option that allows the user to display a latex
+report with the results plotted
 
-#### Installation
-Prerequisites:
+```
+make all
+```
+## Installation
+* clone this project 
+* type ```make```
+
+
+### Fortran Prerequisites 
+gfortran
+
+### Python Prerequisites 
+
+Numpy
 Sympy
+Scipy
+### Known Issues
+nonconvecting modes are sorted in outputModule and needs to be moved
 
-
-#### API Reference 
-
-'''html
-<p>dummy code</p>
-'''
 [Back To The Top](#SWIRL)
 ## Contributors
 - Jeffrey Severino <jseveri@rockets.utoledo.edu>
