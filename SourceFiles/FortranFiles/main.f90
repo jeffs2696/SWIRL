@@ -190,8 +190,8 @@ PROGRAM MAIN
         numberOfGridPointsArray(numberOfIterations))
 
     M_int_new = M_int
-    numberOfGridPoints = 256 
-    DO FDfac = 2,2! numberOfFiniteDifferenceSchemes
+    numberOfGridPoints = 32 
+    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes
 
     DO fac = 1, numberOfIterations
 

@@ -63,8 +63,6 @@ filename_list = [
             n=list_of_grid_points[3]) ]
 
 
-NumericalAxialWavenumberData = \
-            pandas.read_csv(  fourth_order_directories[1] + filename_list[1], delim_whitespace = True )
 
 NumericalAxialWavenumberData_list = []
 for i in range(len(fourth_order_directories)):
@@ -72,20 +70,6 @@ for i in range(len(fourth_order_directories)):
             pandas.read_csv(  fourth_order_directories[i] + filename_list[i], delim_whitespace = True )
     NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData)
 
-NumericalAxialWavenumberData = NumericalAxialWavenumberData_list[0]
-
-# Initializing list
-
-# sys.exit()
-# NumericalAxialWavenumberData1 = fcn.importPlotData(
-#         fourth_order_directories[1] + 'gam.nonconv_acc.0064')
-
-
-# NumericalAxialWavenumberData2 = fcn.importPlotData(
-#         fourth_order_directories[2] + 'gam.nonconv_acc.0128')
-
-# NumericalAxialWavenumberData3 = fcn.importPlotData(
-#         fourth_order_directories[3] + 'gam.nonconv_acc.0256')
 
 # test case parameters
 
@@ -97,25 +81,18 @@ azimuthal_mode_number = 2
 radial_mode_number =4
 
 axial_mach_number = 0.3
-hub_to_tip_ratio = 0.25
-
-angle = np.linspace(0,2*math.pi,100)
 
 r_min = 0
 r_max = 1
 r_steps = 100
 r = np.linspace(r_min,r_max,r_steps)
 
-x_min = 0.0
-x_max = 1
-x_steps = 100
-# x = np.linspace(x_min,x_max,x_steps)
-t = 0
-
 num_of_zeros = 5 # each zero corresponds to radial modes
-Jv_p_zero = afcn.get_radial_wavenumbers(azimuthal_mode_number,num_of_zeros)
 
-# Yv_p_zero = scp.special.ynp_zeros(n  = azimuthal_mode_number, nt = num_of_zeros)
+Jv_p_zero = afcn.get_radial_wavenumbers(
+        azimuthal_mode_number,
+        num_of_zeros)
+
 Jv_p_zero_01 = scp.special.jnp_zeros(n  = 0, nt = 1)
 
 # Get axial wavenumbers for a given temporal and radial wavenumber
@@ -152,7 +129,7 @@ for i,j in enumerate(radial_mode_list):
     else: 
         analytical_normalization_constant = np.sqrt(2)/(
                 (
-                    abs(scp.special.jv(
+                    (scp.special.jv(
                         azimuthal_mode_number,
                         Jv_p_zero[radial_mode_number_for_list]))
                     )*np.sqrt(
@@ -253,7 +230,6 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
     #this loops through each row for the file
 
     for i,row in NumericalAxialWavenumberData_list[ii].iterrows(): 
-        # print(NumericalAxialWavenumberData['Re{gam}'][i]r
 
         # TODO: improve plot_axial_wavenumbers to handle numerical cases
 
@@ -299,7 +275,7 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
 
                 ax.annotate(r'$K_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = NumericalAxialWavenumberData_list[ii]['nz'][i]),
                         xy=(
-                            NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],#+NumericalAxialWavenumberData['Re{gam}'][i]/3,
+                            NumericalAxialWavenumberData_list[ii]['Re{gam}'][i],
                             NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]
                             ),
                         xycoords='data',
@@ -348,7 +324,7 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
                 fcn.append_value(mode_dictionary, 'k_x', (NumericalAxialWavenumberData_list[ii]['Re{gam}'][i], NumericalAxialWavenumberData_list[ii]['Im{gam}'][i]))
                 fcn.append_value(mode_dictionary, 'radial_mode_number', NumericalAxialWavenumberData_list[ii]['nz'][i])
                 fcn.append_value(mode_dictionary, 'radial_mode_index',  NumericalAxialWavenumberData_list[ii]['#'][i])
-    # pprint.pprint((mode_nested_dictionary[ii][ii]))
+    pprint.pprint((mode_nested_dictionary[ii][ii]))
     # pprint.pprint((mode_nested_dictionary))
     
     # I was trying to get the mode_dictionaries in one spot to pull from. Is this a
@@ -374,16 +350,6 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
     
             # print(mode_dictionary['radial_mode_index'])
             # print(
-            #         NumericalAxialWavenumberData['Re{gam}'][i],
-            #         NumericalAxialWavenumberData['Im{gam}'][i],
-            #         'index',NumericalAxialWavenumberData['#'][i],
-            #         'radial_mode',NumericalAxialWavenumberData['nz'][i])
-    
-            # ax.annotate(r'$t^_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = int(NumericalAxialWavenumberData['nz'][i])),
-            #         xy=(NumericalAxialWavenumberData['Re{gam}'],
-            #             NumericalAxialWavenumberData['Im{gam}']),
-            #         xycoords='data',
-            #         fontsize='8')
     #------------------------------------------------------------------------------
     # identify modes from SWIRL that correspond to the computed radial wavenumber
     print('identify modes from SWIRL that correspond to the computed radial wavenumber')
@@ -502,9 +468,10 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
         plt.xlabel('Radius')
         plt.ylabel('Pressure Fluctuation')
         plt.savefig(
-                fname      ='figures/radial_mode_{N}_test_case_number_{index}.pdf'.format(
+                fname      ='figures/fourth_order_radial_mode_{N}_test_case_number_{index}_grid_{n}.pdf'.format(
                     N = radial_mode_number,
-                    index = i),
+                    index = i,
+                    n = list_of_grid_points[ii]),
                 format     ='pdf')
     
         plt.show()

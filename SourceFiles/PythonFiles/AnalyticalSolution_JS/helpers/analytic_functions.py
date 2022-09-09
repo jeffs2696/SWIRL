@@ -20,7 +20,7 @@ def get_radial_modes(
     for i in range(len(Jv_p_zero)): 
         radial_mode = scp.special.jv(
                 azimuthal_mode_number,
-                abs(Jv_p_zero[i])*r)
+                (Jv_p_zero[i])*r)
         radial_mode_list.append(radial_mode)
 
     return radial_mode_list
@@ -47,11 +47,11 @@ def normalize_psi(psi, x):
     if type(psi) is list:
         normalization_constant = []
         for psi_i in range(len(psi)):
-            int_psi_square = np.trapz(abs(psi_i)*abs(np.conj((psi_i)))*x, x)
+            int_psi_square = np.trapz((psi_i)*(np.conj((psi_i)))*x, x)
             normalization_constant.append(np.sqrt(1/int_psi_square))
     else:
         # note this is for cylindrical only hence the extra x
-        int_psi_square = np.trapz(abs(psi)*abs(np.conj((psi)))*x, x)
+        int_psi_square = np.trapz((psi)*(np.conj((psi)))*x, x)
         normalization_constant = np.sqrt(1/int_psi_square)
 
     return normalization_constant

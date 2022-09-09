@@ -120,6 +120,7 @@ CONTAINS
             'Rad','v_r[Re]','v_t[Re]','v_x[Re]','p[Re]  ','p_mg[Re]','p_no_phase[Re]', &
                   'v_r[Im]','v_t[Im]','v_x[Im]','p[Im]  ','p_mg[Im]','p_no_phase[Im]'
 
+            ! phi = atan2(aimag(vrm(np*3+1,n)),real(vrm(np*3+1,n)))
             phi = atan2(aimag(vrm(np4,n)),real(vrm(np4,n)))
             DO j = 1,np
                 write(myunit1,formatData) &
