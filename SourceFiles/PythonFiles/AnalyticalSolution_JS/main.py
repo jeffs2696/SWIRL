@@ -73,6 +73,7 @@ for i in range(len(fourth_order_directories)):
 
 # test case parameters
 
+num_of_zeros = 5 # each zero corresponds to radial modes
 # no flow
 wavenumber = 10 
 
@@ -81,13 +82,15 @@ azimuthal_mode_number = 2
 radial_mode_number =4
 
 axial_mach_number = 0.3
+# ------------
 
 r_min = 0
 r_max = 1
-r_steps = 100
+# this needs to change each loop
+r_steps = int(list_of_grid_points[0] ) 
+
 r = np.linspace(r_min,r_max,r_steps)
 
-num_of_zeros = 5 # each zero corresponds to radial modes
 
 Jv_p_zero = afcn.get_radial_wavenumbers(
         azimuthal_mode_number,
@@ -204,7 +207,8 @@ key_list_for_mode_dictionary =[ "radial_mode", "index"]
 mode_dictionary = {
         'k_x' : None,
         'radial_mode_number': None, 
-        'radial_mode_index': None 
+        'radial_mode_index': None ,
+        'radial_mode_data': None
         }
 
 mode_nested_dictionary = {}
@@ -216,12 +220,13 @@ for i in range(len(fourth_order_directories)):
 # TODO: make the loop through different grids work..
 # Issue: Radial modes that correspond to the axial wavenumbers are not appearing 
 # due to some issue in the normalization (?) 
-for ii in range(len(fourth_order_directories)): # this loops through different grids
+for ii in range(0,1):#range(len(fourth_order_directories)): # this loops through different grids
     # Needed to reset the current looP
     mode_dictionary = {
             'k_x' : None,
             'radial_mode_number': None, 
-            'radial_mode_index': None 
+            'radial_mode_index': None, 
+            'radial_mode_data': None
             }
     
     mode_nested_dictionary[ii][ii] = mode_dictionary
@@ -411,6 +416,7 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
     # pprint.pprint(radial_mode_dataframe_dictionary[1])
     
     dict_indicies = []
+    numerical_normalized_radial_mode_list = []
     
     for i,j in enumerate(mode_dictionary['radial_mode_number']):
         # print(radial_mode_number)
@@ -435,7 +441,15 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
         # print(i,normalization_constant_numerical)
         normalized_radial_mode_data = normalization_constant_numerical*numerical_radial_mode
     
-    
+        numerical_normalized_radial_mode_list.append(normalized_radial_mode_data)
+
+
+        print((numerical_normalized_radial_mode_list[i]))
+        print((analytical_normalized_radial_mode_list[i]))
+        fig,ax = plt.subplots()
+        plt.plot(r,(abs(numerical_normalized_radial_mode_list[i][:].real-analytical_normalized_radial_mode_list[radial_mode_number][:].real)))
+        plt.show
+
     # print(type(normalized_radial_mode_data))
     # dict_indicies = [
     #         dict_index,
@@ -476,6 +490,8 @@ for ii in range(len(fourth_order_directories)): # this loops through different g
     
         plt.show()
 
+# pprint.pprint(mode_nested_dictionary)
+# pprint.pprint(radial_mode_dataframe_dictionary)
 sys.exit()
 # resize the figure to match the aspect ratio of the Axes    
 # fig.set_size_inches(10, 8, forward=True)
