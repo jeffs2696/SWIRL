@@ -57,6 +57,7 @@ F90FLAGS  =	\
 			-Wall -Wline-truncation -Wcharacter-truncation -Wuninitialized  \
 			-Wsurprising -Warray-temporaries \
 			-Wextra \
+			-Werror \
 			-Wno-compare-reals \
 			-Wno-unused-parameter \
 			-Wno-unused-dummy-argument \
@@ -233,7 +234,7 @@ all:  $(OBJECTS)
 	@(mv $(OBJECTS) $(OBJ_FILES)); 
 	@(mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE)); 
-	@(spd-say 'stay-hard' ); 
+	@(spd-say 'good-job' ); 
 
 # @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	
