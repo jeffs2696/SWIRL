@@ -1,5 +1,7 @@
 all:
-	./main.py
+	./main.py;
+	cat debug_file.log
 docs:
-	cd docs/;
-	make;
+	(cd docs/); (make);
+clean:
+	rm debug_file.log
