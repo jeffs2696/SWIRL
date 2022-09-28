@@ -80,8 +80,9 @@ mode_dictionary = {
         }
 
 mode_nested_dictionary = {}
+list_list = []
 # sys.exit()
-for i_rad_mode_num in range(num_of_zeros):
+for i_rad_mode_num in range(0,1):#range(num_of_zeros):
     # radial mode number loop
 
     radial_mode_number = i_rad_mode_num
@@ -458,6 +459,7 @@ for i_rad_mode_num in range(num_of_zeros):
             L2 = (1/grid_point_array[i_gp])*np.sqrt(sum(error_list[i]**2))
 
             L2_list.append(L2)
+            list_list.append(L2_list)
             print('L2',L2_list[i])
             L_max = max(error_list[i]) 
             L_max_list.append(L_max)
@@ -525,8 +527,23 @@ for i_rad_mode_num in range(num_of_zeros):
 # plt.close()
 # plt.plot(L2_list)
 # plt.show()
-print(L2_list)
-print(L_max_list)
+# fig,ax = plt.subplots()
+#upstream modes
+# plt.plot(list_list[:])
+# plt.show()
+
+# print(L2_list)
+# print(L_max_list)
+# print(list_list[::2][1])
+# print(list_list)
+# list_list = list_list[:]
+print('upstream',list_list[:][0][::2])
+# print((list_list[1][:][:]))
+
+for i in range(len(list_list[:][0][:])-1):
+    ROC = (list_list[::2][0][i+1]/list_list[::2][0][i])/0.5#(grid_point_array[i+1]-grid_point_array[i])
+    # ROC = list_list[i][1]
+    print('ROC',ROC)
 # CODE ENDS HERE
 
 # pprint.pprint(mode_nested_dictionary)
