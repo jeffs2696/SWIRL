@@ -1,5 +1,6 @@
 PROGRAM MAIN
     !! The main SWIRL code that generates the executable
+
     USE, INTRINSIC  :: ISO_FORTRAN_ENV
     USE swirlClassObject               ! Runs SWIRL for a given set of parameters
     USE mmsClassObject                 ! Calculates L2Norm, L2Max, and Rate Of Convergence
@@ -8,9 +9,9 @@ PROGRAM MAIN
     IMPLICIT NONE
 
     ! Variable Definitions
+    !! headers, formatters, and filename variables
     CHARACTER(50) :: &
-        !! headers, formatters, and filename variables
-    dir_name,&
+        dir_name,&
         file_id , &
         FDfac_id, &
         numIter, &
@@ -34,9 +35,9 @@ PROGRAM MAIN
         debug   = .FALSE. , &
         MMSflag = .FALSE.
 
+    !! Code parameters for double precision and number of iterations
     INTEGER, PARAMETER :: &
-        !! Code parameters for double precision and number of iterations
-    M_int = 2 , & 
+        M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
         numberOfIterations = 1 
@@ -53,9 +54,9 @@ PROGRAM MAIN
         FDfac                    ,&
         facCount                    ! counts the outermost do loop
 
+    !! Integer arrays to store the number of grid points
     INTEGER, DIMENSION(:), ALLOCATABLE :: &
-        !! Integer arrays to store the number of grid points
-    numberOfGridPointsArray, &
+        numberOfGridPointsArray, &
         gridSpacingArray
 
     REAL(KIND = REAL64) ::  &

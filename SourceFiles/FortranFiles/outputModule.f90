@@ -1,5 +1,6 @@
 MODULE outputModule
     USE, INTRINSIC :: ISO_FORTRAN_ENV
+    USE zeroCrossingModule
     USE indexxModule
     USE egvModule
     USE kapsubModule
@@ -194,7 +195,6 @@ CONTAINS
 
         do i = 1,np4
         
-            ! WRITE(0,*) i, wvn(i)
             gamma1 = wvn(i)
 
             akx   = real(gamma1)

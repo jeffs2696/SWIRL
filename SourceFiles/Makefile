@@ -118,6 +118,7 @@ OBJECTS  =                     \
 	analysisModule.o 		   \
 	boundaryModule.o 		   \
 	indexxModule.o 			   \
+	zeroCrossingModule.o 			   \
 	egvModule.o				   \
 	kapsubModule.o			   \
 	rmachModule.o 			   \
@@ -304,6 +305,9 @@ FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
 							$(LAPACK_LOCATION)/zggev.o
 	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/kapsubModule.f90
 
+FortranFiles/zeroCrossingModule.o:  FortranFiles/zeroCrossingModule.f90
+	@$(F90) $(F90FLAGS) FortranFiles/zeroCrossingModule.f90
+
 FortranFiles/indexxModule.o:  FortranFiles/indexxModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/indexxModule.f90
 
@@ -327,9 +331,10 @@ FortranFiles/sndspdModule.o:  FortranFiles/sndspdModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/sndspdModule.f90
 
 FortranFiles/outputModule.o:  FortranFiles/outputModule.f90 \
-						      FortranFiles/indexxModule.o \
-							  FortranFiles/kapsubModule.o \
-						      FortranFiles/egvModule.o
+	FortranFiles/zeroCrossingModule.o \
+	FortranFiles/indexxModule.o \
+	FortranFiles/kapsubModule.o \
+	FortranFiles/egvModule.o
 	@$(F90) $(F90FLAGS) FortranFiles/outputModule.f90
 
 FortranFiles/SourceTermModule.o:  FortranFiles/SourceTermModule.f90
