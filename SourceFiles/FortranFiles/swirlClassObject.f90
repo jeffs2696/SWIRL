@@ -66,6 +66,13 @@ modulE swirlClassObject
     TYPE SwirlClassType
         PRIVATE  ! prevents user from accessing any of the following variables
 
+        CHARACTER(LEN = 50) :: &
+            test_name_id , &
+            grid_number_id, &
+            finite_difference_id ,& 
+            hub_to_tip_ratio_id
+
+
         LOGICAL :: &
             isInitialized = .FALSE.         ! flag to identify if object exists
 
@@ -169,7 +176,8 @@ CONTAINS
         ifdff               , &
         secondOrderSmoother , &
         fourthOrderSmoother , &
-        debugFlag        )
+        debugFlag, &
+        test_name)
 
         TYPE(SwirlClassType), INTENT(INOUT) ::&
             object
@@ -204,8 +212,18 @@ CONTAINS
         COMPLEX(KIND = REAL64), INTENT(IN) ::&
             etah, etad, ak
 
-        object%isInitialized = .TRUE.
+        CHARACTER(LEN=*), INTENT(IN) :: &
+            test_name
 
+
+
+
+
+
+
+
+
+        object%isInitialized = .TRUE.
         IF (debugFlag) THEN 
             WRITE(0,*) 'swirlClassObject isInitialized:', object%isInitialized
         ENDIF
@@ -228,6 +246,32 @@ CONTAINS
 
         object%dr =  &
             (1.0_rDef-object%hubTipRatio)/REAL(object%numberOfRadialPoints - 1, rDef)
+
+        WRITE(object%grid_number_id,*) object%numberOfRadialPoints
+        WRITE(object%finite_difference_id,*) object%FiniteDifferenceFlag
+        IF (object%hubTipRatio .gt. 0.0_rDef) THEN 
+            WRITE(object%hub_to_tip_ratio_id,*) 'a'
+        ELSE
+            WRITE(object%hub_to_tip_ratio_id,*) 'c'
+        ENDIF
+
+        
+        
+        ! (object%hubTipRatio) .gt. 0.0_rDef THEN
+
+        object%test_name_id = &
+            TRIM(&
+            TRIM(&
+            ADJUSTL(TRIM(test_name)) //&
+            '_npts'//&
+            ADJUSTL(TRIM(object%grid_number_id))) //& 
+            '_fd' //&
+            ADJUSTL(TRIM(object%finite_difference_id))) //&
+            '_domain_' //&
+            ADJUSTL(TRIM(object%hub_to_tip_ratio_id))
+
+
+        ! WRITE(0,*) object%test_name_id 
 
         ALLOCATE(&
             object%eigenVectorMMS(object%numberOfRadialPoints*4) , &
@@ -488,7 +532,8 @@ CONTAINS
                 wvn    = object%wvn,   &
                 vrm    = object%vr,    &
                 vphi   = object%vph,   &
-                is     = is)
+                is     = is        ,   &
+                file_name_string = object%test_name_id)
 
         ELSE
             WRITE(6,*) 'ERROR: The object is not initialized'

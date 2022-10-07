@@ -42,9 +42,9 @@ PROGRAM MAIN
         rDef = REAL64   , &
         numberOfIterations = 1 
 
+    !! Integers for flags and loop indicies
     INTEGER  :: &
-        !! Integers for flags and loop indicies
-    UNIT , & ! for NEWUNIT
+        UNIT , & ! for NEWUNIT
         finiteDiffFlag           ,& ! finite difference flag
         numericalIntegrationFlag ,& !  numerical integration flag
         numberOfGridPoints       ,& ! number of points
@@ -81,9 +81,9 @@ PROGRAM MAIN
         sgn                                , &
         hubToTipRatio
 
+    !! real values arrays
     REAL(KIND = rDef), DIMENSION(:), ALLOCATABLE :: &
-        !! real values arrays
-    drArray             , &
+        drArray             , &
         r                   , & !radial grid locations
         rOut                , &
         vR, vX, vTh, Pr     , &
@@ -93,9 +93,8 @@ PROGRAM MAIN
         SoundSpeed_drOut    , &
         axialMachData       , & !M_x
         thetaMachData       , & !M_th
-        totalMachData       , & !M_total = sqrt(M_x^2+M_th^2)
-        !! MMS variables 
-    RateOfConvergence1  , &
+        totalMachData       , & !M_total = sqrt(M_x^2+M_th^2) 
+        RateOfConvergence1  , & !! MMS variables
         speedOfSoundMMS     , &
         axialMachDataMMS    , & !M_x
         thetaMachDataMMS    , & !M_th
@@ -139,13 +138,7 @@ PROGRAM MAIN
 
     TYPE(mmsClassType) :: SoundSpeedMMS_ClassObj, SourceTermMMS_ClassObj
 
-    !                  !
-    ! Code Starts Here !
-    !                  !
-
     CONTINUE
-
-
 
     CALL CPU_TIME(start_time)
 
@@ -169,9 +162,11 @@ PROGRAM MAIN
     ! include 'InputVariables_KousenTable4_5.f90'
     ! include 'InputVariables_KousenTable4_6.f90'
     ! include 'InputVariables_KousenFigure4_5.f90'
+
     hubToTipRatio              =  r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
+
     !!include statements with inputs needed for SwirlClassType
 
     eigenValueMMS = CMPLX(0,-1,KIND=rDef)*frequency*r_max
@@ -191,8 +186,10 @@ PROGRAM MAIN
         numberOfGridPointsArray(numberOfIterations))
 
     M_int_new = M_int
-    numberOfGridPoints = 32 
-    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes
+
+    numberOfGridPoints = 33 
+
+    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes 
 
     DO fac = 1, numberOfIterations
 
@@ -226,16 +223,15 @@ PROGRAM MAIN
     ! ENDIF
     ! numberOfGridPoints = (1+(2**fac)*2)
     ! to double the number of grid points each iteration...
+
     IF (fac.gt.1) THEN
         numberOfGridPoints = (numberOfGridPoints + numberOfGridPoints)
     ELSE
     ENDIF
 
-
     numberOfGridPointsArray(fac) = numberOfGridPoints
     dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
     drArray(fac) = dr
-
 
     IF (facCount .gt. 1) THEN
         gridSpacingRatio = drArray(fac)/drArray(fac-1) 
@@ -269,6 +265,7 @@ PROGRAM MAIN
         S_error(numberOfGridPoints*4) , &
         S_actual(numberOfGridPoints*4) , &
         eigenVectorMMS(numberOfGridPoints*4))
+
     ! Code Body
 
     ! Allocatables for include files
@@ -284,6 +281,7 @@ PROGRAM MAIN
     include 'InputMeanFlow_AnalyticalSolution_1.f90'
     ! WRITE(0,*) axialMachData
     !Create a swirl Class Obj for a given flow
+
     CALL CreateObject(&
         object        = swirlClassObj(fac)  ,&
         azimuthalMode = azimuthalModeNumber  ,&
@@ -297,7 +295,9 @@ PROGRAM MAIN
         ifdff         = finiteDiffFlag       ,&
         secondOrderSmoother = 0.0_rDef       ,&
         fourthOrderSmoother = 0.0_rDef       ,& 
-        debugFlag     = debug)
+        debugFlag     = debug                ,&
+        test_name = 'Test1')
+
 
     CALL runSwirlClassMethods(&
         object = swirlClassObj(fac), &
@@ -330,6 +330,7 @@ PROGRAM MAIN
             CMPLX(vX(i), KIND = rDef)
         eigenVectorMMS(i + 3*numberOfGridPoints) = &
             CMPLX(Pr(i), KIND = rDef)
+
         ENDDO
 
         CALL getMMSSourceTerms( &
@@ -360,8 +361,8 @@ PROGRAM MAIN
             ifdff         = finiteDiffFlag       ,&
             secondOrderSmoother = 0.0_rDef       ,&
             fourthOrderSmoother = 0.0_rDef       ,& 
-            debugFlag     = debug)
-
+            debugFlag     = debug                ,&
+            test_name  ='MMS')
 
         CALL runSwirlClassMethods(&
             object    = swirlClassObjMMS(fac) , &
@@ -383,7 +384,6 @@ PROGRAM MAIN
             eigenVector = eigenVectorMMS       , &
             eigenValue  =  eigenValueMMS       , &
             S           =  S_actual)
-
 
         DO i = 1,numberOfGridPoints
 
@@ -446,13 +446,13 @@ PROGRAM MAIN
 
         CALL DestroyObject(object = swirlClassObjMMS(fac))
 
-
-
     ELSE 
+
     ENDIF
 
     ! for test cases 
     include 'main-scripts/swirl-data-export-per-grid.f90'
+
     DEALLOCATE(&
         axialMachDataMMSOut, &
         thetaMachDataMMSOut, &
@@ -474,6 +474,7 @@ PROGRAM MAIN
         S_MMS,S_actual, S_error, S_1, S_2, S_3, S_4)
 
     ENDDO
+
     IF (MMSflag) THEN 
         CALL getRateOfConvergence(&
             object            = SoundSpeedMMS_ClassObj , &

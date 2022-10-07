@@ -63,8 +63,7 @@ r_max = 1
 
 # [1] importing results from SWIRL
 grid_point_array = np.array([32, 64, 128, 256])
-list_of_grid_points = ['32','64','128','256']
-# list_of_grid_points = ['32']#,'64','128','256']
+
 second_order_directories = []
 fourth_order_directories = [] 
 filename_list = []
@@ -81,9 +80,9 @@ mode_dictionary = {
         }
 
 mode_nested_dictionary = {}
-# sys.exit()
-number_of_spaces = 20
-for i_rad_mode_num in range(num_of_zeros):
+
+# for i_rad_mode_num in range(num_of_zeros):
+for i_rad_mode_num in range(0,1):
     radial_mode_iteration_string = 'Radial Mode Number ' + str(i_rad_mode_num)
     list_list = []
 # for i_rad_mode_num in range(num_of_zeros):
@@ -132,7 +131,11 @@ for i_rad_mode_num in range(num_of_zeros):
         NumericalAxialWavenumberData_fourth_order = \
                 pandas.read_csv(  fourth_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
 
+        # NumericalAxialWavenumberData_second_order = \
+                # pandas.read_csv(  second_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
+
         NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData_fourth_order)
+        # NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData_second_order)
     
         # Done importing files 
         
@@ -257,7 +260,7 @@ for i_rad_mode_num in range(num_of_zeros):
     # TODO: make the loop through different grids work..
     # Issue: Radial modes that correspond to the axial wavenumbers are not appearing 
     # due to some issue in the normalization (?) 
-    # for ii in range(len(list_of_grid_points)):#range(0,1): # this loops through different grids
+    # for ii in range(len(grid_point_array)):#range(0,1): # this loops through different grids
     
         # Needed to reset the current looP
         mode_dictionary = {
@@ -381,7 +384,7 @@ for i_rad_mode_num in range(num_of_zeros):
         len_indicies = len(mode_dictionary['radial_mode_index'])
         # pprint.pprint(mode_dictionary)
 
-        print('Identified Radial Mode Orders: ', mode_dictionary['radial_mode_number'])
+        # print('Identified Radial Mode Orders: ', mode_dictionary['radial_mode_number'])
 
         radial_mode_data_sets = {
                 'k_x': None,
@@ -441,7 +444,7 @@ for i_rad_mode_num in range(num_of_zeros):
             # print(radial_mode_number)
             # print(i,j)
             if j == radial_mode_number:
-                print('match!',j,'at',i)
+                # print('match!',j,'at',i)
                 dict_indicies.append(i)
         
         # test = [t for t,x in enumerate(mode_dictionary['radial_mode_index'][t]) if x == radial_mode_number]# in mode_dictionary['radial_mode_index']:
@@ -462,8 +465,11 @@ for i_rad_mode_num in range(num_of_zeros):
         
             numerical_normalized_radial_mode_list.append(normalized_radial_mode_data)
 
-            error_list.append(abs(numerical_normalized_radial_mode_list[i][1:-2].real-
-                    analytical_normalized_radial_mode_list[radial_mode_number][1:-2].real))
+            error_list.append(abs(numerical_normalized_radial_mode_list[i][:].real-
+                    analytical_normalized_radial_mode_list[radial_mode_number][:].real))
+
+            # error_list.append(abs(numerical_normalized_radial_mode_list[i][1:-2].real-
+            #         analytical_normalized_radial_mode_list[radial_mode_number][1:-2].real))
     
     
             # print(sum(error_list[i]))
@@ -526,7 +532,7 @@ for i_rad_mode_num in range(num_of_zeros):
     
             fig,ax = plt.subplots()
             
-            # plt.plot(r,error_list[i])
+            plt.plot(r,error_list[i])
     
             plt.savefig(
                     fname      ='figures/fourth_order_radial_mode_error_{N}_test_case_number_{index}_grid_{n}.pdf'.format(
@@ -536,19 +542,12 @@ for i_rad_mode_num in range(num_of_zeros):
                     format     ='pdf')
 
         list_list.append(L2_list[0])
-    print('ROC')
     for i in range(len(list_list)-1):
         
         ROC = np.log(list_list[i+1]/list_list[i])/np.log(0.5)#(grid_point_array[i+1]-grid_point_array[i])
         # print((grid_point_array[i]/grid_point_array[i+1]))
     #   # ROC = ist_list[i][1]
         
-        print(ROC) 
-        # with open("myfile.txt", "w") as file1:
-        #     np.save(file1,str(ROC))
-        # Writing data to a file
-        # file1.write("Hello \n")
-        # file1.writelines(ROC)
     
 # plt.show()
 # plt.close()

@@ -25,6 +25,7 @@ Warning--entry type for "Ingraham2015" isn't style-file defined
 --line 433 of file references.bib
 Warning--entry type for "Ingraham2010" isn't style-file defined
 --line 437 of file references.bib
+Warning--I didn't find a database entry for "wolphram:bessel"
 Warning--empty author and editor in icao2020
 Warning--empty publisher in icao2020
 Warning--empty journal in KERREBROCK1974
@@ -34,7 +35,7 @@ Warning--empty author in MESref
 Warning--empty booktitle in Hixon2010
 You've used 36 entries,
             1791 wiz_defined-function locations,
-            693 strings with 9649 characters,
+            694 strings with 9664 characters,
 and the built_in function-call counts, 7189 in all, are:
 = -- 639
 > -- 228
@@ -73,4 +74,4 @@ warning$ -- 7
 while$ -- 61
 width$ -- 38
 write$ -- 364
-(There were 13 warnings)
+(There were 14 warnings)

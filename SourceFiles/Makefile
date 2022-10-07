@@ -244,6 +244,11 @@ MMS:
 plot:
 	@(cd $(EXECUTABLE_LOCATION); (make plot ))
 
+test_zero_crossing: 
+	@(cd FortranFiles; $(F90) -o main.exe zeroCrossingModule.f90 testzeroCrossingModule.f90;)
+	@ (cd FortranFiles; ./main.exe;)
+	@(cd FortranFiles; ./plotZCM.py);
+	
 clean:
 	rm -f *.o *.c *.a *.mod
 	@(cd $(EXECUTABLE_LOCATION); (make clean))
@@ -304,6 +309,9 @@ FortranFiles/egvModule.o: FortranFiles/egvModule.f90
 FortranFiles/kapsubModule.o:  FortranFiles/kapsubModule.f90 \
 							$(LAPACK_LOCATION)/zggev.o
 	@$(F90) $(F90FLAGS) -I$(LAPACK_LOCATION) FortranFiles/kapsubModule.f90
+
+# FortranFiles/testzeroCrossingModule.o:  FortranFiles/testzeroCrossingModule.f90
+	# @$(F90) $(F90FLAGS) FortranFiles/testzeroCrossingModule.f90
 
 FortranFiles/zeroCrossingModule.o:  FortranFiles/zeroCrossingModule.f90
 	@$(F90) $(F90FLAGS) FortranFiles/zeroCrossingModule.f90
