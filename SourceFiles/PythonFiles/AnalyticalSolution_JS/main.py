@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # from classes.DuctModeClass import DuctModeClass
 from classes import DuctModeClass
-import logging
+# import logging
 import pprint
 import pandas
 import sys 
@@ -10,6 +10,7 @@ import cmath
 import numpy as np
 import scipy as scp
 from scipy import special
+import helpers.importing_functions as ifcn
 import helpers.analytic_functions as afcn
 import helpers.plotting_functions as pfcn 
 import helpers.helper_functions as fcn
@@ -63,11 +64,14 @@ r_max = 1
 
 # [1] importing results from SWIRL
 grid_point_array = np.array([32, 64, 128, 256])
+grid_point_array = np.array([33])#, 64, 128, 256])
 
-second_order_directories = []
-fourth_order_directories = [] 
-filename_list = []
-NumericalAxialWavenumberData_list = []
+
+# sys.exit()
+# second_order_directories = []
+# fourth_order_directories = [] 
+# filename_list = []
+# NumericalAxialWavenumberData_list = []
  
 index_for_mode_import = []
 key_list_for_mode_dictionary =[ "radial_mode", "index"] 
@@ -85,22 +89,26 @@ mode_nested_dictionary = {}
 for i_rad_mode_num in range(0,1):
     radial_mode_iteration_string = 'Radial Mode Number ' + str(i_rad_mode_num)
     list_list = []
-# for i_rad_mode_num in range(num_of_zeros):
-
-    
     # radial mode number loop
-
     radial_mode_number = i_rad_mode_num
     # list_list = []
 
     print(f'{radial_mode_iteration_string: ^20}')
-    for i_gp,j_gp in enumerate(grid_point_array):
-        grid_iteration_string = 'Grid Iteration ' + str(i_gp)
-        grid_point_string = '# of Gridpoints ' + str(j_gp)
-        # Grid Loop
 
-        print(f'{grid_iteration_string: ^20}')
-        print(f'{grid_point_string: ^20}')
+    second_order_directories, \
+            fourth_order_directories, \
+            NumericalAxialWavenumberData_second_order_list, \
+            NumericalAxialWavenumberData_fourth_order_list = ifcn.importSwirlOutput(grid_point_array)
+
+    NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_second_order_list
+
+    # for i_gp,j_gp in enumerate(grid_point_array):
+    #     grid_iteration_string = 'Grid Iteration ' + str(i_gp)
+    #     grid_point_string = '# of Gridpoints ' + str(j_gp)
+    #     # Grid Loop
+
+    #     print(f'{grid_iteration_string: ^20}')
+    #     print(f'{grid_point_string: ^20}')
 
         
         # logging.info('Iteration       ' + str(i))
@@ -108,39 +116,42 @@ for i_rad_mode_num in range(0,1):
     
         # print('Importing files for this grid...')
 
-        second_order_directories.append(
-                '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
-                'UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
-                    n=str(grid_point_array[i_gp])))
+        
+        # second_order_directories.append(
+        #         '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
+        #         'UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
+        #             n=str(grid_point_array[i_gp])))
 
-        fourth_order_directories.append(
-                '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
-                'UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
-                    n=str(grid_point_array[i_gp])))
+        # fourth_order_directories.append(
+        #         '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
+        #         'UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
+        #             n=str(grid_point_array[i_gp])))
 
-        if i_gp <= 1:
-            filename_list.append(
-                    'gam.nonconv_acc.00{n}'.format(
-                        n=str(grid_point_array[i_gp]))) 
+        # if i_gp <= 1:
+        #     filename_list.append(
+        #             'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.00{n}'.format(
+        #                 n=str(grid_point_array[i_gp]))) 
 
-        else: 
-            filename_list.append(
-                    'gam.nonconv_acc.0{n}'.format(
-                        n=str(grid_point_array[i_gp])))
+        # else: 
+        #     filename_list.append(
+        #             'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.0{n}'.format(
+        #                 n=str(grid_point_array[i_gp])))
 
-        NumericalAxialWavenumberData_fourth_order = \
-                pandas.read_csv(  fourth_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
+        # # NumericalAxialWavenumberData_fourth_order = \
+        #         # pandas.read_csv(  fourth_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
 
+        # # NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData_fourth_order)
         # NumericalAxialWavenumberData_second_order = \
-                # pandas.read_csv(  second_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
+        #         pandas.read_csv(  second_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
 
-        NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData_fourth_order)
         # NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData_second_order)
     
         # Done importing files 
         
         # Getting analytical radial mode shapes and axial wavenumbers  
-
+# sys.exit()
+    for i_gp,j_gp in enumerate(grid_point_array):
+        
         r_steps = grid_point_array[i_gp] 
         
         r = np.linspace(r_min,r_max,r_steps)
@@ -170,49 +181,85 @@ for i_rad_mode_num in range(0,1):
 
         # "allocating" lists for radial mode data for each grid
         
-        normalized_radial_mode_list = []
-        analytical_normalized_radial_mode_list = []
+        # normalized_radial_mode_list = []
+        # print(radial_mode_list)
+
+        # analytical_normalized_radial_mode_list = []
+        normalized_radial_mode_list, \
+        analytical_normalized_radial_mode_list = \
+        afcn.normalize_radial_modes(
+                r,
+                radial_mode_list,
+                radial_mode_number,
+                azimuthal_mode_number,Jv_p_zero) 
+        # print(normalized_radial_mode_list,analytical_normalized_radial_mode_list)
+        # sys.exit()
+        
         
         
         # normalizing radial modes in a loop
-        for i,j in enumerate(radial_mode_list):
+        #for i,j in enumerate(radial_mode_list):
         
-            radial_mode = radial_mode_list[i]
-            radial_mode_number_for_list = i
-            normalization_constant = afcn.normalize_psi((radial_mode),r)
-            if (radial_mode_number%2) == 0:
-                normalized_radial_mode = normalization_constant*radial_mode
-            else: 
-                normalized_radial_mode = -normalization_constant*radial_mode
+        #    radial_mode = radial_mode_list[i]
+        #    radial_mode_number_for_list = i
+        #    normalization_constant = afcn.normalize_psi((radial_mode),r)
+        #    if (radial_mode_number%2) == 0:
+        #        normalized_radial_mode = normalization_constant*radial_mode
+        #    else: 
+        #        normalized_radial_mode = -normalization_constant*radial_mode
     
     
-            normalized_radial_mode_list.append(normalized_radial_mode) 
+        #    normalized_radial_mode_list.append(normalized_radial_mode) 
         
-            if azimuthal_mode_number == 0 and radial_mode_number_for_list == 0:
-                #from Fund. Of Duct Acs - Rienstra 
-                analytical_normalization_constant = np.sqrt(2)     
-            else: 
-                analytical_normalization_constant = np.sqrt(2)/(
-                        (
-                            (scp.special.jv(
-                                azimuthal_mode_number,
-                                Jv_p_zero[radial_mode_number_for_list]))
-                            )*np.sqrt(
-                                1 - azimuthal_mode_number**2/
-                                Jv_p_zero[radial_mode_number_for_list]**2
-                                )
-                            )
-                analytical_normalized_radial_mode = \
-                        analytical_normalization_constant*(radial_mode) 
+        #    if azimuthal_mode_number == 0 and radial_mode_number_for_list == 0:
+        #        #from Fund. Of Duct Acs - Rienstra 
+        #        analytical_normalization_constant = np.sqrt(2)     
+        #    else: 
+        #        analytical_normalization_constant = np.sqrt(2)/(
+        #                (
+        #                    (scp.special.jv(
+        #                        azimuthal_mode_number,
+        #                        Jv_p_zero[radial_mode_number_for_list]))
+        #                    )*np.sqrt(
+        #                        1 - azimuthal_mode_number**2/
+        #                        Jv_p_zero[radial_mode_number_for_list]**2
+        #                        )
+        #                    )
+        #        analytical_normalized_radial_mode = \
+        #                analytical_normalization_constant*(radial_mode) 
         
-                analytical_normalized_radial_mode_list.append(
-                        analytical_normalized_radial_mode
-                    )
+        #        analytical_normalized_radial_mode_list.append(
+        #                analytical_normalized_radial_mode
+        #            )
         
     
     # plotting data 
     # -----------------------------------------------------------------------------
     # Data set 1 - Analytical Wavenumbers 
+    # plt.show()
+        
+    #------------------------------------------------------------------------------
+    # for i in range(len(fourth_order_directories)):
+        mode_nested_dictionary[i_gp] = {i_gp: mode_dictionary} 
+    
+        # print(mode_nested_dictionary)
+    
+    
+    
+        # Needed to reset the current looP
+        mode_dictionary = {
+                'k_x' : None,
+                'radial_mode_number': None, 
+                'radial_mode_index': None, 
+                # 'radial_mode_data': None
+                }
+    
+        mode_nested_dictionary[i_gp][i_gp] = mode_dictionary
+        # mode_dictionary = mode_nested_dictionary[ii][ii]
+    
+        #this loops through each row for the file
+    
+
         fig,ax = plt.subplots(
                 constrained_layout=True)#, figsize=fcn.set_size(width))
         scatter_parameters = {
@@ -248,33 +295,7 @@ for i_rad_mode_num in range(0,1):
             k_x_cutoff = axial_mach_number*wavenumber/(axial_mach_number**2-1)
             plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=0.5,ls='dotted') 
     
-    # plt.show()
-        
-    #------------------------------------------------------------------------------
-    # for i in range(len(fourth_order_directories)):
-        mode_nested_dictionary[i_gp] = {i_gp: mode_dictionary} 
-    
-        # print(mode_nested_dictionary)
-    
-    
-    # TODO: make the loop through different grids work..
-    # Issue: Radial modes that correspond to the axial wavenumbers are not appearing 
-    # due to some issue in the normalization (?) 
-    # for ii in range(len(grid_point_array)):#range(0,1): # this loops through different grids
-    
-        # Needed to reset the current looP
-        mode_dictionary = {
-                'k_x' : None,
-                'radial_mode_number': None, 
-                'radial_mode_index': None, 
-                # 'radial_mode_data': None
-                }
-    
-        mode_nested_dictionary[i_gp][i_gp] = mode_dictionary
-        # mode_dictionary = mode_nested_dictionary[ii][ii]
-    
-        #this loops through each row for the file
-    
+
         for index,row in NumericalAxialWavenumberData_list[i_gp].iterrows(): 
     
             # TODO: improve plot_axial_wavenumbers to handle numerical cases
@@ -377,14 +398,19 @@ for i_rad_mode_num in range(0,1):
             fname      ='figures/axial_wavenumber_analytical_test_case_comparison_{n}gridpoints_fourth_order.pdf'.format(
                 n = str(grid_point_array[ii])),
             format     ='pdf')#, bbox_inches='tight')
-        
+
+        plt.show()
+
+        # sys.exit() 
+        #debug here
+
         #------------------------------------------------------------------------------
         # identify modes from SWIRL that correspond to the computed radial wavenumber 
         
         len_indicies = len(mode_dictionary['radial_mode_index'])
         # pprint.pprint(mode_dictionary)
 
-        # print('Identified Radial Mode Orders: ', mode_dictionary['radial_mode_number'])
+        print('Identified Radial Mode Orders: ', mode_dictionary['radial_mode_number'])
 
         radial_mode_data_sets = {
                 'k_x': None,
@@ -398,9 +424,9 @@ for i_rad_mode_num in range(0,1):
             if ii == 0:
                 if mode_dictionary['radial_mode_index'][i] < 100:
                     # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
-                    radial_mode_filenames.append('egv_np_0032radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+                    radial_mode_filenames.append('egv_np_0033radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
                 else:
-                    radial_mode_filenames.append('egv_np_0032radialmode_0' + str(mode_dictionary['radial_mode_index'][i]))
+                    radial_mode_filenames.append('egv_np_0033radialmode_0' + str(mode_dictionary['radial_mode_index'][i]))
 
             if ii == 1:
                 if mode_dictionary['radial_mode_index'][i] < 100:
@@ -427,7 +453,7 @@ for i_rad_mode_num in range(0,1):
 
         for i in range(len(mode_dictionary['radial_mode_index'])):
             radial_mode_data = \
-                    pandas.read_csv(  fourth_order_directories[ii] + radial_mode_filenames[i], delim_whitespace = True )
+                    pandas.read_csv(  second_order_directories[ii] + radial_mode_filenames[i], delim_whitespace = True )
             
             radial_mode_dataframe_dictionary[i] = radial_mode_data
         
@@ -549,7 +575,7 @@ for i_rad_mode_num in range(0,1):
     #   # ROC = ist_list[i][1]
         
     
-# plt.show()
+plt.show()
 # plt.close()
 # plt.plot(L2_list)
 # plt.show()

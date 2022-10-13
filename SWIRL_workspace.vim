@@ -16,9 +16,9 @@ inoremap <silent> <C-Tab> =UltiSnips#ListSnippets()
 inoremap <C-L> u[s1z=`]a
 cnoremap <F5> :set list!
 inoremap <F5> :set list!
-snoremap <silent>  "_c
-nmap  :NERDTreeToggle
 xmap  :NERDTreeToggle
+nmap  :NERDTreeToggle
+snoremap <silent>  "_c
 omap  :NERDTreeToggle
 xnoremap <silent> 	 :call UltiSnips#SaveLastVisualSelection()gvs
 snoremap <silent> 	 :call UltiSnips#ExpandSnippetOrJump()
@@ -51,6 +51,9 @@ xnoremap <silent> g<C-N> :call multiple_cursors#new("v", 0)
 xnoremap <silent> g :call multiple_cursors#new("v", 0)
 nnoremap <silent> g<C-N> :call multiple_cursors#new("n", 0)
 nnoremap <silent> g :call multiple_cursors#new("n", 0)
+nnoremap <SNR>94_: :=v:count ? v:count : ''
+xmap <C-H> :NERDTreeToggle
+nmap <C-H> :NERDTreeToggle
 nnoremap <SNR>93_: :=v:count ? v:count : ''
 vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())
@@ -83,8 +86,6 @@ nnoremap <silent> <M-n> :call multiple_cursors#select_all("n", 1)
 xnoremap <silent> <C-N> :call multiple_cursors#new("v", 0)
 nnoremap <silent> <C-N> :call multiple_cursors#new("n", 1)
 nnoremap <C-L> l
-nmap <C-H> :NERDTreeToggle
-xmap <C-H> :NERDTreeToggle
 omap <C-H> :NERDTreeToggle
 nnoremap <C-K> k
 nmap <C-J> <Plug>IMAP_JumpForward
@@ -133,6 +134,7 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
+edit SourceFiles/FortranFiles/main.f90
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -142,7 +144,6 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-enew
 let s:cpo_save=&cpo
 set cpo&vim
 inoremap <buffer> <PageDown> :call HardModeEcho(g:HardMode_hardmodeMsg)
@@ -198,8 +199,8 @@ setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 set colorcolumn=80
 setlocal colorcolumn=80
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
+setlocal comments=:!
+setlocal commentstring=!%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 set conceallevel=1
@@ -217,8 +218,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != ''
-setlocal filetype=
+if &filetype != 'fortran'
+setlocal filetype=fortran
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -233,16 +234,16 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
-setlocal include=
+setlocal include=^\\c#\\=\\s*include\\s\\+
 setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal indentexpr=FortranGetFreeIndent()
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,=~end,=~case,=~if,=~else,=~do,=~where,=~elsewhere,=~select,=~endif,=~enddo,=~endwhere,=~endselect,=~elseif,=~type,=~interface,=~forall,=~associate,=~block,=~enum,=~endforall,=~endassociate,=~endblock,=~endenum
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -281,11 +282,11 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en_us
 setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=
+setlocal suffixesadd=.f08,.f03,.f95,.f90,.for,.f,.F,.f77,.ftn,.fpp
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
+if &syntax != 'fortran'
+setlocal syntax=fortran
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -294,7 +295,7 @@ setlocal tags=
 setlocal termwinkey=
 setlocal termwinscroll=10000
 setlocal termwinsize=
-setlocal textwidth=0
+setlocal textwidth=132
 setlocal thesaurus=
 setlocal undofile
 setlocal undolevels=-123456
@@ -306,7 +307,30 @@ setlocal nowinfixwidth
 set nowrap
 setlocal nowrap
 setlocal wrapmargin=0
+2
+normal! zo
+14
+normal! zo
+286
+normal! zo
+311
+normal! zo
+352
+normal! zo
+391
+normal! zo
+479
+normal! zo
+509
+normal! zo
+let s:l = 300 - ((29 * winheight(0) + 29) / 59)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+300
+normal! 0
 tabnext 1
+badd +0 SourceFiles/FortranFiles/main.f90
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif

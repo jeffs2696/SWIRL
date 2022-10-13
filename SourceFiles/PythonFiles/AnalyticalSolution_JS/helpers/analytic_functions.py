@@ -56,3 +56,46 @@ def normalize_psi(psi, x):
 
     return normalization_constant
 
+def normalize_radial_modes(r,radial_mode_list,radial_mode_number,azimuthal_mode_number,Jv_p_zero):
+
+    # print('entering normalize_radial_modes')
+    normalized_radial_mode_list = []
+    analytical_normalized_radial_mode_list = []
+
+    for i,j in enumerate(radial_mode_list):
+        radial_mode = radial_mode_list[i]
+        radial_mode_number_for_list = i
+        
+        normalization_constant = normalize_psi((radial_mode),r)
+
+        if (radial_mode_number%2) == 0:
+            normalized_radial_mode = normalization_constant*radial_mode
+        else: 
+            normalized_radial_mode = -normalization_constant*radial_mode 
+
+        normalized_radial_mode_list.append(normalized_radial_mode) 
+
+        if azimuthal_mode_number == 0 and radial_mode_number_for_list == 0:
+            #from Fund. Of Duct Acs - Rienstra 
+            analytical_normalization_constant = np.sqrt(2)     
+        else: 
+            analytical_normalization_constant = np.sqrt(2)/(
+                    (
+                        (scp.special.jv(
+                            azimuthal_mode_number,
+                            Jv_p_zero[radial_mode_number_for_list]))
+                        )*np.sqrt(
+                            1 - azimuthal_mode_number**2/
+                            Jv_p_zero[radial_mode_number_for_list]**2
+                            )
+                        )
+
+            analytical_normalized_radial_mode = \
+                    analytical_normalization_constant*(radial_mode) 
+
+            analytical_normalized_radial_mode_list.append(
+                        analytical_normalized_radial_mode
+                        )
+    # print(normalized_radial_mode_list)
+    # print('leaving normalize_radial_modes')
+    return normalized_radial_mode_list,analytical_normalized_radial_mode_list

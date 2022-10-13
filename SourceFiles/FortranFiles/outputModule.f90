@@ -247,6 +247,7 @@ CONTAINS
             vold = val
             enddo
 
+
         elseif (akx.lt.10e-12_rDef) then
             izeros(i) = 100
         else
@@ -264,14 +265,18 @@ CONTAINS
         CALL indexx(n     = np4,    &
             arrin = azeros, &
             indx  = indx)
+
         !
         ! Sort nonconvected modes into upstream and downstream.
 
         eps  = 1.e-4_rDef ! JS: ??? 
 
         !     do j=1,np4
+
         do j=1,np4-1
+
         if (izeros(indx(j)).eq.izeros(indx(j+1))) then
+            ! 
             gam1a = real(wvn(indx(j)))
             gam2a = real(wvn(indx(j+1)))
             if (gam2a .lt. 10e-12_rDef) then
@@ -286,7 +291,8 @@ CONTAINS
                     indx(j+1) = jtmp
                 endif
             else
-                if (gam1a .lt. 10e-12_rDef .or. gam2a .lt. 10e-12_rDef) then
+                ! if (gam1a .lt. 10e-12_rDef .or. gam2a .lt. 10e-12_rDef) then
+                if (gam1a .eq. 0.0_rDef .or. gam2a .eq. 0.0_rDef) then
                     !print*, 'gam1a = ',gam1a,'  gam2a = ',gam2a
                     IF (gam1a == 0.0_rDef) THEN
                         alm1 = 0.0_rDef
@@ -317,6 +323,7 @@ CONTAINS
             rr = rr)
 
         WRITE(file_id, '(i0.4)') np
+
         open(unit=14,             &
             file='03-EVanalysis/' // &
             TRIM(file_name_string) //&

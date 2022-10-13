@@ -65,7 +65,6 @@ F90FLAGS  =	\
 			-Wno-array-temporaries \
 			-Wno-unused-function #\
 			-fdump-fortran-global \
-			-Werror \
 			-Wno-error=unused-parameter \
 			-Wno-error=conversion-extra \
 			-Wno-error=conversion \
