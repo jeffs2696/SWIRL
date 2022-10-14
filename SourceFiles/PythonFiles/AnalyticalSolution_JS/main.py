@@ -87,7 +87,7 @@ mode_dictionary = {
 mode_nested_dictionary = {}
 
 # for i_rad_mode_num in range(num_of_zeros):
-for i_rad_mode_num in range(0,1):
+for i_rad_mode_num in range(2,3):
     radial_mode_iteration_string = 'Radial Mode Number ' + str(i_rad_mode_num)
     list_list = []
     # radial mode number loop
@@ -306,8 +306,8 @@ for i_rad_mode_num in range(0,1):
                         lw=1,
                         ls='--') 
                     )
-        plt.show()
-        sys.exit()
+        # plt.show()
+        # sys.exit()
 
         for index,row in NumericalAxialWavenumberData_list[i_gp].iterrows(): 
     
