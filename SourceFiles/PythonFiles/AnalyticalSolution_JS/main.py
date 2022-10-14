@@ -11,6 +11,7 @@ import numpy as np
 import scipy as scp
 from scipy import special
 import helpers.importing_functions as ifcn
+import helpers.mode_sorting_functions as msfcn
 import helpers.analytic_functions as afcn
 import helpers.plotting_functions as pfcn 
 import helpers.helper_functions as fcn
@@ -191,49 +192,11 @@ for i_rad_mode_num in range(0,1):
                 r,
                 radial_mode_list,
                 radial_mode_number,
-                azimuthal_mode_number,Jv_p_zero) 
-        # print(normalized_radial_mode_list,analytical_normalized_radial_mode_list)
-        # sys.exit()
-        
-        
-        
-        # normalizing radial modes in a loop
-        #for i,j in enumerate(radial_mode_list):
-        
-        #    radial_mode = radial_mode_list[i]
-        #    radial_mode_number_for_list = i
-        #    normalization_constant = afcn.normalize_psi((radial_mode),r)
-        #    if (radial_mode_number%2) == 0:
-        #        normalized_radial_mode = normalization_constant*radial_mode
-        #    else: 
-        #        normalized_radial_mode = -normalization_constant*radial_mode
-    
-    
-        #    normalized_radial_mode_list.append(normalized_radial_mode) 
-        
-        #    if azimuthal_mode_number == 0 and radial_mode_number_for_list == 0:
-        #        #from Fund. Of Duct Acs - Rienstra 
-        #        analytical_normalization_constant = np.sqrt(2)     
-        #    else: 
-        #        analytical_normalization_constant = np.sqrt(2)/(
-        #                (
-        #                    (scp.special.jv(
-        #                        azimuthal_mode_number,
-        #                        Jv_p_zero[radial_mode_number_for_list]))
-        #                    )*np.sqrt(
-        #                        1 - azimuthal_mode_number**2/
-        #                        Jv_p_zero[radial_mode_number_for_list]**2
-        #                        )
-        #                    )
-        #        analytical_normalized_radial_mode = \
-        #                analytical_normalization_constant*(radial_mode) 
-        
-        #        analytical_normalized_radial_mode_list.append(
-        #                analytical_normalized_radial_mode
-        #            )
-        
-    
-    # plotting data 
+                azimuthal_mode_number,
+                Jv_p_zero) 
+
+    # plotting data / creating mode dictionary
+
     # -----------------------------------------------------------------------------
     # Data set 1 - Analytical Wavenumbers 
     # plt.show()
@@ -252,14 +215,12 @@ for i_rad_mode_num in range(0,1):
                 'radial_mode_number': None, 
                 'radial_mode_index': None, 
                 # 'radial_mode_data': None
-                }
-    
+                } 
         mode_nested_dictionary[i_gp][i_gp] = mode_dictionary
         # mode_dictionary = mode_nested_dictionary[ii][ii]
     
         #this loops through each row for the file
     
-
         fig,ax = plt.subplots(
                 constrained_layout=True)#, figsize=fcn.set_size(width))
         scatter_parameters = {
@@ -295,6 +256,58 @@ for i_rad_mode_num in range(0,1):
             k_x_cutoff = axial_mach_number*wavenumber/(axial_mach_number**2-1)
             plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=0.5,ls='dotted') 
     
+
+        # sorting modes, using the max and min real part
+        # pprint.pprint(msfcn.sortRadialModes(axial_mach_number,wavenumber,num_of_zeros,NumericalAxialWavenumberData_list[i_gp]))
+        m_dict = msfcn.sortRadialModes(axial_mach_number,wavenumber,num_of_zeros,NumericalAxialWavenumberData_list[i_gp])
+        k_x_numerical = m_dict['k_x'] 
+        for i in range(len(m_dict['k_x'])):
+            
+            plt.scatter(
+                    k_x_numerical[i][0], # real part
+                    k_x_numerical[i][1], # imaginary part
+                    marker = 'd',# changes triangle direction
+                    # label = ii,
+                    facecolor ='none', edgecolors ='b',
+                    )
+            if k_x_numerical[i][1] > 0 or k_x_numerical[i][1] < 0: 
+                ax.annotate(r'$K_{{{M},{N}}}$'.format(
+                    M = azimuthal_mode_number,
+                    N = m_dict['radial_mode_number'][i]),
+                    xy=(
+                        m_dict['k_x'][i][0],
+                        m_dict['k_x'][i][1]),
+                    xycoords='data',
+                    textcoords='offset points',
+                    xytext = (-20,-20),
+                    horizontalalignment='center',
+                    verticalalignment='bottom',
+                    fontsize='10',
+                    arrowprops=dict(arrowstyle= '-',
+                        color='blue',
+                        lw=1,
+                        ls='--')
+                    )
+            else: 
+                ax.annotate(r'$K_{{{M},{N}}}$'.format(
+                    M = azimuthal_mode_number,
+                    N = m_dict['radial_mode_number'][i]),
+                    xy=(
+                        m_dict['k_x'][i][0],
+                        m_dict['k_x'][i][1]),
+                    xycoords='data',
+                    textcoords='offset points',
+                    xytext = (0,-20),
+                    horizontalalignment='center',
+                    verticalalignment='center',
+                    fontsize='10',
+                    arrowprops=dict(arrowstyle= '-',
+                        color='blue',
+                        lw=1,
+                        ls='--') 
+                    )
+        plt.show()
+        sys.exit()
 
         for index,row in NumericalAxialWavenumberData_list[i_gp].iterrows(): 
     
@@ -339,44 +352,8 @@ for i_rad_mode_num in range(0,1):
                         facecolor ='none', edgecolors ='b',
                         )
     
-                if NumericalAxialWavenumberData_list[ii]['Im{gam}'][index] > 0 or \
-                        NumericalAxialWavenumberData_list[ii]['Im{gam}'][index] < 0: 
-    
-                    ax.annotate(r'$K_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = NumericalAxialWavenumberData_list[ii]['nz'][index]),
-                            xy=(
-                                NumericalAxialWavenumberData_list[ii]['Re{gam}'][index],
-                                NumericalAxialWavenumberData_list[ii]['Im{gam}'][index]
-                                ),
-                            xycoords='data',
-                            textcoords='offset points',
-                            xytext = (-20,-20),
-                            horizontalalignment='center',
-                            verticalalignment='bottom',
-                            fontsize='10',
-                            arrowprops=dict(arrowstyle= '-',
-                                color='blue',
-                                lw=1,
-                                ls='--')
-                            )
-    
-                else:
-                    ax.annotate(r'$K_{{{M},{N}}}$'.format(M = azimuthal_mode_number,N = NumericalAxialWavenumberData_list[ii]['nz'][index]),
-                            xy=(
-                                NumericalAxialWavenumberData_list[ii]['Re{gam}'][index],
-                                NumericalAxialWavenumberData_list[ii]['Im{gam}'][index]),
-                            xycoords='data',
-                            textcoords='offset points',
-                            xytext = (0,-20),
-                            horizontalalignment='center',
-                            verticalalignment='center',
-                            fontsize='10',
-                            arrowprops=dict(arrowstyle= '-',
-                                color='blue',
-                                lw=1,
-                                ls='--')
-                            )
+                
                     
-                    index_for_mode_import.append(NumericalAxialWavenumberData_list[ii]['#'][index]) 
                     # print(ii)
     
                 if mode_dictionary['radial_mode_index'] == None:
@@ -399,7 +376,7 @@ for i_rad_mode_num in range(0,1):
                 n = str(grid_point_array[ii])),
             format     ='pdf')#, bbox_inches='tight')
 
-        plt.show()
+        # plt.show()
 
         # sys.exit() 
         #debug here
@@ -599,6 +576,7 @@ print(list_list)
 
 # pprint.pprint(mode_nested_dictionary)
 # pprint.pprint(radial_mode_dataframe_dictionary)
+plt.show()
 sys.exit()
 # resize the figure to match the aspect ratio of the Axes    
 # fig.set_size_inches(10, 8, forward=True)
