@@ -1,5 +1,5 @@
 all:
-	@./main.py; # cat debug_file.log
+	@python3 -m main.py; # cat debug_file.log
 docs:
 	(cd docs/); (make);
 clean:

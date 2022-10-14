@@ -47,6 +47,17 @@ make all
 * clone this project 
 * type ```make```
 
+This code was developed using Linux and has been compiled using gfortran. 
+Post processing was done using python. 
+
+Depending on your system, your ploting windows may or may not appear. In
+particular, if you are using WSL 1 or 2 make sure that you have xLaunch or 
+xming enabled with the right display window. 
+
+
+
+
+
 
 ### Fortran Prerequisites 
 gfortran
@@ -57,7 +68,6 @@ Numpy
 Sympy
 Scipy
 ### Known Issues
-nonconvecting modes are sorted in outputModule and needs to be moved
 
 [Back To The Top](#SWIRL)
 ## Contributors
