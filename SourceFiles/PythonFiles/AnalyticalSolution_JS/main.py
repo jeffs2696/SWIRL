@@ -33,6 +33,16 @@ wavenumber = 10
 azimuthal_mode_number = 2 
 
 axial_mach_number = 0.3
+if axial_mach_number > 0:
+    k_x_convective = wavenumber/axial_mach_number
+    max_real_part = 33 #k_x_convective
+    max_imag_part = 14
+    min_imag_part = -14
+else: 
+    max_real_part = 33
+    max_imag_part = 14
+    min_imag_part = -14
+
 radial_mode_number = 1
 
 DuctModeObject = DuctModeClass(
@@ -43,16 +53,6 @@ DuctModeObject = DuctModeClass(
         axial_mach_number)
 
 
-# Desired Decay Rate 
-if axial_mach_number > 0:
-    k_x_convective = wavenumber/axial_mach_number
-    max_real_part = 33 #k_x_convective
-    max_imag_part = 14
-    min_imag_part = -14
-else: 
-    max_real_part = 33
-    max_imag_part = 14
-    min_imag_part = -14
 
 # ------------
 
@@ -87,7 +87,7 @@ mode_dictionary = {
 mode_nested_dictionary = {}
 
 # for i_rad_mode_num in range(num_of_zeros):
-for i_rad_mode_num in range(2,3):
+for i_rad_mode_num in range(0,1):
     radial_mode_iteration_string = 'Radial Mode Number ' + str(i_rad_mode_num)
     list_list = []
     # radial mode number loop
@@ -101,7 +101,7 @@ for i_rad_mode_num in range(2,3):
             NumericalAxialWavenumberData_second_order_list, \
             NumericalAxialWavenumberData_fourth_order_list = ifcn.importSwirlOutput(grid_point_array)
 
-    NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_second_order_list
+    NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_fourth_order_list
 
     # for i_gp,j_gp in enumerate(grid_point_array):
     #     grid_iteration_string = 'Grid Iteration ' + str(i_gp)
@@ -150,7 +150,9 @@ for i_rad_mode_num in range(2,3):
         # Done importing files 
         
         # Getting analytical radial mode shapes and axial wavenumbers  
+
 # sys.exit()
+
     for i_gp,j_gp in enumerate(grid_point_array):
         
         r_steps = grid_point_array[i_gp] 
@@ -259,7 +261,11 @@ for i_rad_mode_num in range(2,3):
 
         # sorting modes, using the max and min real part
         # pprint.pprint(msfcn.sortRadialModes(axial_mach_number,wavenumber,num_of_zeros,NumericalAxialWavenumberData_list[i_gp]))
-        m_dict = msfcn.sortRadialModes(axial_mach_number,wavenumber,num_of_zeros,NumericalAxialWavenumberData_list[i_gp])
+        m_dict = msfcn.sortRadialModes(
+                axial_mach_number,
+                wavenumber,
+                num_of_zeros,
+                NumericalAxialWavenumberData_list[i_gp])
         k_x_numerical = m_dict['k_x'] 
         for i in range(len(m_dict['k_x'])):
             
@@ -376,7 +382,7 @@ for i_rad_mode_num in range(2,3):
                 n = str(grid_point_array[ii])),
             format     ='pdf')#, bbox_inches='tight')
 
-        # plt.show()
+        plt.show()
 
         # sys.exit() 
         #debug here
@@ -430,7 +436,7 @@ for i_rad_mode_num in range(2,3):
 
         for i in range(len(mode_dictionary['radial_mode_index'])):
             radial_mode_data = \
-                    pandas.read_csv(  second_order_directories[ii] + radial_mode_filenames[i], delim_whitespace = True )
+                    pandas.read_csv(  fourth_order_directories[ii] + radial_mode_filenames[i], delim_whitespace = True )
             
             radial_mode_dataframe_dictionary[i] = radial_mode_data
         
