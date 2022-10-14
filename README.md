@@ -55,7 +55,6 @@ particular, if you are using WSL 1 or 2 make sure that you have xLaunch or
 xming enabled with the right display window. 
 
 
-
 ### Fortran Prerequisites 
 gfortran
 
