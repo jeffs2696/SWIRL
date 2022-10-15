@@ -36,6 +36,7 @@ def importSwirlOutput(grid_point_array):
             filename_list.append(
                     'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.00{n}'.format(
                         n=str(grid_point_array[i_gp]))) 
+                    #needs to be fixed for fd2 as well
 
         else: 
             filename_list.append(

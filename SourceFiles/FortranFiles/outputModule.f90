@@ -344,8 +344,8 @@ CONTAINS
         gamma1 = wvn(indx(j))
         fac   = (1.0_rDef +rho)/2.0_rDef
         if (izeros(indx(j)).lt.np-4) then
-            write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))-1!Changing zero order to match NASA convention for radial modes
-            write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))-1
+            write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))!Changing zero order to match NASA convention for radial modes
+            write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))
         endif
         enddo
         10      format(1x,i4,4e13.5,i4)

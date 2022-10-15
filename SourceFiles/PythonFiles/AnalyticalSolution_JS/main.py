@@ -52,11 +52,6 @@ DuctModeObject = DuctModeClass(
         azimuthal_mode_number,
         axial_mach_number)
 
-
-
-# ------------
-
-
 r_min = 0
 r_max = 1
 
@@ -66,13 +61,6 @@ r_max = 1
 # [1] importing results from SWIRL
 grid_point_array = np.array([32, 64, 128, 256])
 grid_point_array = np.array([33])#, 64, 128, 256])
-
-
-# sys.exit()
-# second_order_directories = []
-# fourth_order_directories = [] 
-# filename_list = []
-# NumericalAxialWavenumberData_list = []
  
 index_for_mode_import = []
 key_list_for_mode_dictionary =[ "radial_mode", "index"] 
@@ -102,57 +90,14 @@ for i_rad_mode_num in range(0,1):
             NumericalAxialWavenumberData_fourth_order_list = ifcn.importSwirlOutput(grid_point_array)
 
     NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_fourth_order_list
+    pprint.pprint(NumericalAxialWavenumberData_list)
 
-    # for i_gp,j_gp in enumerate(grid_point_array):
-    #     grid_iteration_string = 'Grid Iteration ' + str(i_gp)
-    #     grid_point_string = '# of Gridpoints ' + str(j_gp)
-    #     # Grid Loop
-
-    #     print(f'{grid_iteration_string: ^20}')
-    #     print(f'{grid_point_string: ^20}')
-
-        
-        # logging.info('Iteration       ' + str(i))
-        # logging.info('# of Gridpoints ' + str(j))
-    
-        # print('Importing files for this grid...')
-
-        
-        # second_order_directories.append(
-        #         '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
-        #         'UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
-        #             n=str(grid_point_array[i_gp])))
-
-        # fourth_order_directories.append(
-        #         '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
-        #         'UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
-        #             n=str(grid_point_array[i_gp])))
-
-        # if i_gp <= 1:
-        #     filename_list.append(
-        #             'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.00{n}'.format(
-        #                 n=str(grid_point_array[i_gp]))) 
-
-        # else: 
-        #     filename_list.append(
-        #             'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.0{n}'.format(
-        #                 n=str(grid_point_array[i_gp])))
-
-        # # NumericalAxialWavenumberData_fourth_order = \
-        #         # pandas.read_csv(  fourth_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
-
-        # # NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData_fourth_order)
-        # NumericalAxialWavenumberData_second_order = \
-        #         pandas.read_csv(  second_order_directories[i_gp] + filename_list[i_gp], delim_whitespace = True )
-
-        # NumericalAxialWavenumberData_list.append(NumericalAxialWavenumberData_second_order)
-    
-        # Done importing files 
-        
-        # Getting analytical radial mode shapes and axial wavenumbers  
-
-# sys.exit()
-
+    m_dict = msfcn.sortRadialModes(
+            axial_mach_number,
+            wavenumber,
+            num_of_zeros,
+            NumericalAxialWavenumberData_list[0])
+    k_x_numerical = m_dict['k_x'] 
     for i_gp,j_gp in enumerate(grid_point_array):
         
         r_steps = grid_point_array[i_gp] 
@@ -180,14 +125,8 @@ for i_rad_mode_num in range(0,1):
         
         # normalize radial modes numerically vs using analytics from Rienstra 
         # Note: NASA's radial mode index starts at 0 while Rienstra starts at 1
-        # This depend on whether you count the first 0 at the boundary or not (?)
+        # This depend on whether you count the first 0 at the boundary or not..  
 
-        # "allocating" lists for radial mode data for each grid
-        
-        # normalized_radial_mode_list = []
-        # print(radial_mode_list)
-
-        # analytical_normalized_radial_mode_list = []
         normalized_radial_mode_list, \
         analytical_normalized_radial_mode_list = \
         afcn.normalize_radial_modes(
@@ -196,6 +135,9 @@ for i_rad_mode_num in range(0,1):
                 radial_mode_number,
                 azimuthal_mode_number,
                 Jv_p_zero) 
+        
+    # sys.exit()
+
 
     # plotting data / creating mode dictionary
 
@@ -205,26 +147,27 @@ for i_rad_mode_num in range(0,1):
         
     #------------------------------------------------------------------------------
     # for i in range(len(fourth_order_directories)):
-        mode_nested_dictionary[i_gp] = {i_gp: mode_dictionary} 
+        # mode_nested_dictionary[i_gp] = {i_gp: mode_dictionary} 
     
         # print(mode_nested_dictionary)
     
     
     
         # Needed to reset the current looP
-        mode_dictionary = {
-                'k_x' : None,
-                'radial_mode_number': None, 
-                'radial_mode_index': None, 
-                # 'radial_mode_data': None
-                } 
-        mode_nested_dictionary[i_gp][i_gp] = mode_dictionary
+        # mode_dictionary = {
+        #         'k_x' : None,
+        #         'radial_mode_number': None, 
+        #         'radial_mode_index': None, 
+        #         # 'radial_mode_data': None
+        #         } 
+        # mode_nested_dictionary[i_gp][i_gp] = mode_dictionary
         # mode_dictionary = mode_nested_dictionary[ii][ii]
     
         #this loops through each row for the file
     
         fig,ax = plt.subplots(
                 constrained_layout=True)#, figsize=fcn.set_size(width))
+
         scatter_parameters = {
                 'marker':'.' ,
                 'c':'black'}
@@ -558,7 +501,7 @@ for i_rad_mode_num in range(0,1):
     #   # ROC = ist_list[i][1]
         
     
-plt.show()
+# plt.show()
 # plt.close()
 # plt.plot(L2_list)
 # plt.show()

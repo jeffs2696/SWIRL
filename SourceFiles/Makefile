@@ -234,7 +234,7 @@ all:  $(OBJECTS)
 	@(mv $(OBJECTS) $(OBJ_FILES)); 
 	@(mv *.mod $(MOD_FILES));
 	@(cd $(EXECUTABLE_LOCATION); ./$(EXE)); 
-	@(spd-say 'good-job' ); 
+	# @(spd-say 'good-job' ); 
 
 # @(cd $(EXECUTABLE_LOCATION); (make plot ))
 	

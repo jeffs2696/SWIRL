@@ -1,3 +1,9 @@
+there needs to be documentation written on the code to make sure the mode extraction proceess is cleaner. 
+
+Breadcrumbs for 10/14/22/
+make sure the plotting and data are separate whuich will determine which loops are right
+fix wavenumver filename_list variable so you can do both second order and fourth
+
 
 the annotation for the numerical wavenumbers do not have a sign for a superscript 
 at the moment. However, t_{2,0} has a duplicate? There can only be one. By coincidence 
