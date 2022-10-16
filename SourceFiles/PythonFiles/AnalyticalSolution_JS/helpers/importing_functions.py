@@ -4,7 +4,8 @@ import pandas
 def importSwirlOutput(grid_point_array):
     second_order_directories = []
     fourth_order_directories = [] 
-    filename_list = []
+    second_order_filename_list = []
+    fourth_order_filename_list = []
     NumericalAxialWavenumberData_second_order_list = []
     NumericalAxialWavenumberData_fourth_order_list = []
 
@@ -33,20 +34,29 @@ def importSwirlOutput(grid_point_array):
                     n=str(grid_point_array[i_gp])))
 
         if i_gp <= 1:
-            filename_list.append(
+            second_order_filename_list.append(
                     'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.00{n}'.format(
                         n=str(grid_point_array[i_gp]))) 
                     #needs to be fixed for fd2 as well
 
+            fourth_order_filename_list.append(
+                    'Test1_npts{n}_fd2_domain_cgam.nonconv_acc.00{n}'.format(
+                        n=str(grid_point_array[i_gp]))) 
+                    #needs to be fixed for fd2 as well
+
         else: 
-            filename_list.append(
+            second_order_filename_list.append(
                     'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.0{n}'.format(
                         n=str(grid_point_array[i_gp])))
+
+            fourth_order_filename_list.append(
+                    'Test1_npts{n}_fd2_domain_cgam.nonconv_acc.00{n}'.format(
+                        n=str(grid_point_array[i_gp]))) 
 
         NumericalAxialWavenumberData_fourth_order = \
                 pandas.read_csv(
                         fourth_order_directories[i_gp] +
-                        filename_list[i_gp], delim_whitespace = True )
+                        fourth_order_filename_list[i_gp], delim_whitespace = True )
 
         NumericalAxialWavenumberData_fourth_order_list.append(
                 NumericalAxialWavenumberData_fourth_order)
@@ -54,7 +64,7 @@ def importSwirlOutput(grid_point_array):
         NumericalAxialWavenumberData_second_order = \
                 pandas.read_csv(
                         second_order_directories[i_gp] +
-                        filename_list[i_gp], delim_whitespace = True )
+                        second_order_filename_list[i_gp], delim_whitespace = True )
 
         NumericalAxialWavenumberData_second_order_list.append(
                 NumericalAxialWavenumberData_second_order)
