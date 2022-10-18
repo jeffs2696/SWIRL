@@ -5,6 +5,8 @@ import cmath
 def get_radial_wavenumbers(
         azimuthal_mode_number,
         num_of_zeros): 
+    """ 
+    """
 
     Jv_p_zero = scp.special.jnp_zeros(
             n  = azimuthal_mode_number,
@@ -99,3 +101,41 @@ def normalize_radial_modes(r,radial_mode_list,radial_mode_number,azimuthal_mode_
     # print(normalized_radial_mode_list)
     # print('leaving normalize_radial_modes')
     return normalized_radial_mode_list,analytical_normalized_radial_mode_list
+
+def get_multiple_radial_modes(grid_point_array,r_min,r_max):
+
+    for i_gp,j_gp in enumerate(grid_point_array): 
+        r_steps = grid_point_array[i_gp]
+        r = np.linspace(r_min,r_max,r_steps)
+
+        Jv_p_zero = afcn.get_radial_wavenumbers(
+                azimuthal_mode_number,
+                num_of_zeros)
+
+        Jv_p_zero_01 = scp.special.jnp_zeros(
+                n  = 0, nt = 1) 
+
+        # Get axial wavenumbers for a given temporal and radial wavenumber
+        k_x_plus,k_x_minus = afcn.get_axial_wavenumbers(
+                azimuthal_mode_number,
+                wavenumber,
+                axial_mach_number,
+                Jv_p_zero) 
+
+        radial_mode_list = afcn.get_radial_modes(
+                azimuthal_mode_number,
+                Jv_p_zero,
+                r)
+
+        # normalize radial modes numerically vs using analytics from Rienstra 
+        # Note: NASA's radial mode index starts at 0 while Rienstra starts at 1
+        # This depend on whether you count the first 0 at the boundary or not.. 
+        normalized_radial_mode_list, \
+                analytical_normalized_radial_mode_list = \
+                afcn.normalize_radial_modes(
+                        r,
+                        radial_mode_list,
+                        radial_mode_number,
+                        azimuthal_mode_number,
+                        Jv_p_zero) 
+    return

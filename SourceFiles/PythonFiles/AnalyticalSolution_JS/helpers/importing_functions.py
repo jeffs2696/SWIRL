@@ -1,7 +1,35 @@
 #!/usr/bin/env python3
 import pandas
 
-def importSwirlOutput(grid_point_array):
+def importNumericalWavenumbers(grid_point_array):
+    """ 
+    Return Swirl's axial wavenumber outputs 
+
+    Parameters
+    ----------
+    grid_point_array : np.array
+        An array of gridpoints which each have a directory within a finite 
+        difference directory
+
+    Returns
+    -------
+    second_order_directories : list
+        list of the second order directories for each grid
+
+    fourth_order_directories : list
+        a list of the fourth order directories for each grid
+
+    NumericalAxialWavenumberData_second_order_list: list
+        a list of pandas Dataframes which contain all of the wavenumbers found
+        in Swirl using a second order central finite difference method for 
+        the radial derivatives in the Linearized Euler Equations 
+
+    NumericalAxialWavenumberData_fourth_order_list: list
+        a list of pandas Dataframes which contain all of the wavenumbers found
+        in Swirl using a fourth order central finite difference method for 
+        the radial derivatives in the Linearized Euler Equations
+
+    """
     second_order_directories = []
     fourth_order_directories = [] 
     second_order_filename_list = []
@@ -16,13 +44,7 @@ def importSwirlOutput(grid_point_array):
 
         print(f'{grid_iteration_string: ^20}')
         print(f'{grid_point_string: ^20}')
-
         
-        # logging.info('Iteration       ' + str(i))
-        # logging.info('# of Gridpoints ' + str(j))
-    
-        # print('Importing files for this grid...')
-
         second_order_directories.append(
                 '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
                 'UniformFlowCylinderHardwall/SecondOrderDiff/{n}pts/'.format(
@@ -33,7 +55,12 @@ def importSwirlOutput(grid_point_array):
                 'UniformFlowCylinderHardwall/FourthOrderDiff/{n}pts/'.format(
                     n=str(grid_point_array[i_gp])))
 
-        if i_gp <= 1:
+        # print(i_gp,j_gp)
+
+        # grid points that are on file names have 0's as place holders so
+        # to account for this, check if the # of points is larger than 100 
+        if j_gp < 100:
+
             second_order_filename_list.append(
                     'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.00{n}'.format(
                         n=str(grid_point_array[i_gp]))) 
@@ -45,12 +72,13 @@ def importSwirlOutput(grid_point_array):
                     #needs to be fixed for fd2 as well
 
         else: 
+
             second_order_filename_list.append(
                     'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.0{n}'.format(
                         n=str(grid_point_array[i_gp])))
 
             fourth_order_filename_list.append(
-                    'Test1_npts{n}_fd2_domain_cgam.nonconv_acc.00{n}'.format(
+                    'Test1_npts{n}_fd2_domain_cgam.nonconv_acc.0{n}'.format(
                         n=str(grid_point_array[i_gp]))) 
 
         NumericalAxialWavenumberData_fourth_order = \
@@ -68,7 +96,11 @@ def importSwirlOutput(grid_point_array):
 
         NumericalAxialWavenumberData_second_order_list.append(
                 NumericalAxialWavenumberData_second_order)
+
     return second_order_directories,\
             fourth_order_directories,\
             NumericalAxialWavenumberData_second_order_list,\
             NumericalAxialWavenumberData_fourth_order_list
+
+
+    return
