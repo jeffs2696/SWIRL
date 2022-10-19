@@ -189,7 +189,7 @@ PROGRAM MAIN
 
     numberOfGridPoints = 33 
 
-    DO FDfac = 2,2! numberOfFiniteDifferenceSchemes 
+    DO FDfac = 1,1! numberOfFiniteDifferenceSchemes 
 
     DO fac = 1, numberOfIterations
 

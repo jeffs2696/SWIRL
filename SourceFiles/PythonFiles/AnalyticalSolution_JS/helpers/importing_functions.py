@@ -71,7 +71,7 @@ def importNumericalWavenumbers(grid_point_array):
                         n=str(grid_point_array[i_gp]))) 
                     #needs to be fixed for fd2 as well
 
-        else: 
+        elif j_gp <1000: 
 
             second_order_filename_list.append(
                     'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.0{n}'.format(
@@ -79,6 +79,14 @@ def importNumericalWavenumbers(grid_point_array):
 
             fourth_order_filename_list.append(
                     'Test1_npts{n}_fd2_domain_cgam.nonconv_acc.0{n}'.format(
+                        n=str(grid_point_array[i_gp]))) 
+        else:
+            second_order_filename_list.append(
+                    'Test1_npts{n}_fd1_domain_cgam.nonconv_acc.{n}'.format(
+                        n=str(grid_point_array[i_gp])))
+
+            fourth_order_filename_list.append(
+                    'Test1_npts{n}_fd2_domain_cgam.nonconv_acc.{n}'.format(
                         n=str(grid_point_array[i_gp]))) 
 
         NumericalAxialWavenumberData_fourth_order = \

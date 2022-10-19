@@ -12,6 +12,7 @@ import numpy as np
 import scipy as scp
 from scipy import special
 import helpers.importing_functions as ifcn
+import helpers.math_functions as mfcn
 import helpers.mode_sorting_functions as msfcn
 import helpers.analytic_functions as afcn
 import helpers.plotting_functions as pfcn 
@@ -37,7 +38,7 @@ def main():
     r_max = 1
 
     # grid_point_array = np.array([32, 64, 128,256]) 
-    grid_point_array = np.array([33, 66, 132,264]) 
+    grid_point_array = np.array([33, 66, 132,264,528,1056]) 
     second_order_directories, fourth_order_directories, \
             NumericalAxialWavenumberData_second_order_list, \
             NumericalAxialWavenumberData_fourth_order_list = \
@@ -63,7 +64,7 @@ def main():
 
     
         # TODO: Second and fourth at the same time
-        NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_fourth_order_list
+        NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_second_order_list
 
     
         for i_gp,j_gp in enumerate(grid_point_array): 
@@ -108,7 +109,7 @@ def main():
                     axial_mach_number,
                     wavenumber,
                     num_of_zeros,
-                    NumericalAxialWavenumberData_fourth_order_list[i_gp],
+                    NumericalAxialWavenumberData_list[i_gp],
                     grid_point_array)
 
             k_x_numerical = m_dict['k_x'] 
@@ -150,12 +151,29 @@ def main():
                         radial_mode_filenames.append('egv_np_0264radialmode_00' + str(m_dict['radial_mode_index'][i])) 
                     else:
                         radial_mode_filenames.append('egv_np_0264radialmode_0' + str(m_dict['radial_mode_index'][i]))
+                if i_gp == 4:
+                    if m_dict['radial_mode_index'][i] < 100:
+                        # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+                        radial_mode_filenames.append('egv_np_0528radialmode_00' + str(m_dict['radial_mode_index'][i])) 
+                    elif m_dict['radial_mode_index'][i] < 1000:
+                        radial_mode_filenames.append('egv_np_0528radialmode_0' + str(m_dict['radial_mode_index'][i]))
+                    else:
+                        radial_mode_filenames.append('egv_np_0528radialmode_' + str(m_dict['radial_mode_index'][i]))
+
+                if i_gp == 5:
+                    if m_dict['radial_mode_index'][i] < 100:
+                        # radial_mode_filenames.append('egv_np_0064radialmode_00' + str(mode_dictionary['radial_mode_index'][i])) 
+                        radial_mode_filenames.append('egv_np_1056radialmode_00' + str(m_dict['radial_mode_index'][i])) 
+                    elif m_dict['radial_mode_index'][i] < 1000:
+                        radial_mode_filenames.append('egv_np_1056radialmode_0' + str(m_dict['radial_mode_index'][i]))
+                    else: 
+                        radial_mode_filenames.append('egv_np_1056radialmode_' + str(m_dict['radial_mode_index'][i]))
                     
             radial_mode_dataframe_dictionary = {}
     
             for i in range(len(m_dict['radial_mode_index'])):
                 radial_mode_data = \
-                        pandas.read_csv(  fourth_order_directories[i_gp] + radial_mode_filenames[i], delim_whitespace = True )
+                        pandas.read_csv(  second_order_directories[i_gp] + radial_mode_filenames[i], delim_whitespace = True )
                 
                 radial_mode_dataframe_dictionary[i] = radial_mode_data
 
@@ -293,7 +311,9 @@ def main():
                 # error_list.append(abs(numerical_normalized_radial_mode_list[i][1:-2].real-
                 #         analytical_normalized_radial_mode_list[radial_mode_number][1:-2].real)) 
         
-                L2 = np.sqrt((1/grid_point_array[i_gp])*sum(error_list[i]**2))
+                L2 = mfcn.getL2norm(
+                        numerical_normalized_radial_mode_list[i][:].real,
+                        analytical_normalized_radial_mode_list[radial_mode_number][:].real )
                 
 
                 # two L2s one for upstream and downstream mode
@@ -311,9 +331,13 @@ def main():
             upstream_L2.append(L2_list[1])
 
         for i in range(len(upstream_L2)-1): 
+            print('iter',i)
+
             ROC = np.log(upstream_L2[i+1]/upstream_L2[i])/\
                     np.log(grid_point_array[i]/grid_point_array[i+1])
-
+                    
+            print((grid_point_array[i]/grid_point_array[i+1]))
+            
             ROC_list.append(ROC)
 
         print(ROC_list)
@@ -548,5 +572,6 @@ def main():
         bbox_inches='tight')
     
     plt.show()
+
 if __name__ == '__main__':
     main()
