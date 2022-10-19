@@ -40,7 +40,7 @@ PROGRAM MAIN
         M_int = 2 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 4 
+        numberOfIterations = 6 
 
     !! Integers for flags and loop indicies
     INTEGER  :: &

@@ -22,9 +22,9 @@ from mpl_toolkits.mplot3d import Axes3D # needed for 3d plots
 from matplotlib import cm
 
 from inputs.test_case_variables import TestCase1 
-def main():
 
-     
+def main(): 
+    
     fcn.set_plot_parameters() #plot parameters
 
     # test case parameters
@@ -36,6 +36,7 @@ def main():
     r_min = 0
     r_max = 1
 
+    # grid_point_array = np.array([32, 64, 128,256]) 
     grid_point_array = np.array([33, 66, 132,264]) 
     second_order_directories, fourth_order_directories, \
             NumericalAxialWavenumberData_second_order_list, \
@@ -43,29 +44,34 @@ def main():
             ifcn.importNumericalWavenumbers(grid_point_array)
     # print(NumericalAxialWavenumberData_second_order_list[0].info()) 
 
-    for i_rad_mode_num in range(num_of_zeros):
+    # for i_rad_mode_num in range(num_of_zeros):
+    for i_rad_mode_num in range(0,1):
 
         radial_mode_iteration_string = 'Radial Mode Number ' + str(i_rad_mode_num)
-        list_list = []
+
+        downstream_L2 = []
+        upstream_L2 = []
+        ROC_list = []
         # radial mode number loop
         radial_mode_number = i_rad_mode_num
     
         print(f'{radial_mode_iteration_string: ^20}')
     
-        print('Importing files...')
+        # print('Importing files...')
 
         # sys.exit()
 
     
         # TODO: Second and fourth at the same time
-        NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_second_order_list
+        NumericalAxialWavenumberData_list = NumericalAxialWavenumberData_fourth_order_list
+
     
-        for i_gp,j_gp in enumerate(grid_point_array):
-            
-            r_steps = grid_point_array[i_gp] 
-            
+        for i_gp,j_gp in enumerate(grid_point_array): 
+
+            r_steps = grid_point_array[i_gp]
+
             r = np.linspace(r_min,r_max,r_steps)
-        
+
             Jv_p_zero = afcn.get_radial_wavenumbers(
                     azimuthal_mode_number,
                     num_of_zeros)
@@ -102,14 +108,14 @@ def main():
                     axial_mach_number,
                     wavenumber,
                     num_of_zeros,
-                    NumericalAxialWavenumberData_list[i_gp],
+                    NumericalAxialWavenumberData_fourth_order_list[i_gp],
                     grid_point_array)
 
             k_x_numerical = m_dict['k_x'] 
 
 # TODO: plot_numerical_axial_wavenumber(m_dict):
 
-            len_indicies = len(m_dict['radial_mode_index'])
+            # len_indicies = len(m_dict['radial_mode_index'])
     
             # print('Identified Radial Mode Orders: ', m_dict['radial_mode_number'])
     
@@ -149,121 +155,119 @@ def main():
     
             for i in range(len(m_dict['radial_mode_index'])):
                 radial_mode_data = \
-                        pandas.read_csv(  second_order_directories[i_gp] + radial_mode_filenames[i], delim_whitespace = True )
+                        pandas.read_csv(  fourth_order_directories[i_gp] + radial_mode_filenames[i], delim_whitespace = True )
                 
                 radial_mode_dataframe_dictionary[i] = radial_mode_data
 
-        # sys.exit()
     
     
         # plotting data 
     
         
-            fig,ax = plt.subplots(
-                    constrained_layout=True)
+            # fig,ax = plt.subplots(
+            #         constrained_layout=True)
     
-            scatter_parameters = {
-                    'marker':'.' ,
-                    'c':'black'}
+            # scatter_parameters = {
+            #         'marker':'.' ,
+            #         'c':'black'}
             
-            scatter_parameters_numerical = {
-                    'marker':'.' ,
-                    'c':'blue'}
+            # scatter_parameters_numerical = {
+            #         'marker':'.' ,
+            #         'c':'blue'}
             
-            for i in range(num_of_zeros):
-                ax = pfcn.plot_axial_wavenumbers(
-                        real_part = k_x_plus[i].real,
-                        imag_part = k_x_plus[i].imag,
-                        azimuthal_mode_number = azimuthal_mode_number,  
-                        radial_mode_number = i,
-                        wavenumber = wavenumber ,
-                        axial_mach_number = axial_mach_number,
-                        scatter_kwargs = scatter_parameters
-                        )
+            # for i in range(num_of_zeros):
+            #     ax = pfcn.plot_axial_wavenumbers(
+            #             real_part = k_x_plus[i].real,
+            #             imag_part = k_x_plus[i].imag,
+            #             azimuthal_mode_number = azimuthal_mode_number,  
+            #             radial_mode_number = i,
+            #             wavenumber = wavenumber ,
+            #             axial_mach_number = axial_mach_number,
+            #             scatter_kwargs = scatter_parameters
+            #             )
             
-                ax = pfcn.plot_axial_wavenumbers(
-                        real_part = k_x_minus[i].real,
-                        imag_part = k_x_minus[i].imag,
-                        azimuthal_mode_number = azimuthal_mode_number,  
-                        radial_mode_number = i,
-                        wavenumber = wavenumber ,
-                        axial_mach_number = axial_mach_number,
-                        scatter_kwargs = scatter_parameters
-                        )
+            #     ax = pfcn.plot_axial_wavenumbers(
+            #             real_part = k_x_minus[i].real,
+            #             imag_part = k_x_minus[i].imag,
+            #             azimuthal_mode_number = azimuthal_mode_number,  
+            #             radial_mode_number = i,
+            #             wavenumber = wavenumber ,
+            #             axial_mach_number = axial_mach_number,
+            #             scatter_kwargs = scatter_parameters
+            #             )
             
-            if axial_mach_number > 0:        
-                k_x_cutoff = axial_mach_number*wavenumber/(axial_mach_number**2-1)
-                plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=0.5,ls='dotted') 
+            # if axial_mach_number > 0:        
+            #     k_x_cutoff = axial_mach_number*wavenumber/(axial_mach_number**2-1)
+            #     plt.axvline(x = k_x_cutoff,color = 'black', label = 'cut-off line',lw=0.5,ls='dotted') 
         
     
             # sorting modes, using the max and min real part
 
             
-            for i in range(len(m_dict['k_x'])):
+            # for i in range(len(m_dict['k_x'])):
                 
-                plt.scatter(
-                        k_x_numerical[i][0], # real part
-                        k_x_numerical[i][1], # imaginary part
-                        marker = 'd',# changes triangle direction
-                        # label = ii,
-                        facecolor ='none', edgecolors ='b',
-                        )
-                if k_x_numerical[i][1] > 0 or k_x_numerical[i][1] < 0: 
-                    ax.annotate(r'$K_{{{M},{N}}}$'.format(
-                        M = azimuthal_mode_number,
-                        N = m_dict['radial_mode_number'][i]),
-                        xy=(
-                            m_dict['k_x'][i][0],
-                            m_dict['k_x'][i][1]),
-                        xycoords='data',
-                        textcoords='offset points',
-                        xytext = (-20,-20),
-                        horizontalalignment='center',
-                        verticalalignment='bottom',
-                        fontsize='10',
-                        arrowprops=dict(arrowstyle= '-',
-                            color='blue',
-                            lw=1,
-                            ls='--')
-                        )
-                else: 
-                    ax.annotate(r'$K_{{{M},{N}}}$'.format(
-                        M = azimuthal_mode_number,
-                        N = m_dict['radial_mode_number'][i]),
-                        xy=(
-                            m_dict['k_x'][i][0],
-                            m_dict['k_x'][i][1]),
-                        xycoords='data',
-                        textcoords='offset points',
-                        xytext = (0,-20),
-                        horizontalalignment='center',
-                        verticalalignment='center',
-                        fontsize='10',
-                        arrowprops=dict(arrowstyle= '-',
-                            color='blue',
-                            lw=1,
-                            ls='--') 
-                        )
+            #     plt.scatter(
+            #             k_x_numerical[i][0], # real part
+            #             k_x_numerical[i][1], # imaginary part
+            #             marker = 'd',# changes triangle direction
+            #             # label = ii,
+            #             facecolor ='none', edgecolors ='b',
+            #             )
+            #     if k_x_numerical[i][1] > 0 or k_x_numerical[i][1] < 0: 
+            #         ax.annotate(r'$K_{{{M},{N}}}$'.format(
+            #             M = azimuthal_mode_number,
+            #             N = m_dict['radial_mode_number'][i]),
+            #             xy=(
+            #                 m_dict['k_x'][i][0],
+            #                 m_dict['k_x'][i][1]),
+            #             xycoords='data',
+            #             textcoords='offset points',
+            #             xytext = (-20,-20),
+            #             horizontalalignment='center',
+            #             verticalalignment='bottom',
+            #             fontsize='10',
+            #             arrowprops=dict(arrowstyle= '-',
+            #                 color='blue',
+            #                 lw=1,
+            #                 ls='--')
+            #             )
+            #     else: 
+            #         ax.annotate(r'$K_{{{M},{N}}}$'.format(
+            #             M = azimuthal_mode_number,
+            #             N = m_dict['radial_mode_number'][i]),
+            #             xy=(
+            #                 m_dict['k_x'][i][0],
+            #                 m_dict['k_x'][i][1]),
+            #             xycoords='data',
+            #             textcoords='offset points',
+            #             xytext = (0,-20),
+            #             horizontalalignment='center',
+            #             verticalalignment='center',
+            #             fontsize='10',
+            #             arrowprops=dict(arrowstyle= '-',
+            #                 color='blue',
+            #                 lw=1,
+            #                 ls='--') 
+            #             )
 
             # plt.show()
-            # sys.exit()
-    
-            
+            # sys.exit() 
+
             dict_indicies = []
             numerical_normalized_radial_mode_list = []
             error_list = []
             L2_list = []
             L_max_list = []
-            L_max_location_list = []
-            
+            L_max_location_list = [] 
+
             for i,j in enumerate(m_dict['radial_mode_number']):
                 if j == i_rad_mode_num:
                     # print('match!',j,'at',i)
                     dict_indicies.append(i)
             
             # test = [t for t,x in enumerate(mode_dictionary['radial_mode_index'][t]) if x == radial_mode_number]# in mode_dictionary['radial_mode_index']:
-            # print('test',test)
-            
+            # print('test',test) 
+
             for i in range(len(dict_indicies)):
                 dict_index = dict_indicies[i]
 
@@ -290,7 +294,9 @@ def main():
                 #         analytical_normalized_radial_mode_list[radial_mode_number][1:-2].real)) 
         
                 L2 = np.sqrt((1/grid_point_array[i_gp])*sum(error_list[i]**2))
+                
 
+                # two L2s one for upstream and downstream mode
                 L2_list.append(L2)
 
                 L_max = max(error_list[i]) 
@@ -301,45 +307,56 @@ def main():
 
                 # print('L_max',L_max_list[i])
                 # print('L_max_location',L_max_location_list[i])
-                # print('L_max_location',L_max_location)
-    
-            # plot Swirl's radial modes ...
-            for i in range(len(dict_indicies)):
+            downstream_L2.append(L2_list[0])
+            upstream_L2.append(L2_list[1])
 
-                dict_index = dict_indicies[i]
-                fig,ax = plt.subplots(
-                       constrained_layout=False,
-                       figsize=fcn.set_size(345)
-                       )
+        for i in range(len(upstream_L2)-1): 
+            ROC = np.log(upstream_L2[i+1]/upstream_L2[i])/\
+                    np.log(grid_point_array[i]/grid_point_array[i+1])
+
+            ROC_list.append(ROC)
+
+        print(ROC_list)
+            # list_list = L2_list[::2] 
+            # print(list_list)
+            # print(L2_list)
+            # plot Swirl's radial modes ...
+            # for i in range(len(dict_indicies)):
+
+            #     dict_index = dict_indicies[i]
+            #     fig,ax = plt.subplots(
+            #            constrained_layout=False,
+            #            figsize=fcn.set_size(345)
+            #            )
             
-                plt.plot(
-                       numerical_r,
-                       normalized_radial_mode_data.real,
-                       label = 'numerical,real')
+            #     plt.plot(
+            #            numerical_r,
+            #            normalized_radial_mode_data.real,
+            #            label = 'numerical,real')
             
-                plt.plot(
-                       numerical_r,
-                       normalized_radial_mode_data.imag,
-                       label = 'numerical,imag')
+            #     plt.plot(
+            #            numerical_r,
+            #            normalized_radial_mode_data.imag,
+            #            label = 'numerical,imag')
             
-                plt.title('Radial mode '+ str(m_dict['radial_mode_number'][dict_index]))
-                plt.suptitle(str(m_dict['k_x'][dict_index]))
+            #     plt.title('Radial mode '+ str(m_dict['radial_mode_number'][dict_index]))
+            #     plt.suptitle(str(m_dict['k_x'][dict_index]))
             
-                plt.plot(r,normalized_radial_mode_list[radial_mode_number].real, label='analytic,real',linestyle='dotted')
-                plt.plot(r,normalized_radial_mode_list[radial_mode_number].imag, label='analytic,imag',linestyle='dotted')
-                plt.legend()
-                plt.xlabel('Radius')
-                plt.ylabel('Pressure Fluctuation')
-                plt.savefig(
-                        fname      ='figures/fourth_order_radial_mode_{N}_test_case_number_{index}_grid_{n}.pdf'.format(
-                            N = radial_mode_number,
-                            index = i,
-                            n = str(grid_point_array[i_gp])),
-                        format     ='pdf')
+            #     plt.plot(r,normalized_radial_mode_list[radial_mode_number].real, label='analytic,real',linestyle='dotted')
+            #     plt.plot(r,normalized_radial_mode_list[radial_mode_number].imag, label='analytic,imag',linestyle='dotted')
+            #     plt.legend()
+            #     plt.xlabel('Radius')
+            #     plt.ylabel('Pressure Fluctuation')
+            #     plt.savefig(
+            #             fname      ='figures/fourth_order_radial_mode_{N}_test_case_number_{index}_grid_{n}.pdf'.format(
+            #                 N = radial_mode_number,
+            #                 index = i,
+            #                 n = str(grid_point_array[i_gp])),
+            #             format     ='pdf')
         
-                fig,ax = plt.subplots()
+            #     fig,ax = plt.subplots()
                 
-                plt.plot(r,error_list[i])
+            #     plt.plot(r,error_list[i])
         
                 # plt.savefig(
                         # fname      ='figures/fourth_order_radial_mode_error_{N}_test_case_number_{index}_grid_{n}.pdf'.format(
@@ -348,10 +365,14 @@ def main():
                         #     n = str(grid_point_array[i_gp])),
                         # format     ='pdf')
     
-            # list_list.append(L2_list[0])
-        # for i in range(len(list_list)-1):
+            # list_list.append(L2_list[0]) 
+            # print(list_list)
+            # print(list_list[::2])
+            # list_list = list_list[::2]
+    # for i in range(len(list_list)-1):
             
-        #     ROC = np.log(list_list[i+1]/list_list[i])/np.log(0.5)#(grid_point_array[i+1]-grid_point_array[i])
+            # ROC = np.log(list_list[i+1]/list_list[i])/(grid_point_array[i+1]-grid_point_array[i])
+            # print(ROC)
             # print((grid_point_array[i]/grid_point_array[i+1]))
         #   # ROC = ist_list[i][1]
             
