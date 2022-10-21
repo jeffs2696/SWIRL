@@ -1,0 +1,885 @@
+%        File: doc.tex
+%     Created: Mon Aug 08 10:00 AM 2022 E
+% Last Change: Mon Aug 08 10:00 AM 2022 E
+%
+\documentclass[a4paper]{report}
+\usepackage[section]{placeins}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{pgffor}
+\usepackage{booktabs}
+\begin{document}
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+
+        \textbf{Analytical Solution for Duct Mode Propagation in%
+        Uniform Flow} 
+
+        \vspace{0.5cm}
+        Swirl Validation
+
+        \vspace{1.5cm}
+
+        \textbf{Jeff Severino}
+
+        \vfill
+
+
+        This document shows the analytical duct mode solution as well as a
+        numerical comparison.
+        \vspace{0.8cm}
+
+        % \includegraphics[width=0.4\textwidth]{university}
+
+        Mechanical, Industrial, Manufacturing Engineering Department\\
+        University Of Toledo\\
+        Toledo, OH\\
+        \today
+
+    \end{center}
+\end{titlepage}
+
+\section{Introduction - Turbomachinery Noise}
+Turbomachinery noise generation occurs from pressure fluctuations from the series 
+of fans within it's annular duct. While the jet that is produced from this stream
+of air freely radiates to the observer, the pressure fluctuations 
+produced from the rotor may or may not propagate out of the inlet and exhaust and 
+radiate to the observer. The production of this propagation can be characterized
+by standing waves referred to as modes, in particular, duct modes because 
+the mode itself is dependent on the geometry of the column of air within the 
+annular duct, as well as the speed of the flow moving through it
+\newpage
+
+\section{Duct Modes}
+The pressure field within a duct is governed by the convective wave equation, a
+second order ODE as a function of radius. Goldstein's \textit{Aeroacoustics} 
+shows that the wave equation can be obtained by taking the divergence of the
+momentum equation and subtracting the material derivative of the continuity 
+equation, however, the same equation can be obtained by resubstitution of the 
+continuity and momentum equations into the energy equations after the fluctuations 
+have also been substituted for the primative variables. (See Appendix for derivation)
+
+The solution of the convective wave equation are eigenvalues and eigenvectors 
+which may or may not correspond to acoustic disturbances fall into two groups.  
+One group corresponding to the acoustics propagation and the other group 
+corresponding to the convection speed of the flow. Both are modes that are a
+result from the pressure distribution from within the cylindrical domain.  
+
+Modes can be categorized based on the sign of the axial wavenumber and if it is
+complex in value. For example, for the uniform axial flow case, propagating modes
+are defined by axial wavenumbers, $k_x$, that have a real-part only, yielding 
+the assumed fluctuation to resemble Euler's Formula ($e^{ik_x x}$). On the other 
+hand, if the $k_x$ is complex, then the mode will resemble an exponentially decaying
+function since the imaginary number cancels, leaving a minus sign in front of
+the axial wavenumber. These two distinctions are referred to as ``cut-on'' and 
+``cut-off'' in the field of ducted sound propagation. Furthermore, the sign of 
+the imaginary part will change the direction of the mode's decay. If $k_x$ is 
+positive, the decay rate occurs in the negative direction. Conversely, if $k_x$ 
+is negative, the decay occurs in the positive direction. The axial wavenumber
+for uniform axial flow is,
+
+\begin{equation}
+    k_x  = \frac{- M_x k \pm \sqrt{k^2 - ( 1 - M_x^2) J_{m,n}'^2 }}{\left( 1 - M_x^2 \right)}.
+    \label{eqn:ax_wavenumb}
+\end{equation}
+
+where $M_x$ is the axial Mach number, $k$ is the temporal (referred to as reduced)
+frequency, and $J_{m,n}'$ is the derivative of the Bessel function of the first kind.  
+The $\pm$ accounts for both upstream and downstream modes.
+
+The condition for propagation is such that the axial wavenumber is larger than 
+a ``cut-off'' value
+
+\begin{equation}
+    k_{x,real}  = \frac{\pm M_x k }{\left( M_x^2 - 1 \right)}.
+    \label{eqn:cuton}
+\end{equation}
+
+Every term that is being raised to the one half i.e. square rooted must 
+be larger than zero to keep axial wavenumber from being imaginary. The mode 
+will propagate or decay based on this condition. Recall thaT the mode is of the 
+form 
+\begin{equation}
+    e^{i k_x x}
+    \label{eqn:fluctuationexample}
+\end{equation}
+if $k_x$ has a real part, $k_{x,real}$ and an imaginary part $i k_{x,imag}$ 
+then,
+
+\begin{align}
+    &= e^{i k_x x} \\
+    &= e^{i (k_{x,real}+ i k_{x,imag}) x} \\
+    &= \underbrace{e^{i k_{x,real}x}}_{\textit{amplitude}} \underbrace{e^{- k_{x,imag} x}}_{\textit{exponential decay}} 
+\end{align}
+
+Although the ``cut-off'' decay to nearly zero rapidly, the rate at which this occured
+was not much of a concern earlier on in turbomachinery design. As nacelles 
+continue to grow shorter, a mode that is ``cut-off'' may make it outside the duct.
+
+For this work a desired amplitude was arbitrarily chosen for a mode, $y_{desired}$
+and then the axial location at which this occurred, $x_{desired}$ which 
+can be compared against a desired length for a nacelle.  
+Since SWIRL assumes an infinitely long duct, there is nothing limiting the 
+modes propagation with respect to nacelle length. For example, if the 
+desired amplitude is one percent, then $x_{desired}$ is $0.46$, 
+
+\begin{align*}
+    0.01 &=  e^{-10 x_{desired}},\\
+    -\frac{ln|0.01|}{10} &=  x_{desired},\\
+    -\frac{ln|0.01|}{10} &= 0.4605170185988091 .
+\end{align*}
+
+
+ % \begin{figure}
+ %     \centering
+ %     \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/desired_cut_off_location_1_percent_of_max.pdf}
+ %     \caption{Decaying mode with $k_x = 0 + 10j$ and unit amplitude. One percent
+ %     of the maximum amplitude is identified for nacelle length comparison}
+ %     \label{fig:decaying_mode_with_1_percent_amp}
+ % \end{figure}
+ 
+ 
+% In general,
+% \begin{align*}
+ %    y_{desired} &=  e^{-k_{x,imag} x_{desired} }\\
+ %    -\frac{ln|y_{desired}|}{k_{x,imag}} &=  x_{desired}
+% \end{align*}
+\section{Analytical Test Case}
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        $\sigma$ & \textit{0.25} \\ \hline
+        $k$      & \textit{10}   \\ \hline
+        $m$      & \textit{2}    \\ \hline
+        $M_x$    & \textit{0.3}  \\ \hline
+    \end{tabular}
+    \caption{Validation test case parameters, Uniform Flow Annular Duct} 
+\end{table}
+
+\newpage
+\subsection{Axial Wavenumber}
+\foreach \i in {32,64,128,256}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {../figures/axial_wavenumber_analytical_test_case_comparison_\i%
+        gridpoints_fourth_order.pdf}
+        \caption{ Analytical Solution vs Numerical Approximation using \i\  points}
+    \end{figure}
+}
+
+% \begin{figure}[!h]
+%     \centering
+%     \includegraphics[width=\textwidth]{%
+%         /home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+%         /figures/axial_wavenumber_analytical_test_case_comparison_32gridpoints_fourth_order}
+%     \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%     Flow in a hard-wall annular duct}
+%     \label{fig:analytical_bessel_function}
+% \end{figure}
+
+\newpage
+\subsection{Propagating Radial Modes}
+
+% \subsubsection{Second Order, Radial Mode 0}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_\i_grid_32.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \newpage
+% \subsubsection{Second Order, Radial Mode 1}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_\i_grid_32.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 2}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_\i_grid_32.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 3}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_\i_grid_32.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 4}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_\i_grid_32.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 0}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_0_test_case_number_\i_grid_32.pdf}
+        \caption{Normalized radial mode number 0, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_0_test_case_number_\i_grid_32.pdf}
+        \caption{Normalized radial mode number 0 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 1}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_\i_grid_32.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_1_test_case_number_\i_grid_32.pdf}
+        \caption{Normalized radial mode number 1 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 2}
+\foreach \i in {0,...,3}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_\i_grid_32.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_2_test_case_number_\i_grid_32.pdf}
+        \caption{Normalized radial mode number 2 error, \i th identified mode}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 3}
+\foreach \i in {0,...,3}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_\i_grid_32.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_2_test_case_number_\i_grid_32.pdf}
+        \caption{Normalized radial mode number 2 error, \i th identified mode}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 4}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_\i_grid_32.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_4_test_case_number_\i_grid_32.pdf}
+        \caption{Normalized radial mode number 4 error, \i th identified mode}
+    \end{figure}
+}
+
+\newpage
+\subsection{64 points}
+% \subsubsection{Second Order, Radial Mode 0}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_\i_grid_64.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \newpage
+% \subsubsection{Second Order, Radial Mode 1}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_\i_grid_64.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 2}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_\i_grid_64.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 3}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_\i_grid_64.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 4}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_\i_grid_64.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 0}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_\i_grid_64.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_0_test_case_number_\i_grid_64.pdf}
+        \caption{Normalized radial mode number 0 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 1}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_1_test_case_number_\i_grid_64.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_1_test_case_number_\i_grid_64.pdf}
+        \caption{Normalized radial mode number 1 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 2}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_\i_grid_64.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_2_test_case_number_\i_grid_64.pdf}
+        \caption{Normalized radial mode number 2 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+
+\subsubsection{Fourth Order, Radial Mode 3}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_3_test_case_number_\i_grid_64.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_3_test_case_number_\i_grid_64.pdf}
+        \caption{Normalized radial mode number 3 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 4}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_4_test_case_number_\i_grid_64.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_4_test_case_number_\i_grid_64.pdf}
+        \caption{Normalized radial mode number 4 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\subsection{128 points}
+% \subsubsection{Second Order, Radial Mode 0}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_\i_grid_128.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \newpage
+% \subsubsection{Second Order, Radial Mode 1}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_\i_grid_128.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 2}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_\i_grid_128.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 3}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_\i_grid_128.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 4}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_\i_grid_128.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 0}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_0_test_case_number_\i_grid_128.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_0_test_case_number_\i_grid_128.pdf}
+        \caption{Normalized radial mode number 0 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 1}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_\i_grid_128.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_1_test_case_number_\i_grid_128.pdf}
+        \caption{Normalized radial mode number 1 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 2}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_\i_grid_128.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_2_test_case_number_\i_grid_128.pdf}
+        \caption{Normalized radial mode number 2 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+
+\subsubsection{Fourth Order, Radial Mode 3}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_\i_grid_128.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_3_test_case_number_\i_grid_128.pdf}
+        \caption{Normalized radial mode number 3 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 4}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_\i_grid_128.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_4_test_case_number_\i_grid_128.pdf}
+        \caption{Normalized radial mode number 4 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\subsection{256 points}
+% \subsubsection{Second Order, Radial Mode 0}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_0_test_case_number_\i_grid_256.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \newpage
+% \subsubsection{Second Order, Radial Mode 1}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_1_test_case_number_\i_grid_256.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 2}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_2_test_case_number_\i_grid_256.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 3}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_3_test_case_number_\i_grid_256.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+% \newpage
+% \subsubsection{Second Order, Radial Mode 4}
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}[!h]
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/second_order_radial_mode_4_test_case_number_\i_grid_256.pdf}
+%         \caption{Second Order, Case number \i}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 0}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_0_test_case_number_\i_grid_256.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_0_test_case_number_\i_grid_256.pdf}
+        \caption{Normalized radial mode number 0 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 1}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_1_test_case_number_\i_grid_256.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_1_test_case_number_\i_grid_256.pdf}
+        \caption{Normalized radial mode number 1 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 2}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_2_test_case_number_\i_grid_256.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_2_test_case_number_\i_grid_256.pdf}
+        \caption{Normalized radial mode number 2 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+
+\subsubsection{Fourth Order, Radial Mode 3}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_3_test_case_number_\i_grid_256.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_3_test_case_number_\i_grid_256.pdf}
+        \caption{Normalized radial mode number 3 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+\newpage
+\subsubsection{Fourth Order, Radial Mode 4}
+\foreach \i in {0,...,1}
+{
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/fourth_order_radial_mode_4_test_case_number_\i_grid_256.pdf}
+        \caption{Fourth Order, Case number \i}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]
+        {/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS%
+        /figures/fourth_order_radial_mode_error_4_test_case_number_\i_grid_256.pdf}
+        \caption{Normalized radial mode number 4 error, \i th identified mode}
+        \label{fig:analytical_bessel_function}
+    \end{figure}
+}
+
+% \foreach \i in {0,...,1}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_0_test_case_number_\i.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \foreach \i\j in {0,...,4}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_\i_test_case_number_1.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \foreach \i\j in {2,...,3}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_\i_test_case_number_2.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+% \foreach \i\j in {4}
+% {
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/SourceFiles/PythonFiles/AnalyticalSolution_JS/figures/radial_mode_\i_test_case_number_0.pdf}
+%         \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%         Flow in a hard-wall annular duct}
+%         \label{fig:analytical_bessel_function}
+%     \end{figure}
+% }
+%  \begin{figure}
+%      \centering
+%      \includegraphics[width=\textwidth]{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/analytical_bessel_function.pdf}
+%      \caption{Propagating Axial Wavenumbers for the analytical solution; Uniform
+%      Flow in a hard-wall annular duct}
+%      \label{fig:analytical_bessel_function}
+%  \end{figure}
+\section{Discussion}
+
+
+\end{document}
+
+
