@@ -30,7 +30,7 @@ def main():
 
     # test case parameters
     
-    num_of_zeros = 5 # each zero corresponds to radial modes
+    num_of_zeros = 1 # each zero corresponds to radial modes
     wavenumber = 10 
     azimuthal_mode_number = 2 
     axial_mach_number = 0.3

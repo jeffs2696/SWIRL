@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.23)  20 OCT 2022 14:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.2.2)  20 OCT 2022 23:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -620,12 +620,12 @@ _1_grid_132.pdf>] [16 <../figures/second_order_radial_mode_0_test_case_number_1
 _grid_264.pdf> <../figures/second_order_radial_mode_error_0_test_case_number_1_
 grid_264.pdf>] ) 
 Here is how much of TeX's memory you used:
- 7685 strings out of 483183
- 151348 string characters out of 5966292
- 352137 words of memory out of 5000000
- 22597 multiletter control sequences out of 15000+600000
+ 7685 strings out of 481239
+ 151348 string characters out of 5920378
+ 357099 words of memory out of 5000000
+ 22848 multiletter control sequences out of 15000+600000
  535354 words of font info for 34 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 1141 hyphenation exceptions out of 8191
  43i,16n,52p,378b,323s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
@@ -646,7 +646,7 @@ live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on doc.pdf (17 pages, 618261 bytes).
+Output written on doc.pdf (17 pages, 618247 bytes).
 PDF statistics:
  622 PDF objects out of 1000 (max. 8388607)
  553 compressed objects within 6 object streams
