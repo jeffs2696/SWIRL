@@ -42,8 +42,8 @@ def importNumericalWavenumbers(grid_point_array):
         grid_point_string = '# of Gridpoints ' + str(j_gp)
         # Grid Loop
 
-        print(f'{grid_iteration_string: ^20}')
-        print(f'{grid_point_string: ^20}')
+        # print(f'{grid_iteration_string: ^20}')
+        # print(f'{grid_point_string: ^20}')
         
         second_order_directories.append(
                 '../../../CodeRun/03-EVanalysis/SWIRLVerification/' + 
