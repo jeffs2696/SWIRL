@@ -4,3 +4,101 @@ Bessel's Function,
     R(r) = A J_0 (k_r r) + B Y_0(k_r r ) 
     \label{eqn:besselsfun}
 \end{equation}
+where $J_0$ and $Y_0$ are Bessel's functions of the first 
+and second kind, and $A$ and $B$ are arbitrary constants. 
+Both functions reduce as $k_r r$ gets large. The Bessel function of the second
+kind is unbounded as $k_r r$ goes to zero. 
+
+For a hard-walled duct, the radial velocity component is zero at the 
+boundaries $r_{min}$ and $r_{max}$. 
+
+\begin{equation}
+    \frac{dR(r)}{dr}\Bigr|_{r = r_{max}}  =%
+    \frac{dR(r)}{dr}\Bigr|_{r = r_{min}}   = 0
+    \label{eqn:besselBC}
+\end{equation}
+In the case of a hollow duct, there is no
+minimum radius, therefore the wall boundary condition only applies at $r_{max}$.
+
+
+Since the solution must be finite as $k_r r$ approaches zero, it can be observed
+that $Y_0$ approaches infinity. Since this would yield in a trivial solution, the 
+coefficient $B = 0$, which reduces \ref{eqn:besselsfun} to,
+
+\begin{equation}
+    R(r) = A J_0 (k_r r) 
+    \label{eqn:besselsfunCylinder}
+\end{equation}
+
+Taking the derivative 
+with respect to $r$ yields,
+
+\begin{equation}
+    \frac{dR(r)}{dr}\Bigr|_{r} = A J'_0 (k_r r)  = 0
+    \label{eqn:besselsfunderivaTive}
+\end{equation}
+The boundary condition requires the Bessel function be zero at a hard wall.
+The terms inside of the Bessel function would then correspond to values along 
+the domain, $k_r r$,  which satisfy our equation.  Let $k_r r = \alpha_{m,n}$ 
+where, $alpha$ represents the zeros of the Bessel function, and 
+$m$ corresponds to the azimuthal mode order and $n$ represents the radial mode
+order, i.e. the index for the number of zero crossings in the 
+derivative of the Bessel function of the first kind. 
+
+Therefore,
+
+
+\begin{align}
+    \frac{dR}{dr}\Bigr|_{r = r_{max}} = A J'_0 (k_r r_{max})  = 0 \\
+    (k_r r_{max})  = 0 
+\end{align}
+Recalling $\alpha_{m,n}$
+
+
+\begin{align}
+    (k_r r_{max})  = \alpha_{m,n} \\
+    k_r = \alpha_{m,n}/r_{max}
+\end{align}
+
+For annular ducts, $r_{min}$ is no longer zero, therefore $B$ cannot be removed
+since $Y_0'$ has finite values as $k_r r $ increases.
+
+\begin{equation}
+    \frac{dR}{dr}\Bigr|_{r} = A J'_0 (k_r r) + B Y'_0(k_r r ) 
+    \label{eqn:besselsfunderivaTive}
+\end{equation}
+Applying boundary conditions to both inner and outer walls at $r_{min}$ and $r_{max}$
+
+\begin{equation}
+    \frac{dR}{dr}\Bigr|_{r=r_{min}} = A J'_0 (k_r r_{min}) + B Y'_0(k_r r_{min}) 
+\end{equation}
+
+\begin{equation}
+    \frac{dR}{dr}\Bigr|_{r=r_{max}} = A J'_0 (k_r r_{max}) + B Y'_0(k_r r_{max}) 
+\end{equation}
+
+defining $\beta = \frac{B}{A}$,
+
+\begin{equation}
+    \frac{dR}{dr}\Bigr|_{r=r_{min}} =  J'_0 (k_r r_{min}) + \beta Y'_0(k_r r_{min}) 
+\end{equation}
+
+\begin{equation}
+    \frac{dR}{dr}\Bigr|_{r=r_{max}} =  J'_0 (k_r r_{max}) + \beta Y'_0(k_r r_{max}) 
+\end{equation}
+
+Defining,
+
+\begin{align*}
+    k_r^{n+1} = k_r^n + \Delta k_r \\
+    \beta^{n+1} = \beta^n + \Delta \beta 
+\end{align*}
+And substituting into the boundary condition expressions,
+\begin{equation}
+    \frac{dR}{dr}\Bigr|_{r=r_{min}} =  J'_0 (k_r^{n+1} r_{min}) + \beta^{n+1} Y'_0(k_r^{n+1} r_{min}) 
+\end{equation}
+
+\begin{equation}
+    \frac{dR}{dr}\Bigr|_{r=r_{max}} =  J'_0 (k_r^{n+1} r_{max}) + \beta^{n+1} Y'_0(k_r^{n+1} r_{max}) 
+\end{equation}
+

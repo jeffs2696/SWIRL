@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.23)  25 OCT 2022 12:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.23)  26 OCT 2022 16:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -226,7 +226,10 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count268
 \l__pdf_internal_box=\box49
 )
-(./doc.aux (./AnnularDuctModeNumericalMethod.tex.aux)
+(./doc.aux
+
+LaTeX Warning: Label `eqn:besselsfunderivaTive' multiply defined.
+
 
 LaTeX Warning: Label `fig:analytical_bessel_function' multiply defined.
 
@@ -1006,100 +1009,100 @@ e
 ABD: EveryShipout initializing macros [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1] (./AnnularDuctModeNume
-ricalMethod.tex) [2] [3]
-<../figures/second_order_wavenumber_grid_33.pdf, id=26, 462.52798pt x 346.89601
+ricalMethod.tex [2] [3]) [4]
+<../figures/second_order_wavenumber_grid_33.pdf, id=29, 462.52798pt x 346.89601
 pt>
 File: ../figures/second_order_wavenumber_grid_33.pdf Graphic file (type pdf)
 <use ../figures/second_order_wavenumber_grid_33.pdf>
 Package pdftex.def Info: ../figures/second_order_wavenumber_grid_33.pdf  used o
 n input line 198.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_wavenumber_grid_66.pdf, id=27, 462.52798pt x 346.89601
+<../figures/second_order_wavenumber_grid_66.pdf, id=30, 462.52798pt x 346.89601
 pt>
 File: ../figures/second_order_wavenumber_grid_66.pdf Graphic file (type pdf)
 <use ../figures/second_order_wavenumber_grid_66.pdf>
 Package pdftex.def Info: ../figures/second_order_wavenumber_grid_66.pdf  used o
 n input line 198.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_wavenumber_grid_132.pdf, id=28, 462.52798pt x 346.8960
+<../figures/second_order_wavenumber_grid_132.pdf, id=31, 462.52798pt x 346.8960
 1pt>
 File: ../figures/second_order_wavenumber_grid_132.pdf Graphic file (type pdf)
 <use ../figures/second_order_wavenumber_grid_132.pdf>
 Package pdftex.def Info: ../figures/second_order_wavenumber_grid_132.pdf  used 
 on input line 198.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_wavenumber_grid_264.pdf, id=29, 462.52798pt x 346.8960
+<../figures/second_order_wavenumber_grid_264.pdf, id=32, 462.52798pt x 346.8960
 1pt>
 File: ../figures/second_order_wavenumber_grid_264.pdf Graphic file (type pdf)
 <use ../figures/second_order_wavenumber_grid_264.pdf>
 Package pdftex.def Info: ../figures/second_order_wavenumber_grid_264.pdf  used 
 on input line 198.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_wavenumber_grid_528.pdf, id=30, 462.52798pt x 346.8960
+<../figures/second_order_wavenumber_grid_528.pdf, id=33, 462.52798pt x 346.8960
 1pt>
 File: ../figures/second_order_wavenumber_grid_528.pdf Graphic file (type pdf)
 <use ../figures/second_order_wavenumber_grid_528.pdf>
 Package pdftex.def Info: ../figures/second_order_wavenumber_grid_528.pdf  used 
 on input line 198.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_wavenumber_grid_1056.pdf, id=31, 462.52798pt x 346.896
+<../figures/second_order_wavenumber_grid_1056.pdf, id=34, 462.52798pt x 346.896
 01pt>
 File: ../figures/second_order_wavenumber_grid_1056.pdf Graphic file (type pdf)
 <use ../figures/second_order_wavenumber_grid_1056.pdf>
 Package pdftex.def Info: ../figures/second_order_wavenumber_grid_1056.pdf  used
  on input line 198.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_wavenumber_grid_33.pdf, id=32, 462.52798pt x 346.89601
+<../figures/fourth_order_wavenumber_grid_33.pdf, id=35, 462.52798pt x 346.89601
 pt>
 File: ../figures/fourth_order_wavenumber_grid_33.pdf Graphic file (type pdf)
 <use ../figures/fourth_order_wavenumber_grid_33.pdf>
 Package pdftex.def Info: ../figures/fourth_order_wavenumber_grid_33.pdf  used o
 n input line 207.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_wavenumber_grid_66.pdf, id=33, 462.52798pt x 346.89601
+<../figures/fourth_order_wavenumber_grid_66.pdf, id=36, 462.52798pt x 346.89601
 pt>
 File: ../figures/fourth_order_wavenumber_grid_66.pdf Graphic file (type pdf)
 <use ../figures/fourth_order_wavenumber_grid_66.pdf>
 Package pdftex.def Info: ../figures/fourth_order_wavenumber_grid_66.pdf  used o
 n input line 207.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_wavenumber_grid_132.pdf, id=34, 462.52798pt x 346.8960
+<../figures/fourth_order_wavenumber_grid_132.pdf, id=37, 462.52798pt x 346.8960
 1pt>
 File: ../figures/fourth_order_wavenumber_grid_132.pdf Graphic file (type pdf)
 <use ../figures/fourth_order_wavenumber_grid_132.pdf>
 Package pdftex.def Info: ../figures/fourth_order_wavenumber_grid_132.pdf  used 
 on input line 207.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_wavenumber_grid_264.pdf, id=35, 462.52798pt x 346.8960
+<../figures/fourth_order_wavenumber_grid_264.pdf, id=38, 462.52798pt x 346.8960
 1pt>
 File: ../figures/fourth_order_wavenumber_grid_264.pdf Graphic file (type pdf)
 <use ../figures/fourth_order_wavenumber_grid_264.pdf>
 Package pdftex.def Info: ../figures/fourth_order_wavenumber_grid_264.pdf  used 
 on input line 207.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_wavenumber_grid_528.pdf, id=36, 462.52798pt x 346.8960
+<../figures/fourth_order_wavenumber_grid_528.pdf, id=39, 462.52798pt x 346.8960
 1pt>
 File: ../figures/fourth_order_wavenumber_grid_528.pdf Graphic file (type pdf)
 <use ../figures/fourth_order_wavenumber_grid_528.pdf>
 Package pdftex.def Info: ../figures/fourth_order_wavenumber_grid_528.pdf  used 
 on input line 207.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_wavenumber_grid_1056.pdf, id=37, 462.52798pt x 346.896
+<../figures/fourth_order_wavenumber_grid_1056.pdf, id=40, 462.52798pt x 346.896
 01pt>
 File: ../figures/fourth_order_wavenumber_grid_1056.pdf Graphic file (type pdf)
 <use ../figures/fourth_order_wavenumber_grid_1056.pdf>
 Package pdftex.def Info: ../figures/fourth_order_wavenumber_grid_1056.pdf  used
  on input line 207.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [4 <../figures/second_order_wavenumber_grid_33.pdf>] [5 <../figures/second_ord
+ [5 <../figures/second_order_wavenumber_grid_33.pdf>] [6 <../figures/second_ord
 er_wavenumber_grid_66.pdf> <../figures/second_order_wavenumber_grid_132.pdf>] [
-6 <../figures/second_order_wavenumber_grid_264.pdf> <../figures/second_order_wa
-venumber_grid_528.pdf>] [7 <../figures/second_order_wavenumber_grid_1056.pdf> <
-../figures/fourth_order_wavenumber_grid_33.pdf>] [8 <../figures/fourth_order_wa
-venumber_grid_66.pdf> <../figures/fourth_order_wavenumber_grid_132.pdf>] [9 <..
-/figures/fourth_order_wavenumber_grid_264.pdf> <../figures/fourth_order_wavenum
-ber_grid_528.pdf>] [10 <../figures/fourth_order_wavenumber_grid_1056.pdf>]
-<../figures/second_order_radial_mode_0_test_case_number_0_grid_33.pdf, id=532, 
+7 <../figures/second_order_wavenumber_grid_264.pdf> <../figures/second_order_wa
+venumber_grid_528.pdf>] [8 <../figures/second_order_wavenumber_grid_1056.pdf> <
+../figures/fourth_order_wavenumber_grid_33.pdf>] [9 <../figures/fourth_order_wa
+venumber_grid_66.pdf> <../figures/fourth_order_wavenumber_grid_132.pdf>] [10 <.
+./figures/fourth_order_wavenumber_grid_264.pdf> <../figures/fourth_order_wavenu
+mber_grid_528.pdf>] [11 <../figures/fourth_order_wavenumber_grid_1056.pdf>]
+<../figures/second_order_radial_mode_0_test_case_number_0_grid_33.pdf, id=535, 
 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -1108,7 +1111,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _0_grid_33.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_0_grid_33.pdf, id
-=533, 462.52798pt x 346.89601pt>
+=536, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_33.pdf
@@ -1116,7 +1119,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_0_grid_33.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_0_grid_66.pdf, id=534, 
+<../figures/second_order_radial_mode_0_test_case_number_0_grid_66.pdf, id=537, 
 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -1125,7 +1128,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _0_grid_66.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_0_grid_66.pdf, id
-=535, 462.52798pt x 346.89601pt>
+=538, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_66.pdf
@@ -1133,7 +1136,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_0_grid_66.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_0_grid_132.pdf, id=536,
+<../figures/second_order_radial_mode_0_test_case_number_0_grid_132.pdf, id=539,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -1142,7 +1145,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _0_grid_132.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_0_grid_132.pdf, i
-d=537, 462.52798pt x 346.89601pt>
+d=540, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_132.pd
@@ -1150,7 +1153,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_0_grid_132.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_0_grid_264.pdf, id=538,
+<../figures/second_order_radial_mode_0_test_case_number_0_grid_264.pdf, id=541,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -1159,7 +1162,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _0_grid_264.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_0_grid_264.pdf, i
-d=539, 462.52798pt x 346.89601pt>
+d=542, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_264.pd
@@ -1167,7 +1170,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_0_grid_264.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_0_grid_528.pdf, id=540,
+<../figures/second_order_radial_mode_0_test_case_number_0_grid_528.pdf, id=543,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -1176,7 +1179,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _0_grid_528.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_0_grid_528.pdf, i
-d=541, 462.52798pt x 346.89601pt>
+d=544, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_528.pd
@@ -1184,7 +1187,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_0_grid_528.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_0_grid_1056.pdf, id=542
+<../figures/second_order_radial_mode_0_test_case_number_0_grid_1056.pdf, id=545
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
@@ -1193,7 +1196,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _0_grid_1056.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_0_grid_1056.pdf, 
-id=543, 462.52798pt x 346.89601pt>
+id=546, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_0_grid_1056.p
@@ -1201,7 +1204,7 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_0_grid_1056.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_1_grid_33.pdf, id=544, 
+<../figures/second_order_radial_mode_0_test_case_number_1_grid_33.pdf, id=547, 
 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -1210,7 +1213,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _1_grid_33.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_1_grid_33.pdf, id
-=545, 462.52798pt x 346.89601pt>
+=548, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_33.pdf
@@ -1218,7 +1221,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_1_grid_33.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_1_grid_66.pdf, id=546, 
+<../figures/second_order_radial_mode_0_test_case_number_1_grid_66.pdf, id=549, 
 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -1227,7 +1230,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _1_grid_66.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_1_grid_66.pdf, id
-=547, 462.52798pt x 346.89601pt>
+=550, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_66.pdf
@@ -1235,7 +1238,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_1_grid_66.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_1_grid_132.pdf, id=548,
+<../figures/second_order_radial_mode_0_test_case_number_1_grid_132.pdf, id=551,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -1244,7 +1247,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _1_grid_132.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_1_grid_132.pdf, i
-d=549, 462.52798pt x 346.89601pt>
+d=552, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_132.pd
@@ -1252,7 +1255,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_1_grid_132.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_1_grid_264.pdf, id=550,
+<../figures/second_order_radial_mode_0_test_case_number_1_grid_264.pdf, id=553,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -1261,7 +1264,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _1_grid_264.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_1_grid_264.pdf, i
-d=551, 462.52798pt x 346.89601pt>
+d=554, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_264.pd
@@ -1269,7 +1272,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_1_grid_264.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_1_grid_528.pdf, id=552,
+<../figures/second_order_radial_mode_0_test_case_number_1_grid_528.pdf, id=555,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -1278,7 +1281,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _1_grid_528.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_1_grid_528.pdf, i
-d=553, 462.52798pt x 346.89601pt>
+d=556, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_528.pd
@@ -1286,7 +1289,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_1_grid_528.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_0_test_case_number_1_grid_1056.pdf, id=554
+<../figures/second_order_radial_mode_0_test_case_number_1_grid_1056.pdf, id=557
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_0_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
@@ -1295,7 +1298,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_0_test_case_number
 _1_grid_1056.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_0_test_case_number_1_grid_1056.pdf, 
-id=555, 462.52798pt x 346.89601pt>
+id=558, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_0_test_case_number_1_grid_1056.p
@@ -1303,33 +1306,33 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_0_test_case_
 number_1_grid_1056.pdf  used on input line 232.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [11
+ [12
 
- <../figures/second_order_radial_mode_0_test_case_number_0_grid_33.pdf>] [12 <.
+ <../figures/second_order_radial_mode_0_test_case_number_0_grid_33.pdf>] [13 <.
 ./figures/second_order_radial_mode_error_0_test_case_number_0_grid_33.pdf> <../
-figures/second_order_radial_mode_0_test_case_number_0_grid_66.pdf>] [13 <../fig
+figures/second_order_radial_mode_0_test_case_number_0_grid_66.pdf>] [14 <../fig
 ures/second_order_radial_mode_error_0_test_case_number_0_grid_66.pdf> <../figur
-es/second_order_radial_mode_0_test_case_number_0_grid_132.pdf>] [14 <../figures
+es/second_order_radial_mode_0_test_case_number_0_grid_132.pdf>] [15 <../figures
 /second_order_radial_mode_error_0_test_case_number_0_grid_132.pdf> <../figures/
-second_order_radial_mode_0_test_case_number_0_grid_264.pdf>] [15 <../figures/se
+second_order_radial_mode_0_test_case_number_0_grid_264.pdf>] [16 <../figures/se
 cond_order_radial_mode_error_0_test_case_number_0_grid_264.pdf> <../figures/sec
-ond_order_radial_mode_0_test_case_number_0_grid_528.pdf>] [16 <../figures/secon
+ond_order_radial_mode_0_test_case_number_0_grid_528.pdf>] [17 <../figures/secon
 d_order_radial_mode_error_0_test_case_number_0_grid_528.pdf> <../figures/second
-_order_radial_mode_0_test_case_number_0_grid_1056.pdf>] [17 <../figures/second_
+_order_radial_mode_0_test_case_number_0_grid_1056.pdf>] [18 <../figures/second_
 order_radial_mode_error_0_test_case_number_0_grid_1056.pdf> <../figures/second_
-order_radial_mode_0_test_case_number_1_grid_33.pdf>] [18 <../figures/second_ord
+order_radial_mode_0_test_case_number_1_grid_33.pdf>] [19 <../figures/second_ord
 er_radial_mode_error_0_test_case_number_1_grid_33.pdf> <../figures/second_order
-_radial_mode_0_test_case_number_1_grid_66.pdf>] [19 <../figures/second_order_ra
+_radial_mode_0_test_case_number_1_grid_66.pdf>] [20 <../figures/second_order_ra
 dial_mode_error_0_test_case_number_1_grid_66.pdf> <../figures/second_order_radi
-al_mode_0_test_case_number_1_grid_132.pdf>] [20 <../figures/second_order_radial
+al_mode_0_test_case_number_1_grid_132.pdf>] [21 <../figures/second_order_radial
 _mode_error_0_test_case_number_1_grid_132.pdf> <../figures/second_order_radial_
-mode_0_test_case_number_1_grid_264.pdf>] [21 <../figures/second_order_radial_mo
+mode_0_test_case_number_1_grid_264.pdf>] [22 <../figures/second_order_radial_mo
 de_error_0_test_case_number_1_grid_264.pdf> <../figures/second_order_radial_mod
-e_0_test_case_number_1_grid_528.pdf>] [22 <../figures/second_order_radial_mode_
+e_0_test_case_number_1_grid_528.pdf>] [23 <../figures/second_order_radial_mode_
 error_0_test_case_number_1_grid_528.pdf> <../figures/second_order_radial_mode_0
-_test_case_number_1_grid_1056.pdf>] [23 <../figures/second_order_radial_mode_er
+_test_case_number_1_grid_1056.pdf>] [24 <../figures/second_order_radial_mode_er
 ror_0_test_case_number_1_grid_1056.pdf>]
-<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_33.pdf, id=878, 
+<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_33.pdf, id=882, 
 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -1338,7 +1341,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _0_grid_33.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_33.pdf, id
-=879, 462.52798pt x 346.89601pt>
+=883, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_33.pdf
@@ -1346,7 +1349,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_0_grid_33.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_66.pdf, id=880, 
+<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_66.pdf, id=884, 
 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -1355,7 +1358,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _0_grid_66.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_66.pdf, id
-=881, 462.52798pt x 346.89601pt>
+=885, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_66.pdf
@@ -1363,7 +1366,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_0_grid_66.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_132.pdf, id=882,
+<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_132.pdf, id=886,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -1372,7 +1375,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _0_grid_132.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_132.pdf, i
-d=883, 462.52798pt x 346.89601pt>
+d=887, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_132.pd
@@ -1380,7 +1383,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_0_grid_132.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_264.pdf, id=884,
+<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_264.pdf, id=888,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -1389,7 +1392,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _0_grid_264.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_264.pdf, i
-d=885, 462.52798pt x 346.89601pt>
+d=889, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_264.pd
@@ -1397,7 +1400,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_0_grid_264.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_528.pdf, id=886,
+<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_528.pdf, id=890,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -1406,7 +1409,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _0_grid_528.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_528.pdf, i
-d=887, 462.52798pt x 346.89601pt>
+d=891, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_528.pd
@@ -1414,7 +1417,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_0_grid_528.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_1056.pdf, id=888
+<../figures/fourth_order_radial_mode_0_test_case_number_0_grid_1056.pdf, id=892
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
@@ -1423,7 +1426,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _0_grid_1056.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_1056.pdf, 
-id=889, 462.52798pt x 346.89601pt>
+id=893, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_1056.p
@@ -1431,7 +1434,7 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_0_grid_1056.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_33.pdf, id=890, 
+<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_33.pdf, id=894, 
 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -1440,7 +1443,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _1_grid_33.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_33.pdf, id
-=891, 462.52798pt x 346.89601pt>
+=895, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_33.pdf
@@ -1448,7 +1451,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_1_grid_33.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_66.pdf, id=892, 
+<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_66.pdf, id=896, 
 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -1457,7 +1460,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _1_grid_66.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_66.pdf, id
-=893, 462.52798pt x 346.89601pt>
+=897, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_66.pdf
@@ -1465,7 +1468,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_1_grid_66.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_132.pdf, id=894,
+<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_132.pdf, id=898,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -1474,7 +1477,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _1_grid_132.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_132.pdf, i
-d=895, 462.52798pt x 346.89601pt>
+d=899, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_132.pd
@@ -1482,7 +1485,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_1_grid_132.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_264.pdf, id=896,
+<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_264.pdf, id=900,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -1491,7 +1494,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _1_grid_264.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_264.pdf, i
-d=897, 462.52798pt x 346.89601pt>
+d=901, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_264.pd
@@ -1499,7 +1502,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_1_grid_264.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_528.pdf, id=898,
+<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_528.pdf, id=902,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -1508,7 +1511,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _1_grid_528.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_528.pdf, i
-d=899, 462.52798pt x 346.89601pt>
+d=903, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_528.pd
@@ -1516,7 +1519,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_1_grid_528.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_1056.pdf, id=900
+<../figures/fourth_order_radial_mode_0_test_case_number_1_grid_1056.pdf, id=904
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_0_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
@@ -1525,7 +1528,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_0_test_case_number
 _1_grid_1056.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_1056.pdf, 
-id=901, 462.52798pt x 346.89601pt>
+id=905, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_1056.p
@@ -1533,34 +1536,34 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_0_test_case_
 number_1_grid_1056.pdf  used on input line 257.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [24
+ [25
 
- <../figures/fourth_order_radial_mode_0_test_case_number_0_grid_33.pdf>] [25 <.
+ <../figures/fourth_order_radial_mode_0_test_case_number_0_grid_33.pdf>] [26 <.
 ./figures/fourth_order_radial_mode_error_0_test_case_number_0_grid_33.pdf> <../
-figures/fourth_order_radial_mode_0_test_case_number_0_grid_66.pdf>] [26 <../fig
+figures/fourth_order_radial_mode_0_test_case_number_0_grid_66.pdf>] [27 <../fig
 ures/fourth_order_radial_mode_error_0_test_case_number_0_grid_66.pdf> <../figur
-es/fourth_order_radial_mode_0_test_case_number_0_grid_132.pdf>] [27 <../figures
+es/fourth_order_radial_mode_0_test_case_number_0_grid_132.pdf>] [28 <../figures
 /fourth_order_radial_mode_error_0_test_case_number_0_grid_132.pdf> <../figures/
-fourth_order_radial_mode_0_test_case_number_0_grid_264.pdf>] [28 <../figures/fo
+fourth_order_radial_mode_0_test_case_number_0_grid_264.pdf>] [29 <../figures/fo
 urth_order_radial_mode_error_0_test_case_number_0_grid_264.pdf> <../figures/fou
-rth_order_radial_mode_0_test_case_number_0_grid_528.pdf>] [29 <../figures/fourt
+rth_order_radial_mode_0_test_case_number_0_grid_528.pdf>] [30 <../figures/fourt
 h_order_radial_mode_error_0_test_case_number_0_grid_528.pdf> <../figures/fourth
-_order_radial_mode_0_test_case_number_0_grid_1056.pdf>] [30 <../figures/fourth_
+_order_radial_mode_0_test_case_number_0_grid_1056.pdf>] [31 <../figures/fourth_
 order_radial_mode_error_0_test_case_number_0_grid_1056.pdf> <../figures/fourth_
-order_radial_mode_0_test_case_number_1_grid_33.pdf>] [31 <../figures/fourth_ord
+order_radial_mode_0_test_case_number_1_grid_33.pdf>] [32 <../figures/fourth_ord
 er_radial_mode_error_0_test_case_number_1_grid_33.pdf> <../figures/fourth_order
-_radial_mode_0_test_case_number_1_grid_66.pdf>]
-[32 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_66.pdf
-> <../figures/fourth_order_radial_mode_0_test_case_number_1_grid_132.pdf>]
-[33 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_132.pd
+_radial_mode_0_test_case_number_1_grid_66.pdf>] [33 <../figures/fourth_order_ra
+dial_mode_error_0_test_case_number_1_grid_66.pdf> <../figures/fourth_order_radi
+al_mode_0_test_case_number_1_grid_132.pdf>]
+[34 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_132.pd
 f> <../figures/fourth_order_radial_mode_0_test_case_number_1_grid_264.pdf>]
-[34 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_264.pd
+[35 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_264.pd
 f> <../figures/fourth_order_radial_mode_0_test_case_number_1_grid_528.pdf>]
-[35 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_528.pd
+[36 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_528.pd
 f> <../figures/fourth_order_radial_mode_0_test_case_number_1_grid_1056.pdf>]
-[36 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_1056.p
+[37 <../figures/fourth_order_radial_mode_error_0_test_case_number_1_grid_1056.p
 df>]
-<../figures/second_order_radial_mode_1_test_case_number_0_grid_33.pdf, id=1235,
+<../figures/second_order_radial_mode_1_test_case_number_0_grid_33.pdf, id=1238,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -1569,7 +1572,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _0_grid_33.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_33.pdf, id
-=1236, 462.52798pt x 346.89601pt>
+=1239, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_33.pdf
@@ -1577,7 +1580,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_0_grid_33.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_0_grid_66.pdf, id=1237,
+<../figures/second_order_radial_mode_1_test_case_number_0_grid_66.pdf, id=1240,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -1586,7 +1589,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _0_grid_66.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_66.pdf, id
-=1238, 462.52798pt x 346.89601pt>
+=1241, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_66.pdf
@@ -1594,7 +1597,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_0_grid_66.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_0_grid_132.pdf, id=1239
+<../figures/second_order_radial_mode_1_test_case_number_0_grid_132.pdf, id=1242
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -1603,7 +1606,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _0_grid_132.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_132.pdf, i
-d=1240, 462.52798pt x 346.89601pt>
+d=1243, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_132.pd
@@ -1611,7 +1614,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_0_grid_132.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_0_grid_264.pdf, id=1241
+<../figures/second_order_radial_mode_1_test_case_number_0_grid_264.pdf, id=1244
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -1620,7 +1623,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _0_grid_264.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_264.pdf, i
-d=1242, 462.52798pt x 346.89601pt>
+d=1245, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_264.pd
@@ -1628,7 +1631,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_0_grid_264.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_0_grid_528.pdf, id=1243
+<../figures/second_order_radial_mode_1_test_case_number_0_grid_528.pdf, id=1246
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -1637,7 +1640,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _0_grid_528.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_528.pdf, i
-d=1244, 462.52798pt x 346.89601pt>
+d=1247, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_528.pd
@@ -1646,7 +1649,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_0_grid_528.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/second_order_radial_mode_1_test_case_number_0_grid_1056.pdf, id=124
-5, 690.00002pt x 426.44344pt>
+8, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_1_test_case_number_0_grid_1056.pdf>
@@ -1654,7 +1657,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _0_grid_1056.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_1056.pdf, 
-id=1246, 462.52798pt x 346.89601pt>
+id=1249, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_0_grid_1056.p
@@ -1662,7 +1665,7 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_0_grid_1056.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_1_grid_33.pdf, id=1247,
+<../figures/second_order_radial_mode_1_test_case_number_1_grid_33.pdf, id=1250,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -1671,7 +1674,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _1_grid_33.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_33.pdf, id
-=1248, 462.52798pt x 346.89601pt>
+=1251, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_33.pdf
@@ -1679,7 +1682,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_1_grid_33.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_1_grid_66.pdf, id=1249,
+<../figures/second_order_radial_mode_1_test_case_number_1_grid_66.pdf, id=1252,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -1688,7 +1691,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _1_grid_66.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_66.pdf, id
-=1250, 462.52798pt x 346.89601pt>
+=1253, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_66.pdf
@@ -1696,7 +1699,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_1_grid_66.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_1_grid_132.pdf, id=1251
+<../figures/second_order_radial_mode_1_test_case_number_1_grid_132.pdf, id=1254
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -1705,7 +1708,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _1_grid_132.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_132.pdf, i
-d=1252, 462.52798pt x 346.89601pt>
+d=1255, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_132.pd
@@ -1713,7 +1716,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_1_grid_132.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_1_grid_264.pdf, id=1253
+<../figures/second_order_radial_mode_1_test_case_number_1_grid_264.pdf, id=1256
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -1722,7 +1725,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _1_grid_264.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_264.pdf, i
-d=1254, 462.52798pt x 346.89601pt>
+d=1257, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_264.pd
@@ -1730,7 +1733,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_1_grid_264.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_1_grid_528.pdf, id=1255
+<../figures/second_order_radial_mode_1_test_case_number_1_grid_528.pdf, id=1258
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -1739,7 +1742,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _1_grid_528.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_528.pdf, i
-d=1256, 462.52798pt x 346.89601pt>
+d=1259, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_528.pd
@@ -1747,8 +1750,8 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_1_grid_528.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_1_test_case_number_1_grid_1056.pdf, id=125
-7, 690.00002pt x 426.44344pt>
+<../figures/second_order_radial_mode_1_test_case_number_1_grid_1056.pdf, id=126
+0, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_1_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_1_test_case_number_1_grid_1056.pdf>
@@ -1756,7 +1759,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_1_test_case_number
 _1_grid_1056.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_1056.pdf, 
-id=1258, 462.52798pt x 346.89601pt>
+id=1261, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_1_test_case_number_1_grid_1056.p
@@ -1764,34 +1767,34 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_1_test_case_
 number_1_grid_1056.pdf  used on input line 279.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [37
+ [38
 
- <../figures/second_order_radial_mode_1_test_case_number_0_grid_33.pdf>] [38 <.
+ <../figures/second_order_radial_mode_1_test_case_number_0_grid_33.pdf>] [39 <.
 ./figures/second_order_radial_mode_error_1_test_case_number_0_grid_33.pdf> <../
 figures/second_order_radial_mode_1_test_case_number_0_grid_66.pdf>]
-[39 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_66.pdf
+[40 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_66.pdf
 > <../figures/second_order_radial_mode_1_test_case_number_0_grid_132.pdf>]
-[40 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_132.pd
+[41 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_132.pd
 f> <../figures/second_order_radial_mode_1_test_case_number_0_grid_264.pdf>]
-[41 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_264.pd
+[42 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_264.pd
 f> <../figures/second_order_radial_mode_1_test_case_number_0_grid_528.pdf>]
-[42 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_528.pd
+[43 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_528.pd
 f> <../figures/second_order_radial_mode_1_test_case_number_0_grid_1056.pdf>]
-[43 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_1056.p
+[44 <../figures/second_order_radial_mode_error_1_test_case_number_0_grid_1056.p
 df> <../figures/second_order_radial_mode_1_test_case_number_1_grid_33.pdf>]
-[44 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_33.pdf
+[45 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_33.pdf
 > <../figures/second_order_radial_mode_1_test_case_number_1_grid_66.pdf>]
-[45 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_66.pdf
+[46 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_66.pdf
 > <../figures/second_order_radial_mode_1_test_case_number_1_grid_132.pdf>]
-[46 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_132.pd
+[47 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_132.pd
 f> <../figures/second_order_radial_mode_1_test_case_number_1_grid_264.pdf>]
-[47 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_264.pd
+[48 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_264.pd
 f> <../figures/second_order_radial_mode_1_test_case_number_1_grid_528.pdf>]
-[48 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_528.pd
+[49 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_528.pd
 f> <../figures/second_order_radial_mode_1_test_case_number_1_grid_1056.pdf>]
-[49 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_1056.p
+[50 <../figures/second_order_radial_mode_error_1_test_case_number_1_grid_1056.p
 df>]
-<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_33.pdf, id=1597,
+<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_33.pdf, id=1600,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -1800,7 +1803,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _0_grid_33.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_33.pdf, id
-=1598, 462.52798pt x 346.89601pt>
+=1601, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_33.pdf
@@ -1808,7 +1811,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_0_grid_33.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_66.pdf, id=1599,
+<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_66.pdf, id=1602,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -1817,7 +1820,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _0_grid_66.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_66.pdf, id
-=1600, 462.52798pt x 346.89601pt>
+=1603, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_66.pdf
@@ -1825,7 +1828,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_0_grid_66.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_132.pdf, id=1601
+<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_132.pdf, id=1604
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -1834,7 +1837,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _0_grid_132.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_132.pdf, i
-d=1602, 462.52798pt x 346.89601pt>
+d=1605, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_132.pd
@@ -1842,7 +1845,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_0_grid_132.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_264.pdf, id=1603
+<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_264.pdf, id=1606
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -1851,7 +1854,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _0_grid_264.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_264.pdf, i
-d=1604, 462.52798pt x 346.89601pt>
+d=1607, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_264.pd
@@ -1859,7 +1862,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_0_grid_264.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_528.pdf, id=1605
+<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_528.pdf, id=1608
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -1868,7 +1871,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _0_grid_528.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_528.pdf, i
-d=1606, 462.52798pt x 346.89601pt>
+d=1609, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_528.pd
@@ -1876,8 +1879,8 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_0_grid_528.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_1056.pdf, id=160
-7, 690.00002pt x 426.44344pt>
+<../figures/fourth_order_radial_mode_1_test_case_number_0_grid_1056.pdf, id=161
+0, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_1_test_case_number_0_grid_1056.pdf>
@@ -1885,7 +1888,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _0_grid_1056.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_1056.pdf, 
-id=1608, 462.52798pt x 346.89601pt>
+id=1611, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_1056.p
@@ -1893,7 +1896,7 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_0_grid_1056.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_33.pdf, id=1609,
+<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_33.pdf, id=1612,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -1902,7 +1905,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _1_grid_33.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_33.pdf, id
-=1610, 462.52798pt x 346.89601pt>
+=1613, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_33.pdf
@@ -1910,7 +1913,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_1_grid_33.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_66.pdf, id=1611,
+<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_66.pdf, id=1614,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -1919,7 +1922,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _1_grid_66.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_66.pdf, id
-=1612, 462.52798pt x 346.89601pt>
+=1615, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_66.pdf
@@ -1927,7 +1930,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_1_grid_66.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_132.pdf, id=1613
+<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_132.pdf, id=1616
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -1936,7 +1939,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _1_grid_132.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_132.pdf, i
-d=1614, 462.52798pt x 346.89601pt>
+d=1617, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_132.pd
@@ -1944,7 +1947,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_1_grid_132.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_264.pdf, id=1615
+<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_264.pdf, id=1618
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -1953,7 +1956,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _1_grid_264.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_264.pdf, i
-d=1616, 462.52798pt x 346.89601pt>
+d=1619, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_264.pd
@@ -1961,7 +1964,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_1_grid_264.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_528.pdf, id=1617
+<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_528.pdf, id=1620
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -1970,7 +1973,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _1_grid_528.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_528.pdf, i
-d=1618, 462.52798pt x 346.89601pt>
+d=1621, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_528.pd
@@ -1978,8 +1981,8 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_1_grid_528.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_1056.pdf, id=161
-9, 690.00002pt x 426.44344pt>
+<../figures/fourth_order_radial_mode_1_test_case_number_1_grid_1056.pdf, id=162
+2, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_1_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_1_test_case_number_1_grid_1056.pdf>
@@ -1987,7 +1990,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_1_test_case_number
 _1_grid_1056.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_1056.pdf, 
-id=1620, 462.52798pt x 346.89601pt>
+id=1623, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_1056.p
@@ -1995,34 +1998,34 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_1_test_case_
 number_1_grid_1056.pdf  used on input line 302.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [50
+ [51
 
- <../figures/fourth_order_radial_mode_1_test_case_number_0_grid_33.pdf>] [51 <.
+ <../figures/fourth_order_radial_mode_1_test_case_number_0_grid_33.pdf>] [52 <.
 ./figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_33.pdf> <../
 figures/fourth_order_radial_mode_1_test_case_number_0_grid_66.pdf>]
-[52 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_66.pdf
+[53 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_66.pdf
 > <../figures/fourth_order_radial_mode_1_test_case_number_0_grid_132.pdf>]
-[53 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_132.pd
+[54 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_132.pd
 f> <../figures/fourth_order_radial_mode_1_test_case_number_0_grid_264.pdf>]
-[54 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_264.pd
+[55 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_264.pd
 f> <../figures/fourth_order_radial_mode_1_test_case_number_0_grid_528.pdf>]
-[55 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_528.pd
+[56 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_528.pd
 f> <../figures/fourth_order_radial_mode_1_test_case_number_0_grid_1056.pdf>]
-[56 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_1056.p
+[57 <../figures/fourth_order_radial_mode_error_1_test_case_number_0_grid_1056.p
 df> <../figures/fourth_order_radial_mode_1_test_case_number_1_grid_33.pdf>]
-[57 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_33.pdf
+[58 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_33.pdf
 > <../figures/fourth_order_radial_mode_1_test_case_number_1_grid_66.pdf>]
-[58 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_66.pdf
+[59 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_66.pdf
 > <../figures/fourth_order_radial_mode_1_test_case_number_1_grid_132.pdf>]
-[59 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_132.pd
+[60 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_132.pd
 f> <../figures/fourth_order_radial_mode_1_test_case_number_1_grid_264.pdf>]
-[60 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_264.pd
+[61 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_264.pd
 f> <../figures/fourth_order_radial_mode_1_test_case_number_1_grid_528.pdf>]
-[61 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_528.pd
+[62 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_528.pd
 f> <../figures/fourth_order_radial_mode_1_test_case_number_1_grid_1056.pdf>]
-[62 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_1056.p
+[63 <../figures/fourth_order_radial_mode_error_1_test_case_number_1_grid_1056.p
 df>]
-<../figures/second_order_radial_mode_2_test_case_number_0_grid_33.pdf, id=1972,
+<../figures/second_order_radial_mode_2_test_case_number_0_grid_33.pdf, id=1975,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -2031,7 +2034,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _0_grid_33.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_33.pdf, id
-=1973, 462.52798pt x 346.89601pt>
+=1976, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_33.pdf
@@ -2039,7 +2042,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_0_grid_33.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_0_grid_66.pdf, id=1974,
+<../figures/second_order_radial_mode_2_test_case_number_0_grid_66.pdf, id=1977,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -2048,7 +2051,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _0_grid_66.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_66.pdf, id
-=1975, 462.52798pt x 346.89601pt>
+=1978, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_66.pdf
@@ -2056,7 +2059,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_0_grid_66.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_0_grid_132.pdf, id=1976
+<../figures/second_order_radial_mode_2_test_case_number_0_grid_132.pdf, id=1979
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -2065,7 +2068,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _0_grid_132.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_132.pdf, i
-d=1977, 462.52798pt x 346.89601pt>
+d=1980, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_132.pd
@@ -2073,7 +2076,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_0_grid_132.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_0_grid_264.pdf, id=1978
+<../figures/second_order_radial_mode_2_test_case_number_0_grid_264.pdf, id=1981
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -2082,7 +2085,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _0_grid_264.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_264.pdf, i
-d=1979, 462.52798pt x 346.89601pt>
+d=1982, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_264.pd
@@ -2090,7 +2093,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_0_grid_264.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_0_grid_528.pdf, id=1980
+<../figures/second_order_radial_mode_2_test_case_number_0_grid_528.pdf, id=1983
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -2099,7 +2102,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _0_grid_528.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_528.pdf, i
-d=1981, 462.52798pt x 346.89601pt>
+d=1984, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_528.pd
@@ -2108,7 +2111,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_0_grid_528.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/second_order_radial_mode_2_test_case_number_0_grid_1056.pdf, id=198
-2, 690.00002pt x 426.44344pt>
+5, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_2_test_case_number_0_grid_1056.pdf>
@@ -2116,7 +2119,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _0_grid_1056.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_1056.pdf, 
-id=1983, 462.52798pt x 346.89601pt>
+id=1986, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_0_grid_1056.p
@@ -2124,7 +2127,7 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_0_grid_1056.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_1_grid_33.pdf, id=1984,
+<../figures/second_order_radial_mode_2_test_case_number_1_grid_33.pdf, id=1987,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -2133,7 +2136,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _1_grid_33.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_33.pdf, id
-=1985, 462.52798pt x 346.89601pt>
+=1988, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_33.pdf
@@ -2141,7 +2144,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_1_grid_33.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_1_grid_66.pdf, id=1986,
+<../figures/second_order_radial_mode_2_test_case_number_1_grid_66.pdf, id=1989,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -2150,7 +2153,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _1_grid_66.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_66.pdf, id
-=1987, 462.52798pt x 346.89601pt>
+=1990, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_66.pdf
@@ -2158,7 +2161,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_1_grid_66.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_1_grid_132.pdf, id=1988
+<../figures/second_order_radial_mode_2_test_case_number_1_grid_132.pdf, id=1991
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -2167,7 +2170,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _1_grid_132.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_132.pdf, i
-d=1989, 462.52798pt x 346.89601pt>
+d=1992, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_132.pd
@@ -2175,7 +2178,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_1_grid_132.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_1_grid_264.pdf, id=1990
+<../figures/second_order_radial_mode_2_test_case_number_1_grid_264.pdf, id=1993
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -2184,7 +2187,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _1_grid_264.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_264.pdf, i
-d=1991, 462.52798pt x 346.89601pt>
+d=1994, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_264.pd
@@ -2192,7 +2195,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_1_grid_264.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_2_test_case_number_1_grid_528.pdf, id=1992
+<../figures/second_order_radial_mode_2_test_case_number_1_grid_528.pdf, id=1995
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -2201,7 +2204,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _1_grid_528.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_528.pdf, i
-d=1993, 462.52798pt x 346.89601pt>
+d=1996, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_528.pd
@@ -2210,7 +2213,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_1_grid_528.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/second_order_radial_mode_2_test_case_number_1_grid_1056.pdf, id=199
-4, 690.00002pt x 426.44344pt>
+7, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_2_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_2_test_case_number_1_grid_1056.pdf>
@@ -2218,7 +2221,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_2_test_case_number
 _1_grid_1056.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_1056.pdf, 
-id=1995, 462.52798pt x 346.89601pt>
+id=1998, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_2_test_case_number_1_grid_1056.p
@@ -2226,34 +2229,34 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_2_test_case_
 number_1_grid_1056.pdf  used on input line 325.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [63
+ [64
 
- <../figures/second_order_radial_mode_2_test_case_number_0_grid_33.pdf>] [64 <.
+ <../figures/second_order_radial_mode_2_test_case_number_0_grid_33.pdf>] [65 <.
 ./figures/second_order_radial_mode_error_2_test_case_number_0_grid_33.pdf> <../
 figures/second_order_radial_mode_2_test_case_number_0_grid_66.pdf>]
-[65 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_66.pdf
+[66 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_66.pdf
 > <../figures/second_order_radial_mode_2_test_case_number_0_grid_132.pdf>]
-[66 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_132.pd
+[67 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_132.pd
 f> <../figures/second_order_radial_mode_2_test_case_number_0_grid_264.pdf>]
-[67 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_264.pd
+[68 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_264.pd
 f> <../figures/second_order_radial_mode_2_test_case_number_0_grid_528.pdf>]
-[68 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_528.pd
+[69 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_528.pd
 f> <../figures/second_order_radial_mode_2_test_case_number_0_grid_1056.pdf>]
-[69 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_1056.p
+[70 <../figures/second_order_radial_mode_error_2_test_case_number_0_grid_1056.p
 df> <../figures/second_order_radial_mode_2_test_case_number_1_grid_33.pdf>]
-[70 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_33.pdf
+[71 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_33.pdf
 > <../figures/second_order_radial_mode_2_test_case_number_1_grid_66.pdf>]
-[71 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_66.pdf
+[72 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_66.pdf
 > <../figures/second_order_radial_mode_2_test_case_number_1_grid_132.pdf>]
-[72 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_132.pd
+[73 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_132.pd
 f> <../figures/second_order_radial_mode_2_test_case_number_1_grid_264.pdf>]
-[73 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_264.pd
+[74 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_264.pd
 f> <../figures/second_order_radial_mode_2_test_case_number_1_grid_528.pdf>]
-[74 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_528.pd
+[75 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_528.pd
 f> <../figures/second_order_radial_mode_2_test_case_number_1_grid_1056.pdf>]
-[75 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_1056.p
+[76 <../figures/second_order_radial_mode_error_2_test_case_number_1_grid_1056.p
 df>]
-<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_33.pdf, id=2328,
+<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_33.pdf, id=2331,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -2262,7 +2265,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _0_grid_33.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_33.pdf, id
-=2329, 462.52798pt x 346.89601pt>
+=2332, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_33.pdf
@@ -2270,7 +2273,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_0_grid_33.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_66.pdf, id=2330,
+<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_66.pdf, id=2333,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -2279,7 +2282,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _0_grid_66.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_66.pdf, id
-=2331, 462.52798pt x 346.89601pt>
+=2334, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_66.pdf
@@ -2287,7 +2290,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_0_grid_66.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_132.pdf, id=2332
+<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_132.pdf, id=2335
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -2296,7 +2299,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _0_grid_132.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_132.pdf, i
-d=2333, 462.52798pt x 346.89601pt>
+d=2336, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_132.pd
@@ -2304,7 +2307,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_0_grid_132.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_264.pdf, id=2334
+<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_264.pdf, id=2337
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -2313,7 +2316,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _0_grid_264.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_264.pdf, i
-d=2335, 462.52798pt x 346.89601pt>
+d=2338, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_264.pd
@@ -2321,7 +2324,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_0_grid_264.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_528.pdf, id=2336
+<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_528.pdf, id=2339
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -2330,7 +2333,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _0_grid_528.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_528.pdf, i
-d=2337, 462.52798pt x 346.89601pt>
+d=2340, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_528.pd
@@ -2338,8 +2341,8 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_0_grid_528.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_1056.pdf, id=233
-8, 690.00002pt x 426.44344pt>
+<../figures/fourth_order_radial_mode_2_test_case_number_0_grid_1056.pdf, id=234
+1, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_2_test_case_number_0_grid_1056.pdf>
@@ -2347,7 +2350,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _0_grid_1056.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_1056.pdf, 
-id=2339, 462.52798pt x 346.89601pt>
+id=2342, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_1056.p
@@ -2355,7 +2358,7 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_0_grid_1056.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_33.pdf, id=2340,
+<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_33.pdf, id=2343,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -2364,7 +2367,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _1_grid_33.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_33.pdf, id
-=2341, 462.52798pt x 346.89601pt>
+=2344, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_33.pdf
@@ -2372,7 +2375,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_1_grid_33.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_66.pdf, id=2342,
+<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_66.pdf, id=2345,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -2381,7 +2384,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _1_grid_66.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_66.pdf, id
-=2343, 462.52798pt x 346.89601pt>
+=2346, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_66.pdf
@@ -2389,7 +2392,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_1_grid_66.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_132.pdf, id=2344
+<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_132.pdf, id=2347
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -2398,7 +2401,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _1_grid_132.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_132.pdf, i
-d=2345, 462.52798pt x 346.89601pt>
+d=2348, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_132.pd
@@ -2406,7 +2409,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_1_grid_132.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_264.pdf, id=2346
+<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_264.pdf, id=2349
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -2415,7 +2418,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _1_grid_264.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_264.pdf, i
-d=2347, 462.52798pt x 346.89601pt>
+d=2350, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_264.pd
@@ -2423,7 +2426,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_1_grid_264.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_528.pdf, id=2348
+<../figures/fourth_order_radial_mode_2_test_case_number_1_grid_528.pdf, id=2351
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -2432,7 +2435,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _1_grid_528.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_528.pdf, i
-d=2349, 462.52798pt x 346.89601pt>
+d=2352, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_528.pd
@@ -2441,7 +2444,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_1_grid_528.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/fourth_order_radial_mode_2_test_case_number_1_grid_1056.pdf, id=235
-0, 690.00002pt x 426.44344pt>
+3, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_2_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_2_test_case_number_1_grid_1056.pdf>
@@ -2449,7 +2452,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_2_test_case_number
 _1_grid_1056.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_1056.pdf, 
-id=2351, 462.52798pt x 346.89601pt>
+id=2354, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_1056.p
@@ -2457,34 +2460,34 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_2_test_case_
 number_1_grid_1056.pdf  used on input line 348.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [76
+ [77
 
- <../figures/fourth_order_radial_mode_2_test_case_number_0_grid_33.pdf>] [77 <.
+ <../figures/fourth_order_radial_mode_2_test_case_number_0_grid_33.pdf>] [78 <.
 ./figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_33.pdf> <../
 figures/fourth_order_radial_mode_2_test_case_number_0_grid_66.pdf>]
-[78 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_66.pdf
+[79 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_66.pdf
 > <../figures/fourth_order_radial_mode_2_test_case_number_0_grid_132.pdf>]
-[79 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_132.pd
+[80 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_132.pd
 f> <../figures/fourth_order_radial_mode_2_test_case_number_0_grid_264.pdf>]
-[80 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_264.pd
+[81 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_264.pd
 f> <../figures/fourth_order_radial_mode_2_test_case_number_0_grid_528.pdf>]
-[81 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_528.pd
+[82 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_528.pd
 f> <../figures/fourth_order_radial_mode_2_test_case_number_0_grid_1056.pdf>]
-[82 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_1056.p
+[83 <../figures/fourth_order_radial_mode_error_2_test_case_number_0_grid_1056.p
 df> <../figures/fourth_order_radial_mode_2_test_case_number_1_grid_33.pdf>]
-[83 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_33.pdf
+[84 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_33.pdf
 > <../figures/fourth_order_radial_mode_2_test_case_number_1_grid_66.pdf>]
-[84 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_66.pdf
+[85 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_66.pdf
 > <../figures/fourth_order_radial_mode_2_test_case_number_1_grid_132.pdf>]
-[85 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_132.pd
+[86 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_132.pd
 f> <../figures/fourth_order_radial_mode_2_test_case_number_1_grid_264.pdf>]
-[86 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_264.pd
+[87 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_264.pd
 f> <../figures/fourth_order_radial_mode_2_test_case_number_1_grid_528.pdf>]
-[87 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_528.pd
+[88 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_528.pd
 f> <../figures/fourth_order_radial_mode_2_test_case_number_1_grid_1056.pdf>]
-[88 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_1056.p
+[89 <../figures/fourth_order_radial_mode_error_2_test_case_number_1_grid_1056.p
 df>]
-<../figures/second_order_radial_mode_3_test_case_number_0_grid_33.pdf, id=2684,
+<../figures/second_order_radial_mode_3_test_case_number_0_grid_33.pdf, id=2687,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -2493,7 +2496,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _0_grid_33.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_33.pdf, id
-=2685, 462.52798pt x 346.89601pt>
+=2688, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_33.pdf
@@ -2501,7 +2504,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_0_grid_33.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_0_grid_66.pdf, id=2686,
+<../figures/second_order_radial_mode_3_test_case_number_0_grid_66.pdf, id=2689,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -2510,7 +2513,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _0_grid_66.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_66.pdf, id
-=2687, 462.52798pt x 346.89601pt>
+=2690, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_66.pdf
@@ -2518,7 +2521,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_0_grid_66.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_0_grid_132.pdf, id=2688
+<../figures/second_order_radial_mode_3_test_case_number_0_grid_132.pdf, id=2691
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -2527,7 +2530,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _0_grid_132.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_132.pdf, i
-d=2689, 462.52798pt x 346.89601pt>
+d=2692, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_132.pd
@@ -2535,7 +2538,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_0_grid_132.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_0_grid_264.pdf, id=2690
+<../figures/second_order_radial_mode_3_test_case_number_0_grid_264.pdf, id=2693
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -2544,7 +2547,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _0_grid_264.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_264.pdf, i
-d=2691, 462.52798pt x 346.89601pt>
+d=2694, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_264.pd
@@ -2552,7 +2555,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_0_grid_264.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_0_grid_528.pdf, id=2692
+<../figures/second_order_radial_mode_3_test_case_number_0_grid_528.pdf, id=2695
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -2561,7 +2564,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _0_grid_528.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_528.pdf, i
-d=2693, 462.52798pt x 346.89601pt>
+d=2696, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_528.pd
@@ -2570,7 +2573,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_0_grid_528.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/second_order_radial_mode_3_test_case_number_0_grid_1056.pdf, id=269
-4, 690.00002pt x 426.44344pt>
+7, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_3_test_case_number_0_grid_1056.pdf>
@@ -2578,7 +2581,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _0_grid_1056.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_1056.pdf, 
-id=2695, 462.52798pt x 346.89601pt>
+id=2698, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_0_grid_1056.p
@@ -2586,7 +2589,7 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_0_grid_1056.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_1_grid_33.pdf, id=2696,
+<../figures/second_order_radial_mode_3_test_case_number_1_grid_33.pdf, id=2699,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -2595,7 +2598,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _1_grid_33.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_33.pdf, id
-=2697, 462.52798pt x 346.89601pt>
+=2700, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_33.pdf
@@ -2603,7 +2606,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_1_grid_33.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_1_grid_66.pdf, id=2698,
+<../figures/second_order_radial_mode_3_test_case_number_1_grid_66.pdf, id=2701,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -2612,7 +2615,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _1_grid_66.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_66.pdf, id
-=2699, 462.52798pt x 346.89601pt>
+=2702, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_66.pdf
@@ -2620,7 +2623,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_1_grid_66.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_1_grid_132.pdf, id=2700
+<../figures/second_order_radial_mode_3_test_case_number_1_grid_132.pdf, id=2703
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -2629,7 +2632,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _1_grid_132.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_132.pdf, i
-d=2701, 462.52798pt x 346.89601pt>
+d=2704, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_132.pd
@@ -2637,7 +2640,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_1_grid_132.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_1_grid_264.pdf, id=2702
+<../figures/second_order_radial_mode_3_test_case_number_1_grid_264.pdf, id=2705
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -2646,7 +2649,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _1_grid_264.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_264.pdf, i
-d=2703, 462.52798pt x 346.89601pt>
+d=2706, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_264.pd
@@ -2654,7 +2657,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_1_grid_264.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_3_test_case_number_1_grid_528.pdf, id=2704
+<../figures/second_order_radial_mode_3_test_case_number_1_grid_528.pdf, id=2707
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -2663,7 +2666,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _1_grid_528.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_528.pdf, i
-d=2705, 462.52798pt x 346.89601pt>
+d=2708, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_528.pd
@@ -2672,7 +2675,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_1_grid_528.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/second_order_radial_mode_3_test_case_number_1_grid_1056.pdf, id=270
-6, 690.00002pt x 426.44344pt>
+9, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_3_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_3_test_case_number_1_grid_1056.pdf>
@@ -2680,7 +2683,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_3_test_case_number
 _1_grid_1056.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_1056.pdf, 
-id=2707, 462.52798pt x 346.89601pt>
+id=2710, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_3_test_case_number_1_grid_1056.p
@@ -2688,34 +2691,34 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_3_test_case_
 number_1_grid_1056.pdf  used on input line 372.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [89
+ [90
 
- <../figures/second_order_radial_mode_3_test_case_number_0_grid_33.pdf>] [90 <.
+ <../figures/second_order_radial_mode_3_test_case_number_0_grid_33.pdf>] [91 <.
 ./figures/second_order_radial_mode_error_3_test_case_number_0_grid_33.pdf> <../
 figures/second_order_radial_mode_3_test_case_number_0_grid_66.pdf>]
-[91 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_66.pdf
+[92 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_66.pdf
 > <../figures/second_order_radial_mode_3_test_case_number_0_grid_132.pdf>]
-[92 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_132.pd
+[93 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_132.pd
 f> <../figures/second_order_radial_mode_3_test_case_number_0_grid_264.pdf>]
-[93 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_264.pd
+[94 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_264.pd
 f> <../figures/second_order_radial_mode_3_test_case_number_0_grid_528.pdf>]
-[94 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_528.pd
+[95 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_528.pd
 f> <../figures/second_order_radial_mode_3_test_case_number_0_grid_1056.pdf>]
-[95 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_1056.p
+[96 <../figures/second_order_radial_mode_error_3_test_case_number_0_grid_1056.p
 df> <../figures/second_order_radial_mode_3_test_case_number_1_grid_33.pdf>]
-[96 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_33.pdf
+[97 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_33.pdf
 > <../figures/second_order_radial_mode_3_test_case_number_1_grid_66.pdf>]
-[97 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_66.pdf
+[98 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_66.pdf
 > <../figures/second_order_radial_mode_3_test_case_number_1_grid_132.pdf>]
-[98 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_132.pd
+[99 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_132.pd
 f> <../figures/second_order_radial_mode_3_test_case_number_1_grid_264.pdf>]
-[99 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_264.pd
-f> <../figures/second_order_radial_mode_3_test_case_number_1_grid_528.pdf>]
-[100 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_528.p
+[100 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_264.p
+df> <../figures/second_order_radial_mode_3_test_case_number_1_grid_528.pdf>]
+[101 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_528.p
 df> <../figures/second_order_radial_mode_3_test_case_number_1_grid_1056.pdf>]
-[101 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_1056.
+[102 <../figures/second_order_radial_mode_error_3_test_case_number_1_grid_1056.
 pdf>]
-<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_33.pdf, id=3028,
+<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_33.pdf, id=3032,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -2724,7 +2727,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _0_grid_33.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_33.pdf, id
-=3029, 462.52798pt x 346.89601pt>
+=3033, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_33.pdf
@@ -2732,7 +2735,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_0_grid_33.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_66.pdf, id=3030,
+<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_66.pdf, id=3034,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -2741,7 +2744,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _0_grid_66.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_66.pdf, id
-=3031, 462.52798pt x 346.89601pt>
+=3035, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_66.pdf
@@ -2749,7 +2752,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_0_grid_66.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_132.pdf, id=3032
+<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_132.pdf, id=3036
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -2758,7 +2761,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _0_grid_132.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_132.pdf, i
-d=3033, 462.52798pt x 346.89601pt>
+d=3037, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_132.pd
@@ -2766,7 +2769,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_0_grid_132.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_264.pdf, id=3034
+<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_264.pdf, id=3038
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -2775,7 +2778,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _0_grid_264.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_264.pdf, i
-d=3035, 462.52798pt x 346.89601pt>
+d=3039, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_264.pd
@@ -2783,7 +2786,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_0_grid_264.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_528.pdf, id=3036
+<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_528.pdf, id=3040
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -2792,7 +2795,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _0_grid_528.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_528.pdf, i
-d=3037, 462.52798pt x 346.89601pt>
+d=3041, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_528.pd
@@ -2800,8 +2803,8 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_0_grid_528.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_1056.pdf, id=303
-8, 690.00002pt x 426.44344pt>
+<../figures/fourth_order_radial_mode_3_test_case_number_0_grid_1056.pdf, id=304
+2, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_3_test_case_number_0_grid_1056.pdf>
@@ -2809,7 +2812,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _0_grid_1056.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_1056.pdf, 
-id=3039, 462.52798pt x 346.89601pt>
+id=3043, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_1056.p
@@ -2817,7 +2820,7 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_0_grid_1056.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_33.pdf, id=3040,
+<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_33.pdf, id=3044,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -2826,7 +2829,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _1_grid_33.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_33.pdf, id
-=3041, 462.52798pt x 346.89601pt>
+=3045, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_33.pdf
@@ -2834,7 +2837,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_1_grid_33.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_66.pdf, id=3042,
+<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_66.pdf, id=3046,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -2843,7 +2846,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _1_grid_66.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_66.pdf, id
-=3043, 462.52798pt x 346.89601pt>
+=3047, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_66.pdf
@@ -2851,7 +2854,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_1_grid_66.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_132.pdf, id=3044
+<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_132.pdf, id=3048
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -2860,7 +2863,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _1_grid_132.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_132.pdf, i
-d=3045, 462.52798pt x 346.89601pt>
+d=3049, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_132.pd
@@ -2868,7 +2871,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_1_grid_132.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_264.pdf, id=3046
+<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_264.pdf, id=3050
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -2877,7 +2880,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _1_grid_264.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_264.pdf, i
-d=3047, 462.52798pt x 346.89601pt>
+d=3051, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_264.pd
@@ -2885,7 +2888,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_1_grid_264.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_528.pdf, id=3048
+<../figures/fourth_order_radial_mode_3_test_case_number_1_grid_528.pdf, id=3052
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -2894,7 +2897,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _1_grid_528.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_528.pdf, i
-d=3049, 462.52798pt x 346.89601pt>
+d=3053, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_528.pd
@@ -2903,7 +2906,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_1_grid_528.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/fourth_order_radial_mode_3_test_case_number_1_grid_1056.pdf, id=305
-0, 690.00002pt x 426.44344pt>
+4, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_3_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_3_test_case_number_1_grid_1056.pdf>
@@ -2911,7 +2914,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_3_test_case_number
 _1_grid_1056.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_1056.pdf, 
-id=3051, 462.52798pt x 346.89601pt>
+id=3055, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_1056.p
@@ -2919,34 +2922,34 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_3_test_case_
 number_1_grid_1056.pdf  used on input line 395.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [102
+ [103
 
- <../figures/fourth_order_radial_mode_3_test_case_number_0_grid_33.pdf>] [103 <
+ <../figures/fourth_order_radial_mode_3_test_case_number_0_grid_33.pdf>] [104 <
 ../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_33.pdf> <..
 /figures/fourth_order_radial_mode_3_test_case_number_0_grid_66.pdf>]
-[104 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_66.pd
+[105 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_66.pd
 f> <../figures/fourth_order_radial_mode_3_test_case_number_0_grid_132.pdf>]
-[105 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_132.p
+[106 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_132.p
 df> <../figures/fourth_order_radial_mode_3_test_case_number_0_grid_264.pdf>]
-[106 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_264.p
+[107 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_264.p
 df> <../figures/fourth_order_radial_mode_3_test_case_number_0_grid_528.pdf>]
-[107 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_528.p
+[108 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_528.p
 df> <../figures/fourth_order_radial_mode_3_test_case_number_0_grid_1056.pdf>]
-[108 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_1056.
+[109 <../figures/fourth_order_radial_mode_error_3_test_case_number_0_grid_1056.
 pdf> <../figures/fourth_order_radial_mode_3_test_case_number_1_grid_33.pdf>]
-[109 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_33.pd
+[110 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_33.pd
 f> <../figures/fourth_order_radial_mode_3_test_case_number_1_grid_66.pdf>]
-[110 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_66.pd
+[111 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_66.pd
 f> <../figures/fourth_order_radial_mode_3_test_case_number_1_grid_132.pdf>]
-[111 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_132.p
+[112 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_132.p
 df> <../figures/fourth_order_radial_mode_3_test_case_number_1_grid_264.pdf>]
-[112 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_264.p
+[113 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_264.p
 df> <../figures/fourth_order_radial_mode_3_test_case_number_1_grid_528.pdf>]
-[113 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_528.p
+[114 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_528.p
 df> <../figures/fourth_order_radial_mode_3_test_case_number_1_grid_1056.pdf>]
-[114 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_1056.
+[115 <../figures/fourth_order_radial_mode_error_3_test_case_number_1_grid_1056.
 pdf>]
-<../figures/second_order_radial_mode_4_test_case_number_0_grid_33.pdf, id=3385,
+<../figures/second_order_radial_mode_4_test_case_number_0_grid_33.pdf, id=3388,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -2955,7 +2958,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _0_grid_33.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_33.pdf, id
-=3386, 462.52798pt x 346.89601pt>
+=3389, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_33.pdf
@@ -2963,7 +2966,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_0_grid_33.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_0_grid_66.pdf, id=3387,
+<../figures/second_order_radial_mode_4_test_case_number_0_grid_66.pdf, id=3390,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -2972,7 +2975,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _0_grid_66.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_66.pdf, id
-=3388, 462.52798pt x 346.89601pt>
+=3391, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_66.pdf
@@ -2980,7 +2983,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_0_grid_66.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_0_grid_132.pdf, id=3389
+<../figures/second_order_radial_mode_4_test_case_number_0_grid_132.pdf, id=3392
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -2989,7 +2992,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _0_grid_132.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_132.pdf, i
-d=3390, 462.52798pt x 346.89601pt>
+d=3393, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_132.pd
@@ -2997,7 +3000,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_0_grid_132.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_0_grid_264.pdf, id=3391
+<../figures/second_order_radial_mode_4_test_case_number_0_grid_264.pdf, id=3394
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -3006,7 +3009,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _0_grid_264.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_264.pdf, i
-d=3392, 462.52798pt x 346.89601pt>
+d=3395, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_264.pd
@@ -3014,7 +3017,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_0_grid_264.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_0_grid_528.pdf, id=3393
+<../figures/second_order_radial_mode_4_test_case_number_0_grid_528.pdf, id=3396
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -3023,7 +3026,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _0_grid_528.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_528.pdf, i
-d=3394, 462.52798pt x 346.89601pt>
+d=3397, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_528.pd
@@ -3032,7 +3035,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_0_grid_528.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/second_order_radial_mode_4_test_case_number_0_grid_1056.pdf, id=339
-5, 690.00002pt x 426.44344pt>
+8, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_4_test_case_number_0_grid_1056.pdf>
@@ -3040,7 +3043,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _0_grid_1056.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_1056.pdf, 
-id=3396, 462.52798pt x 346.89601pt>
+id=3399, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_1056.p
@@ -3048,7 +3051,7 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_0_grid_1056.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_1_grid_33.pdf, id=3397,
+<../figures/second_order_radial_mode_4_test_case_number_1_grid_33.pdf, id=3400,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -3057,7 +3060,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _1_grid_33.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_33.pdf, id
-=3398, 462.52798pt x 346.89601pt>
+=3401, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_33.pdf
@@ -3065,7 +3068,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_1_grid_33.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_1_grid_66.pdf, id=3399,
+<../figures/second_order_radial_mode_4_test_case_number_1_grid_66.pdf, id=3402,
  690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -3074,7 +3077,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _1_grid_66.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_66.pdf, id
-=3400, 462.52798pt x 346.89601pt>
+=3403, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_66.pdf
@@ -3082,7 +3085,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_1_grid_66.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_1_grid_132.pdf, id=3401
+<../figures/second_order_radial_mode_4_test_case_number_1_grid_132.pdf, id=3404
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -3091,7 +3094,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _1_grid_132.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_132.pdf, i
-d=3402, 462.52798pt x 346.89601pt>
+d=3405, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_132.pd
@@ -3099,7 +3102,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_1_grid_132.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_1_grid_264.pdf, id=3403
+<../figures/second_order_radial_mode_4_test_case_number_1_grid_264.pdf, id=3406
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -3108,7 +3111,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _1_grid_264.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_264.pdf, i
-d=3404, 462.52798pt x 346.89601pt>
+d=3407, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_264.pd
@@ -3116,7 +3119,7 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_1_grid_264.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_1_grid_528.pdf, id=3405
+<../figures/second_order_radial_mode_4_test_case_number_1_grid_528.pdf, id=3408
 , 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -3125,7 +3128,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _1_grid_528.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_528.pdf, i
-d=3406, 462.52798pt x 346.89601pt>
+d=3409, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_528.pd
@@ -3133,8 +3136,8 @@ f>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_1_grid_528.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/second_order_radial_mode_4_test_case_number_1_grid_1056.pdf, id=340
-7, 690.00002pt x 426.44344pt>
+<../figures/second_order_radial_mode_4_test_case_number_1_grid_1056.pdf, id=341
+0, 690.00002pt x 426.44344pt>
 File: ../figures/second_order_radial_mode_4_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/second_order_radial_mode_4_test_case_number_1_grid_1056.pdf>
@@ -3142,7 +3145,7 @@ Package pdftex.def Info: ../figures/second_order_radial_mode_4_test_case_number
 _1_grid_1056.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_1056.pdf, 
-id=3408, 462.52798pt x 346.89601pt>
+id=3411, 462.52798pt x 346.89601pt>
 File: ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/second_order_radial_mode_error_4_test_case_number_1_grid_1056.p
@@ -3150,34 +3153,34 @@ df>
 Package pdftex.def Info: ../figures/second_order_radial_mode_error_4_test_case_
 number_1_grid_1056.pdf  used on input line 420.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [115
+ [116
 
- <../figures/second_order_radial_mode_4_test_case_number_0_grid_33.pdf>] [116 <
+ <../figures/second_order_radial_mode_4_test_case_number_0_grid_33.pdf>] [117 <
 ../figures/second_order_radial_mode_error_4_test_case_number_0_grid_33.pdf> <..
 /figures/second_order_radial_mode_4_test_case_number_0_grid_66.pdf>]
-[117 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_66.pd
+[118 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_66.pd
 f> <../figures/second_order_radial_mode_4_test_case_number_0_grid_132.pdf>]
-[118 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_132.p
+[119 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_132.p
 df> <../figures/second_order_radial_mode_4_test_case_number_0_grid_264.pdf>]
-[119 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_264.p
+[120 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_264.p
 df> <../figures/second_order_radial_mode_4_test_case_number_0_grid_528.pdf>]
-[120 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_528.p
+[121 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_528.p
 df> <../figures/second_order_radial_mode_4_test_case_number_0_grid_1056.pdf>]
-[121 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_1056.
+[122 <../figures/second_order_radial_mode_error_4_test_case_number_0_grid_1056.
 pdf> <../figures/second_order_radial_mode_4_test_case_number_1_grid_33.pdf>]
-[122 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_33.pd
+[123 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_33.pd
 f> <../figures/second_order_radial_mode_4_test_case_number_1_grid_66.pdf>]
-[123 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_66.pd
+[124 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_66.pd
 f> <../figures/second_order_radial_mode_4_test_case_number_1_grid_132.pdf>]
-[124 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_132.p
+[125 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_132.p
 df> <../figures/second_order_radial_mode_4_test_case_number_1_grid_264.pdf>]
-[125 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_264.p
+[126 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_264.p
 df> <../figures/second_order_radial_mode_4_test_case_number_1_grid_528.pdf>]
-[126 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_528.p
+[127 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_528.p
 df> <../figures/second_order_radial_mode_4_test_case_number_1_grid_1056.pdf>]
-[127 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_1056.
+[128 <../figures/second_order_radial_mode_error_4_test_case_number_1_grid_1056.
 pdf>]
-<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_33.pdf, id=3729,
+<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_33.pdf, id=3732,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_0_grid_33.pdf Grap
 hic file (type pdf)
@@ -3186,7 +3189,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _0_grid_33.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_33.pdf, id
-=3730, 462.52798pt x 346.89601pt>
+=3733, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_33.pdf
@@ -3194,7 +3197,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_0_grid_33.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_66.pdf, id=3731,
+<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_66.pdf, id=3734,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_0_grid_66.pdf Grap
 hic file (type pdf)
@@ -3203,7 +3206,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _0_grid_66.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_66.pdf, id
-=3732, 462.52798pt x 346.89601pt>
+=3735, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_66.pdf
@@ -3211,7 +3214,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_0_grid_66.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_132.pdf, id=3733
+<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_132.pdf, id=3736
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_0_grid_132.pdf Gra
 phic file (type pdf)
@@ -3220,7 +3223,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _0_grid_132.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_132.pdf, i
-d=3734, 462.52798pt x 346.89601pt>
+d=3737, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_132.pd
@@ -3228,7 +3231,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_0_grid_132.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_264.pdf, id=3735
+<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_264.pdf, id=3738
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_0_grid_264.pdf Gra
 phic file (type pdf)
@@ -3237,7 +3240,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _0_grid_264.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_264.pdf, i
-d=3736, 462.52798pt x 346.89601pt>
+d=3739, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_264.pd
@@ -3245,7 +3248,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_0_grid_264.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_528.pdf, id=3737
+<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_528.pdf, id=3740
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_0_grid_528.pdf Gra
 phic file (type pdf)
@@ -3254,7 +3257,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _0_grid_528.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_528.pdf, i
-d=3738, 462.52798pt x 346.89601pt>
+d=3741, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_528.pd
@@ -3262,8 +3265,8 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_0_grid_528.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_1056.pdf, id=373
-9, 690.00002pt x 426.44344pt>
+<../figures/fourth_order_radial_mode_4_test_case_number_0_grid_1056.pdf, id=374
+2, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_0_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_4_test_case_number_0_grid_1056.pdf>
@@ -3271,7 +3274,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _0_grid_1056.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_1056.pdf, 
-id=3740, 462.52798pt x 346.89601pt>
+id=3743, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_1056.p
@@ -3279,7 +3282,7 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_0_grid_1056.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_33.pdf, id=3741,
+<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_33.pdf, id=3744,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_1_grid_33.pdf Grap
 hic file (type pdf)
@@ -3288,7 +3291,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _1_grid_33.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_33.pdf, id
-=3742, 462.52798pt x 346.89601pt>
+=3745, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_33.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_33.pdf
@@ -3296,7 +3299,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_1_grid_33.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_66.pdf, id=3743,
+<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_66.pdf, id=3746,
  690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_1_grid_66.pdf Grap
 hic file (type pdf)
@@ -3305,7 +3308,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _1_grid_66.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_66.pdf, id
-=3744, 462.52798pt x 346.89601pt>
+=3747, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_66.pd
 f Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_66.pdf
@@ -3313,7 +3316,7 @@ f Graphic file (type pdf)
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_1_grid_66.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_132.pdf, id=3745
+<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_132.pdf, id=3748
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_1_grid_132.pdf Gra
 phic file (type pdf)
@@ -3322,7 +3325,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _1_grid_132.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_132.pdf, i
-d=3746, 462.52798pt x 346.89601pt>
+d=3749, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_132.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_132.pd
@@ -3330,7 +3333,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_1_grid_132.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_264.pdf, id=3747
+<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_264.pdf, id=3750
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_1_grid_264.pdf Gra
 phic file (type pdf)
@@ -3339,7 +3342,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _1_grid_264.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_264.pdf, i
-d=3748, 462.52798pt x 346.89601pt>
+d=3751, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_264.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_264.pd
@@ -3347,7 +3350,7 @@ f>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_1_grid_264.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
-<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_528.pdf, id=3749
+<../figures/fourth_order_radial_mode_4_test_case_number_1_grid_528.pdf, id=3752
 , 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_1_grid_528.pdf Gra
 phic file (type pdf)
@@ -3356,7 +3359,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _1_grid_528.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_528.pdf, i
-d=3750, 462.52798pt x 346.89601pt>
+d=3753, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_528.p
 df Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_528.pd
@@ -3365,7 +3368,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_1_grid_528.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
 <../figures/fourth_order_radial_mode_4_test_case_number_1_grid_1056.pdf, id=375
-1, 690.00002pt x 426.44344pt>
+4, 690.00002pt x 426.44344pt>
 File: ../figures/fourth_order_radial_mode_4_test_case_number_1_grid_1056.pdf Gr
 aphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_4_test_case_number_1_grid_1056.pdf>
@@ -3373,7 +3376,7 @@ Package pdftex.def Info: ../figures/fourth_order_radial_mode_4_test_case_number
 _1_grid_1056.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 213.22769pt.
 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_1056.pdf, 
-id=3752, 462.52798pt x 346.89601pt>
+id=3755, 462.52798pt x 346.89601pt>
 File: ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_1056.
 pdf Graphic file (type pdf)
 <use ../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_1056.p
@@ -3381,45 +3384,45 @@ df>
 Package pdftex.def Info: ../figures/fourth_order_radial_mode_error_4_test_case_
 number_1_grid_1056.pdf  used on input line 443.
 (pdftex.def)             Requested size: 345.0pt x 258.76337pt.
- [128
+ [129
 
- <../figures/fourth_order_radial_mode_4_test_case_number_0_grid_33.pdf>] [129 <
+ <../figures/fourth_order_radial_mode_4_test_case_number_0_grid_33.pdf>] [130 <
 ../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_33.pdf> <..
 /figures/fourth_order_radial_mode_4_test_case_number_0_grid_66.pdf>]
-[130 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_66.pd
+[131 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_66.pd
 f> <../figures/fourth_order_radial_mode_4_test_case_number_0_grid_132.pdf>]
-[131 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_132.p
+[132 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_132.p
 df> <../figures/fourth_order_radial_mode_4_test_case_number_0_grid_264.pdf>]
-[132 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_264.p
+[133 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_264.p
 df> <../figures/fourth_order_radial_mode_4_test_case_number_0_grid_528.pdf>]
-[133 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_528.p
+[134 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_528.p
 df> <../figures/fourth_order_radial_mode_4_test_case_number_0_grid_1056.pdf>]
-[134 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_1056.
+[135 <../figures/fourth_order_radial_mode_error_4_test_case_number_0_grid_1056.
 pdf> <../figures/fourth_order_radial_mode_4_test_case_number_1_grid_33.pdf>]
-[135 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_33.pd
+[136 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_33.pd
 f> <../figures/fourth_order_radial_mode_4_test_case_number_1_grid_66.pdf>]
-[136 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_66.pd
+[137 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_66.pd
 f> <../figures/fourth_order_radial_mode_4_test_case_number_1_grid_132.pdf>]
-[137 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_132.p
+[138 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_132.p
 df> <../figures/fourth_order_radial_mode_4_test_case_number_1_grid_264.pdf>]
-[138 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_264.p
+[139 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_264.p
 df> <../figures/fourth_order_radial_mode_4_test_case_number_1_grid_528.pdf>]
-[139 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_528.p
+[140 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_528.p
 df> <../figures/fourth_order_radial_mode_4_test_case_number_1_grid_1056.pdf>]
-[140 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_1056.
+[141 <../figures/fourth_order_radial_mode_error_4_test_case_number_1_grid_1056.
 pdf>] (./doc.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 9061 strings out of 483183
- 256656 string characters out of 5966292
- 360147 words of memory out of 5000000
- 23738 multiletter control sequences out of 15000+600000
+ 9059 strings out of 483183
+ 256533 string characters out of 5966292
+ 361081 words of memory out of 5000000
+ 23739 multiletter control sequences out of 15000+600000
  534656 words of font info for 32 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 43i,9n,52p,378b,325s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,12n,52p,378b,325s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -3440,10 +3443,10 @@ type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmti9.pfb>
-Output written on doc.pdf (141 pages, 1846193 bytes).
+Output written on doc.pdf (142 pages, 1851444 bytes).
 PDF statistics:
- 4118 PDF objects out of 4296 (max. 8388607)
- 3665 compressed objects within 37 object streams
+ 4121 PDF objects out of 4296 (max. 8388607)
+ 3667 compressed objects within 37 object streams
  0 named destinations out of 1000 (max. 500000)
  1261 words of extra memory for PDF output out of 10000 (max. 10000000)
 
