@@ -1,0 +1,37 @@
+
+\section{Analytical Test Case}
+The results present a comparison of analytical and numerical solutions for a
+uniform flow, hard-wall, cylindrical duct for six grids. The physical 
+parameters for this test case are reporte in Table 1. The grid points were
+doubled each iteration and a starting grid of 33 points was chosen. The 
+first five radial modes were chosen in order to get a group of modes that were cut
+on and cut off. The case number's are used as identifiers for each 
+mode propagating up or downstream. In the event that a spurious mode is identified,
+the case number will index it.  The number of cut off modes was also constrained
+by setting a maximum value for the imaginary part of the axial wavenumber. 
+While this magnitude is currently arbitrary, the value could be correlated to a
+desired decay rate for the corresponding mode. Each of the axial wavenumber's 
+radial mode for each grid in also reported. The same test case was ran twice using 
+second and fourth order central schemes for the radial derivatives.  The 
+approximate rate of convergence is also reported for both numerical schemes.
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        $\sigma$ & \textit{0.0} \\ \hline
+        $k$      & \textit{10}   \\ \hline
+        $m$      & \textit{2}    \\ \hline
+        $M_x$    & \textit{0.3}  \\ \hline
+    \end{tabular}
+    \caption{Validation test case parameters, Uniform Flow Hard-wall Cylindrical%
+    Duct} 
+\end{table}
+
+\newpage
+\input{TestCase1Figures}
+\section{Discussion}
+
+
+
+
+

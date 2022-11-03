@@ -1,0 +1,99 @@
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage[noend]{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Research Report}
+
+
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+Still going for the annular test case.
+\section{Research Performed}
+
+\begin{itemize}
+    \item There is an additional function in \verb|V072| called \verb|anfu.f| which 
+        is short for Annulus Function but was not investigated prior to yesterday's 
+        report . I have now started seeing its output in my \verb|BesselFunctionCode.f90|,
+        which has all of the same bessel function and its derivative subroutines 
+        in Fortran 90. The intial radial mode plots look exponential when looking
+        at a $r_min$ to $r_max$ from $\leq 1$ but the domain was changed to be larger,  
+        periodic behavior can be observed in segements of the data as, $r$ increases.
+         , so there is standing wave result from \verb|V072|'s libraries, but 
+         does not compare to numerical results. 
+    \item \verb|mode_test_case_poster_child.py| is a refactored version 
+        of the analytical solution code used for the first cylindrical
+        test case in this work. This was done to ensure that the ``Fundamentals
+        of Duct Acoustics Toolkit '' (FDAT) functions were working properly 
+        and so that the structure of a test routine can be outlined. The 
+        normalization procedure from $Rienstra$ was indeed validated and documentation
+        is underway. This also allows the normalization of any radial mode to be
+        separate from the numerical study that is being conducted with SWIRL.
+    \item Upon Further Thesis review, the convective wave equation that is 
+        obtained by linearizing the governing equations for an 
+        compressible, inviscid fluid is reffered to as the Pridmore-Brown, 
+        Helmholtz , or Bessel's equation , depending on the further simplifications 
+        that are made to obtain them. This distinction in my thesis would be useful 
+        to the reader to observe how the governing equations change with changes
+        in flow direction , which will in-turn assist in modal descriptions.
+        The full derivation is included in the FDAT repository and is being revised 
+        to be placed in the Thesis as well. The excluded steps in the main body
+        are included in an appendix.  Are there too many steps presented?
+\end{itemize}
+\section{Issues and Concerns}
+Visual inspection was used to compare numerical results to the analytical result
+obtained from \verb|BesselFunctionCode.f90|, although the results are apparently different,
+the two data sets will be super imposed to ensure that it is a true apples to 
+apples comparison. This also proceeds to make progress.
+
+\section{Planned Research}
+\begin{itemize}
+    \item Revisit \verb|anfu.f| to see how it can properly be used and if it
+        is necessary, I wasn't using it initially.  
+    \item Rerun Annular test cases in SWIRL using odd number of grid points because
+        this will allow the user to se point by point convergence studies 
+\end{itemize}
+\end{document}
+
+

@@ -386,10 +386,9 @@ def main():
             upstream_Lmax.append(L_max_list[1])
 
                 
-        df = open('fourth_ourder_convergenceRates_radial_mode_{}'.format(str(i_rad_mode_num)),'w')
-        df.write('{},{},{},{}'.format('ROC','ROC_at_Lmax','Lmaxlocation','iter')
-        for i in range(len(downstream_L2)-1):
-
+        # df = open('fourth_ourder_convergenceRates_radial_mode_{}'.format(str(i_rad_mode_num)),'w')
+        # df.write('{},{},{},{}'.format('ROC','ROC_at_Lmax','Lmaxlocation','iter'))
+        for i in range(len(downstream_L2)-1): 
             ROC = np.log(downstream_L2[i+1]/downstream_L2[i])/\
                     np.log(grid_point_array[i]/grid_point_array[i+1])
                     
@@ -397,209 +396,13 @@ def main():
                     np.log(grid_point_array[i]/grid_point_array[i+1])
 
 
-            df.write('{},{},{},{}'.format(ROC,ROC_for_L_max,L_max_location_list[i]))
-            df.write('\n')
+            # df.write('{},{},{},{}'.format(ROC,ROC_for_L_max,L_max_location_list[i],i))
+            # df.write('\n')
             
             ROC_list.append(ROC)
             ROC_L_max_list.append(ROC_for_L_max)
             ROC_nested_list.append(ROC_list)
 
-            # np.save('ROCdata.dat',ROC)
-            # with open(r'ROC_result.dat','w') as rocf:
-                # rocf.write('\n'.join(str(ROC_list)))
-        # print(ROC_list)
-        # print(ROC_L_max_list)
-        df.close()
-        # print(ROC_list)
-            # list_list = L2_list[::2] 
-            # print(list_list)
-            # print(L2_list)
-            # plot Swirl's radial modes ...
-                
-            # list_list.append(L2_list[0]) 
-            # print(list_list)
-            # print(list_list[::2])
-            # list_list = list_list[::2]
-    # for i in range(len(list_list)-1):
-
-            # ROC = np.log(list_list[i+1]/list_list[i])/(grid_point_array[i+1]-grid_point_array[i])
-            # print(ROC)
-            # print((grid_point_array[i]/grid_point_array[i+1]))
-        #   # ROC = ist_list[i][1]
-
-
-    # plt.show()
-    # plt.close()
-    # plt.plot(L2_list)
-    # plt.show()
-    # fig,ax = plt.subplots()
-    #upstream modes
-    # plt.plot(list_list[:])
-    # plt.show()
-
-    # print(L2_list)
-
-    # print(L_max_list)
-    # print(list_list[::2][1])
-    # print(list_list)
-    # list_list = list_list[:]
-
-    # print('upstream',list_list[:][0][::2])
-    # print((list_list[1][:][:]))
-
-
-    # CODE ENDS HERE
-
-    # plt.show()
-    sys.exit()
-    # resize the figure to match the aspect ratio of the Axes    
-    # fig.set_size_inches(10, 8, forward=True)
-
-    fig = plt.figure()
-
-    plt.plot(r,radial_mode)
-
-    plt.plot(r,normalized_radial_mode,label='Normalized - Numerical')
-
-    plt.plot(r,analytical_normalized_radial_mode,label='Normalized - Analytic',linestyle='dotted',lw=2,marker='o')
-
-    plt.ylabel(r'\textit{Pressure,}$(p)$') 
-
-
-    sanity_check_for_normalization =np.trapz(
-            np.conj(normalized_radial_mode)*normalized_radial_mode*r,r)
-
-    sanity_check_for_analytical_normalization =np.trapz(
-            np.conj(analytical_normalized_radial_mode)*analytical_normalized_radial_mode*r,r)
-
-    print('Integral of Normalized Modes')
-    print('Numerical',sanity_check_for_normalization)
-    print('Analytic ',sanity_check_for_analytical_normalization)
-
-    txt = ("Analytical Propagating Mode for " + 
-            "$m = {M}$," + 
-            "$k_r = {N}$,"+
-            "$k = {freq}$,"+
-            "$M_x = {speed}$,"+ 
-            "$\eta = {liner}$").format(
-                    M     = azimuthal_mode_number,
-                    N     = radial_mode_number, 
-                    freq  = wavenumber ,
-                    speed = axial_mach_number,
-                    liner = 0)
-
-    plt.xlabel(r'\begin{center}\textit{Radius,}$(r)$\\*\textit{\small{' + txt + r'}}\end{center}')
-    # plt.figtext(k_x_plus[0],k_x_minus[0],txt, wrap = True, horizontalalignment='center', fontsize=12)
-    plt.legend()
-    fig.set_size_inches(10, 8, forward=True)
-
-
-    plt.savefig(
-            fname      ='figures/Radial_mode_analytical_test_case.pdf',
-            format     ='pdf',
-            bbox_inches='tight')
-
-
-    # plt.show()
-    # sys.exit()
-
-
-    # 3D plots
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    # ax.plot_surface(angle,x,mode_solution)
-    # plt.show()
-
-    # Create the mesh in polar coordinates and compute corresponding Z.
-    r = np.linspace(0, 1, 50)
-    p = np.linspace(0, 2*np.pi, 50)
-    # Function would start here
-    R, P = np.meshgrid(r, p)
-
-    radial_mode = scp.special.jv(
-            azimuthal_mode_number,
-            Jv_p_zero[radial_mode_number]*R)
-
-    Z = radial_mode*np.exp(-1j*azimuthal_mode_number*P).real
-
-    # Express the mesh in the cartesian system.
-    X, Y = R*np.cos(P), R*np.sin(P)
-
-    # Plot the surface.
-    ax.plot_surface(X, Y, Z, cmap=plt.cm.YlGnBu_r)
-    ax.view_init(30,90)
-    filename ='Radial_mode_analytical_test_case_3d1'
-    plt.savefig(
-            fname      ='figures/'+filename+'.pdf',
-            format     ='pdf',
-            bbox_inches='tight')
-
-    ax = plt.figure().add_subplot(projection='3d')
-
-    ax.plot_surface(X, Y, Z, cmap=plt.cm.YlGnBu_r)
-
-    # Plot projections of the contours for each dimension.  By choosing offsets
-    # that match the appropriate axes limits, the projected contours will sit on
-    # the 'walls' of the graph.
-    ax.contourf(X, Y, Z, zdir='z', offset=(max(Z[0])+max(Z[0])/2),cmap =plt.cm.YlGnBu_r)#, cmap=cm.coolwarm)
-    # need color bar
-
-    ax.set(
-            xlabel='X', ylabel='Y', zlabel='P')
-
-    plt.savefig(
-            fname      ='figures/Radial_mode_analytical_test_case_3d2.pdf',
-            format     ='pdf',
-            bbox_inches='tight')
-
-    animate_flag = False
-    # if animate_flag:
-    #     # rotate the axes and update
-    #     # for angle in range(0, 360):
-    #     ax.view_init(30, angle)
-    #     plt.draw()
-    #     plt.pause(.01)
-    #     plt.show()
-
-
-    points = 1000
-
-    angle_min = 0 
-    angle_max = 360*2 
-    dangle = angle_max - angle_min
-    n = dangle/720
-    r = 1
-    # pitch -distance from curve to curve
-    c = 2*np.pi*azimuthal_mode_number/abs(k_x_plus[0].real)
-    # c =1# 2*np.pi*azimuthal_mode_number/abs(k_x_plus[0].real)
-    # print('n',n)
-    u = np.linspace(0, r, endpoint=True, num=int(points * n))
-    v = np.linspace(-np.deg2rad(angle_min), np.deg2rad(angle_max), endpoint=True, num=int(2 * points * n))
-    u, v = np.meshgrid(u, v)
-
-    x = u * np.cos(v)   # r*cos(theta)
-    y = u * np.sin(v)   # r*cos(theta)
-
-    # JS:
-    #pitch*theta + r*arctan(phase)
-    #phase = m*theta + Re(k_x)*x
-    z = c * v + u*np.arctan(azimuthal_mode_number*v + k_x_plus[0].real*u) 
-
-
-
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-
-    ax.plot_surface(z, x, y)#, alpha=1, edgecolors='w', zorder=0, color='black')
-    # ax.quiver(-6, 0, 0, 24, 0, 0, length=1, arrow_length_ratio=0.03, color='black', zorder=1)
-    # ax.text(19, -2, -2, "$\mathbf{z}$", fontsize=40, color='black', zorder=1)
-
-    plt.savefig(
-            fname      ='figures/helicoid_test_case_3d2.pdf',
-            format     ='pdf',
-            bbox_inches='tight')
-
-    plt.show()
 
 if __name__ == '__main__':
     main()
