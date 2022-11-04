@@ -1,0 +1,49 @@
+        SUBROUTINE CASC(OMEGBC,MR,KB,SIGMA,H,CHI,MSEG,F,IER)
+C
+C       THIS SUBROUTINE IS USED BY V071 AND V074 ONLY
+C
+C PURPOSE : CALCULATE COMPLEX PRESSURE DISTRIBUTION ACROSS THE BLADE/
+C           VANE CHORD FOR INCIDENT TURBULENCE
+C
+C METHOD : REFER TO C.S. VENTRES,ET AL., "TURBOFAN NOISE GENERATION",
+C          NASA-CR-167951 AND NASA-CR-167952,JULY 1982
+C
+        IMPLICIT REAL*8 (A - H , O - Z )
+        REAL*8 MR,K,KB
+        REAL ERROR
+        COMPLEX*16 I,F,A,CKF
+        COMPLEX*16 G,G0,G1,G2,G3
+        DIMENSION F(20),A(20,20),WA(20)
+        DATA I/(0.0D+00,1.0D+00)/,ERROR/.0001/,PI/3.14159D+00/
+        BETAR=DSQRT(1.-MR**2)
+        K=-OMEGBC/(1.-MR**2)
+        H1=H*DSIN(CHI)
+        H2=H*DCOS(CHI)
+        GAMMA=SIGMA-K*MR*H1
+        G0=I*BETAR*K/(2.*PI*MR)
+        G1=BETAR*K**2/(2.*PI)*(1./MR**2-0.5)
+        G2=I*BETAR*K**3/(4.*PI)*(1./(2.*MR)-1./MR**3)
+        G3=-BETAR*K**4/(12.*PI)*(1./MR**4-1./(2.*MR**2)-0.125)
+        DO 10 M=1,MSEG
+        X=DCOS((M-.5)*PI/MSEG)
+        F(M)=-CDEXP(I*KB*X)
+ 10     CONTINUE
+        N=MSEG
+        DO 50 M=1,N
+        DO 50 L=1,N
+        S=-DLOG(2.0D+00)
+        DO 40 IR=1,N
+        BIR=1.0D+00
+        IF(IR.EQ.N) BIR=.5
+        S=S-2.*BIR/IR*DCOS((M-.5)*IR*PI/N)*DCOS(PI*IR*L/N)
+ 40     CONTINUE
+        X=DCOS((M-.5)*PI/N)-DCOS(L*PI/N)
+        CALL KERNEL(X,K,GAMMA,MR,H1,H2,ERROR,CKF)
+        G=(G0+G1*X+G2*X**2+G3*X**3)*CDEXP(I*K*MR*X)
+        BL=1.0D+00
+        IF(L.EQ.N) BL=.5D+00
+        A(M,L)=BL*(CKF+G*(S-DLOG(DABS(X))))*PI/N
+ 50     CONTINUE
+        CALL LEQT1C(A,MSEG,20,F,1,20,0,WA,IER)
+        RETURN
+        END
