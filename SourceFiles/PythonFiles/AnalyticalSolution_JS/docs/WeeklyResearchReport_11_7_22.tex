@@ -1,0 +1,116 @@
+
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+%\usepackage{algorithm}
+\usepackage{graphicx}
+%\usepackage[noend]{algpseudocode}
+%\usepackage{gnuplot-lua-tikz}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Weekly Research Report}
+
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+Validate annular duct modes. A result has been obtained but does not seem to 
+have the correct boundary conditions.
+
+\section{Research Performed This Week}
+Documentation for the annular duct mode calculations is underway. The procedure
+was presented in ``Aeroacoustic Analysis of Turbofan Noise Generation'' by 
+Harold D. Meyer and Edmane Envia. In Chapter 4: Duct Acoustics, Section 
+4.1 Normal Modes in an Annular Duct , along with the accompanying appendix 
+section, Appendix B: Numerical Computation of the Normal Modes in An Annular 
+Duct, the theoretical background discusses how the boundary conditions are
+used to obtain the appropriate weighting factors and mode shapes. The FORTRAN 77
+library codes have been copied over to SWIRL and a test routine using 
+FORTRAN 90 was written. The test routine contains three main calls, \verb|anrt.f|,
+\verb|eigen.f| and \verb|rmode.f|. 
+The analytic radial mode shape is of the form,
+
+\begin{equation}
+    R(k_{r,mn} r) =  A J_m (k_{r,mn} r) + B Y_m (k_{r,nmn} r)
+\end{equation}
+The key to the numerical procedure is the following ``transcendental'' equation,
+\begin{equation}
+    \begin{vmatrix}
+        J'_m(k_{r,mn} r_H) &Y'_m(k_{r,mn} r_H) \\
+        J'_m(k_{r,mn} r_T) &Y'_m(k_{r,mn} r_T) 
+    \end{vmatrix}   
+    = 0
+\end{equation}
+ The non-dimensional roots $k_{r,mn} r_T$ are found using initial guess and then incrementing from there
+
+ \begin{equation}
+     k_{r,mn} = 
+    \begin{cases}
+        m & \text{if } n = 1\\
+        k_{r,m(n-1)} r_T + \pi,              & \text{if }  n > 1.
+    \end{cases}
+ \end{equation}
+
+ The estimate is refined by incrementing the value of $k_{r,mn}$ by $\pi/10$ until
+ the determinant above changes sign. The step size is then halved and also changes 
+ sign. This iterative process continues until the absolute value of the determinant 
+ is reduced to a preassigned value (error tolerance?). The non dimensional versions
+ of these equations are used in the FORTRAN 77 Code.
+
+ Once $k_{r,mn}$ has been computed, the weighting factors $A$ and $B$ are assigned to 
+ one of the following two sets of values ( \verb|eigen.f|)
+
+
+ The remainder of the procedure is being documented along with directions on 
+ how to pass in the correct inputs to the F77 calls
+  
+\section{Issues and Concerns}
+Preliminary results appear to not have zero value derivatives at the boundaries
+since there is an apparent non zero slope. The hypothesis is that the 
+bessel functions are being truncated and not scaled. 
+
+\section{Planned Research}
+\begin{itemize}
+    \item Complete investigation and documention on the numerical method.
+    \item writing clear directions and examples will hopefully help me determine the 
+        correct annular mode shapes.
+\end{itemize}
+\end{document}
+
+

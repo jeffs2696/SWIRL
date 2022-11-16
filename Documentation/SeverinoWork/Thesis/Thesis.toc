@@ -1,75 +1,20 @@
 \contentsline {chapter}{Abstract}{iii}{Doc-Start}%
 \contentsline {chapter}{Acknowledgments}{iv}{chapter*.1}%
 \contentsline {chapter}{Contents}{v}{chapter*.2}%
-\contentsline {chapter}{List of Tables}{ix}{chapter*.3}%
-\contentsline {chapter}{List of Figures}{x}{chapter*.4}%
-\contentsline {chapter}{List of Symbols}{xii}{chapter*.5}%
-\contentsline {chapter}{List of Abbreviations}{xiv}{chapter*.6}%
-\contentsline {chapter}{Preface}{xv}{chapter*.7}%
-\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Overview}{1}{section.1.1}%
-\contentsline {chapter}{\numberline {2}Literature Review}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{7}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}The problem to be addressed and its significance}{7}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Establish reasoning - i.e. point - of - view for reviewing the literature}{7}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Explain the order/sequence of the review}{9}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}The theoretical foundation of conceptual framework}{10}{subsection.2.1.4}%
-\contentsline {section}{\numberline {2.2}Review of the assessment of the numerical techniques}{11}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}The research questions, hypotheses, foreshadowed problems, or conjectures}{12}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Calculation of Observed Order-of-Accuracy}{14}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Conclusion}{17}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Theoretical Framework and Methods}{18}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{18}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Steady Flow Aerodynamic Model}{19}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Compressible Euler Equations}{19}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Nonuniformities from swirling mean flow}{21}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Unsteady Flow: Aerodynamic Model}{22}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Non-dimensionalization}{22}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Analytical Solution to Sound Propagation in ducted flows}{22}{section.3.5}%
-\contentsline {subsubsection}{\numberline {3.5.0.1}Hard Wall boundary condition}{25}{subsubsection.3.5.0.1}%
-\contentsline {chapter}{\numberline {4}Chapter 4: Numerical Models}{27}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Numerical Integration}{27}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Introduction}{27}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Methods}{29}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Theory}{30}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Procedure}{34}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Tanh Summaion Formulation}{35}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Calculation of Observed Order-of-Accuracy}{39}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Fairing Functions}{43}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Setting Boundary Condition Values Using a Fairing Function}{43}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Using $\beta $ as a scaling parameter}{43}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Minimum Boundary Fairing Function}{45}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Max boundary polynomial}{47}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Corrected function}{47}{subsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.5.5}Symbolic Sanity Checks}{48}{subsection.4.5.5}%
-\contentsline {subsection}{\numberline {4.5.6}Min boundary derivative polynomial}{49}{subsection.4.5.6}%
-\contentsline {subsection}{\numberline {4.5.7}Polynomial function, max boundary derivative}{50}{subsection.4.5.7}%
-\contentsline {subsection}{\numberline {4.5.8}Putting it together}{52}{subsection.4.5.8}%
-\contentsline {chapter}{\numberline {5}Results and Discusssion}{53}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Verification}{53}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Introduction}{53}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}MMS, Solutions}{54}{subsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.2.1}Test Case 1}{59}{subsubsection.5.1.2.1}%
-\contentsline {section}{\numberline {5.2}Sheared Flow Results}{65}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Sheared Flow Results}{66}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Sheared Flow Results}{67}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Validation}{70}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Comparison to Kousen}{70}{subsection.5.5.1}%
-\contentsline {subsubsection}{\numberline {5.5.1.1}Test Case 1 ,Cylinder, Uniform Flow with Liner}{72}{subsubsection.5.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.5.1.2}Test Case 2}{72}{subsubsection.5.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.5.1.3}Test Case 3}{72}{subsubsection.5.5.1.3}%
-\contentsline {subsubsection}{\numberline {5.5.1.4}Test Case 4}{73}{subsubsection.5.5.1.4}%
-\contentsline {chapter}{References}{74}{chapter*.9}%
-\contentsline {chapter}{\numberline {A}Theory Appendix}{78}{appendix.A}%
-\contentsline {chapter}{\numberline {B}Chapter 3 Appendix}{79}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Divergence operations in new coordinate systems}{80}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Appendix A: Speed of Sound}{88}{section.B.2}%
-\contentsline {section}{\numberline {B.3}Appendix B: Isentropic Waves}{92}{section.B.3}%
-\contentsline {subsection}{\numberline {B.3.1}Linearizing the governing equations}{94}{subsection.B.3.1}%
-\contentsline {subsubsection}{\numberline {B.3.1.1}Linearizing Conservation of Mass}{94}{subsubsection.B.3.1.1}%
-\contentsline {subsubsection}{\numberline {B.3.1.2}Linearizing the Conservation of Momentum\\ in the \textit {r} direction}{97}{subsubsection.B.3.1.2}%
-\contentsline {subsubsection}{\numberline {B.3.1.3}Linearizing the Conservation of Momentum\\ in the \textit {$\theta $} direction}{99}{subsubsection.B.3.1.3}%
-\contentsline {subsubsection}{\numberline {B.3.1.4}Linearizing the Conservation of Momentum\\ in the \textit {x} direction}{101}{subsubsection.B.3.1.4}%
-\contentsline {subsubsection}{\numberline {B.3.1.5}Linearizing the Energy Equation}{103}{subsubsection.B.3.1.5}%
-\contentsline {section}{\numberline {B.4}Substituting Pertubation Variables}{105}{section.B.4}%
-\contentsline {section}{\numberline {B.5}Non-Dimensionalization}{110}{section.B.5}%
+\contentsline {chapter}{List of Tables}{vii}{chapter*.3}%
+\contentsline {chapter}{List of Figures}{viii}{chapter*.4}%
+\contentsline {chapter}{List of Symbols}{ix}{chapter*.5}%
+\contentsline {chapter}{List of Abbreviations}{xi}{chapter*.6}%
+\contentsline {chapter}{Preface}{xii}{chapter*.7}%
+\contentsline {chapter}{\numberline {1}Theoretical Framework and Methods}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Governing Equations for Compressible, Inviscid Flow}{1}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Nonuniformities from swirling mean flow}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Linearizing the Governing Equations}{4}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Non-Dimensionalization}{6}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Analytical Solution to Sound Propagation in ducted flows}{8}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Results and Discusssion}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Verification}{11}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Introduction}{11}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}MMS, Solutions}{12}{subsection.2.1.2}%
+\contentsline {chapter}{References}{23}{chapter*.8}%

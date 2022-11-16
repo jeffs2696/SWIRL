@@ -3,62 +3,62 @@
 \subsection{MMS, Solutions} 
 
 (insert table instead of equations, check comments in tex file for parameters)
-\begin{table}[h!]
-    \centering
-    \begin{tabular}{c|r}
-        $\bar{A}$ & test
-    \end{tabular}
-    \caption{Manufactured solution table for the first MMS test case}
-    \label{tab:MMS1_input}
-\end{table}
-% \begin{equation}
-%     M_x = 0.3 \left(
-%     \sum_{j=1}^5 R_{ij} +
-%     \sum_{j=1}^5 L_{ij} + 1
-%     \right) , B = 50
-%     \label{eqn:MMS_M_x}
-% \end{equation}
+%\begin{table}[h!]
+%    \centering
+%    \begin{tabular}{c|r}
+%        $\bar{A}$ & test
+%    \end{tabular}
+%    \caption{Manufactured solution table for the first MMS test case}
+%    \label{tab:MMS1_input}
+%\end{table}
+\begin{equation}
+    M_x = 0.3 \left(
+    \sum_{j=1}^5 R_{ij} +
+    \sum_{j=1}^5 L_{ij} + 1
+    \right) , B = 50
+    \label{eqn:MMS_M_x}
+\end{equation}
 
-% \begin{equation}
-%     \tilde{A} = \left(
-%     \sum_{j=1}^5 R_{ij} +
-%     \sum_{j=1}^5 L_{ij} + 1
-%     \right) , B = 0.3
-%     \label{eqn:MMS_A}
-% \end{equation}
+\begin{equation}
+    \tilde{A} = \left(
+    \sum_{j=1}^5 R_{ij} +
+    \sum_{j=1}^5 L_{ij} + 1
+    \right) , B = 0.3
+    \label{eqn:MMS_A}
+\end{equation}
 
-% \begin{align}
-%     \tilde{v}_{r,BCsImposed} = 
-%     \sum_{j=1}^3 R_{ij} +
-%     \sum_{j=1}^3 L_{ij} + 1, \\
-%     B = 2 , \\ 
-%     \tilde{v}_{r,BCsImposed}(\tilde{r}_{min}=\tilde{r}_{max}) = 0
-%     \label{eqn:MMS_vTh}
-% \end{align}
+\begin{align}
+    \tilde{v}_{r,BCsImposed} = 
+    \sum_{j=1}^3 R_{ij} +
+    \sum_{j=1}^3 L_{ij} + 1, \\
+    B = 2 , \\ 
+    \tilde{v}_{r,BCsImposed}(\tilde{r}_{min}=\tilde{r}_{max}) = 0
+    \label{eqn:MMS_vTh}
+\end{align}
 
-% \begin{equation}
-%     \tilde{v}_{\theta} = \left(
-%     \sum_{j=1}^4 R_{ij} +
-%     \sum_{j=1}^4 L_{ij} + 1
-%     \right) , B = 50 
-%     \label{eqn:MMS_vTh}
-% \end{equation}
+\begin{equation}
+    \tilde{v}_{\theta} = \left(
+    \sum_{j=1}^4 R_{ij} +
+    \sum_{j=1}^4 L_{ij} + 1
+    \right) , B = 50 
+    \label{eqn:MMS_vTh}
+\end{equation}
 
-% \begin{equation}
-%     \tilde{v}_{x} = 
-%     \sum_{j=1}^3 R_{ij} +
-%     \sum_{j=1}^3 L_{ij} + 1
-%     , B = 30 
-%     \label{eqn:MMS_vX}
-% \end{equation}
+\begin{equation}
+    \tilde{v}_{x} = 
+    \sum_{j=1}^3 R_{ij} +
+    \sum_{j=1}^3 L_{ij} + 1
+    , B = 30 
+    \label{eqn:MMS_vX}
+\end{equation}
 
-% \begin{align}
-%     \tilde{p}_{diffBCsImposed} = 
-%     \sum_{j=1}^5 R_{ij} +
-%     \sum_{j=1}^5 L_{ij} + 1
-%     , B = 30 
-%     \label{eqn:MMS_p}
-% \end{align}
+\begin{align}
+    \tilde{p}_{diffBCsImposed} = 
+    \sum_{j=1}^5 R_{ij} +
+    \sum_{j=1}^5 L_{ij} + 1
+    , B = 30 
+    \label{eqn:MMS_p}
+\end{align}
 
 Figure \ref{fig:1} shows the manufactured solution for the mean flow profile. The tangent
 summation method was used to generate the axial Mach number, the speed of sound, and the perturbation variables. The tangential Mach number was numerically
@@ -67,10 +67,11 @@ profile is unique because it has been generated solely to verify SWIRL
 and does not have physical significance. The “kinks” in the solution will allow a significant magnitude for the derivatives of these solutions.
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_profile.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_profile.pdf}
     \caption{The manufactured mean flow test case using a summation of Tangents for $A$ and $M_x$}
     \label{fig:1}
 \end{figure}
+
 The results from the numerical integration are presented in Figure \ref{fig:5}. Although
 the slope of the line appears linear, the TSM was still used to generate the MS for
 the speed of sound. Denser grids were used to compute the error by iterating as 
@@ -81,7 +82,7 @@ iterations and approaches zero as more grid points are used.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.pdf}
     \caption{ A comparison of the speed of sound, expected vs actual at the lowest grid to show similarities in solution}
     \label{fig:5}
 \end{figure}
@@ -89,10 +90,11 @@ iterations and approaches zero as more grid points are used.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison2.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison2.pdf}
     \caption{ A comparison of the speed of sound error at three grid}
     \label{fig:5a}
 \end{figure}
+
 The error will decrease at a known rate depending on the type of numerical integration scheme. Since the composite trapezoidal rule has an order of accuracy
 of 2, it is expected that the approximated order of accuracy will approach two as the
 error approaches zero. This behavior is shown in Figure \ref{fig:8}, where the approximated
@@ -102,7 +104,7 @@ convergence) approached two for numerical integration as the grid spacing decrea
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf}
     \caption{L2 Norm comparison for the speed of sound integration for the compound trapezoidal rule}
     \label{fig:8}
 \end{figure}
@@ -122,15 +124,14 @@ the manufactured solution.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vR.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vR.pdf}
 \caption{The manufactured perturbation functions ,$v_r$}%, $v_x$, $v_{\theta}$, $p$}
     \label{fig:1a}
 \end{figure}
 
-
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vX.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vX.pdf}
 \caption{The manufactured perturbation functions ,$v_x$}%, $v_x$, $v_{\theta}$, $p$}
     \label{fig:2a}
 \end{figure}
@@ -138,7 +139,7 @@ the manufactured solution.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vTh.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vTh.pdf}
     \caption{The manufactured perturbation functions ,$v_{\theta}$}%, $v_x$, $v_{\theta}$, $p$}
     \label{fig:3a}
 \end{figure}
@@ -146,7 +147,7 @@ the manufactured solution.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_Pr.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_Pr.pdf}
 \caption{The manufactured perturbation functions ,$P$}%, $v_x$, $v_{\theta}$, $p$}
     \label{fig:4a}
 \end{figure}
@@ -164,24 +165,21 @@ for the approximated radial derivatives and then compared to the source terms
 generated for the MMS in Figure \ref{fig:6}. 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonROC.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonROC.pdf}
     \caption{ Speed of Sound Rate Of Convergence}
     \label{fig:SpeedOfSoundROC}
 \end{figure}
 
-
-
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison1.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison1.pdf}
     \caption{LEE Source Terms}
     \label{fig:6}
 \end{figure}
 
-
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError1.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError1.pdf}
     \caption{LEE Source Term Error}
     \label{fig:7}
 \end{figure}
@@ -189,7 +187,7 @@ generated for the MMS in Figure \ref{fig:6}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError2.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError2.pdf}
     \caption{LEE Source Term Error}
     \label{fig:7}
 \end{figure}
@@ -197,7 +195,7 @@ generated for the MMS in Figure \ref{fig:6}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError3.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError3.pdf}
     \caption{LEE Source Term Error}
     \label{fig:7}
 \end{figure}
@@ -205,7 +203,7 @@ generated for the MMS in Figure \ref{fig:6}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.pdf}
     \caption{LEE Source Term Error}
     \label{fig:7}
 \end{figure}
@@ -213,12 +211,12 @@ generated for the MMS in Figure \ref{fig:6}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf}
     \label{fig:9}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics{/home/jeff-severino/SWIRL/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf}
+    \includegraphics{../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf}
     \label{fig:9}
 \end{figure}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.23)  4 NOV 2022 15:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.23)  4 NOV 2022 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -297,22 +297,22 @@ e
 )
 ABD: EveryShipout initializing macros [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./TheoreticalDerivation.t
-ex
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1] (./TheoreticalDerivati
+on.tex
 Overfull \hbox (12.05812pt too wide) detected at line 38
 []
  []
 
-[1]
+[2]
 
-LaTeX Warning: Citation `wolphram:bessel' on page 2 undefined on input line 152
+LaTeX Warning: Citation `wolphram:bessel' on page 3 undefined on input line 152
 .
 
 
-LaTeX Warning: Reference `eqn:besselODE' on page 2 undefined on input line 162.
+LaTeX Warning: Reference `eqn:besselODE' on page 3 undefined on input line 162.
 
 
-[2] [3] [4] [5] [6]) (./AnnularDuctModeNumericalMethod.tex [7]) [8] (./doc.aux)
+[3] [4] [5] [6] [7]) (./AnnularDuctModeNumericalMethod.tex [8]) [9] (./doc.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -321,29 +321,30 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 7575 strings out of 483183
- 142136 string characters out of 5966292
+ 7578 strings out of 483183
+ 142172 string characters out of 5966292
  356727 words of memory out of 5000000
- 22503 multiletter control sequences out of 15000+600000
- 534656 words of font info for 32 fonts, out of 8000000 for 9000
+ 22505 multiletter control sequences out of 15000+600000
+ 534991 words of font info for 33 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  43i,16n,52p,378b,136s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
->
-Output written on doc.pdf (9 pages, 161139 bytes).
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on doc.pdf (10 pages, 167907 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 90 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

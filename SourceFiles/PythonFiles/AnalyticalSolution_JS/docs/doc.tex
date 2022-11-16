@@ -15,7 +15,8 @@
     \begin{center}
         \vspace*{1cm}
 
-        \textbf{Analytical Solution for Duct Mode Propagation in %
+        \textbf{ Validation using the %
+            Analytical Solution for Duct Mode Propagation in %
         Uniform Flow} 
 
         \vspace{0.5cm}
@@ -41,6 +42,7 @@
 
     \end{center}
 \end{titlepage}
+
 \section{Introduction - Turbomachinery Noise}
 Turbomachinery noise generation occurs from pressure fluctuations from the series 
 of fans within it's annular duct. While the jet that is produced from this stream
@@ -51,7 +53,22 @@ by standing waves referred to as modes, in particular, duct modes because
 the mode itself is dependent on the geometry of the column of air within the 
 annular duct, as well as the speed of the flow moving through it
 
-\section{Duct Mode Theory}
+
+This document will provide the fundamental equations that describe sound propagation
+in ducted flow.
+
+\begin{itemize}
+    \item Introduce the governing equations for compressible inviscid flow and 
+        the assumptions used to obtain them
+    \item Demonstrate the linearization process and show the general equations
+        that describe duct modes.  
+    \item The analytic solution for cylindrical and annular ducts with and
+        without liner will be presented and used for validation against
+        numerical approximations.
+ \end{itemize}
+\newpage
+
+\section{Theoretical Foundation for Duct Acoustics based on first principles}
 
 The pressure field within a duct is governed by the convective wave equation, a
 second order ODE as a function of radius. 

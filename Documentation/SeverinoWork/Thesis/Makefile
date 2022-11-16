@@ -3,4 +3,4 @@ all:
 	bibtex Thesis
 	pdflatex Thesis.tex
 	pdflatex Thesis.tex
-	xdg-open Thesis.pdf
+	wslview Thesis.pdf

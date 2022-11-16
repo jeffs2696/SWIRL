@@ -9,36 +9,36 @@
 % \section{No Flow}
 \section{Analytical Solution to Sound Propagation in ducted flows}
 
-Goldstein demonstrated the linearized momentum and continuity PDE  can be 
-combined to derive the convective wave equation by taking the divergence of
-the momentum equation and taking the difference of the substantial derivative
-of the conservation of mass equation to yield,
-
-\begin{equation}
-    \frac{1}{A^2}\frac{D^2\tilde{p}}{Dt^2} -
-    \nabla^2 \tilde{p} =
-    2 \bar{\rho} \frac{d V_x}{d x} \frac{\partial  \tilde{v}_r}{ \partial x} 
-    \label{eqn:KousensWaveEquation}
-\end{equation}
-
-
-In the case of sheared flow, $dV_x/dx = 0$ the right hand side will be zero 
-
-
-
-\begin{align*}
-    \frac{1}{A^2}\left(
-        \frac{\partial^2 \tilde{p}}{\partial t^2} + 
-        \vec{V}\cdot \vec {\nabla} (\tilde{p}) 
-    \right) -
-    \nabla^2
-    \tilde{p} &=
-    0 \\
-\end{align*}
-
-Substituting the definitions for $\nabla$ and $\nabla^2$ and setting $\vec{V} =0$
-in cylindrical coordinates gives,
-
+%Goldstein demonstrated the linearized momentum and continuity PDE  can be 
+%combined to derive the convective wave equation by taking the divergence of
+%the momentum equation and taking the difference of the substantial derivative
+%of the conservation of mass equation to yield,
+%
+%\begin{equation}
+%    \frac{1}{A^2}\frac{D^2\tilde{p}}{Dt^2} -
+%    \nabla^2 \tilde{p} =
+%    2 \bar{\rho} \frac{d V_x}{d x} \frac{\partial  \tilde{v}_r}{ \partial x} 
+%    \label{eqn:KousensWaveEquation}
+%\end{equation}
+%
+%
+%In the case of sheared flow, $dV_x/dx = 0$ the right hand side will be zero 
+%
+%
+%
+%\begin{align*}
+%    \frac{1}{A^2}\left(
+%        \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+%        \vec{V}\cdot \vec {\nabla} (\tilde{p}) 
+%    \right) -
+%    \nabla^2
+%    \tilde{p} &=
+%    0 \\
+%\end{align*}
+%
+%Substituting the definitions for $\nabla$ and $\nabla^2$ and setting $\vec{V} =0$
+%in cylindrical coordinates gives,
+%
 % \begin{align*} 
 %     \frac{1}{A^2}\left(
 %         \frac{\partial^2 \tilde{p}}{\partial t^2}
@@ -58,18 +58,18 @@ in cylindrical coordinates gives,
 % \end{align*} 
 % Setting $\vec{V} = 0$,
 
-\begin{align*} 
-    \frac{1}{A^2}\left(
-        \frac{\partial^2 \tilde{p}}{\partial t^2}
-    \right) - 
-        \left(
-            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
-            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial  r}  +
-            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
-            \frac{\partial^2 \tilde{p}}{\partial x^2} 
-        \right) &= 0  
-\end{align*} 
-Utilizing the relation, $\tilde{p} = p/\bar{\rho} A^2$,
+%\begin{align*} 
+%    \frac{1}{A^2}\left(
+%        \frac{\partial^2 \tilde{p}}{\partial t^2}
+%    \right) - 
+%        \left(
+%            \frac{\partial^2 \tilde{p}}{\partial t^2} + 
+%            \frac{1}{\tilde{r}}\frac{\partial \tilde{p}}{\partial  r}  +
+%            \frac{1}{\tilde{r}^2} \frac{\partial^2 \tilde{p}}{\partial \theta^2} + 
+%            \frac{\partial^2 \tilde{p}}{\partial x^2} 
+%        \right) &= 0  
+%\end{align*} 
+%Utilizing the relation, $\tilde{p} = p/\bar{\rho} A^2$,
 
 \begin{align*} 
     \frac{1}{A^2}\left(
@@ -415,7 +415,7 @@ Equation} ,
 
 The general solution to Bessel's differential equation is a linear combination of
 the Bessel functions of the first kind, $J_n(k_r r)$ and of the second kind, $Y_n(k_r r)$ 
-\cite{wolphram:bessel}. The subscript $n$ refers to the order of Bessel's equation.
+\cite{weisstein2002bessel}. The subscript $n$ refers to the order of Bessel's equation.
 
 \begin{equation}
     R(r) = (AJ_n(k_r r) + BY_n(k_r r)) 
@@ -536,37 +536,37 @@ be set equal to a separation constant, $-k_r^2$.
 
 
 
-\subsubsection{Hard Wall boundary condition}
-\begin{align*}
-    \frac{\partial p}{\partial r}|_{r = r_{min}}  =\frac{\partial p}{\partial r}|_{r = r_{max}} = 0 \rightarrow 
-    \frac{\partial}{\partial r} \left( X\Theta T R \right) &= 0 \\
-    X \Theta T\frac{\partial R}{\partial r}  &= 0 \\
-    \frac{\partial R}{\partial r}  &= 0 
-\end{align*}
-
-where,
-
-
-\begin{align*} 
-    \frac{ \partial R}{\partial r}|_{r_{min}} &= AJ_n'(k_r r_{min}) + B Y_n' (k_r r_{min}) = 0 
-    \rightarrow B = -A \frac{J_n'(k_r r_{min})}{Y_n'(k_r r_{min})}
-\end{align*}
-
-
-\begin{align*} 
-    \frac{ \partial R}{\partial r} &= AJ_n'(k_r r_{max}) + B Y_n' (k_r r_{max}) = 0 \\
-                                   &= AJ_n'(k_r r_{max}) - A\frac{J_n' (k_r r_{min})}{Y_n'(k_r r_{min})} Y_n' (k_r r_{max}) = 0 \\
-                                   &= \frac{J_n'(k_r r_{min})}{J_n' (k_r r_{max})} - \frac{Y_n'(k_r r_{min})}{Y_n' (k_r r_{max})} = 0 
-\end{align*}
-where $k_r r$ are the zero crossings for the derivatives of the Bessel functions of the first and second kind.
-
-In summary, the wave equation for no flow in a hollow duct with hard walls is obtained 
-from Equation (\ref{eqn:wavenumber_without_kr}).
-\begin{equation}
-    k^2 = k_r^2 + k_x^2
-    \label{eqn:wavenumber_equation}
-\end{equation}
-
+%\subsubsection{Hard Wall boundary condition}
+%\begin{align*}
+%    \frac{\partial p}{\partial r}|_{r = r_{min}}  =\frac{\partial p}{\partial r}|_{r = r_{max}} = 0 \rightarrow 
+%    \frac{\partial}{\partial r} \left( X\Theta T R \right) &= 0 \\
+%    X \Theta T\frac{\partial R}{\partial r}  &= 0 \\
+%    \frac{\partial R}{\partial r}  &= 0 
+%\end{align*}
+%
+%where,
+%
+%
+%\begin{align*} 
+%    \frac{ \partial R}{\partial r}|_{r_{min}} &= AJ_n'(k_r r_{min}) + B Y_n' (k_r r_{min}) = 0 
+%    \rightarrow B = -A \frac{J_n'(k_r r_{min})}{Y_n'(k_r r_{min})}
+%\end{align*}
+%
+%
+%\begin{align*} 
+%    \frac{ \partial R}{\partial r} &= AJ_n'(k_r r_{max}) + B Y_n' (k_r r_{max}) = 0 \\
+%                                   &= AJ_n'(k_r r_{max}) - A\frac{J_n' (k_r r_{min})}{Y_n'(k_r r_{min})} Y_n' (k_r r_{max}) = 0 \\
+%                                   &= \frac{J_n'(k_r r_{min})}{J_n' (k_r r_{max})} - \frac{Y_n'(k_r r_{min})}{Y_n' (k_r r_{max})} = 0 
+%\end{align*}
+%where $k_r r$ are the zero crossings for the derivatives of the Bessel functions of the first and second kind.
+%
+%In summary, the wave equation for no flow in a hollow duct with hard walls is obtained 
+%from Equation (\ref{eqn:wavenumber_without_kr}).
+%\begin{equation}
+%    k^2 = k_r^2 + k_x^2
+%    \label{eqn:wavenumber_equation}
+%\end{equation}
+%
 
 % Solving for the axial wavenumber gives,
 % \section{Uniform Flow}

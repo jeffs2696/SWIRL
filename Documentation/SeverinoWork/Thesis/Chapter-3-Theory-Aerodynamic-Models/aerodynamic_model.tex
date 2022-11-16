@@ -2,28 +2,32 @@
 % \section{Steady Flow Aerodynamic Model}
 % \section{Modal Propagation Theroetical Background}
 
-\subsection{Governing Equations for Compressible, Inviscid Flow}
+\section{Governing Equations for Compressible, Inviscid Flow}
 
-The governing equations for an ideal polytropic gas with density, $\rho$, velocity, $\vec{V}$, and 
-pressure, $p$ describe the conservation of mass, momentum, and energy for a 
+The governing equations for an isentropic, inviscid, compressible gas with 
+density, $\rho$, velocity, $\vec{V}$, and pressure, $p$ describe the 
+conservation of mass, momentum, and energy for a 
 given domain in Equations (\ref{eqn:CompressibleConservationOfMass},
 \ref{eqn:CompressibleConservationOfMomentum},
 \ref{eqn:CompressibleConservationOfEnergy}) respectively. 
 
 \begin{align}
-    \frac{D\rho}{Dt} = - \rho \nabla \cdot \vec{V} 
+    \frac{D\rho}{Dt} &= - \rho \nabla \cdot \vec{V} 
     \label{eqn:CompressibleConservationOfMass} \\
-    \frac{D\vec{V}}{Dt} = - \frac{\nabla p}{\rho} + \vec{g} 
+    \frac{D\vec{V}}{Dt} &= - \frac{\nabla p}{\rho} + \vec{g} 
     \label{eqn:CompressibleConservationOfMomentum} \\
-    \frac{Dp}{Dt} = - \gamma p \nabla \cdot \vec{V} 
-    \label{eqn:CompressibleConservationOfEnergy} \\
+    %\frac{Dp}{Dt} = - \gamma p \nabla \cdot \vec{V} 
+    \frac{Ds}{Dt} &= 0
+    \label{eqn:CompressibleConservationOfEnergy} 
 \end{align}
 
-where,
+where $D/Dt$ is the material derivative operator,,
+
 \begin{equation}
     \frac{D}{Dt} = \frac{\partial }{\partial t} + \nabla \cdot \vec{V}
     \label{eqn:MaterialDerivative}
 \end{equation}
+
 
 For this model, the domain is assumed to be uniformly cylindrical. Therefore the
 flow is assumed to be asymmetric, then the radial velocity component is 
@@ -47,11 +51,40 @@ coordinates, is
     \label{eqn:NablaInCylindrical}
 \end{align}
 
+To close the problem and to write \label{eqn:CompressibleConservationOfEnergy}
+in terms of pressure, the thermodynamic relation for the speed of sound is used
+
+\begin{equation}
+    A^2 = \frac{\partial p}{\partial \rho}\Big|_s
+    \label{eqn:isentropicspeedofsound}
+\end{equation}
+
+Utilizing the equation of state in differential form and with material derivatives
+
+\begin{equation}
+    \frac{D p}{Dt } = A^2 \frac{D \rho }{D t } + \frac{\partial p}{\partial s}%
+    \Big|_{\rho} \frac{Ds}{Dt} 
+    \label{eqn:EOSinDifferentialForm}
+\end{equation}
+The convervation of energy can be rewritten in terms of pressure, by using 
+\ref{eqn:isentropicspeedofsound} and \ref{eqn:EOSinDifferentialForm}
+\begin{equation}
+    \frac{D p}{D t} = A^2 \frac{D \rho}{Dt}.
+    \label{eqn:CompressibleConservationOfEnergyWithPressure}
+\end{equation}
+Using the \ref{eqn:CompressibleConservationOfMass} in non-conservative form 
+and the definition $A^2 = \gamma p / \rho$ 
+(See Appendix for derivation)
+
+\begin{equation}
+    \frac{D p}{D t} + \gamma p \left( \nabla \cdot \vec{V} \right)= 0.
+    \label{eqn:CompressibleConservationOfEnergyWithPressureandGamma}
+\end{equation}
 Expanding equations
 (
 \ref{eqn:CompressibleConservationOfMass},
 \ref{eqn:CompressibleConservationOfMomentum},
-\ref{eqn:CompressibleConservationOfEnergy}
+\ref{eqn:CompressibleConservationOfEnergyWithPressureandGamma}
 ) with the corresponding cylindrical expressions become, 
 
 \begin{align}

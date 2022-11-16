@@ -403,6 +403,7 @@ def main():
             ROC_L_max_list.append(ROC_for_L_max)
             ROC_nested_list.append(ROC_list)
 
+    print(ROC_list)
 
 if __name__ == '__main__':
     main()

@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\makeatletter
+\let\latex@xfloat=\@xfloat
+\def\@xfloat #1[#2]{%
+    \latex@xfloat #1[#2]%
+    \def\baselinestretch{1}
+    \@normalsize\normalsize
+    \normalsize
+}
+\makeatother
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{epigraph}
+\usepackage{cancel}
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\DeclareUnicodeCharacter{2212}{−}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
+\pgfplotsset{compat=newest}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Update Report}
+
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+Thesis revision is currently in progress. The  ``Chapter 3: Theoretical Framework and Methods``
+section  is nearly complete. It is missing the 
+complete derivation for the wave equation at the start of the ''Analytical 
+Solution to Sound Propagation in ducted flows``
+but has the governing equations, the nonuniformities in swirling mean flow, the linearization
+and the non dimensionalization that will be used.
+
+
+\section{Research Performed}
+The current Methods section is included. The initial results for the MMS
+study is also included.  The goal is finalize what I can now and include my initial 
+findings for the uniform flow case that contained the boundary problems.
+
+%Here is the opening section for the third chapter,
+%\input{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model}
+%\input{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
+%
+\section{Issues and Concerns}
+Formatting is happening in parallel. There are missing labels and equation numbers
+and some equations are not being referenced when mentioned, leading to confusion 
+for the reader
+\section{Planned Research}
+
+\begin{itemize}
+    \item Include the derivation for the wave equation that is used for validation
+        work. I would like to start the ``Analytical Solution to Sound Propagation in 
+        ducted flows'' section with this and emphasize that the equations outlined 
+        above this section present the  eigenvalue problem, but the problem 
+        can also be solved by solving a second order ODE for pressure, but this 
+        has pros and cons that need to also be discussed.  
+    \item The MMS theoretical background needs to also be included in its own 
+        section prior the numerical methods section
+\end{itemize}
+\end{document}
+
+

@@ -1,7 +1,7 @@
 % \section{Applying model to various flows}
 % The LEE for flows ith axial sheared flow, solid body and free vortex swirl
 % were reviewed by \cite{kousen1995eigenmode}, and most recently studied by \cite{Maldonado2016}.
-\subsection{Nonuniformities from swirling mean flow}
+\section{Nonuniformities from swirling mean flow}
 
 % \[P = \int_{\}^{1} \frac{\bar{\rho} V_{\theta}^2}{\tilde{r}} d\tilde{r}\] 
 % % \subsection{Axial Shear Flow}
@@ -82,7 +82,7 @@ the resulting nonuniformities due to rotations in the flow.
 where $r_{min}$ and $r_{max}$ are the bounds of the radius. Since the flow
 is isentropic, the pressure is related to the speed of sound through $\nabla p =
 A^2 \nabla \rho$; which is used to compute $\rho$. With the relationship 
-$A^2 = \kappa p/\rho$, the speed of sound is found to be,
+$A^2 = \gamma p/\rho$, the speed of sound is found to be,
 
 % The dimensional form is,
 % \[
@@ -143,12 +143,14 @@ $A^2 = \kappa p/\rho$, the speed of sound is found to be,
 % \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right] \\ \text{replacing r with }\tilde{r} \rightarrow \tilde{A}(r) &= exp\left[-\int_{r}^{r_{max}}\frac{M_{\theta}}{r}\frac{\left(\gamma - 1\right)}{2}{\partial r}\right]		\\
 % \end{align*}
 % (See appendix for full derivation)
-\begin{align*}
+\begin{align}
 \tilde{A}(\tilde{r}) &= exp\left[\left(\frac{1 - \gamma}{2}\right)\int_{\tilde{r}}^{1}\frac{M_{\theta}}{\tilde{r}}{\partial \tilde{r}}\right]	
-\end{align*}
+\end{align}
 
+The appendix shows how the speed of sound was extracted.
 For special cases of swirling flow, the relation to between the speed 
 of sound and the tangential velocity can be found. Expressions can be derived 
-for free vortex , and/or solid body swirl. 
+for free vortex , and/or solid body swirl. The non-dimesionalization is shown in the
+next section.
 
 

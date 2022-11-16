@@ -1,15 +1,33 @@
 
-\subsection{Linearizing the governing equations}
-\subsubsection{Linearizing Conservation of Mass}
-To linearize the Euler equations, we substitute each flow variable with its equivalent mean and perturbation components. Note that the mean term is only a function of space whereas the perturbation component is a dependent on both space and time (functional dependence is not explicity written with each variable). Assuming that we can divide the variable into a known laminar flow solution to the Navier-Stokes equations and a small amplitude perturbation solution:
+\section{Linearizing the Governing Equations}
+To linearize the Euler equations, we substitute each flow variable with its
+equivalent mean and perturbation components. Note that the mean term is only a 
+function of space whereas the perturbation component is a dependent on both space 
+and time (functional dependence is not explicity written with each variable). 
+Assuming that we can divide the variable into a known laminar flow solution 
+to the governing equations and a small amplitude perturbation solution,
 
-%\begin{align}
-%v_r 		&= V_r(x) + v_r'\\
-%v_{\theta} 	&= V_{\theta} + v_{\theta}'\\
-%v_x 		&= V_x + v_x'\\
-%p 			&= \bar{p} + p'\\
-%\rho 		&= \bar{\rho} + \rho'
-%\end{align}
+\begin{align}
+v_r 		&= V_r(x) + v_r'\\
+v_{\theta} 	&= V_{\theta} + v_{\theta}'\\
+v_x 		&= V_x + v_x'\\
+p 			&= \bar{p} + p'\\
+\rho 		&= \bar{\rho} + \rho'
+\end{align}
+
+One key assumption is that the perturbation quantites, $\tilde{p}$, 
+$\tilde{v}_r$,$\tilde{v}_{\theta}$, and $\tilde{v}_x$ , are all exponential 
+and that they are solely a function of radius, 
+
+\begin{align}
+    v'_r &= v_r (r) e^{i\left(k_x x + m \theta - \omega t \right)}  \\
+    v'_{\theta} &= v_{\theta} (r) e^{i\left(k_x x + m \theta - \omega t \right)} \\ 
+    v'_x &= v_x (r) e^{i\left(k_x x + m \theta - \omega t\right)} \\
+    p' &= p(r) e^{i\left(k_x x + m \theta - \omega t\right)}
+    \label{eqn:perturbationexponents}
+\end{align}
+
+%\subsection{Linearizing Conservation of Mass}
 %% \newpage
 %% Starting with continuity,
 %Substituting these expressions into the governing equations will give the 
@@ -87,7 +105,8 @@ To linearize the Euler equations, we substitute each flow variable with its equi
 %= 0	\\
 %\end{align*}
 %\end{flushleft}
-Important things to note
+
+There are a few important assumptions that will be utilized,
 \begin{itemize}
 	\item The small disturbances are infinitesimal (thus linearized)
 	\item Neglect second order terms.
@@ -490,7 +509,7 @@ Important things to note
 % \end{equation*}
 % \newpage
 
-The linearized Euler equations are,
+%The linearized Euler equations are,
 
 % \begin{align*}
 % \frac{\partial \rho'}{\partial t} +
@@ -531,13 +550,18 @@ The linearized Euler equations are,
 % \end{align*}
 
 
-First, recall,
+The following relationships were utlized to simplify the linearized equations,
 
 \[\frac{\partial P}{\partial r} = \frac{\bar{\rho} V_{\theta}^2}{r} \]
 \[\gamma P  = \bar{\rho}A^2\]
 \[\rho' = \frac{1}{A^2} p'\]
 
-% We can rearrange the equations to reflect Equations 2.33-2.36. Note that the momentum equation in the $\theta$ and $x$ directions remain unchanged. The term $ \frac{\partial(rv_r')}{\partial r}  = \frac{\partial (r)}{\partial r}v_r' + \frac{\partial v_r'}{\partial r} r$ in the Energy equation
+% We can rearrange the equations to reflect Equations 2.33-2.36. 
+Note that the momentum equation in the $\theta$ and $x$ directions remain 
+unchanged. The term $ \frac{\partial(rv_r')}{\partial r}  =%
+\frac{\partial (r)}{\partial r}v_r' + \frac{\partial v_r'}{\partial r} r$ 
+in the Energy equation
+
 \begin{align*}
 \frac{1}{\bar{\rho} A^2}\left(
 \frac{\partial p'}{\partial t} +
@@ -572,19 +596,19 @@ V_x \frac{\partial v_x'}{\partial x}
 \end{align*}
 
 % \newpage
-\section{Substituting Pertubation Variables}
-One key assumption is that the perturbation quantites, $\tilde{p}$, 
-$\tilde{v}_r$,$\tilde{v}_{\theta}$, and $\tilde{v}_x$ , are all exponential 
-and that they are solely a function of radius, 
+%\section{Substituting Pertubation Variables}
+%One key assumption is that the perturbation quantites, $\tilde{p}$, 
+%$\tilde{v}_r$,$\tilde{v}_{\theta}$, and $\tilde{v}_x$ , are all exponential 
+%and that they are solely a function of radius, 
+%
+%\[v'_r = v_r (r) e^{i\left(k_x x + m \theta - \omega t \right)} \]
+%\[v'_{\theta} = v_{\theta} (r) e^{i\left(k_x x + m \theta - \omega t \right)} \]	
+%\[v'_x = v_x (r) e^{i\left(k_x x + m \theta - \omega t\right)} \]	
+%\[p' = p(r) e^{i\left(k_x x + m \theta - \omega t\right)} \]	
+%
+%\newpage
 
-\[v'_r = v_r (r) e^{i\left(k_x x + m \theta - \omega t \right)} \]
-\[v'_{\theta} = v_{\theta} (r) e^{i\left(k_x x + m \theta - \omega t \right)} \]	
-\[v'_x = v_x (r) e^{i\left(k_x x + m \theta - \omega t\right)} \]	
-\[p' = p(r) e^{i\left(k_x x + m \theta - \omega t\right)} \]	
-
-\newpage
-
-Substituting the quantities into the linearized equations will give us the final 
+Substituting Equation (\ref{eqn:perturbationexponents})  into the linearized equations will give us the final 
 governing equations. 
 % Starting with the Conservation of Momentum in the r direction,
 % \[
@@ -754,39 +778,44 @@ governing equations.
 % ik_xv_x(r) = 0} \]
 % The Linearized Euler equations now become
 
-% \begin{align*}
-% r\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_r - \frac{2 \bar{v_{\theta}}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p\\
-% \theta\text{-direction: }& i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_{\theta} + \left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta = -\frac{m}{\bar{\rho}r}p \\ 
-% x\text{-direction: }&i\left(-\omega + \frac{mV_{\theta}}{r} +  k_xVx\right)v_x + \frac{\partial V_x}{\partial r} v_r = - \frac{i
-% 	k_x}{\bar{\rho}}p\\ 
-% \text{Energy: }&\frac{1}{\bar{\rho} A^2} \left(-i\omega + \frac{imV_{\theta}}{r} + ik_xV_x  +
-% \right)p(r)  +
-% \frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
-% \frac{\partial v_r(r)}{\partial r}+ 
-% \frac{im}{r} v_{\theta}(r)
-% +
-% ik_xv_x(r) 
-% &= 0
-% \end{align*}
+ \begin{align*}
+ i\left(
+     -\omega + \frac{ m}{r} +  k_x V_x 
+ \right) v_r - 
+ \frac{2 \bar{v_{\theta}}}{r}v_{\theta}  
+ = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+
+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p\\
+i\left(-\omega + \frac{ m}{r} +  k_x V_x \right) v_{\theta} + \left(\frac{V_{\theta}}{r} +  \frac{\partial V_{\theta}}{\partial r}\right)v_\theta = -\frac{m}{\bar{\rho}r}p \\ 
+ i\left(-\omega + \frac{mV_{\theta}}{r} +  k_xVx\right)v_x + \frac{\partial V_x}{\partial r} v_r = - \frac{i
+ 	k_x}{\bar{\rho}}p\\ 
+ \frac{1}{\bar{\rho} A^2} \left(-i\omega + \frac{imV_{\theta}}{r} + ik_xV_x  +
+ \right)p(r)  +
+ \frac{V_{\theta}^2}{A^2 r}v_r+ \frac{v_r}{r} +
+ \frac{\partial v_r(r)}{\partial r}+ 
+ \frac{im}{r} v_{\theta}(r)
+ +
+ ik_xv_x(r) 
+ &= 0
+ \end{align*}
 
 % \newpage
 
-% \section{Non-Dimensionalization}
-% Defining 
+ \section{Non-Dimensionalization}
+ Defining 
 
-% \[r_T = r_{max}\]
-% \[A_T = A(r_{max})\]
-% \[k = \frac{\omega r_T}{A_T}\]
-% \[\bar{\gamma} = k_x r_T\]
-% \[\tilde{r} = \frac{r}{r_T}\]
-% \[\frac{\partial }{\partial r} = \frac{\partial \tilde{r}}{\partial r} \frac{\partial }{\partial \tilde{r}} = \frac{1}{r_T} \frac{\partial }{\partial \tilde{r}}\]
-% \[V_{\theta} = M_{\theta} A\]
-% \[V_{x} = M_{x} A\]
-% \[\tilde{A} = \frac{A}{A_T}\]
-% \[v_{x} =\tilde{v}_x A\]
-% \[v_{r} =\tilde{v}_r A\]
-% \[v_{\theta} =\tilde{v}_{\theta} A\]
-% \[p = \tilde{p} \bar{\rho} A^2\]
+ \[r_T = r_{max}\]
+ \[A_T = A(r_{max})\]
+ \[k = \frac{\omega r_T}{A_T}\]
+ \[\bar{\gamma} = k_x r_T\]
+ \[\tilde{r} = \frac{r}{r_T}\]
+ \[\frac{\partial }{\partial r} = \frac{\partial \tilde{r}}{\partial r} \frac{\partial }{\partial \tilde{r}} = \frac{1}{r_T} \frac{\partial }{\partial \tilde{r}}\]
+ \[V_{\theta} = M_{\theta} A\]
+ \[V_{x} = M_{x} A\]
+ \[\tilde{A} = \frac{A}{A_T}\]
+ \[v_{x} =\tilde{v}_x A\]
+ \[v_{r} =\tilde{v}_r A\]
+ \[v_{\theta} =\tilde{v}_{\theta} A\]
+ \[p = \tilde{p} \bar{\rho} A^2\]
 
 % \begin{align*}
 % r\text{-direction: }& i\left(-\omega + \frac{ m V_{\theta}}{r} +  k_x V_x \right) v_r - \frac{2 \bar{v}_{\theta}}{r}v_{\theta}  = -\frac{1}{\bar{\rho}} \frac{\partial P}{\partial r}+ \frac{V_{\theta^2}}{A^2}\frac{1}{\bar{\rho} r}p\\
@@ -802,7 +831,7 @@ governing equations.
 % ik_xv_x(r) 
 % = 0
 % \end{align*}
-
+%
 % Substituting the non dimensional quantities, and noting $r_T$ and $A^2$ in each term, 
 % the radial momentum equation becomes,
 
@@ -899,27 +928,62 @@ governing equations.
 
 
 Substituting in yields ,%equations $2.38$ - $2.41$
-\[ \boxed{i\left[ 
-- \frac{k}{\tilde{A}} + 
-\frac{m M_{\theta}}{\tilde{r}} + 
-\bar{\gamma} M_x 
-\right] \tilde{v}_r - 
-\frac{2 M_{\theta} \tilde{v}_{\theta}}{\tilde{r}} = 
--\frac{\partial \tilde{p}}{\partial \tilde{r}} - (\gamma-1)\frac{\gamma M_{\theta}}{\tilde{r}}\tilde{p}}  \] 
+\begin{align} 
+        i\left[ 
+            - \frac{k}{\tilde{A}} + 
+            \frac{m M_{\theta}}{\tilde{r}} + 
+            \bar{\gamma} M_x 
+        \right] \tilde{v}_r - 
+        \frac{2 M_{\theta} \tilde{v}_{\theta}}{\tilde{r}} = 
+        -\frac{\partial \tilde{p}}{\partial \tilde{r}} -
+        (\gamma-1)\frac{\gamma M_{\theta}}{\tilde{r}}\tilde{p}\\
+        i\left[ - \frac{k}{\tilde{A}} +
+        \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] 
+        \tilde{v}_{\theta} + \left(\frac{ M_{\theta}}{\tilde{r}}  + 
+        \frac{1}{A} \frac{\partial M_{\theta}A}{\partial \tilde{r}}\right)
+        \tilde{v}_r = \frac{i m}{\tilde{r}}\tilde{p}\\
+        i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + 
+        \bar{\gamma} M_x \right] \tilde{v}_x  + \frac{1}{A} 
+        \frac{\partial M_x A}{\partial \tilde{r}}\tilde{v}_r =
+        -i \bar{\gamma}\tilde{p} \\ 
+        i \left[ -\frac{k}{\tilde{A}} + 
+            \frac{mM_{\theta}}{\tilde{r}} +
+        \bar{\gamma}M_x \right] \tilde{p} + 
+        \frac{M_{\theta}^2}{\tilde{r}}\tilde{v}_r + 
+        \frac{\partial \tilde{v}_r}{\partial \tilde{r}} +
+        \frac{1}{A}\frac{\partial A}{\partial \tilde{r}}{v}_r+ 
+        \frac{\tilde{v}_r  }{\tilde{r}} + \frac{im}{\tilde{r}}\tilde{v}_\theta + i \bar{\gamma} \tilde{v}_x = 0
+\end{align}
 
+The mean flow derivatives $\partial A/ \parial r$ and $\partial (\bar{\rho A^2) /\partial r $
 
-\[\boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_{\theta} + \left(\frac{ M_{\theta}}{\tilde{r}}  + \frac{1}{A} \frac{\partial M_{\theta}A}{\partial \tilde{r}}\right)\tilde{v}_r = \frac{i m}{\tilde{r}}\tilde{p}}\]         
-\[\boxed{i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] \tilde{v}_x  + \frac{1}{A} \frac{\partial M_x A}{\partial \tilde{r}}\tilde{v}_r = -i \bar{\gamma}\tilde{p}} \]
-
-\begin{align*}
-	 \boxed{i \left[ -\frac{k}{\tilde{A}} + 
-	 \frac{mM_{\theta}}{\tilde{r}} +
-	 \bar{\gamma}M_x \right] \tilde{p} + 
-	 \frac{M_{\theta}^2}{\tilde{r}}\tilde{v}_r + 
-     \frac{\partial \tilde{v}_r}{\partial \tilde{r}} +
-	 \frac{1}{A}\frac{\partial A}{\partial \tilde{r}}{v}_r+ 
- \frac{\tilde{v}_r  }{\tilde{r}} + \frac{im}{\tilde{r}}\tilde{v}_\theta + i \bar{\gamma} \tilde{v}_x = 0}
-\end{align*}
+    
+\begin{align} 
+        i\left[ 
+            - \frac{k}{\tilde{A}} + 
+            \frac{m M_{\theta}}{\tilde{r}} + 
+            \bar{\gamma} M_x 
+        \right] \tilde{v}_r - 
+        \frac{2 M_{\theta} \tilde{v}_{\theta}}{\tilde{r}} = 
+        -\frac{\partial \tilde{p}}{\partial \tilde{r}} -
+        (\gamma-1)\frac{\gamma M_{\theta}}{\tilde{r}}\tilde{p}\\
+        i\left[ - \frac{k}{\tilde{A}} +
+        \frac{m M_{\theta}}{\tilde{r}} + \bar{\gamma} M_x \right] 
+        \tilde{v}_{\theta} + \left(\frac{ M_{\theta}}{\tilde{r}}  + 
+        \frac{1}{A} \frac{\partial M_{\theta}A}{\partial \tilde{r}}\right)
+        \tilde{v}_r = \frac{i m}{\tilde{r}}\tilde{p}\\
+        i\left[ - \frac{k}{\tilde{A}} + \frac{m M_{\theta}}{\tilde{r}} + 
+        \bar{\gamma} M_x \right] \tilde{v}_x  + \frac{1}{A} 
+        \frac{\partial M_x A}{\partial \tilde{r}}\tilde{v}_r =
+        -i \bar{\gamma}\tilde{p} \\ 
+        i \left[ -\frac{k}{\tilde{A}} + 
+            \frac{mM_{\theta}}{\tilde{r}} +
+        \bar{\gamma}M_x \right] \tilde{p} + 
+        \frac{M_{\theta}^2}{\tilde{r}}\tilde{v}_r + 
+        \frac{\partial \tilde{v}_r}{\partial \tilde{r}} +
+        \frac{1}{A}\frac{\partial A}{\partial \tilde{r}}{v}_r+ 
+        \frac{\tilde{v}_r  }{\tilde{r}} + \frac{im}{\tilde{r}}\tilde{v}_\theta + i \bar{\gamma} \tilde{v}_x = 0
+\end{align}
 
 Defining, $\lambda = -i \bar{\gamma} $ 
 

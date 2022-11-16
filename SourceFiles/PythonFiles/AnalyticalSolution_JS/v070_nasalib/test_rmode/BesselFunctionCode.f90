@@ -1,14 +1,9 @@
-! Notes:
-! Pros of f90 for V072:
-!   better management of inputs and outputs
-!       - explicit interfaces
 PROGRAM BesselFunctionCode
       USE, INTRINSIC :: ISO_FORTRAN_ENV  
-      ! USE rmode
       IMPLICIT NONE
       INTEGER, PARAMETER :: &
           rDef = REAL64, &
-          numberOfGridPoints = 100
+          numberOfGridPoints = 50
 
       INTEGER :: &
           UNIT                  ,&
@@ -40,10 +35,9 @@ PROGRAM BesselFunctionCode
       ALLOCATE(X(numberOfGridPoints))
 
       ! Notes:
-      ! r_min cant be zero 
 
-      r_min = 0.000010_rDef 
-      r_max = 1.0_rDef      
+      r_min = 1.0_rDef 
+      r_max = 3.0_rDef      
 
       hubTipRatio = r_min/r_max 
 
@@ -51,14 +45,15 @@ PROGRAM BesselFunctionCode
 
       DO i =1,numberOfGridPoints
 
-      X(i)  = (r_min+REAL(i-1, rDef)*dr)/r_max
+      X(i)  = (r_min+REAL(i-1, rDef)*dr)!r_max !radial grid
+      
       
       ENDDO
 
 
-      azimuthal_mode_number = 3 
+      azimuthal_mode_number = 2 
       radial_mode_number = 1
-      convergence_criteria = 1.0E-8_rDef
+      convergence_criteria = 1.0E-5_rDef
       
       
       CALL ANRT(&
@@ -87,6 +82,9 @@ PROGRAM BesselFunctionCode
           BMN                  , &
           IERROR1)
 
+      ! in the case of cylindrical ducts...
+      ! AMN = 0.50_rDef
+      ! BMN = 0.50_rDef
       ! AMN = 1.0_rDef
       ! BMN = 0.0_rDef
       WRITE(0,*) 'A =' , AMN
@@ -99,11 +97,19 @@ PROGRAM BesselFunctionCode
 
       CALL RMODE(&
       azimuthal_mode_number,&
-      X(i),AMN,BMN,PSI,IERROR2)
+      X(i),&
+      AMN,&
+      BMN,&
+      PSI,&
+      IERROR2)
   
-      WRITE(UNIT,*) X(i), PSI
+      WRITE(UNIT,*) X(i)/r_max, PSI
 
       ENDDO
       CLOSE(UNIT)
 
 END PROGRAM
+! Notes:
+! Pros of f90 for V072:
+!   better management of inputs and outputs
+!       - explicit interfaces

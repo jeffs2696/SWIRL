@@ -79,24 +79,23 @@ mpl.rcParams.update(tex_fonts)
 
 
 directories = [
-        '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/32pts/',
-        '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/64pts/',
-        '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/128pts/',
-        '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/256pts/',
-        '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/512pts/']
+        '../03-EVanalysis/SWIRLVerification/UniformFlowAnnulusHardwall/FourthOrderDiff/33pts/',
+        '../03-EVanalysis/SWIRLVerification/UniformFlowAnnulusHardwall/FourthOrderDiff/66pts/',
+        '../03-EVanalysis/SWIRLVerification/UniformFlowAnnulusHardwall/FourthOrderDiff/132pts/',
+        '../03-EVanalysis/SWIRLVerification/UniformFlowAnnulusHardwall/FourthOrderDiff/264pts/']#, '../03-EVanalysis/SWIRLVerification/UniformFlowCylinderHardwall/FourthOrderDiff/512pts/']
 
 NumericalAxialWavenumberData = fcn.importPlotData(
-        directories[0] + 'gam.nonconv_acc.0032')
+        directories[0] + 'gam.nonconv_acc.0033')
 
 NumericalAxialWavenumberData1 = fcn.importPlotData(
-        directories[1] + 'gam.nonconv_acc.0064')
+        directories[1] + 'gam.nonconv_acc.0066')
 
 
 NumericalAxialWavenumberData2 = fcn.importPlotData(
-        directories[2] + 'gam.nonconv_acc.0128')
+        directories[2] + 'gam.nonconv_acc.0132')
 
 NumericalAxialWavenumberData3 = fcn.importPlotData(
-        directories[3] + 'gam.nonconv_acc.0256')
+        directories[3] + 'gam.nonconv_acc.0264')
 
 # NumericalAxialWavenumberData4 = fcn.importPlotData(
 #         directories[3] + 'gam.nonconv_acc.0512')
