@@ -28,8 +28,8 @@ def main():
     
     num_of_zeros = 5 # each zero corresponds to radial modes
     wavenumber = 10 
-    azimuthal_mode_number = 2 
-    radial_mode_number = 0
+    azimuthal_mode_number = 10 
+    radial_mode_number = 2
     axial_mach_number = 0.3
     r_min = 0
     r_max = 1
@@ -70,9 +70,9 @@ def main():
             azimuthal_mode_number,
             Jv_p_zero) 
 
-    radial_mode = radial_mode_list[0] 
-    normalized_radial_mode = normalized_radial_mode_list[0]
-    analytical_normalized_radial_mode = analytical_normalized_radial_mode_list[0]
+    radial_mode = radial_mode_list[2] 
+    normalized_radial_mode = normalized_radial_mode_list[2]
+    analytical_normalized_radial_mode = analytical_normalized_radial_mode_list[2]
 
     # plot data 
     fig = plt.figure()

@@ -163,7 +163,7 @@ PROGRAM MAIN
     ! include 'InputVariables_KousenTable4_6.f90'
     ! include 'InputVariables_KousenFigure4_5.f90'
 
-    hubToTipRatio              =  r_min/r_max
+    hubToTipRatio             = r_min/r_max
 
     finiteDiffFlag            = FDfac ! from FDfac loop
 
@@ -197,6 +197,8 @@ PROGRAM MAIN
         WRITE(0,*) 'Iteration ', fac
     ENDIF
     finiteDiffFlag            = FDfac ! from FDfac loop
+
+    ! Can this be done from within the SwirlClassObject?
 
     IF (numericalIntegrationFlag.eq.1) THEN
         ExpectedRateOfConvergenceSoundSpeed = 2.0_rDef
@@ -279,7 +281,6 @@ PROGRAM MAIN
     ! include 'InputMeanFlow_KousenFigure4_5_NoSwirl.f90'
     ! include 'InputMeanFlow_KousenFigure4_5_Swirl.f90'
     include 'InputMeanFlow_AnalyticalSolution_1.f90'
-    ! WRITE(0,*) axialMachData
     !Create a swirl Class Obj for a given flow
 
     CALL CreateObject(&

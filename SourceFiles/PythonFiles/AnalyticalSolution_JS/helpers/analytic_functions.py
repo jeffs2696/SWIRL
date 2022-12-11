@@ -59,6 +59,20 @@ def normalize_psi(psi, x):
     return normalization_constant
 
 def normalize_radial_modes(r,radial_mode_list,radial_mode_number,azimuthal_mode_number,Jv_p_zero):
+    """
+    Objective
+    ---------
+    
+    Parameters
+    -----------
+    r : numpy array 
+
+    radial_mode_list : nested list containing numpy arrays of analytic mode data
+    (see output for get_radial_modes)
+    radial_mode_number : integer for the corresponding radial mode number  
+
+
+    """
 
     # print('entering normalize_radial_modes')
     normalized_radial_mode_list = []

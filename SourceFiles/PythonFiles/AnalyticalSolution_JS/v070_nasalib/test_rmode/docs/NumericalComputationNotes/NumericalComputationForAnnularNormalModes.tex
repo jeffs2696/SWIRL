@@ -19,15 +19,22 @@ email: jseveri@rockets.utoledo.edu  }
 
 \end{titlepage}
 
-\section{Current Research Direction}
- The goal is to currently compute the coefficients $A$ and $B$, the weighting
- factors for the Bessel Functions for the first and second kind. V072
- contains FORTRAN subroutines that compute these along with the Bessel functions.
- \section{Numerical Computation of Annular Duct Modes}
+\section{Introduction - Current Research Direction}
+The \verb|FORTRAN 77| codes that compute the duct mode solution for annular ducts are
+presented.  A testing routine written in FORTRAN 90 calls the FORTRAN 77 subroutines, 
+the main one being \verb|rmode.f|. The weigting factors, $A$, and $B$ as well as
+the roots that satisfy the transcendental equation containing the determinant of 
+the derivative of the bessel functions of the first and second kind.  By importing
+$A$, $B$, and the nondimensional roots into \verb|Python|, the modeshape result
+from FORTRAN was validated. For a complete validation, $A$, $B$, and the 
+nondimensional roots should be computed in \verb|Python|, however this is not 
+necessary since there is no restriction to using \verb|F77|.
+
 
   
-\section{Research Performed This Week}
-\subsection{Theoretical Background}
+\section{Research Performed}
+\subsection{Numerical Computation of Annular Duct Modes}
+\subsubsection{Theoretical Background}
 
 The analytic radial mode shape is of the form,
 
@@ -55,19 +62,7 @@ The key to the numerical procedure is the following ``transcendental'' equation,
  The estimate is refined by incrementing the value of $k_{r,mn}$ by $\pi/10$ until
  the determinant above changes sign. The step size is then halved and also changes 
  sign. This iterative process continues until the absolute value of the determinant 
- is reduced to a preassigned value (error tolerance?). The non dimensional versions
- of these equations are used in the FORTRAN 77 Code.
-
- Once $k_{r,mn}$ has been computed, the weighting factors $A$ and $B$ are assigned to 
- one of the following two sets of values ( \verb|eigen.f|)
-
-
- The remainder of the procedure is being documented along with directions on 
- how to pass in the correct inputs to the F77 calls
- The estimate is refined by incrementing the value of $k_{r,mn}$ by $\pi/10$ until
- the determinant above changes sign. The step size is then halved and also changes 
- sign. This iterative process continues until the absolute value of the determinant 
- is reduced to a preassigned value (error tolerance?). The non dimensional versions
+ is reduced to a preassigned error tolerance. The non dimensional versions
  of these equations are used in the FORTRAN 77 Code, \verb|anrt.f|, which calls 
  \verb|anfu.f|.
 
@@ -134,6 +129,59 @@ and the constant that A and B are divided by becomes
 }{\left( 1 - \sigma^2 \right)}}
     \label{eqn:normalizationconst_nondimension}
 \end{equation}
+
+The current code is in the Appendix, which produces the following:
+
+\begin{figure}
+    \centering
+    \includegraphics{../figures/Figure1.png}
+    \caption{initial result}
+    \label{fig:dd}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{../figures/Figure1error.png}
+    \caption{initial result}
+    \label{fig:d}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics{../figures/Figure1deriv.png}
+    \caption{initial result}
+    \label{fig:d}
+\end{figure}
+
+Figure \ref{fig:dd} shows the radial mode 3. The two lines are used as a sanity 
+check to ensure that 1) The bessel function routines work in F77 2) and so that 
+my understanding of the F77 routines is intact. 
+
+
+\section{Issues and Concerns}
+The only issue I have now is the current state of SWIRL. The modes that are 
+computed in SWIRL have very poor filtering and sorting methods for the eigenvalue 
+problem. For this reason, the relevant radial modes and their corresponding wavenumber 
+were sorted in post. I have to do the annular modes in post too if I want the 
+answer as soon as possible. Once a case study is done there, perhaps I can add the 
+sorting functionality that I worked on in Python to Fortran.
+
+
+
+\section{Planned Research} 
+\subsubsection{Validation - Annular Duct Modes}
+Set test case parameters and compare results to SWIRL.
+\subsubsection{Validation - Cylindrical Duct Modes}
+
+I believe I have a potential technical memorandum with the boundary condition issues 
+in the cylindrical case. I'd like to ``make the case'' for this by reporting the 
+rates of convergence for the first 5 modes at 5-6 grids. The notes from my discussion
+with Envia help me make this case! I did a preliminary literature review, 
+\cite{meyer1996aeroacoustic}
+\section{Appendix}
+
+\subsection{Code Documention}
+
 \begin{itemize}
     \item \verb|eigen.f|, 
         \subitem Computes the weighting factors, $A$ and $B$ for the radial mode
@@ -148,26 +196,31 @@ and the constant that A and B are divided by becomes
         \subitem Calculate radial mode shape psi for the (m,n) radial mode of an annular duct 
 \end{itemize}
 
-
-\section{Issues and Concerns}
-The mode shapes produced do not have zero slope at the boundaries.
-
 Currently a subdirectory within the \verb|v070_nasalib| directory has a testing 
 code to obtain the annular duct modes. 
-
-The current code is, 
 \begin{verbatim}
 
-! Notes:
-! Pros of f90 for V072:
-!   better management of inputs and outputs
-!       - explicit interfaces
+! BesselFunctionCode
+! Author - Jeff Severino
+! Date - 11/17/22
+!
+! Description -
+! This code tests various subroutines in the v070nasalib needed to produce 
+! a radial mode shape for annular ducts
+!
 PROGRAM BesselFunctionCode
       USE, INTRINSIC :: ISO_FORTRAN_ENV  
       IMPLICIT NONE
+
       INTEGER, PARAMETER :: &
           rDef = REAL64, &
-          numberOfGridPoints = 1000
+          numberOfGridPoints = 50
+
+      LOGICAL :: &
+          debug_flag = .FALSE.
+
+      CHARACTER(LEN = 50) :: &
+          filename
 
       INTEGER :: &
           UNIT                  ,&
@@ -180,46 +233,46 @@ PROGRAM BesselFunctionCode
           r_min, &
           r_max, &
           dr,  &
-          AMN, &
-          BMN, &
+          weighting_coefficient_A, &
+          weighting_coefficient_B, &
           hubTipRatio,&
           convergence_criteria ,& 
-          PSI
+          mode_shape
 
-      REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: X
+      REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: &
+          radial_grid
 
-      REAL(KIND=rDef),DIMENSION(2) :: IERROR1, IERROR2
-      REAL(KIND=rDef),DIMENSION(4) :: anfu_bessel_function_error 
+      REAL(KIND=rDef),DIMENSION(2) :: &
+          rmode_bessel_function_errors
 
-      REAL(KIND=rDef) ::  anrt_convergence_flag 
+      REAL(KIND=rDef),DIMENSION(4) :: &
+          eigen_bessel_function_errors , &
+          anfu_bessel_function_errors 
+
+      REAL(KIND=rDef) :: &
+          anrt_convergence_flag 
       
-      REAL(KIND=rDef) :: non_dimensional_roots
+      REAL(KIND=rDef) :: &
+          non_dimensional_roots
 
 
-      ALLOCATE(X(numberOfGridPoints))
+      ALLOCATE(radial_grid(numberOfGridPoints))
 
-      ! Notes:
-      ! r_min cant be zero 
 
       r_min = 0.20_rDef 
-      r_max = 3.0_rDef      
-
+      r_max = 1.0_rDef      
+      azimuthal_mode_number = 2 
+      radial_mode_number = 3
+      convergence_criteria = 1.0E-12_rDef
       hubTipRatio = r_min/r_max 
 
       dr    = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
 
       DO i =1,numberOfGridPoints
 
-      X(i)  = (r_min+REAL(i-1, rDef)*dr)/r_max !radial grid
-      
+      radial_grid(i)  = (r_min+REAL(i-1, rDef)*dr)!radial grid 
       
       ENDDO
-
-
-      azimuthal_mode_number = 2 
-      radial_mode_number = 1
-      convergence_criteria = 1.0E-5_rDef
-      
       
       CALL ANRT(&
           azimuthal_mode_number,&
@@ -227,68 +280,149 @@ PROGRAM BesselFunctionCode
           hubTipRatio,&
           convergence_criteria,&
           non_dimensional_roots,&
-          anfu_bessel_function_error,&
+          anfu_bessel_function_errors,&
           anrt_convergence_flag)
 
-      WRITE(0,*) 'k_mn=' ,non_dimensional_roots
+      ! checking ANRT result
 
       IF (anrt_convergence_flag .gt. 0.0_rDef) THEN
           WRITE(0,*) 'ERROR: ANRT DID NOT CONVERGE ',anrt_convergence_flag
       ELSE
       ENDIF
 
-      ! STOP
+      IF (debug_flag.eqv..TRUE.) THEN
+          ! WRITE(0,*) 'k_mn r_max' ,non_dimensional_roots
+      ELSE
+      ENDIF
+      
       ! Obtaining A and B coefficients for radial mode shape
+
       CALL EIGEN(&
           azimuthal_mode_number, &
-          hubTipRatio               , &
-          non_dimensional_roots                  , &
-          AMN                  , &
-          BMN                  , &
-          IERROR1)
+          hubTipRatio          , &
+          non_dimensional_roots, &
+          weighting_coefficient_A                  , &
+          weighting_coefficient_B                  , &
+          eigen_bessel_function_errors)
 
-      ! in the case of cylindrical ducts...
-      ! AMN = 1.0_rDef
-      ! BMN = 0.0_rDef
-      WRITE(0,*) 'A =' , AMN
-      WRITE(0,*) 'B =' , BMN
-      WRITE(0,*) 'non_dimensional_roots =' , non_dimensional_roots
-      OPEN(NEWUNIT=UNIT,FILE='radial_mode_data.dat') 
-      WRITE(UNIT,*) 'radius ', 'pressure '
+      IF (debug_flag.eqv..TRUE.) THEN
+          WRITE(0,*) 'A ' , weighting_coefficient_A
+          WRITE(0,*) 'B ' , weighting_coefficient_B
+          WRITE(0,*) 'k_mn r_max ' , non_dimensional_roots
+          WRITE(0,*) 'k_mn ' , non_dimensional_roots/r_max
+      ELSE
+      ENDIF
+
+      filename = 'radial_mode_data.dat'
+      OPEN(NEWUNIT=UNIT,FILE=TRIM(ADJUSTL(filename))) 
+
+      WRITE(UNIT,*) &
+          'radius ', &
+          'pressure '
        
       DO i = 1,numberOfGridPoints
 
       CALL RMODE(&
       azimuthal_mode_number,&
-      X(i),&
-      AMN,&
-      BMN,&
-      PSI,&
-      IERROR2)
+      non_dimensional_roots*radial_grid(i)/r_max,&
+      weighting_coefficient_A,&
+      weighting_coefficient_B,&
+      mode_shape,&
+      rmode_bessel_function_errors)
   
-      WRITE(UNIT,*) X(i), PSI
+      WRITE(UNIT,*) &
+          radial_grid(i)/r_max,&
+          mode_shape 
 
       ENDDO
+
       CLOSE(UNIT)
 
+      IF (debug_flag) THEN
+          OPEN(NEWUNIT=UNIT,FILE='radial_mode_parameters.dat')
+          WRITE(UNIT,*) &
+              'azimuthal_mode_number ', &
+              'radial_mode_number ', &
+              'weighting_factor_A ', &
+              'weighting_factor_B ', &
+              'non_dimensional_roots ' 
+          WRITE(UNIT,*) &
+              azimuthal_mode_number, &
+              radial_mode_number , &
+              weighting_coefficient_A, &
+              weighting_coefficient_B, &
+              non_dimensional_roots 
+          CLOSE(UNIT)
+      ENDIF
 END PROGRAM
+! Notes:
+! Pros of f90 for V072:
+!   better management of inputs and outputs
+!       - explicit interfaces
 \end{verbatim}
-This produces the following:
 
-\begin{figure}
-    \centering
-    \includegraphics{figures/Figure_1_1.png}
-    \caption{initial result}
-    \label{fig:dd}
-\end{figure}
+plotting code, \verb|plotResult.py|
+\begin{verbatim}
+
+#!/usr/bin/env python3
+import matplotlib
+import matplotlib.pyplot as plt
+import pandas as pd
+import pprint 
+import scipy as scip
+import numpy as np
+
+debug_flag = False
+
+filename = 'radial_mode_data.dat'
+parameter_filename = 'radial_mode_parameters.dat'
+data = \
+        pd.read_csv(filename, delim_whitespace = True)
+
+if debug_flag:
+   pprint.pprint(data)
+
+parameters = \
+        pd.read_csv(parameter_filename, delim_whitespace = True)
+if debug_flag:
+    pprint.pprint(parameters)
+
+AMN =float(parameters['weighting_factor_A'])
+BMN =float(parameters['weighting_factor_B'])
+k_rmn = float(parameters['non_dimensional_roots'])
+m_order = float(parameters['azimuthal_mode_number'])
+
+pressure_python = \
+        (AMN)*scip.special.jv(m_order,k_rmn*(data['radius'])) + \
+        (BMN)*scip.special.yv(m_order,k_rmn*(data['radius']))
+
+fig, axs = plt.subplots()
+
+axs.plot(
+        data['radius'],
+        data['pressure'],
+        label = 'FORTRAN Output (V072)')
+
+axs.plot(data['radius'],pressure_python,'o',label = 'Python Output')
+
+plt.title('Radial Mode for an Annular Duct, m =' + str(m_order))
+plt.xlabel('Radius [-]')
+plt.ylabel('Pressure [-]')
+plt.legend()
+
+plt.savefig('docs/figures/Figure1.png')
+
+fig, axs = plt.subplots()
+axs.plot(np.diff(data['pressure']))
+
+plt.title('Radial Mode Numerical Derivative for an Annular Duct, m =' + str(m_order))
+plt.xlabel('Radial Grid Index [-]')
+plt.ylabel('d(Pressure)/dRadius [-]')
+
+plt.show()
 
 
 
-Figure \ref{fig:dd} does not have zero slope boundaries as expected for a hard 
-wall.
+\end{verbatim}
 
-\section{Planned Research} 
-Come up with sanity checks to test the functionality of this testing code.
-
-I can compare bessel function plots in python to the output in F77 to see if they are identical\dots.
  \end{document}

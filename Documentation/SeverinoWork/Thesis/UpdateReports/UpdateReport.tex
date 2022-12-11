@@ -46,39 +46,73 @@
 
 \end{titlepage}
 \section{Current Research Direction}
-Thesis revision is currently in progress. The  ``Chapter 3: Theoretical Framework and Methods``
-section  is nearly complete. It is missing the 
-complete derivation for the wave equation at the start of the ''Analytical 
-Solution to Sound Propagation in ducted flows``
-but has the governing equations, the nonuniformities in swirling mean flow, the linearization
-and the non dimensionalization that will be used.
-
-
+The goal is to clarify what occurs when ducts are lined 
+with sound absorbing material.  Speciificaally, the description of acoustic liner
+in terms of the Linearized Euler Equations is investigated.
 \section{Research Performed}
-The current Methods section is included. The initial results for the MMS
-study is also included.  The goal is finalize what I can now and include my initial 
-findings for the uniform flow case that contained the boundary problems.
+The acoustic absorbing material is called locally reacting and is often 
+describes with ``wall impedance'' and will be denoted as $Z(\omega)$
 
-%Here is the opening section for the third chapter,
-%\input{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model}
-%\input{Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases}
-%
+The boundary condition is given as
+
+\[i \omega p = -Z \frac{\partial p'}{\partial r} \text{at} r = 1 \]
+
+A typical test case example is for the inlet of an aircraft turbojet engine. 
+The general solution has a form similar to the hard wall case, except the 
+eigenvalues $k_r$ are now defined by
+
+\[\frac{J_m(k_r) }{k_r J'_m (k_{r,mn})} = \frac{ i Z}{\omega}\]
+
+Which is related to $k_{x}$ by 
+
+\[k_{x}^{\pm} =  \pm \sqrt{ k^2 - k_{r,mn}} = \pm \omega \zeta(k_{r,mn}/\omega)\]
+
+While these ``soft wall'' modes are no longer orthoganal, the modes could be normalized in such a way
+that preserves the normalization relation,
+
+\[ \int_0^1 U_{mn} (r) \text{conj}(U_{mn}(r)) r d\Theta dr = 1 \]
+
+The normalization constan 
+\[N_{mn} = \frac{|Z|}{|J_m(k_{r,mn}|} \sqrt{\frac{Im(k_{r,mn}^2}{\omega Re(Z)}}\]
+
+
 \section{Issues and Concerns}
-Formatting is happening in parallel. There are missing labels and equation numbers
-and some equations are not being referenced when mentioned, leading to confusion 
-for the reader
+The new function $\zeta$ is described in Rienstra's work in his appendix in a clever way\dots
+
+
+He defines $\zeta$ as a function of an arbitrary number $z$.
+
+\[\zeta(z) = \sqrt{1 - z^2}\]
+
+where $Im(\zeta) \leq 0$, and $\zeta(0) = 1$
+
+His description is,
+
+`` 
+The sign choice is made such that always $Im(\zeta) \leq 0$. This implies that the branch cuts 
+are located right along the curves where $Im(\zeta) = 0$. i.e. along the imaginary 
+axis, and the real interval $|z| \leq 1$.
+For definiteness the branch cuts are included in the dommain of the 
+definition as the limits from the $Re \zeta > 0$ side. 
+If we take care along the branch cuts, where sign($Im \zeta$) is not defined,
+a simple (theres a footnote  here) way to determine $\zeta$ is 
+
+\[ \zeta(z) = - sign (Im \sqrt{1 - z^2}) \sqrt{1 - z^2} \]
+
+"
+There is a nice figure shown along with this description 
+\begin{figure}[!]
+    \centering
+    \includegraphics{Capture.PNG}
+    \caption{Fiigure in appendix A.2 An Important Complex Square Root in 
+    Fundamentals of Duct Acoustics by Rienstra}
+\end{figure}
 \section{Planned Research}
 
-\begin{itemize}
-    \item Include the derivation for the wave equation that is used for validation
-        work. I would like to start the ``Analytical Solution to Sound Propagation in 
-        ducted flows'' section with this and emphasize that the equations outlined 
-        above this section present the  eigenvalue problem, but the problem 
-        can also be solved by solving a second order ODE for pressure, but this 
-        has pros and cons that need to also be discussed.  
-    \item The MMS theoretical background needs to also be included in its own 
-        section prior the numerical methods section
-\end{itemize}
+I am slightly confused on how to use this information.. but my current understanding 
+of this is that the value of $Z$ changes which zero zrossings $k_r$ are used.
+
+
 \end{document}
 
 
