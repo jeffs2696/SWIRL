@@ -138,6 +138,20 @@ LIB_FILES = ../LibraryFiles
 MOD_FILES = ../ModuleFiles
 OBJ_FILES = ../ObjectFiles
 EXE_FILES = $(EXECUTABLE_LOCATION)
+V072_FILES = FortranFiles/v070_nasalib
+
+V072_OBJS = \
+			FortranFiles/v070_nasalib/anfu.o \
+			FortranFiles/v070_nasalib/anrt.o \
+			FortranFiles/v070_nasalib/besj.o \
+			FortranFiles/v070_nasalib/besy.o \
+			FortranFiles/v070_nasalib/eigen.o \
+			FortranFiles/v070_nasalib/isig.o \
+			FortranFiles/v070_nasalib/kernel.o \
+			FortranFiles/v070_nasalib/phithh.o \
+			FortranFiles/v070_nasalib/phixht.o \
+			FortranFiles/v070_nasalib/rmode.o \
+
 
 BLAS_LOCATION = $(LIB_FILES)/blas3.8.0
 BLAS_OBJS =      \
@@ -218,7 +232,7 @@ LAPACK_OBJS =           \
 all:  $(OBJECTS)
 	@printf "%b" "$(COM_COLOR)$(COM_COLOR) $(OBJ_COLOR)$(@)$(NO_COLOR)\n" "Compiling $@\n";
 	@$(F90) -o $(EXE) $(BLAS_OBJS) \
-             $(LAPACK_OBJS) $(FITPACK_OBJS) $(OBJECTS) 2> $@.log; \
+             $(LAPACK_OBJS) $(FITPACK_OBJS) $(V072_OBJS) $(OBJECTS) 2> $@.log; \
 	RESULT=$$?; \
 		if [ $$RESULT -ne 0 ]; then \
 			printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"; \
@@ -359,6 +373,16 @@ FortranFiles/FindResidualVectorModule.o: FortranFiles/FindResidualVectorModule.f
 
 FortranFiles/swirlClassObject.o: FortranFiles/swirlClassObject.f90
 	@$(F90) $(F90FLAGS) FortranFiles/swirlClassObject.f90
+
+#FortranFiles/v070_nasalib/anrt.o: FortranFiles/v070_nasalib/anrt.f
+#	@$(F77) $(F77FLAGS) FortranFiles/v070_nasalib/anrt.f
+#	
+#FortranFiles/v070_nasalib/anfu.o: FortranFiles/v070_nasalib/anfu.f
+#	@$(F77) $(F77FLAGS) FortranFiles/v070_nasalib/anfu.f
+#
+#FortranFiles/v070_nasalib/rmode.o: FortranFiles/v070_nasalib/rmode.f
+#	@$(F77) $(F77FLAGS) FortranFiles/v070_nasalib/rmode.f
+#
 #----------------------------------BLAS------------------------------------------
 
 $(BLAS_LOCATION)/dgemv.o: \

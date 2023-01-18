@@ -25,7 +25,8 @@ modulE swirlClassObject
         SwirlClassType ,&
         GetMeanFlowData, &
         FindResidualData, &
-        GetModeData
+        GetModeData     , &
+        GetAnalyiticModeShape
 
 ! Creates a derived data type containing SWIRL's essential modules
     INTERFACE CreateObject
@@ -60,6 +61,10 @@ modulE swirlClassObject
     INTERFACE DestroyObject
         MODULE PROCEDURE DestroySwirlClassObject
     END INTERFACE DestroyObject
+
+    INTERFACE GetAnalyiticModeShape
+        MODULE PROCEDURE GetModeShape 
+    END INTERFACE GetAnalyiticModeShape
 
     INTEGER, PARAMETER:: rDef = REAL64
 
@@ -317,13 +322,22 @@ CONTAINS
     END SUBROUTINE CreateSwirlClassObject
     SUBROUTINE runSWIRL(&
         object         ,&
-        debugFlag)
+        debugFlag      ,&
+        MMSflag)
 
         TYPE(SwirlClassType) , INTENT(INOUT) :: &
             object
 
+        !total debug flag
         LOGICAL, INTENT(IN) :: &
-            debugFlag
+            debugFlag, &
+            MMSflag
+        !eigensolver debug flag
+        LOGICAL :: &
+            debug_analysis = .TRUE.
+
+         
+        
 
         IF (object%isInitialized) THEN
             ! Set up Gauss-Lobatto grid and compute Chebyshev derivative matrix.
@@ -477,6 +491,7 @@ CONTAINS
             object%bb_before = object%bb
 
 
+            IF (MMSflag .eqv. .FALSE.) THEN
             IF (debugFlag) THEN
                 WRITE(0,*) 'Entering analysis CALL'
             ELSE
@@ -506,14 +521,14 @@ CONTAINS
                 ! is    = is,    &
                 vphi  = object%vph,   &
                 akap  = object%akap , &
-                debug = debugFlag)
+                debug = debug_analysis)
 
 
            IF (debugFlag) THEN
                WRITE(0,*) 'Leaving analysis CALL'
            ELSE
            ENDIF
-
+           ENDIF
             CALL output(&
                 np     = object%numberOfRadialPoints,    &
                 np4    = object%numberOfRadialPoints*4,   &
@@ -804,5 +819,159 @@ CONTAINS
             object%eigenVectorMMS)
 
     END SUBROUTINE DestroySwirlClassObject
-!
+    SUBROUTINE GetModeShape(&
+            object)
+
+        TYPE(SwirlClassType), INTENT(INOUT) ::&
+            object
+
+        INTEGER, PARAMETER :: &
+          rDef = REAL64, &
+          numberOfGridPoints = 50
+
+        LOGICAL :: &
+            debug_flag = .TRUE.
+
+        CHARACTER(LEN = 50) :: &
+            filename
+
+        INTEGER :: &
+            UNIT                  ,&
+            azimuthal_mode_number ,&
+            radial_mode_number    ,&
+            i
+        
+        
+        REAL(KIND=rDef) :: & 
+            r_min, &
+            r_max, &
+            dr,  &
+            weighting_coefficient_A, &
+            weighting_coefficient_B, &
+            hubTipRatio,&
+            convergence_criteria ,& 
+            mode_shape
+
+        REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: &
+            radial_grid
+
+        REAL(KIND=rDef),DIMENSION(2) :: &
+            rmode_bessel_function_errors
+
+        REAL(KIND=rDef),DIMENSION(4) :: &
+            eigen_bessel_function_errors , &
+            anfu_bessel_function_errors 
+
+        REAL(KIND=rDef) :: &
+            anrt_convergence_flag 
+        
+        REAL(KIND=rDef) :: &
+            non_dimensional_roots
+
+
+
+        ALLOCATE(radial_grid(numberOfGridPoints))
+
+
+        r_min = object%hubTipRatio!0.045537!0.20_rDef 
+
+        r_max = object%r(object%numberOfRadialPoints)!1.0_rDef      
+
+        azimuthal_mode_number = object%azimuthalMode 
+        radial_mode_number = 2
+        convergence_criteria = 1.0E-12_rDef
+        ! redundant to recreate radial grid
+        hubTipRatio = r_min/r_max 
+
+        dr    = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
+
+        DO i =1,numberOfGridPoints
+
+        radial_grid(i)  = (r_min+REAL(i-1, rDef)*dr)!radial grid 
+        
+        ENDDO
+        
+        CALL ANRT(&
+            azimuthal_mode_number,&
+            radial_mode_number,&
+            hubTipRatio,&
+            convergence_criteria,&
+            non_dimensional_roots,&
+            anfu_bessel_function_errors,&
+            anrt_convergence_flag)
+
+        ! checking ANRT result
+
+        IF (anrt_convergence_flag .gt. 10e-12_rDef) THEN
+            WRITE(0,*) 'ERROR: ANRT DID NOT CONVERGE ',anrt_convergence_flag
+        ELSE
+        ENDIF
+
+        IF (debug_flag.eqv..TRUE.) THEN
+            ! WRITE(0,*) 'k_mn r_max' ,non_dimensional_roots
+        ELSE
+        ENDIF
+        
+        ! Obtaining A and B coefficients for radial mode shape
+
+        CALL EIGEN(&
+            azimuthal_mode_number, &
+            hubTipRatio          , &
+            non_dimensional_roots, &
+            weighting_coefficient_A                  , &
+            weighting_coefficient_B                  , &
+            eigen_bessel_function_errors)
+
+        IF (debug_flag.eqv..TRUE.) THEN
+            WRITE(0,*) 'A ' , weighting_coefficient_A
+            WRITE(0,*) 'B ' , weighting_coefficient_B
+            WRITE(0,*) 'k_mn r_max ' , non_dimensional_roots
+            WRITE(0,*) 'k_mn ' , non_dimensional_roots/r_max
+        ELSE
+        ENDIF
+
+        filename = 'radial_mode_data.dat'
+        OPEN(NEWUNIT=UNIT,FILE=TRIM(ADJUSTL(filename))) 
+
+        WRITE(UNIT,*) &
+            'radius ', &
+            'pressure '
+         
+        DO i = 1,numberOfGridPoints
+
+        CALL RMODE(&
+        azimuthal_mode_number,&
+        non_dimensional_roots*radial_grid(i)/r_max,&
+        weighting_coefficient_A,&
+        weighting_coefficient_B,&
+        mode_shape,&
+        rmode_bessel_function_errors)
+  
+        WRITE(UNIT,*) &
+            radial_grid(i)/r_max,&
+            mode_shape 
+
+        ENDDO
+
+        CLOSE(UNIT)
+
+        OPEN(NEWUNIT=UNIT,FILE='radial_mode_parameters.dat')
+        WRITE(UNIT,*) &
+            'azimuthal_mode_number ', &
+            'radial_mode_number ', &
+            'weighting_factor_A ', &
+            'weighting_factor_B ', &
+            'non_dimensional_roots ' 
+        WRITE(UNIT,*) &
+            azimuthal_mode_number, &
+            radial_mode_number , &
+            weighting_coefficient_A, &
+            weighting_coefficient_B, &
+            non_dimensional_roots 
+        CLOSE(UNIT)
+
+        IF (debug_flag) THEN
+        ENDIF
+    END SUBROUTINE GetModeShape   
+! 
 END MODULE swirlClassObject

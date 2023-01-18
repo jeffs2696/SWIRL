@@ -1,6 +1,6 @@
 
 
-r_min                     = 0.00_rDef
+r_min                     = 0.100_rDef
 r_max                     = 1.00_rDef
 
 azimuthalModeNumber       =  2

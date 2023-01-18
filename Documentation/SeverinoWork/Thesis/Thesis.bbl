@@ -1,8 +1,205 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{weisstein2002bessel}
-Eric~W Weisstein.
-\newblock Bessel function of the first kind.
-\newblock {\em https://mathworld. wolfram. com/}, 2002.
+\bibitem{Wundrow2019}
+Small-amplitude disturbances in turbomachine flows with swirl - david w.
+  wundrow - google books.
+
+\bibitem{MESref}
+Chapter 3 exact methods of solution.
+\newblock {\em Mathematics in Science and Engineering}, 18:71--122, 1 1965.
+
+\bibitem{icao2020}
+{\em INDEPENDENT EXPERT INTEGRATED TECHNOLOGY GOALS ASSESSMENT AND REVIEW FOR
+  ENGINES AND AIRCRAFT REPORT}.
+\newblock 2019.
+
+\bibitem{FAAPolicy}
+Department Of Transportation Federal~Aviation Administration.
+\newblock Aviation environmental and energy policy statement - july 2012, 2012.
+
+\bibitem{Agarwal1989}
+N.~K. Agarwal and M.~K. Bull.
+\newblock Acoustic wave propagation in a pipe with fully developed turbulent
+  flow.
+\newblock {\em Journal of Sound and Vibration}, 132:275--298, 7 1989.
+
+\bibitem{Astley1979}
+R.~J. Astley and W.~Eversman.
+\newblock A finite element formulation of the eigenvalue problem in lined ducts
+  with flow.
+\newblock {\em Journal of Sound and Vibration}, 65:61--74, 7 1979.
+
+\bibitem{Case2004}
+K.~M. Case.
+\newblock Stability of inviscid plane couette flow.
+\newblock {\em The Physics of Fluids}, 3:143, 11 2004.
+
+\bibitem{Cooper2006}
+A.~J. Cooper.
+\newblock Effect of mean entropy on unsteady disturbance propagation in a
+  slowly varying duct with mean swirling flow.
+\newblock {\em Journal of Sound and Vibration}, 291:779--801, 4 2006.
+
+\bibitem{COOPER2001}
+A.~J. COOPER and N.~PEAKE.
+\newblock Propagation of unsteady disturbances in a slowly varying duct with
+  mean swirling flow.
+\newblock {\em Journal of Fluid Mechanics}, 445:207--234, 10 2001.
+
+\bibitem{Envia2004}
+Edmane Envia, Alexander~G. Wilson, and Dennis~L. Huff.
+\newblock Fan noise: A challenge to caa, 8 2004.
+
+\bibitem{Goldstein1978}
+M.~E. Goldstein.
+\newblock Characteristics of the unsteady motion on transversely sheared mean
+  flows.
+\newblock {\em Journal of Fluid Mechanics}, 84:305, 1 1978.
+
+\bibitem{Goldstein1979}
+M.~E. Goldstein.
+\newblock Scattering and distortion of the unsteady motion on transversely
+  sheared mean flows.
+\newblock {\em Journal of Fluid Mechanics}, 91:601--632, 1979.
+
+\bibitem{Golubev1998}
+V.~V. Golubev and H.~M. Atassi.
+\newblock Acoustic-vorticity waves in swirling flows.
+\newblock {\em Journal of Sound and Vibration}, 209:203--222, 1 1998.
+
+\bibitem{Golubev1997}
+Vladimir~V. Golubev and Hafiz~M. Atassi.
+\newblock Acoustic-vorticity modes in an annular duct with mean vortical
+  swirling flow.
+\newblock {\em 3rd AIAA/CEAS Aeroacoustics Conference}, pages 804--814, 1997.
+
+\bibitem{golubev1996sound}
+VV~Golubev and HM~Atassi.
+\newblock Sound propagation in an annular duct with mean potential swirling
+  flow.
+\newblock {\em Journal of Sound and Vibration}, 198(5):601--616, 1996.
+
+\bibitem{Guan2009}
+Ying Guan, Kai~H. Luo, and Tong~Q. Wang.
+\newblock Sound transmission in a lined annular duct with mean swirling flow.
+\newblock {\em American Society of Mechanical Engineers, Noise Control and
+  Acoustics Division (Publication) NCAD}, pages 135--144, 6 2009.
+
+\bibitem{Heaton2006}
+C.~J. Heaton and N.~Peake.
+\newblock Algebraic and exponential instability of inviscid swirling flow.
+\newblock {\em Journal of Fluid Mechanics}, 565:279--318, 10 2006.
+
+\bibitem{Hixon2010}
+Ray Hixon, Adrian Sescu, and Vasanth Allampalli.
+\newblock Towards the prediction of noise from realistic rotor wake/stator
+  interaction using caa.
+\newblock volume~6, pages 203--213. Elsevier Ltd, 2010.
+
+\bibitem{Ingraham2010}
+Daniel Ingraham.
+\newblock Verification of a computational aeroacoustics code using external
+  verification analysis (eva), 2010.
+
+\bibitem{Ingraham2015}
+Daniel Ingraham and Ray Hixon.
+\newblock Verification of a viscous computational aeroacoustics code using
+  external verification analysis aiaa paper 2015-2225 motivation.
+
+\bibitem{KAPUR1973}
+A.~KAPUR and P.~MUNGUR.
+\newblock Sound interaction with a helical flow contained in an annular duct
+  with radial gradients of flow, density and temperature.
+\newblock 1973.
+
+\bibitem{KERREBROCK1974}
+J.~L. KERREBROCK.
+\newblock Waves and wakes in turbomachine annuli with swirl.
+\newblock 1974.
+
+\bibitem{Kerrebrock2012}
+J.~L. Kerrebrock.
+\newblock Small disturbances in turbomachine annuli with swirl.
+\newblock {\em https://doi.org/10.2514/3.7370}, 15:794--803, 5 2012.
+
+\bibitem{Kerrebrock1992}
+Jack~L. Kerrebrock.
+\newblock {\em Aircraft engines and gas turbines}.
+\newblock MIT Press, 1992.
+
+\bibitem{kousen1996pressure}
+Kenneth Kousen.
+\newblock Pressure modes in ducted flows with swirl.
+\newblock In {\em Aeroacoustics Conference}, page 1679, 1996.
+
+\bibitem{kousen1995eigenmode}
+Kenneth~A Kousen.
+\newblock Eigenmode analysis of ducted flows with radially dependent axial and
+  swirl components.
+\newblock In {\em CEAS/AIAA Joint Aeroacoustics Conference, 1 st, Munich,
+  Germany}, pages 1085--1094, 1995.
+
+\bibitem{Kozaczuk2017}
+Konrad Kozaczuk.
+\newblock Engine nacelles design – problems and challenges.
+\newblock {\em Proceedings of the Institution of Mechanical Engineers, Part G:
+  Journal of Aerospace Engineering}, 231:2259--2265, 10 2017.
+
+\bibitem{Maldonado2016}
+A.~L.P. Maldonado, R.~J. Astley, J.~Coupland, G.~Gabard, and D.~Sutliff.
+\newblock Sound propagation in lined annular ducts with mean swirling flow.
+\newblock American Institute of Aeronautics and Astronautics Inc, AIAA, 2016.
+
+\bibitem{Nijboer2001}
+Ronald Nijboer.
+\newblock Eigenvalues and eigenfunctions of ducted swirling flows.
+\newblock {\em 7th AIAA/CEAS Aeroacoustics Conference and Exhibit}, 2001.
+
+\bibitem{Posson2013}
+H.~Posson and N.~Peake.
+\newblock The acoustic analogy in an annular duct with swirling mean flow.
+\newblock {\em Journal of Fluid Mechanics}, 726:439--475, 2013.
+
+\bibitem{Roy2005}
+Christopher~J. Roy.
+\newblock Review of code and solution verification procedures for computational
+  simulation.
+\newblock {\em Journal of Computational Physics}, 205:131--156, 5 2005.
+
+\bibitem{Salari2000}
+Kambiz Salari and Patrick Knupp.
+\newblock Code verification by the method of manufactured solutions, 2000.
+
+\bibitem{Shankar1972}
+P~N Shankar.
+\newblock Acoustic refraction and attenuation in cylindrical and annular ducts,
+  1972.
+
+\bibitem{smith1989aircraft}
+Michael~JT Smith.
+\newblock Aircraft noise.
+\newblock {\em Cambridge Aerospace Series}, 1989.
+
+\bibitem{Tam1998}
+Christopher~K.W. Tam and Laurent Auriault.
+\newblock The wave modes in ducted swirling flows.
+\newblock {\em Journal of Fluid Mechanics}, 371:1--20, 9 1998.
+
+\bibitem{Tyler1962}
+J.~M. Tyler and T.~G. Sofrin.
+\newblock Axial flow compressor noise studies.
+\newblock {\em SAE Technical Papers}, 1 1962.
+
+\bibitem{Vo1978}
+P.~T. Vo and W.~Eversman.
+\newblock A method of weighted residuals with trigonometric basis functions for
+  sound transmission in circular ducts.
+\newblock {\em Journal of Sound and Vibration}, 56:243--250, 1 1978.
+
+\bibitem{YURKOVICH1975}
+R.~YURKOVICH.
+\newblock Attenuation of acoustic modes in circular and annular ducts in the
+  presence of sheared flow.
+\newblock {\em 13th Aerospace Sciences Meeting}, 1 1975.
 
 \end{thebibliography}

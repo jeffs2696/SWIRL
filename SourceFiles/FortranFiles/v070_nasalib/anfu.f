@@ -1,0 +1,86 @@
+        SUBROUTINE ANFU(M,X,S,F,IEB)
+C
+C       THIS SUBROUTINE IS USED BY V071-V076
+C
+C       (AN)NULAR (FU)NCTION
+C
+C SOFTWARE ID : V070
+C
+C
+C AUTHOR :    UNKNOWN
+C
+C DATE : UNKNOWN
+C
+C
+C DATED REVISIONS:
+C  11/18/87 MADE IEB AN ARRAY DIMENSIONED TO 8 TO HOLD THE ERROR CODES
+C           FROM THIS ROUTINE TO BE PASSED TO ANRT AND USED TO PRINT
+C           AN ERROR MESSAGE AFTER THE FINAL CALL.
+C
+C  4/1/91   CHANGED ANFU TO ACCEPT OUTPUT FROM THE NEW BESJ AND BESY     
+C           SUBROUTINES.  THIS OUTPUT CONSISTS OF THE BESSEL FUNCTION 
+C           AND THE DERIVATIVE OF THE BESSEL FUNCTION.              
+C
+C  4/1/91   MADE IEB AN ARRAY DIMENSIONED TO 4 TO HOLD THE ERROR CODES
+C           FROM THIS ROUTINE TO BE PASSED TO ANRT AND USED TO PRINT
+C           AN ERROR MESSAGE AFTER THE FINAL CALL.
+C
+C$
+C -------------------------------------------------------------------
+C
+C PURPOSE : EVALUATE THE DETERMINANT F = P(JS*Y-YS*J)
+C
+C
+C FORM OF CALL:
+C       CALL ANFU(M,X,S,F,IEB)
+C
+C
+C ARGUMENT LIST  :
+C M - CIRCUMFERENTIAL MODE NUMBER (INPUT)
+C X - GUESS FOR XMN (INPUT)
+C S - SIGMAR (INPUT)
+C F - FUNCTION VALUE (OUTPUT)
+C IEB - ARRAY OF   BESSEL FUNCTION ERRORS (OUTPUT)
+C
+C
+C INPUT: UNKNOWN
+C
+C
+C OUTPUT: UNKNOWN
+C
+C
+C METHOD : REFER TO C.S. VENTRES,ET AL., "TURBOFAN NOISE GENERATION",
+C          NASA-CR-167951 AND NASA-CR-167952,JULY 1982
+C
+C
+C IDIOSYNCRASIES : UNKNOWN
+C
+C
+C -------------------------------------------------------------------
+C$
+C**********************************************************************
+C
+C     ..................................................................
+C
+      IMPLICIT REAL*8 (A - H , O - Z )
+      INTEGER * 4 IEB(4)
+c
+c=>      BESJ 
+c
+          CALL BESJ(X,M,BJM,ZJ,'ANFU  ',IE1)
+          IEB(1) = IE1
+          CALL BESJ(S*X,M,BJMS,ZJS,'ANFU  ',IE2)
+          IEB(2) = IE2
+c
+c=>     BESY
+c
+          CALL BESY(X,M,BYM,ZY,'ANFU  ',IE3)
+          IEB(3) = IE3
+          CALL BESY(S*X,M,BYMS,ZYS,'ANFU  ',IE4)
+          IEB(4) = IE4
+C
+C=>
+C
+          F   = ZJS*ZY - ZJ*ZYS
+        RETURN
+        END

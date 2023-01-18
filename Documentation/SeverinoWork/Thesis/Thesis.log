@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.23)  9 NOV 2022 12:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.23)  18 JAN 2023 11:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -884,6 +884,27 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 LaTeX Warning: Label `eqn:CompressibleConservationOfEnergy' multiply defined.
 
 
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
+racy.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
+
+LaTeX Warning: Label `eqn:1' multiply defined.
+
+
+LaTeX Warning: Label `eqn:2' multiply defined.
+
+
+LaTeX Warning: Label `eqn:3' multiply defined.
+
+
+LaTeX Warning: Label `eqn:1' multiply defined.
+
+
+LaTeX Warning: Label `eqn:1' multiply defined.
+
+)
+
 LaTeX Warning: Label `eqn:MMS_vTh' multiply defined.
 
 
@@ -977,65 +998,186 @@ LaTeX Info: Redefining \nameref on input line 44.
 ] (./Thesis.toc [5
 
 
-])
+] [6])
 \tf@toc=\write5
 \openout5 = `Thesis.toc'.
 
- [6]
+ [7]
 (./Thesis.lot)
 \tf@lot=\write6
 \openout6 = `Thesis.lot'.
 
- [7
+ [8
 
-] (./Thesis.lof)
+] (./Thesis.lof [9
+
+])
 \tf@lof=\write7
 \openout7 = `Thesis.lof'.
 
- [8
+ [10]
 
-]
+LaTeX Warning: Reference `Shankar' on page xi undefined on input line 307.
 
-LaTeX Warning: Reference `Shankar' on page ix undefined on input line 307.
+[11
 
-[9
+] [12] [13
 
-] [10] [11
-
-] [12
+] [14
 
 ]
 Chapter 1.
+(./Chapter-1-Introduction/Ch-1-Intro.tex [1
+
+
+
+]
+<Chapter-1-Introduction/Figures/lowVhighBPRdirectivitySMITH2004.png, id=381, 59
+3.21625pt x 210.7875pt>
+File: Chapter-1-Introduction/Figures/lowVhighBPRdirectivitySMITH2004.png Graphi
+c file (type png)
+<use Chapter-1-Introduction/Figures/lowVhighBPRdirectivitySMITH2004.png>
+Package pdftex.def Info: Chapter-1-Introduction/Figures/lowVhighBPRdirectivityS
+MITH2004.png  used on input line 83.
+(pdftex.def)             Requested size: 433.62pt x 154.08266pt.
+ [2 <./Chapter-1-Introduction/Figures/lowVhighBPRdirectivitySMITH2004.png>] [3]
+ [4] [5]) [6]
+Chapter 2.
+(./Chapter-2-Literature-Review/Ch-2-intro.tex [7
+
+] [8] [9])
+(./Chapter-2-Literature-Review/Ch-2-main-body.tex [10])
+(./Chapter-2-Literature-Review/Ch-2-golubev-atassi-work.tex [11])
+(./Chapter-2-Literature-Review/Ch-2-conclusion.tex
+Overfull \hbox (5.27184pt too wide) in paragraph at lines 2--2
+[]\OT1/cmr/bx/n/17.28 Review of the as-sess-ment of the nu-mer-i-cal tech-
+ []
+
+[12]
+Overfull \hbox (5.15623pt too wide) in paragraph at lines 40--40
+[]\OT1/cmr/bx/n/14.4 The re-search ques-tions, hy-pothe-ses, fore-shad-owed pro
+b-
+ []
+
+[13] [14] [15] [16] [17]) [18]
+Chapter 3.
 (./Chapter-3-Theory-Aerodynamic-Models/Ch-3-intro.tex)
-(./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.tex [1
+(./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model.tex [19
 
-
-
-] [2])
+] [20])
 (./Chapter-3-Theory-Aerodynamic-Models/aerodynamic_model_special_cases.tex
-[3]) (./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.tex
-[4] [5]
+[21]) (./Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations.tex
+[22] [23]
 Overfull \hbox (1.42184pt too wide) detected at line 799
 []
  []
 
-[6] [7]
+[24] [25]
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 973.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 1002.
 
-) (./Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes.tex [8] [9]
+) [26] [27]
+Chapter 4.
 
-LaTeX Warning: Reference `eqn:besselODE' on page 10 undefined on input line 428
-.
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction.
+tex [28
 
-) [10]
-Chapter 2.
-(./Chapter-5-Results/Ch-5-intro.tex)
-(./Chapter-5-Results/Ch-5-results-and-discussion.tex [11
+]) [29]
+\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/ord
+er-of-accuracy.aux'.
+
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
+racy.tex [30
+
+] [31] [32]) [33]
+\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/met
+hods.aux'.
+
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.tex)
+[34
+
 
 ]
-(./Chapter-5-Results/Ch-5-MMS-study.tex [12]
-<../../../CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_profile.pdf, id=312,
+\openout2 = `Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/pro
+cedure.aux'.
+
+
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.tex
+
+LaTeX Warning: Reference `eq:Mthetabackcalculated' on page 35 undefined on inpu
+t line 33.
+
+[35
+
+
+] [36]
+Overfull \hbox (10.83311pt too wide) in paragraph at lines 77--79
+[]$\OML/cmm/m/it/12 A \OMS/cmsy/m/n/12 ^^Q$ \OT1/cmr/m/n/12 mag-ni-tude fac-tor
+ that in-creases or de-creases the asymp-totic lim-its $[][] =
+ []
+
+[37] [38] [39]
+
+LaTeX Warning: Reference `eq:Mthetabackcalculated' on page 40 undefined on inpu
+t line 254.
+
+
+Overfull \hbox (37.03601pt too wide) detected at line 259
+[]
+ []
+
+[40]) [41]
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/intro.tex)
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/setting-bc-values
+-using-a-fairing-function.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 4.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\beta' on input line 4.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 4.
+
+[42
+
+] [43])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-poly
+nomial.tex [44] [45])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/max-boundary-poly
+nomial.tex [46])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/symbolic-sanity-c
+hecks.tex
+Overfull \hbox (18.29695pt too wide) in paragraph at lines 2--8
+[]\OT1/cmr/m/n/12 We want to en-sure that $\OML/cmm/m/it/12 f[]$ \OT1/cmr/m/n/1
+2 has the de-sired bound-ary con-di-tions, $\OML/cmm/m/it/12 f[]$
+ []
+
+
+Overfull \hbox (110.35847pt too wide) detected at line 35
+[]
+ []
+
+
+Overfull \hbox (105.42238pt too wide) detected at line 52
+[]
+ []
+
+[47])
+(./Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-poly
+nomial-derivative.tex [48] [49] [50]) [51]
+Chapter 5.
+(./Chapter-5-Results/Ch-5-intro.tex)
+(./Chapter-5-Results/Ch-5-results-and-discussion.tex [52
+
+]
+(./Chapter-5-Results/Ch-5-MMS-study.tex [53]
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_profile.pdf, id=793,
  400.00002pt x 247.2136pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_profile.pdf Gra
 phic file (type pdf)
@@ -1043,9 +1185,9 @@ phic file (type pdf)
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_mean_f
 low_profile.pdf  used on input line 70.
 (pdftex.def)             Requested size: 399.99902pt x 247.21298pt.
- [13 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_profile.pdf>]
+ [54 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_mean_flow_profile.pdf>]
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.pdf, i
-d=353, 359.49548pt x 256.57108pt>
+d=834, 359.49548pt x 256.57108pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.p
 df Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.pd
@@ -1054,7 +1196,7 @@ Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedO
 fSoundComparison1.pdf  used on input line 85.
 (pdftex.def)             Requested size: 359.4946pt x 256.57045pt.
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison2.pdf, i
-d=354, 355.2454pt x 256.57108pt>
+d=835, 355.2454pt x 256.57108pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison2.p
 df Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison2.pd
@@ -1067,7 +1209,7 @@ fSoundComparison2.pdf  used on input line 93.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.pdf, 
-id=357, 367.02531pt x 257.68217pt>
+id=838, 367.02531pt x 257.68217pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.
 pdf Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.p
@@ -1079,24 +1221,19 @@ fSoundComparisonL2.pdf  used on input line 107.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Reference `tab:MMS1_input' on page 14 undefined on input line 11
+LaTeX Warning: Reference `tab:MMS1_input' on page 55 undefined on input line 11
 3.
 
-[14 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.pd
+[55 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison1.pd
 f>]
 
-LaTeX Warning: Text page 15 contains only floats.
+LaTeX Warning: Text page 56 contains only floats.
 
-[15 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison2.pd
+[56 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparison2.pd
 f> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonL2.pd
-f
-
-pdfTeX warning: pdflatex (file ../../../CodeRun/04-plotReport/tex-outputs/MMS1_
-SpeedOfSoundComparisonL2.pdf): PDF inclusion: multiple pdfs with page group inc
-luded in a single page
->]
+f>]
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vR.pdf,
- id=447, 400.00002pt x 247.2136pt>
+ id=925, 400.00002pt x 247.2136pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vR
 .pdf Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vR.
@@ -1105,7 +1242,7 @@ Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_pertur
 bation_variables_vR.pdf  used on input line 127.
 (pdftex.def)             Requested size: 399.99902pt x 247.21298pt.
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vX.pdf,
- id=448, 400.00002pt x 247.2136pt>
+ id=926, 400.00002pt x 247.2136pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vX
 .pdf Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vX.
@@ -1118,7 +1255,7 @@ bation_variables_vX.pdf  used on input line 134.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vTh.pdf
-, id=449, 400.00002pt x 247.2136pt>
+, id=927, 400.00002pt x 247.2136pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vT
 h.pdf Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vTh
@@ -1130,7 +1267,7 @@ bation_variables_vTh.pdf  used on input line 142.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_Pr.pdf,
- id=450, 400.00002pt x 247.2136pt>
+ id=928, 400.00002pt x 247.2136pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_Pr
 .pdf Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_Pr.
@@ -1142,7 +1279,7 @@ bation_variables_Pr.pdf  used on input line 150.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonROC.pdf,
- id=452, 359.49548pt x 231.84973pt>
+ id=930, 359.49548pt x 231.84973pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonROC
 .pdf Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonROC.
@@ -1150,17 +1287,15 @@ pdf>
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedO
 fSoundComparisonROC.pdf  used on input line 168.
 (pdftex.def)             Requested size: 359.4946pt x 231.84915pt.
-[16 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vR.
-pdf>] [17 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variabl
+[57 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_vR.
+pdf>] [58 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variabl
 es_vX.pdf> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variab
-les_vTh.pdf
+les_vTh.pdf>]
 
-pdfTeX warning: pdflatex (file ../../../CodeRun/04-plotReport/tex-outputs/MMS1_
-perturbation_variables_vTh.pdf): PDF inclusion: multiple pdfs with page group i
-ncluded in a single page
->]
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison1.pdf, id=
-514, 366.10666pt x 256.57108pt>
+991, 366.10666pt x 256.57108pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison1.pdf
  Graphic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison1.pdf>
@@ -1169,112 +1304,137 @@ Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
 TermComparison1.pdf  used on input line 175.
 (pdftex.def)             Requested size: 366.10576pt x 256.57045pt.
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison2.pdf, id=
+992, 366.10666pt x 256.57108pt>
+File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison2.pdf
+ Graphic file (type pdf)
+<use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison2.pdf>
+
+Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
+TermComparison2.pdf  used on input line 182.
+(pdftex.def)             Requested size: 366.10576pt x 256.57045pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError1.pdf, id=515, 
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison3.pdf, id=
+993, 370.35674pt x 256.57108pt>
+File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison3.pdf
+ Graphic file (type pdf)
+<use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison3.pdf>
+
+Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
+TermComparison3.pdf  used on input line 188.
+(pdftex.def)             Requested size: 370.35582pt x 256.57045pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison4.pdf, id=
+994, 366.10666pt x 256.57108pt>
+File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison4.pdf
+ Graphic file (type pdf)
+<use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermComparison4.pdf>
+
+Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
+TermComparison4.pdf  used on input line 194.
+(pdftex.def)             Requested size: 366.10576pt x 256.57045pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError1.pdf, id=995, 
 362.3286pt x 243.66719pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError1.pdf Grap
 hic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError1.pdf>
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
-TermError1.pdf  used on input line 182.
+TermError1.pdf  used on input line 203.
 (pdftex.def)             Requested size: 362.3277pt x 243.66658pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError2.pdf, id=516, 
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError2.pdf, id=996, 
 365.9952pt x 256.57108pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError2.pdf Grap
 hic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError2.pdf>
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
-TermError2.pdf  used on input line 190.
+TermError2.pdf  used on input line 211.
 (pdftex.def)             Requested size: 365.9943pt x 256.57045pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError3.pdf, id=517, 
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError3.pdf, id=997, 
 362.3286pt x 243.66719pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError3.pdf Grap
 hic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError3.pdf>
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
-TermError3.pdf  used on input line 198.
+TermError3.pdf  used on input line 219.
 (pdftex.def)             Requested size: 362.3277pt x 243.66658pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.pdf, id=518, 
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.pdf, id=998, 
 362.3286pt x 243.66719pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.pdf Grap
 hic file (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.pdf>
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_Source
-TermError4.pdf  used on input line 206.
+TermError4.pdf  used on input line 227.
 (pdftex.def)             Requested size: 362.3277pt x 243.66658pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf, id=519, 362.3286pt
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf, id=999, 362.3286pt
  x 256.57108pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf Graphic file (
 type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf>
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2
-.pdf  used on input line 214.
+.pdf  used on input line 235.
 (pdftex.def)             Requested size: 362.3277pt x 256.57045pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf, id=520, 355.2454p
-t x 256.57108pt>
+<../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf, id=1000, 355.2454
+pt x 256.57108pt>
 File: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf Graphic file 
 (type pdf)
 <use ../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf>
 Package pdftex.def Info: ../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_RO
-C.pdf  used on input line 220.
+C.pdf  used on input line 241.
 (pdftex.def)             Requested size: 355.24452pt x 256.57045pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [18 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_P
-r.pdf> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SpeedOfSoundComparisonR
-OC.pdf
+) [59 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_perturbation_variables_P
+r.pdf>]) (./Thesis.bbl [60 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_Spe
+edOfSoundComparisonROC.pdf> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_So
+urceTermComparison1.pdf>] [61 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_
+SourceTermComparison2.pdf> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_Sou
+rceTermComparison3.pdf>] [62 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_S
+ourceTermComparison4.pdf> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_Sour
+ceTermError1.pdf>] [63 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceT
+ermError2.pdf> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError
+3.pdf>] [64 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.p
+df> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf>] [65 <../../..
+/CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf>] [66
 
-pdfTeX warning: pdflatex (file ../../../CodeRun/04-plotReport/tex-outputs/MMS1_
-SpeedOfSoundComparisonROC.pdf): PDF inclusion: multiple pdfs with page group in
-cluded in a single page
->]) (./Thesis.bbl [19 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTe
-rmComparison1.pdf> <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermE
-rror1.pdf
-
-pdfTeX warning: pdflatex (file ../../../CodeRun/04-plotReport/tex-outputs/MMS1_
-SourceTermError1.pdf): PDF inclusion: multiple pdfs with page group included in
- a single page
->] [20 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError2.pdf> <
-../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError3.pdf
-
-pdfTeX warning: pdflatex (file ../../../CodeRun/04-plotReport/tex-outputs/MMS1_
-SourceTermError3.pdf): PDF inclusion: multiple pdfs with page group included in
- a single page
->] [21 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_SourceTermError4.pdf> <
-../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_L2.pdf
-
-pdfTeX warning: pdflatex (file ../../../CodeRun/04-plotReport/tex-outputs/MMS1_
-LEE_L2.pdf): PDF inclusion: multiple pdfs with page group included in a single 
-page
->] [22 <../../../CodeRun/04-plotReport/tex-outputs/MMS1_LEE_ROC.pdf>]) [23
-
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 686.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 686.
-
-(./Thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 686.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 686.
+] [67] [68]) [69]
+[70]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 695.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 695.
+ (./Thesis.aux
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accu
+racy.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods.aux)
+(./Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure.aux
+))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 695.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 695.
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 36F0C8A76144AD88615BEC5BD20C6A01;1254.
+(rerunfilecheck)             Checksum: 2844B71490FAFD74E7A1DB907CA399A5;3700.
 
 
 LaTeX Warning: There were undefined references.
@@ -1282,38 +1442,40 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 686.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 695.
  ) 
 Here is how much of TeX's memory you used:
- 29673 strings out of 483183
- 725083 string characters out of 5966292
- 1066904 words of memory out of 5000000
- 43963 multiletter control sequences out of 15000+600000
- 539067 words of font info for 47 fonts, out of 8000000 for 9000
+ 30457 strings out of 483183
+ 747864 string characters out of 5966292
+ 1106043 words of memory out of 5000000
+ 44541 multiletter control sequences out of 15000+600000
+ 540302 words of font info for 52 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 78i,16n,136p,723b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 78i,14n,136p,723b,2075s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmti12.pfb>
-Output written on Thesis.pdf (35 pages, 548498 bytes).
+texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmtt12.pfb>
+Output written on Thesis.pdf (84 pages, 717461 bytes).
 PDF statistics:
- 803 PDF objects out of 1000 (max. 8388607)
- 722 compressed objects within 8 object streams
- 113 named destinations out of 1000 (max. 500000)
- 253 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1409 PDF objects out of 1440 (max. 8388607)
+ 1267 compressed objects within 13 object streams
+ 254 named destinations out of 1000 (max. 500000)
+ 505 words of extra memory for PDF output out of 10000 (max. 10000000)
 

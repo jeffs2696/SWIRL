@@ -1,0 +1,60 @@
+%        File: WeeklyResearchReport_4_19_21.tex
+%     Created: Mon Apr 19 08:00 AM 2021 E
+% Last Change: Mon Apr 19 08:00 AM 2021 E
+%
+\documentclass[a4paper]{article}
+\begin{document}
+\begin{titlepage}
+
+    \title{
+    Examining Convergence}
+
+    \author{ Jeffrey Severino \\
+        University of Toledo \\
+        Toledo, OH  43606 \\
+    email: jseveri@rockets.utoledo.edu}
+
+
+    \maketitle
+
+\end{titlepage}
+\section{Current Research Direction}
+The current research direction is to decide on the proper range of grid points to
+conduct a grid convergence study. The \verb|Wind-US| CFD Code from NASA GRC and USAF
+AEDC outlines how the examine spatial grid convergence. There work has been summarized below (in my own words)
+unless quotes are used.
+\section{Research Performed}
+When repeating the simulation while increasing the number of grid points is standard 
+practice when conducting a numerical approximation. The discretization errors that
+initially arise should asymptotically approach zero, excluding computer round-off error. 
+
+Although it is desirable to know the error band for the results obtained from a 
+fine grid, the study may require a coarse grid due to time constraints for design
+iteration. Furthermore, as the grid gets finer, the computational time required 
+increases. So it is desirable to compute the discretization on grids with fewer points
+to get a sense of where the asymptotic range is located. The approach for generating
+the series of grids is to generate a grid with what the user would consider small or
+fine grid spacing, reaching the upper limit of one's tolerance for generating a grid. Otherwise, the finest grid that requires the least amount of computation on that grid to converge should be chosen. Then coarser grids can be obtained by removing every other grid point. Finally, the
+number of iterations can be increased to create additional levels of coarse grids.
+For example, in generating the fine grid, one can choose the number of coarser grids
+by satisfying the following relation,
+
+\begin{equation}
+    N = (2^n)m + 1
+\end{equation}
+
+\subsection{Order of Convergence}
+
+
+
+\section{Issues and Concerns}
+Why must the number of grid points in each coordinate direction equal $4m+1$?
+\section{Planned Research}
+Expand this document as it pertains to SWIRL
+
+
+
+
+\end{document}
+
+++>

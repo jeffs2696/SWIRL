@@ -1,36 +1,56 @@
+\subsection{Examining Convergence Using Multiple Grids}
+When repeating the simulation while increasing the number of grid points is standard 
+practice when conducting a numerical approximation. The discretization errors that
+initially arise should asymptotically approach zero, excluding computer round-off error. 
 
+Although it is desirable to know the error band for the results obtained from a 
+fine grid, the study may require a coarse grid due to time constraints for design
+iteration. Furthermore, as the grid gets finer, the computational time required 
+increases. So it is desirable to compute the discretization on grids with fewer points
+to get a sense of where the asymptotic range is located. The approach for generating
+the series of grids is to generate a grid with what the user would consider small or
+fine grid spacing, reaching the upper limit of one's tolerance for generating a grid. Otherwise, the finest grid that requires the least amount of computation on that grid to converge should be chosen. Then coarser grids can be obtained by removing every other grid point. Finally, the
+number of iterations can be increased to create additional levels of coarse grids.
+For example, in generating the fine grid, one can choose the number of coarser grids
+by satisfying the following relation,
+
+\begin{equation}
+    N = (2^n)m + 1
+\end{equation}
+where, $N$ is the number of grid points, $n$ is the iteration level, and $m$ is 
+an arbitrary integer. The base $2$ has the effect of doubling grid points. However
+$m$ can change between iterations which will allow for grids which are fractions of double.
+
+One can use the finest grid that was run to determine how to iterate from a coarser
+grid up to a finer one. Note that the number of grid points does not to be doubled
+each time, however the grid refnement should be such that the ratio between grid spacing 
+it is less than $0.91$ since it is easier to determine which errors occur from
+discretization as opposed to computer round-off error or iterative convergence 
+errors.  
+
+For this work, the number of grid points will be computed using the following 
 \subsection{Calculation of Observed Order-of-Accuracy}
 The numerical scheme used to perform the integration of the tangential velocity
 will have a theoretical order-of-accuracy. To find the theoretical 
 order-of-accuracy, the discretization error must first be defined. The error, 
-$\epsilon$, is a function of id spacing, $\Delta r$
+$\epsilon$, is a function of grid spacing, $\Delta r$
 
 \[ \epsilon = \epsilon(\Delta r) \]
 
 The discretization error in the solution should be proportional to 
 $\left( \Delta r \right)^{\alpha}$ where $\alpha > 0$ is the theoretical order
-for the computational method.  The error for each grid is expressed as 
-\[ \epsilon_{M_{\theta}}(\Delta r) = |M_{\theta,analytic}-M_{\theta,calc}|\]
-where $M_{\theta,analytic}$ is the tangential mach number that is defined from the
-speed of sound we also defined and the $M_{\theta,calc}$ is the result from 
-SWIRL. The $\Delta r$ is to indicate that this is a discretization error for a
-specific grid spacing. Applying the same concept to to the speed of sound,
+for the computational method.  An error between two quantities can expressed as 
+\[ \epsilon(\Delta r) = |f_{analytic}-f_{calc}|\]
+where $f_{analytic}$ is the function value of an analytic solution and $f_{calc}$ 
+represents some calculated value.  The $\Delta r$ is to indicate that this is a discretization error for a
+specific grid spacing. 
 
 If we define this error on various grid sizes and compute $\epsilon$ for
 each grid, the observed order of accuracy can be estimated and compared to
 the theoretical order of accuracy. For instance, if the numerical soution
-is second-order accurate and the error is converging to a value, the L2 norm of
+is second-order accurate and the error is converging to a value, the $L_2$ norm of
 the error will decrease by a factor of 4 for every halving of the grid cell 
 size. 
-
-Since the input variables should remain unchanged (except from minor changes 
-from the Akima interpolation), the error for the axial and tangential mach 
-number should be zero. As for the speed of sound, since we are using an analytic
-expression for the tangential mach number, we know what the theoretical result
-would be from the numerical integration technique as shown above. 
-Similarly we define the discretization error for the speed of sound.
-
-\[ \epsilon_{A}(\Delta r) = |A_{analytic}-A_{calc}|\]
 
 For a perfect answer, we expect $\epsilon$ to be zero. Since a Taylor series can 
 be used to derive the numerical schemes, we know that the truncation of higher
@@ -40,8 +60,8 @@ is constructed with such truncated Taylor series.
 The error at each grid point $j$ is expected to satisfy the following,
 
 \begin{align*}
-    0 &= |A_{analytic}(r_j) - A_{calc}(r_j)| \\
-    \widetilde{A}_{analytic}(r_j) &= \widetilde{A}_{calc}(r_j) +
+    0 &= |f_{analytic}(r_j) - f_{calc}(r_j)| \\
+    f_{analytic}(r_j) &= {f}_{calc}(r_j) +
     (\Delta r)^{\alpha} \beta(r_j)  + H.O.T
 \end{align*}
 
@@ -49,24 +69,24 @@ where the value of $\beta(r_j)$ does not change with grid spacing, and
 $\alpha$ is the asymptotic order of accuracy of the method. It is important to
 note that the numerical method recovers the original equations as the grid 
 spacing approached zero.  It is important to note that $\beta$ represents the
-first derivative of the Taylor Series.  Subtracting $A_{analytic}$ from both
+first derivative of the Taylor Series.  Subtracting $f_{analytic}$ from both
 sides gives,
 
 \begin{align*}
-    A_{calc}(r_j) - A_{analytic}(r_j) &= A_{analytic}(r_j) - A_{analytic}(r_j)
+    f_{calc}(r_j) - f_{analytic}(r_j) &= f_{analytic}(r_j) - f_{analytic}(r_j)
     + \beta(r_j) (\Delta r)^{\alpha} \\
-    \epsilon_A(r_j)(\Delta r) &= \beta(r_j) (\Delta r)^{\alpha}
+    \epsilon_(r_j)(\Delta r) &= \beta(r_j) (\Delta r)^{\alpha}
 \end{align*}
 
 To estimate the order of accuracy of the accuracy, we define the global errors 
-by calculating the L2 Norm of the error which is denoted as $\hat{\epsilon}_A$ 
+by calculating the L2 Norm of the error which is denoted as $\hat{\epsilon}$ 
 
 \begin{align*}
-    \hat{\epsilon}_A = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \epsilon(r_j)^2  }
+    \hat{\epsilon} = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \epsilon(r_j)^2  }
 \end{align*}
 
 \begin{align*}
-    \hat{\beta}_A(r_j) = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \beta(r_j)^2  }
+    \hat{\beta}(r_j) = \sqrt{\frac{1}{N}\sum_{j=1}^{N} \beta(r_j)^2  }
 \end{align*}
 
 As the grid density increases, $\hat{\beta}$ should asymptote to a constant 
@@ -104,15 +124,15 @@ Defining  for a doubling of grid points ,
     \right)}{\ln \left( \frac{1}{2} \right)}
 \end{align*}
 
-Similarly for the eigenvalue problem, 
-Initially the source terms were defined without mention of the indicies of the 
-matricies they make up. In other words, there was no fore sight on the fact 
-that these source terms are sums of the elements within A,B, and X. 
-To investigate the source terms in greater detail, the FORTRAN code 
-that calls the source terms will output the terms within the source term 
-and then sum them, instead of just their sum.
-
-\[ [A]x - \lambda [B]x = 0 \]
-
-
-
+%Similarly for the eigenvalue problem, 
+%Initially the source terms were defined without mention of the indicies of the 
+%matricies they make up. In other words, there was no fore sight on the fact 
+%that these source terms are sums of the elements within A,B, and X. 
+%To investigate the source terms in greater detail, the FORTRAN code 
+%that calls the source terms will output the terms within the source term 
+%and then sum them, instead of just their sum.
+%
+%\[ [A]x - \lambda [B]x = 0 \]
+%
+%
+%

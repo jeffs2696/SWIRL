@@ -1,0 +1,128 @@
+\documentclass[a4paper]{report}
+\maxdeadcycles=200
+\usepackage[section]{placeins}
+\usepackage{afterpage}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{pgffor}
+\usepackage{booktabs}
+\begin{document}
+
+\begin{titlepage}
+\title{
+Research Report}
+
+
+\author{ Jeff Severino
+ \\
+University of Toledo \\
+Toledo, OH  43606 \\
+email:  jeffrey.severino@rockets.utoledo.edu}
+
+\maketitle
+
+\end{titlepage}
+
+\section{Current Research Direction}
+This week the plan was to complete:
+
+\begin{itemize}
+    \item Wrap up the initial numerical analysis study on hard-walled cylindrical 
+        duct acoustic mode convergence study by looking at the first five 
+        radial modes; only the first cut-on radial mode for five grids were studied. 
+    \item Start the same study on the annular duct case.  
+\end{itemize}
+
+\section{Research Performed This Week}
+Last week, the convergence study for the cylindrical duct mode was completed
+for the first cut-on radial mode for a given uniform flow. However, the issue was
+
+Last week, the convergence study for the cylindrical duct mode was completed for
+the first cut-on radial mode for a given uniform flow. However, the issue was that
+the analytic computation and importing of numerical results coincided, which can be
+problematic in convergence studies since the convergence rates can only be computed
+once all the data from multiple grids is imported. Therefore, importing data was first
+completed as a relatively quick fix. Then the corresponding analytic computations were
+carried out, allowing the data to be pulled when needed instead of doing these two
+steps simultaneously. 
+
+Although these compuations are separate, the convergence rate for the next 
+four radial modes need to be computed, the results for the first five grids are 
+below. Note that the number of grids were doubled and not yet subtracted by one.
+
+
+\begin{table}
+    % \centering
+    \makebox[\linewidth]{
+        \input{../tables/L2_downstream_table.tex}
+    }
+    \caption{L2 error for downstream radial mode 1}
+\end{table}
+\begin{table}
+    \makebox[\linewidth]{
+        \input{../tables/L2_upstream_table.tex}
+    }
+    \caption{L2 error for upstream radial mode 1}
+\end{table}
+
+\begin{table}
+    \makebox[\linewidth]{
+        \input{../tables/ROC_downstream_table.tex}
+    }
+    \caption{ROC error for downstream radial mode 1}
+\end{table}
+\begin{table}
+    \makebox[\linewidth]{
+        \input{../tables/ROC_upstream_table.tex}
+    }
+    \caption{ROC error for upstream radial mode 1}
+\end{table}
+\subsection{Discussion}
+A total of five grids were studied, starting from 33 and doubling until 1056 for the
+first cut on radial mode. The upstream and downstream mode pairs were used to compute
+the L2, $L_{max}$, and convergence rates for a uniform flow in a cylindrical duct. The axial
+wavenumber’s error starts with a magnitude of  e-6 and decreases to  $e-12$. A fourth
+order is expected when computing the convergence rate since a fourth-order central
+scheme was used. This behavior is shown in the upstream mode, with a rate of convergence
+of  ~4.19. However, this behavior is less pronounced in the downstream case. The rate
+increases to  3.7  but begins to decrease for the last grid pair. A grid spacing choice
+should have been made such that the jumps are not as large so that the convergence
+rates can be studied more carefully.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       For
+
+For the first radial mode, the pressure distribution in the upstream and downstream directions 
+do not reach fourth-order convergence as excpected. Using L’Hopital’s rule to obtain 
+a value at the centerline causes the error between the numerical and analytic modes 
+to be highest at the centerline gridpoint. L’Hopital’s rule’s effect is shown in upstream and downstream directions by identifying the
+location of the highest error, $L_{max}$, for pressure radial mode comparisons. When computing
+the rate of convergence for the  $L_{max}$ point, it converges to the second order. The
+same trend is noticed when both boundaries are removed in the error calculation. When
+looking at the difference between the excluding of boundaries, it seems that the convergence
+rate is higher without the wall BC as opposed to being higher without the centerline
+BC, but when computing the convergence rate of  $L_{max}$, a second-order rate is computed.         
+
+For the pressure mode data, neither upstream or downstream reach fourth order convergence.
+The use of the L'Hopital's rule to obtain a value at the centerline causes the 
+error between the numerical and analytic modes to be highest at the centerline
+gridpoint. This is shown in both upstream and downstream directions by identifying
+the location of the highest error $L_{max}$. When computing the rate of convergence
+for the $L_{max}$ point, it converges to second order. The same trend is noticed when 
+both boundaries are removed in the error calculation. 
+
+When looking at the difference between the excluding of boundaries, it seems that 
+the convergence rate is higher without the wall BC as opposed to being higher without 
+the centerline BC, but when computing the convergence rate of $L_{max}$, a second
+order rate is computed. 
+
+\section{Issues and Concerns}
+The proper grid spacing needs to be used. The distance between grid points isn't
+halving with the doubling of grid points because of the two points on the boundaries 
+of the domain. As a result the grid should be ``doubled'' by following $2n - 1$ 
+where $n$ is the number of grid points.
+
+\section{Planned Research}
+Now that the post processing routine allows for easier computation of more radial
+modes, that will be completed first. Then, SWIRL will be revised with the  correct method of doubling grid points to preserve a halving of 
+ grid spacing $\Delta r$ .  
+
+
+\end{document}

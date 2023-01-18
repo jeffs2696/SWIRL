@@ -1,7 +1,13 @@
 # How to run
 
+The first step is to ensure that the method of manufactured solutions is working.
+To generate the symbolic expressions used in the method of manufactured solutions
+
 1. make MMS
+Then, to run SWIRL...
 2. make all 
+
+
 
 
 ## FORTRAN
@@ -19,7 +25,7 @@ Important flags:
 -Wconversion-extra is not implied by -Wconversion but -Wconversion is implied by
 -Wall
 
-Use -Wno-error= foo to control which errors -Wextra is catching
+Use -Wno-error= () to control which errors -Wextra is catching
 
 see gcc.gnu.org/onlinedocs/gcc/invoking-GCC.html#Invoking-GCC
 
@@ -37,6 +43,10 @@ equations (LEE) using MMS.
 *2.(issue) we don't know if matrices were defined correctly in globalModule.f90
 *3.(why I care) The code needs verification
 
+
+Done 
+    - [ ]   
+
 *Steps for creating actual source terms for LEE
     -1. hack into swirlClassObject and extract aa,bb
     -2. decide which individual element is needed,and zero out the rest so that 
@@ -44,8 +54,4 @@ equations (LEE) using MMS.
     -2. multiply aa and bb by x, where x is the manufactured perturbation solutions
       - input: index of desired element in 4x4 matrix
       - output: Residual array data, S, where S=aa*x-lambda*bb*x  
-
-Questions:
-*How do we compare the actual terms to the manufactured terms?  
-
 

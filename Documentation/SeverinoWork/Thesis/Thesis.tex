@@ -459,13 +459,13 @@ their endevours.
 %        |  Leslie Lamport's "LaTeX: A Document Preparation         |
 %        |  System." Addison Wesley: Reading Massachusetts, 1985.   |
 %        +----------------------------------------------------------+
-% \chapter{Introduction}
-% \input{Chapter-1-Introduction/Ch-1-Intro} 
-% \chapter{Literature Review}
-% \input{Chapter-2-Literature-Review/Ch-2-intro}
-% \input{Chapter-2-Literature-Review/Ch-2-main-body}
-% \input{Chapter-2-Literature-Review/Ch-2-golubev-atassi-work}
-% \input{Chapter-2-Literature-Review/Ch-2-conclusion}
+\chapter{Introduction}
+\input{Chapter-1-Introduction/Ch-1-Intro} 
+\chapter{Literature Review}
+\input{Chapter-2-Literature-Review/Ch-2-intro}
+\input{Chapter-2-Literature-Review/Ch-2-main-body}
+\input{Chapter-2-Literature-Review/Ch-2-golubev-atassi-work}
+\input{Chapter-2-Literature-Review/Ch-2-conclusion}
 
 
 \chapter{Theoretical Framework and Methods}
@@ -480,25 +480,34 @@ their endevours.
 % \section{Non-dimensionalization}
 
 \input{Chapter-3-Theory-Aerodynamic-Models/linearized_euler_equations}
-\input{Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes}
+\newpage
+(place holder for analytics)
+\newpage
+\chapter{Verification and Validation Techniques for Numerical Approximations} 
+
+% \input{Chapter-3-Theory-Aerodynamic-Models/AnalyticalDuctModes}
 
 % \chapter{Chapter 4: Numerical Models}
 % \section{Numerical Integration}
 
-% \input{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction}
-% \include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/introduction}
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy}
+
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/methods}
 % \include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/theory}
-% \include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure}
-% \include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/order-of-accuracy}
+
+\include{Chapter-4-Theory-Numerical-Models/Theory-Numerical-Integration/procedure}
+
 % \section{Fairing Functions}
-% \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/intro}
-% \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/setting-bc-values-using-a-fairing-function}
-% \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-polynomial}
-% \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/max-boundary-polynomial}
-% \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/symbolic-sanity-checks}
-% \input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-polynomial-derivative}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/intro}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/setting-bc-values-using-a-fairing-function}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-polynomial}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/max-boundary-polynomial}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/symbolic-sanity-checks}
+\input{Chapter-4-Theory-Numerical-Models/Theory-Fairing-Functions/min-boundary-polynomial-derivative}
 \chapter{Results and Discusssion}
-\section{Verification}
+\section{Verification of Numerical Schemes using the Method of Manufactured Solution}
+
 \input{Chapter-5-Results/Ch-5-intro}
 \input{Chapter-5-Results/Ch-5-results-and-discussion}
 %\subsection{Method of Manufactured Solution Results}

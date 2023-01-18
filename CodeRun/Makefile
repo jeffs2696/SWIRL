@@ -35,7 +35,7 @@ run:
 	(./$(EXE));
 
 plot:
-	@cd 04-plotReport; ./plotReport.py;
+	@cd 04-plotReport; python3 plotReport.py;
 
 
 clean:

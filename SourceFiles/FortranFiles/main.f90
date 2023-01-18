@@ -33,14 +33,15 @@ PROGRAM MAIN
 
     LOGICAL :: &
         debug   = .FALSE. , &
-        MMSflag = .FALSE.
+        MMSflag = .TRUE. , &
+        MMSdebug_flag = .TRUE. 
 
     !! Code parameters for double precision and number of iterations
     INTEGER, PARAMETER :: &
-        M_int = 2 , & 
+        M_int = 16 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 4 
+        numberOfIterations = 7 
 
     !! Integers for flags and loop indicies
     INTEGER  :: &
@@ -155,8 +156,12 @@ PROGRAM MAIN
     FORMAT_ROC                 = "(F20.12,F20.12)"
     FORMAT_ROC_HEADER          = ("(A10,A20)")
 
-    ! include 'InputVariables_MMS1.f90'
-    include 'InputVariables_AnalyticalSolution_1.f90'
+    ! Use include statements to define mean flow and test case parameters
+
+    ! use this flow for propoer MMS calculation!
+    include 'InputVariables_MMS1.f90'
+
+    ! include 'InputVariables_AnalyticalSolution_1.f90'
     ! include 'InputVariables_KousenTable4_3.f90'
     ! include 'InputVariables_KousenTable4_4.f90'
     ! include 'InputVariables_KousenTable4_5.f90'
@@ -165,13 +170,12 @@ PROGRAM MAIN
 
     hubToTipRatio             = r_min/r_max
 
-    finiteDiffFlag            = FDfac ! from FDfac loop
 
     !!include statements with inputs needed for SwirlClassType
 
     eigenValueMMS = CMPLX(0,-1,KIND=rDef)*frequency*r_max
 
-    facCount = 0 ! initializer for far count
+    facCount = 0 ! initializer for fac count
 
     ALLOCATE( &
         RateOfConvergence1(numberOfIterations - 1) , &
@@ -187,7 +191,9 @@ PROGRAM MAIN
 
     M_int_new = M_int
 
-    numberOfGridPoints = 33 
+    !starting range
+    ! what if the user didn't have to define this
+    numberOfGridPoints =1+(2**fac)*M_int ! 
 
     DO FDfac = 2,2! numberOfFiniteDifferenceSchemes 
 
@@ -196,6 +202,7 @@ PROGRAM MAIN
     IF (debug) THEN
         WRITE(0,*) 'Iteration ', fac
     ENDIF
+
     finiteDiffFlag            = FDfac ! from FDfac loop
 
     ! Can this be done from within the SwirlClassObject?
@@ -212,23 +219,24 @@ PROGRAM MAIN
         ExpectedRateOfConvergenceSourceTerm = 4.0_rDef
     ENDIF
 
+
+    numberOfGridPoints = (1+(2**fac)*M_int)
+
     facCount                     = facCount + 1
 
-    ! IF (fac .lt. 8) THEN
-
-    !     numberOfGridPoints           = (1+(2**fac)*2)
-
-    ! ELSEIF (fac .eq. numberOfIterations) THEN 
-    !     numberOfGridPoints           = (1+(2**fac)*2)
-    ! ELSE
-    !     numberOfGridPoints           = (1+(2**fac)*2)
-    ! ENDIF
-    ! numberOfGridPoints = (1+(2**fac)*2)
     ! to double the number of grid points each iteration...
 
-    IF (fac.gt.1) THEN
-        numberOfGridPoints = (numberOfGridPoints + numberOfGridPoints)
-    ELSE
+    IF (facCount.gt.0) THEN
+        ! it really should be if the comp time is larger than a second or something
+        ! oR if the grid gets too big
+        ! using base 2 has the effect of doubling
+        numberOfGridPoints = 1 + (2**fac)*(M_int-(3+facCount))
+    ! ELSEIF (fac.gt.2) THEN
+        ! numberOfGridPoints = NINT((0.5**fac)*(M_int)) !+ numberOfGridPoints
+    ! ELSEIF (fac.gt.4) THEN
+    !     numberOfGridPoints = ((2**fac)*(M_int)) + numberOfGridPoints/3
+        
+        
     ENDIF
 
     numberOfGridPointsArray(fac) = numberOfGridPoints
@@ -239,7 +247,7 @@ PROGRAM MAIN
         gridSpacingRatio = drArray(fac)/drArray(fac-1) 
         WRITE(0,*)  'number of grid points 2: ', numberOfGridPointsArray(fac)   ,'delta r', drArray(fac)
         WRITE(0,*)  'number of grid points 1: ', numberOfGridPointsArray(fac-1) , 'delta r' ,drArray(fac-1)
-        WRITE(0,*)  'grid refinement ratio:   ' ,gridSpacingRatio
+        WRITE(0,*)  'grid refinement ratio:   ' ,gridSpacingRatio, 1/gridSpacingRatio
     END IF
 
     ALLOCATE(&
@@ -280,6 +288,7 @@ PROGRAM MAIN
 
     ! include 'InputMeanFlow_KousenFigure4_5_NoSwirl.f90'
     ! include 'InputMeanFlow_KousenFigure4_5_Swirl.f90'
+
     include 'InputMeanFlow_AnalyticalSolution_1.f90'
     !Create a swirl Class Obj for a given flow
 
@@ -302,12 +311,18 @@ PROGRAM MAIN
 
     CALL runSwirlClassMethods(&
         object = swirlClassObj(fac), &
-        debugFlag = debug)
+        debugFlag = debug          , &
+        MMSflag = MMSflag)
+
+    CALL GetAnalyiticModeShape(&
+        object = swirlClassObj(fac))
 
     CALL DestroyObject(object = swirlClassObj(fac))
 
     !!----------------------- MMS ----------------------------------------------
+    !! Uses the MMSflag variable to run MMS. Set MMSflag = .TRUE. to run
     include 'include_mms_main.f90'
+
     ENDDO
     DEALLOCATE(&
         RateOfConvergence1 , &

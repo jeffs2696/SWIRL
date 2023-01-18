@@ -11,6 +11,7 @@ import cmath
 import numpy as np
 import scipy as scp
 from scipy import special
+import helpers.logging_functions as lfcn
 import helpers.importing_functions as ifcn
 import helpers.math_functions as mfcn
 import helpers.mode_sorting_functions as msfcn
@@ -23,24 +24,12 @@ from mpl_toolkits.mplot3d import Axes3D # needed for 3d plots
 from matplotlib import cm
 from inputs.test_case_variables import TestCase1 
 
-logger = logging.getLogger("main")
-logger.setLevel(logging.DEBUG)
+# get logging settings 
+logger = lfcn.log_to_console()
 
-# remove all default handlers
-for handler in logger.handlers:
-        logger.removeHandler(handler)
-
-# create console handler and set level to debug
-console_handle = logging.StreamHandler()
-console_handle.setLevel(logging.DEBUG)
-
-# create formatter
-formatter = logging.Formatter("%(name)-20s - %(levelname)-8s - %(message)s")
-console_handle.setFormatter(formatter)
-
-# now add new handler to logger
-logger.addHandler(console_handle)
+# used to print indents to log
 tab = '--'  
+
 def main(): 
     
     logger.info(
@@ -62,7 +51,7 @@ def main():
     axial_mach_number = 0.3
     r_min = 0
     r_max = 1
-    grid_point_array = np.array([33, 66])
+    grid_point_array = np.array([33, 66])#, 132, 264,528,1056])
     # grid_point_array = np.array([32, 64, 128,256]) 
     # grid_point_array = np.array([33,66,132, 264,528,1056]) 
     number_of_grids = len(grid_point_array)
@@ -80,37 +69,126 @@ def main():
 
     # obtaining axial wavenumber outputs for all grids in study
 
+    if debug:
+        logger.info(f'Importing SWIRL data')
+
     second_order_directories, \
             fourth_order_directories, \
             NumericalAxialWavenumberData_second_order_list, \
             NumericalAxialWavenumberData_fourth_order_list = \
             ifcn.importNumericalWavenumbers(grid_point_array)
+            
     # obtaining mode data
 
-#     m_dict_second_order = []
-#     m_dict_fourth_order = [] 
-#     radial_mode_filenames = []
+    m_dict_second_order = []
+    m_dict_fourth_order = [] 
+    radial_mode_filenames = []
 
-#     for i_gp,j_gp in enumerate(grid_point_array): 
-#         m_dict = msfcn.sortAxialWavenumbers(
-#                 axial_mach_number,
-#                 wavenumber,
-#                 num_of_zeros,
-#                 NumericalAxialWavenumberData_second_order_list[i_gp],
-#                 grid_point_array)
+    if debug:
+        logger.info(f'Sorting SWIRL data')
 
-#         m_dict_second_order.append(m_dict)
 
-#         m_dict = msfcn.sortAxialWavenumbers(
-#                 axial_mach_number,
-#                 wavenumber,
-#                 num_of_zeros,
-#                 NumericalAxialWavenumberData_fourth_order_list[i_gp],
-#                 grid_point_array)
-#         m_dict_fourth_order.append(m_dict)
+    for i_gp,j_gp in enumerate(grid_point_array): 
 
-#     pprint.pprint(m_dict_fourth_order)
-#     sys.exit()
+        if debug:
+            logger.info(f'{tab*2}' \
+                    f' Grid : {i_gp:>5}' \
+                    f'{j_gp:>5} points')
+
+
+        m_dict_second_order.append(msfcn.sortAxialWavenumbers(
+                axial_mach_number,
+                wavenumber,
+                num_of_zeros,
+                NumericalAxialWavenumberData_second_order_list[i_gp],
+                grid_point_array))
+
+        logger.info(f'Second Order\n' + 
+            pprint.pformat(m_dict_second_order[i_gp]))
+
+        m_dict_fourth_order.append(msfcn.sortAxialWavenumbers(
+            axial_mach_number,
+            wavenumber,
+            num_of_zeros,
+            NumericalAxialWavenumberData_fourth_order_list[i_gp],
+            grid_point_array))
+
+        logger.info(f'Fourth Order\n' + 
+            pprint.pformat(m_dict_second_order[i_gp]))
+        # pprint.pprint(m_dict_fourth_order)
+
+    # pprint.pprint(m_dict_fourth_order)
+    # logger.info(pprint.pprint(m_dict_fourth_order)
+    
+        m_dict = m_dict_fourth_order
+        for i in range(len(m_dict['radial_mode_index'])):
+            # this concept is flawed .... it expects a certain array of grid points
+            #
+            if i_gp == 0:
+                if m_dict['radial_mode_index'][i] < 100:
+                    radial_mode_filenames.append(
+                            'egv_np_00{n}radialmode_00'.format(
+                                n = j_gp) +
+                            str(m_dict['radial_mode_index'][i])) 
+                else:
+                    radial_mode_filenames.append(
+                            'egv_np_00{n}radialmode_0'.format(
+                                n = j_gp ) +
+                            str(m_dict['radial_mode_index'][i]))
+            if i_gp == 1:
+                if m_dict['radial_mode_index'][i] < 100:
+                    radial_mode_filenames.append('egv_np_00{n}radialmode_00'.format(
+                        n = j_gp)+ str(m_dict['radial_mode_index'][i])) 
+                else:
+                    radial_mode_filenames.append('egv_np_00{n}radialmode_0'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i]))
+            if i_gp == 2:
+                if m_dict['radial_mode_index'][i] < 100:
+                    radial_mode_filenames.append('egv_np_0{n}radialmode_00'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i])) 
+                else:
+                    radial_mode_filenames.append('egv_np_0{n}radialmode_0'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i]))
+            if i_gp == 3:
+                if m_dict['radial_mode_index'][i] < 100:
+                    radial_mode_filenames.append('egv_np_0{n}radialmode_00'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i])) 
+                else:
+                    radial_mode_filenames.append('egv_np_0{n}radialmode_0'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i]))
+            if i_gp == 4:
+                if m_dict['radial_mode_index'][i] < 100:
+                    radial_mode_filenames.append('egv_np_0{n}radialmode_00'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i]))
+                elif m_dict['radial_mode_index'][i] < 1000:
+                    radial_mode_filenames.append('egv_np_0{n}radialmode_0'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i]))
+                else:
+                    radial_mode_filenames.append('egv_np_0{n}radialmode_'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i]))
+            if i_gp == 5:
+                if m_dict['radial_mode_index'][i] < 100:
+                    radial_mode_filenames.append('egv_np_{n}radialmode_00'.format(
+                                        n = j_gp) + str(m_dict['radial_mode_index'][i])) 
+                elif m_dict['radial_mode_index'][i] < 1000:
+                    radial_mode_filenames.append('egv_np_{n}radialmode_0'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i]))
+                else: 
+                    radial_mode_filenames.append('egv_np_{n}radialmode_'.format(
+                        n = j_gp) + str(m_dict['radial_mode_index'][i])) 
+                    
+
+            logger.info(f'{radial_mode_filenames}')
+            radial_mode_dataframe_dictionary = {} 
+    
+            for i in range(len(m_dict['radial_mode_index'])):
+                radial_mode_data = \
+                        pandas.read_csv(  fourth_order_directories[i_gp] +
+                                radial_mode_filenames[i], delim_whitespace = True )
+                        # print(j_gp) 
+                radial_mode_dataframe_dictionary[i] = radial_mode_data
+    
+    #sys.exit()
 
 
     ROC_nested_list = []
@@ -133,6 +211,8 @@ def main():
         ROC_axial_wavenumber_downstream_list = []
         ROC_axial_wavenumber_upstream_list = []
         ROC_downstream_list = []
+        ROC_kx_downstream_list = []
+        ROC_kx_upstream_list = []
         ROC_downstream_without_left_list = []
         ROC_downstream_without_right_list = []
         ROC_downstream_without_boundaries_list = []
@@ -429,8 +509,6 @@ def main():
                 
                 mode_direction = np.sign(corresponding_axial_wavenumber[0]) # real part only...
 
-
-
                 if (mode_direction) == 1.0: 
                     kx_downstream_list.append(corresponding_axial_wavenumber)
                     if debug_per_mode:
@@ -468,7 +546,11 @@ def main():
                         )
     
                 # two L2s one for upstream and downstream mode
-                
+                # kx_downstream_error.append(
+                        # abs(kx_downstream_list[i][0] - k_x_plus[0].real)) 
+                # kx_upstream_error.append(
+                        # abs(kx_upstream_list[i][0] - k_x_minus[0].real))
+
                 L2 = mfcn.getL2norm(
                         numerical_normalized_radial_mode_list[i][:].real,
                         analytical_normalized_radial_mode_list[radial_mode_number][:].real )
@@ -581,18 +663,30 @@ def main():
             upstream_L2_without_right.append(L2_list_without_right[0]) 
             upstream_L2_without_boundaries.append(L2_list_without_boundaries[0]) 
 
+        for i in range(number_of_grids): 
+            # logger.info(k_x_plus[0].real)
+
+            # logger.info(f'{kx_downstream_list[i][0]}')
+            
+            kx_downstream_error.append(
+            abs(kx_downstream_list[i][0] - k_x_plus[0].real))
+
+            kx_upstream_error.append(
+            abs(kx_upstream_list[i][0] - k_x_minus[0].real))
         logger.info(f"{'Convergence Study':=^90}")
         logger.info(f"{'L2-Norm Results':-^90}")
         mode_identifier_string = 'Downstream Radial Mode ' + str(i_rad_mode_num )
         logger.info(f'{mode_identifier_string :-^90}')
         logger.info(
                 f"{'Gridpoints':>10}" +
+                f"{'k_x_error':>17}" +
                 f"{'L2':>19}" +
                 f"{'L2 no left BC':>19}"+
                 f"{'L2 no right BC':>19}")
         for i in range(number_of_grids): 
             logger.info(
-                    f'{grid_point_array[i]:>10}'+
+                    f'{grid_point_array[i]:^10}'+
+                    f'{kx_downstream_error[i]:<0.11e}'+
                     f'  {downstream_L2[i]: <0.11e}'+ 
                     f'  {downstream_L2_without_left[i]: <0.11e}' +
                     f'  {downstream_L2_without_right[i]: <0.11e}') 
@@ -611,12 +705,14 @@ def main():
         logger.info(f'{mode_identifier_string :-^90}')
         logger.info(
                 f"{'Gridpoints':>10}" +
+                f"{'k_x_error':>17}" +
                 f"{'L2':>19}" +
                 f"{'L2 no left BC':>19}"+
                 f"{'L2 no right BC':>19}")
         for i in range(number_of_grids): 
             logger.info(
-                    f'{grid_point_array[i]:>10}'+
+                    f'{grid_point_array[i]:^10}'+
+                    f'{kx_upstream_error[i]:<0.11e}'+
                     f'  {upstream_L2[i]: <0.11e}'+ 
                     f'  {upstream_L2_without_left[i]: <0.11e}' +
                     f'  {upstream_L2_without_right[i]: <0.11e}') 
@@ -630,22 +726,9 @@ def main():
                     f'{grid_point_array[i]:>10}'+
                     f'  {upstream_Lmax[i]: <0.11e}'+ 
                     f'  {upstream_Lmax_location[i]: >17}') 
-
 # for axial wavenumber ...
-# need to compute error for each wavenumber corrresponding to each radial mode
+        # need to compute error for each wavenumber corrresponding to each radial mode
 
-        for i in range(number_of_grids): 
-            # logger.info(k_x_plus[0].real)
-
-            logger.info(f'{kx_downstream_list[i][0]}')
-            
-            kx_downstream_error.append(
-            abs(kx_downstream_list[i][0] - k_x_plus[0].real))
-
-            kx_upstream_error.append(
-            abs(kx_upstream_list[i][0] - k_x_plus[0].real))
-        # sys.exit()
-        logger.info(kx_downstream_error)
         for i in range(number_of_grids-1): 
             refinement_ratio = grid_point_array[i+1]/grid_point_array[i] # 2 for a doubling of gridpoints 
             # logger.info(kx_downstream_error[i])
@@ -654,7 +737,13 @@ def main():
                     kx_downstream_error[i]/kx_downstream_error[i+1])/\
                             np.log(refinement_ratio)
 
-            logger.info(ROC_kx_downstream)
+            ROC_kx_upstream = np.log (
+                    kx_upstream_error[i]/kx_upstream_error[i+1])/\
+                            np.log(refinement_ratio)
+
+            ROC_kx_downstream_list.append(ROC_kx_downstream)
+            ROC_kx_upstream_list.append(ROC_kx_upstream)
+            # logger.info(ROC_kx_downstream)
         # sys.exit()
 
             # ROC_kx_upstream = np.log(
@@ -735,34 +824,96 @@ def main():
                 f"{'ROC_noRBC':>14}"+
                 f"{'ROC_noBCS':>14}"+
                 f"{'ROC at Lmax': >14}")
+        L2_downstream_DataFrame = pandas.DataFrame(
+                list(zip(
+                    kx_downstream_error,
+                    downstream_L2,
+                    downstream_L2_without_left,
+                    downstream_L2_without_right,
+                    downstream_L2_without_boundaries,
+                    downstream_Lmax,
+                    downstream_Lmax_location)),
+                    columns = [
+                        r'$L_{2,k_x}$',
+                        r'$L_{2,\bar{p}}$',
+                        r'$L_{2,noLBC}$',
+                        r'$L_{2,noRBC}$',
+                        r'$L_{2,noBCS}$',
+                        r'$L_{max}$',
+                        r'$L_{max,location}$'])
+        #,index = grid_point_array)
 
+        L2_upstream_DataFrame = pandas.DataFrame(
+                list(zip(
+                    kx_upstream_error,
+                    upstream_L2,
+                    upstream_L2_without_left,
+                    upstream_L2_without_right,
+                    upstream_L2_without_boundaries,
+                    upstream_Lmax,
+                    upstream_Lmax_location
+                    )),
+                columns = [
+                        r'$L_{2,k_x}$',
+                        r'$L_{2,\bar{p}}$',
+                        r'$L_{2,noLBC}$',
+                        r'$L_{2,noRBC}$',
+                        r'$L_{2,noBCS}$',
+                        r'$L_{max}$',
+                        r'$L_{max,location}$'])#,
+                        # columns = [r'\alpha',r'\alpha_{noLBC}',r'\alpha_{noRBC}',r'\alpha_{noBCS}'])#,index = grid_point_array)
 
+        # L2_upstream_DataFrame = L2_upstream_DataFrame.style.format(precision=11).to_latex()
         ROC_downstream_DataFrame = pandas.DataFrame(
-                list(zip(ROC_downstream_list,
-                ROC_downstream_without_left_list,
-                ROC_downstream_without_right_list,
-                ROC_downstream_without_boundaries_list)))#,
-        #         columns = [r'\alpha',r'\alpha_{noLBC}',r'\alpha_{noRBC}',r'\alpha_{noBCS}'])#,index = grid_point_array)
+                list(zip(ROC_kx_downstream_list,
+                    ROC_downstream_list,
+                    ROC_downstream_without_left_list,
+                    ROC_downstream_without_right_list,
+                    ROC_downstream_without_boundaries_list,
+                    ROC_L_max_downstream_list)),
+                columns = [
+                        r'$ROC_{k_x}$',
+                        r'$ROC_{\bar{p}}$',
+                        r'$ROC_{noLBC}$',
+                        r'$ROC_{noRBC}$',
+                        r'$ROC_{noBCS}$',
+                        r'$ROC_{Lmax}$'])
+                        # columns = [r'\alpha',r'\alpha_{noLBC}',r'\alpha_{noRBC}',r'\alpha_{noBCS}'])#,index = grid_point_array)
 
         ROC_upstream_DataFrame = pandas.DataFrame(
-                list(zip(ROC_downstream_list,
-                ROC_downstream_without_left_list,
-                ROC_downstream_without_right_list,
-                ROC_downstream_without_boundaries_list)))#,
+                list(zip(ROC_kx_upstream_list,
+                    ROC_upstream_list,
+                    ROC_upstream_without_left_list,
+                    ROC_upstream_without_right_list,
+                    ROC_upstream_without_boundaries_list,
+                    ROC_L_max_upstream_list)),
+                columns = [
+                        r'$ROC_{k_x}$',
+                        r'$ROC_{\bar{p}}$',
+                        r'$ROC_{noLBC}$',
+                        r'$ROC_{noRBC}$',
+                        r'$ROC_{noBCS}$',
+                        r'$ROC_{Lmax}$'])
 
         # fig, ax = plt.subplots()
         # plt.plot(ROC_downstream_list)
         # plt.show()
+        with open('tables/L2_downstream_table.tex','w') as tf:
+            tf.write(L2_downstream_DataFrame.style.format(precision=11).to_latex())
+        with open('tables/L2_upstream_table.tex','w') as tf:
+            tf.write(L2_upstream_DataFrame.style.format(precision=11).to_latex())
         with open('tables/ROC_downstream_table.tex','w') as tf:
-            tf.write(ROC_downstream_DataFrame.style.to_latex())
+            tf.write(ROC_downstream_DataFrame.style.format(precision= 11).to_latex())
         with open('tables/ROC_upstream_table.tex','w') as tf:
-            tf.write(ROC_upstream_DataFrame.style.to_latex())
-        # pprint.pprint(ROC_downstream_DataFrame)
+            tf.write(ROC_upstream_DataFrame.style.format(precision=11).to_latex())
+        # pprint.pprint(L2_downstream_DataFrame)
+        # sys.exit()
             
         mode_identifier_string = 'Downstream Radial Mode ' + str(i_rad_mode_num )
         logger.info(f'{mode_identifier_string :-^90}')
         logger.info(
                 f"{'Grid':^10}"+
+                f"{'ROC_kx':>13}"+
                 f"{'ROC':>14}"+
                 f"{'ROC_noLBC':>14}"+
                 f"{'ROC_noRBC':>14}"+
@@ -772,6 +923,7 @@ def main():
         for i in range(number_of_grids-1): 
             logger.info(
                     f'{i : ^10}' +
+                    f'{ROC_kx_downstream_list[i]:.11f}'+
                     f' {ROC_downstream_list[i]:.11f}'+
                     f' {ROC_downstream_without_left_list[i]:.11f}'+
                     f' {ROC_downstream_without_right_list[i]:.11f}'+
@@ -782,6 +934,7 @@ def main():
         logger.info(f'{mode_identifier_string :-^90}')
         logger.info(
                 f"{'Grid':^10}"+
+                f"{'ROC_kx':>13}"+
                 f"{'ROC':>14}"+
                 f"{'ROC_noLBC':>14}"+
                 f"{'ROC_noRBC':>14}"+
@@ -791,6 +944,7 @@ def main():
         for i in range(number_of_grids-1): 
             logger.info(
                     f'{i : ^10}' +
+                    f'{ROC_kx_upstream_list[i]:.11f}'+
                     f' {ROC_upstream_list[i]:.11f}'+
                     f' {ROC_upstream_without_left_list[i]:.11f}'+
                     f' {ROC_upstream_without_right_list[i]:.11f}'+

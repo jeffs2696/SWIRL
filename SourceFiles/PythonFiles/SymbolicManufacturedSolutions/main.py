@@ -83,10 +83,10 @@ sigma  = r_min
 # Defining manufactured mean flow functions
 # use decimal places to ensure double precision in fortran code
 print('eta_min' ,eta_min, r_min,r_max)
-A_analytic        = msg.TanhMethod(5,0.3,r_min,r_max)# 0.0001*(r/5+4)**4#
+A_analytic        = msg.TanhMethod(10,0.3,r_min,r_max)# 0.0001*(r/5+4)**4#
 
 # scalar multiplier below
-M_x_analytic      = 0.3*msg.TanhMethod(5 ,50,r_min,r_max )
+M_x_analytic      = 0.3*msg.TanhMethod(3 ,20,r_min,r_max )
 
 flow_1 = fc.FlowClass(
         radius = r,
@@ -99,7 +99,7 @@ M_t_analytic = flow_1.get_tangential_mach()
 
 M_total           = (M_x_analytic**(2) + M_t_analytic**(2))**(0.5)
 
-f     = msg.TanhMethod(3,2,r_min,r_max)
+f     = msg.TanhMethod(3,20,r_min,r_max)
 df    = f.diff(r)
 r_hat = (r - r_min)/(r_max - r_min)
 f_min = f.subs(r,r_min)
@@ -120,8 +120,8 @@ f_imposed = msm.ModifiedManufacturedSolution(
         A_min         = A_min        ,
         A_max         = A_max)
 
-v_t_analytic = msg.TanhMethod(4,50,r_min,r_max)
-v_x_analytic = msg.TanhMethod(3,30,r_min,r_max)
+v_t_analytic = msg.TanhMethod(10,50,r_min,r_max)
+v_x_analytic = msg.TanhMethod(30,30,r_min,r_max)
 
 # v_r and dp_dr need to be zero at the wall!
 v_r_analytic = f_imposed
@@ -158,6 +158,7 @@ if r_min > 0:
                 )*M_t_analytic**2
             + 1/r
             )*v_t_analytic
+
 elif r_min == 0:
     psi_1 = 2*dM_t_dr_analytic*v_t_analytic #- (2.0*(kappa - 1) *M_t_analytic*dM_t_dr_analytic*f) - df
     psi_2 = dv_r_dr_analytic + ci*gamma*v_x_analytic +(
@@ -167,6 +168,7 @@ elif r_min == 0:
     print('r_min = 0')
 
 L = eta*((1-(gamma/ak))*M_total) 
+
 del_dp_BC    = psi_1 + L*psi_2
 
 

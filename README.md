@@ -58,7 +58,8 @@ xming enabled with the right display window.
 gfortran
 
 ### Python Prerequisites 
-
+cycler
+virtualenv
 Numpy
 Sympy
 Scipy

@@ -43,31 +43,116 @@
     \end{center}
 \end{titlepage}
 
-\section{Introduction - Turbomachinery Noise}
-Turbomachinery noise generation occurs from pressure fluctuations from the series 
-of fans within it's annular duct. While the jet that is produced from this stream
-of air freely radiates to the observer, the pressure fluctuations 
-produced from the rotor may or may not propagate out of the inlet and exhaust and 
-radiate to the observer. The production of this propagation can be characterized
-by standing waves referred to as modes, in particular, duct modes because 
-the mode itself is dependent on the geometry of the column of air within the 
-annular duct, as well as the speed of the flow moving through it
+% \section{Introduction - Turbomachinery Noise}
+% Turbomachinery noise generation occurs from pressure fluctuations from the series 
+% of fans within it's annular duct. While the jet that is produced from this stream
+% of air freely radiates to the observer, the pressure fluctuations 
+% produced from the rotor may or may not propagate out of the inlet and exhaust and 
+% radiate to the observer. The production of this propagation can be characterized
+% by standing waves referred to as modes, in particular, duct modes because 
+% the mode itself is dependent on the geometry of the column of air within the 
+% annular duct, as well as the speed of the flow moving through it
 
 
-This document will provide the fundamental equations that describe sound propagation
-in ducted flow.
+% This document will provide the fundamental equations that describe sound propagation
+% in ducted flow.
 
-\begin{itemize}
-    \item Introduce the governing equations for compressible inviscid flow and 
-        the assumptions used to obtain them
-    \item Demonstrate the linearization process and show the general equations
-        that describe duct modes.  
-    \item The analytic solution for cylindrical and annular ducts with and
-        without liner will be presented and used for validation against
-        numerical approximations.
- \end{itemize}
-\newpage
+% \begin{itemize}
+%     \item Introduce the governing equations for compressible inviscid flow and 
+%         the assumptions used to obtain them
+%     \item Demonstrate the linearization process and show the general equations
+%         that describe duct modes.  
+%     \item The analytic solution for cylindrical and annular ducts with and
+%         without liner will be presented and used for validation against
+%         numerical approximations.
+%  \end{itemize}
+% \newpage
+% \section{Current Research Direction}
+\section{Research Performed}
+\section{Results}
 
+\begin{table}
+    % \centering
+    \makebox[\linewidth]{
+        \input{../tables/L2_downstream_table.tex}
+    }
+    \caption{L2 error for downstream radial mode 1}
+\end{table}
+\begin{table}
+    \makebox[\linewidth]{
+        \input{../tables/L2_upstream_table.tex}
+    }
+    \caption{L2 error for upstream radial mode 1}
+\end{table}
+
+\begin{table}
+    \makebox[\linewidth]{
+        \input{../tables/ROC_downstream_table.tex}
+    }
+    \caption{ROC error for downstream radial mode 1}
+\end{table}
+\begin{table}
+    \makebox[\linewidth]{
+        \input{../tables/ROC_upstream_table.tex}
+    }
+    \caption{ROC error for upstream radial mode 1}
+\end{table}
+
+% legend \\
+% 0 - axial wavenumber error  \\
+% 1 - pressure mode L2 \\
+% 2 - pressure mode L2 without left \\
+% 3 - pressure mode L2 without right   \\
+% 4 - pressure mode L2 without boundaries   \\
+% 5 - pressure mode LMax  \\
+% 6 - pressure mode LMax location \\
+
+% legend \\
+% 0 - axial wavenumber ROC \\
+% 1 - pressure mode ROC \\
+% 2 - pressure mode ROC without left \\
+% 3 - pressure mode ROC without right   \\
+% 4 - pressure mode ROC without boundaries  \\
+% 6 - pressure mode LMax ROC
+
+\subsection{Discussion}
+
+A total of five grids were studied, starting from 33 and doubling until 1056 for
+the first cut on radial mode. The upstream and downstream mode pair were both used
+to compute the L2, Lmax, and rate of convergence for a given uniform flow in 
+a cylindrical duct. The axial wavenumber's error starts with a magnitude of $e-6$
+and decreases to $e-12$. When computing the convergence rate, a fourth order is 
+expected since a fourth order central scheme was used. This behavior is shown in
+the upstream mode, with a rate of convergence of $~4.19$. However, this behaviour
+is less pronounced in the downstream case. The rate increases to $3.7$ but begins
+to decrease for the last grid pair. A grid spacing choice should have been made
+such that the jumps are not as large so that the convergence rates can be 
+studied more carefully.
+
+For the pressure mode data, neither upstream or downstream reach fourth order convergence.
+The use of the L'Hopital's rule to obtain a value at the centerline causes the 
+error between the numerical and analytic modes to be highest at the centerline
+gridpoint. This is shown in both upstream and downstream directions by identifying
+the location of the highest error $L_{max}$. When computing the rate of convergence
+for the $L_{max}$ point, it converges to second order. The same trend is noticed when 
+both boundaries are removed in the error calculation. 
+
+\section{Issues}
+When looking at the difference between the excluding of boundaries, it seems that 
+the convergence rate is higher without the wall BC as opposed to being higher without 
+the centerline BC, but when computing the convergence rate of $LMax$, a second
+order rate is computed. I could have the two collumns swapped. 
+
+\section{Planned Research}
+The formatting of the latex table doesn't show the Floating point values I am seeing but
+discussing.
+
+I only looked at the first radial mode at the moment. Once this study can be achieved 
+for multiple radial modes simultaneously, the annular duct mode case will be studied
+using the same outline.
+
+% \input{../tables/L2_upstream_table.tex}
+% \input{../tables/ROC_downstream_table.tex}
 % \section{Theoretical Foundation for Duct Acoustics based on first principles}
 
 % The pressure field within a duct is governed by the convective wave equation, a
@@ -120,7 +205,8 @@ in ducted flow.
 
 % \subsection{Methods}
 % \input{AnnularDuctModeNumericalMethod.tex}
-\section{Results and Discussion}
+% \section{Discussion}
+
 
 % \input{TestCase1}
 \end{document}
