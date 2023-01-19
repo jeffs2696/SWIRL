@@ -55,6 +55,7 @@
         CALL CreateObject(&
             object        = swirlClassObjMMS(fac)  ,&
             azimuthalMode = azimuthalModeNumber  ,&
+            numberOfRadialModes = numberOfRadialModes  , &
             np            = numberOfGridPoints   ,&
             sig           = hubToTipRatio        ,&
             axialMachData = axialMachDataMMS        ,&

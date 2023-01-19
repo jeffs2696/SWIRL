@@ -374,15 +374,6 @@ FortranFiles/FindResidualVectorModule.o: FortranFiles/FindResidualVectorModule.f
 FortranFiles/swirlClassObject.o: FortranFiles/swirlClassObject.f90
 	@$(F90) $(F90FLAGS) FortranFiles/swirlClassObject.f90
 
-#FortranFiles/v070_nasalib/anrt.o: FortranFiles/v070_nasalib/anrt.f
-#	@$(F77) $(F77FLAGS) FortranFiles/v070_nasalib/anrt.f
-#	
-#FortranFiles/v070_nasalib/anfu.o: FortranFiles/v070_nasalib/anfu.f
-#	@$(F77) $(F77FLAGS) FortranFiles/v070_nasalib/anfu.f
-#
-#FortranFiles/v070_nasalib/rmode.o: FortranFiles/v070_nasalib/rmode.f
-#	@$(F77) $(F77FLAGS) FortranFiles/v070_nasalib/rmode.f
-#
 #----------------------------------BLAS------------------------------------------
 
 $(BLAS_LOCATION)/dgemv.o: \

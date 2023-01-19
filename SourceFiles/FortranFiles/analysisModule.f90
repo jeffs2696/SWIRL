@@ -42,8 +42,7 @@ CONTAINS
         INTEGER, INTENT(IN) :: &
             np, &
             np4, &
-            mm!, &
-            ! ir, & is
+            mm  !,& ir, & is
 
         REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
             rr, &
@@ -125,7 +124,7 @@ CONTAINS
 
         ci      = CMPLX(0.0_rDef,1.0_rDef,rDef)
 
-        eps     = 10.e-4_rDef !JS: is this sufficient
+        eps     = 10.e-8_rDef !JS: is this sufficient
 
 ! Compute convected wavenumbers.  Store them in a file.
         do j=1,np
@@ -315,13 +314,15 @@ CONTAINS
         ! WRITE(UNIT,55)
 
         do j=1,np4
-            ! WRITE(0,*) 'before' ,j, alpha(j),beta(j)
+            IF (debug) THEN 
+                WRITE(0,*) 'before' ,j, alpha(j),beta(j)
+            ELSE
+            ENDIF
             if ((REAL(beta(j)).gt.eps) .or.(AIMAG(beta(j)).gt.eps)) then
                 gam(j) = ci*alpha(j)/beta(j)
                 if (abs(AIMAG(gam(j))).lt.eps) then
                     gam(j) = CMPLX(REAL(gam(j)),0.0d0,rDef)
                 elseif (abs(REAL(gam(j))).lt.eps) then
-                    WRITE(0,*)
                     gam(j) =CMPLX(0.0_rDef,AIMAG(gam(j)),KIND=rDef)
                 endif
                 vphi(j)  = ak/gam(j)
@@ -336,7 +337,9 @@ CONTAINS
                 IF (debug) THEN
                     WRITE(0,*) 'beta is lt eps'
                 ENDIF
+
                 ! gam(j) = ci*CMPLX(0.0_rDef, AIMAG(alpha(j)), KIND=rDef)/beta(j)
+
             endif
 
             if (debug) THEN

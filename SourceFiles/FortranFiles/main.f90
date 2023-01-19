@@ -33,15 +33,15 @@ PROGRAM MAIN
 
     LOGICAL :: &
         debug   = .FALSE. , &
-        MMSflag = .TRUE. , &
-        MMSdebug_flag = .TRUE. 
+        MMSflag = .FALSE. , &
+        MMSdebug_flag = .FALSE. 
 
     !! Code parameters for double precision and number of iterations
     INTEGER, PARAMETER :: &
         M_int = 16 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
-        numberOfIterations = 7 
+        numberOfIterations = 2 
 
     !! Integers for flags and loop indicies
     INTEGER  :: &
@@ -53,7 +53,8 @@ PROGRAM MAIN
         i                        ,& ! indexer for do loops
         fac                      ,& ! variable used for doubling grid points
         FDfac                    ,&
-        facCount                    ! counts the outermost do loop
+        facCount                 ,& ! counts the outermost do loop
+        numberOfRadialModes
 
     !! Integer arrays to store the number of grid points
     INTEGER, DIMENSION(:), ALLOCATABLE :: &
@@ -292,9 +293,12 @@ PROGRAM MAIN
     include 'InputMeanFlow_AnalyticalSolution_1.f90'
     !Create a swirl Class Obj for a given flow
 
+    numberOfRadialModes = 5
+
     CALL CreateObject(&
         object        = swirlClassObj(fac)  ,&
         azimuthalMode = azimuthalModeNumber  ,&
+        numberOfRadialModes = numberOfRadialModes ,&
         np            = numberOfGridPoints   ,&
         sig           = hubToTipRatio        ,&
         axialMachData = axialMachData        ,&
@@ -314,8 +318,8 @@ PROGRAM MAIN
         debugFlag = debug          , &
         MMSflag = MMSflag)
 
-    CALL GetAnalyiticModeShape(&
-        object = swirlClassObj(fac))
+    ! CALL GetAnalyiticModeShape(&
+    !     object = swirlClassObj(fac))
 
     CALL DestroyObject(object = swirlClassObj(fac))
 

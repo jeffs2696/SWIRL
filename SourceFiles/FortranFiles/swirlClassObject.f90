@@ -84,7 +84,7 @@ modulE swirlClassObject
         INTEGER :: &
             azimuthalMode            ,&    ! m, Circumfirential mode number
             numberOfRadialPoints     ,&    ! npts, number of radial mesh points
-            numberOfPropagatingModes, &    ! number of modes that the user wants
+            numberOfRadialModes, &    ! number of modes that the user wants
             FiniteDifferenceFlag     !,&    ! Use central FD for derivatives, ! 1 = 2nd Order, 2 = 4th Order PrintToggle                    ! Turns on print to screen
 
         REAL(KIND = REAL64) :: &
@@ -171,6 +171,7 @@ CONTAINS
     SUBROUTINE CreateSwirlClassObject(&
         object              , &
         azimuthalMode       , &
+        numberOfRadialModes , &
         np                  , &
         sig                 , &
         axialMachData       , &
@@ -188,9 +189,12 @@ CONTAINS
             object
 
         INTEGER, INTENT(INOUT) :: &
-            ifdff,   &
-            azimuthalMode, &
+            ifdff               , &
+            azimuthalMode       , &
             np
+        INTEGER,INTENT(IN) :: numberOfRadialModes
+
+
 
         REAL(KIND = REAL64), INTENT(IN) :: &
             sig
@@ -222,11 +226,7 @@ CONTAINS
 
 
 
-
-
-
-
-
+        object%numberOfRadialModes = numberOfRadialModes 
 
         object%isInitialized = .TRUE.
         IF (debugFlag) THEN 
@@ -334,7 +334,7 @@ CONTAINS
             MMSflag
         !eigensolver debug flag
         LOGICAL :: &
-            debug_analysis = .TRUE.
+            debug_analysis = .FALSE.
 
          
         
@@ -533,6 +533,7 @@ CONTAINS
                 np     = object%numberOfRadialPoints,    &
                 np4    = object%numberOfRadialPoints*4,   &
                 mode   = object%azimuthalMode,    &
+                numberOfRadialModes = object%numberOfRadialModes  , &
                 rho    = object%hubTipRatio,   &
                 omega  = object%frequency,    &
                 egv    = jobvr, &
@@ -826,8 +827,7 @@ CONTAINS
             object
 
         INTEGER, PARAMETER :: &
-          rDef = REAL64, &
-          numberOfGridPoints = 50
+          rDef = REAL64
 
         LOGICAL :: &
             debug_flag = .TRUE.
@@ -837,6 +837,7 @@ CONTAINS
 
         INTEGER :: &
             UNIT                  ,&
+            ! numberOfGridPoints    , &
             azimuthal_mode_number ,&
             radial_mode_number    ,&
             i
@@ -870,7 +871,7 @@ CONTAINS
 
 
 
-        ALLOCATE(radial_grid(numberOfGridPoints))
+        ALLOCATE(radial_grid(object%numberOfRadialPoints))
 
 
         r_min = object%hubTipRatio!0.045537!0.20_rDef 
@@ -883,9 +884,9 @@ CONTAINS
         ! redundant to recreate radial grid
         hubTipRatio = r_min/r_max 
 
-        dr    = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
+        dr    = (r_max-r_min)/REAL(object%numberOfRadialPoints-1, rDef)
 
-        DO i =1,numberOfGridPoints
+        DO i =1,object%numberOfRadialPoints
 
         radial_grid(i)  = (r_min+REAL(i-1, rDef)*dr)!radial grid 
         
@@ -908,7 +909,7 @@ CONTAINS
         ENDIF
 
         IF (debug_flag.eqv..TRUE.) THEN
-            ! WRITE(0,*) 'k_mn r_max' ,non_dimensional_roots
+            WRITE(0,*) 'k_mn r_max' ,non_dimensional_roots
         ELSE
         ENDIF
         
@@ -937,7 +938,7 @@ CONTAINS
             'radius ', &
             'pressure '
          
-        DO i = 1,numberOfGridPoints
+        DO i = 1,object%numberOfRadialPoints
 
         CALL RMODE(&
         azimuthal_mode_number,&

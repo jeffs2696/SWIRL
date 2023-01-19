@@ -1,4 +1,4 @@
-! outputModule - extract radial modes and axial wavenumbers
+! outputModule - extract radial modes and axial wave numbers
 MODULE outputModule
     USE, INTRINSIC :: ISO_FORTRAN_ENV
     USE zeroCrossingModule
@@ -17,60 +17,88 @@ MODULE outputModule
 
 CONTAINS
 
-    subroutine output1(np,np4,mode,rho,omega, &
-            egv,attenh,attend,rmx,drm,rmt,drt,snd,rr,wvn,vrm,vphi,is,file_name_string)
+    subroutine output1(&
+            np,& 
+            np4, &
+            mode, &
+            numberOfRadialModes , &
+            rho, &
+            omega, &
+            egv, &
+            attenh, &
+            attend, &
+            rmx, &
+            drm, &
+            rmt, &
+            drt, &
+            snd, &
+            rr, &
+            wvn, &
+            vrm, &
+            vphi, &
+            is, &
+            file_name_string)
 
         INTEGER, INTENT(IN) :: &
             ! myunit1, &
-        ! myunit2, &
-        np, &
+            ! myunit2, &
+            np, &
             np4, &
             mode, &
+            numberOfRadialModes , &
             is!, & icomp
 
         REAL(KIND=rDef), INTENT(IN) :: &
             rho!, &
-        !ang!, & gam!swirl magn JS
+            !ang!, & gam!swirl magn JS
 
-        REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: rmx, &
+        REAL(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
+            rmx, &
             drm, &
             rmt, &
             drt, &
             snd, &
             rr
 
-        COMPLEX(KIND=rDef), INTENT(IN) :: omega, &
+        COMPLEX(KIND=rDef), INTENT(IN) :: &
+            omega, &
             attenh, &
             attend
 
-        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: wvn, &
+        COMPLEX(KIND=rDef), DIMENSION(:), INTENT(IN) :: &
+            wvn, &
             vphi
 
-        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(IN) :: vrm
+        COMPLEX(KIND=rDef), DIMENSION(:,:), INTENT(IN) :: &
+            vrm
 
-        CHARACTER(LEN=*), INTENT(IN) :: egv,file_name_string
+        CHARACTER(LEN=*), INTENT(IN) :: &
+            egv, &
+            file_name_string
 
-        CHARACTER(10) :: file_id
-        !
+        CHARACTER(10) :: &
+            file_id
+
         ! local variables
-        !
 
         INTEGER :: &
             i, &
             ! icomp ,&
-        j, &
+            j, &
             ! jj, &
-        jtmp, &
+            jtmp, &
             ! kk, &
-        mumax !,&
+            mumax !,&
         !, & UNIT12,UNIT14,UNIT16!, & n
 
         ! INTEGER, DIMENSION(np) :: mu
 
-        INTEGER, DIMENSION(np4) :: izeros, &
+        INTEGER, DIMENSION(np4) :: &
+            izeros, &
             indx
 
-        REAL(KIND=rDef) :: eps, &
+        REAL(KIND=rDef) :: &
+            eps, &
             pi, &
             cvcmin, &
             cvcmax, &
@@ -85,20 +113,20 @@ CONTAINS
             gam1a, &
             gam2a, &
             ! aki, &
-        alm1, &
+            alm1, &
             alm2, &
             ! disc, &
-        fac, &
+            fac, &
             ! fn, &
-        ! fn1, &
-        gim1, &
+            ! fn1, &
+            gim1, &
             gim2, &
             ! rm, &
-        ! rmav, &
-        ! term, &
-        ! tot, &
-        as
-
+            ! rmav, &
+            ! term, &
+            ! tot, &
+            as
+    
         REAL(KIND=rDef), DIMENSION(np4) :: phi, &
             azeros
 
@@ -128,15 +156,17 @@ CONTAINS
 
         pi  = 4.0_rDef*ATAN(1.0_rDef)
         ci  = CMPLX(0.0_rDef,1.0_rDef,rDef)
-        eps = 1.e-8_rDef
+        eps = 1.e-4_rDef
         alm1 = -10000
         alm2 = -10000
 
         cvcmin =  1.e+4_rDef
         cvcmax = -1.e+4_rDef
+
         !
         !drh: np == number of radial points
         !
+
         ! CALL SortAxialWavenumbers(
         !   wvn - wavenumbers
         !   cvcmin/max - max range on convective wavenumber (k/M) 
@@ -144,38 +174,38 @@ CONTAINS
         !   cv - convective wavenumber
 
         ! Compute range of convected wavenumbers.
-        do i = 1,np
+        DO i = 1,np
         r  =  rr(i)
         rx =  rmx(i)
         rt =  rmt(i)
         as =  snd(i)
         ! if r = 0 compute the convective wavenumber as follows...
-        if (r.lt. 10e-12_rDef ) then
+        IF (r.lt. 10e-12_rDef ) THEN
             cv = (&
                 omega/CMPLX(as,KIND=rDef) -&
                 CMPLX(mode,KIND=rDef)*CMPLX(rt,KIND=rDef))/CMPLX(rx , KIND = rDef)
-        else 
+        ELSE 
             cv = (omega/CMPLX(as,KIND=rDef) - &
                 CMPLX(mode,KIND=rDef)/CMPLX(r*rt,KIND=rDef))/CMPLX(rx,KIND=rDef)
-        endif
+        ENDIF
 
-        if (abs(cv).gt.cvcmax) cvcmax = abs(cv)
-        if (abs(cv).lt.cvcmin) cvcmin = abs(cv)
+        IF (abs(cv).gt.cvcmax) cvcmax = abs(cv)
+        IF (abs(cv).lt.cvcmin) cvcmin = abs(cv)
 
-        enddo
+        ENDDO
 
         ! 
 
-        if (cvcmin .ge. 0.0_rDef) then
+        IF (cvcmin .ge. 0.0_rDef) THEN
             cvcmin = cvcmin -eps
-        else
+        ELSE
             cvcmin = cvcmin +eps
-        endif
-        if (cvcmax .ge. 0.0_rDef) then
+        ENDIF
+        IF (cvcmax .ge. 0.0_rDef) then
             cvcmax = cvcmax +eps
-        else
+        ELSE
             cvcmax = cvcmax -eps
-        endif
+        ENDIF
 
         !WRITE(0,*) 'convection speed: ',cvcmin,cvcmax
         !
@@ -189,7 +219,7 @@ CONTAINS
         
         DO i = 1,np4
         akx = REAL(wvn(i),KIND=rDef)
-        if (akx .le. cvcmin .or. akx .ge. cvcmax) then
+        IF (akx .le. cvcmin .or. akx .ge. cvcmax) THEN
             izeros(i) = 0
 
             radial_velocity_mode(:,i) = vrm(1:np,i)
@@ -197,52 +227,51 @@ CONTAINS
             axial_velocity_mode(:,i) = vrm(2*np+1:3*np,i)
             pressure_mode(:,i) = vrm(3*np+1:np4,i)
 
-        elseif (akx.lt.10e-12_rDef) then
+        ELSEIF (akx.lt.10e-12_rDef) THEN
             izeros(i) = 100
-        else
+        ELSE
             izeros(i) = 200
-        endif
+        ENDIF
         ENDDO
 
-                CALL zeroCrossing(&
-                    domain = rr , &
-                    dataSet = pressure_mode(:,1))
+        CALL zeroCrossing(&
+            domain = rr , &
+            dataSet = pressure_mode(:,1))
 
 
-        do i = 1,np4
+        DO i = 1,np4
 
         gamma1 = wvn(i)
 
         akx   = real(gamma1)
+
         ! First, only check the corresponding mode if it is within bounds on real axis
-        if (akx .le. cvcmin .or. akx .ge. cvcmax) then
-
+        IF (akx .le. cvcmin .or. akx .ge. cvcmax) THEN
             
-
             ! start the zero counter. i.e. at this point there are no zeros
             izeros(i) = 0
             ! Calculate phase of the mode i
 
-
-            ! WRITE(0,*) 'nonconvecting mode found at index', i
-
             ! calculating the phase of the first grid point
-            aim    = aimag(pressure_mode(1,i))
-            are    =  real(pressure_mode(1,i))
-            phi(i) = atan2(aim,are)
+
+            aim    = aimag(pressure_mode(1,i)) ! imaginary part
+            are    =  real(pressure_mode(1,i)) ! real part
+            phi(i) = atan2(aim,are)            ! phase
 
             ! first point of mode with 0 phase
             vold   = real(pressure_mode(1,i)*exp(-ci*CMPLX(phi(i),KIND=rDef)))
 
 
             ! WRITE(0,*) aim, are, phi(i),vold
-            do j = 3*np+2,np4
+            DO j = 3*np+2,np4 ! are we sure we don't want to start at 3*np + 1
 
             val = real(vrm(j,i)*exp(-ci*CMPLX(phi(i),KIND = rDef)))
 
             ! checking for sign change from first point to second
             if (val*vold.lt.0.0_rDef) then
                 izeros(i) = izeros(i) +1 
+
+
             endif 
             vold = val
             enddo
@@ -256,6 +285,11 @@ CONTAINS
         enddo
         !
 
+
+        ! DO i=1,np4
+        ! WRITE(0,*) 'zero count', izeros(i)
+        ! ENDDO
+        
         ! Sort modes by number of zero crossings.
 
         do i=1,np4
@@ -269,7 +303,7 @@ CONTAINS
         !
         ! Sort nonconvected modes into upstream and downstream.
 
-        eps  = 1.e-4_rDef ! JS: ??? 
+        eps  = 1.e-3_rDef ! JS: ??? 
 
         !     do j=1,np4
 
@@ -334,22 +368,29 @@ CONTAINS
             file='03-EVanalysis/' // TRIM(file_name_string) //'gam.nonconv_acc.'// TRIM(ADJUSTL(file_id))  )
         rewind 14
         rewind 16
-        write(14,40)
-        write(16,42)
+        
+        WRITE(0,40)
+        WRITE(14,40)
+        WRITE(16,42)
         40      format('#',2x,'Re{gam}',6x,'Im{gam}',4x,'Re{gam/ak}',    &
-            3x,'Im{gam/ak}',2x,'nz')
+            3x,'Im{gam/ak}',2x,'nz',5x,'rmn')
         42      format('#',2x,'Re{gam}',13x,'Im{gam}',11x,'Re{gam/ak}', &
-            10x,'Im{gam/ak}',5x,'nz')
+            10x,'Im{gam/ak}',5x,'nz',5x,'rmn')
         do j=1,np4
         gamma1 = wvn(indx(j))
         fac   = (1.0_rDef +rho)/2.0_rDef
-        if (izeros(indx(j)).lt.np-4) then
-            write(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j))-1!Changing zero order to match NASA convention for radial modes
-            write(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j))-1
+
+        ! WRITE(0,*) izeros(indx(j)) , numberOfRadialModes
+
+        if (izeros(indx(j)).lt.numberOfRadialModes) then
+
+            WRITE(0,10) indx(j),gamma1,gamma1/omega,izeros(indx(j)),izeros(indx(j))+1!Changing zero order to match NASA convention for radial modes
+            WRITE(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j)),izeros(indx(j))+1!Changing zero order to match NASA convention for radial modes
+            WRITE(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j)),izeros(indx(j))+1
         endif
         enddo
-        10      format(1x,i4,4e13.5,i4)
-        12      format(1x,i4,4e20.12,i4)
+        10      format(1x,i4,4e13.5,i4,i4)
+        12      format(1x,i4,4e20.12,i4,i4)
         close(14)
         close(16)
         !
