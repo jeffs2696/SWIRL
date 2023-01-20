@@ -318,8 +318,8 @@ PROGRAM MAIN
         debugFlag = debug          , &
         MMSflag = MMSflag)
 
-    ! CALL GetAnalyiticModeShape(&
-    !     object = swirlClassObj(fac))
+    CALL GetAnalyiticModeShape(&
+        object = swirlClassObj(fac))
 
     CALL DestroyObject(object = swirlClassObj(fac))
 

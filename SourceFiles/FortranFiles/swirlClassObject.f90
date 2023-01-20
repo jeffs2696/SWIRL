@@ -840,7 +840,7 @@ CONTAINS
             ! numberOfGridPoints    , &
             azimuthal_mode_number ,&
             radial_mode_number    ,&
-            i
+            i,j
         
         
         REAL(KIND=rDef) :: & 
@@ -855,6 +855,9 @@ CONTAINS
 
         REAL(KIND=rDef), DIMENSION(:), ALLOCATABLE :: &
             radial_grid
+
+        REAL(KIND=rDef), DIMENSION(:,:), ALLOCATABLE :: &
+            analytic_mode_array 
 
         REAL(KIND=rDef),DIMENSION(2) :: &
             rmode_bessel_function_errors
@@ -871,7 +874,11 @@ CONTAINS
 
 
 
-        ALLOCATE(radial_grid(object%numberOfRadialPoints))
+        ALLOCATE(&
+            radial_grid(object%numberOfRadialPoints) , &
+            analytic_mode_array(object%numberOfRadialModes,object%numberOfRadialPoints) &
+        )
+
 
 
         r_min = object%hubTipRatio!0.045537!0.20_rDef 
@@ -932,12 +939,14 @@ CONTAINS
         ENDIF
 
         filename = 'radial_mode_data.dat'
-        OPEN(NEWUNIT=UNIT,FILE=TRIM(ADJUSTL(filename))) 
+        ! OPEN(NEWUNIT=UNIT,FILE=TRIM(ADJUSTL(filename))) 
 
-        WRITE(UNIT,*) &
-            'radius ', &
-            'pressure '
+        ! WRITE(UNIT,*) &
+        !     'radius ', &
+        !     'pressure '
+        DO j = 1,object%numberOfRadialModes
          
+        
         DO i = 1,object%numberOfRadialPoints
 
         CALL RMODE(&
@@ -947,32 +956,41 @@ CONTAINS
         weighting_coefficient_B,&
         mode_shape,&
         rmode_bessel_function_errors)
+
+        analytic_mode_array(j,i) = mode_shape
   
-        WRITE(UNIT,*) &
-            radial_grid(i)/r_max,&
-            mode_shape 
-
-        ENDDO
-
-        CLOSE(UNIT)
-
-        OPEN(NEWUNIT=UNIT,FILE='radial_mode_parameters.dat')
-        WRITE(UNIT,*) &
-            'azimuthal_mode_number ', &
-            'radial_mode_number ', &
-            'weighting_factor_A ', &
-            'weighting_factor_B ', &
-            'non_dimensional_roots ' 
-        WRITE(UNIT,*) &
-            azimuthal_mode_number, &
-            radial_mode_number , &
-            weighting_coefficient_A, &
-            weighting_coefficient_B, &
-            non_dimensional_roots 
-        CLOSE(UNIT)
+        ! WRITE(UNIT,*) &
+        !     radial_grid(i)/r_max,&
+        !     mode_shape 
 
         IF (debug_flag) THEN
+            ! WRITE(0,*) analytic_mode_array(j,i)
         ENDIF
+        ENDDO
+
+        ! CLOSE(UNIT)
+
+        ! OPEN(NEWUNIT=UNIT,FILE='radial_mode_parameters.dat')
+        ! WRITE(UNIT,*) &
+        !     'azimuthal_mode_number ', &
+        !     'radial_mode_number ', &
+        !     'weighting_factor_A ', &
+        !     'weighting_factor_B ', &
+        !     'non_dimensional_roots ' 
+        ! WRITE(UNIT,*) &
+        !     azimuthal_mode_number, &
+        !     radial_mode_number , &
+        !     weighting_coefficient_A, &
+        !     weighting_coefficient_B, &
+        !     non_dimensional_roots 
+        ! CLOSE(UNIT)
+
+        ENDDO
+        DEALLOCATE(&
+            radial_grid, &
+            analytic_mode_array &
+        )
+
     END SUBROUTINE GetModeShape   
 ! 
 END MODULE swirlClassObject

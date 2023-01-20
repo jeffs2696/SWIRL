@@ -1,49 +1,36 @@
 \contentsline {chapter}{Abstract}{iii}{Doc-Start}%
 \contentsline {chapter}{Acknowledgments}{iv}{chapter*.1}%
 \contentsline {chapter}{Contents}{v}{chapter*.2}%
-\contentsline {chapter}{List of Tables}{viii}{chapter*.3}%
-\contentsline {chapter}{List of Figures}{ix}{chapter*.4}%
-\contentsline {chapter}{List of Symbols}{xi}{chapter*.5}%
-\contentsline {chapter}{List of Abbreviations}{xiii}{chapter*.6}%
-\contentsline {chapter}{Preface}{xiv}{chapter*.7}%
+\contentsline {chapter}{List of Tables}{vii}{chapter*.3}%
+\contentsline {chapter}{List of Figures}{viii}{chapter*.4}%
+\contentsline {chapter}{List of Symbols}{ix}{chapter*.5}%
+\contentsline {chapter}{List of Abbreviations}{xi}{chapter*.6}%
+\contentsline {chapter}{Preface}{xii}{chapter*.7}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Overview}{1}{section.1.1}%
-\contentsline {chapter}{\numberline {2}Literature Review}{7}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{7}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}The problem to be addressed and its significance}{7}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Establish reasoning - i.e. point - of - view for reviewing the literature}{7}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Explain the order/sequence of the review}{9}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}The theoretical foundation of conceptual framework}{10}{subsection.2.1.4}%
-\contentsline {section}{\numberline {2.2}Golubev and Atassi's work}{11}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Review of the assessment of the numerical techniques}{12}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}The research questions, hypotheses, foreshadowed problems, or conjectures}{13}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Calculation of Observed Order-of-Accuracy}{15}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Conclusion}{18}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Theoretical Framework and Methods}{19}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{19}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Governing Equations for Compressible, Inviscid Flow}{19}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Nonuniformities from swirling mean flow}{21}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Linearizing the Governing Equations}{22}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Non-Dimensionalization}{24}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Verification and Validation Techniques for Numerical Approximations}{28}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{28}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Examining Convergence Using Multiple Grids}{30}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Calculation of Observed Order-of-Accuracy}{31}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Methods}{34}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Procedure}{35}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Tanh Summaion Formulation}{36}{subsection.4.2.2}%
-\contentsline {section}{\numberline {4.3}General form of a Hyperbolic Tangent}{36}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Setting Boundary Condition Values Using a Fairing Function}{42}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Using $\beta $ as a scaling parameter}{42}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Minimum Boundary Fairing Function}{44}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Max boundary polynomial}{46}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Corrected function}{46}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Symbolic Sanity Checks}{47}{subsection.4.4.5}%
-\contentsline {subsection}{\numberline {4.4.6}Min boundary derivative polynomial}{48}{subsection.4.4.6}%
-\contentsline {subsection}{\numberline {4.4.7}Polynomial function, max boundary derivative}{49}{subsection.4.4.7}%
-\contentsline {subsection}{\numberline {4.4.8}Putting it together}{51}{subsection.4.4.8}%
-\contentsline {chapter}{\numberline {5}Results and Discusssion}{52}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Verification of Numerical Schemes using the Method of Manufactured Solution}{52}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Introduction}{52}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}MMS, Solutions}{53}{subsection.5.1.2}%
-\contentsline {chapter}{References}{66}{chapter*.9}%
+\contentsline {chapter}{\numberline {2}Literature Review}{2}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Theoretical Framework and Methods}{3}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{3}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Governing Equations for Compressible, Inviscid Flow}{3}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Nonuniformities from swirling mean flow}{5}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Linearizing the Governing Equations}{6}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Non-Dimensionalization}{8}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Verification and Validation Techniques for Numerical Approximations}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{12}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Examining Convergence Using Multiple Grids}{14}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Calculation of Observed Order-of-Accuracy}{15}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Methods}{18}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Procedure}{19}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Tanh Summaion Formulation}{20}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}General form of a Hyperbolic Tangent}{20}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Setting Boundary Condition Values Using a Fairing Function}{26}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Using $\beta $ as a scaling parameter}{26}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Minimum Boundary Fairing Function}{28}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Max boundary polynomial}{30}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Corrected function}{30}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Symbolic Sanity Checks}{31}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.6}Min boundary derivative polynomial}{32}{subsection.4.4.6}%
+\contentsline {subsection}{\numberline {4.4.7}Polynomial function, max boundary derivative}{33}{subsection.4.4.7}%
+\contentsline {subsection}{\numberline {4.4.8}Putting it together}{35}{subsection.4.4.8}%
+\contentsline {chapter}{\numberline {5}Results and Discusssion}{36}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Verification of Numerical Schemes using the Method of Manufactured Solution}{36}{section.5.1}%
+\contentsline {chapter}{References}{37}{chapter*.9}%

@@ -7,43 +7,30 @@
 \BOOKMARK [0][-]{chapter*.6}{List of Abbreviations}{}% 7
 \BOOKMARK [0][-]{chapter*.7}{Preface}{}% 8
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 9
-\BOOKMARK [1][-]{section.1.1}{Overview}{chapter.1}% 10
-\BOOKMARK [0][-]{chapter.2}{Literature Review}{}% 11
-\BOOKMARK [1][-]{section.2.1}{Introduction}{chapter.2}% 12
-\BOOKMARK [2][-]{subsection.2.1.1}{The problem to be addressed and its significance}{section.2.1}% 13
-\BOOKMARK [2][-]{subsection.2.1.2}{Establish reasoning - i.e. point - of - view for reviewing the literature}{section.2.1}% 14
-\BOOKMARK [2][-]{subsection.2.1.3}{Explain the order/sequence of the review}{section.2.1}% 15
-\BOOKMARK [2][-]{subsection.2.1.4}{The theoretical foundation of conceptual framework}{section.2.1}% 16
-\BOOKMARK [1][-]{section.2.2}{Golubev and Atassi's work}{chapter.2}% 17
-\BOOKMARK [1][-]{section.2.3}{Review of the assessment of the numerical techniques}{chapter.2}% 18
-\BOOKMARK [2][-]{subsection.2.3.1}{The research questions, hypotheses, foreshadowed problems, or conjectures}{section.2.3}% 19
-\BOOKMARK [2][-]{subsection.2.3.2}{Calculation of Observed Order-of-Accuracy}{section.2.3}% 20
-\BOOKMARK [1][-]{section.2.4}{Conclusion}{chapter.2}% 21
-\BOOKMARK [0][-]{chapter.3}{Theoretical Framework and Methods}{}% 22
-\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.2}{Governing Equations for Compressible, Inviscid Flow}{chapter.3}% 24
-\BOOKMARK [1][-]{section.3.3}{Nonuniformities from swirling mean flow}{chapter.3}% 25
-\BOOKMARK [1][-]{section.3.4}{Linearizing the Governing Equations}{chapter.3}% 26
-\BOOKMARK [1][-]{section.3.5}{Non-Dimensionalization}{chapter.3}% 27
-\BOOKMARK [0][-]{chapter.4}{Verification and Validation Techniques for Numerical Approximations}{}% 28
-\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 29
-\BOOKMARK [2][-]{subsection.4.1.1}{Examining Convergence Using Multiple Grids}{section.4.1}% 30
-\BOOKMARK [2][-]{subsection.4.1.2}{Calculation of Observed Order-of-Accuracy}{section.4.1}% 31
-\BOOKMARK [1][-]{section.4.2}{Methods}{chapter.4}% 32
-\BOOKMARK [2][-]{subsection.4.2.1}{Procedure}{section.4.2}% 33
-\BOOKMARK [2][-]{subsection.4.2.2}{Tanh Summaion Formulation}{section.4.2}% 34
-\BOOKMARK [1][-]{section.4.3}{General form of a Hyperbolic Tangent}{chapter.4}% 35
-\BOOKMARK [1][-]{section.4.4}{Setting Boundary Condition Values Using a Fairing Function}{chapter.4}% 36
-\BOOKMARK [2][-]{subsection.4.4.1}{Using \040as a scaling parameter}{section.4.4}% 37
-\BOOKMARK [2][-]{subsection.4.4.2}{Minimum Boundary Fairing Function}{section.4.4}% 38
-\BOOKMARK [2][-]{subsection.4.4.3}{Max boundary polynomial}{section.4.4}% 39
-\BOOKMARK [2][-]{subsection.4.4.4}{Corrected function}{section.4.4}% 40
-\BOOKMARK [2][-]{subsection.4.4.5}{Symbolic Sanity Checks}{section.4.4}% 41
-\BOOKMARK [2][-]{subsection.4.4.6}{Min boundary derivative polynomial}{section.4.4}% 42
-\BOOKMARK [2][-]{subsection.4.4.7}{Polynomial function, max boundary derivative}{section.4.4}% 43
-\BOOKMARK [2][-]{subsection.4.4.8}{Putting it together}{section.4.4}% 44
-\BOOKMARK [0][-]{chapter.5}{Results and Discusssion}{}% 45
-\BOOKMARK [1][-]{section.5.1}{Verification of Numerical Schemes using the Method of Manufactured Solution}{chapter.5}% 46
-\BOOKMARK [2][-]{subsection.5.1.1}{Introduction}{section.5.1}% 47
-\BOOKMARK [2][-]{subsection.5.1.2}{MMS, Solutions}{section.5.1}% 48
-\BOOKMARK [0][-]{chapter*.9}{References}{}% 49
+\BOOKMARK [0][-]{chapter.2}{Literature Review}{}% 10
+\BOOKMARK [0][-]{chapter.3}{Theoretical Framework and Methods}{}% 11
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Governing Equations for Compressible, Inviscid Flow}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Nonuniformities from swirling mean flow}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{Linearizing the Governing Equations}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.5}{Non-Dimensionalization}{chapter.3}% 16
+\BOOKMARK [0][-]{chapter.4}{Verification and Validation Techniques for Numerical Approximations}{}% 17
+\BOOKMARK [1][-]{section.4.1}{Introduction}{chapter.4}% 18
+\BOOKMARK [2][-]{subsection.4.1.1}{Examining Convergence Using Multiple Grids}{section.4.1}% 19
+\BOOKMARK [2][-]{subsection.4.1.2}{Calculation of Observed Order-of-Accuracy}{section.4.1}% 20
+\BOOKMARK [1][-]{section.4.2}{Methods}{chapter.4}% 21
+\BOOKMARK [2][-]{subsection.4.2.1}{Procedure}{section.4.2}% 22
+\BOOKMARK [2][-]{subsection.4.2.2}{Tanh Summaion Formulation}{section.4.2}% 23
+\BOOKMARK [1][-]{section.4.3}{General form of a Hyperbolic Tangent}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.4}{Setting Boundary Condition Values Using a Fairing Function}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.4.1}{Using \040as a scaling parameter}{section.4.4}% 26
+\BOOKMARK [2][-]{subsection.4.4.2}{Minimum Boundary Fairing Function}{section.4.4}% 27
+\BOOKMARK [2][-]{subsection.4.4.3}{Max boundary polynomial}{section.4.4}% 28
+\BOOKMARK [2][-]{subsection.4.4.4}{Corrected function}{section.4.4}% 29
+\BOOKMARK [2][-]{subsection.4.4.5}{Symbolic Sanity Checks}{section.4.4}% 30
+\BOOKMARK [2][-]{subsection.4.4.6}{Min boundary derivative polynomial}{section.4.4}% 31
+\BOOKMARK [2][-]{subsection.4.4.7}{Polynomial function, max boundary derivative}{section.4.4}% 32
+\BOOKMARK [2][-]{subsection.4.4.8}{Putting it together}{section.4.4}% 33
+\BOOKMARK [0][-]{chapter.5}{Results and Discusssion}{}% 34
+\BOOKMARK [1][-]{section.5.1}{Verification of Numerical Schemes using the Method of Manufactured Solution}{chapter.5}% 35
+\BOOKMARK [0][-]{chapter*.9}{References}{}% 36
