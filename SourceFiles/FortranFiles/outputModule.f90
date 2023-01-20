@@ -351,10 +351,10 @@ CONTAINS
         enddo
         1000    continue
 
-        CALL saveEGV(&
-            np = np,&
-            vrm = vrm,&
-            rr = rr)
+        ! CALL saveEGV(&
+        !     np = np,&
+        !     vrm = vrm,&
+        !     rr = rr)
 
         WRITE(file_id, '(i0.4)') np
 
@@ -382,11 +382,14 @@ CONTAINS
 
         ! WRITE(0,*) izeros(indx(j)) , numberOfRadialModes
 
+        ! limit the number of modes outputted, NOTE: can you just stop the sorting once the desired
+        ! number of Radial modes is identified
         if (izeros(indx(j)).lt.numberOfRadialModes) then
-
+            if ((REAL(gamma1).ne.0).and.(AIMAG(gamma1).ne.0)) THEN
             WRITE(0,10) indx(j),gamma1,gamma1/omega,izeros(indx(j)),izeros(indx(j))+1!Changing zero order to match NASA convention for radial modes
             WRITE(14,10) indx(j),gamma1,gamma1/omega,izeros(indx(j)),izeros(indx(j))+1!Changing zero order to match NASA convention for radial modes
             WRITE(16,12) indx(j),gamma1,gamma1/omega,izeros(indx(j)),izeros(indx(j))+1
+        endiF
         endif
         enddo
         10      format(1x,i4,4e13.5,i4,i4)
