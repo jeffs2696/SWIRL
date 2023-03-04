@@ -288,6 +288,15 @@ CONTAINS
         enddo
 !
 
+
+        OPEN(456)
+
+
+
+        do k = 1,np4
+            WRITE(456,*) aa(k,:)
+            ENDDO
+            close(456)
         ! row = 2
         ! col = 2
 

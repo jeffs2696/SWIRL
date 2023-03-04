@@ -1,0 +1,212 @@
+%        File: GetDissipationF90_doc.tex
+%     Created: Wed Feb 15 11:00 AM 2023 E
+% Last Change: Wed Feb 15 11:00 AM 2023 E
+%
+\documentclass[a4paper]{report}
+\usepackage{mathtools}
+\usepackage{verbatim}
+
+\begin{document}
+\section{Introduction and Background}
+\subsection{Understanding and Mitigating Numerical Error in Scientific Computing}
+Truncation error arises when an approximation
+is made in place of an exact mathematical operation, such as an infinite sum or
+an integral. For instance, when using numerical methods to solve differential
+equations, the equations are usually approximated in discrete time steps, leading
+to a truncation error that can accumulate over time.
+
+Truncation error can lead to numerical dispersion and dissipation in some methods
+such as finite difference methods. Numerical dispersion is the amplification of
+high-frequency content in a signal, while numerical dissipation is the damping
+of low-frequency components. These errors can lead to inaccurate results and may
+limit the applicability of the method. One approach to mitigating truncation error
+is to impose artificial dissipation. This technique is used in finite differences
+to suppress numerical oscillations and instabilities that can arise due to truncation
+error. In some cases, the truncation error can result in oscillations or spurious
+high-frequency modes that are not present in the original problem. Artificial
+dissipation is designed to mitigate these oscillations by introducing additional
+dissipation into the numerical method. The dissipation can be added in various
+ways, such as numerical filters, artificial viscosity, or upwind differencing. 
+The additional dissipation has the effect of damping out the spurious oscillations,
+leading to more accurate and stable numerical solutions.
+
+In many cases, a small amount of artificial dissipation can greatly improve the accuracy
+and stability of a finite difference method. However, excessive dissipation can
+lead to loss of accuracy and numerical ``smearing'' of the solution. Thus, the
+amount of artificial dissipation added to the numerical method must be carefully
+chosen to balance stability and accuracy. It is important to note that while artificial
+dissipation can help mitigate truncation error, it cannot completely eliminate
+it. Therefore, researchers must carefully consider the limitations and assumptions
+of their numerical methods, and validate their results through comparison with
+exact solutions or experimental data.
+\subsection{Numerical Error from Boundary Conditions} 
+
+Imposing boundary conditions on a numerical problem can sometimes cause high 
+frequency oscillations in the solution, especially if the boundary conditions are 
+not well-suited to the problem or if the numerical method 
+used to solve the problem is not well-designed.
+
+Boundary conditions are essential in many numerical problems because they provide
+information about the solution at the boundaries of the computational domain. 
+This information is used by the numerical method to compute the solution throughout 
+the domain. However, if the boundary conditions are not well-chosen, they 
+can introduce artificial oscillations in the solution that are not present in 
+the physical problem.
+
+For example, if a boundary condition specifies a fixed value of the solution 
+at a boundary, and the numerical method used to solve the problem is not 
+stable or accurate enough, it can lead to high frequency oscillations in the 
+solution near the boundary. This is because the numerical method may be unable 
+to accurately represent the sharp gradients or discontinuities that can occur 
+in the solution near the boundary.
+
+In some cases, imposing boundary conditions that are too restrictive can also 
+lead to high frequency oscillations in the solution. For example, 
+if a boundary condition specifies that the derivative of the solution is zero at a boundary, 
+it can create oscillations in the solution near the boundary because 
+the numerical method may have difficulty accurately representing 
+the steep gradients that can occur at the boundary.
+
+To avoid these types of issues, it's important to choose boundary conditions 
+that are appropriate for the problem and to use numerical methods that are 
+well-suited to the problem and can accurately represent the gradients and 
+discontinuities in the solution near the boundaries. 
+Techniques such as the second order central finite difference dissipation 
+operator can be used to add numerical dissipation and stabilize the solution near the boundaries.
+%Imposing boundary conditions on a numerical problem can cause high frequency oscillations, but it depends on the specific problem and the way the boundary conditions are imposed.
+%
+%Boundary conditions are used to specify the behavior of a numerical solution at the edges of the computational domain. For example, in a finite difference or finite element method, boundary conditions are often specified by setting the values of the solution at the boundaries. If the boundary conditions are not specified correctly or are inconsistent with the rest of the problem, high frequency oscillations can occur.
+%
+%One common cause of high frequency oscillations is the use of ``artificial'' boundary conditions, which are designed to prevent waves from leaving the computational domain. These boundary conditions can introduce high frequency components into the solution, which can cause oscillations.
+%
+%Another common cause of high frequency oscillations is the use of numerical methods that are not stable or accurate. For example, if a finite difference method is used with a large time step, the solution can become unstable and oscillate at high frequencies.
+%
+%Overall, while boundary conditions can contribute to high frequency oscillations in numerical problems, they are not the only factor. Other factors such as the numerical method, time step, and problem formulation can also play a role.
+%The goal of this document it to provide the artificial dissipation stencils as outlined
+%in \cite{kennedy1997comparison} and to provide documentation for \verb|GetDissipation.f90| , a subroutine
+%used to compute the artificial dissipation of a given data set.
+%
+% info on shock capturing
+%\subsection{Artificial Dissipation}
+%Artificial dissipation is a technique used in numerical methods for solving 
+%partial differential equations to introduce an artificial form of dissipation 
+%into the system. The goal of artificial dissipation is to provide a numerical 
+%approach to mimic the physical dissipation of energy that occurs in 
+%fluid dynamics due to the viscosity of the fluid.
+%
+%In numerical simulations, the absence of physical viscosity can lead to 
+%spurious oscillations and instability, particularly in regions of high 
+%gradients or shocks. Artificial dissipation is used to reduce these numerical 
+%errors by introducing a controlled amount of viscosity or damping into the system. In addition,
+%the imposing of boundary conditions can cause high gradients, causing sharp changes 
+%in the solution, leading to high frequency oscillation and numerical instability.
+%
+%The most common form of artificial dissipation is known as ``shock capturing.'' 
+%It involves adding a term to the equations that depends on the local gradients 
+%in the solution, effectively smoothing out any sharp discontinuities in the 
+%solution. This term is typically adjusted based on the level of dissipation 
+%required to achieve a stable solution while minimizing the loss of physical 
+%detail.
+%
+%
+%Imposing boundary conditions on a numerica
+%Large gradients can also occur at the boundaries of a solution. In fluid
+%dynamics, a large velocity gradient can 
+%
+%Artificial dissipation is a powerful tool for improving the accuracy and 
+%stability of numerical simulations, particularly in the context of fluid dynamics
+%and other systems with high levels of complexity or variability. However, it
+%is important to calibrate the level of dissipation carefully to ensure that it
+%does not lead to significant loss of physical information or distort the results 
+%of the simulation.  
+%
+
+\subsection{Dissipation Schemes}
+The second order central finite difference approximation to the first derivative:
+
+\begin{equation}
+    f'(r) \approx \frac{f(r + \Delta r) - f(r - \Delta r)}{2 \Delta r}
+\end{equation}
+
+where $f'(r)$ is the first derivative of $f(r)$ with respect to $r$, $\Delta r$
+is the spacing between the grid points, and $f(r + \Delta r)$ and $f(r - \Delta r)$ are the function values at the neighboring grid points.
+
+To introduce some dissipation, a second order term is added to the approximation that includes the second derivative:
+
+\begin{equation}
+    f''(r) \approx \frac{f(r + \Delta r) - 2f(r) + f(r - \Delta r)}{(\Delta r)^2}
+\end{equation}
+
+
+where $f''(r)$ is the second derivative of $f(r)$ with respect to $r$.
+
+By combining these two approximations , a second order central finite difference
+dissipation operator is defined, 
+
+\begin{equation}
+    D(f(r)) = \frac{f(r + \Delta r) - f(r - \Delta r)}{(2\Delta r)} - \chi \frac{f(r + \Delta r) - 2f(r) + f(r - \Delta r)}{(\Delta r)^2}
+\end{equation}
+
+where $\chi$ is a parameter that controls the amount of dissipation. A larger value of $\chi$ results in more dissipation.
+
+This operator can be used to add some numerical dissipation to a computational method, 
+which can help to stabilize the solution and reduce the impact of high frequency 
+oscillations. However, it's worth noting that adding too much dissipation can also lead to loss of accuracy in the solution.
+
+
+For a second order filter with first-order boundary points ,
+
+\begin{equation}
+    D_2  =
+    \frac{1}{4}
+    \begin{bmatrix}
+        -1  & +1 & 0  & 0  & 0  & 0 \\ 
+        +1 & -2  & +1 & 0  & 0  & 0 \\ 
+        0  & +1  & -2  & +1 & 0  & 0 \\ 
+        0  & 0  & +1 & -2  & +1  & 0 \\ 
+        0  & 0  & 0  & 0  & +1 & -1 \\ 
+    \end{bmatrix}
+\end{equation}]
+Second order boundary points can be represented with a matrix,
+
+\begin{equation}
+    \begin{bmatrix}
+        +1 & -1 \\
+        -1 & +2 
+    \end{bmatrix} 
+    \label{eqn:4thBC}
+\end{equation}
+The lower row and right column element belongs to the interior operator. The 
+full dissipation matrix for a fourth-order filter can be constructed using the interior matrix,
+
+\begin{equation}
+    \begin{bmatrix}
+        -1 & +2 & -1 \\
+        +2 & -5 & +4 \\ 
+        -1 & +4 & -6  
+    \end{bmatrix} 
+    \label{eqn:4thInterior}
+\end{equation}
+
+Combining equations (\ref{eqn:4thBC} ) and (\ref{eqn:4thInterior})
+\begin{equation}
+    D_4  =
+    \frac{1}{16}
+    \begin{bmatrix}
+        -1  & +2 & -1  &  0  &  0  &  0  &  0  &  0  &  0    \\ 
+        +2  & -5 & +4  &  0  &  0  &  0  &  0  &  0  &  0    \\ 
+         0  & -1 & +4  & -6  & +4  & -1  &  0  &  0  &  0    \\ 
+         0  &  0 & -1  & +4  & -6  & +4  &  -1  &  0  &  0    \\ 
+         0  &  0 &  0  & -1  & +4  & -6  & +4  & -1  &  0     \\ 
+         0  &  0 &  0  &  0  & 0   & +2  & -5  & +4  &  0      \\ 
+         0  &  0  &  0 &  0  & 0   &  0  & -1  & +2  & -1       
+    \end{bmatrix}
+\end{equation}
+\cite{kennedy1997comparison}
+\newpage
+\bibliographystyle{plain}
+\bibliography{references.bib}
+\end{document}
+
+
+

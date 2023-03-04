@@ -1,0 +1,154 @@
+%        File: ZGGEV_testing_doc.tex
+%     Created: Thu Feb 09 11:00 AM 2023 E
+% Last Change: Thu Feb 09 11:00 AM 2023 E
+%
+
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{verbatim}
+\begin{document}
+The current research direction is to conduct a test on the eigenvalue and eigenvector
+output from SWIRL to ensure that LAPACK's generalized eigensolver for general matricies \verb|zggev.f|. Note the
+slight difference in subroutine name \verb|zgeev.f| , which is intended for an unsymmetric general matrix, which in some cases 
+is rectangular. 
+
+\begin{align*}
+    A {x} = \lambda B {x}
+\end{align*}
+where A is a $n x n$ matrix and $B$ is an identity matrix of equal size. 
+
+Expanding,
+
+\begin{align*}
+    A {x} - \lambda B {x} = 0 \\
+    (A - \lambda B) {x} = 0 
+\end{align*}
+therefore, eigenvectors of $A$ with the corresponding eigenvalue $\lambda$, if any
+are the nontrivial solutions of the matrix equation $(A - \lambda B) {x} = 0$.
+Since LAPACK uses iterative numerical techniques to solve for the eigenvalues
+of the input matrix $A$, the matrix equation may not necessarily be zero if the resulting eigenvalue and
+vector was substituted back into the equation. To account for this, the right 
+hand side of the matrix equation is set to a variable $S$, which will be floating 
+point precision for the correct eigenvalue and vector pair, given the LAPACK routine
+has converged. 
+
+The code provided in this directory computes the eigenvalues and vectors 
+of a $3x3$ matrix and computes $S$ for a given eigenvalue/vector pair. The $L_2$ of $S$ is
+also computed using the same \verb|SUBROUTINE| as in SWIRL. 
+
+This code will also precondition the A matrix using the \verb|LWORK| variable by
+first calling \verb|ZGGEV| with \verb|LWORK| set to minus one, and using the resulting 
+$A$ and $B$ matrices in a second call. Otherwise, \verb|LWORK| is set to twice the order of the $A$ matrix,
+\verb|N|. 
+%
+%For this particular problem $A$ is generated using the \verb|reshape| function\dots where as SWIRL does not 
+%have this(?). It may have used an implied do loop instead\dots this needs to be
+%checked.
+%
+%The $L_2$ of S is machine precision except when the \verb|eigenIndex| is 4,5, or 6
+%but not 1-3 and 6-9\dots
+%\begin{verbatim}
+%    DO i = 1,N
+%        WVN(i) = ALPHA(i)/BETA(i)
+%    END DO
+%    
+%    S = MATMUL(A_before,VR(:,eigenIndex)) - MATMUL(B_before,VR(:,eigenIndex))*(WVN(eigenIndex))
+%
+%    CALL getL2Norm(L2,S)
+%\end{verbatim}
+%
+
+
+
+\section{2 x 2 Example Problem}
+
+The eigenvalues of the 2x2 matrix 
+$A = \begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix}$ can be found by solving the characteristic equation:
+\begin{equation}
+    \det(A - \lambda I) = 0
+\end{equation}
+
+
+where $I$ is the 2x2 identity matrix. 
+
+The determinant of $A - \lambda I$ is given by:
+
+\begin{align*}
+    \det(A - \lambda I) &= \\
+    \det\begin{bmatrix} 
+        0 - \lambda & 1 \\ 
+        -2 & -3 - \lambda 
+    \end{bmatrix} 
+                        &=  \\
+    \det\begin{bmatrix} 
+    -\lambda & 1 \\ 
+    -2 & -3 - \lambda 
+\end{bmatrix} &= \\
+    (-\lambda)(-3 - \lambda) - (1)(-2) = \\
+    \lambda^2 + 3\lambda + 2 
+\end{align*}
+
+So the characteristic equation is:
+
+\begin{equation}
+    \lambda^2 + 3\lambda + 2 = 0
+\end{equation}
+
+This equation can be solved using the quadratic formula:
+
+\begin{equation}
+    \lambda = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+
+where $a = 1$, $b = 3$, and $c = 2$.
+
+So the eigenvalues are:
+\begin{align*}
+    \lambda = \frac{-(3) \pm \sqrt{3^2 - 4(1)(2)}}{2(1)} = \frac{-3 \pm \sqrt{9 - 8}}{2} = \frac{-3 \pm \sqrt{1}}{2} = \frac{-3 \pm 1}{2} = -2 \text{ or } -1 
+\end{align*}
+
+To find the eigenvectors, we need to solve the equation:
+
+$(A - \lambda I)v = 0$
+
+where $v$ is the eigenvector and $\lambda$ is the corresponding eigenvalue.
+
+For $\lambda = -2$:
+
+$\begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = -2 \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+which leads to the system of equations:
+\begin{align*}
+0x_1 + 1x_2 = -2x_1 \\  
+-2x_1 - 3x_2 = -2x_2 
+\end{align*}
+
+Solving this system of equations, we find that $x_1 = 1$ and $x_2 = 2$, so the
+eigenvector corresponding to $\lambda = -2$ is $\begin{bmatrix} 1 \\ 2 \end{bmatrix}$.
+
+For $\lambda = -1$:
+
+$\begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = -1 \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+
+which leads to the system of equations: 
+\begin{align*}
+    0x_1 + 1x_2 = -x_1 \\
+    -2x_1 - 3x = -x_2
+\end{align*}
+
+Solving this system of equations, we find that $x_1 = 1$ and $x_2 = 1$, so the
+eigenvector corresponding to $\lambda = -1$ is $\begin{bmatrix} 1 \\ -1 \end{bmatrix}$.
+
+Now we have a basis to do our characteristic equation test with either pair!
+
+Note that an eigensolver may chose different values for the eigenvectors than the
+ones we chose. However, the ratio of $v_{1,1}$ to $v_{1,2}$ will be the same.  
+
+
+
+ 
+
+\end{document}
+
+

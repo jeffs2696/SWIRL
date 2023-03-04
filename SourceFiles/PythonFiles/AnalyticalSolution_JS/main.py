@@ -120,7 +120,7 @@ def main():
     # pprint.pprint(m_dict_fourth_order)
     # logger.info(pprint.pprint(m_dict_fourth_order)
     
-        m_dict = m_dict_fourth_order
+
         for i in range(len(m_dict['radial_mode_index'])):
             # this concept is flawed .... it expects a certain array of grid points
             #

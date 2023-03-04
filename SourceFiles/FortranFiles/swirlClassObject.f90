@@ -14,6 +14,8 @@ modulE swirlClassObject
     USE FindResidualVectorModule
     USE SourceTermModule
     USE mmsClassObject
+    USE L2NormModule
+    USE trapezoidalRuleModule
     IMPLICIT NONE
 
     PRIVATE
@@ -25,8 +27,13 @@ modulE swirlClassObject
         SwirlClassType ,&
         GetMeanFlowData, &
         FindResidualData, &
+        CutOnResiduialCheck ,&
         GetModeData     , &
-        GetAnalyiticModeShape
+        GetAnalyiticModeShape,&
+        NormalizeModeShape , &
+        CompareModeShapes
+        
+
 
 ! Creates a derived data type containing SWIRL's essential modules
     INTERFACE CreateObject
@@ -44,7 +51,12 @@ modulE swirlClassObject
 ! Finds S = [A]{x} - i*eigVal*[B]{x}, x \equiv eigen vector
     INTERFACE FindResidualData
         MODULE PROCEDURE GetResidualVector
+        ! MODULE PROCEDURE GetResidualVector2
     END INTERFACE FindResidualData
+
+    INTERFACE CutOnResiduialCheck
+        MODULE PROCEDURE CheckFirstRadialModeEigenResidual
+    END INTERFACE CutOnResiduialCheck
 
     INTERFACE GetModeData
         MODULE PROCEDURE GetRadialModeData
@@ -66,12 +78,24 @@ modulE swirlClassObject
         MODULE PROCEDURE GetModeShape 
     END INTERFACE GetAnalyiticModeShape
 
+    INTERFACE NormalizeModeShape
+        MODULE PROCEDURE NormModeShape
+    END INTERFACE NormalizeModeShape
+
+    INTERFACE CompareModeShapes
+        MODULE PROCEDURE CompareModeShape
+    END INTERFACE CompareModeShapes
+
+    INTERFACE ComputeAnalyticAxialWavenumber
+        MODULE PROCEDURE ComputeAnalyticAxialWavenumber1
+    END INTERFACE ComputeAnalyticAxialWavenumber
+
     INTEGER, PARAMETER:: rDef = REAL64
 
     TYPE SwirlClassType
         PRIVATE  ! prevents user from accessing any of the following variables
 
-        CHARACTER(LEN = 50) :: &
+        CHARACTER(LEN = 500) :: &
             test_name_id , &
             grid_number_id, &
             finite_difference_id ,& 
@@ -86,6 +110,9 @@ modulE swirlClassObject
             numberOfRadialPoints     ,&    ! npts, number of radial mesh points
             numberOfRadialModes, &    ! number of modes that the user wants
             FiniteDifferenceFlag     !,&    ! Use central FD for derivatives, ! 1 = 2nd Order, 2 = 4th Order PrintToggle                    ! Turns on print to screen
+
+        INTEGER, DIMENSION(:), ALLOCATABLE :: &
+            mode_index,radial_mode_number_array
 
         REAL(KIND = REAL64) :: &
             hubTipRatio        ,&
@@ -141,11 +168,15 @@ modulE swirlClassObject
             S_3   ,&
             S_4   ,&
             eigenVectorMMS , &
+            numerical_wavenumber_array, &
             wvn
 
         COMPLEX(KIND = REAL64), DIMENSION(:,:), ALLOCATABLE :: &
             vl, &
             vr
+
+        COMPLEX(KIND=rDef), DIMENSION(:,:), ALLOCATABLE :: &
+            analytic_mode_array , numerical_mode_array
 
 !         LOGICAL, :: &
 !             debugFlag
@@ -255,9 +286,9 @@ CONTAINS
         WRITE(object%grid_number_id,*) object%numberOfRadialPoints
         WRITE(object%finite_difference_id,*) object%FiniteDifferenceFlag
         IF (object%hubTipRatio .gt. 0.0_rDef) THEN 
-            WRITE(object%hub_to_tip_ratio_id,*) 'a'
+            WRITE(object%hub_to_tip_ratio_id,*) 'a_'
         ELSE
-            WRITE(object%hub_to_tip_ratio_id,*) 'c'
+            WRITE(object%hub_to_tip_ratio_id,*) 'c_'
         ENDIF
 
         
@@ -278,8 +309,18 @@ CONTAINS
 
         ! WRITE(0,*) object%test_name_id 
 
+
+        ALLOCATE(&
+            object%mode_index(object%numberOfRadialModes*2) , &
+            object%radial_mode_number_array(object%numberOfRadialModes*2))
+        ALLOCATE(&
+            object%analytic_mode_array(object%numberOfRadialPoints,object%numberOfRadialModes), &
+            object%numerical_mode_array(object%numberOfRadialPoints,object%numberOfRadialModes*2))
+
+
         ALLOCATE(&
             object%eigenVectorMMS(object%numberOfRadialPoints*4) , &
+            object%numerical_wavenumber_array(object%numberOfRadialModes*2) , &
             object%S_actual(object%numberOfRadialPoints*4) , &
             object%S_Expected(object%numberOfRadialPoints*4) , &
             object%S_1(object%numberOfRadialPoints) , &
@@ -292,7 +333,7 @@ CONTAINS
             object%vRad(object%numberOfRadialPoints),&
             object%vT(object%numberOfRadialPoints),&
             object%vX(object%numberOfRadialPoints),&
-            object%Pr(object%numberOfRadialPoints))
+            OBJECt%Pr(object%numberOfRadialPoints))
 
         ALLOCATE(&
             object%dl1(object%numberOfRadialPoints,object%numberOfRadialPoints),   &
@@ -549,6 +590,10 @@ CONTAINS
                 vrm    = object%vr,    &
                 vphi   = object%vph,   &
                 is     = is        ,   &
+                indx_out = object%mode_index , &
+                izeros_out = object%radial_mode_number_array , &
+                sortedRadialModeShapes = object%numerical_mode_array , & 
+                sortedWavenumberArray = object%numerical_wavenumber_array, &
                 file_name_string = object%test_name_id)
 
         ELSE
@@ -730,6 +775,7 @@ CONTAINS
 
     END SUBROUTINE GetRadialModeData
 
+
     SUBROUTINE GetResidualVector(&
         object                  ,&
         eigenVector             ,&
@@ -767,6 +813,103 @@ CONTAINS
 
 
     END SUBROUTINE GetResidualVector
+    SUBROUTINE CheckFirstRadialModeEigenResidual(&
+            object)!, & S_eigcheck_L2)
+
+       TYPE(SwirlClassType), INTENT(IN) ::&
+            object
+
+        ! COMPLEX(KIND=rDef) ,DIMENSION(:), INTENT(INOUT) :: S_eigcheck_L2
+
+        INTEGER :: np ,i, UNIT
+
+        COMPLEX(KIND = rDef), DIMENSION(object%numberOfRadialPoints*4) :: &
+            S_all_egv, S_sorted_egv
+
+        COMPLEX(KIND = rDef) :: &
+            L2
+
+        ! S_all_egv = (MATMUL(object%aa_before,object%vr(:,1))- MATMUL(object%vr(:,1),MATMUL(object%bb_before,object%wvn)))
+        ! S_all_egv =MATMUL(object%aa_before,object%vr(:,1))- object%wvn()*MATMUL(object%bb_before,object%vr(:,1) )
+       ! WRITE(0,*) S_all_egv   !- MATMUL(object%bb_before,object%vr(:,1)*object%wvn(1)))
+       ! WRITE(0,*) SIZE(object%wvn)
+       np = object%numberOfRadialPoints
+       ! WRITE(0,*)  MATMUL(object%aa_before ,object%vr(:,1)) !-MATMUL((MATMUL(object%bb_before,object%vr)),object%wvn)
+       ! WRITE(0,*)  MATMUL(object%aa_before(3*np+1:4*np,3*np+1:4*np) ,object%vr(3*np+1:4*np,3*np+1:4*np)) !-MATMUL((MATMUL(object%bb_before,object%vr)),object%wvn)
+
+       ! WRITE(0,*) SIZE(MATMUL(MATMUL(object%bb_before,object%vr(:,1)),object%wvn(1)))
+       ! WRITE(0,*) SIZE(MATMUL(object%bb_before,object%vr(:,1))*object%wvn(1))
+
+       ! WRITE(0,*) SIZE(MATMUL(object%aa_before,object%vr(:,1))) 
+
+
+           S_sorted_egv = &
+               MATMUL(object%aa_before,object%vr(:,object%mode_index(1))) -&
+               CMPLX(0.0_rDef,-1.0_rDef,KIND=rDef)*&
+               (MATMUL(object%bb_before,object%vr(:,object%mode_index(1)))*object%wvn(object%mode_index(1)))
+
+           S_all_egv = &
+               MATMUL(object%aa_before,object%vr(:,1)) -&
+               (MATMUL(object%bb_before,object%vr(:,1))*object%wvn(1))
+           OPEN(NEWUNIT = UNIT, FILE='S_sorted_egv.dat')
+           WRITE(UNIT,*) 'i ', 'S_real ', 'S_imag ', 'egv_real ', 'egv_imag ', 'k_x_real ', 'k_x_imag '
+           DO i = 1,SIZE(S_sorted_egv)
+           WRITE(UNIT,*) i ,REAL(S_sorted_egv(i)), AIMAG(S_sorted_egv(i)) ,&
+               REAL(object%vr(i,object%mode_index(1))), AIMAG(object%vr(i,object%mode_index(1))), &
+               REAL(object%wvn(object%mode_index(1))), AIMAG(object%wvn(object%mode_index(1)))
+           
+           ! WRITE(0,*) S_sorted_egv(i), object%vr(i,321), object%wvn(321) 
+           ENDDO
+           CLOSE(UNIT)
+           OPEN(NEWUNIT = UNIT, FILE='S_sorted_first_egv.dat')
+           WRITE(UNIT,*) 'i ', 'S_real ', 'S_imag ', 'egv_real ', 'egv_imag ', 'k_x_real ', 'k_x_imag '
+           DO i = 1,SIZE(S_sorted_egv)
+           WRITE(UNIT,*) i ,REAL(S_sorted_egv(i)), AIMAG(S_sorted_egv(i)) ,&
+               REAL(object%vr(i,(1))), AIMAG(object%vr(i,(1))), &
+               REAL(object%wvn((1))), AIMAG(object%wvn((1)))
+           
+           ! WRITE(0,*) S_sorted_egv(i), object%vr(i,321), object%wvn(321) 
+           ENDDO
+           CLOSE(UNIT)
+           ! S_sorted_egv = MATMUL(object%aa_before,object%vr(:,1)) - (MATMUL(object%bb_before,object%vr(:,1))*object%wvn(1))
+       ! DO i = 1,SIZE(S_all_egv)
+       ! WRITE(0,*) S_all_egv(i)
+       ! ENDDO
+
+!         CALL GetResidualVector(&
+!             object                  ,&
+!             object%vr(:,3),&
+!             object%wvn(3)             ,&
+!             S_all_egv)
+
+        ! CALL GetResidualVector(&
+        !     object                  ,&
+        !     object%vr(:,3),&
+        !     object%wvn(3)             ,&
+        !     ! object%numerical_mode_array(:,2),&
+        !     ! object%numerical_wavenumber_array(2)             ,&
+        !     S_sorted_egv)
+        
+        ! WRITE(0,*) S
+        ! CALL getL2Norm(L2,S_all_egv)
+        ! WRITE(0,*) 'L2 all egv', L2
+
+        CALL getL2Norm(L2,S_sorted_egv)
+
+
+        ! OPEN(NEWUNIT = UNIT, FILE='S_sorted.dat')
+        ! WRITE(UNIT,*) 'i ', 'S_real ', 'S_imag '
+        ! DO i = 1,SIZE(S_sorted_egv)
+        ! WRITE(UNIT,*) i ,REAL(S_sorted_egv(i)), AIMAG(S_sorted_egv(i))
+        ! WRITE(0,*) S_sorted_egv(i), object%vr(i,1), object%wvn(1) 
+        ! ENDDO
+        ! CLOSE(UNIT)
+        
+
+        WRITE(0,*) 'L2 sorted egv', L2
+    END SUBROUTINE CheckFirstRadialModeEigenResidual
+
+
     SUBROUTINE SortModeData()
 
     END SUBROUTINE SortModeData
@@ -817,7 +960,13 @@ CONTAINS
             object%vT,&
             object%vX,&
             object%Pr,&
-            object%eigenVectorMMS)
+            object%eigenVectorMMS , &
+            object%analytic_mode_array, &
+            object%numerical_mode_array, &
+            object%numerical_wavenumber_array,&
+            object%mode_index , &
+            object%radial_mode_number_array ,&
+        )
 
     END SUBROUTINE DestroySwirlClassObject
     SUBROUTINE GetModeShape(&
@@ -830,9 +979,11 @@ CONTAINS
           rDef = REAL64
 
         LOGICAL :: &
-            debug_flag = .TRUE.
+            debug_flag = .FALSE.
 
-        CHARACTER(LEN = 50) :: &
+        CHARACTER(LEN = 500) :: &
+            file_id , &
+            gridpoint_file_id, &
             filename
 
         INTEGER :: &
@@ -876,7 +1027,7 @@ CONTAINS
 
         ALLOCATE(&
             radial_grid(object%numberOfRadialPoints) , &
-            analytic_mode_array(object%numberOfRadialModes,object%numberOfRadialPoints) &
+            analytic_mode_array(object%numberOfRadialPoints,object%numberOfRadialModes) &
         )
 
 
@@ -886,7 +1037,6 @@ CONTAINS
         r_max = object%r(object%numberOfRadialPoints)!1.0_rDef      
 
         azimuthal_mode_number = object%azimuthalMode 
-        radial_mode_number = 2
         convergence_criteria = 1.0E-12_rDef
         ! redundant to recreate radial grid
         hubTipRatio = r_min/r_max 
@@ -898,6 +1048,8 @@ CONTAINS
         radial_grid(i)  = (r_min+REAL(i-1, rDef)*dr)!radial grid 
         
         ENDDO
+        DO j = 1,object%numberOfRadialModes
+        radial_mode_number = j
         
         CALL ANRT(&
             azimuthal_mode_number,&
@@ -938,13 +1090,17 @@ CONTAINS
         ELSE
         ENDIF
 
-        filename = 'radial_mode_data.dat'
-        ! OPEN(NEWUNIT=UNIT,FILE=TRIM(ADJUSTL(filename))) 
+        WRITE(file_id, '(i0.2)') radial_mode_number
+        WRITE(gridpoint_file_id, '(i0.4)') object%numberOfRadialPoints
 
-        ! WRITE(UNIT,*) &
-        !     'radius ', &
-        !     'pressure '
-        DO j = 1,object%numberOfRadialModes
+        filename = '03-EVanalysis/analytic_radial_mode_data_radial_mode_number_' &
+            // TRIM(ADJUSTL(file_id)) // '_np_'  &
+            // TRIM(ADJUSTL(gridpoint_file_id)) // '.dat'
+        OPEN(NEWUNIT=UNIT,FILE=TRIM(ADJUSTL(filename))) 
+
+        WRITE(UNIT,'(A12, A12)') &
+            'radius', &
+            'pressure'
          
         
         DO i = 1,object%numberOfRadialPoints
@@ -957,40 +1113,113 @@ CONTAINS
         mode_shape,&
         rmode_bessel_function_errors)
 
-        analytic_mode_array(j,i) = mode_shape
+        analytic_mode_array(i,j) = mode_shape
+        object%analytic_mode_array(i,j) = analytic_mode_array(i,j)
+        
   
-        ! WRITE(UNIT,*) &
-        !     radial_grid(i)/r_max,&
-        !     mode_shape 
+        WRITE(UNIT,"(F16.12,F16.12)") &
+            radial_grid(i)/r_max,&
+            analytic_mode_array(i,j) 
 
         IF (debug_flag) THEN
-            ! WRITE(0,*) analytic_mode_array(j,i)
+
+
+            WRITE(0,*) &
+                radial_grid(i)/r_max , &
+                analytic_mode_array(i,j)
         ENDIF
         ENDDO
 
-        ! CLOSE(UNIT)
+        CLOSE(UNIT)
 
-        ! OPEN(NEWUNIT=UNIT,FILE='radial_mode_parameters.dat')
-        ! WRITE(UNIT,*) &
-        !     'azimuthal_mode_number ', &
-        !     'radial_mode_number ', &
-        !     'weighting_factor_A ', &
-        !     'weighting_factor_B ', &
-        !     'non_dimensional_roots ' 
-        ! WRITE(UNIT,*) &
-        !     azimuthal_mode_number, &
-        !     radial_mode_number , &
-        !     weighting_coefficient_A, &
-        !     weighting_coefficient_B, &
-        !     non_dimensional_roots 
-        ! CLOSE(UNIT)
+        OPEN(NEWUNIT=UNIT,FILE='radial_mode_parameters' & 
+            // TRIM(ADJUSTL(file_id)) // '_np_'  &
+            // TRIM(ADJUSTL(gridpoint_file_id)) // '.dat')
+        WRITE(UNIT,*) &
+            'azimuthal_mode_number ', &
+            'radial_mode_number ', &
+            'weighting_factor_A ', &
+            'weighting_factor_B ', &
+            'non_dimensional_roots ' 
+        WRITE(UNIT,*) &
+            azimuthal_mode_number, &
+            radial_mode_number , &
+            weighting_coefficient_A, &
+            weighting_coefficient_B, &
+            non_dimensional_roots 
+        CLOSE(UNIT)
 
         ENDDO
+        
         DEALLOCATE(&
             radial_grid, &
             analytic_mode_array &
         )
 
     END SUBROUTINE GetModeShape   
+    SUBROUTINE NormModeShape(&
+            object)
+
+        TYPE(SwirlClassType), INTENT(INOUT) ::&
+            object
+        INTEGER :: &
+            i 
+        REAL(KIND = rDef) :: &
+            total
+
+        REAL(KIND = rDef) , DIMENSION(:) , ALLOCATABLE :: &
+            test_integrand,   &
+            test_result
+
+        
+        ALLOCATE(&
+            test_integrand(object%numberOfRadialPoints), &
+            test_result(object%numberOfRadialPoints))
+
+
+
+!         DO i = 1,object%numberOfRadialPoints
+!             test_integrand = REAL(object%numerical_mode_array(i,1)**2) 
+!             ! WRITE(0,*) object%r(i), test_integrand(i)
+!         END DO
+
+
+!         CALL trapezoidalRule(&
+!             rr = object%r , &
+!             integrand = test_integrand, &
+!             total = total )
+
+!         DO i = 1,object%numberOfRadialPoints
+             
+!             WRITE(0,*) object%r(i), object%analytic_mode_array(i,1), (1/total**2)*object%numerical_mode_array(i,1)
+
+!         END DO
+
+        DEALLOCATE(test_integrand,test_result)
+        
+        
+    END SUBROUTINE NormModeShape
+
+    SUBROUTINE CompareModeShape(&
+            object)
+
+        TYPE(SwirlClassType), INTENT(INOUT) ::&
+            object
+        INTEGER :: &
+            i
+
+        ! DO i = 1,object%numberOfRadialPoints
+        ! WRITE(0,*) object%analytic_mode_array(i,1), object%numerical_mode_array(i,1), object%numerical_mode_array(i,2)
+        ! END DO
+    END SUBROUTINE CompareModeShape
+
+    SUBROUTINE ComputeAnalyticAxialWavenumber1( &
+        object)
+
+        TYPE(SwirlClassType), INTENT(INOUT) ::&
+            object
+
+
+    END SUBROUTINE ComputeAnalyticAxialWavenumber1
 ! 
 END MODULE swirlClassObject

@@ -32,13 +32,14 @@ PROGRAM MAIN
     !! MMS flag to get approximated order of accuracy
 
     LOGICAL :: &
+        variableGridSpacing = .FALSE. , &
         debug   = .FALSE. , &
         MMSflag = .FALSE. , &
         MMSdebug_flag = .FALSE. 
 
     !! Code parameters for double precision and number of iterations
     INTEGER, PARAMETER :: &
-        M_int = 16 , & 
+        M_int = 60 , & 
         numberOfFiniteDifferenceSchemes = 1 , &
         rDef = REAL64   , &
         numberOfIterations = 2 
@@ -124,6 +125,7 @@ PROGRAM MAIN
         S_2 , &
         S_3 , &
         S_4 , &
+        S_eigcheck_L2,&
         S_MMS , &
         S_actual, &
         S_L2Array , &
@@ -160,9 +162,9 @@ PROGRAM MAIN
     ! Use include statements to define mean flow and test case parameters
 
     ! use this flow for propoer MMS calculation!
-    include 'InputVariables_MMS1.f90'
+    ! include 'InputVariables_MMS1.f90'
 
-    ! include 'InputVariables_AnalyticalSolution_1.f90'
+    include 'InputVariables_AnalyticalSolution_1.f90'
     ! include 'InputVariables_KousenTable4_3.f90'
     ! include 'InputVariables_KousenTable4_4.f90'
     ! include 'InputVariables_KousenTable4_5.f90'
@@ -179,6 +181,7 @@ PROGRAM MAIN
     facCount = 0 ! initializer for fac count
 
     ALLOCATE( &
+        ! S_eigcheck_L2(numberOfIterations - 1) , &
         RateOfConvergence1(numberOfIterations - 1) , &
         RateOfConvergence2(numberOfIterations - 1) , &
         S_L2Array(numberOfIterations)         , &
@@ -194,8 +197,9 @@ PROGRAM MAIN
 
     !starting range
     ! what if the user didn't have to define this
-    numberOfGridPoints =1+(2**fac)*M_int ! 
+    ! numberOfGridPoints =1+(2**fac)*M_int ! 
 
+    numberOfGridPoints = 81 
     DO FDfac = 2,2! numberOfFiniteDifferenceSchemes 
 
     DO fac = 1, numberOfIterations
@@ -221,24 +225,28 @@ PROGRAM MAIN
     ENDIF
 
 
-    numberOfGridPoints = (1+(2**fac)*M_int)
+    ! numberOfGridPoints = (1+(2**fac)*M_int)
 
     facCount                     = facCount + 1
 
     ! to double the number of grid points each iteration...
 
-    IF (facCount.gt.0) THEN
-        ! it really should be if the comp time is larger than a second or something
-        ! oR if the grid gets too big
-        ! using base 2 has the effect of doubling
-        numberOfGridPoints = 1 + (2**fac)*(M_int-(3+facCount))
-    ! ELSEIF (fac.gt.2) THEN
-        ! numberOfGridPoints = NINT((0.5**fac)*(M_int)) !+ numberOfGridPoints
-    ! ELSEIF (fac.gt.4) THEN
-    !     numberOfGridPoints = ((2**fac)*(M_int)) + numberOfGridPoints/3
-        
-        
-    ENDIF
+    ! IF (numberOfIterations.gt.1) THEN
+        IF (variableGridSpacing) THEN
+            IF (facCount.gt.0) THEN
+                ! it really should be if the comp time is larger than a second or something
+                ! oR if the grid gets too big
+                ! using base 2 has the effect of doubling
+                numberOfGridPoints = 1 + (2**fac)*(M_int-(3+facCount))
+                ! ELSEIF (fac.gt.2) THEN
+                ! numberOfGridPoints = NINT((0.5**fac)*(M_int)) !+ numberOfGridPoints
+                ! ELSEIF (fac.gt.4) THEN
+                !     numberOfGridPoints = ((2**fac)*(M_int)) + numberOfGridPoints/3 
+            ENDIF
+        ELSE
+            numberOfGridPoints = numberOfGridPoints + 40!1 + (2**fac)*M_int
+        ENDIF
+    ! ENDIF
 
     numberOfGridPointsArray(fac) = numberOfGridPoints
     dr                           = (r_max-r_min)/REAL(numberOfGridPoints-1, rDef)
@@ -293,7 +301,7 @@ PROGRAM MAIN
     include 'InputMeanFlow_AnalyticalSolution_1.f90'
     !Create a swirl Class Obj for a given flow
 
-    numberOfRadialModes = 5
+    numberOfRadialModes = 3
 
     CALL CreateObject(&
         object        = swirlClassObj(fac)  ,&
@@ -321,6 +329,14 @@ PROGRAM MAIN
     CALL GetAnalyiticModeShape(&
         object = swirlClassObj(fac))
 
+    CALL NormalizeModeShape(&
+        object = swirlClassObj(fac))
+    CALL CompareModeShapes(&
+        object = swirlClassObj(fac))
+
+    CALL CutOnResiduialCheck(&
+        object = swirlClassObj(fac))!, &
+        ! S_eigcheck_L2     = S_eigcheck_L2(fac))
     CALL DestroyObject(object = swirlClassObj(fac))
 
     !!----------------------- MMS ----------------------------------------------
@@ -328,7 +344,9 @@ PROGRAM MAIN
     include 'include_mms_main.f90'
 
     ENDDO
+    WRITE(0,*) S_eigcheck_L2
     DEALLOCATE(&
+        ! S_eigcheck_L2      , &
         RateOfConvergence1 , &
         RateOfConvergence2 , &
         S1_L2Array         , &
@@ -336,6 +354,7 @@ PROGRAM MAIN
         S3_L2Array         , &
         S4_L2Array         , &
         S_L2Array)
+
     CALL CPU_TIME(end_time)
     if ((end_time-start_time) .lt. 60.0_rDef) THEN
         WRITE(0,*) 'SWIRL''s run time:', (end_time-start_time), 'seconds'!/60.0_rDef

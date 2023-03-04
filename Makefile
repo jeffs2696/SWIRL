@@ -8,3 +8,5 @@ MMS:
 	cd SourceFiles/PythonFiles/SymbolicManufacturedSolutions && make
 Thesis:
 	cd Documentation/SeverinoWork/Thesis && make
+python_validation:
+	cd SourceFiles/PythonFiles/AnalyticalSolution_JS/ && make

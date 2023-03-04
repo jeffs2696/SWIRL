@@ -107,7 +107,7 @@ CONTAINS
         REAL(KIND=rDef) :: &
             as, &
             eps, &
-        ! gamco, &
+            gamco, &
             r, &
             rm, &
             rs
@@ -290,6 +290,12 @@ CONTAINS
 ! if there is only axial flow, no shear or swirl, then... JS
 
         !  if ((ir.eq.1) .and. (slp.eq.0.0_rDef) .and. (is.eq.0)) then
+        DO i =1,np-1
+            if (rmx(i).ne.rmx(i+1)) THEN
+            ELSE
+                gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
+            ENDIF
+        ENDDO
         !      rm = rmx(1)
         !      gamco = REAL(ak,rDef)*rm/(rm*rm -1.0_rDef)
         !      WRITE(0,30) gamco

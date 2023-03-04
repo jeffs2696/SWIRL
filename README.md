@@ -1,4 +1,4 @@
-# SWIRL
+# SWIRL 
 
 ## A frequency domain linearized Euler equation code for ducted sound propagation 
 
